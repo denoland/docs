@@ -48,6 +48,10 @@ export const sidebar = [
         href: "/runtime/test/",
       },
       {
+        title: "Migrating from Jest",
+        href: "/runtime/test/migrate_from_jest/",
+      },
+      {
         title: "Linting and formatting",
         href: "/runtime/lint_and_format/",
       },

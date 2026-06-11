@@ -12,7 +12,7 @@ user sees (roles, labels, text) instead of implementation details. It runs in
 ## Install the packages
 
 ```sh
-deno add npm:happy-dom npm:@testing-library/dom
+deno add happy-dom @testing-library/dom
 ```
 
 ## Query and interact with the DOM
@@ -67,7 +67,7 @@ experiences rather than class names or DOM structure. The full query catalog
 
 ## Where this fits
 
-For testing DOM code without Testing Library, using `deno-dom` or parsing HTML
-directly, see [Testing web applications](/examples/web_testing_tutorial/).
+For testing DOM code without Testing Library (using `deno-dom` or parsing HTML
+directly) see [Testing web applications](/examples/web_testing_tutorial/).
 Framework wrappers like `@testing-library/react` layer on the same setup with a
 framework renderer in between.

@@ -1,20 +1,19 @@
 ---
-title: "Migrate from Jest"
-description: "Move a Jest test suite to deno test: describe/it and expect mappings, mock function equivalents, snapshot testing, fake timers, and translating Jest configuration."
-url: /examples/migrate_from_jest_tutorial/
+title: "Migrating from Jest"
+description: "Move a Jest test suite to deno test: describe/it via node:test, expect mappings, mock function equivalents, snapshot testing, fake timers, and translating Jest configuration."
 ---
 
 Most Jest suites translate to `deno test` without rewriting test logic: the
-standard library provides the same `describe`/`it` structure, an `expect` with
-the matchers you already use, and mock functions. What changes is a handful of
-imports and how the runner is configured.
+`node:test` module provides the same `describe`/`it` structure, and the standard
+library ships an `expect` with the matchers you already use. What changes is a
+handful of imports and how the runner is configured.
 
 ## The same test, in Deno
 
 A typical Jest test needs only new imports:
 
 ```ts title="cart.test.ts"
-import { beforeEach, describe, it } from "jsr:@std/testing/bdd";
+import { beforeEach, describe, it } from "node:test";
 import { expect, fn } from "jsr:@std/expect";
 
 describe("shopping cart", () => {
@@ -39,17 +38,18 @@ describe("shopping cart", () => {
 
 ```sh
 $ deno test cart.test.ts
-ok | 1 passed (2 steps) | 0 failed (12ms)
+ok | 1 passed (2 steps) | 0 failed (13ms)
 ```
 
 Unlike Jest, nothing is injected as a global: `describe`, `it`, `expect`, and
-hooks are explicit imports, so each file states what it uses.
+the hooks are explicit imports, so each file states what it uses. Tests written
+against `node:test` also keep working in Node.js itself.
 
 ## What maps to what
 
 | Jest                              | Deno                                                                 |
 | --------------------------------- | -------------------------------------------------------------------- |
-| `describe`, `it`, `beforeEach`, … | [`@std/testing/bdd`](/examples/bdd_tutorial/)                        |
+| `describe`, `it`, `beforeEach`, … | `node:test` (or [`@std/testing/bdd`](/examples/bdd_tutorial/))       |
 | `expect(...)` matchers            | `jsr:@std/expect`                                                    |
 | `jest.fn()`                       | `fn()` from `jsr:@std/expect`                                        |
 | `jest.spyOn(obj, "m")`            | [`spy`/`stub` from `@std/testing/mock`](/examples/mocking_tutorial/) |

@@ -496,8 +496,8 @@ export const sidebar = [
         type: "example",
       },
       {
-        title: "Migrate from Jest",
-        href: "/examples/migrate_from_jest_tutorial/",
+        title: "Migrating from Jest",
+        href: "/runtime/test/migrate_from_jest/",
         type: "tutorial",
       },
       {
