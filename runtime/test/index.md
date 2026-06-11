@@ -3,6 +3,7 @@ last_modified: 2026-05-20
 title: "Testing"
 description: "A guide to Deno's testing capabilities. Learn about the built-in test runner, assertions, mocking, coverage reporting, snapshot testing, and how to write effective tests for your Deno applications."
 oldUrl:
+  - /runtime/fundamentals/testing/
   - /runtime/manual/advanced/language_server/testing_api/
   - /runtime/manual/basics/testing/
   - /runtime/manual/basics/testing/coverage/
@@ -34,13 +35,12 @@ function. Here are some examples:
 
 ```ts title="my_test.ts"
 import { assertEquals } from "jsr:@std/assert";
+import { delay } from "jsr:@std/async";
 
 Deno.test("simple test", () => {
   const x = 1 + 2;
   assertEquals(x, 3);
 });
-
-import { delay } from "jsr:@std/async";
 
 Deno.test("async test", async () => {
   const x = 1 + 2;
@@ -240,74 +240,24 @@ Deno.test.beforeEach(() => {
 // (test runs)
 ```
 
-## Command line filtering
+## Filtering tests
 
-Deno allows you to run specific tests or groups of tests using the `--filter`
-option on the command line. This option accepts either a string or a pattern to
-match test names. Filtering does not affect steps; if a test name matches the
-filter, all of its steps are executed.
-
-Consider the following tests:
-
-```ts
-Deno.test("my-test", () => {});
-Deno.test("test-1", () => {});
-Deno.test("test-2", () => {});
-```
-
-### Filtering by string
-
-To run all tests that contain the word "my" in their names, use:
+Run a subset of tests with the `--filter` flag. It accepts a string, or a
+regular expression wrapped in forward slashes:
 
 ```sh
+# Run tests whose name contains the word "my"
 deno test --filter "my" tests/
-```
 
-This command will execute `my-test` because it contains the word "my".
-
-### Filtering by Pattern
-
-To run tests that match a specific pattern, use:
-
-```sh
+# Run tests whose name matches a pattern
 deno test --filter "/test-*\d/" tests/
 ```
 
-This command will run `test-1` and `test-2` because they match the pattern
-`test-*` followed by a digit.
-
-To indicate that you are using a pattern (regular expression), wrap your filter
-value with forward slashes `/`, much like JavaScript’s syntax for regular
-expressions.
-
-### Including and excluding test files in the configuration file
-
-You can also filter tests by specifying paths to include or exclude in the
-[Deno configuration file](/runtime/fundamentals/configuration).
-
-For example, if you want to only test `src/fetch_test.ts` and
-`src/signal_test.ts` and exclude everything in `out/`:
-
-```json
-{
-  "test": {
-    "include": [
-      "src/fetch_test.ts",
-      "src/signal_test.ts"
-    ]
-  }
-}
-```
-
-Or more likely:
-
-```json
-{
-  "test": {
-    "exclude": ["out/"]
-  }
-}
-```
+To control which test files are collected in the first place, set `test.include`
+and `test.exclude` in your
+[configuration file](/runtime/reference/deno_json/#include-and-exclude). See the
+[`deno test` reference](/runtime/reference/cli/test/#filtering) for the full
+filtering semantics.
 
 ## Test definition selection
 
@@ -379,32 +329,17 @@ This will cause the test runner to stop execution after the first test failure.
 
 ## Reporters
 
-Deno includes three built-in reporters to format test output:
-
-- `pretty` (default): Provides a detailed and readable output.
-- `dot`: Offers a concise output, useful for quickly seeing test results.
-- `junit`: Produces output in JUnit XML format, which is useful for integrating
-  with CI/CD tools.
-
-You can specify which reporter to use with the --reporter flag:
+Test output defaults to the detailed `pretty` reporter. Switch formats with the
+`--reporter` flag (`dot`, `junit`, `tap`), or write a JUnit XML report to a file
+with `--junit-path` while keeping readable output in the terminal:
 
 ```sh
-# Use the default pretty reporter
-deno test
-
-# Use the dot reporter for concise output
 deno test --reporter=dot
-
-# Use the JUnit reporter
-deno test --reporter=junit
-```
-
-Additionally, you can write the JUnit report to a file while still getting
-human-readable output in the terminal by using the `--junit-path` flag:
-
-```sh
 deno test --junit-path=./report.xml
 ```
+
+See the [`deno test` reference](/runtime/reference/cli/test/#reporters) for the
+full list of reporters.
 
 ## Spying, mocking (test doubles), stubbing and faking time
 
@@ -676,7 +611,7 @@ Deno.test({
 ### Enabling sanitizers globally
 
 If you want the pre-2.8 behavior — resource and op sanitizers on for every test
-— you can re-enable them at any of four scopes. Higher-precedence settings
+— you can re-enable them at any of five scopes. Higher-precedence settings
 override lower ones.
 
 1. **Per-test** (highest precedence):

@@ -1,5 +1,6 @@
 ---
 title: "Configuration with Deno JSON"
+description: "Learn how to use deno.json to manage dependencies, configure tasks, customize formatting and linting, and work with import maps."
 url: /examples/configuration_with_deno_json/
 videoUrl: https://www.youtube.com/watch?v=bTmO5Tfgke4
 layout: video.tsx

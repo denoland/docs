@@ -79,6 +79,28 @@ You may be forced to use a `tsconfig.json` file when, for example, the required
 granularity for [`include`](https://www.typescriptlang.org/tsconfig/#include)
 cannot be represented with `deno.json` workspaces and directory scopes.
 
+## Migrating compilerOptions from Node.js
+
+Most of a typical Node.js `tsconfig.json` exists to configure compilation output
+and module interop. Deno runs TypeScript directly and never emits JavaScript, so
+most of those options have no effect and can be deleted. Deno warns about
+ignored options when they appear in a `tsconfig.json`; moving your remaining
+options into `deno.json`'s `compilerOptions` suppresses the warning.
+
+| Option in your `tsconfig.json`                          | In Deno                                                                                                                                    |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `target`, `outDir`, `outFile`, `rootDir`                | Delete. Deno never emits: code runs directly on the latest V8, and `deno check` type-checks without producing output.                      |
+| `declaration`, `declarationMap`, `emitDeclarationOnly`  | Delete. No emit. Use [`deno doc`](/runtime/reference/cli/doc/) for API documentation.                                                      |
+| `sourceMap`, `inlineSourceMap`, `inlineSources`         | Delete. Stack traces map to your TypeScript sources automatically.                                                                         |
+| `esModuleInterop`, `allowSyntheticDefaultImports`       | Delete. Deno is ESM-native and handles CommonJS interop in the runtime.                                                                    |
+| `importHelpers`, `noEmitHelpers`, `downlevelIteration`  | Delete. No downleveling happens, so no helpers are emitted.                                                                                |
+| `resolveJsonModule`                                     | Delete. Import JSON with an attribute instead: `import data from "./data.json" with { type: "json" }`.                                     |
+| `skipLibCheck`                                          | Delete. Deno does not type-check dependencies by default (`deno check --all` opts in).                                                     |
+| `module`, `moduleResolution`                            | Usually delete. Deno defaults to `nodenext`; the supported values are listed in the table below.                                           |
+| `lib`, `types`                                          | Usually delete. Deno's defaults cover its runtime; keep `lib` only for cross-runtime code (see ["lib" property](#using-the-lib-property)). |
+| `strict`, `noImplicit*`, `noUnused*`, other check flags | Keep the ones you want, in `deno.json`'s `compilerOptions`. Note Deno's defaults are already strict (table below).                         |
+| `paths`, `baseUrl`                                      | Keep if needed for type-time path mapping, or replace with [import maps](/runtime/fundamentals/modules/), which also work at runtime.      |
+
 ## TS Compiler Options
 
 Here is a table of compiler options that can be changed, their default in Deno
@@ -179,8 +201,8 @@ using any APIs exclusive to one or the other. In such cases, a typical
 
 This should allow most code to be type checked properly by Deno.
 
-If you expect to run the code in Deno with the `--unstable` flag, then you
-should add that library to the mix as well:
+If your code uses APIs that are gated behind one of the `--unstable-*` flags,
+add the `deno.unstable` library to the mix as well:
 
 ```json title="deno.json"
 {

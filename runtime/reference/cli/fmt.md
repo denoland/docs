@@ -14,7 +14,7 @@ description: "Format your code with Deno's built-in formatter"
 
 Deno ships with a built-in code formatter based on [dprint](https://dprint.dev/)
 that auto-formats your code to a consistent style. For a broader overview, see
-[Linting and Formatting](/runtime/fundamentals/linting_and_formatting/).
+[Linting and Formatting](/runtime/lint_and_format/).
 
 ## Basic usage
 

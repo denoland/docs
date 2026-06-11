@@ -86,7 +86,7 @@ import bytes from "./image.png" with { type: "bytes" };
 console.log(bytes instanceof Uint8Array);
 // true
 console.log(bytes);
-Uint8Array(12) [
+// Uint8Array(12) [
 //    72, 101, 108, 108, 111,
 //    44,  32,  68, 101, 110,
 //   111,  33
@@ -263,9 +263,8 @@ without the trailing `/`:
 ## Managing dependencies
 
 Now that you understand how Deno resolves and imports modules, see the
-[Dependency management guide](/runtime/fundamentals/dependency_management/) for
-the day-to-day tasks: adding and removing packages with `deno add` /
-`deno
-remove`, pinning versions, overriding and vendoring dependencies,
-lockfiles and integrity checking, supply chain management, publishing your own
-modules, and using private registries.
+[Dependency management guide](/runtime/packages/) for the day-to-day tasks:
+adding and removing packages with `deno add` / `deno
+remove`, pinning versions,
+overriding and vendoring dependencies, lockfiles and integrity checking, supply
+chain management, publishing your own modules, and using private registries.

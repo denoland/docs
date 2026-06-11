@@ -1,34 +1,43 @@
 /**
  * @title Hex and base64 encoding
  * @difficulty beginner
- * @tags cli
+ * @tags cli, deploy, web
  * @run <url>
+ * @resource {https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array/toBase64} MDN: Uint8Array.prototype.toBase64
+ * @resource {https://docs.deno.com/examples/convert_uint8array/} Example: Convert a Uint8Array
  * @group Encoding
  *
- * There are a few cases where it would be practical to encode
- * and decode between different string and array buffer formats.
- * The Deno Standard Library makes this easy.
+ * Binary data often needs to travel as text, in URLs, JSON, or HTTP
+ * headers. Since Deno 2.x the Uint8Array built-in methods handle hex and
+ * base64 directly, with no imports needed.
  */
 
-// The standard library provides hex and base64 encoding and decoding utilities
-import { decodeBase64, encodeBase64 } from "jsr:@std/encoding/base64";
-import { decodeHex, encodeHex } from "jsr:@std/encoding/hex";
+// Encoding starts from bytes. To encode a string, convert it to a
+// Uint8Array with TextEncoder first.
+const bytes = new TextEncoder().encode("somestringtoencode");
 
-// We can easily encode a string or an array buffer into base64 using the encodeBase64 method.
-const base64Encoded = encodeBase64("somestringtoencode");
-console.log(encodeBase64(new Uint8Array([1, 32, 67, 120, 19])));
+// To encode the bytes as base64, use the built-in toBase64 method.
+const base64Encoded = bytes.toBase64();
+console.log(base64Encoded); // c29tZXN0cmluZ3RvZW5jb2Rl
 
-// We can then decode base64 into a Uint8Array using the decode method.
-const base64Decoded = decodeBase64(base64Encoded);
+// To decode base64 back into bytes, use the static fromBase64 method.
+const base64Decoded = Uint8Array.fromBase64(base64Encoded);
 
-// If we want to get the value as a string we can use the built-in TextDecoder.
-const textDecoder = new TextDecoder();
-console.log(textDecoder.decode(base64Decoded));
+// To get the value back as a string, use TextDecoder.
+console.log(new TextDecoder().decode(base64Decoded)); // somestringtoencode
 
-// To encode hex, we can use the encodeHex method.
-const hexEncoded = encodeHex("somestringtoencode");
-console.log(hexEncoded);
+// Base64url is the URL-safe variant used in JWTs and web APIs. Pass the
+// alphabet option to encode or decode it.
+const urlSafe = bytes.toBase64({ alphabet: "base64url" });
+console.log(urlSafe); // c29tZXN0cmluZ3RvZW5jb2Rl
 
-// We can convert back to a string by using the decodeHex method.
-const hexDecoded = decodeHex(hexEncoded);
-console.log(textDecoder.decode(hexDecoded));
+// Hex encoding works the same way, with toHex and fromHex.
+const hexEncoded = bytes.toHex();
+console.log(hexEncoded); // 736f6d65737472696e67746f656e636f6465
+
+// And back again.
+const hexDecoded = Uint8Array.fromHex(hexEncoded);
+console.log(new TextDecoder().decode(hexDecoded)); // somestringtoencode
+
+// For formats beyond hex and base64, like base32 or base58, the Deno
+// Standard Library provides encoders in jsr:@std/encoding.

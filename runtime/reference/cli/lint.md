@@ -15,7 +15,7 @@ description: "Run the Deno linter to check your code for errors and apply automa
 
 Deno ships with a built-in linter that analyzes your code for potential errors,
 bugs, and stylistic issues. For a broader overview, see
-[Linting and Formatting](/runtime/fundamentals/linting_and_formatting/).
+[Linting and Formatting](/runtime/lint_and_format/).
 
 ## Basic usage
 

@@ -134,6 +134,17 @@ files in their respective content directories.
 Static files (like screenshots) can be included directly in the `runtime`,
 `deploy`, or `kv` folders, and referenced by relative URLs in your markdown.
 
+### Guides teach, reference enumerates
+
+A topic's depth lives in exactly one place. Guide pages (like `/runtime/test/`
+or `/runtime/packages/`) teach the opinionated path with minimal flags and link
+out for detail; reference pages (under `/runtime/reference/`) enumerate every
+flag, field, and option exhaustively. Don't repeat flag or option documentation
+in a guide: link to the reference instead. A guide may include at most one
+summary table when it links to the full reference. When the same material exists
+in both kinds of page, move the depth to the reference and keep the narrative in
+the guide.
+
 ## Reference docs
 
 The reference docs served at `/api` are generated via the `deno doc` subcommand.

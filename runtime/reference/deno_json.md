@@ -33,7 +33,7 @@ your project, you could use this import map:
 }
 ```
 
-Then your script can use the bare specifier `std/assert`:
+Then your script can use the bare specifier `@std/assert`:
 
 ```js title="script.ts"
 import { assertEquals } from "@std/assert";
@@ -277,14 +277,13 @@ allowed values:
 
 </div>
 
-Read more about
-[formatting your code with Deno](/runtime/fundamentals/linting_and_formatting/).
+Read more about [formatting your code with Deno](/runtime/lint_and_format/).
 
 ## Lockfile
 
 The `lock` field in the `deno.json` file is used to specify configuration of the
 lock file that Deno uses to
-[ensure the integrity of your dependencies](/runtime/fundamentals/dependency_management/#integrity-checking-and-lock-files).
+[ensure the integrity of your dependencies](/runtime/packages/#integrity-checking-and-lock-files).
 A lock file records the exact versions and integrity hashes of the modules your
 project depends on, ensuring that the same versions are used every time the
 project is run, even if the dependencies are updated or changed remotely.
@@ -311,6 +310,42 @@ Deno uses lockfile by default, you can disable it with following configuration:
   "lock": false
 }
 ```
+
+## Minimum dependency age
+
+The `minimumDependencyAge` field stops Deno from installing npm or JSR package
+versions that were published more recently than the configured age. Freshly
+published malicious versions are usually detected and yanked within days, so a
+small delay window catches the bulk of supply-chain attacks. See
+[supply chain management](/runtime/packages/#supply-chain-management) for
+guidance on choosing a window.
+
+```jsonc title="deno.json"
+{
+  // Don't install versions published less than 3 days ago
+  "minimumDependencyAge": "P3D"
+}
+```
+
+The value accepts an
+[ISO-8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) such as
+`P3D` or `PT72H`, a number of minutes (`120`), an absolute cutoff date
+(`2025-09-16`) or RFC3339 timestamp, or `0` to disable.
+
+To exempt specific packages, use the object form with an `exclude` list:
+
+```jsonc title="deno.json"
+{
+  "minimumDependencyAge": {
+    "age": "P3D",
+    "exclude": ["npm:@mycompany/cli", "jsr:@mycompany/lib"]
+  }
+}
+```
+
+The same control is available as the `--minimum-dependency-age` CLI flag and as
+`min-release-age` in
+[`.npmrc`](/runtime/fundamentals/node/#npmrc-configuration).
 
 ## Node modules directory
 
@@ -359,9 +394,9 @@ sharing code.
 :::
 
 If you’re migrating from Node.js, your existing `tsconfig.json` files work out
-of the box with Deno. See
-[Using tsconfig.json with Deno](/runtime/fundamentals/typescript/#using-tsconfigjson-with-deno)
-for details.
+of the box with Deno. See the
+[tsconfig.json compatibility reference](/runtime/reference/ts_config_migration/)
+for the supported fields and precedence rules.
 
 For the full list of supported compiler options, library configuration, and
 advanced settings, see
@@ -532,10 +567,11 @@ You can also define multiple entry points:
 
 This configuration will:
 
-- expose `module1` and `module2` as entry points for your package,
-- allow importing any file from the `utils` directory using a wildcard. This
-  means users can import these modules using the specified paths, while other
-  files in your package remain private.
+- expose `module1` and `module2` as entry points for your package, and
+- make `./src/mod.ts` the default entry point (`.`).
+
+Users can import these modules using the specified paths, while other files in
+your package remain private.
 
 To use the exports in your code, you can import them like this:
 
