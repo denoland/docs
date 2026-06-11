@@ -738,6 +738,16 @@ export const sidebar = [
         href: "/examples/convert_buffer/",
         type: "example",
       },
+      {
+        title: "Convert a ReadableStream",
+        href: "/examples/convert_readablestream/",
+        type: "example",
+      },
+      {
+        title: "Convert a string to bytes and back",
+        href: "/examples/convert_string/",
+        type: "example",
+      },
     ],
   },
   {
