@@ -221,6 +221,81 @@ export const sidebar = [
         href: "/examples/webassembly/",
         type: "example",
       },
+      {
+        title: "Match URLs with URLPattern",
+        href: "/examples/url_pattern/",
+        type: "example",
+      },
+      {
+        title: "Cancel async work with AbortController",
+        href: "/examples/abort_controller/",
+        type: "example",
+      },
+      {
+        title: "Set a timeout on fetch",
+        href: "/examples/fetch_timeout/",
+        type: "example",
+      },
+      {
+        title: "Deep clone objects with structuredClone",
+        href: "/examples/structured_clone/",
+        type: "example",
+      },
+      {
+        title: "Build and send forms with FormData",
+        href: "/examples/form_data/",
+        type: "example",
+      },
+      {
+        title: "Create and dispatch custom events",
+        href: "/examples/event_target/",
+        type: "example",
+      },
+      {
+        title: "Communicate between workers with BroadcastChannel",
+        href: "/examples/broadcast_channel/",
+        type: "example",
+      },
+      {
+        title: "Transform data with TransformStream",
+        href: "/examples/transform_stream/",
+        type: "example",
+      },
+      {
+        title: "Format numbers and currencies",
+        href: "/examples/intl_number_format/",
+        type: "example",
+      },
+      {
+        title: "Format dates for any locale",
+        href: "/examples/intl_date_format/",
+        type: "example",
+      },
+      {
+        title: "Format relative time",
+        href: "/examples/intl_relative_time/",
+        type: "example",
+      },
+      {
+        title: "Pluralize and format lists",
+        href: "/examples/intl_plural_list/",
+        type: "example",
+      },
+      {
+        title: "Split text by words, sentences, and graphemes",
+        href: "/examples/intl_segmenter/",
+        type: "example",
+      },
+      {
+        title: "Measure performance with marks and measures",
+        href: "/examples/performance_timing/",
+        type: "example",
+      },
+      {
+        title: "Cache HTTP responses with the Web Cache API",
+        href: "/examples/web_cache_api/",
+        type: "example",
+      },
     ],
   },
 
@@ -1138,6 +1213,36 @@ export const sidebar = [
       {
         title: "AES Encryption and Decryption",
         href: "/examples/aes_encryption/",
+        type: "example",
+      },
+      {
+        title: "Sign and verify data with ECDSA",
+        href: "/examples/ecdsa_signing/",
+        type: "example",
+      },
+      {
+        title: "Derive encryption keys from passwords",
+        href: "/examples/derive_aes_key/",
+        type: "example",
+      },
+      {
+        title: "Generate secure random values",
+        href: "/examples/secure_random_values/",
+        type: "example",
+      },
+      {
+        title: "Compare secrets in constant time",
+        href: "/examples/timing_safe_comparison/",
+        type: "example",
+      },
+      {
+        title: "Hash large files with streams",
+        href: "/examples/hash_file_streams/",
+        type: "example",
+      },
+      {
+        title: "Hash and sign with node:crypto",
+        href: "/examples/node_crypto/",
         type: "example",
       },
     ],
