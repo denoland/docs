@@ -197,6 +197,11 @@ export const sidebar = [
         type: "example",
       },
       {
+        title: "Extract links and metadata from HTML",
+        href: "/examples/extract_html_data/",
+        type: "example",
+      },
+      {
         title: "Fetch and stream data",
         href: "/examples/fetch_data_tutorial/",
         type: "tutorial",
@@ -608,6 +613,11 @@ export const sidebar = [
         type: "tutorial",
       },
       {
+        title: "Use Deno in Docker",
+        href: "/runtime/reference/docker/",
+        type: "tutorial",
+      },
+      {
         title: "Deploying Deno with Docker",
         href: "/examples/deploying_deno_with_docker/",
         externalURL:
@@ -911,6 +921,16 @@ export const sidebar = [
         type: "example",
       },
       {
+        title: "WebSocket server: Broadcasting messages",
+        href: "/examples/websocket_pubsub/",
+        type: "example",
+      },
+      {
+        title: "WebSocket server: Per-socket state",
+        href: "/examples/websocket_context/",
+        type: "example",
+      },
+      {
         title: "TCP Echo Server",
         href: "/examples/tcp_echo_server/",
         type: "example",
@@ -988,6 +1008,16 @@ export const sidebar = [
       {
         title: "Write to stdout",
         href: "/examples/write_stdout/",
+        type: "example",
+      },
+      {
+        title: "Set the time zone",
+        href: "/examples/set_timezone/",
+        type: "example",
+      },
+      {
+        title: "Find an executable on the PATH",
+        href: "/examples/find_executable/",
         type: "example",
       },
       {
@@ -1195,6 +1225,11 @@ export const sidebar = [
       {
         title: "Exponential backoff",
         href: "/examples/exponential_backoff/",
+        type: "example",
+      },
+      {
+        title: "Inspect memory with heap snapshots",
+        href: "/examples/heap_snapshot/",
         type: "example",
       },
     ],
