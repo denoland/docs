@@ -104,8 +104,8 @@ The permission sandbox controls what code can do at runtime, but it does not
 tell you whether your dependencies contain known vulnerabilities. Deno ships
 [`deno audit`](/runtime/reference/cli/audit/) to scan your dependencies against
 vulnerability databases, which is useful as a CI gate. See
-[supply chain management](/runtime/packages/#supply-chain-management)
-for keeping dependencies safe over time.
+[supply chain management](/runtime/packages/#supply-chain-management) for
+keeping dependencies safe over time.
 
 ## Permission broker
 
