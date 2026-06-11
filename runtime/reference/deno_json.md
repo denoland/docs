@@ -317,8 +317,8 @@ The `minimumDependencyAge` field stops Deno from installing npm or JSR package
 versions that were published more recently than the configured age. Freshly
 published malicious versions are usually detected and yanked within days, so a
 small delay window catches the bulk of supply-chain attacks. See
-[supply chain management](/runtime/packages/#supply-chain-management) for
-guidance on choosing a window.
+[supply chain management](/runtime/packages/supply_chain/) for guidance on
+choosing a window.
 
 ```jsonc title="deno.json"
 {

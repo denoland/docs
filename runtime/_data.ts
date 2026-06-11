@@ -34,6 +34,16 @@ export const sidebar = [
       {
         title: "Dependency management",
         href: "/runtime/packages/",
+        items: [
+          {
+            title: "Supply chain",
+            href: "/runtime/packages/supply_chain/",
+          },
+          {
+            title: "Private repositories",
+            href: "/runtime/packages/private_repositories/",
+          },
+        ],
       },
       {
         title: "Web development",

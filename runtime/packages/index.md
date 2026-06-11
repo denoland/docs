@@ -15,8 +15,6 @@ oldUrl:
   - /runtime/manual/node/cdns.md
   - /runtime/manual/linking_to_external_code/reloading_modules
   - /runtime/fundamentals/esm.sh
-  - /runtime/manual/advanced/private_repositories/
-  - /runtime/reference/private_repositories/
 ---
 
 This guide covers the day-to-day tasks of working with dependencies in Deno:
@@ -308,7 +306,26 @@ Modules can be published to:
 - [deno.land/x](https://deno.com/add_module) - for HTTPS imports, use JSR
   instead if possible
 
-## Reloading modules
+To publish to JSR, give your package a name, version, and entry point in
+`deno.json`, then run [`deno publish`](/runtime/reference/cli/publish/):
+
+```json title="deno.json"
+{
+  "name": "@scope/my-package",
+  "version": "1.0.0",
+  "exports": "./mod.ts"
+}
+```
+
+```sh
+deno publish --dry-run   # check what will be published
+deno publish             # publish (authenticates via jsr.io)
+```
+
+See [Publishing packages on jsr.io](https://jsr.io/docs/publishing-packages) for
+scopes, versioning, and provenance.
+
+## Managing the module cache
 
 By default, Deno uses a global cache directory (`DENO_DIR`) for downloaded
 dependencies. This cache is shared across all projects.
@@ -322,6 +339,14 @@ deno run --reload my_module.ts
 
 # Reload a specific module
 deno run --reload=jsr:@std/fs my_module.ts
+```
+
+The reverse also works: `--cached-only` forbids the network entirely and fails
+if anything in the dependency tree is not already cached, which is useful for
+offline work and reproducible CI:
+
+```shell
+deno run --cached-only mod.ts
 ```
 
 ## Development only dependencies
@@ -431,18 +456,6 @@ Deno offers two approaches for installing production-only dependencies:
 See the [`deno install` reference](/runtime/reference/cli/install/) for more
 details.
 
-## Using only cached modules
-
-To force Deno to only use modules that have previously been cached, use the
-`--cached-only` flag:
-
-```shell
-deno run --cached-only mod.ts
-```
-
-This will fail if there are any dependencies in the dependency tree for mod.ts
-which are not yet cached.
-
 ## Integrity Checking and Lock Files
 
 Imagine your module relies on a remote module located at
@@ -512,285 +525,15 @@ following in a Deno configuration file:
 
 ## Supply chain management
 
-Modern JavaScript projects pull code from many sources (JSR, npm, HTTPS URLs,
-local workspaces). Good supply chain management helps you achieve four goals:
-
-- Determinism: everyone (and your CI) runs the exact same code.
-- Security: unexpected upstream changes or compromises are detected early.
-- Velocity: you can update dependencies intentionally when you choose.
-- Resilience: builds keep working offline or when registries have outages.
-
-### Core practices
-
-1. Pin versions deliberately
-   - For applications, prefer exact versions (for example
-     `jsr:@luca/cases@1.2.3`).
-   - For libraries, a caret range (`^1.2.3`) lets consumers get
-     backwards‑compatible fixes.
-   - Avoid unbounded (`*`) or overly broad ranges in production applications.
-2. Commit your `deno.lock` file.
-3. Enable a frozen lockfile in CI / production (`--frozen` or
-   `"lock": { "frozen": true }`) so new, unseen dependencies fail the build
-   instead of silently appearing.
-4. Vendor when you need hermetic/offline builds (`"vendor": true`) or when you
-   must patch third‑party code locally. Vendoring does not remove the need for a
-   lockfile—it complements it.
-5. Prefer import map (`imports`) entries over raw HTTPS imports in larger
-   codebases to centralize version changes.
-6. Periodically unfreeze and update consciously (for example on a weekly or
-   sprint cadence) instead of ad‑hoc updates during feature work.
-7. Set a [minimum dependency age](#minimum-dependency-age) so freshly published
-   versions can't slip into an install before the ecosystem has had time to spot
-   a compromised release.
-
-### Minimum dependency age
-
-Deno can refuse to install any package version that is younger than a configured
-age. This is a cheap, broad defence against npm supply-chain attacks: malicious
-versions are usually detected and yanked within days, so delaying installs by a
-similar window catches the bulk of them.
-
-You can configure the same control in three places; pick whichever fits the
-project:
-
-- **`deno.json`**, apply project-wide:
-
-  ```jsonc title="deno.json"
-  {
-    "minimumDependencyAge": "P3D"
-  }
-  ```
-
-- **CLI flag**, apply ad-hoc, e.g. for a one-off install or in a CI step:
-
-  ```sh
-  deno install --minimum-dependency-age=P3D
-  ```
-
-- **`.npmrc`** (Deno 2.8+), matches the npm convention, useful when sharing the
-  same `.npmrc` across npm and Deno tooling. The npm setting accepts a whole
-  number of days only:
-
-  ```ini title=".npmrc"
-  min-release-age=3
-  ```
-
-`deno.json` and `--minimum-dependency-age` accept an
-[ISO-8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) such as
-`P3D` (3 days) or `PT72H` (72 hours), an integer (interpreted as minutes), an
-absolute cutoff date (`2025-09-16`) or RFC3339 timestamp, or `0` to disable. The
-field also supports an object form that exempts specific packages; see the
-[`minimumDependencyAge` reference](/runtime/reference/deno_json/#minimum-dependency-age)
-for the full shape, and
-[`.npmrc` configuration](/runtime/fundamentals/node/#npmrc-configuration) for
-the other npm-registry options Deno reads.
-
-### Typical CI pattern
-
-In Deno 2.8+, the single command [`deno ci`](/runtime/reference/cli/ci/)
-encapsulates the recommended CI install flow (frozen lockfile + lifecycle
-scripts):
-
-```sh
-deno ci
-```
-
-For older Deno versions, or to compose the steps manually:
-
-```sh
-# Install (resolve) dependencies exactly as locked; fail if drift or new deps
-deno install --frozen --entrypoint main.ts
-
-# (optional) Run with only cached modules to guarantee no network access
-deno run --cached-only main.ts
-```
-
-If you rely on `npm` packages (`package.json` present), include `deno install`
-(or `deno ci`) in CI before running tests so the `node_modules` directory is
-materialized deterministically.
-
-### Updating dependencies intentionally
-
-When you decide to update:
-
-1. Temporarily allow lockfile writes: add `--frozen=false` or set
-   `"lock": { "frozen": false }`.
-2. Change versions (edit `deno.json`, use `deno add <specifier>@<newVersion>`,
-   or remove with `deno remove`).
-3. Re-run `deno install --entrypoint main.ts` (optionally `--reload`) to update
-   resolutions and integrity hashes.
-4. Review the diff in `deno.lock` (and `vendor/` if used) in your pull request.
-5. Re-enable the frozen lockfile.
-
-### Troubleshooting a frozen lockfile
-
-You may encounter errors like:
-
-```text
-error: The lockfile is frozen. Cannot add new entry for "jsr:@scope/pkg@1.3.0".
-```
-
-or:
-
-```text
-error: Module not found in frozen lockfile: https://example.com/dependency/mod.ts
-```
-
-Common causes and fixes:
-
-| Symptom                                                    | Cause                                          | Fix                                                                                                                         |
-| ---------------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| Need to bump a version but command fails with frozen error | Lockfile is in frozen mode                     | Re-run with `--frozen=false` (one-off) or temporarily set `"lock": { "frozen": false }`, then update and re-freeze          |
-| New transitive dependency appears after editing code       | Code now imports something not in lockfile     | Unfreeze (`--frozen=false`) and run `deno install --entrypoint <entry>.ts` to record it                                     |
-| Removed imports but lockfile still contains old entries    | Lockfile is additive; entries persist          | (Optional) regenerate: move `deno.lock` aside (`mv deno.lock deno.lock.old`), run install to recreate, compare, then commit |
-| Lockfile corruption / merge conflict                       | Manual edit or conflict left inconsistent JSON | Delete conflicting sections and re-run install, or regenerate entirely                                                      |
-| Using vendored deps but lockfile complains                 | Vendor dir out of sync with lockfile           | Re-run `deno install --entrypoint <entry>` (unfrozen) to sync both, then commit                                             |
-
-### Safe regeneration checklist
-
-Only regenerate the entire `deno.lock` when necessary (corruption, massive
-pruning). When you do:
-
-1. Back it up: `cp deno.lock deno.lock.bak`.
-2. Remove it: `rm deno.lock`.
-3. (If vendoring) remove or move the `vendor/` directory.
-4. Run `deno install --entrypoint main.ts` to recreate.
-5. Inspect the diff between old and new to catch unexpected additions.
-
-### Vendor vs lockfile
-
-These are complementary:
-
-- Lockfile: records exact resolved versions + integrity hashes for remote and
-  npm/JSR deps.
-- Vendor directory: stores the actual source locally for hermetic, offline, and
-  patchable builds.
-
-Use both for maximum reproducibility. A frozen lockfile alone does not make your
-build fully hermetic if the remote source disappears; vendoring closes that gap.
-
-### Quick decision guide
-
-| Need                       | Use                                            |
-| -------------------------- | ---------------------------------------------- |
-| Detect upstream tampering  | Lockfile (commit & freeze)                     |
-| Offline / air-gapped build | `vendor: true` + lockfile                      |
-| Patch third-party code     | Vendoring or `scopes` overrides (short-term)   |
-| Fast CI with integrity     | `deno install --frozen`                        |
-| Intentionally upgrade      | Temporarily unfreeze, run install, review diff |
-
-### Minimum supply chain baseline (recommended)
-
-```json title="deno.json"
-{
-  "imports": {/* centralize versions */},
-  "vendor": true,
-  "lock": { "frozen": true }
-}
-```
-
-Commit `deno.json`, `deno.lock`, and (if using vendor) the entire `vendor/`
-directory.
-
-:::tip Automate a weekly dependency refresh
-
-A scheduled CI job that unfreezes, runs `deno add --latest` (or manually bumps
-key packages), executes tests, and opens a pull request with the updated
-`deno.lock` (and `vendor/`) keeps security patches flowing while keeping
-day-to-day builds deterministic.
-
-:::
+Lockfile discipline, a minimum dependency age, `deno audit`, and intentional
+update workflows keep your dependency tree deterministic and safe. See
+[Supply chain management](/runtime/packages/supply_chain/) for the practices and
+a recommended CI baseline.
 
 ## Private repositories
 
-:::note
-
-If you're looking for private npm registries and `.npmrc` support, visit the
-[npm support](/runtime/fundamentals/node/#private-registries) page.
-
-:::
-
-There may be instances where you want to load a remote module that is located in
-a _private_ repository, like a private repository on GitHub.
-
-Deno supports sending bearer tokens when requesting a remote module. Bearer
-tokens are the predominant type of access token used with OAuth 2.0, and are
-broadly supported by hosting services (e.g., GitHub, GitLab, Bitbucket,
-Cloudsmith, etc.).
-
-### DENO_AUTH_TOKENS
-
-The Deno CLI will look for an environment variable named `DENO_AUTH_TOKENS` to
-determine what authentication tokens it should consider using when requesting
-remote modules. The value of the environment variable is in the format of _n_
-number of tokens delimited by a semi-colon (`;`) where each token is either:
-
-- a bearer token in the format of `{token}@{hostname[:port]}` or
-- basic auth data in the format of `{username}:{password}@{hostname[:port]}`
-
-For example, a single token for `deno.land` would look something like this:
-
-```sh
-DENO_AUTH_TOKENS=a1b2c3d4e5f6@deno.land
-```
-
-or:
-
-```sh
-DENO_AUTH_TOKENS=username:password@deno.land
-```
-
-And multiple tokens would look like this:
-
-```sh
-DENO_AUTH_TOKENS=a1b2c3d4e5f6@deno.land;f1e2d3c4b5a6@example.com:8080;username:password@deno.land
-```
-
-When Deno goes to fetch a remote module, where the hostname matches the hostname
-of the remote module, Deno will set the `Authorization` header of the request to
-the value of `Bearer {token}` or `Basic {base64EncodedData}`. This allows the
-remote server to recognize that the request is an authorized request tied to a
-specific authenticated user, and provide access to the appropriate resources and
-modules on the server.
-
-### GitHub
-
-To access private repositories on GitHub, you would need to issue yourself a
-_personal access token_. You do this by logging into GitHub and going under
-_Settings -> Developer settings -> Personal access tokens_:
-
-![Personal access tokens settings on GitHub](./images/private-pat.png)
-
-You would then choose to _Generate new token_ and give your token a description
-and appropriate access to the `repo` scope. The `repo` scope will enable reading
-file contents (more on
-[scopes in the GitHub docs](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps#available-scopes)):
-
-![Creating a new personal access token on GitHub](./images/private-github-new-token.png)
-
-And once created GitHub will display the new token a single time, the value of
-which you would want to use in the environment variable:
-
-![Display of newly created token on GitHub](./images/private-github-token-display.png)
-
-In order to access modules that are contained in a private repository on GitHub,
-you would want to use the generated token in the `DENO_AUTH_TOKENS` environment
-variable scoped to the `raw.githubusercontent.com` hostname. For example:
-
-```sh
-DENO_AUTH_TOKENS=a1b2c3d4e5f6@raw.githubusercontent.com
-```
-
-This should allow Deno to access any modules that the user who the token was
-issued for has access to.
-
-When the token is incorrect, or the user does not have access to the module,
-GitHub will issue a `404 Not Found` status, instead of an unauthorized status.
-So if you are getting errors that the modules you are trying to access are not
-found on the command line, check the environment variable settings and the
-personal access token settings.
-
-In addition, `deno run -L debug` should print out a debug message about the
-number of tokens that are parsed out of the environment variable. It will print
-an error message if it feels any of the tokens are malformed. It won't print any
-details about the tokens for security purposes.
+Deno can load remote modules from private hosts by sending bearer tokens from
+the `DENO_AUTH_TOKENS` environment variable. For private npm registries and
+`.npmrc`, see [npm support](/runtime/fundamentals/node/#private-registries)
+instead. See [Private repositories](/runtime/packages/private_repositories/) for
+setup, including a GitHub walkthrough.
