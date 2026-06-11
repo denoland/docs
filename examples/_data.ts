@@ -129,6 +129,7 @@ export const sidebar = [
       },
     ],
   },
+
   {
     title: "Modules and package management",
     items: [
@@ -171,820 +172,6 @@ export const sidebar = [
     ],
   },
 
-  {
-    title: "Web standard APIs",
-    items: [
-      {
-        title: "Browser APIs in Deno",
-        href: "/examples/browser_apis_in_deno/",
-        externalURL:
-          "https://www.youtube.com/watch?v=oxVwTT-rZRo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=6",
-        type: "video",
-      },
-      {
-        title: "Temporal API",
-        href: "/examples/temporal/",
-        type: "example",
-      },
-      {
-        title: "Better debugging with the console API",
-        href: "/examples/debugging_with_console_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Manipulating & parsing URLs",
-        href: "/examples/url_parsing/",
-        type: "example",
-      },
-      {
-        title: "Escape an HTML string",
-        href: "/examples/escape_html/",
-        type: "example",
-      },
-      {
-        title: "Fetch and stream data",
-        href: "/examples/fetch_data_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Set timeout and intervals",
-        href: "/examples/timers/",
-        type: "example",
-      },
-      {
-        title: "Logging with colors",
-        href: "/examples/color_logging/",
-        type: "example",
-      },
-      {
-        title: "Web workers",
-        href: "/examples/web_workers/",
-        type: "example",
-      },
-      {
-        title: "Web assembly",
-        href: "/examples/webassembly/",
-        type: "example",
-      },
-    ],
-  },
-
-  {
-    title: "Standard library",
-    items: [
-      {
-        title: "User Data Processing with Deno Collections",
-        href: "/examples/data_processing/",
-        type: "example",
-      },
-      {
-        title: "Exponential backoff",
-        href: "/examples/exponential_backoff/",
-        type: "example",
-      },
-      {
-        title: "Debounce a function",
-        href: "/examples/debounce_function/",
-        type: "example",
-      },
-      {
-        title: "Run async tasks with a concurrency limit",
-        href: "/examples/concurrency_limit/",
-        type: "example",
-      },
-      {
-        title: "Add a timeout to any promise",
-        href: "/examples/promise_timeout/",
-        type: "example",
-      },
-      {
-        title: "Memoize an expensive function",
-        href: "/examples/memoize_function/",
-        type: "example",
-      },
-      {
-        title: "Parse and compare semver versions",
-        href: "/examples/semver_versions/",
-        type: "example",
-      },
-      {
-        title: "Convert string case",
-        href: "/examples/string_case/",
-        type: "example",
-      },
-      {
-        title: "Escape text for regular expressions",
-        href: "/examples/regexp_escape/",
-        type: "example",
-      },
-      {
-        title: "Parse and format dates",
-        href: "/examples/date_format_parse/",
-        type: "example",
-      },
-      {
-        title: "Structured logging",
-        href: "/examples/structured_logging/",
-        type: "example",
-      },
-      {
-        title: "Format bytes and durations for humans",
-        href: "/examples/format_bytes_duration/",
-        type: "example",
-      },
-    ],
-  },
-
-  {
-    title: "Web frameworks and libraries",
-    items: [
-      {
-        title: "TypeScript and JSX",
-        href: "/examples/ts_jsx/",
-        externalURL:
-          "https://www.youtube.com/watch?v=KoM8ahe8O74&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=11",
-        type: "video",
-      },
-      {
-        title: "Build a React App",
-        href: "/examples/react_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Build a Next.js app",
-        href: "/examples/next_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Build a Fresh app",
-        href: "/examples/fresh_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Build a Svelte app",
-        href: "/examples/svelte_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Build a Vue app",
-        href: "/examples/vue_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Use Express with Deno",
-        href: "/examples/express_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "How to use Apollo with Deno",
-        href: "/examples/apollo_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Build an Astro site with Deno",
-        href: "/examples/astro_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Build a Qwik app with Deno",
-        href: "/examples/qwik_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Build a Nuxt app with Deno",
-        href: "/examples/nuxt_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Build a Typesafe API with tRPC and Deno",
-        href: "/examples/trpc_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Build an API server with TypeScript",
-        href: "/examples/build_api_server_ts/",
-        externalURL:
-          "https://www.youtube.com/watch?v=J8kZ-s-5-ms&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=13",
-        type: "video",
-      },
-      {
-        title: "Build a Vue app",
-        href: "/examples/vue_app_video/",
-        externalURL: "https://www.youtube.com/watch?v=MDPauM8fZDE",
-        type: "video",
-      },
-      {
-        title: "Build a SolidJS app",
-        href: "/examples/solidjs_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Build a React app",
-        href: "/examples/react_app_video/",
-        externalURL: "https://www.youtube.com/watch?v=eStwt_2THd8",
-        type: "video",
-      },
-      {
-        title: "Build a Tanstack app",
-        href: "/examples/tanstack_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "HTTP server file upload",
-        href: "/examples/http_server_file_upload/",
-        type: "example",
-      },
-      {
-        title: "Build a word finder app",
-        href: "/examples/word_finder_tutorial/",
-        type: "tutorial",
-      },
-    ],
-  },
-  {
-    title: "Deno Sandbox",
-    items: [
-      {
-        title: "Evaluating JavaScript",
-        href: "/examples/sandbox_evaluating_javascript/",
-        type: "example",
-      },
-      {
-        title: "Spawn a subprocess",
-        href: "/examples/sandbox_spawn_subprocess/",
-        type: "tutorial",
-      },
-      {
-        title: "Serve a web framework",
-        href: "/examples/sandbox_web_framework/",
-        type: "tutorial",
-      },
-      {
-        title: "Provide SSH access to a sandbox",
-        href: "/examples/sandbox_ssh_access/",
-        type: "tutorial",
-      },
-      {
-        title: "Interactive JavaScript REPL",
-        href: "/examples/sandbox_javascript_repl/",
-        type: "tutorial",
-      },
-      {
-        title: "Provide a VSCode instance in a sandbox",
-        href: "/examples/sandbox_vscode_instance/",
-        type: "tutorial",
-      },
-      {
-        title: "Use template literals with variable interpolation",
-        href: "/examples/sandbox_template_literals/",
-        type: "tutorial",
-      },
-      {
-        title: "Error handling",
-        href: "/examples/sandbox_error_handling/",
-        type: "tutorial",
-      },
-      {
-        title: "Command cancellation",
-        href: "/examples/sandbox_command_cancellation/",
-        type: "tutorial",
-      },
-      {
-        title: "Streaming access string and binary output",
-        href: "/examples/sandbox_access_output/",
-        type: "tutorial",
-      },
-      {
-        title: "Set and get environment variables",
-        href: "/examples/sandbox_environment_variables/",
-        type: "tutorial",
-      },
-      {
-        title: "Stream output to a local file",
-        href: "/examples/sandbox_stream_output/",
-        type: "tutorial",
-      },
-      {
-        title: "Upload files and directories to a sandbox",
-        href: "/examples/sandbox_upload_files/",
-        type: "tutorial",
-      },
-      {
-        title: "Control sandbox timeout",
-        href: "/examples/sandbox_timeout_control/",
-        type: "tutorial",
-      },
-      {
-        title: "Configure sandbox memory",
-        href: "/examples/sandbox_memory/",
-        type: "tutorial",
-      },
-      {
-        title: "Add read-write volumes to your Sandbox",
-        href: "/examples/volumes_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Boot instantly with snapshots",
-        href: "/examples/snapshots_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Boot a Python environment with snapshots",
-        href: "/examples/snapshot_python_video/",
-        type: "video",
-      },
-      {
-        title: "Boot a Python environment with snapshots",
-        href: "/examples/snapshot_python_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Run AI generated code",
-        href: "/examples/sandbox_for_untrusted_code/",
-        type: "example",
-      },
-    ],
-  },
-  {
-    title: "Testing",
-    items: [
-      {
-        title: "Writing tests",
-        href: "/examples/writing_tests/",
-        type: "example",
-      },
-      {
-        title: "Basics of testing",
-        href: "/examples/testing_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Mocking data in tests",
-        href: "/examples/mocking_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Stubbing",
-        href: "/examples/stubbing_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Snapshot testing",
-        href: "/examples/snapshot_test_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Spy functions",
-        href: "/examples/spy_functions/",
-        type: "example",
-      },
-      {
-        title: "Getting started with Deno test",
-        href: "/examples/deno_test/",
-        externalURL: "https://www.youtube.com/watch?v=gDtDVfsgHgs",
-        type: "video",
-      },
-      {
-        title: "Better testing with Deno coverage",
-        href: "/examples/deno_coverage/",
-        externalURL: "https://www.youtube.com/watch?v=P2BBYNPpgW8",
-        type: "video",
-      },
-      {
-        title: "Testing web applications",
-        href: "/examples/web_testing_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "BDD testing",
-        href: "/examples/bdd_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Skipping and focusing tests",
-        href: "/examples/tests_skip_focus/",
-        type: "example",
-      },
-      {
-        title: "Filtering and controlling test runs",
-        href: "/examples/tests_run_control/",
-        type: "example",
-      },
-      {
-        title: "Use Testing Library with Deno",
-        href: "/examples/testing_library_tutorial/",
-        type: "tutorial",
-      },
-    ],
-  },
-  {
-    title: "OpenTelemetry",
-    items: [
-      {
-        title: "Basic OpenTelemetry setup",
-        href: "/examples/basic_opentelemetry_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Export telemetry to Grafana",
-        href: "/examples/grafana_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Export telemetry to Hyperdx",
-        href: "/examples/hyperdx_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "View telemetry data for your local application",
-        href: "/examples/tunnel_telemetry_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Export telemetry to Honeycomb",
-        href: "/examples/honeycomb_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Span propagation",
-        href: "/examples/otel_span_propagation_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "OpenTelemetry with Deno Deploy",
-        href: "/examples/deploy_otel_tutorial/",
-        type: "tutorial",
-      },
-    ],
-  },
-  {
-    title: "Deploying Deno projects",
-    items: [
-      {
-        title: "Deploy with Deno Deploy",
-        href: "/examples/deno_deploy_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Deploy with the deploy command",
-        href: "/examples/deploy_command_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Migrating a custom domain to Deno Deploy",
-        href: "/examples/migrate_custom_domain_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Connecting to a database both locally and on Deno Deploy",
-        href: "/examples/tunnel_database_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "AWS Lambda",
-        href: "/examples/aws_lambda_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Deploy Deno to AWS Lambda",
-        href: "/examples/deploy_deno_to_aws_lambda/",
-        externalURL:
-          "https://www.youtube.com/watch?v=_xLOrT3cWK4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=17",
-        type: "video",
-      },
-      {
-        title: "AWS Lightsail",
-        href: "/examples/aws_lightsail_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Cloudflare workers",
-        href: "/examples/cloudflare_workers_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Cloudflare workers with wrangler",
-        href: "/examples/cloudflare_workers_wrangler_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Digital Ocean",
-        href: "/examples/digital_ocean_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Google Cloud Run",
-        href: "/examples/google_cloud_run_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Kinsta",
-        href: "/examples/kinsta_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Deploying Deno with Docker",
-        href: "/examples/deploying_deno_with_docker/",
-        externalURL:
-          "https://www.youtube.com/watch?v=VRryNeYm6yw&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=16",
-        type: "video",
-      },
-    ],
-  },
-  {
-    title: "Databases",
-    items: [
-      {
-        title: "Overview",
-        href: "/examples/connecting_to_databases_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "MySQL",
-        href: "/examples/mysql2_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "PlanetScale",
-        href: "/examples/planetscale_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Redis",
-        href: "/examples/redis_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Prisma",
-        href: "/examples/prisma_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Drizzle",
-        href: "/examples/drizzle_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Mongoose",
-        href: "/examples/mongoose_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Redis quick start",
-        href: "/examples/redis/",
-        type: "example",
-      },
-      {
-        title: "Postgres",
-        href: "/examples/postgres/",
-        type: "example",
-      },
-      {
-        title: "Supabase",
-        href: "/examples/supabase/",
-        type: "example",
-      },
-      {
-        title: "MongoDB",
-        href: "/examples/mongo/",
-        type: "example",
-      },
-      {
-        title: "SQLite",
-        href: "/examples/sqlite/",
-        type: "example",
-      },
-      {
-        title: "Mongoose (video)",
-        href: "/examples/mongoose/",
-        externalURL: "https://www.youtube.com/watch?v=dmZ9Ih0CR9g",
-        type: "video",
-      },
-      {
-        title: "Prisma (video)",
-        href: "/examples/prisma/",
-        externalURL: "https://www.youtube.com/watch?v=P8VzA_XSF8w",
-        type: "video",
-      },
-      {
-        title: "DuckDB",
-        href: "/examples/duckdb/",
-        type: "example",
-      },
-    ],
-  },
-
-  {
-    title: "Deno KV and scheduling",
-    items: [
-      {
-        title: "Deno KV: Key/Value database",
-        href: "/examples/kv/",
-        type: "example",
-      },
-      {
-        title: "Deno KV watch",
-        href: "/examples/kv_watch/",
-        type: "example",
-      },
-      {
-        title: "Deno queues",
-        href: "/examples/queues/",
-        type: "example",
-      },
-      {
-        title: "Deno Cron",
-        href: "/examples/cron/",
-        type: "example",
-      },
-    ],
-  },
-
-  {
-    title: "AI",
-    items: [
-      {
-        title: "LLM Chat app",
-        href: "/examples/llm_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Connect to OpenAI - Chat completion",
-        href: "/examples/openai_chat_completion/",
-        type: "example",
-      },
-    ],
-  },
-  {
-    title: "Encoding",
-    items: [
-      {
-        title: "Hex and base64 encoding",
-        href: "/examples/hex_base64_encoding/",
-        type: "example",
-      },
-      {
-        title: "Parsing and serializing TOML",
-        href: "/examples/parsing_serializing_toml/",
-        type: "example",
-      },
-      {
-        title: "Importing JSON",
-        href: "/examples/importing_json/",
-        type: "example",
-      },
-      {
-        title: "Byte and text imports",
-        href: "/examples/byte_and_text_imports/",
-        externalURL: "https://www.youtube.com/watch?v=PAEI6mdlXwc",
-        type: "video",
-      },
-      {
-        title: "Image bundling with deno compile",
-        href: "/examples/image_bundling_deno_compile/",
-        externalURL: "https://www.youtube.com/watch?v=qg_M0deBlfQ",
-        type: "video",
-      },
-      {
-        title: "Parsing and serializing CSV",
-        href: "/examples/parsing_serializing_csv/",
-        type: "example",
-      },
-      {
-        title: "Parsing and serializing JSON",
-        href: "/examples/parsing_serializing_json/",
-        type: "example",
-      },
-      {
-        title: "Parsing and serializing YAML",
-        href: "/examples/parsing_serializing_yaml/",
-        type: "example",
-      },
-      {
-        title: "Manipulating byte arrays",
-        href: "/examples/byte_manipulation/",
-        type: "example",
-      },
-      {
-        title: "Convert an ArrayBuffer",
-        href: "/examples/convert_arraybuffer/",
-        type: "example",
-      },
-      {
-        title: "Convert a Uint8Array",
-        href: "/examples/convert_uint8array/",
-        type: "example",
-      },
-      {
-        title: "Convert a Blob",
-        href: "/examples/convert_blob/",
-        type: "example",
-      },
-      {
-        title: "Convert a Buffer (node:buffer)",
-        href: "/examples/convert_buffer/",
-        type: "example",
-      },
-      {
-        title: "Convert a ReadableStream",
-        href: "/examples/convert_readablestream/",
-        type: "example",
-      },
-      {
-        title: "Convert a string to bytes and back",
-        href: "/examples/convert_string/",
-        type: "example",
-      },
-      {
-        title: "Convert a Node.js Readable",
-        href: "/examples/convert_node_readable/",
-        type: "example",
-      },
-      {
-        title: "Compress and decompress data",
-        href: "/examples/compress_decompress/",
-        type: "example",
-      },
-      {
-        title: "Importing text",
-        href: "/examples/importing_text/",
-        type: "example",
-      },
-      {
-        title: "Importing bytes",
-        href: "/examples/importing_bytes/",
-        type: "example",
-      },
-      {
-        title: "Parsing and serializing INI",
-        href: "/examples/parsing_serializing_ini/",
-        type: "example",
-      },
-      {
-        title: "Parsing JSONC",
-        href: "/examples/parsing_jsonc/",
-        type: "example",
-      },
-      {
-        title: "Parse large CSV files as streams",
-        href: "/examples/csv_streaming/",
-        type: "example",
-      },
-      {
-        title: "Stream JSON Lines data",
-        href: "/examples/json_lines/",
-        type: "example",
-      },
-      {
-        title: "Encode and decode MessagePack",
-        href: "/examples/msgpack_encoding/",
-        type: "example",
-      },
-      {
-        title: "Encode and decode CBOR",
-        href: "/examples/cbor_encoding/",
-        type: "example",
-      },
-      {
-        title: "Compress data with node:zlib",
-        href: "/examples/zlib_compression/",
-        type: "example",
-      },
-    ],
-  },
-  {
-    title: "CLI",
-    items: [
-      {
-        title: "Build a Command Line Utility",
-        href: "/examples/command_line_utility/",
-        externalURL:
-          "https://www.youtube.com/watch?v=TUxj2TS5pNo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=14",
-        type: "video",
-      },
-      {
-        title: "Input prompts",
-        href: "/examples/prompts/",
-        type: "example",
-      },
-      {
-        title: "Permission management",
-        href: "/examples/permissions/",
-        type: "example",
-      },
-      {
-        title: "Command line arguments",
-        href: "/examples/command_line_arguments/",
-        type: "example",
-      },
-      {
-        title: "Getting the Deno version",
-        href: "/examples/deno_version/",
-        type: "example",
-      },
-    ],
-  },
   {
     title: "Network",
     items: [
@@ -1132,76 +319,7 @@ export const sidebar = [
       },
     ],
   },
-  {
-    title: "System",
-    items: [
-      {
-        title: "Handling OS signals",
-        href: "/examples/os_signals/",
-        type: "example",
-      },
-      {
-        title: "Benchmarking",
-        href: "/examples/benchmarking/",
-        type: "example",
-      },
-      {
-        title: "Create a subprocess",
-        href: "/examples/subprocess_tutorial/",
-        type: "tutorial",
-      },
-      {
-        title: "Subprocess Spawning",
-        href: "/examples/subprocess_running_files/",
-        type: "example",
-      },
-      {
-        title: "Collecting output from subprocesses",
-        href: "/examples/subprocesses_output/",
-        type: "example",
-      },
-      {
-        title: "Reading system metrics",
-        href: "/examples/reading_system_metrics/",
-        type: "example",
-      },
-      {
-        title: "Process information",
-        href: "/examples/pid/",
-        type: "example",
-      },
-      {
-        title: "Read from stdin",
-        href: "/examples/reading_stdin/",
-        type: "example",
-      },
-      {
-        title: "Write to stdout",
-        href: "/examples/write_stdout/",
-        type: "example",
-      },
-      {
-        title: "Communicate with a child process over IPC",
-        href: "/examples/child_process_ipc/",
-        type: "example",
-      },
-      {
-        title: "Environment variables",
-        href: "/examples/environment_variables/",
-        type: "example",
-      },
-      {
-        title: "Subprocesses: Spawning",
-        href: "/examples/subprocesses_spawn/",
-        type: "example",
-      },
-      {
-        title: "Handle OS signals",
-        href: "/examples/os_signals_tutorial/",
-        type: "tutorial",
-      },
-    ],
-  },
+
   {
     title: "File system",
     items: [
@@ -1302,6 +420,373 @@ export const sidebar = [
       },
     ],
   },
+
+  {
+    title: "System",
+    items: [
+      {
+        title: "Handling OS signals",
+        href: "/examples/os_signals/",
+        type: "example",
+      },
+      {
+        title: "Benchmarking",
+        href: "/examples/benchmarking/",
+        type: "example",
+      },
+      {
+        title: "Create a subprocess",
+        href: "/examples/subprocess_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Subprocess Spawning",
+        href: "/examples/subprocess_running_files/",
+        type: "example",
+      },
+      {
+        title: "Collecting output from subprocesses",
+        href: "/examples/subprocesses_output/",
+        type: "example",
+      },
+      {
+        title: "Reading system metrics",
+        href: "/examples/reading_system_metrics/",
+        type: "example",
+      },
+      {
+        title: "Process information",
+        href: "/examples/pid/",
+        type: "example",
+      },
+      {
+        title: "Read from stdin",
+        href: "/examples/reading_stdin/",
+        type: "example",
+      },
+      {
+        title: "Write to stdout",
+        href: "/examples/write_stdout/",
+        type: "example",
+      },
+      {
+        title: "Communicate with a child process over IPC",
+        href: "/examples/child_process_ipc/",
+        type: "example",
+      },
+      {
+        title: "Environment variables",
+        href: "/examples/environment_variables/",
+        type: "example",
+      },
+      {
+        title: "Subprocesses: Spawning",
+        href: "/examples/subprocesses_spawn/",
+        type: "example",
+      },
+      {
+        title: "Handle OS signals",
+        href: "/examples/os_signals_tutorial/",
+        type: "tutorial",
+      },
+    ],
+  },
+
+  {
+    title: "Web standard APIs",
+    items: [
+      {
+        title: "Browser APIs in Deno",
+        href: "/examples/browser_apis_in_deno/",
+        externalURL:
+          "https://www.youtube.com/watch?v=oxVwTT-rZRo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=6",
+        type: "video",
+      },
+      {
+        title: "Temporal API",
+        href: "/examples/temporal/",
+        type: "example",
+      },
+      {
+        title: "Better debugging with the console API",
+        href: "/examples/debugging_with_console_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Manipulating & parsing URLs",
+        href: "/examples/url_parsing/",
+        type: "example",
+      },
+      {
+        title: "Escape an HTML string",
+        href: "/examples/escape_html/",
+        type: "example",
+      },
+      {
+        title: "Fetch and stream data",
+        href: "/examples/fetch_data_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Set timeout and intervals",
+        href: "/examples/timers/",
+        type: "example",
+      },
+      {
+        title: "Logging with colors",
+        href: "/examples/color_logging/",
+        type: "example",
+      },
+      {
+        title: "Web workers",
+        href: "/examples/web_workers/",
+        type: "example",
+      },
+      {
+        title: "Web assembly",
+        href: "/examples/webassembly/",
+        type: "example",
+      },
+    ],
+  },
+
+  {
+    title: "Standard library",
+    items: [
+      {
+        title: "User Data Processing with Deno Collections",
+        href: "/examples/data_processing/",
+        type: "example",
+      },
+      {
+        title: "Exponential backoff",
+        href: "/examples/exponential_backoff/",
+        type: "example",
+      },
+      {
+        title: "Debounce a function",
+        href: "/examples/debounce_function/",
+        type: "example",
+      },
+      {
+        title: "Run async tasks with a concurrency limit",
+        href: "/examples/concurrency_limit/",
+        type: "example",
+      },
+      {
+        title: "Add a timeout to any promise",
+        href: "/examples/promise_timeout/",
+        type: "example",
+      },
+      {
+        title: "Memoize an expensive function",
+        href: "/examples/memoize_function/",
+        type: "example",
+      },
+      {
+        title: "Parse and compare semver versions",
+        href: "/examples/semver_versions/",
+        type: "example",
+      },
+      {
+        title: "Convert string case",
+        href: "/examples/string_case/",
+        type: "example",
+      },
+      {
+        title: "Escape text for regular expressions",
+        href: "/examples/regexp_escape/",
+        type: "example",
+      },
+      {
+        title: "Parse and format dates",
+        href: "/examples/date_format_parse/",
+        type: "example",
+      },
+      {
+        title: "Structured logging",
+        href: "/examples/structured_logging/",
+        type: "example",
+      },
+      {
+        title: "Format bytes and durations for humans",
+        href: "/examples/format_bytes_duration/",
+        type: "example",
+      },
+    ],
+  },
+
+  {
+    title: "Encoding",
+    items: [
+      {
+        title: "Hex and base64 encoding",
+        href: "/examples/hex_base64_encoding/",
+        type: "example",
+      },
+      {
+        title: "Parsing and serializing TOML",
+        href: "/examples/parsing_serializing_toml/",
+        type: "example",
+      },
+      {
+        title: "Importing JSON",
+        href: "/examples/importing_json/",
+        type: "example",
+      },
+      {
+        title: "Byte and text imports",
+        href: "/examples/byte_and_text_imports/",
+        externalURL: "https://www.youtube.com/watch?v=PAEI6mdlXwc",
+        type: "video",
+      },
+      {
+        title: "Image bundling with deno compile",
+        href: "/examples/image_bundling_deno_compile/",
+        externalURL: "https://www.youtube.com/watch?v=qg_M0deBlfQ",
+        type: "video",
+      },
+      {
+        title: "Parsing and serializing CSV",
+        href: "/examples/parsing_serializing_csv/",
+        type: "example",
+      },
+      {
+        title: "Parsing and serializing JSON",
+        href: "/examples/parsing_serializing_json/",
+        type: "example",
+      },
+      {
+        title: "Parsing and serializing YAML",
+        href: "/examples/parsing_serializing_yaml/",
+        type: "example",
+      },
+      {
+        title: "Manipulating byte arrays",
+        href: "/examples/byte_manipulation/",
+        type: "example",
+      },
+      {
+        title: "Convert an ArrayBuffer",
+        href: "/examples/convert_arraybuffer/",
+        type: "example",
+      },
+      {
+        title: "Convert a Uint8Array",
+        href: "/examples/convert_uint8array/",
+        type: "example",
+      },
+      {
+        title: "Convert a Blob",
+        href: "/examples/convert_blob/",
+        type: "example",
+      },
+      {
+        title: "Convert a Buffer (node:buffer)",
+        href: "/examples/convert_buffer/",
+        type: "example",
+      },
+      {
+        title: "Convert a ReadableStream",
+        href: "/examples/convert_readablestream/",
+        type: "example",
+      },
+      {
+        title: "Convert a string to bytes and back",
+        href: "/examples/convert_string/",
+        type: "example",
+      },
+      {
+        title: "Convert a Node.js Readable",
+        href: "/examples/convert_node_readable/",
+        type: "example",
+      },
+      {
+        title: "Compress and decompress data",
+        href: "/examples/compress_decompress/",
+        type: "example",
+      },
+      {
+        title: "Importing text",
+        href: "/examples/importing_text/",
+        type: "example",
+      },
+      {
+        title: "Importing bytes",
+        href: "/examples/importing_bytes/",
+        type: "example",
+      },
+      {
+        title: "Parsing and serializing INI",
+        href: "/examples/parsing_serializing_ini/",
+        type: "example",
+      },
+      {
+        title: "Parsing JSONC",
+        href: "/examples/parsing_jsonc/",
+        type: "example",
+      },
+      {
+        title: "Parse large CSV files as streams",
+        href: "/examples/csv_streaming/",
+        type: "example",
+      },
+      {
+        title: "Stream JSON Lines data",
+        href: "/examples/json_lines/",
+        type: "example",
+      },
+      {
+        title: "Encode and decode MessagePack",
+        href: "/examples/msgpack_encoding/",
+        type: "example",
+      },
+      {
+        title: "Encode and decode CBOR",
+        href: "/examples/cbor_encoding/",
+        type: "example",
+      },
+      {
+        title: "Compress data with node:zlib",
+        href: "/examples/zlib_compression/",
+        type: "example",
+      },
+    ],
+  },
+
+  {
+    title: "CLI",
+    items: [
+      {
+        title: "Build a Command Line Utility",
+        href: "/examples/command_line_utility/",
+        externalURL:
+          "https://www.youtube.com/watch?v=TUxj2TS5pNo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=14",
+        type: "video",
+      },
+      {
+        title: "Input prompts",
+        href: "/examples/prompts/",
+        type: "example",
+      },
+      {
+        title: "Permission management",
+        href: "/examples/permissions/",
+        type: "example",
+      },
+      {
+        title: "Command line arguments",
+        href: "/examples/command_line_arguments/",
+        type: "example",
+      },
+      {
+        title: "Getting the Deno version",
+        href: "/examples/deno_version/",
+        type: "example",
+      },
+    ],
+  },
+
   {
     title: "Cryptography",
     items: [
@@ -1338,6 +823,533 @@ export const sidebar = [
       {
         title: "AES Encryption and Decryption",
         href: "/examples/aes_encryption/",
+        type: "example",
+      },
+    ],
+  },
+
+  {
+    title: "Testing",
+    items: [
+      {
+        title: "Writing tests",
+        href: "/examples/writing_tests/",
+        type: "example",
+      },
+      {
+        title: "Basics of testing",
+        href: "/examples/testing_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Mocking data in tests",
+        href: "/examples/mocking_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Stubbing",
+        href: "/examples/stubbing_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Snapshot testing",
+        href: "/examples/snapshot_test_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Spy functions",
+        href: "/examples/spy_functions/",
+        type: "example",
+      },
+      {
+        title: "Getting started with Deno test",
+        href: "/examples/deno_test/",
+        externalURL: "https://www.youtube.com/watch?v=gDtDVfsgHgs",
+        type: "video",
+      },
+      {
+        title: "Better testing with Deno coverage",
+        href: "/examples/deno_coverage/",
+        externalURL: "https://www.youtube.com/watch?v=P2BBYNPpgW8",
+        type: "video",
+      },
+      {
+        title: "Testing web applications",
+        href: "/examples/web_testing_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "BDD testing",
+        href: "/examples/bdd_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Skipping and focusing tests",
+        href: "/examples/tests_skip_focus/",
+        type: "example",
+      },
+      {
+        title: "Filtering and controlling test runs",
+        href: "/examples/tests_run_control/",
+        type: "example",
+      },
+      {
+        title: "Use Testing Library with Deno",
+        href: "/examples/testing_library_tutorial/",
+        type: "tutorial",
+      },
+    ],
+  },
+
+  {
+    title: "Web frameworks and libraries",
+    items: [
+      {
+        title: "TypeScript and JSX",
+        href: "/examples/ts_jsx/",
+        externalURL:
+          "https://www.youtube.com/watch?v=KoM8ahe8O74&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=11",
+        type: "video",
+      },
+      {
+        title: "Build a React App",
+        href: "/examples/react_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Build a Next.js app",
+        href: "/examples/next_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Build a Fresh app",
+        href: "/examples/fresh_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Build a Svelte app",
+        href: "/examples/svelte_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Build a Vue app",
+        href: "/examples/vue_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Use Express with Deno",
+        href: "/examples/express_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "How to use Apollo with Deno",
+        href: "/examples/apollo_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Build an Astro site with Deno",
+        href: "/examples/astro_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Build a Qwik app with Deno",
+        href: "/examples/qwik_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Build a Nuxt app with Deno",
+        href: "/examples/nuxt_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Build a Typesafe API with tRPC and Deno",
+        href: "/examples/trpc_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Build an API server with TypeScript",
+        href: "/examples/build_api_server_ts/",
+        externalURL:
+          "https://www.youtube.com/watch?v=J8kZ-s-5-ms&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=13",
+        type: "video",
+      },
+      {
+        title: "Build a Vue app",
+        href: "/examples/vue_app_video/",
+        externalURL: "https://www.youtube.com/watch?v=MDPauM8fZDE",
+        type: "video",
+      },
+      {
+        title: "Build a SolidJS app",
+        href: "/examples/solidjs_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Build a React app",
+        href: "/examples/react_app_video/",
+        externalURL: "https://www.youtube.com/watch?v=eStwt_2THd8",
+        type: "video",
+      },
+      {
+        title: "Build a Tanstack app",
+        href: "/examples/tanstack_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "HTTP server file upload",
+        href: "/examples/http_server_file_upload/",
+        type: "example",
+      },
+      {
+        title: "Build a word finder app",
+        href: "/examples/word_finder_tutorial/",
+        type: "tutorial",
+      },
+    ],
+  },
+
+  {
+    title: "Databases",
+    items: [
+      {
+        title: "Overview",
+        href: "/examples/connecting_to_databases_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "MySQL",
+        href: "/examples/mysql2_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "PlanetScale",
+        href: "/examples/planetscale_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Redis",
+        href: "/examples/redis_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Prisma",
+        href: "/examples/prisma_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Drizzle",
+        href: "/examples/drizzle_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Mongoose",
+        href: "/examples/mongoose_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Redis quick start",
+        href: "/examples/redis/",
+        type: "example",
+      },
+      {
+        title: "Postgres",
+        href: "/examples/postgres/",
+        type: "example",
+      },
+      {
+        title: "Supabase",
+        href: "/examples/supabase/",
+        type: "example",
+      },
+      {
+        title: "MongoDB",
+        href: "/examples/mongo/",
+        type: "example",
+      },
+      {
+        title: "SQLite",
+        href: "/examples/sqlite/",
+        type: "example",
+      },
+      {
+        title: "Mongoose (video)",
+        href: "/examples/mongoose/",
+        externalURL: "https://www.youtube.com/watch?v=dmZ9Ih0CR9g",
+        type: "video",
+      },
+      {
+        title: "Prisma (video)",
+        href: "/examples/prisma/",
+        externalURL: "https://www.youtube.com/watch?v=P8VzA_XSF8w",
+        type: "video",
+      },
+      {
+        title: "DuckDB",
+        href: "/examples/duckdb/",
+        type: "example",
+      },
+    ],
+  },
+
+  {
+    title: "Deno KV and scheduling",
+    items: [
+      {
+        title: "Deno KV: Key/Value database",
+        href: "/examples/kv/",
+        type: "example",
+      },
+      {
+        title: "Deno KV watch",
+        href: "/examples/kv_watch/",
+        type: "example",
+      },
+      {
+        title: "Deno queues",
+        href: "/examples/queues/",
+        type: "example",
+      },
+      {
+        title: "Deno Cron",
+        href: "/examples/cron/",
+        type: "example",
+      },
+    ],
+  },
+
+  {
+    title: "AI",
+    items: [
+      {
+        title: "LLM Chat app",
+        href: "/examples/llm_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Connect to OpenAI - Chat completion",
+        href: "/examples/openai_chat_completion/",
+        type: "example",
+      },
+    ],
+  },
+
+  {
+    title: "Deploying Deno projects",
+    items: [
+      {
+        title: "Deploy with Deno Deploy",
+        href: "/examples/deno_deploy_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Deploy with the deploy command",
+        href: "/examples/deploy_command_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Migrating a custom domain to Deno Deploy",
+        href: "/examples/migrate_custom_domain_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Connecting to a database both locally and on Deno Deploy",
+        href: "/examples/tunnel_database_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "AWS Lambda",
+        href: "/examples/aws_lambda_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Deploy Deno to AWS Lambda",
+        href: "/examples/deploy_deno_to_aws_lambda/",
+        externalURL:
+          "https://www.youtube.com/watch?v=_xLOrT3cWK4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=17",
+        type: "video",
+      },
+      {
+        title: "AWS Lightsail",
+        href: "/examples/aws_lightsail_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Cloudflare workers",
+        href: "/examples/cloudflare_workers_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Cloudflare workers with wrangler",
+        href: "/examples/cloudflare_workers_wrangler_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Digital Ocean",
+        href: "/examples/digital_ocean_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Google Cloud Run",
+        href: "/examples/google_cloud_run_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Kinsta",
+        href: "/examples/kinsta_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Deploying Deno with Docker",
+        href: "/examples/deploying_deno_with_docker/",
+        externalURL:
+          "https://www.youtube.com/watch?v=VRryNeYm6yw&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=16",
+        type: "video",
+      },
+    ],
+  },
+
+  {
+    title: "OpenTelemetry",
+    items: [
+      {
+        title: "Basic OpenTelemetry setup",
+        href: "/examples/basic_opentelemetry_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Export telemetry to Grafana",
+        href: "/examples/grafana_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Export telemetry to Hyperdx",
+        href: "/examples/hyperdx_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "View telemetry data for your local application",
+        href: "/examples/tunnel_telemetry_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Export telemetry to Honeycomb",
+        href: "/examples/honeycomb_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Span propagation",
+        href: "/examples/otel_span_propagation_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "OpenTelemetry with Deno Deploy",
+        href: "/examples/deploy_otel_tutorial/",
+        type: "tutorial",
+      },
+    ],
+  },
+
+  {
+    title: "Deno Sandbox",
+    items: [
+      {
+        title: "Evaluating JavaScript",
+        href: "/examples/sandbox_evaluating_javascript/",
+        type: "example",
+      },
+      {
+        title: "Spawn a subprocess",
+        href: "/examples/sandbox_spawn_subprocess/",
+        type: "tutorial",
+      },
+      {
+        title: "Serve a web framework",
+        href: "/examples/sandbox_web_framework/",
+        type: "tutorial",
+      },
+      {
+        title: "Provide SSH access to a sandbox",
+        href: "/examples/sandbox_ssh_access/",
+        type: "tutorial",
+      },
+      {
+        title: "Interactive JavaScript REPL",
+        href: "/examples/sandbox_javascript_repl/",
+        type: "tutorial",
+      },
+      {
+        title: "Provide a VSCode instance in a sandbox",
+        href: "/examples/sandbox_vscode_instance/",
+        type: "tutorial",
+      },
+      {
+        title: "Use template literals with variable interpolation",
+        href: "/examples/sandbox_template_literals/",
+        type: "tutorial",
+      },
+      {
+        title: "Error handling",
+        href: "/examples/sandbox_error_handling/",
+        type: "tutorial",
+      },
+      {
+        title: "Command cancellation",
+        href: "/examples/sandbox_command_cancellation/",
+        type: "tutorial",
+      },
+      {
+        title: "Streaming access string and binary output",
+        href: "/examples/sandbox_access_output/",
+        type: "tutorial",
+      },
+      {
+        title: "Set and get environment variables",
+        href: "/examples/sandbox_environment_variables/",
+        type: "tutorial",
+      },
+      {
+        title: "Stream output to a local file",
+        href: "/examples/sandbox_stream_output/",
+        type: "tutorial",
+      },
+      {
+        title: "Upload files and directories to a sandbox",
+        href: "/examples/sandbox_upload_files/",
+        type: "tutorial",
+      },
+      {
+        title: "Control sandbox timeout",
+        href: "/examples/sandbox_timeout_control/",
+        type: "tutorial",
+      },
+      {
+        title: "Configure sandbox memory",
+        href: "/examples/sandbox_memory/",
+        type: "tutorial",
+      },
+      {
+        title: "Add read-write volumes to your Sandbox",
+        href: "/examples/volumes_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Boot instantly with snapshots",
+        href: "/examples/snapshots_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Boot a Python environment with snapshots",
+        href: "/examples/snapshot_python_video/",
+        type: "video",
+      },
+      {
+        title: "Boot a Python environment with snapshots",
+        href: "/examples/snapshot_python_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Run AI generated code",
+        href: "/examples/sandbox_for_untrusted_code/",
         type: "example",
       },
     ],
