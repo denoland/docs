@@ -51,7 +51,8 @@ console.log(stream instanceof ReadableStream); // true
 // since Deno 2.x. The matching fromBase64 and fromHex methods decode back.
 console.log(bytes.toBase64()); // SGVsbG8=
 console.log(bytes.toHex()); // 48656c6c6f
-console.log(Uint8Array.fromBase64("SGVsbG8=")); // Uint8Array(5) [ 72, 101, 108, 108, 111 ]
+const decoded = Uint8Array.fromBase64("SGVsbG8=");
+console.log(decoded); // Uint8Array(5) [ 72, 101, 108, 108, 111 ]
 
 // When working with Node.js APIs, convert to a Buffer with Buffer.from.
 // This copies the bytes. To share memory instead, pass the underlying
