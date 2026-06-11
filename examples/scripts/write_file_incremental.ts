@@ -21,26 +21,26 @@ const file = await Deno.open(`${dir}/log.txt`, {
   create: true,
 });
 
-// Each write call appends bytes at the current position. A single call may
-// write fewer bytes than given, so for raw writes prefer the helper that
-// retries until everything is written.
-import { writeAll } from "jsr:@std/io/write-all";
+// Every open file exposes a web standard WritableStream. Its writer
+// guarantees each chunk is fully written before the promise resolves.
 const encoder = new TextEncoder();
-await writeAll(file, encoder.encode("line 1\n"));
-await writeAll(file, encoder.encode("line 2\n"));
+const writer = file.writable.getWriter();
+await writer.write(encoder.encode("line 1\n"));
+await writer.write(encoder.encode("line 2\n"));
 
-// Close the file when done writing.
-file.close();
+// Closing the writer also closes the file.
+await writer.close();
 console.log(await Deno.readTextFile(`${dir}/log.txt`)); // line 1\nline 2\n
 
 // To append to an existing file instead of starting at the beginning, open
 // it with the append option.
 const log = await Deno.open(`${dir}/log.txt`, { append: true });
-await writeAll(log, encoder.encode("line 3\n"));
-log.close();
+const appender = log.writable.getWriter();
+await appender.write(encoder.encode("line 3\n"));
+await appender.close();
 
-// A file is also a WritableStream destination. Any readable stream can be
-// piped into it, and the pipe closes the file for you.
+// Any readable stream can also be piped into the file directly, and the
+// pipe closes the file for you.
 const source = ReadableStream.from(["streamed ", "content\n"])
   .pipeThrough(new TextEncoderStream());
 const target = await Deno.open(`${dir}/stream.txt`, {
@@ -49,6 +49,21 @@ const target = await Deno.open(`${dir}/stream.txt`, {
 });
 await source.pipeTo(target.writable);
 console.log(await Deno.readTextFile(`${dir}/stream.txt`)); // streamed content
+
+// The Node.js API offers the same operations. appendFile adds to a file in
+// one call, and createWriteStream is the classic incremental writer used
+// by many npm packages.
+import { appendFile } from "node:fs/promises";
+await appendFile(`${dir}/log.txt`, "line 4\n");
+
+import { createWriteStream } from "node:fs";
+import { finished } from "node:stream/promises";
+const nodeStream = createWriteStream(`${dir}/node.txt`);
+nodeStream.write("written with ");
+nodeStream.write("node:fs\n");
+nodeStream.end();
+await finished(nodeStream);
+console.log(await Deno.readTextFile(`${dir}/node.txt`)); // written with node:fs
 
 // Reading and writing files requires the -R and -W permissions.
 await Deno.remove(dir, { recursive: true });

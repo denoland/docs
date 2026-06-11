@@ -40,5 +40,20 @@ async function processLines() {
   }
 }
 
+// Code written for Node.js reads process.stdin, which works in Deno too.
+// It is an async iterable of chunks, already decoded when you set an
+// encoding.
+import process from "node:process";
+
+// deno-lint-ignore no-unused-vars
+async function readAllNodeStyle() {
+  process.stdin.setEncoding("utf8");
+  let data = "";
+  for await (const chunk of process.stdin) {
+    data += chunk;
+  }
+  return data;
+}
+
 // Note that a stream can only be consumed once: pick one of the approaches
 // above per program run.
