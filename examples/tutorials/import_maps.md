@@ -81,26 +81,14 @@ for imports that originate under a given path prefix:
 
 Modules under `vendor/` get the legacy logger; everything else gets the default.
 
-## Overriding versions in package.json projects
+:::note
 
-The import map redirects specifiers in your own code. To force a version of a
-package deeper in the dependency tree, projects with a `package.json` use its
-`overrides` field, which Deno honors the same way npm does:
+The import map redirects specifiers in your own code. To force the version of a
+package deeper in the dependency tree, use the `overrides` field of
+`package.json` instead; see
+[Overriding transitive dependencies](/examples/add_remove_dependencies_tutorial/#overriding-transitive-dependencies).
 
-```json title="package.json"
-{
-  "dependencies": {
-    "debug": "4.4.3"
-  },
-  "overrides": {
-    "ms": "2.1.2"
-  }
-}
-```
-
-`deno install` resolves `ms` to 2.1.2 everywhere it appears in the tree. See
-[Overriding transitive dependencies](/examples/add_remove_dependencies_tutorial/#overriding-transitive-dependencies)
-for the longer treatment.
+:::
 
 For how packages themselves are named and versioned in the import map, see
 [Add and remove dependencies](/examples/add_remove_dependencies_tutorial/) and
