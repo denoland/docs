@@ -2,6 +2,10 @@
 last_modified: 2024-10-07
 title: "deno lsp"
 oldUrl: /runtime/manual/tools/lsp/
+command: lsp
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno lsp"
+description: "Start the Deno language server, used by editors for IntelliSense, formatting, and diagnostics"
 ---
 
 :::info
