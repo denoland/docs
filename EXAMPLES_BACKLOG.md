@@ -322,9 +322,9 @@ Items marked (verify) need a support check before writing. Quick win first:
 - [x] Escape special characters in regular expressions
 - [x] Parse and format dates (@std/datetime)
 - [x] Structured logging (@std/log, rotating files)
-- [ ] Extract front matter from markdown files
+- [x] Extract front matter from markdown files (PR #3238)
 - [x] Format bytes and durations for humans (@std/fmt)
-- [ ] Generate seeded random numbers (@std/random)
+- [x] Generate seeded random numbers (@std/random) (PR #3238)
 
 ### Web standard APIs
 
@@ -352,7 +352,7 @@ Items marked (verify) need a support check before writing. Quick win first:
 - [x] Stream JSON Lines data (NDJSON)
 - [x] Encode and decode MessagePack (@std/msgpack)
 - [x] Encode and decode CBOR (@std/cbor)
-- [ ] Parse and generate XML (verify: likely third-party, not @std)
+- [x] Parse and generate XML (@libs/xml from JSR) (PR #3238)
 - [x] Compress data with node:zlib
 
 ### System and FileSystem
@@ -387,7 +387,7 @@ Items marked (verify) need a support check before writing. Quick win first:
 - [x] Compile a script into a standalone executable (deno compile)
 - [x] Cross compile executables for other platforms
 - [x] Write and run benchmarks with Deno.bench (only a video exists)
-- [ ] Publish a package to JSR step by step (only a video exists)
+- [x] Publish a package to JSR step by step (PR #3238)
 - [x] Find and update outdated dependencies (deno outdated)
 - [x] Display progress bars and spinners (@std/cli)
 - [x] Control the terminal with ANSI escape codes
@@ -404,19 +404,24 @@ Items marked (verify) need a support check before writing. Quick win first:
 - [ ] Vector similarity search with Postgres and pgvector
 - [ ] Connection pooling for Postgres
 - [ ] Build an MCP server with Deno
-- [ ] Call native libraries with Deno FFI (task-shaped walkthrough)
+- [x] Call native libraries with Deno FFI (quick example: dlopen, UnsafeCallback) (PR #3238)
 - [ ] Build a Discord bot
 - [ ] Send email over SMTP (nodemailer)
 - [ ] Resize and convert images (verify library choice)
 - [ ] Generate PDFs (pdf-lib)
 - [ ] Generate QR codes
-- [ ] Distribute work across a pool of web workers
+- [x] Distribute work across a pool of web workers (PR #3238)
 - [ ] Automate a browser (Astral)
-- [ ] Create custom OpenTelemetry spans
-- [ ] Record custom OpenTelemetry metrics
-- [ ] Atomic transactions in Deno KV
-- [ ] Two-way streaming with WebSocketStream
-- [ ] Run a compute shader with WebGPU
+- [x] Create custom OpenTelemetry spans (already covered by the basic OpenTelemetry setup tutorial; not duplicated)
+- [x] Record custom OpenTelemetry metrics (already covered by the basic OpenTelemetry setup tutorial; not duplicated)
+- [x] Atomic transactions in Deno KV (PR #3238)
+- [x] Two-way streaming with WebSocketStream (PR #3238)
+- [x] Run a compute shader with WebGPU (PR #3238)
+- [x] Bundle code with Deno.bundle (from API coverage analysis) (PR #3238)
+- [x] Rich output in Jupyter notebooks (Deno.jupyter) (PR #3238)
+- [x] Upgrade a TCP connection to TLS with Deno.startTls (PR #3238)
+- [x] Communicate over QUIC (PR #3238)
+- [x] Connect two peers with WebTransport (PR #3238)
 
 Excluded as already covered: FakeTime and fetch mocking (mocking tutorial),
 @std/expect (testing tutorial), watch mode (hot reload example), recursive
