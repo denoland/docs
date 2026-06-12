@@ -1157,20 +1157,6 @@ export const items = [
     category: "Databases",
   },
   {
-    title: "Mongoose (video)",
-    href: "/examples/mongoose/",
-    externalURL: "https://www.youtube.com/watch?v=dmZ9Ih0CR9g",
-    type: "video",
-    category: "Databases",
-  },
-  {
-    title: "Prisma (video)",
-    href: "/examples/prisma/",
-    externalURL: "https://www.youtube.com/watch?v=P8VzA_XSF8w",
-    type: "video",
-    category: "Databases",
-  },
-  {
     title: "DuckDB",
     href: "/examples/duckdb/",
     type: "example",

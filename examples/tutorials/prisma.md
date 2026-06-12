@@ -6,6 +6,7 @@ url: /examples/prisma_tutorial/
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/prisma/
   - /runtime/tutorials/how_to_with_npm/prisma/
+  - /examples/prisma/
 ---
 
 [Prisma](https://prisma.io) has been one of our top requested modules to work
@@ -13,7 +14,10 @@ with in Deno. The demand is understandable, given that Prisma's developer
 experience is top notch and plays well with so many persistent data storage
 technologies.
 
-We're excited to show you how to use Prisma with Deno.
+We're excited to show you how to use Prisma with Deno. You can follow along in
+text below or watch the video version:
+
+<lite-youtube videoid="P8VzA_XSF8w"></lite-youtube>
 
 In this How To guide, we'll setup a simple RESTful API in Deno using Oak and
 Prisma.

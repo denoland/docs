@@ -14,7 +14,21 @@ easily.
 Initialize a new project by running the following command:
 
 ```sh
-deno init my_project
+$ deno init my_project
+✅ Project initialized
+
+Run these commands to get started
+
+  cd my_project
+
+  # Run the server
+  deno run --allow-net main.ts
+
+  # Run the server and watch for file changes
+  deno task dev
+
+  # Run the tests
+  deno test
 ```
 
 Where `my_project` is the name of your project. You can
@@ -31,7 +45,10 @@ cd my_project
 Then you can run the project directly using the `deno task` command:
 
 ```sh
-deno run dev
+$ deno task dev
+Task dev deno run --watch --allow-net main.ts
+Watcher Process started.
+Listening on http://0.0.0.0:8000/ (http://localhost:8000/)
 ```
 
 Take a look in the `deno.json` file in your new project. You should see a `dev`
@@ -39,7 +56,7 @@ task in the "tasks" field.
 
 ```json title="deno.json"
 "tasks": {
-  "dev": "deno run --watch main.ts"
+  "dev": "deno run --watch --allow-net main.ts"
 },
 ```
 
@@ -53,21 +70,26 @@ action if you open the `main.ts` file and make a change.
 In the project directory run:
 
 ```sh
-deno test
+$ deno test
+Check main_test.ts
+running 2 tests from ./main_test.ts
+returns html on / ... ok (11ms)
+returns json on /api ... ok (0ms)
+
+ok | 2 passed | 0 failed (13ms)
 ```
 
 This will execute all the tests in the project. You can read more about
 [testing in Deno](/runtime/test/) and we'll cover tests in a little more depth
 in a later tutorial. At the moment you have one test file, `main_test.ts`, which
-tests the `add` function in `main.ts`.
+tests the request handler in `main.ts`.
 
 ### Adding to your project
 
 The `main.ts` file serves as the entry point for your application. It’s where
 you’ll write your main program logic. When developing your project you will
-start by removing the default addition program and replace it with your own
-code. For example, if you’re building a web server, this is where you’d set up
-your routes and handle requests.
+start by replacing the default HTTP server with your own code; its routes and
+request handler are a starting point to build on.
 
 Beyond the initial files, you’ll likely create additional modules (files) to
 organize your code. Consider grouping related functionality into separate files.
