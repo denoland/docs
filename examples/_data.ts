@@ -165,6 +165,46 @@ export const sidebar = [
         type: "video",
       },
       {
+        title: "Add and remove dependencies",
+        href: "/examples/add_remove_dependencies_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Lock dependencies with deno.lock",
+        href: "/examples/dependency_lockfile_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Use private npm registries",
+        href: "/examples/private_registries_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Run npm lifecycle scripts",
+        href: "/examples/npm_lifecycle_scripts_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Use local and unpublished packages",
+        href: "/examples/local_unpublished_packages_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Configure a monorepo with workspaces",
+        href: "/examples/workspaces_monorepo_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Run Deno in GitHub Actions",
+        href: "/examples/deno_github_actions_tutorial/",
+        type: "tutorial",
+      },
+      {
+        title: "Use Deno in an existing Node.js project",
+        href: "/examples/migrate_node_project_tutorial/",
+        type: "tutorial",
+      },
+      {
         title: "Module Metadata",
         href: "/examples/module_metadata_tutorial/",
         type: "tutorial",
