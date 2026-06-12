@@ -179,6 +179,21 @@ export default function LandingPage(
           </span>
         </section>
 
+        <nav
+          className="flex flex-wrap gap-2 mb-10"
+          aria-label="Example categories"
+        >
+          {sidebar.map((category: { title: string }) => (
+            <a
+              key={category.title}
+              href={`#${category.title.toLowerCase().replace(/\s+/g, "-")}`}
+              className="px-3 py-1 rounded-full border border-foreground-tertiary text-sm !no-underline text-foreground-secondary hover:border-primary hover:text-primary transition-colors duration-150"
+            >
+              {category.title}
+            </a>
+          ))}
+        </nav>
+
         <section className="unfiltered mb-8 w-full markdown-body">
           {componentsPerSidebarItem}
         </section>
