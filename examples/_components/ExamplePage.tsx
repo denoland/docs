@@ -46,17 +46,25 @@ export default function ExamplePage({ example }: Props) {
             class="flex flex-col gap-4 md:gap-0 example-content"
             key={file.name}
           >
-            {file.snippets.map((snippet, i) => (
-              <SnippetComponent
-                key={i}
-                onlyOneSnippet={file.snippets.length === 1}
-                firstOfFile={i === 0 || !file.snippets[i - 1].code}
-                lastOfFile={i === file.snippets.length - 1 ||
-                  !file.snippets[i + 1].code}
-                filename={file.name}
-                snippet={snippet}
-              />
-            ))}
+            {file.snippets.map((snippet, i) => {
+              // In the stacked layout, prose separates code into visual
+              // blocks: a snippet with text starts a new block, and a block
+              // ends right before the next snippet with text.
+              const startsBlock = i === 0 || !!snippet.text ||
+                !file.snippets[i - 1].code;
+              const endsBlock = i === file.snippets.length - 1 ||
+                !!file.snippets[i + 1].text || !file.snippets[i + 1].code;
+              return (
+                <SnippetComponent
+                  key={i}
+                  onlyOneSnippet={startsBlock && endsBlock}
+                  firstOfFile={startsBlock}
+                  lastOfFile={endsBlock}
+                  filename={i === 0 ? file.name : ""}
+                  snippet={snippet}
+                />
+              );
+            })}
           </div>
         ))}
       </div>
