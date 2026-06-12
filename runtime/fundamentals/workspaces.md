@@ -634,6 +634,11 @@ deno task --cwd=add build
 
 ## Sharing and managing dependencies
 
+Workspace members can share dependencies, depend on each other, and resolve
+version conflicts member by member. To pin one version of a dependency for the
+whole workspace, see [`catalog:`](#centralized-dependency-versions-with-catalog)
+below.
+
 Workspaces provide powerful ways to share and manage dependencies across
 projects:
 
@@ -692,6 +697,27 @@ This approach allows you to:
 2. Share code between packages without publishing to a registry
 3. Test and develop interdependent modules together
 4. Gradually migrate monolithic codebases to modular architecture
+
+### Using workspace protocol in package.json
+
+Deno supports workspace protocol specifiers in `package.json` files. These are
+useful when you have npm packages that depend on other packages within the
+workspace:
+
+```json title="package.json"
+{
+  "name": "my-npm-package",
+  "dependencies": {
+    "another-workspace-package": "workspace:*"
+  }
+}
+```
+
+The following workspace protocol specifiers are supported:
+
+- `workspace:*` - Use the latest version available in the workspace
+- `workspace:~` - Use the workspace version with only patch-level changes
+- `workspace:^` - Use the workspace version with semver-compatible changes
 
 ## Centralized dependency versions with `catalog:`
 
@@ -801,27 +827,6 @@ If both `deno.json` and `package.json` define catalogs at the workspace root,
   member emits a diagnostic.
 - Members must reference a catalog name that exists. A missing entry produces a
   resolution error during install or run.
-
-## Using workspace protocol in package.json
-
-Deno supports workspace protocol specifiers in `package.json` files. These are
-useful when you have npm packages that depend on other packages within the
-workspace:
-
-```json title="package.json"
-{
-  "name": "my-npm-package",
-  "dependencies": {
-    "another-workspace-package": "workspace:*"
-  }
-}
-```
-
-The following workspace protocol specifiers are supported:
-
-- `workspace:*` - Use the latest version available in the workspace
-- `workspace:~` - Use the workspace version with only patch-level changes
-- `workspace:^` - Use the workspace version with semver-compatible changes
 
 ## npm and pnpm workspace compatibility
 
