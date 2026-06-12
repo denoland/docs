@@ -96,6 +96,13 @@ export const sidebar = [
       {
         title: "Debugging",
         href: "/runtime/fundamentals/debugging/",
+        disclosure: true,
+        items: [
+          {
+            title: "CPU profiling",
+            href: "/runtime/fundamentals/cpu_profiling/",
+          },
+        ],
       },
       {
         title: "Migrating from Node",
