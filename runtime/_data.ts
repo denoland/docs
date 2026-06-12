@@ -46,6 +46,7 @@ export const sidebar = [
       {
         title: "Testing",
         href: "/runtime/test/",
+        disclosure: true,
         items: [
           {
             title: "Mocking",
