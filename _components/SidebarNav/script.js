@@ -60,6 +60,40 @@ if (sidebar) {
   });
 }
 
+if (sidebar) {
+  // Opt-in disclosure groups (item.disclosure in a section's _data.ts).
+  // Each group is independent: opening one never closes another. The server
+  // renders the active trail open; other groups restore the user's last
+  // choice from localStorage, defaulting to collapsed. The legacy accordion
+  // above is untouched and handles all non-opted-in groups.
+  sidebar.querySelectorAll("[data-disclosure]").forEach((group) => {
+    const list = group.querySelector(":scope > ul");
+    const buttons = group.querySelectorAll("[data-disclosure-toggle]");
+    if (!list) return;
+    const storageKey = `sidebar-open:${list.id}`;
+
+    const setOpen = (open, persist) => {
+      group.setAttribute("data-open", String(open));
+      list.hidden = !open;
+      buttons.forEach((b) => b.setAttribute("aria-expanded", String(open)));
+      if (persist) localStorage.setItem(storageKey, String(open));
+    };
+
+    if (
+      group.getAttribute("data-open") !== "true" &&
+      localStorage.getItem(storageKey) === "true"
+    ) {
+      setOpen(true, false);
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setOpen(group.getAttribute("data-open") !== "true", true);
+      });
+    });
+  });
+}
+
 // Wire up the hamburger toggle button
 if (sidebar && button) {
   button.addEventListener("click", () => {
