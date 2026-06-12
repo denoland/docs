@@ -43,3 +43,15 @@ async function safeCompare(actual: string, expected: string) {
 // A correct secret matches, a wrong one of any length does not.
 console.log(await safeCompare("my-api-key", "my-api-key")); // true
 console.log(await safeCompare("my-api", "my-api-key")); // false
+
+// The same @std/crypto module extends WebCrypto with additional digest
+// algorithms. Its crypto.subtle accepts everything the built-in one does,
+// plus algorithms like BLAKE3, and the digests feed the same comparison.
+import { crypto as stdCrypto } from "jsr:@std/crypto";
+
+const fast = await stdCrypto.subtle.digest(
+  "BLAKE3",
+  encoder.encode("my-api-key"),
+);
+console.log(new Uint8Array(fast).length); // 32
+console.log(timingSafeEqual(fast, fast.slice(0))); // true

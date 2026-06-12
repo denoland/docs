@@ -66,3 +66,13 @@ console.log(timeAgo(70 * 24 * 60 * 60 * 1000)); // in 2 months
 
 // In an application you would compute the difference from the clock,
 // for example timeAgo(postDate.getTime() - Date.now()).
+
+// With Temporal, the unit math comes from the calendar instead of fixed
+// millisecond constants: since() on zoned values yields a signed duration
+// in the unit you ask for, ready to feed the formatter.
+const now = Temporal.Instant.from("2026-06-11T12:00:00Z")
+  .toZonedDateTimeISO("UTC");
+const earlier = Temporal.Instant.from("2026-06-08T12:00:00Z")
+  .toZonedDateTimeISO("UTC");
+const elapsed = earlier.since(now, { largestUnit: "day" });
+console.log(auto.format(elapsed.days, "day")); // 3 days ago

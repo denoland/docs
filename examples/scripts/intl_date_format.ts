@@ -79,3 +79,23 @@ const longRange = new Intl.DateTimeFormat("en-US", {
 });
 const nextMonth = new Date("2026-07-02T12:00:00Z");
 console.log(longRange.formatRange(date, nextMonth)); // June 11 – July 2, 2026
+
+// Temporal values format through the same machinery: toLocaleString takes
+// the same locales and options. An Instant is the Temporal analog of a
+// Date.
+const instant = Temporal.Instant.from("2026-06-11T12:00:00Z");
+console.log(
+  instant.toLocaleString("en-US", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "UTC",
+  }),
+); // Jun 11, 2026, 12:00 PM
+
+// A ZonedDateTime already carries its time zone, so no timeZone option is
+// needed (or allowed).
+const zoned = instant.toZonedDateTimeISO("Europe/Warsaw");
+console.log(zoned.toLocaleString("de-DE", {
+  dateStyle: "full",
+  timeStyle: "short",
+})); // Donnerstag, 11. Juni 2026 um 14:00
