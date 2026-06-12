@@ -893,20 +893,14 @@ export const items = [
     category: "Testing",
   },
   {
-    title: "Mocking data in tests",
-    href: "/examples/mocking_tutorial/",
-    type: "tutorial",
-    category: "Testing",
-  },
-  {
-    title: "Stubbing",
-    href: "/examples/stubbing_tutorial/",
+    title: "Mocking and test doubles",
+    href: "/runtime/test/mocking/",
     type: "tutorial",
     category: "Testing",
   },
   {
     title: "Snapshot testing",
-    href: "/examples/snapshot_test_tutorial/",
+    href: "/runtime/test/snapshots/",
     type: "tutorial",
     category: "Testing",
   },

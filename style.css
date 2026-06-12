@@ -1549,6 +1549,55 @@
     padding-bottom: 1rem;
   }
 
+  /* Opt-in sidebar disclosure groups (item.disclosure in _data.ts): label is
+     a link, the chevron button is the only toggle. Visual treatment kept
+     minimal pending the styling overhaul. Legacy .sub-nav-toggle accordions
+     above are unaffected. */
+  .sidebar-disclosure {
+    .sidebar-disclosure-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      flex-shrink: 0;
+      cursor: pointer;
+      color: var(--color-foreground-secondary);
+
+      &:hover {
+        background-color: var(--color-header-highlight);
+        color: var(--color-gray-800);
+      }
+    }
+
+    .sidebar-disclosure-chevron {
+      transition: transform 0.1s ease-in;
+    }
+
+    &[data-open="true"] .sidebar-disclosure-chevron {
+      transform: rotate(90deg);
+    }
+
+    .sidebar-disclosure-list {
+      margin-left: 1rem !important;
+      border-left: 2px solid var(--color-runtime);
+
+      /* The shared nested-item style is denser (py-1) than disclosure groups
+         want; give these items the same breathing room as top-level entries
+         without touching the legacy accordions. */
+      a {
+        padding-block: 0.5rem;
+      }
+    }
+
+    &[data-open="true"] {
+      padding-bottom: 0.5rem;
+    }
+
+    &[data-open="true"] > .sidebar-disclosure-row > a {
+      font-weight: 600;
+    }
+  }
+
   #hamburger-button[aria-pressed="true"] {
     .hamburger-bar--top {
       transform: translate(0, 0.4375rem) rotate(45deg);
