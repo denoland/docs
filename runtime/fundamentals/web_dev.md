@@ -30,7 +30,7 @@ client-side rendering where you ask for it.
 Create a project and start the dev server:
 
 ```sh
-deno run -Ar jsr:@fresh/init
+deno run -Ar jsr:@fresh/init my-fresh-app
 cd my-fresh-app
 deno task dev
 ```
@@ -140,7 +140,7 @@ tasks live in `deno.json`, and plugins are imported as modules.
 documentation websites.
 
 ```sh
-deno run -A npm:create-docusaurus@latest my-website classic
+deno run -A npm:create-docusaurus@latest my-website classic --skip-install
 cd my-website
 deno install
 deno task start
@@ -149,8 +149,9 @@ deno task start
 Open `http://localhost:3000` to see the site.
 
 What's different under Deno: almost nothing. Docusaurus is a plain npm project
-that runs through Deno's Node.js compatibility unchanged; `deno install` puts
-the `node_modules` directory in place, the same as for Next.js and Astro.
+that runs through Deno's Node.js compatibility unchanged. The `--skip-install`
+flag stops the generator from invoking npm, and `deno install` puts the
+`node_modules` directory in place instead, the same as for Next.js and Astro.
 
 ## Without a framework
 
