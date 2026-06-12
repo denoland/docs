@@ -29,3 +29,6 @@ deno remove @std/path @std/assert npm:express
 `deno remove` will look at both
 [`deno.json`](/runtime/fundamentals/configuration/) and `package.json` (if
 present) and remove the matching dependency from whichever file it is found in.
+
+Removing a dependency does not delete it from the global cache. To reclaim disk
+space, see [`deno clean`](/runtime/reference/cli/clean/).

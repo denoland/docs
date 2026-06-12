@@ -25,12 +25,13 @@ Preview what would be deleted without actually removing anything:
 deno clean --dry-run
 ```
 
-## Keeping specific caches
+## Keeping what a project still needs
 
-Use `--except` to preserve certain cache types while cleaning the rest:
+Use `--except` with one or more entry points to remove everything from the cache
+except the data those files need:
 
 ```sh
-deno clean --except=npm,jsr
+deno clean --except main.ts
 ```
 
 ## When to use this
