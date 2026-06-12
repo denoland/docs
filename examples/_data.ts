@@ -1479,6 +1479,49 @@ export const items = [
     type: "tutorial",
     category: "CLI",
   },
+
+  {
+    title: "WebSocket server: Broadcasting messages",
+    href: "/examples/websocket_pubsub/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "WebSocket server: Per-socket state",
+    href: "/examples/websocket_context/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Extract links and metadata from HTML",
+    href: "/examples/extract_html_data/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Set the time zone",
+    href: "/examples/set_timezone/",
+    type: "example",
+    category: "System",
+  },
+  {
+    title: "Inspect memory with heap snapshots",
+    href: "/examples/heap_snapshot/",
+    type: "example",
+    category: "CLI",
+  },
+  {
+    title: "Find an executable on the PATH",
+    href: "/examples/find_executable/",
+    type: "example",
+    category: "System",
+  },
+  {
+    title: "Use Deno in Docker",
+    href: "/runtime/reference/docker/",
+    type: "tutorial",
+    category: "Deploying Deno projects",
+  },
 ];
 
 // Section order on the landing page and in the sidebar.
