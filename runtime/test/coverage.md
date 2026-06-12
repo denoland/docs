@@ -43,6 +43,25 @@ directory before the tests run:
 deno test --clean --coverage
 ```
 
+### Collect coverage outside deno test
+
+`deno run` accepts the same `--coverage` flag, which is useful when the code you
+want to measure doesn't run under the test runner: integration scripts, CLI
+invocations of your tool, or a server exercised from the outside.
+
+```sh
+deno run --coverage=cov_profile main.ts
+```
+
+When your tests spawn Deno subprocesses, set the `DENO_COVERAGE_DIR` environment
+variable instead. Child processes inherit it, so their execution is collected
+into the same directory and shows up in the combined report:
+
+```sh
+DENO_COVERAGE_DIR=cov_profile deno test --allow-run
+deno coverage cov_profile
+```
+
 ## Read the report
 
 Point `deno coverage` at the directory you collected into:
