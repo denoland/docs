@@ -1,6 +1,33 @@
 import renderCommand from "./renderCommand.tsx";
+import { getSectionData } from "../_components/Navigation.tsx";
+import type { Sidebar, SidebarItem } from "../types.ts";
 
 export const layout = "layout.tsx";
+
+// Flatten the section sidebar into reading order for prev/next pagination.
+// Only string-titled, internal links participate (JSX titles and external
+// URLs are skipped).
+function flattenSidebar(sidebar: Sidebar): { title: string; href: string }[] {
+  const out: { title: string; href: string }[] = [];
+  const visit = (items?: SidebarItem[]) => {
+    for (const item of items ?? []) {
+      if (
+        item.href && typeof item.title === "string" && !item.externalUrl &&
+        item.href.startsWith("/")
+      ) {
+        out.push({ title: item.title, href: item.href });
+      }
+      visit(item.items);
+    }
+  };
+  for (const section of sidebar ?? []) {
+    if (section.href && typeof section.title === "string") {
+      out.push({ title: section.title, href: section.href });
+    }
+    visit(section.items);
+  }
+  return out;
+}
 
 export const ogImage = (data: Lume.Data) => `${data.url}/index.png`;
 
@@ -52,6 +79,21 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
 
   const tocCtx = getTocCtx(data);
 
+  // Prev/next pagination, derived from the section sidebar's reading order.
+  let prevPage: { title: string; href: string } | null = null;
+  let nextPage: { title: string; href: string } | null = null;
+  if (!isReference && !isLintRule) {
+    const sectionData = getSectionData(data, data.url);
+    const seen = new Set<string>();
+    const flat = (Array.isArray(sectionData) ? flattenSidebar(sectionData) : [])
+      .filter((item) => seen.has(item.href) ? false : seen.add(item.href));
+    const index = flat.findIndex((item) => item.href === data.url);
+    if (index !== -1) {
+      prevPage = flat[index - 1] ?? null;
+      nextPage = flat[index + 1] ?? null;
+    }
+  }
+
   return (
     <>
       <main
@@ -100,6 +142,45 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
               {data.children}
               {renderedCommand}
             </div>
+            {(prevPage || nextPage) && (
+              <nav
+                aria-label="Previous and next page"
+                class="flex justify-between gap-4 mt-12 pt-4 border-t border-foreground-tertiary"
+              >
+                {prevPage
+                  ? (
+                    <a
+                      href={prevPage.href}
+                      rel="prev"
+                      class="no-underline hover:underline"
+                    >
+                      <span class="block text-xs text-foreground-secondary mb-1">
+                        Previous
+                      </span>
+                      <span class="text-sm font-medium">
+                        ← {prevPage.title}
+                      </span>
+                    </a>
+                  )
+                  : <span />}
+                {nextPage
+                  ? (
+                    <a
+                      href={nextPage.href}
+                      rel="next"
+                      class="no-underline hover:underline text-right"
+                    >
+                      <span class="block text-xs text-foreground-secondary mb-1">
+                        Next
+                      </span>
+                      <span class="text-sm font-medium">
+                        {nextPage.title} →
+                      </span>
+                    </a>
+                  )
+                  : <span />}
+              </nav>
+            )}
           </article>
           {data.lastModified && !isReference && !isLintRule && (
             <p class="text-sm text-foreground-secondary mt-8">
