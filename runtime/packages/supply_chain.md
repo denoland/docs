@@ -12,7 +12,7 @@ local workspaces). Good supply chain management helps you achieve four goals:
 - Resilience: builds keep working offline or when registries have outages.
 
 This page builds on
-[lockfiles](/runtime/packages/#integrity-checking-and-lock-files) and
+[lockfiles](/runtime/packages/#lockfile-and-reproducible-installs) and
 [vendoring](/runtime/packages/#vendoring-remote-modules) from the
 [dependency management guide](/runtime/packages/).
 

@@ -283,7 +283,7 @@ Read more about [formatting your code with Deno](/runtime/lint_and_format/).
 
 The `lock` field in the `deno.json` file is used to specify configuration of the
 lock file that Deno uses to
-[ensure the integrity of your dependencies](/runtime/packages/#integrity-checking-and-lock-files).
+[ensure the integrity of your dependencies](/runtime/packages/#lockfile-and-reproducible-installs).
 A lock file records the exact versions and integrity hashes of the modules your
 project depends on, ensuring that the same versions are used every time the
 project is run, even if the dependencies are updated or changed remotely.

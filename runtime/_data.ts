@@ -37,6 +37,10 @@ export const sidebar = [
         disclosure: true,
         items: [
           {
+            title: "Publishing",
+            href: "/runtime/packages/publishing/",
+          },
+          {
             title: "Supply chain",
             href: "/runtime/packages/supply_chain/",
           },

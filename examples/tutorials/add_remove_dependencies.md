@@ -128,5 +128,5 @@ Removed express
 
 The lockfile keeps records of removed packages until you run `deno install`
 again; see
-[the lockfile documentation](/runtime/packages/#integrity-checking-and-lock-files)
+[the lockfile documentation](/runtime/packages/#lockfile-and-reproducible-installs)
 for how `deno.lock` tracks all of this.
