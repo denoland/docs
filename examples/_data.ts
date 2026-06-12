@@ -1770,6 +1770,115 @@ export const items = [
     type: "example",
     category: "Cryptography",
   },
+
+  {
+    title: "Debounce a function",
+    href: "/examples/debounce_function/",
+    type: "example",
+    category: "Standard library",
+  },
+  {
+    title: "Run async tasks with a concurrency limit",
+    href: "/examples/concurrency_limit/",
+    type: "example",
+    category: "Standard library",
+  },
+  {
+    title: "Add a timeout to any promise",
+    href: "/examples/promise_timeout/",
+    type: "example",
+    category: "Standard library",
+  },
+  {
+    title: "Memoize an expensive function",
+    href: "/examples/memoize_function/",
+    type: "example",
+    category: "Standard library",
+  },
+  {
+    title: "Parse and compare semver versions",
+    href: "/examples/semver_versions/",
+    type: "example",
+    category: "Standard library",
+  },
+  {
+    title: "Convert string case",
+    href: "/examples/string_case/",
+    type: "example",
+    category: "Standard library",
+  },
+  {
+    title: "Escape text for regular expressions",
+    href: "/examples/regexp_escape/",
+    type: "example",
+    category: "Standard library",
+  },
+  {
+    title: "Structured logging",
+    href: "/examples/structured_logging/",
+    type: "example",
+    category: "Standard library",
+  },
+  {
+    title: "Format bytes and durations for humans",
+    href: "/examples/format_bytes_duration/",
+    type: "example",
+    category: "Standard library",
+  },
+  {
+    title: "Parse and format dates",
+    href: "/examples/date_format_parse/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Parsing and serializing INI",
+    href: "/examples/parsing_serializing_ini/",
+    type: "example",
+    category: "Encoding",
+  },
+  {
+    title: "Parsing JSONC",
+    href: "/examples/parsing_jsonc/",
+    type: "example",
+    category: "Encoding",
+  },
+  {
+    title: "Parse large CSV files as streams",
+    href: "/examples/csv_streaming/",
+    type: "example",
+    category: "Encoding",
+  },
+  {
+    title: "Stream JSON Lines data",
+    href: "/examples/json_lines/",
+    type: "example",
+    category: "Encoding",
+  },
+  {
+    title: "Encode and decode MessagePack",
+    href: "/examples/msgpack_encoding/",
+    type: "example",
+    category: "Encoding",
+  },
+  {
+    title: "Encode and decode CBOR",
+    href: "/examples/cbor_encoding/",
+    type: "example",
+    category: "Encoding",
+  },
+  {
+    title: "Compress data with node:zlib",
+    href: "/examples/zlib_compression/",
+    type: "example",
+    category: "Encoding",
+  },
+  {
+    title: "Create and extract tar archives",
+    href: "/examples/tar_archives/",
+    type: "example",
+    category: "File system",
+  },
 ];
 
 // Section order on the landing page and in the sidebar.
