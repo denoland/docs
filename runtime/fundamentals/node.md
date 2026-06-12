@@ -15,31 +15,10 @@ oldUrl:
   - /runtime/manual/node/private_registries
 ---
 
-- **Deno is Node-compatible**. Most Node projects will run in Deno with little
-  or no change!
-- **Deno supports npm packages**. Just use the `npm:` specifier in the import,
-  and Deno takes care of the rest.
-
-For example, here's how you'd import Hono from npm in a Deno project:
-
-```ts
-import { Hono } from "npm:hono";
-```
-
-That's all you really need to know to get started! However, there are some key
-differences between the two runtimes that you can take advantage of to make your
-code simpler and smaller when migrating your Node.js projects to Deno.
-
-As of Deno 2.8, **over 75% of Node's own test suite passes** in Deno, covering
-nearly every `node:` module. You can track the current state at
-[node-test-viewer.deno.dev](https://node-test-viewer.deno.dev/).
-
-We provide a [list of supported Node.js APIs](/runtime/reference/node_apis/)
-that you can use in Deno.
-
-## Quick start
-
-### Import an npm package
+Deno is Node-compatible: most Node.js projects will run in Deno with little or
+no change. You can import npm packages with the `npm:` specifier, use Node's
+built-in modules through `node:` specifiers, and keep your existing
+`package.json`. No `npm install` step is required before running your code.
 
 ```ts title="main.ts"
 import chalk from "npm:chalk@5";
@@ -50,25 +29,15 @@ console.log(chalk.green("Hello from npm in Deno"));
 deno run main.ts
 ```
 
-### Execute CommonJS
+As of Deno 2.8, **over 75% of Node's own test suite passes** in Deno, covering
+nearly every `node:` module. You can track the current state at
+[node-test-viewer.deno.dev](https://node-test-viewer.deno.dev/) and browse the
+[list of supported Node.js APIs](/runtime/reference/node_apis/).
 
-Use `.cjs` extension to inform Deno that module is using CommonJS system.
-
-```js title="main.cjs"
-const chalk = require("chalk");
-console.log(chalk.green("Hello from npm in Deno"));
-```
-
-```sh
-deno run main.cjs
-```
-
-### Use a Node API
-
-```js title="process.js"
-import path from "node:path";
-console.log(path.join("./foo", "../bar"));
-```
+That's all you really need to know to get started. The rest of this page covers
+the details, along with some key differences between the two runtimes that you
+can take advantage of to make your code simpler and smaller when migrating your
+Node.js projects to Deno.
 
 ## Using Node's built-in modules
 
@@ -81,14 +50,14 @@ import * as os from "node:os";
 console.log(os.cpus());
 ```
 
-And run it with `deno run main.mjs` - you will notice you get the same output as
-running the program in Node.js.
+Run it with `deno run main.mjs` and you will get the same output as running the
+program in Node.js.
 
 Updating any imports in your application to use `node:` specifiers should enable
 any code using Node built-ins to function as it did in Node.js.
 
 To make updating existing code easier, Deno will provide helpful hints for
-imports that don't use `node:` prefix:
+imports that don't use the `node:` prefix:
 
 ```js title="main.mjs"
 import * as os from "os";
@@ -97,7 +66,7 @@ console.log(os.cpus());
 
 ```sh
 $ deno run main.mjs
-error: Relative import path "os" not prefixed with / or ./ or ../
+error: Import "os" not a dependency
   hint: If you want to use a built-in Node module, add a "node:" prefix (ex. "node:os").
     at file:///main.mjs:1:21
 ```
@@ -113,7 +82,13 @@ customize module resolution and loading from inside your program.
 
 ## Using npm packages
 
-Deno has native support for importing npm packages by using `npm:` specifiers.
+Deno has native support for importing npm packages by using `npm:` specifiers,
+which have the following format:
+
+```console
+npm:<package-name>[@<version-requirement>][/<sub-path>]
+```
+
 For example:
 
 ```ts title="main.js"
@@ -130,30 +105,14 @@ $ deno run main.js
 ```
 
 No `npm install` is necessary before the `deno run` command and no
-`node_modules` folder is created. These packages are also subject to the same
-[permissions](/runtime/fundamentals/security/) as other code in Deno.
+`node_modules` folder is created: dependencies are stored in Deno's global
+cache. These packages are also subject to the same
+[permissions](/runtime/fundamentals/security/) as other code in Deno. If your
+tools expect a local `node_modules` directory, see
+[node_modules](#node_modules).
 
-### First-class package.json support
-
-Deno understands `package.json` in your project. You can:
-
-- Declare dependencies there (alongside or instead of inline `npm:` specifiers).
-- Use scripts from `package.json` via `deno task` (for example,
-  `deno task start`).
-- Rely on `package.json` fields like `type` when resolving modules (see CommonJS
-  support below).
-
-By default, dependencies are stored in Deno's global cache without creating a
-local `node_modules` directory. If your tools expect `node_modules`, opt-in
-using `nodeModulesDir` in `deno.json`.
-
-npm specifiers have the following format:
-
-```console
-npm:<package-name>[@<version-requirement>][/<sub-path>]
-```
-
-This also allows functionality that may be familiar from the `npx` command.
+npm specifiers also allow functionality that may be familiar from the `npx`
+command.
 
 ```console
 # npx allows remote execution of a package from npm or a URL
@@ -166,6 +125,16 @@ $ deno run -A npm:create-next-app@latest
 
 For examples with popular libraries, please refer to the
 [tutorial section](/runtime/tutorials).
+
+### First-class package.json support
+
+Deno understands `package.json` in your project. You can:
+
+- Declare dependencies there (alongside or instead of inline `npm:` specifiers).
+- Use scripts from `package.json` via `deno task` (for example,
+  `deno task start`).
+- Rely on `package.json` fields like `type` when resolving modules (see
+  [CommonJS support](#commonjs-support)).
 
 ## Node.js global objects
 
@@ -180,7 +149,8 @@ in Deno:
   popular global used in popular npm packages. It is available to all code. Deno
   can also guide you towards importing it explicitly from `node:process`. Opt in
   by enabling the [`no-process-global`](/lint/rules/no-process-global/) lint
-  rule (off by default since Deno 2.8):
+  rule (off by default since Deno 2.8); `deno lint` will then flag uses of the
+  global:
 
 ```js title="process.js"
 console.log(process.versions.deno);
@@ -188,7 +158,7 @@ console.log(process.versions.deno);
 
 ```shell
 $ deno run process.js
-2.0.0
+2.8.3
 $ deno lint process.js
 error[no-process-global]: NodeJS process global is discouraged in Deno
  --> /process.js:1:13
@@ -254,60 +224,29 @@ subclasses instead.
 
 ## CommonJS support
 
-Deno supports CommonJS modules by default.
+Deno supports CommonJS modules by default. When using CommonJS, Deno expects
+that dependencies will be installed manually and a `node_modules` directory will
+be present. It's best to set `"nodeModulesDir": "auto"` in your `deno.json` to
+ensure that (see [node_modules](#node_modules)).
 
-Note: Deno's permission system still applies to CommonJS code. You may need
-`--allow-read` because Deno probes `package.json` and `node_modules` to resolve
-CommonJS modules.
+Deno's permission system also applies to CommonJS code. You typically need the
+`-R` (`--allow-read`) and `-E` (`--allow-env`) flags, because Deno probes
+`package.json` files and the `node_modules` directory to resolve CommonJS
+modules.
 
-### Use .cjs extension
+### How Deno determines module type
 
-If the file extension is `.cjs` Deno will treat this module as CommonJS.
+If the file extension is `.cjs`, Deno will treat the module as CommonJS, without
+consulting `package.json`:
 
 ```js title="main.cjs"
 const express = require("express");
 ```
 
-Deno does not look for `package.json` files and `type` option to determine if
-the file is CommonJS or ESM.
-
-When using CommonJS, Deno expects that dependencies will be installed manually
-and a `node_modules` directory will be present. It's best to set
-`"nodeModulesDir": "auto"` in your `deno.json` to ensure that.
-
-```shell
-$ cat deno.json
-{
-  "nodeModulesDir": "auto"
-}
-
-$ deno install npm:express
-Add npm:express@5.0.0
-
-$ deno run -R -E main.cjs
-[Function: createApplication] {
-  application: {
-    init: [Function: init],
-    defaultConfiguration: [Function: defaultConfiguration],
-    ...
-  }
-}
-```
-
-`-R` and `-E` flags are used to allow permissions to read files and environment
-variables.
-
-You can also just run a `.cjs` file directly:
-
-```sh
-deno run -A main.cjs
-```
-
-### package.json type option
-
-Deno will attempt to load `.js`, `.jsx`, `.ts`, and `.tsx` files as CommonJS if
-there's a `package.json` file with `"type": "commonjs"` option next to the file,
-or up in the directory tree when in a project with a package.json file.
+Deno will also attempt to load `.js`, `.jsx`, `.ts`, and `.tsx` files as
+CommonJS if there's a `package.json` file with the `"type": "commonjs"` option
+next to the file, or up in the directory tree when in a project with a
+`package.json` file:
 
 ```json title="package.json"
 {
@@ -320,26 +259,43 @@ const express = require("express");
 ```
 
 Tools like Next.js's bundler and others will generate a `package.json` file like
-that automatically.
+that automatically. If you have an existing project that uses CommonJS modules,
+you can make it work with both Node.js and Deno by adding the
+`"type": "commonjs"` option to the `package.json` file.
 
-If you have an existing project that uses CommonJS modules, you can make it work
-with both Node.js and Deno, by adding `"type": "commonjs"` option to the
-`package.json` file.
+Deno does not otherwise analyze module contents to detect CommonJS, because
+looking for `package.json` files on the file system and analyzing a module to
+detect if it's CommonJS takes longer than not doing it, and to discourage the
+use of CommonJS. You can opt into this detection by running with the
+`--unstable-detect-cjs` flag in Deno >= 2.1.2. It takes effect except when
+there's a `package.json` file with `{ "type": "module" }`.
 
-### Always detecting if a file might be CommonJS
+### Using require()
 
-Telling Deno to analyze modules as possibly being CommonJS is possible by
-running with the `--unstable-detect-cjs` in Deno >= 2.1.2. This will take
-effect, except when there's a _package.json_ file with `{ "type": "module" }`.
+To run the `.cjs` example above, install the dependency and pass the read and
+env permission flags:
 
-Looking for package.json files on the file system and analyzing a module to
-detect if its CommonJS takes longer than not doing it. For this reason and to
-discourage the use of CommonJS, Deno does not do this behavior by default.
+```shell
+$ cat deno.json
+{
+  "nodeModulesDir": "auto"
+}
 
-### Create require() manually
+$ deno install npm:express
+Dependencies:
++ npm:express 5.2.1
 
-An alternative option is to create an instance of the `require()` function
-manually:
+$ deno run -R -E main.cjs
+[Function: createApplication] {
+  application: {
+    init: [Function: init],
+    defaultConfiguration: [Function: defaultConfiguration],
+    ...
+  }
+}
+```
+
+In ES modules, you can create an instance of the `require()` function manually:
 
 ```js title="main.js"
 import { createRequire } from "node:module";
@@ -347,17 +303,16 @@ const require = createRequire(import.meta.url);
 const express = require("express");
 ```
 
-In this scenario the same requirements apply, as when running `.cjs` files -
+In this scenario the same requirements apply as when running `.cjs` files:
 dependencies need to be installed manually and appropriate permission flags
 given.
 
-### require(ESM)
+### CommonJS and ESM interop
 
-Deno's `require()` implementation supports requiring ES modules.
-
-This works the same as in Node.js, where you can only `require()` ES modules
-that don't have Top-Level Await in their module graph - or in other words you
-can only `require()` ES modules that are "synchronous".
+Deno's `require()` implementation supports requiring ES modules. This works the
+same as in Node.js, where you can only `require()` ES modules that don't have
+top-level await in their module graph. In other words, you can only `require()`
+ES modules that are "synchronous".
 
 ```js title="greet.js"
 export function greet(name) {
@@ -383,9 +338,7 @@ $ deno run -R main.cjs
 Hello Deno
 ```
 
-### Import CommonJS modules
-
-You can also import CommonJS files in ES modules.
+You can also import CommonJS files in ES modules:
 
 ```js title="greet.cjs"
 module.exports = {
@@ -394,29 +347,25 @@ module.exports = {
 ```
 
 ```js title="main.js"
-import greet from "./greet.js";
+import greet from "./greet.cjs";
 console.log(greet);
 ```
 
 ```shell
 $ deno run main.js
-{
-  "hello": "world"
-}
+{ hello: "world" }
 ```
 
-### Hints and suggestions
+### Troubleshooting
 
-Deno will guide you when a file looks like CommonJS but isn’t loaded as such. If
+Deno will guide you when a file looks like CommonJS but isn't loaded as such. If
 you see an error about `module` not being defined, fix it by one of the
 following:
 
-- Rewrite to ESM
+- Rewrite the code to ESM
 - Change the file extension to `.cjs`
 - Add a nearby `package.json` with `{ "type": "commonjs" }`
 - Run with `--unstable-detect-cjs`
-
-See docs: [CommonJS in Deno](https://docs.deno.com/go/commonjs)
 
 ## Conditional exports
 
@@ -522,7 +471,7 @@ const t: NodeJS.Timeout = setTimeout(() => {}, 0);
 The bundled `lib.node` tracks the major version of `@types/node` that matches
 the Node release Deno reports in `process.versions.node`. If you need to pin a
 specific `@types/node` version (for example to match the Node version your
-project standardises on), add it as an explicit dependency:
+project standardizes on), add it as an explicit dependency:
 
 ```jsonc title="deno.json"
 {
@@ -532,8 +481,8 @@ project standardises on), add it as an explicit dependency:
 }
 ```
 
-On versions before 2.8 — or if you've opted out of `lib.node` — you can still
-load the types with a reference directive:
+On versions before 2.8, or if you've opted out of `lib.node`, you can still load
+the types with a reference directive:
 
 ```ts
 /// <reference types="npm:@types/node" />
@@ -551,7 +500,7 @@ npm:<package-name>[@<version-requirement>][/<binary-name>]
 For example:
 
 ```sh
-$ deno run --allow-read npm:cowsay@1.5.0 "Hello there!"
+$ deno run -R npm:cowsay@1.5.0 "Hello there!"
  ______________
 < Hello there! >
  --------------
@@ -561,7 +510,7 @@ $ deno run --allow-read npm:cowsay@1.5.0 "Hello there!"
                 ||----w |
                 ||     ||
 
-$ deno run --allow-read npm:cowsay@1.5.0/cowthink "What to eat?"
+$ deno run -R npm:cowsay@1.5.0/cowthink "What to eat?"
  ______________
 ( What to eat? )
  --------------
@@ -577,24 +526,18 @@ $ deno run --allow-read npm:cowsay@1.5.0/cowthink "What to eat?"
 When you run `npm install`, npm creates a `node_modules` directory in your
 project which houses the dependencies as specified in the `package.json` file.
 
-Deno uses [npm specifiers](/runtime/fundamentals/node/#using-npm-packages) to
-resolve npm packages to a central global npm cache, instead of using a
-`node_modules` folder in your projects. This is ideal since it uses less space
-and keeps your project directory clean.
+By default, Deno instead uses
+[npm specifiers](/runtime/fundamentals/node/#using-npm-packages) to resolve npm
+packages to a central global npm cache and does not create a `node_modules`
+directory. This uses less space, keeps your project directory clean, and is the
+recommended setup for new Deno projects.
 
 There may however be cases where you need a local `node_modules` directory in
-your Deno project, even if you don’t have a `package.json` (eg. when using
+your Deno project, even if you don't have a `package.json` (eg. when using
 frameworks like Next.js or Svelte or when depending on npm packages that use
 Node-API).
 
 ### Choosing a node_modules mode
-
-- Use no local node_modules (default) when your project runs fine with Deno's
-  global cache. No setup required.
-- Use auto when some tools expect node_modules or you rely on Node-API addons
-  and want automatic creation.
-- Use manual when your project has a package.json and you prefer an explicit
-  install step.
 
 | Mode   | When to use                                  | How to enable                                              |
 | ------ | -------------------------------------------- | ---------------------------------------------------------- |
@@ -602,17 +545,20 @@ Node-API).
 | auto   | Tools/bundlers expect node_modules; Node-API | `"nodeModulesDir": "auto"` or `--node-modules-dir=auto`    |
 | manual | Existing package.json with install step      | `"nodeModulesDir": "manual"` + run `deno install`/npm/pnpm |
 
-### Default Deno dependencies behavior
+:::note
 
-By default, Deno will not create a `node_modules` directory when you use the
-`deno run` command, dependencies will be installed into the global cache. This
-is the recommended setup for new Deno projects.
+We recommend that you use the default `none` mode, and fall back to `auto` or
+`manual` mode if you get errors about missing packages inside the `node_modules`
+directory.
+
+:::
 
 ### Automatic node_modules creation
 
 If you need a `node_modules` directory in your project, you can use the
-`--node-modules-dir` flag or `nodeModulesDir: auto` option in the config file to
-tell Deno to create a `node_modules` directory in the current working directory:
+`--node-modules-dir=auto` flag on a per-command basis, or the
+`"nodeModulesDir": "auto"` option in the config file, to tell Deno to create a
+`node_modules` directory in the current working directory:
 
 ```sh
 deno run --node-modules-dir=auto main.ts
@@ -628,8 +574,8 @@ or with a configuration file:
 
 The auto mode automatically installs dependencies into the global cache and
 creates a local node_modules directory in the project root. This is recommended
-for projects that have npm dependencies that rely on node_modules directory -
-mostly projects using bundlers or ones that have npm dependencies with
+for projects that have npm dependencies that rely on the node_modules directory:
+mostly projects using bundlers, or ones that have npm dependencies with
 postinstall scripts.
 
 ### Manual node_modules creation
@@ -655,33 +601,6 @@ Manual mode is the default mode for projects using a `package.json`. You may
 recognize this workflow from Node.js projects. It is recommended for projects
 using frameworks like Next.js, Remix, Svelte, Qwik etc, or tools like Vite,
 Parcel or Rollup.
-
-:::note
-
-We recommend that you use the default `none` mode, and fallback to `auto` or
-`manual` mode if you get errors about missing packages inside the `node_modules`
-directory.
-
-:::
-
-### node_modules flag
-
-You can also enable the creation of a `node_modules` directory on a per-command
-basis with the `--node-modules-dir` flag.
-
-```ts title="main.ts"
-import chalk from "npm:chalk@5";
-
-console.log(chalk.green("Hello"));
-```
-
-```sh
-deno run --node-modules-dir main.ts
-```
-
-Running the above command, with a `--node-modules-dir` flag, will create a
-`node_modules` folder in the current directory with a similar folder structure
-to npm.
 
 ### node_modules layout: isolated vs hoisted
 
@@ -736,22 +655,11 @@ hide.
 
 ## Node-API addons
 
-Summary: Node-API addons work in Deno when a local `node_modules/` is present
-and you grant `--allow-ffi`.
-
 Deno supports [Node-API addons](https://nodejs.org/api/n-api.html) used by
 popular npm packages like [`esbuild`](https://www.npmjs.com/package/esbuild),
 [`npm:sqlite3`](https://www.npmjs.com/package/sqlite3) and
 [`npm:duckdb`](https://www.npmjs.com/package/duckdb). You can expect packages
 that use public Node-APIs to work.
-
-:::note
-
-Many addons rely on npm lifecycle scripts (for example, `postinstall`). Deno
-supports them, but they are not run by default for security reasons. See the
-[`deno install` docs](/runtime/reference/cli/install/).
-
-:::
 
 As of Deno 2.0, npm packages using Node-API addons are supported when a local
 `node_modules/` directory is present. Configure
@@ -760,6 +668,14 @@ As of Deno 2.0, npm packages using Node-API addons are supported when a local
 
 Like all native FFI, pass `--allow-ffi` to grant explicit permission. Review
 [Security and permissions](/runtime/reference/permissions/#ffi-(foreign-function-interface)).
+
+:::note
+
+Many addons rely on npm lifecycle scripts (for example, `postinstall`). Deno
+supports them, but they are not run by default for security reasons. See the
+[`deno install` docs](/runtime/reference/cli/install/).
+
+:::
 
 ## Migrating from Node to Deno
 
