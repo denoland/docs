@@ -55,6 +55,13 @@ deno install
 deno run main.js
 ```
 
+Expect one immediate difference from Node: Deno is
+[secure by default](/runtime/fundamentals/security/), so the first time your app
+touches the network, filesystem, or environment, Deno prompts for permission.
+Grant what the app needs up front with flags (`deno run -N -R -E main.js`), or
+run with `-A` for Node-equivalent behavior while migrating and tighten later.
+See [Permissions](/runtime/reference/permissions/) for the full flag list.
+
 If your `package.json` defines scripts, run them with
 [`deno task`](/runtime/reference/cli/task/), the equivalent of `npm run`:
 
@@ -104,6 +111,34 @@ files or via `createRequire`, Deno's `require()` can load synchronous ES
 modules, and you can `import` CommonJS files from ES modules. See
 [CommonJS support](/runtime/fundamentals/node/#commonjs-support) for the details
 and edge cases.
+
+## Common errors and fixes
+
+The handful of errors most Node projects hit on first run, and what they mean:
+
+- **`NotCapable: Requires read access to "...", run again with the
+  --allow-read flag`**:
+  the permission sandbox at work. Grant the listed permission (`-R` here) or run
+  with `-A` until you're ready to scope permissions down.
+- **`ReferenceError: require is not defined`**: Deno treated the file as an ES
+  module. Set `"type": "commonjs"` in `package.json`, or rename the file to
+  `.cjs`. See [CommonJS and ES modules](#commonjs-and-es-modules) above.
+- **Cannot find module / missing `node_modules`**: run `deno install`. If your
+  tools expect a `node_modules` directory to exist, set
+  `"nodeModulesDir": "auto"` in `deno.json`.
+- **A dependency's install/postinstall script didn't run** (native addons,
+  `node-gyp` builds): Deno does not run npm lifecycle scripts by default. Allow
+  them per package with `deno install --allow-scripts=npm:<pkg>`, or manage
+  approvals with
+  [`deno approve-scripts`](/runtime/reference/cli/approve_scripts/).
+- **A `node:` API behaves differently or is missing**: check the
+  [Node API compatibility list](/runtime/reference/node_apis/) for status and
+  known gaps.
+
+If you're migrating a framework app (Next.js, SvelteKit, Nuxt, and friends),
+most run under Deno by replacing `npm run dev` with `deno task dev`. See
+[Web development](/runtime/fundamentals/web_dev/) and the
+[tutorials](/examples/) for framework-specific walkthroughs.
 
 ## Node to Deno Cheatsheet
 
@@ -170,5 +205,7 @@ installed side by side.
 
 - **[Node.js and npm compatibility](/runtime/fundamentals/node/).** What's
   supported (`node:` built-ins, npm packages, globals) and the known gaps.
+- **[Node API compatibility list](/runtime/reference/node_apis/).** Per-module
+  support status for every `node:` built-in.
 - **[Migrating your tsconfig.json](/runtime/reference/ts_config_migration/).**
   Map `tsconfig.json` options onto `deno.json`.
