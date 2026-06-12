@@ -145,6 +145,16 @@ summary table when it links to the full reference. When the same material exists
 in both kinds of page, move the depth to the reference and keep the narrative in
 the guide.
 
+### Mark version-specific behavior
+
+When documenting behavior that was added or changed in a specific Deno version,
+say so where it's documented: use an info admonition titled with the version
+(`:::info Deno 2.8`) for a behavior change worth a callout, or an inline "(Deno
+2.8+)" for a brief mention. This keeps pages visibly current, matches how people
+search ("what's new in Deno 2.8"), and tells readers on older versions why
+something doesn't work for them. Don't version-mark behavior older than the
+previous major release.
+
 ## Reference docs
 
 The reference docs served at `/api` are generated via the `deno doc` subcommand.

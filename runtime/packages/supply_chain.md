@@ -78,7 +78,7 @@ absolute cutoff date (`2025-09-16`) or RFC3339 timestamp, or `0` to disable. The
 field also supports an object form that exempts specific packages; see the
 [`minimumDependencyAge` reference](/runtime/reference/deno_json/#minimum-dependency-age)
 for the full shape, and
-[`.npmrc` configuration](/runtime/fundamentals/node/#npmrc-configuration) for
+[`.npmrc` configuration](/runtime/fundamentals/node/#.npmrc-configuration) for
 the other npm-registry options Deno reads.
 
 ## Typical CI pattern
