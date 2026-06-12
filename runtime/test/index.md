@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-05-20
 title: "Testing"
-description: "A guide to Deno's testing capabilities. Learn about the built-in test runner, assertions, mocking, coverage reporting, snapshot testing, and how to write effective tests for your Deno applications."
+description: "Write and run tests with Deno's built-in test runner: assertions, test steps, hooks, filtering, and reporters, with dedicated guides for mocking, snapshots, and coverage."
 oldUrl:
   - /runtime/fundamentals/testing/
   - /runtime/manual/basics/testing/

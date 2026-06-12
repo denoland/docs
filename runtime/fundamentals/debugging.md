@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-05-20
 title: "Debugging"
-description: "Complete guide to debugging Deno applications. Learn to use Chrome DevTools, VS Code debugger, and other debugging techniques for TypeScript/JavaScript code in Deno."
+description: "Debug Deno programs with the V8 inspector: Chrome DevTools, VS Code and JetBrains setup, network inspection, worker debugging, and the --inspect flag family."
 oldUrl:
   - /runtime/manual/getting_started/debugging_your_code/
   - /runtime/manual/basics/debugging_your_code/
