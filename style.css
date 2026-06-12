@@ -1579,7 +1579,14 @@
 
     .sidebar-disclosure-list {
       margin-left: 1rem !important;
-      border-left: 1px solid var(--color-foreground-tertiary);
+      border-left: 2px solid var(--color-runtime);
+
+      /* The shared nested-item style is denser (py-1) than disclosure groups
+         want; give these items the same breathing room as top-level entries
+         without touching the legacy accordions. */
+      a {
+        padding-block: 0.5rem;
+      }
     }
 
     &[data-open="true"] {
