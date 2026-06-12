@@ -451,7 +451,7 @@ keep seeing the mock. The `using` + `stub` pattern fixes both.
 :::
 
 For spies, fake timers, and more advanced mocking, see
-[Mocking data for tests](/examples/mocking_tutorial/).
+[Mocking data for tests](/runtime/test/mocking/).
 
 ## Mocking in tests
 
@@ -463,7 +463,7 @@ creating mocks.
 
 You can create simple mocks by
 [replacing functions or objects with your own
-implementations](/examples/mocking_tutorial/). This allows you to control the
+implementations](/runtime/test/mocking/). This allows you to control the
 behavior of dependencies and test how your code interacts with them.
 
 ```ts
@@ -522,7 +522,7 @@ Deno.test("spy example", () => {
 ```
 
 For more advanced mocking techniques, check our
-[dedicated guide on mocking in Deno](/examples/mocking_tutorial/).
+[dedicated guide on mocking in Deno](/runtime/test/mocking/).
 
 ## Test hooks
 
@@ -713,5 +713,5 @@ applications are well-tested and reliable.
 For more information about testing in Deno, check out:
 
 - [Testing documentation](/runtime/test/)
-- [Mocking data for tests](/examples/mocking_tutorial/)
+- [Mocking data for tests](/runtime/test/mocking/)
 - [Writing benchmark tests](/examples/benchmarking/)

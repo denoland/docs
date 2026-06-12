@@ -4,18 +4,10 @@ title: "Testing"
 description: "A guide to Deno's testing capabilities. Learn about the built-in test runner, assertions, mocking, coverage reporting, snapshot testing, and how to write effective tests for your Deno applications."
 oldUrl:
   - /runtime/fundamentals/testing/
-  - /runtime/manual/advanced/language_server/testing_api/
   - /runtime/manual/basics/testing/
-  - /runtime/manual/basics/testing/coverage/
   - /runtime/manual/basics/testing/assertions/
-  - /runtime/manual/basics/testing/mocking/
   - /runtime/manual/basics/testing/behavior_driven_development
-  - /runtime/manual/testing/documentation/
-  - /runtime/manual/basics/testing/sanitizers/
-  - /runtime/manual/basics/testing/snapshot_testing/
   - /runtime/manual/testing
-  - /runtime/manual/basics/testing/documentation/
-  - /runtime/reference/documentation/
 ---
 
 Deno provides a built-in test runner for writing and running tests in both
@@ -25,8 +17,9 @@ or tools. The `deno test` runner allows you fine-grained control over
 permissions for each test, ensuring that code does not do anything unexpected.
 
 In addition to the built-in test runner, you can also use other test runners
-from the JS ecosystem, such as Jest, Mocha, or AVA, with Deno. We will not cover
-these in this document however.
+from the JS ecosystem, such as Jest, Mocha, or AVA, with Deno. Moving an
+existing Jest suite over? See
+[Migrating from Jest](/runtime/test/migrate_from_jest/).
 
 ## Writing Tests
 
@@ -341,23 +334,19 @@ deno test --junit-path=./report.xml
 See the [`deno test` reference](/runtime/reference/cli/test/#reporters) for the
 full list of reporters.
 
-## Spying, mocking (test doubles), stubbing and faking time
+## Mocking and test doubles
 
-The [Deno Standard Library](/runtime/reference/std/) provides a set of functions
-to help you write tests that involve spying, mocking, and stubbing. Check out
-the [`@std/testing` documentation](/runtime/reference/std/testing/) for more
-information on each of these utilities or our
-[tutorial on mocking and spying in tests with deno](/examples/mocking_tutorial/).
+Isolate the code under test by replacing its collaborators with spies, stubs,
+and mocks from `@std/testing`, and control the clock with `FakeTime`. See
+[Mocking and test doubles](/runtime/test/mocking/) for the full guide with
+runnable examples.
 
 ## Coverage
 
-Deno will collect test coverage into a directory for your code if you specify
-the `--coverage` flag when starting `deno test`. This coverage information is
-acquired directly from the V8 JavaScript engine, ensuring high accuracy.
-
-This can then be further processed from the internal format into well known
-formats like `lcov` with the [`deno coverage`](/runtime/reference/cli/coverage/)
-tool.
+Collect coverage while testing with `deno test --coverage`, then turn it into
+terminal, HTML, or lcov reports with `deno coverage`. The data comes straight
+from V8. See [Test coverage](/runtime/test/coverage/) for the workflow,
+including CI integration.
 
 ## Behavior-Driven Development
 
@@ -392,304 +381,28 @@ for more information on these functions and hooks.
 
 - [BDD testing tutorial](/examples/bdd_tutorial/)
 
-## Documentation Tests
+## Documentation tests
 
-Deno allows you to evaluate code snippets written in JSDoc or markdown files.
-This ensures the examples in your documentation are up-to-date and functional.
-
-### Example code blocks
-
-````ts title="example.ts"
-/**
- * # Examples
- *
- * ```ts
- * import { assertEquals } from "jsr:@std/assert/equals";
- *
- * const sum = add(1, 2);
- * assertEquals(sum, 3);
- * ```
- */
-export function add(a: number, b: number): number {
-  return a + b;
-}
-````
-
-The triple backticks mark the start and end of code blocks, the language is
-determined by the language identifier attribute which may be one of the
-following:
-
-- `js`
-- `javascript`
-- `mjs`
-- `cjs`
-- `jsx`
-- `ts`
-- `typescript`
-- `mts`
-- `cts`
-- `tsx`
-
-If no language identifier is specified then the language is inferred from media
-type of the source document that the code block is extracted from.
-
-```sh
-deno test --doc example.ts
-```
-
-The above command will extract this example, turn it into a pseudo test case
-that looks like below:
-
-```ts title="example.ts$4-10.ts" ignore
-import { assertEquals } from "jsr:@std/assert/equals";
-import { add } from "file:///path/to/example.ts";
-
-Deno.test("example.ts$4-10.ts", async () => {
-  const sum = add(1, 2);
-  assertEquals(sum, 3);
-});
-```
-
-and then run it as a standalone module living in the same directory as the
-module being documented.
-
-:::tip Want to type-check only?
-
-If you want to type-check your code snippets in JSDoc and markdown files without
-actually running them, you can use [`deno check`](/runtime/reference/cli/check/)
-command with `--doc` option (for JSDoc) or with `--doc-only` option (for
-markdown) instead.
-
-:::
-
-### Exported items are automatically imported
-
-Looking at the generated test code above, you will notice that it includes the
-`import` statement to import the `add` function even though the original code
-block does not have it. When documenting a module, any items exported from the
-module are automatically included in the generated test code using the same
-name.
-
-Let's say we have the following module:
-
-````ts title="example.ts"
-/**
- * # Examples
- *
- * ```ts
- * import { assertEquals } from "jsr:@std/assert/equals";
- *
- * const sum = add(ONE, getTwo());
- * assertEquals(sum, 3);
- * ```
- */
-export function add(a: number, b: number): number {
-  return a + b;
-}
-
-export const ONE = 1;
-export default function getTwo() {
-  return 2;
-}
-````
-
-This will get converted to the following test case:
-
-```ts title="example.ts$4-10.ts" ignore
-import { assertEquals } from "jsr:@std/assert/equals";
-import { add, ONE }, getTwo from "file:///path/to/example.ts";
-
-Deno.test("example.ts$4-10.ts", async () => {
-  const sum = add(ONE, getTwo());
-  assertEquals(sum, 3);
-});
-```
-
-### Skipping code blocks
-
-You can skip the evaluation of code blocks by adding the `ignore` attribute.
-
-````ts
-/**
- * This code block will not be run.
- *
- * ```ts ignore
- * await sendEmail("deno@example.com");
- * ```
- */
-export async function sendEmail(to: string) {
-  // send an email to the given address...
-}
-````
+`deno test --doc` runs the code examples inside your JSDoc comments and markdown
+files as tests, so documentation can't silently go stale. See
+[Documentation tests](/runtime/test/doc_tests/) for how snippets are extracted,
+typed, and skipped.
 
 ## Sanitizers
 
-The test runner offers several sanitizers to ensure that the test behaves in a
-reasonable and expected way.
-
-### Resource sanitizer
-
-The resource sanitizer ensures that all I/O resources created during a test are
-closed, to prevent leaks.
-
-I/O resources are things like [`Deno.FsFile`](/api/deno/~/Deno.FsFile) handles,
-network connections, [`fetch`](/api/web/~/fetch) bodies, timers, and other
-resources that are not automatically garbage collected.
-
-You should always close resources when you are done with them. For example, to
-close a file:
-
-```ts
-const file = await Deno.open("hello.txt");
-// Do something with the file
-file.close(); // <- Always close the file when you are done with it
-```
-
-To close a network connection:
-
-```ts
-const conn = await Deno.connect({ hostname: "example.com", port: 80 });
-// Do something with the connection
-conn.close(); // <- Always close the connection when you are done with it
-```
-
-To close a [`fetch`](/api/web/~/fetch) body:
-
-```ts
-const response = await fetch("https://example.com");
-// Do something with the response
-await response.body?.cancel(); // <- Always cancel the body when you are done with it, if you didn't consume it otherwise
-```
-
-As of Deno 2.8 this sanitizer is **off by default**. Opt in with
-`sanitizeResources: true`, or with one of the global mechanisms described in
-[Enabling sanitizers globally](#enabling-sanitizers-globally).
-
-```ts
-Deno.test({
-  name: "no leaks allowed",
-  async fn() {
-    using file = await Deno.open("hello.txt");
-    // ...
-  },
-  sanitizeResources: true,
-});
-```
-
-### Async operation sanitizer
-
-The async operation sanitizer ensures that all async operations started in a
-test are completed before the test ends. This is important because if an async
-operation is not awaited, the test will end before the operation is completed,
-and the test will be marked as successful even if the operation may have
-actually failed.
-
-You should always await all async operations in your tests. For example:
-
-```ts
-Deno.test({
-  name: "async operation test",
-  async fn() {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-  },
-});
-```
-
-As of Deno 2.8 this sanitizer is **off by default**. Opt in with
-`sanitizeOps: true`, or with one of the global mechanisms described below.
-
-```ts
-Deno.test({
-  name: "no leaked ops allowed",
-  async fn() {
-    await someAsyncWork();
-  },
-  sanitizeOps: true,
-});
-```
-
-### Enabling sanitizers globally
-
-If you want the pre-2.8 behavior — resource and op sanitizers on for every test
-— you can re-enable them at any of five scopes. Higher-precedence settings
-override lower ones.
-
-1. **Per-test** (highest precedence):
-
-   ```ts
-   Deno.test({
-     name: "strict",
-     sanitizeOps: true,
-     sanitizeResources: true,
-     fn() {/* … */},
-   });
-   ```
-
-2. **Per-module** with
-   [`Deno.test.sanitizer()`](/api/deno/~/Deno.test.sanitizer):
-
-   ```ts
-   Deno.test.sanitizer({ ops: true, resources: true });
-
-   Deno.test("uses module-level sanitizers", () => {/* … */});
-   ```
-
-3. **CLI flags**: `--sanitize-ops` and `--sanitize-resources`.
-
-4. **Environment variables**: `DENO_TEST_SANITIZE_OPS=1` and
-   `DENO_TEST_SANITIZE_RESOURCES=1`.
-
-5. **`deno.json`** (lowest precedence):
-
-   ```jsonc
-   {
-     "test": {
-       "sanitizeOps": true,
-       "sanitizeResources": true
-     }
-   }
-   ```
-
-### Exit sanitizer
-
-The exit sanitizer ensures that tested code doesn’t call
-[`Deno.exit()`](/api/deno/~/Deno.exit), which could signal a false test success.
-
-This sanitizer is enabled by default, but can be disabled with
-`sanitizeExit: false`.
-
-```ts
-Deno.test({
-  name: "false success",
-  fn() {
-    Deno.exit(0);
-  },
-  sanitizeExit: false,
-});
-
-// This test never runs, because the process exits during "false success" test
-Deno.test({
-  name: "failing test",
-  fn() {
-    throw new Error("this test fails");
-  },
-});
-```
+The test runner can catch misbehavior that assertions don't see: leaked async
+operations, unclosed resources, and unexpected
+[`Deno.exit()`](/api/deno/~/Deno.exit) calls. The exit sanitizer is on by
+default; the op and resource sanitizers are opt-in since Deno 2.8. See
+[Test sanitizers](/runtime/test/sanitizers/) for each sanitizer and the global
+enablement options.
 
 ## Snapshot testing
 
-The [Deno Standard Library](/runtime/reference/std/) includes a
-[snapshot module](/runtime/reference/std/testing/) that allows developers to
-write tests by comparing values against reference snapshots. These snapshots are
-serialized representations of the original values and are stored alongside the
-test files.
-
-Snapshot testing enables catching a wide array of bugs with very little code. It
-is particularly helpful in situations where it is difficult to precisely express
-what should be asserted, without requiring a prohibitive amount of code, or
-where the assertions a test makes are expected to change often.
-
-- [Snapshot testing tutorial](/examples/snapshot_test_tutorial/)
+Compare a value against a serialized reference stored next to your test, and
+update the references with a single flag when behavior intentionally changes.
+See [Snapshot testing](/runtime/test/snapshots/) for the workflow, including
+updating and reviewing snapshots.
 
 ## Tests and Permissions
 
@@ -763,5 +476,7 @@ denied, regardless of what's specified in the test configuration.
 For more hands-on testing guides, check out:
 
 - [Basic testing tutorial](/examples/testing_tutorial/)
-- [Mocking data in tests tutorial](/examples/mocking_tutorial/)
+- [Mocking and test doubles](/runtime/test/mocking/)
+- [Snapshot testing](/runtime/test/snapshots/)
+- [Migrating from Jest](/runtime/test/migrate_from_jest/)
 - [Testing web applications tutorial](/examples/web_testing_tutorial/)

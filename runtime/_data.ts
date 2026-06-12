@@ -56,6 +56,33 @@ export const sidebar = [
       {
         title: "Testing",
         href: "/runtime/test/",
+        disclosure: true,
+        items: [
+          {
+            title: "Mocking",
+            href: "/runtime/test/mocking/",
+          },
+          {
+            title: "Snapshots",
+            href: "/runtime/test/snapshots/",
+          },
+          {
+            title: "Coverage",
+            href: "/runtime/test/coverage/",
+          },
+          {
+            title: "Documentation tests",
+            href: "/runtime/test/doc_tests/",
+          },
+          {
+            title: "Sanitizers",
+            href: "/runtime/test/sanitizers/",
+          },
+          {
+            title: "Migrating from Jest",
+            href: "/runtime/test/migrate_from_jest/",
+          },
+        ],
       },
       {
         title: "Linting and formatting",
