@@ -85,7 +85,7 @@ change underneath you.
 For private repositories, set `DENO_AUTH_TOKENS` to a personal access token
 scoped to the host, e.g.
 `DENO_AUTH_TOKENS=a1b2c3d4e5f6@raw.githubusercontent.com`; see
-[Private repositories](/runtime/packages/#private-repositories) for details.
+[Private repositories](/runtime/packages/private_repositories/) for details.
 
 :::caution
 
