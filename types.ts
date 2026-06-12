@@ -60,6 +60,10 @@ export interface SidebarItem {
   label?: string;
   href?: string;
   items?: SidebarItem[];
+  // Opt in to the link-plus-chevron disclosure rendering for a group whose
+  // item has its own landing page. Groups without this keep the legacy
+  // accordion (CLI reference, Standard library).
+  disclosure?: boolean;
   externalUrl?: string;
   type?: "video" | "example" | "tutorial";
 }
