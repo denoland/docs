@@ -8,23 +8,13 @@ oldUrl:
   - /runtime/tutorials/http_server/
 ---
 
-HTTP servers are the backbone of the web, allowing you to access websites,
-download files, and interact with web services. They listen for incoming
-requests from clients (like web browsers) and send back responses.
+Deno has a built-in HTTP server API: the
+[`Deno.serve`](https://docs.deno.com/api/deno/~/Deno.serve) function, which
+speaks HTTP/1.1 and HTTP/2 and works with the web-standard `Request` and
+`Response` objects. This page covers writing servers with it, from a first
+handler to routing, static files, TLS, WebSockets, and shutdown.
 
-When you build your own HTTP server, you have complete control over its behavior
-and can tailor it to your specific needs. You may be using it for local
-development, to serve your HTML, CSS, and JS files, or building a REST API -
-having your own server lets you define endpoints, handle requests and manage
-data.
-
-## Deno's built-in HTTP server
-
-Deno has a built in HTTP server API that allows you to write HTTP servers. The
-[`Deno.serve`](https://docs.deno.com/api/deno/~/Deno.serve) API supports
-HTTP/1.1 and HTTP/2.
-
-### A "Hello World" server
+## A "Hello World" server
 
 The [`Deno.serve`](/api/deno/~/Deno.serve) function takes a handler function
 that will be called for each incoming request, and is expected to return a
@@ -51,7 +41,7 @@ deno run --allow-net server.ts
 There are many more examples of using [`Deno.serve`](/api/deno/~/Deno.serve) in
 the [Examples collection](/examples/#network).
 
-### Listening on a specific port
+## Listening on a specific port
 
 By default [`Deno.serve`](/api/deno/~/Deno.serve) will listen on port `8000`,
 but this can be changed by passing in a port number in options bag as the first
@@ -65,7 +55,7 @@ Deno.serve({ port: 4242 }, handler);
 Deno.serve({ port: 4242, hostname: "0.0.0.0" }, handler);
 ```
 
-### Inspecting the incoming request
+## Inspecting the incoming request
 
 Most servers will not answer with the same response for every request. Instead
 they will change their answer depending on various aspects of the request: the
@@ -103,7 +93,7 @@ can happen in all methods that read from the request body, such as `req.json()`,
 
 :::
 
-### Responding with real data
+## Responding with real data
 
 Most servers do not respond with "Hello, World!" to every request. Instead they
 might respond with different headers, status codes, and body contents (even body
@@ -124,7 +114,7 @@ Deno.serve((req) => {
 });
 ```
 
-### Responding with a stream
+## Responding with a stream
 
 Response bodies can also be streams. Here is an example of a response that
 returns a stream of "Hello, World!" repeated every second:
@@ -166,7 +156,71 @@ object that is attached to the response body
 [`ReadableStream`](/api/web/~/ReadableStream) object (for example through a
 [`TransformStream`](/api/web/~/TransformStream)).
 
-### HTTPS support
+## Routing requests
+
+For a server with more than one endpoint, match the URL with the built-in
+[`URLPattern`](https://developer.mozilla.org/en-US/docs/Web/API/URL_Pattern_API)
+web API:
+
+```ts
+const userPattern = new URLPattern({ pathname: "/users/:id" });
+
+Deno.serve((req) => {
+  const match = userPattern.exec(req.url);
+  if (match) {
+    const id = match.pathname.groups.id;
+    return new Response(`User ${id}`);
+  }
+  if (new URL(req.url).pathname === "/") {
+    return new Response("Home");
+  }
+  return new Response("Not found", { status: 404 });
+});
+```
+
+The standard library also ships a small router that maps pattern and method
+pairs to handlers:
+[`route` from `@std/http`](https://jsr.io/@std/http/doc/unstable-route). For
+middleware, larger route trees, or framework conveniences, reach for
+[Oak or Hono](/runtime/fundamentals/web_dev/).
+
+## Serving static files
+
+To serve files from a directory, use
+[`serveDir` from `@std/http`](https://jsr.io/@std/http/doc/file-server):
+
+```ts
+import { serveDir } from "jsr:@std/http/file-server";
+
+Deno.serve((req) => serveDir(req, { fsRoot: "./public" }));
+```
+
+`serveDir` handles content types, range requests, and directory traversal
+protection. Run it with read access to the directory:
+`deno run -N -R server.ts`. For a one-off file server without writing any code,
+the same module doubles as a CLI:
+`deno run -RN jsr:@std/http/file-server ./public`.
+
+## Shutting down gracefully
+
+[`Deno.serve`](/api/deno/~/Deno.serve) returns an
+[`HttpServer`](/api/deno/~/Deno.HttpServer) whose `shutdown()` method stops
+accepting new connections while letting in-flight requests finish. Combine it
+with a signal listener for clean exits in production:
+
+```ts
+const server = Deno.serve((_req) => new Response("Hello"));
+
+Deno.addSignalListener("SIGINT", async () => {
+  console.log("shutting down");
+  await server.shutdown();
+});
+```
+
+You can also pass an [`AbortSignal`](/api/web/~/AbortSignal) via the `signal`
+option to tie the server's lifetime to other logic.
+
+## HTTPS support
 
 To serve HTTPS, pass `cert` and `key` in the options. Both values are the
 PEM-encoded contents of the certificate and private key — not file paths.
@@ -211,7 +265,7 @@ runtime API is the same; only the source of `cert` and `key` changes.
 
 :::
 
-### HTTP/2 support
+## HTTP/2 support
 
 HTTP/2 support is "automatic" when using the HTTP server APIs with Deno. You
 just need to create your server, and it will handle HTTP/1 or HTTP/2 requests
@@ -219,7 +273,7 @@ seamlessly.
 
 HTTP/2 is also supported over cleartext with prior knowledge.
 
-### Automatic body compression
+## Automatic body compression
 
 The HTTP server has built in automatic compression of response bodies. When a
 response is sent to a client, Deno determines if the response body can be safely
@@ -264,7 +318,7 @@ be compressed automatically:
   value. This indicates that your server doesn’t want Deno or any downstream
   proxies to modify the response.
 
-### Serving WebSockets
+## Serving WebSockets
 
 Deno can upgrade incoming HTTP requests to a WebSocket. This allows you to
 handle WebSocket endpoints on your HTTP servers.
