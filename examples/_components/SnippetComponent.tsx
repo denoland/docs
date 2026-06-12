@@ -15,7 +15,7 @@ export default function SnippetComponent(props: {
       <div
         class={`select-none text-sm ${props.snippet.text ? "pb-4" : " "} ${
           props.snippet.code
-            ? "italic md:text-balance md:text-right col-span-5 sm:col-span-3 md:pb-0 snippet-comment"
+            ? "leading-relaxed text-foreground-secondary col-span-5 sm:col-span-3 md:pb-0 md:pt-1 snippet-comment"
             : "col-span-full mt-8"
         }`}
       >
