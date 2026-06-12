@@ -1643,6 +1643,133 @@ export const items = [
     type: "example",
     category: "CLI",
   },
+
+  {
+    title: "Match URLs with URLPattern",
+    href: "/examples/url_pattern/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Cancel async work with AbortController",
+    href: "/examples/abort_controller/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Set a timeout on fetch",
+    href: "/examples/fetch_timeout/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Deep clone objects with structuredClone",
+    href: "/examples/structured_clone/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Build and send forms with FormData",
+    href: "/examples/form_data/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Create and dispatch custom events",
+    href: "/examples/event_target/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Communicate between workers with BroadcastChannel",
+    href: "/examples/broadcast_channel/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Transform data with TransformStream",
+    href: "/examples/transform_stream/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Format numbers and currencies",
+    href: "/examples/intl_number_format/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Format dates for any locale",
+    href: "/examples/intl_date_format/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Format relative time",
+    href: "/examples/intl_relative_time/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Pluralize and format lists",
+    href: "/examples/intl_plural_list/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Split text by words, sentences, and graphemes",
+    href: "/examples/intl_segmenter/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Measure performance with marks and measures",
+    href: "/examples/performance_timing/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Cache HTTP responses with the Web Cache API",
+    href: "/examples/web_cache_api/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Sign and verify data with ECDSA",
+    href: "/examples/ecdsa_signing/",
+    type: "example",
+    category: "Cryptography",
+  },
+  {
+    title: "Derive encryption keys from passwords",
+    href: "/examples/derive_aes_key/",
+    type: "example",
+    category: "Cryptography",
+  },
+  {
+    title: "Generate secure random values",
+    href: "/examples/secure_random_values/",
+    type: "example",
+    category: "Cryptography",
+  },
+  {
+    title: "Compare secrets in constant time",
+    href: "/examples/timing_safe_comparison/",
+    type: "example",
+    category: "Cryptography",
+  },
+  {
+    title: "Hash large files with streams",
+    href: "/examples/hash_file_streams/",
+    type: "example",
+    category: "Cryptography",
+  },
+  {
+    title: "Hash and sign with node:crypto",
+    href: "/examples/node_crypto/",
+    type: "example",
+    category: "Cryptography",
+  },
 ];
 
 // Section order on the landing page and in the sidebar.
