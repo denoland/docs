@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "Web development"
 description: "Set up Fresh, Next.js, Astro, Vite, Lume, or Docusaurus with Deno, or build a server without a framework. Verified commands and Deno-specific notes."
 oldUrl:
@@ -77,7 +78,7 @@ understand how Deno handles JSX in general, see the
 HTML by default and hydrates components only where needed.
 
 ```sh
-deno run -A npm:create-astro@latest
+deno run -A npm:create-astro@latest my-astro-site
 cd my-astro-site
 deno install
 deno task dev
@@ -141,13 +142,15 @@ documentation websites.
 ```sh
 deno run -A npm:create-docusaurus@latest my-website classic
 cd my-website
+deno install
 deno task start
 ```
 
 Open `http://localhost:3000` to see the site.
 
-What's different under Deno: nothing. Docusaurus is a plain npm project that
-runs through Deno's Node.js compatibility unchanged.
+What's different under Deno: almost nothing. Docusaurus is a plain npm project
+that runs through Deno's Node.js compatibility unchanged; `deno install` puts
+the `node_modules` directory in place, the same as for Next.js and Astro.
 
 ## Without a framework
 
