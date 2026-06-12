@@ -187,7 +187,7 @@ router.get("/", (ctx) => {
 const app = new Application();
 app.use(router.routes());
 app.use(router.allowedMethods());
-app.listen({ port: 8000 });
+await app.listen({ port: 8000 });
 ```
 
 Servers like these are where Deno's
