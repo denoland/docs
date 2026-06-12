@@ -772,7 +772,7 @@ optional toolchain improvements, and a Node-to-Deno command cheatsheet.
 :::caution
 
 Not to be confused with
-[private repositories and modules](/runtime/packages/#private-repositories).
+[private repositories and modules](/runtime/packages/private_repositories/).
 
 :::
 
@@ -866,8 +866,8 @@ fields. The ones most likely to matter:
   installs. The same control is also available as the CLI flag
   `--minimum-dependency-age` and the `minimumDependencyAge` field in
   `deno.json`. See
-  [Minimum dependency age](/runtime/packages/#minimum-dependency-age) for the
-  full picture.
+  [Minimum dependency age](/runtime/packages/supply_chain/#minimum-dependency-age)
+  for the full picture.
 
   ```ini title=".npmrc"
   min-release-age=3

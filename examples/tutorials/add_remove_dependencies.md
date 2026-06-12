@@ -111,7 +111,10 @@ of a package somewhere deeper in the tree, use the `overrides` field in
 ```
 
 `deno install` resolves `ms` to 2.1.2 everywhere it appears, and records that in
-the lockfile.
+the lockfile. For overriding with a local copy of a package, or remapping your
+own imports rather than the dependency tree, see
+[Overriding dependencies](/runtime/packages/#overriding-dependencies) and
+[Re-map import paths](/examples/import_maps_tutorial/).
 
 ## Removing packages
 
@@ -125,5 +128,5 @@ Removed express
 
 The lockfile keeps records of removed packages until you run `deno install`
 again; see
-[the lockfile documentation](/runtime/packages/#integrity-checking-and-lock-files)
+[the lockfile documentation](/runtime/packages/#lockfile-and-reproducible-installs)
 for how `deno.lock` tracks all of this.

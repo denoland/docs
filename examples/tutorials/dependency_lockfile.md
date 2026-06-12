@@ -123,4 +123,4 @@ deno install
 Set `"lock": false` to disable the lockfile entirely (not recommended for
 applications). For the full picture, including supply chain practices built on
 the lockfile, see
-[Integrity checking and lock files](/runtime/packages/#integrity-checking-and-lock-files).
+[Integrity checking and lock files](/runtime/packages/#lockfile-and-reproducible-installs).

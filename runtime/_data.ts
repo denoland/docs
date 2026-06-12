@@ -34,6 +34,21 @@ export const sidebar = [
       {
         title: "Dependency management",
         href: "/runtime/packages/",
+        disclosure: true,
+        items: [
+          {
+            title: "Publishing",
+            href: "/runtime/packages/publishing/",
+          },
+          {
+            title: "Supply chain",
+            href: "/runtime/packages/supply_chain/",
+          },
+          {
+            title: "Private repositories",
+            href: "/runtime/packages/private_repositories/",
+          },
+        ],
       },
       {
         title: "Web development",
@@ -46,6 +61,33 @@ export const sidebar = [
       {
         title: "Testing",
         href: "/runtime/test/",
+        disclosure: true,
+        items: [
+          {
+            title: "Mocking",
+            href: "/runtime/test/mocking/",
+          },
+          {
+            title: "Snapshots",
+            href: "/runtime/test/snapshots/",
+          },
+          {
+            title: "Coverage",
+            href: "/runtime/test/coverage/",
+          },
+          {
+            title: "Documentation tests",
+            href: "/runtime/test/doc_tests/",
+          },
+          {
+            title: "Sanitizers",
+            href: "/runtime/test/sanitizers/",
+          },
+          {
+            title: "Migrating from Jest",
+            href: "/runtime/test/migrate_from_jest/",
+          },
+        ],
       },
       {
         title: "Linting and formatting",
