@@ -1513,7 +1513,7 @@ export const items = [
     title: "Parse and format dates",
     href: "/examples/date_format_parse/",
     type: "example",
-    category: "Standard library",
+    category: "Web standard APIs",
   },
   {
     title: "Structured logging",
