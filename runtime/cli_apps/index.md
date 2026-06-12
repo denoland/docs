@@ -69,10 +69,15 @@ Got 2 characters
 
 Reading stdin requires no permission flags.
 
+If you're porting a Node.js CLI or using npm libraries that read input,
+Node-style `process.stdin` (from `node:process` or the `process` global) works
+in Deno too, so that code runs unchanged.
+
 ## Prompt the user
 
 For simple interactive input, Deno ships the browser globals `prompt()`,
-`confirm()`, and `alert()`. They block until the user responds, and they need no
+`confirm()`, and `alert()`. They block until the user responds (execution pauses
+at that line and nothing else runs until input arrives), and they need no
 imports or permissions:
 
 ```ts title="setup.ts"
