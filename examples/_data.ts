@@ -1879,6 +1879,109 @@ export const items = [
     type: "example",
     category: "File system",
   },
+
+  {
+    title: "HTTP server: CORS",
+    href: "/examples/http_server_cors/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "HTTP server: Cookies",
+    href: "/examples/http_server_cookies/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "HTTP server: Sessions",
+    href: "/examples/http_server_sessions/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "HTTP server: Basic authentication",
+    href: "/examples/http_server_basic_auth/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "HTTP server: Rate limiting",
+    href: "/examples/http_server_rate_limit/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "HTTP server: Graceful shutdown",
+    href: "/examples/http_server_graceful_shutdown/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "HTTP server: Caching headers",
+    href: "/examples/http_server_static_caching/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "HTTP server: Request timeouts",
+    href: "/examples/http_server_request_timeouts/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "HTTP server: Health checks",
+    href: "/examples/http_server_health_checks/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "HTTP server: Paginating results",
+    href: "/examples/http_server_pagination/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "HTTP server: Verifying webhook signatures",
+    href: "/examples/http_server_webhooks/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Generate an RSS feed",
+    href: "/examples/http_server_rss/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Generate sitemap.xml and robots.txt",
+    href: "/examples/http_server_sitemap/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Download a file with progress",
+    href: "/examples/download_progress/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Route fetch through an HTTP proxy",
+    href: "/examples/fetch_http_proxy/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Find a free port",
+    href: "/examples/find_free_port/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Creating and verifying JWT",
+    href: "/examples/creating_and_verifying_jwt/",
+    type: "example",
+    category: "Network",
+  },
 ];
 
 // Section order on the landing page and in the sidebar.
