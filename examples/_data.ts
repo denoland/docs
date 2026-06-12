@@ -1615,7 +1615,7 @@ export const items = [
   },
   {
     title: "Write benchmarks with Deno.bench",
-    href: "/examples/deno_bench/",
+    href: "/examples/write_benchmarks/",
     type: "example",
     category: "CLI",
   },
