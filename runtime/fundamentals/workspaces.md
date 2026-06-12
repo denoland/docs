@@ -251,7 +251,7 @@ COPY project-b/ /app/project-b/
 This preserves the workspace resolution mechanism that Deno uses to find and
 import workspace dependencies.
 
-### Multiple package entries
+## Multiple package entries
 
 The `exports` property details the entry points and exposes which modules should
 be importable by users of your package.
@@ -281,7 +281,7 @@ following entries:
 - `@scope/my-package/foo`
 - `@scope/my-package/other`
 
-### Publishing workspace packages to registries
+## Publishing workspace packages to registries
 
 Workspaces make it easy to publish packages to registries like JSR or NPM. You
 can publish individual workspace members while keeping their development
@@ -357,7 +357,7 @@ When publishing packages that depend on other workspace members, Deno will
 automatically replace workspace references with proper registry references in
 the published code.
 
-### Migrating from `npm` workspaces
+## Migrating from `npm` workspaces
 
 Deno workspaces support using a Deno-first package from an existing npm package.
 In this example, we mix and match a Deno library called `@deno/hi`, with a
