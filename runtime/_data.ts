@@ -34,6 +34,7 @@ export const sidebar = [
       {
         title: "Dependency management",
         href: "/runtime/packages/",
+        disclosure: true,
         items: [
           {
             title: "Supply chain",
