@@ -1466,6 +1466,19 @@ export const items = [
     type: "example",
     category: "Deno Sandbox",
   },
+
+  {
+    title: "Re-map import paths",
+    href: "/examples/import_maps_tutorial/",
+    type: "tutorial",
+    category: "Modules and package management",
+  },
+  {
+    title: "Debugging with Chrome DevTools",
+    href: "/runtime/fundamentals/debugging/",
+    type: "tutorial",
+    category: "CLI",
+  },
 ];
 
 // Section order on the landing page and in the sidebar.
