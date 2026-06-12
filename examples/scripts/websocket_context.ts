@@ -22,6 +22,9 @@ interface Session {
 const sessions = new Map<WebSocket, Session>();
 
 Deno.serve((req) => {
+  if (req.headers.get("upgrade") !== "websocket") {
+    return new Response("This endpoint expects a WebSocket", { status: 426 });
+  }
   const { socket, response } = Deno.upgradeWebSocket(req);
 
   // Read the username from the connection URL, e.g. /?username=ada.

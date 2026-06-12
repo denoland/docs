@@ -29,8 +29,17 @@ console.log(new Date().toString());
 //   TZ=UTC deno run main.ts
 //   UTC
 
-// To format a single value in another zone without changing the process
-// zone, pass timeZone to Intl instead.
+// The Temporal API is the preferred way to work with zoned time. The
+// current moment in the process zone keeps its zone name attached.
+const now = Temporal.Now.zonedDateTimeISO();
+console.log(now.timeZoneId); // Europe/Warsaw (follows TZ like the above)
+
+// Getting the same moment in another zone is an argument, not a process
+// setting, so zone conversions stay explicit and local to the call.
+const tokyoTime = Temporal.Now.zonedDateTimeISO("Asia/Tokyo");
+console.log(tokyoTime.hour); // e.g. 22
+
+// The Intl API formats a value for another zone the same way.
 const tokyo = new Intl.DateTimeFormat("en-US", {
   timeStyle: "long",
   timeZone: "Asia/Tokyo",

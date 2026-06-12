@@ -56,6 +56,18 @@ Deno.serve((req) => {
 //   ws.onmessage = (event) => console.log(event.data);
 //   ws.onopen = () => ws.send("hello, everyone");
 
-// This state lives in one process. To broadcast across several servers or
-// deno serve --parallel workers, relay messages through something shared,
-// like Deno KV watch or a Redis channel.
+// This state lives in one worker. To broadcast across the workers of
+// deno serve --parallel, relay each message through a BroadcastChannel,
+// which reaches the other workers; on Deno Deploy it reaches the other
+// instances too.
+//
+//   const relay = new BroadcastChannel("chat");
+//   relay.onmessage = (event) => broadcast(event.data);
+//   socket.onmessage = (event) => {
+//     broadcast(event.data);
+//     relay.postMessage(event.data);
+//   };
+//
+// Separate processes and machines do not share a BroadcastChannel; for
+// those, relay through something external like Deno KV watch or a Redis
+// channel.
