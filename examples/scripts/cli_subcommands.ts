@@ -10,10 +10,10 @@
  * Tools like git and deno itself take a subcommand first and flags after
  * it. The pattern is easy to build by hand: treat the first element of
  * Deno.args as the command name, dispatch to a function, and let each
- * command parse its own flags with parseArgs from the standard library.
+ * command parse its own flags with parseArgs from node:util.
  */
 
-import { parseArgs } from "jsr:@std/cli@^1.0.30/parse-args";
+import { parseArgs } from "node:util";
 
 // A tiny task manager. State lives in memory here to keep the example
 // small; a real tool would persist it to a file.
@@ -28,32 +28,38 @@ const tasks: Task[] = [];
 // the command name and returns an exit code. This keeps commands easy to
 // unit test. Every command declares just its own flags.
 function runInit(args: string[]): number {
-  const flags = parseArgs(args, {
-    string: ["name"],
-    default: { name: "my-todos" },
+  const { values } = parseArgs({
+    args,
+    options: { name: { type: "string", default: "my-todos" } },
   });
-  console.log(`Initialized task list "${flags.name}".`);
+  console.log(`Initialized task list "${values.name}".`);
   return 0;
 }
 
 function runAdd(args: string[]): number {
-  const flags = parseArgs(args, {
-    string: ["title"],
-    boolean: ["urgent"],
+  const { values } = parseArgs({
+    args,
+    options: {
+      title: { type: "string" },
+      urgent: { type: "boolean", default: false },
+    },
   });
   // Validate required flags and signal failure with a nonzero exit code.
-  if (!flags.title) {
+  if (!values.title) {
     console.error("error: add requires --title");
     return 1;
   }
-  tasks.push({ title: flags.title, urgent: flags.urgent });
-  console.log(`Added "${flags.title}"${flags.urgent ? " (urgent)" : ""}.`);
+  tasks.push({ title: values.title, urgent: values.urgent! });
+  console.log(`Added "${values.title}"${values.urgent ? " (urgent)" : ""}.`);
   return 0;
 }
 
 function runList(args: string[]): number {
-  const flags = parseArgs(args, { boolean: ["urgent-only"] });
-  const visible = flags["urgent-only"] ? tasks.filter((t) => t.urgent) : tasks;
+  const { values } = parseArgs({
+    args,
+    options: { "urgent-only": { type: "boolean", default: false } },
+  });
+  const visible = values["urgent-only"] ? tasks.filter((t) => t.urgent) : tasks;
   if (visible.length === 0) {
     console.log("No tasks yet.");
     return 0;
@@ -113,6 +119,10 @@ if (Deno.args.length === 0) {
 } else {
   Deno.exit(main(Deno.args));
 }
+
+// parseArgs from node:util is the web-and-Node-portable choice. The
+// standard library variant, parseArgs from jsr:@std/cli, adds aliases,
+// collectable flags, and negatable booleans when a tool outgrows this one.
 
 // Real runs of the script, with their output:
 //

@@ -42,6 +42,17 @@ for await (
 console.log(found.sort());
 // [ "src/main.ts", "src/util/helpers.ts", "src/util/helpers_test.ts" ]
 
+// The Node.js API offers globbing too: glob from node:fs/promises is an
+// async iterator of matching paths, with cwd and exclude options.
+import { glob } from "node:fs/promises";
+
+const nodeFound: string[] = [];
+for await (const path of glob("**/*.ts", { cwd: dir, exclude: ["build"] })) {
+  nodeFound.push(path);
+}
+console.log(nodeFound.sort());
+// [ "src/main.ts", "src/util/helpers.ts", "src/util/helpers_test.ts" ]
+
 // Sometimes the paths are already in memory, for instance from a config
 // file or an API response. globToRegExp turns a glob into a RegExp so you
 // can match strings without touching the disk.

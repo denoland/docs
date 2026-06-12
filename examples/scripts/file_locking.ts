@@ -56,6 +56,15 @@ await file.unlock();
 
 // The moment we release, the child's lock call resolves and it finishes.
 await child.status;
+
+// To attempt a lock without blocking, use tryLock. It returns true when
+// the lock was acquired and false when someone else holds it, which suits
+// a skip-if-busy pattern better than waiting.
+const again = await file.tryLock(true);
+console.log("parent: tryLock after child released:", again); // true
+if (again) {
+  await file.unlock();
+}
 file.close();
 
 // The whole run prints, with the wait time varying slightly:

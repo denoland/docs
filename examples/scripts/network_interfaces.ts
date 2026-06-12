@@ -37,3 +37,10 @@ console.log(lanAddress()); // e.g. 192.168.1.239
 // With that address a local development server can announce a URL that
 // other devices on the same network can open.
 console.log(`http://${lanAddress()}:8000/`); // e.g. http://192.168.1.239:8000/
+
+// Code written for Node.js gets the same data from the os module, shaped
+// as a record keyed by interface name instead of a flat list.
+import os from "node:os";
+const nodeInterfaces = os.networkInterfaces();
+console.log(Object.keys(nodeInterfaces).length); // e.g. 12
+console.log(nodeInterfaces["lo0"]?.[0]?.address); // e.g. 127.0.0.1

@@ -33,23 +33,25 @@ await writer.write(encoder.encode("cherry\n"));
 // step would hang the program.
 await writer.close();
 
-// output() waits for the process to exit and collects its stdout.
-const { stdout } = await sortProcess.output();
-const sorted = new TextDecoder().decode(stdout);
+// The child's stdout stream has the same convenience methods as a fetch
+// Response, so collecting it as a string is one call.
+const sorted = await sortProcess.stdout.text();
 console.log(sorted.trim().split("\n")); // [ "apple", "banana", "cherry" ]
+await sortProcess.status;
 
 // When the input already exists as a stream or an iterable, skip the manual
-// writer and pipe it into stdin in one shot. ReadableStream.from turns any
+// writer and pipe it into stdin in one shot. Deno.spawn is the shorthand
+// for spawning: command, arguments, options. ReadableStream.from turns any
 // iterable into a stream, and pipeTo closes the child's stdin when the
 // stream ends.
-const catProcess = new Deno.Command("cat", {
+const catProcess = Deno.spawn("cat", [], {
   stdin: "piped",
   stdout: "piped",
-}).spawn();
+});
 
 await ReadableStream.from(["hello from a stream\n"])
   .pipeThrough(new TextEncoderStream())
   .pipeTo(catProcess.stdin);
 
-const catResult = await catProcess.output();
-console.log(new TextDecoder().decode(catResult.stdout).trim()); // hello from a stream
+console.log((await catProcess.stdout.text()).trim()); // hello from a stream
+await catProcess.status;

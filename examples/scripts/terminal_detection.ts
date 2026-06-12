@@ -20,6 +20,11 @@
 console.log(`stdin is a terminal: ${Deno.stdin.isTerminal()}`); // stdin is a terminal: true
 console.log(`stdout is a terminal: ${Deno.stdout.isTerminal()}`); // stdout is a terminal: false (when piped; true in a terminal)
 
+// Code written for Node.js checks the isTTY property of the process
+// streams, which works in Deno and gives the same answer.
+import process from "node:process";
+console.log(`process.stdout.isTTY: ${process.stdout.isTTY}`); // undefined when piped; true in a terminal
+
 // Deno.consoleSize returns the current size of the terminal window. It
 // throws when no standard stream is attached to a terminal, for example in
 // CI, so wrap it in a try/catch.
