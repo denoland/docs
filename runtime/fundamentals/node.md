@@ -89,18 +89,14 @@ The `node:module` built-in includes the
 [`registerHooks()`](/runtime/reference/loader_hooks/) API, which you can use to
 customize module resolution and loading from inside your program.
 
-**If it doesn't work:** a bare import like `import * as os from "os"` fails,
-because the `node:` prefix is required. Deno tells you how to fix it:
-
-```sh
-$ deno run main.mjs
-error: Import "os" not a dependency
-  hint: If you want to use a built-in Node module, add a "node:" prefix (ex. "node:os").
-    at file:///main.mjs:1:21
-```
-
-The same hints and additional quick-fixes are provided by the Deno LSP in your
-editor.
+**Bare imports work too.** Since Deno 2.9, a specifier that matches a Node
+built-in resolves to it even without the prefix, so `import * as os from "os"`
+runs with no prefix and no flag. Before 2.9 the bare form errored unless you
+passed `--unstable-bare-node-builtins`. Prefer the explicit `node:` form anyway:
+it is unambiguous, it is what the Deno LSP's quick-fixes insert, and it works in
+Node.js too. A `deno.json` `imports` entry or `package.json` dependency of the
+same name still wins over the built-in, and a `node_modules` package no longer
+shadows it, matching Node.js.
 
 <a href="/api/node/" class="docs-cta runtime-cta">Explore built-in Node APIs</a>
 
