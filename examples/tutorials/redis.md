@@ -9,7 +9,9 @@ oldUrl:
 ---
 
 [Redis](https://redis.io/) is an in-memory data store you can use for caching,
-as a message broker, or for streaming data.
+as a message broker, or for streaming data. If you just need to connect and send
+commands, see the [Redis quick start](/examples/redis/); this tutorial builds
+something more complete on top of it.
 
 [View source here.](https://github.com/denoland/examples/tree/main/with-redis)
 

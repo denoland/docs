@@ -6,17 +6,17 @@ oldUrl:
   - /runtime/fundamentals/linting_and_formatting/
 ---
 
-In an ideal world, your code is always clean, consistent, and free of pesky
-errors. That's the promise of Deno's built-in linting and formatting tools. By
-integrating these features directly into the runtime, Deno eliminates the need
-for external dependencies and complex configurations in your projects. These
-inbuilt tools are fast and performant, not only saving time but also ensuring
-that every line of code adheres to best practices.
+Deno ships a linter and a formatter in the `deno` binary. No packages to
+install, no config files required:
 
-With `deno fmt` and `deno lint`, you can focus on writing great code, knowing
-that Deno has your back. It's like having a vigilant assistant who keeps your
-codebase in top shape, allowing you to concentrate on what truly matters:
-building amazing applications.
+```sh
+deno lint    # catch bugs and anti-patterns
+deno fmt     # format code, markdown, and JSON
+```
+
+Both are fast, run the same way locally and in CI, and are configured (when you
+need to configure anything at all) in the same `deno.json` as the rest of your
+project.
 
 ## Linting
 
@@ -44,6 +44,37 @@ deno lint src/
 ```
 
 This command will lint all files in the `src/` directory.
+
+A finding shows the rule name, the offending code, and a hint:
+
+```console
+$ deno lint main.ts
+error[require-await]: Async function 'fetchData' has no 'await' expression
+ --> /project/main.ts:1:1
+  |
+1 | async function fetchData() {
+  | ^^^^^
+  = hint: Remove 'async' keyword from the function or use 'await' expression inside.
+
+  docs: https://docs.deno.com/lint/rules/require-await
+
+Found 1 problem
+Checked 1 file
+```
+
+Some rules can fix the problem for you: run `deno lint --fix` to apply those
+fixes automatically. To silence a rule for one line, add an ignore directive
+naming the rule above it:
+
+```ts
+// deno-lint-ignore require-await
+async function fetchData() {
+  return "data";
+}
+```
+
+See the [`deno lint` reference](/runtime/reference/cli/lint/) for all flags and
+directive forms.
 
 The linter can be configured in a
 [`deno.json`](/runtime/reference/deno_json/#linting) file. You can specify
