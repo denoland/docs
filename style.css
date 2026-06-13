@@ -817,7 +817,7 @@
       @apply m-0;
     }
     pre.snippet-code[data-example-position="only"] {
-      @apply md:border-t md:border-b md:pt-4 h-full md:rounded-sm md:rounded-b;
+      @apply md:border-t md:border-b md:py-4 h-full md:rounded-sm;
     }
 
     pre.snippet-code[data-example-position="first"] {
@@ -826,12 +826,11 @@
     }
 
     pre.snippet-code[data-example-position="middle"] {
-      @apply md:border-t-0 md:border-b-0 md:pt-0 md:pb-16 h-full
-        md:rounded-none;
+      @apply md:border-t-0 md:border-b-0 md:py-0 h-full md:rounded-none;
     }
 
     pre.snippet-code[data-example-position="last"] {
-      @apply md:border-t-0 md:border-b md:pb-8 h-full md:rounded-t-none
+      @apply md:border-t-0 md:border-b md:pb-4 h-full md:rounded-t-none
         md:rounded-b;
     }
 
