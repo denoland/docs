@@ -123,7 +123,7 @@ Deno provides several official tags:
 - `denoland/deno:alpine` - Alpine-based smaller image
 - `denoland/deno:distroless` - Google's distroless-based image
 - `denoland/deno:ubuntu` - Ubuntu-based image
-- `denoland/deno:1.x` - Specific version tags
+- `denoland/deno:2.x` - Specific version tags
 
 ### Environment Variables
 
@@ -148,7 +148,7 @@ WORKDIR /app
 COPY . .
 
 # Run tests
-CMD ["deno", "test", "--allow-none"]
+CMD ["deno", "test", "--permit-no-files"]
 ```
 
 ### Using Docker Compose

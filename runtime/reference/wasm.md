@@ -82,8 +82,8 @@ console.log(add(1, ""));
 
 Like JavaScript, Wasm modules can also import other modules.
 
-For example, we can create a Wasm module that imports the `"./values.js"`
-specifier and calls the `getValue` export:
+For example, we can create a Wasm module that imports the `"./time.ts"`
+specifier and calls its `getTimeInSeconds` export:
 
 ```wat title="toolkit.wat"
 (module
@@ -113,9 +113,6 @@ Now running:
 > wat2wasm toolkit.wat
 > deno run main.ts
 1732147633
-V:\scratch
-> deno run main.ts
-1732147637
 ```
 
 #### Overriding import specifiers

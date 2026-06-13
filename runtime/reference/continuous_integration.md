@@ -118,7 +118,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        deno-version: [v1.x]
+        deno-version: [v2.x]
         canary: [false]
         include:
           - deno-version: canary
