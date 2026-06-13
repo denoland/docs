@@ -96,9 +96,9 @@ If you are moving a whole project over, the
 ## Type checking
 
 Deno type-checks in
-[strict mode](https://www.typescriptlang.org/tsconfig/#strict) by default, and
-several other checks that are opt-in under `tsc` (like `noImplicitOverride` and
-`useUnknownInCatchVariables`) are also on by default. The
+[strict mode](https://www.typescriptlang.org/tsconfig/#strict) by default. It
+also turns on `noImplicitOverride`, which `tsc` leaves off even under `strict`.
+The
 [compiler options table](/runtime/reference/ts_config_migration/#ts-compiler-options)
 lists every default.
 
