@@ -21,8 +21,7 @@ Prisma.
 
 Let's get started.
 
-[View source](https://github.com/denoland/examples/tree/main/with-prisma) or
-[check out the video guide](https://youtu.be/P8VzA_XSF8w).
+[View source](https://github.com/denoland/examples/tree/main/with-prisma).
 
 ## Setup the application
 
