@@ -2012,6 +2012,84 @@ export const items = [
     type: "example",
     category: "AI",
   },
+  {
+    title: "Call C functions with FFI",
+    href: "/examples/ffi/",
+    type: "example",
+    category: "System",
+  },
+  {
+    title: "Bundle code with Deno.bundle",
+    href: "/examples/deno_bundle/",
+    type: "example",
+    category: "CLI",
+  },
+  {
+    title: "Rich output in Jupyter notebooks",
+    href: "/examples/jupyter_display/",
+    type: "example",
+    category: "CLI",
+  },
+  {
+    title: "Upgrade a TCP connection to TLS (STARTTLS)",
+    href: "/examples/starttls/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Communicate over QUIC",
+    href: "/examples/quic/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Connect two peers with WebTransport",
+    href: "/examples/web_transport/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Two-way streaming with WebSocketStream",
+    href: "/examples/websocket_stream/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Atomic transactions in Deno KV",
+    href: "/examples/kv_transactions/",
+    type: "example",
+    category: "Deno KV and scheduling",
+  },
+  {
+    title: "Run a compute shader with WebGPU",
+    href: "/examples/webgpu_compute/",
+    type: "example",
+    category: "Web standard APIs",
+  },
+  {
+    title: "Extract front matter from markdown",
+    href: "/examples/front_matter/",
+    type: "example",
+    category: "Encoding",
+  },
+  {
+    title: "Generate seeded random numbers",
+    href: "/examples/seeded_random/",
+    type: "example",
+    category: "Standard library",
+  },
+  {
+    title: "Parse and generate XML",
+    href: "/examples/parse_xml/",
+    type: "example",
+    category: "Encoding",
+  },
+  {
+    title: "Distribute work across a worker pool",
+    href: "/examples/worker_pool/",
+    type: "example",
+    category: "Web standard APIs",
+  },
 ];
 
 // Section order on the landing page and in the sidebar.
