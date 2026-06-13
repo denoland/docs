@@ -185,7 +185,7 @@ Existing: writing tests, basics, mocking, spying, stubbing, snapshot testing,
 coverage (+ threshold), BDD, web app testing, documentation tests. Bun's win
 here is granularity — each discrete task is a findable page.
 
-- [ ] Migrate from Jest to `deno test`
+- [x] Migrate from Jest to `deno test` (landed as runtime/test/migrate_from_jest.md)
       ([Bun](https://bun.com/docs/guides/test/migrate-from-jest))
 - [x] Run tests in watch mode
       ([Bun](https://bun.com/docs/guides/test/watch-mode))
