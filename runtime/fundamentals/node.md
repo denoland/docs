@@ -53,24 +53,24 @@ and browse the [list of supported Node.js APIs](/runtime/reference/node_apis/).
 
 ## Using Node's built-in modules
 
-Suppose the first import in `report.mjs` had been written without the prefix, as
-most existing Node code is:
+`report.mjs` opens by reaching for a Node built-in. Write it with the explicit
+`node:` specifier:
 
 ```js title="report.mjs"
-import os from "os";
+import os from "node:os";
 ```
 
-```sh
-$ deno run report.mjs
-error: Import "os" not a dependency
-  hint: If you want to use a built-in Node module, add a "node:" prefix (ex. "node:os").
-    at file:///tmp/report/report.mjs:1:16
-```
+Since Deno 2.9, the bare form that most existing Node code uses resolves too: a
+specifier that matches a Node built-in name (`import os from "os"`) falls back
+to the built-in, with no prefix and no flag. Before 2.9 the bare form errored
+unless you passed `--unstable-bare-node-builtins`.
 
-Deno requires the `node:` specifier for Node built-ins. The same hints, with
-quick-fixes, are provided by the Deno LSP in your editor. Once the prefix is in
-place, code using Node built-ins behaves as it does in Node.js, and the `node:`
-form also works in Node itself, so updated files stay portable.
+Prefer the explicit `node:` specifier anyway: it is unambiguous, it is what the
+Deno LSP's quick-fixes insert, and it works in Node itself, so updated files
+stay portable. A `deno.json` `imports` entry or `package.json` dependency of the
+same name still takes precedence over the built-in, and a package in
+`node_modules` no longer shadows it, matching Node.js. Either way, code using
+Node built-ins behaves as it does in Node.js.
 
 The `node:module` built-in includes the
 [`registerHooks()`](/runtime/reference/loader_hooks/) API for customizing module
