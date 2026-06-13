@@ -1,9 +1,9 @@
-export function VideoIcon() {
+export function VideoIcon({ size = "1rem" }: { size?: string } = {}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 416 368"
-      width="1rem"
+      width={size}
     >
       <rect
         x="25"

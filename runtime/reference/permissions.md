@@ -21,7 +21,8 @@ below.
 
 To enable these operations, the user must explicitly grant permission to the
 Deno runtime. This is done by passing the `--allow-read`, `--allow-write`,
-`--allow-net`, `--allow-env`, and `--allow-run` flags to the `deno` command.
+`--allow-net`, `--allow-env`, `--allow-run`, `--allow-sys`, `--allow-ffi`, and
+`--allow-import` flags to the `deno` command.
 
 During execution of a script, a user can also explicitly grant permission to
 specific files, directories, network addresses, environment variables, and
@@ -30,10 +31,10 @@ stdout/stderr are not a TTY, or when the `--no-prompt` flag is passed to the
 `deno` command.
 
 Users can also explicitly disallow access to specific resources by using the
-`--deny-read`, `--deny-write`, `--deny-net`, `--deny-env`, and `--deny-run`
-flags. These flags take precedence over the allow flags. For example, if you
-allow network access but deny access to a specific domain, the deny flag will
-take precedence.
+`--deny-read`, `--deny-write`, `--deny-net`, `--deny-env`, `--deny-run`,
+`--deny-sys`, `--deny-ffi`, and `--deny-import` flags. These flags take
+precedence over the allow flags. For example, if you allow network access but
+deny access to a specific domain, the deny flag will take precedence.
 
 Deno also provides a `--allow-all` flag that grants all permissions to the
 script. This **disables** the security sandbox entirely, and should be used with
@@ -268,8 +269,10 @@ dynamic imports, without requiring explicit network access:
 - `https://deno.land/`
 - `https://jsr.io/`
 - `https://esm.sh/`
-- `https://raw.githubusercontent.com`
-- `https://gist.githubusercontent.com`
+- `https://raw.esm.sh/`
+- `https://cdn.jsdelivr.net/`
+- `https://raw.githubusercontent.com/`
+- `https://gist.githubusercontent.com/`
 
 These locations are trusted "public good" registries that are not expected to
 enable data exfiltration through URL paths. You can add more trusted registries
@@ -339,7 +342,7 @@ deno run --ignore-env=PORT,HOME script.ts
 > so Deno also matches them case insensitively (on Windows only).
 
 Deno reads certain environment variables on startup, such as `DENO_DIR` and
-`NO_COLOR` ([see the full list](/runtime/reference/cli/env_variables/)).
+`NO_COLOR` ([see the full list](/runtime/reference/env_variables/)).
 
 The value of the `NO_COLOR` environment variable is visible to all code running
 in the Deno runtime, regardless of whether the code has been granted permission
@@ -497,8 +500,9 @@ $ deno run --allow-import=example.com main.ts
 By default Deno allows importing sources from following hosts:
 
 - `deno.land`
-- `esm.sh`
 - `jsr.io`
+- `esm.sh`
+- `raw.esm.sh`
 - `cdn.jsdelivr.net`
 - `raw.githubusercontent.com`
 - `gist.githubusercontent.com`
@@ -515,3 +519,11 @@ $ deno run --allow-import main.ts
 
 Note that specifying an allow list for `--allow-import` will override the list
 of default hosts.
+
+Use `--deny-import` to block importing from specific hosts, even when they would
+otherwise be allowed. Deny flags take precedence over allow flags:
+
+```sh
+# allow the default import hosts, except esm.sh
+$ deno run --deny-import=esm.sh main.ts
+```

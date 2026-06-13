@@ -68,7 +68,7 @@
   "/examples/udp-connector": "/examples/udp_connector",
   "/examples/udp-listener": "/examples/udp_listener",
   "/examples/unix-cat": "/examples/unix_cat",
-  "/examples/unzip-gzipped-file": "/examples/unzip_gzipped_file",
+  "/examples/unzip-gzipped-file": "/examples/compress_decompress/",
   "/examples/url-parsing": "/examples/url_parsing",
   "/examples/walking-directories": "/examples/walking_directories",
   "/examples/watching-files": "/examples/watching_files",
@@ -151,5 +151,6 @@
   "/deploy/classic/faunadb/": "/examples/#connecting-to-databases",
   "/hello_world.ts": "/examples/scripts/hello_world.ts",
   "/services/": "/deploy/",
-  "/deploy/cron/": "/deploy/reference/cron/"
+  "/deploy/cron/": "/deploy/reference/cron/",
+  "/examples/unzip_gzipped_file/": "/examples/compress_decompress/"
 }

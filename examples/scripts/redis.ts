@@ -5,6 +5,7 @@
  * @run -N -E <url>
  * @resource {https://jsr.io/@iuioiua/redis} redis on jsr.io
  * @resource {https://redis.io/docs/getting-started/} Getting started with Redis
+ * @resource {https://docs.deno.com/examples/redis_tutorial/} Tutorial: Build a caching layer with Redis
  * @group Databases
  *
  * Using the jsr:@iuioiua/redis module, you can connect to a Redis database running anywhere.

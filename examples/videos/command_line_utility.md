@@ -1,5 +1,6 @@
 ---
 title: "Build a Command Line Utility"
+description: "Learn to build a command line tool with Deno's standard library, parse flags, handle errors, and compile cross-platform executables."
 url: /examples/command_line_utility/
 videoUrl: https://www.youtube.com/watch?v=TUxj2TS5pNo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=14
 layout: video.tsx

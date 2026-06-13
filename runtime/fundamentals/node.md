@@ -764,17 +764,15 @@ Like all native FFI, pass `--allow-ffi` to grant explicit permission. Review
 ## Migrating from Node to Deno
 
 Running a Node.js project with Deno usually requires little to no change. See
-the
-[Migrating from Node.js to Deno guide](/runtime/fundamentals/migrate_from_node/)
-for the details, optional toolchain improvements, and a Node-to-Deno command
-cheatsheet.
+the [Migrating from Node.js to Deno guide](/runtime/migrate/) for the details,
+optional toolchain improvements, and a Node-to-Deno command cheatsheet.
 
 ## Private registries
 
 :::caution
 
 Not to be confused with
-[private repositories and modules](/runtime/fundamentals/dependency_management/#private-repositories).
+[private repositories and modules](/runtime/packages/private_repositories/).
 
 :::
 
@@ -799,11 +797,13 @@ to your private registry. The `.npmrc` file must be in the project root or
 
 ```sh
 @mycompany:registry=http://mycompany.com:8111/
-//mycompany.com:8111/:_auth=secretToken
+//mycompany.com:8111/:_authToken=secretToken
 ```
 
 Replace `http://mycompany.com:8111/` with the actual URL of your private
-registry and `secretToken` with your authentication token.
+registry and `secretToken` with your authentication token. `_authToken` is the
+standard bearer-token form; registries that use legacy `_auth` credentials are
+also supported (see the `.npmrc` features list below).
 
 Then update Your `deno.json` or `package.json` to specify the import path for
 your private package. For example:
@@ -866,7 +866,7 @@ fields. The ones most likely to matter:
   installs. The same control is also available as the CLI flag
   `--minimum-dependency-age` and the `minimumDependencyAge` field in
   `deno.json`. See
-  [Minimum dependency age](/runtime/fundamentals/dependency_management/#minimum-dependency-age)
+  [Minimum dependency age](/runtime/packages/supply_chain/#minimum-dependency-age)
   for the full picture.
 
   ```ini title=".npmrc"

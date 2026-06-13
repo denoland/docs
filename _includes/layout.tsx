@@ -8,6 +8,42 @@ export default function Layout(data: Lume.Data) {
   const section = data.url.split("/").filter(Boolean)[0];
   const description = data.description ||
     "In-depth documentation, guides, and reference materials for building secure, high-performance JavaScript and TypeScript applications with Deno";
+  const is404 = data.url.startsWith("/404");
+  const canonicalUrl = `https://docs.deno.com${data.url}`;
+  const pageTitle = deleteBackticks(data.title);
+
+  // BreadcrumbList structured data (schema.org JSON-LD): Deno Docs → section
+  // → page. Search engines read this to show a breadcrumb trail in results
+  // instead of the raw URL, and to understand the site hierarchy; see
+  // https://developers.google.com/search/docs/appearance/structured-data/breadcrumb
+  // We emit only the data (no visible breadcrumb UI yet). The section name
+  // comes from the section's own _data.ts (sectionTitle) when defined.
+  const sectionRoot = section ? `/${section}/` : null;
+  const sectionTitle = sectionRoot
+    ? (data.search.data(sectionRoot)?.sectionTitle ??
+      section.charAt(0).toUpperCase() + section.slice(1))
+    : null;
+  const breadcrumbJsonLd = pageTitle && !is404
+    ? {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { name: "Deno Docs", item: "https://docs.deno.com/" },
+        ...(sectionTitle && data.url !== sectionRoot
+          ? [{
+            name: sectionTitle as string,
+            item: `https://docs.deno.com${sectionRoot}`,
+          }]
+          : []),
+        { name: pageTitle, item: canonicalUrl },
+      ].map((crumb, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: crumb.name,
+        item: crumb.item,
+      })),
+    }
+    : null;
   const isServicesPage = data.url.startsWith("/deploy") ||
     data.url.startsWith("/subhosting") ||
     data.url.startsWith("/services") ||
@@ -20,9 +56,18 @@ export default function Layout(data: Lume.Data) {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="light dark" />
-        <title>{deleteBackticks(data.title)}</title>
+        <title>{pageTitle ? `${pageTitle} | Deno Docs` : "Deno Docs"}</title>
         {data?.description &&
           <meta name="description" content={data.description} />}
+        {!is404 && <link rel="canonical" href={canonicalUrl} />}
+        {breadcrumbJsonLd && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(breadcrumbJsonLd),
+            }}
+          />
+        )}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <script

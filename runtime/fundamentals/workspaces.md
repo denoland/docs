@@ -251,7 +251,7 @@ COPY project-b/ /app/project-b/
 This preserves the workspace resolution mechanism that Deno uses to find and
 import workspace dependencies.
 
-### Multiple package entries
+## Multiple package entries
 
 The `exports` property details the entry points and exposes which modules should
 be importable by users of your package.
@@ -281,7 +281,7 @@ following entries:
 - `@scope/my-package/foo`
 - `@scope/my-package/other`
 
-### Publishing workspace packages to registries
+## Publishing workspace packages to registries
 
 Workspaces make it easy to publish packages to registries like JSR or NPM. You
 can publish individual workspace members while keeping their development
@@ -357,7 +357,7 @@ When publishing packages that depend on other workspace members, Deno will
 automatically replace workspace references with proper registry references in
 the published code.
 
-### Migrating from `npm` workspaces
+## Migrating from `npm` workspaces
 
 Deno workspaces support using a Deno-first package from an existing npm package.
 In this example, we mix and match a Deno library called `@deno/hi`, with a
@@ -634,6 +634,11 @@ deno task --cwd=add build
 
 ## Sharing and managing dependencies
 
+Workspace members can share dependencies, depend on each other, and resolve
+version conflicts member by member. To pin one version of a dependency for the
+whole workspace, see [`catalog:`](#centralized-dependency-versions-with-catalog)
+below.
+
 Workspaces provide powerful ways to share and manage dependencies across
 projects:
 
@@ -692,6 +697,27 @@ This approach allows you to:
 2. Share code between packages without publishing to a registry
 3. Test and develop interdependent modules together
 4. Gradually migrate monolithic codebases to modular architecture
+
+### Using workspace protocol in package.json
+
+Deno supports workspace protocol specifiers in `package.json` files. These are
+useful when you have npm packages that depend on other packages within the
+workspace:
+
+```json title="package.json"
+{
+  "name": "my-npm-package",
+  "dependencies": {
+    "another-workspace-package": "workspace:*"
+  }
+}
+```
+
+The following workspace protocol specifiers are supported:
+
+- `workspace:*` - Use the latest version available in the workspace
+- `workspace:~` - Use the workspace version with only patch-level changes
+- `workspace:^` - Use the workspace version with semver-compatible changes
 
 ## Centralized dependency versions with `catalog:`
 
@@ -801,27 +827,6 @@ If both `deno.json` and `package.json` define catalogs at the workspace root,
   member emits a diagnostic.
 - Members must reference a catalog name that exists. A missing entry produces a
   resolution error during install or run.
-
-## Using workspace protocol in package.json
-
-Deno supports workspace protocol specifiers in `package.json` files. These are
-useful when you have npm packages that depend on other packages within the
-workspace:
-
-```json title="package.json"
-{
-  "name": "my-npm-package",
-  "dependencies": {
-    "another-workspace-package": "workspace:*"
-  }
-}
-```
-
-The following workspace protocol specifiers are supported:
-
-- `workspace:*` - Use the latest version available in the workspace
-- `workspace:~` - Use the workspace version with only patch-level changes
-- `workspace:^` - Use the workspace version with semver-compatible changes
 
 ## npm and pnpm workspace compatibility
 

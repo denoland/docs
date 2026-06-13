@@ -15,10 +15,6 @@ export const sidebar = [
         href: "/runtime/getting_started/installation/",
       },
       {
-        title: "First project",
-        href: "/runtime/getting_started/first_project/",
-      },
-      {
         title: "Setup your environment",
         href: "/runtime/getting_started/setup_your_environment/",
       },
@@ -32,8 +28,27 @@ export const sidebar = [
     title: "Guides",
     items: [
       {
+        title: "Running code",
+        href: "/runtime/run/",
+      },
+      {
         title: "Dependency management",
-        href: "/runtime/fundamentals/dependency_management/",
+        href: "/runtime/packages/",
+        disclosure: true,
+        items: [
+          {
+            title: "Publishing",
+            href: "/runtime/packages/publishing/",
+          },
+          {
+            title: "Supply chain",
+            href: "/runtime/packages/supply_chain/",
+          },
+          {
+            title: "Private repositories",
+            href: "/runtime/packages/private_repositories/",
+          },
+        ],
       },
       {
         title: "Web development",
@@ -45,19 +60,57 @@ export const sidebar = [
       },
       {
         title: "Testing",
-        href: "/runtime/fundamentals/testing/",
+        href: "/runtime/test/",
+        disclosure: true,
+        items: [
+          {
+            title: "Mocking",
+            href: "/runtime/test/mocking/",
+          },
+          {
+            title: "Snapshots",
+            href: "/runtime/test/snapshots/",
+          },
+          {
+            title: "Coverage",
+            href: "/runtime/test/coverage/",
+          },
+          {
+            title: "Documentation tests",
+            href: "/runtime/test/doc_tests/",
+          },
+          {
+            title: "Sanitizers",
+            href: "/runtime/test/sanitizers/",
+          },
+          {
+            title: "Migrating from Jest",
+            href: "/runtime/test/migrate_from_jest/",
+          },
+        ],
       },
       {
         title: "Linting and formatting",
-        href: "/runtime/fundamentals/linting_and_formatting/",
+        href: "/runtime/lint_and_format/",
       },
       {
         title: "Debugging",
         href: "/runtime/fundamentals/debugging/",
+        disclosure: true,
+        items: [
+          {
+            title: "CPU profiling",
+            href: "/runtime/fundamentals/cpu_profiling/",
+          },
+        ],
       },
       {
         title: "Migrating from Node",
-        href: "/runtime/fundamentals/migrate_from_node/",
+        href: "/runtime/migrate/",
+      },
+      {
+        title: "Building CLI apps",
+        href: "/runtime/cli_apps/",
       },
     ],
   },
@@ -146,6 +199,10 @@ export const sidebar = [
   {
     title: "Reference",
     items: [
+      {
+        title: "Overview",
+        href: "/runtime/reference/",
+      },
       {
         title: "CLI",
         href: "/runtime/reference/cli/",
