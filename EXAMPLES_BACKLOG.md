@@ -430,19 +430,25 @@ directory copy (copy file example), debugging with DevTools (pointer card in
 
 ## Content consolidation candidates
 
-- [ ] Databases: Redis, Prisma, and Mongoose each have a tutorial, a quick
+- [x] Databases: Redis, Prisma, and Mongoose each have a tutorial, a quick
       example, and/or a video covering overlapping material (now labeled "Redis"
-      / "Redis quick start" / "(video)" after the relabel in #3218). Consolidate
-      each product to one canonical page with the video embedded and redirect
-      the retired URLs, the same way unzip_gzipped_file was folded into
-      compress_decompress (#3210).
+      / "Redis quick start" / "(video)" after the relabel in #3218). Done in
+      #3249: the Mongoose and Prisma video pages were retired (URLs redirect to
+      the written tutorials, videos stay on the YouTube channel) since the
+      recordings predate and risk contradicting the tutorials. Redis keeps both
+      pages (quick start vs caching tutorial cover different ground) and now
+      cross-links them.
 
 ## Style follow-ups from the audit (apply when writing the above)
 
-- [ ] Show expected terminal output after each command (Bun does this
-      everywhere; doubles as reader self-verification)
-- [ ] Strengthen the Postgres/database quick examples: env vars and error
-      handling instead of hardcoded credentials
+- [x] Show expected terminal output after each command (doubles as reader
+      self-verification). Applied to the project-init tutorial in #3249 (real
+      captured output of deno init, deno task dev, deno test); apply to more
+      tutorials as they are touched.
+- [x] Strengthen the Postgres/database quick examples: env vars and error
+      handling instead of hardcoded credentials. Done in #3249 (PG* env vars
+      with localhost fallbacks, .env / --env-file note, error code reporting,
+      pool closed in finally).
 - [ ] Reconsider the example page layout: the two-column rendering (italic,
       right-aligned prose in a narrow left strip, code on the right) reads like
       a gimmick and makes it harder to follow what's going on than a plain
