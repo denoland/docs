@@ -2077,12 +2077,6 @@ export const items = [
     category: "Web standard APIs",
   },
   {
-    title: "Build a static site with Lume",
-    href: "/examples/lume_tutorial/",
-    type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
-  {
     title: "Use Vite with Deno",
     href: "/examples/vite_tutorial/",
     type: "tutorial",
