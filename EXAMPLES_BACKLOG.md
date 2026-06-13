@@ -397,19 +397,19 @@ Items marked (verify) need a support check before writing. Quick win first:
 
 - [ ] Build a static site with Lume
 - [ ] Use Vite with Deno
-- [ ] Render markdown to HTML with syntax highlighting
-- [ ] Server-side HTML templating (JSX precompile or Eta)
+- [x] Render markdown to HTML with syntax highlighting (@deno/gfm) (#3251)
+- [x] Server-side HTML templating with Eta (#3251)
 - [ ] Run Deno as a systemd service on a VPS
 - [ ] Deploy Deno to Fly.io
 - [ ] Vector similarity search with Postgres and pgvector
 - [ ] Connection pooling for Postgres
-- [ ] Build an MCP server with Deno
+- [x] Build an MCP server with Deno (#3251)
 - [x] Call native libraries with Deno FFI (quick example: dlopen, UnsafeCallback) (PR #3238)
 - [ ] Build a Discord bot
 - [ ] Send email over SMTP (nodemailer)
-- [ ] Resize and convert images (verify library choice)
-- [ ] Generate PDFs (pdf-lib)
-- [ ] Generate QR codes
+- [x] Resize and convert images (sharp) (#3251)
+- [x] Generate PDFs (pdf-lib) (#3251)
+- [x] Generate QR codes (@libs/qrcode) (#3251)
 - [x] Distribute work across a pool of web workers (PR #3238)
 - [ ] Automate a browser (Astral)
 - [x] Create custom OpenTelemetry spans (already covered by the basic OpenTelemetry setup tutorial; not duplicated)
