@@ -1976,6 +1976,42 @@ export const items = [
     type: "example",
     category: "Network",
   },
+  {
+    title: "Render markdown to HTML",
+    href: "/examples/render_markdown/",
+    type: "example",
+    category: "Web frameworks and libraries",
+  },
+  {
+    title: "Render HTML templates with Eta",
+    href: "/examples/html_templating/",
+    type: "example",
+    category: "Web frameworks and libraries",
+  },
+  {
+    title: "Generate a QR code",
+    href: "/examples/generate_qr_code/",
+    type: "example",
+    category: "Web frameworks and libraries",
+  },
+  {
+    title: "Generate a PDF",
+    href: "/examples/generate_pdf/",
+    type: "example",
+    category: "Web frameworks and libraries",
+  },
+  {
+    title: "Resize and convert images",
+    href: "/examples/resize_images/",
+    type: "example",
+    category: "Web frameworks and libraries",
+  },
+  {
+    title: "Build an MCP server",
+    href: "/examples/mcp_server/",
+    type: "example",
+    category: "AI",
+  },
 ];
 
 // Section order on the landing page and in the sidebar.
