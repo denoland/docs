@@ -387,7 +387,7 @@ Items marked (verify) need a support check before writing. Quick win first:
 - [x] Compile a script into a standalone executable (deno compile)
 - [x] Cross compile executables for other platforms
 - [x] Write and run benchmarks with Deno.bench (only a video exists)
-- [x] Publish a package to JSR step by step (PR #3238)
+- [x] Publish a package to JSR step by step (covered by an existing docs page; example tutorial dropped from #3238 in review)
 - [x] Find and update outdated dependencies (deno outdated)
 - [x] Display progress bars and spinners (@std/cli)
 - [x] Control the terminal with ANSI escape codes
