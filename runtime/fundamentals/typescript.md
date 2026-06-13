@@ -13,8 +13,9 @@ oldUrl:
 ---
 
 TypeScript is a first-class language in Deno. Put TypeScript in a file and run
-it — there is no compiler to install, no `tsconfig.json` to write, and no build
-step:
+it. There is no compiler to install and no build step, and configuration is
+optional: a `tsconfig.json` works if you already have one, but you don't need to
+write one to get started.
 
 ```ts title="main.ts"
 function greet(name: string): string {
@@ -29,7 +30,9 @@ deno run main.ts
 ```
 
 Deno also ships the type checker: `deno check` plays the role of `tsc --noEmit`,
-with strict mode on by default.
+with strict mode on by default. The same checker runs inside your editor through
+the [Deno language server](/runtime/getting_started/setup_your_environment/), so
+type errors surface as you type.
 
 ## How TypeScript runs in Deno
 
@@ -42,16 +45,19 @@ Deno treats executing TypeScript and type-checking it as two separate concerns:
   TypeScript compiler over your code without executing it.
 
 This means **type errors do not stop your code from running unless you ask**.
-Checking a whole module graph is expensive, so Deno keeps it out of the hot
+Type-checking a whole module graph is expensive, so Deno keeps it out of the hot
 edit-run loop and lets you invoke it where it earns its cost: in your editor
 (via the Deno language server), in CI, and in `deno test`, which type-checks by
 default.
 
-A consequence worth knowing: Deno never emits JavaScript files. There is no
-`outDir`, no `dist/` directory, and no source map configuration — error stack
-traces point at your `.ts` sources directly. If you genuinely need `.js` output
-(for example, to ship a library to consumers running Node or a bundler), that is
-a separate tool: [`deno transpile`](/runtime/reference/cli/transpile/) or
+A consequence worth knowing: Deno does not write JavaScript next to your
+sources. The stripped output goes into an internal cache instead (you can see
+its location listed as "Emitted modules cache" in the output of `deno info`), so
+there is no `outDir`, no `dist/` directory, and no source map configuration to
+manage. Error stack traces still point at your `.ts` sources directly. If you
+genuinely need `.js` files on disk (for example, to ship a library to consumers
+running Node or a bundler), reach for a separate tool:
+[`deno transpile`](/runtime/reference/cli/transpile/) or
 [`deno pack`](/runtime/reference/cli/pack/).
 
 ## Coming from Node.js
@@ -64,30 +70,33 @@ replacement:
 | `tsx`, `ts-node`, or `node` with type stripping | `deno run main.ts`                                                                                              |
 | `tsc --noEmit`                                  | `deno check`                                                                                                    |
 | `tsconfig.json`                                 | Optional. Auto-detected if present; Deno-first projects use `compilerOptions` in `deno.json`                    |
-| `typescript` as a devDependency                 | Nothing to install — the checker ships inside the `deno` binary                                                 |
-| `@types/node`                                   | Built in — `node:` imports are typed out of the box                                                             |
+| `typescript` as a devDependency                 | Nothing to install; the checker ships inside the `deno` binary                                                  |
+| `@types/node`                                   | Built in and [version-overridable](/runtime/fundamentals/node/#including-node-types); `node:` imports are typed |
 | ESLint + Prettier with TypeScript plugins       | [`deno lint`](/runtime/reference/cli/lint/) and [`deno fmt`](/runtime/reference/cli/fmt/) handle `.ts` natively |
 
 Three differences trip up Node.js developers most often:
 
 **Imports use real file extensions.** In Deno you write
-`import { greet } from "./greet.ts"` — the extension is required, and it is the
-actual extension of the file on disk. If you are used to `tsc` with Node-style
-ESM, this replaces the counterintuitive habit of writing `./greet.js` to import
-a file named `greet.ts`. See [Modules](/runtime/fundamentals/modules/) for how
+`import { greet } from "./greet.ts"`, using the actual extension of the file on
+disk. Under `tsc` you would instead write `./greet.js` to import a file named
+`greet.ts`, or opt into
+[`allowImportingTsExtensions`](https://www.typescriptlang.org/tsconfig/#allowImportingTsExtensions),
+which `tsc` only permits together with `noEmit`. Deno needs neither workaround,
+since it never emits. See [Modules](/runtime/fundamentals/modules/) for how
 resolution works, including npm packages.
 
 **Deno runs the full TypeScript language.** Node's built-in type stripping only
-handles syntax it can erase; features that generate runtime code — enums,
-namespaces with runtime values, and parameter properties — require Node's
-experimental `--experimental-transform-types` flag. Deno runs all of them with
-no flag.
+handles syntax it can erase. Features that generate runtime code (enums,
+namespaces with runtime values, and parameter properties) require Node's
+experimental `--experimental-transform-types` flag, which is still present as of
+Node 24. Deno runs all of them with no flag.
 
-**Most of your `tsconfig.json` is about emit, and emit doesn't exist.** Options
-like `target`, `module`, `outDir`, `esModuleInterop`, and `sourceMap` configure
-output that Deno never produces. Deno warns about ignored options and the
+**Most of your `tsconfig.json` configures output files Deno never writes.**
+Options like `target`, `module`, `outDir`, `esModuleInterop`, and `sourceMap`
+shape emitted JavaScript, which Deno keeps in its internal cache rather than
+writing to disk. Deno warns about these ignored options, and the
 [migration table](/runtime/reference/ts_config_migration/#migrating-compileroptions-from-nodejs)
-in the configuration reference says what to do with each one — for most, the
+in the configuration reference says what to do with each one. For most, the
 answer is "delete it".
 
 If you are moving a whole project over, the
@@ -121,8 +130,10 @@ deno check --all main.ts
 deno check --check-js main.js
 ```
 
-`deno check` exits non-zero on errors, so it works as-is in CI. It can also
-check code blocks in JSDoc comments and markdown files — see
+`deno check` exits non-zero on errors, so it works as-is in CI. The `--check-js`
+flag shown above is covered in
+[type checking JavaScript](#type-checking-javascript) below. `deno check` can
+also check code blocks in JSDoc comments and markdown files; see
 [documentation tests](/runtime/test/doc_tests/).
 
 To type-check before execution, add `--check` to `deno run`:
@@ -148,8 +159,11 @@ deno test --no-check
 ## Configuring TypeScript compiler options
 
 Deno's defaults are strict and modern, so most projects need no configuration at
-all. When you do want to change the checker's behavior, use the
-`compilerOptions` field in [`deno.json`](/runtime/fundamentals/configuration/):
+all. When you do want to change the checker's behavior, set the options under
+`compilerOptions`, either in [`deno.json`](/runtime/fundamentals/configuration/)
+or in a `tsconfig.json` (see [using an existing tsconfig.json](#tsconfig)). For
+a Deno-first project, keeping them in `deno.json` means one config file instead
+of two:
 
 ```json title="deno.json"
 {
@@ -170,9 +184,9 @@ friends), see the [JSX reference](/runtime/reference/jsx/).
 
 You do not have to translate your configuration to try Deno. Each workspace
 directory containing a `deno.json` or `package.json` is probed for a
-`tsconfig.json` — if one exists, Deno automatically uses it for type checking
-and the language server, no flags needed. Since Deno 2.1, `jsconfig.json` is
-also auto-detected when a `package.json` is present, which is useful for
+`tsconfig.json`; if one exists, Deno automatically uses it for type checking and
+the language server, no flags needed. Since Deno 2.1, `jsconfig.json` is also
+auto-detected when a `package.json` is present, which is useful for
 JavaScript-only projects.
 
 For example, an existing Node.js project with this `tsconfig.json`:
@@ -193,8 +207,8 @@ For example, an existing Node.js project with this `tsconfig.json`:
 
 will be picked up automatically by `deno check` and the Deno language server. If
 a `deno.json` with its own `compilerOptions` is added later, those take
-precedence. Emit-related options are ignored (with a warning), since Deno never
-emits.
+precedence. Emit-related options are ignored (with a warning), since Deno does
+not write output files.
 
 For Deno-first projects, prefer `compilerOptions` in `deno.json` over a separate
 `tsconfig.json`. See
@@ -204,9 +218,14 @@ fields, precedence rules, and project-reference behavior.
 ## Type checking JavaScript
 
 Deno runs JavaScript and TypeScript side by side, but only type-checks
-TypeScript files by default. To include a JavaScript file in checking, add a
-`// @ts-check` pragma at the top of the file, or enable
-`compilerOptions.checkJs` for the whole project:
+TypeScript files by default. There are three ways to opt a JavaScript file in:
+add a `// @ts-check` pragma at the top of the file, enable
+`compilerOptions.checkJs` for the whole project, or pass `--check-js` on the
+command line (`deno check --check-js main.js`) for a one-off check without
+touching any configuration.
+
+With the file in scope, the checker flags the same errors it would in
+TypeScript:
 
 ```js title="main.js"
 // @ts-check
@@ -214,6 +233,8 @@ TypeScript files by default. To include a JavaScript file in checking, add a
 let x = "hello";
 x = 42; // Type 'number' is not assignable to type 'string'.
 ```
+
+The pragma checks a single file; `checkJs` turns it on project-wide:
 
 ```json title="deno.json"
 {
@@ -320,7 +341,7 @@ setup.
 ## Augmenting global types
 
 When polyfilling a global API, you can teach the type checker about it with
-`declare global`. Note that Deno 2 has no `window` object — globals live on
+`declare global`. Note that Deno 2 has no `window` object; globals live on
 `globalThis`, so declare them with `var`:
 
 ```ts
@@ -349,8 +370,7 @@ publishing to [JSR](https://jsr.io).
 
 ## Next steps
 
-- Set up your editor with the Deno language server for inline type checking —
-  see
+- Set up your editor with the Deno language server for inline type checking. See
   [Setup your environment](/runtime/getting_started/setup_your_environment/).
 - Read the
   [TypeScript configuration reference](/runtime/reference/ts_config_migration/)
