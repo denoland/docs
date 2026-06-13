@@ -25,7 +25,7 @@ path = "cli/main.rs"
 name = "deno_core"
 path = "src/foo.rs"
 `;
-const data = parse(text);
+const data = parse(text) as { int: number; bin: { name: string }[] };
 console.log(data.int);
 console.log(data.bin.length);
 
