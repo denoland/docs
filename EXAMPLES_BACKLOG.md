@@ -395,7 +395,7 @@ Items marked (verify) need a support check before writing. Quick win first:
 
 ### Frameworks, deploys, and bigger tutorials
 
-- [x] Build a static site with Lume (#3254)
+- [x] Build a static site with Lume (not duplicated; covered canonically by lume.land, and Lume is Deno-native so there is no compatibility story to show)
 - [x] Use Vite with Deno (#3254)
 - [x] Render markdown to HTML with syntax highlighting (@deno/gfm) (#3251)
 - [x] Server-side HTML templating with Eta (#3251)
