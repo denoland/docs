@@ -7,7 +7,7 @@
  * @resource {https://docs.deno.com/examples/kv/} Example: Deno KV
  * @group Deno KV and scheduling
  *
- * <strong>Warning: This is an unstable API that is subject to change or removal at anytime.</strong><br>Deno KV transactions group reads and writes so they either all happen
+ * Deno KV transactions group reads and writes so they either all happen
  * or none do, with optimistic concurrency: a transaction only commits if
  * the values it read have not changed in the meantime. This example
  * transfers funds between two accounts safely and shows the retry pattern

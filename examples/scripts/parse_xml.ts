@@ -6,11 +6,9 @@
  * @resource {https://jsr.io/@libs/xml} @libs/xml on JSR
  * @group Encoding
  *
- * There is no XML parser in the web platform's server-side APIs or in the
- * Deno standard library, but the @libs/xml package on JSR covers both
- * directions: XML text to plain JavaScript objects and back. This is
- * enough for RSS feeds, sitemaps, SVG manipulation, and API responses
- * from older services.
+ * The @libs/xml package on JSR converts XML in both directions: XML text
+ * to plain JavaScript objects and back. This is enough for RSS feeds,
+ * sitemaps, SVG manipulation, and API responses from older services.
  */
 import { parse, stringify } from "jsr:@libs/xml";
 

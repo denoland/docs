@@ -2060,12 +2060,6 @@ export const items = [
     type: "example",
     category: "Web standard APIs",
   },
-  {
-    title: "Publish a package to JSR",
-    href: "/examples/publish_to_jsr_tutorial/",
-    type: "tutorial",
-    category: "Modules and package management",
-  },
 ];
 
 // Section order on the landing page and in the sidebar.

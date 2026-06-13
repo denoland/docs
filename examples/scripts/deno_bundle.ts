@@ -7,7 +7,7 @@
  * @resource {https://docs.deno.com/runtime/reference/bundling/} Bundling in the Deno manual
  * @group CLI
  *
- * <strong>Warning: This is an unstable API that is subject to change or removal at anytime.</strong><br>Deno.bundle compiles a module graph into a single JavaScript file,
+ * Deno.bundle compiles a module graph into a single JavaScript file,
  * resolving and inlining all imports, including jsr: and npm: packages. It is
  * the programmatic counterpart of the deno bundle subcommand, useful in build
  * scripts that need to produce self-contained output for browsers, serverless
@@ -46,8 +46,11 @@ if (!result.success) {
 const stat = await Deno.stat("dist/app.js");
 console.log(`bundled ${stat.size} bytes`); // bundled 462 bytes
 
-// Run it to prove it is self-contained.
-const output = await new Deno.Command(Deno.execPath(), {
+// Run it to prove it is self-contained. Deno.spawnAndWait is a shorthand
+// for Deno.Command; pass stdout: "piped" to capture the output instead of
+// inheriting the terminal.
+const output = await Deno.spawnAndWait(Deno.execPath(), {
   args: ["run", "dist/app.js"],
-}).output();
+  stdout: "piped",
+});
 console.log(new TextDecoder().decode(output.stdout)); // helloFromTheBundle
