@@ -14,9 +14,7 @@ models data for [MongoDB](https://www.mongodb.com/). It simplifies writing
 MongoDB validation, casting, and other relevant business logic.
 
 This tutorial will show you how to setup Mongoose and MongoDB with your Deno
-project. You can follow along in text below or watch the video version:
-
-<lite-youtube videoid="dmZ9Ih0CR9g"></lite-youtube>
+project.
 
 [View source](https://github.com/denoland/examples/tree/main/with-mongoose).
 
