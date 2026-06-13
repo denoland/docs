@@ -69,25 +69,15 @@ Run it with `deno run main.mjs` to get the same output as in Node.js.
 
 The rules:
 
-- **The `node:` prefix is required.** Update imports to use `node:` specifiers
-  and any code using Node built-ins should function as it did in Node.js.
-- **Deno tells you when the prefix is missing.** Imports that lack the `node:`
-  prefix fail with a helpful hint:
-
-  ```js title="main.mjs"
-  import * as os from "os";
-  console.log(os.cpus());
-  ```
-
-  ```sh
-  $ deno run main.mjs
-  error: Import "os" not a dependency
-    hint: If you want to use a built-in Node module, add a "node:" prefix (ex. "node:os").
-      at file:///main.mjs:1:21
-  ```
-
-  The same hints and additional quick-fixes are provided by the Deno LSP in your
-  editor.
+- **`node:os` and bare `os` both work.** Since Deno 2.9, a specifier that
+  matches a Node built-in resolves to it automatically, so `import os from "os"`
+  runs with no prefix and no flag. Before 2.9 the bare form errored unless you
+  passed `--unstable-bare-node-builtins`. Prefer the explicit `node:` form: it
+  is unambiguous, it is what the Deno LSP's quick-fixes insert, and it works in
+  Node.js too, so updated files stay portable.
+- **Your own mappings take precedence.** A `deno.json` `imports` entry or a
+  `package.json` dependency of the same name wins over the built-in; a
+  same-named package in `node_modules` no longer shadows it, matching Node.js.
 - **Loader hooks work.** The `node:module` built-in includes the
   [`registerHooks()`](/runtime/reference/loader_hooks/) API, which you can use
   to customize module resolution and loading from inside your program.
