@@ -77,10 +77,11 @@ ESM, this replaces the counterintuitive habit of writing `./greet.js` to import
 a file named `greet.ts`. See [Modules](/runtime/fundamentals/modules/) for how
 resolution works, including npm packages.
 
-**Deno runs the full TypeScript language.** Node's built-in type stripping is
-limited to erasable syntax: enums, namespaces with runtime code, and parameter
-properties need an extra experimental transform flag. Deno runs all of these
-without flags.
+**Deno runs the full TypeScript language.** Node's built-in type stripping only
+handles syntax it can erase; features that generate runtime code — enums,
+namespaces with runtime values, and parameter properties — require Node's
+experimental `--experimental-transform-types` flag. Deno runs all of them with
+no flag.
 
 **Most of your `tsconfig.json` is about emit, and emit doesn't exist.** Options
 like `target`, `module`, `outDir`, `esModuleInterop`, and `sourceMap` configure
