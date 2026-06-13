@@ -296,10 +296,10 @@ URL (like a `Location` header) and uses during type checking. CDNs such as
 ## Targeting browsers and web workers
 
 By default, Deno type-checks code against the Deno runtime's global scope (the
-`deno.window` library): `Deno.readFile` exists, `document` does not. Code
-destined for other environments can swap the type libraries via
-`compilerOptions.lib`. The common case is code shared between Deno and the
-browser:
+`deno.window` library): [`Deno.readFile`](/api/deno/~/Deno.readFile) exists,
+`document` does not. Code destined for other environments can swap the type
+libraries via `compilerOptions.lib`. The common case is code shared between Deno
+and the browser:
 
 ```json title="deno.json"
 {
