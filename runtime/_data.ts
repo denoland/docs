@@ -112,6 +112,10 @@ export const sidebar = [
         title: "Building CLI apps",
         href: "/runtime/cli_apps/",
       },
+      {
+        title: "Deploying your app",
+        href: "/runtime/deploy/",
+      },
     ],
   },
   {
