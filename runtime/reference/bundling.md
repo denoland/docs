@@ -60,17 +60,30 @@ single output file.
 
 ## Options Overview
 
-| Flag                    | Description                                          |
-| ----------------------- | ---------------------------------------------------- |
-| `-o`, `--output <file>` | Write bundled output to a file                       |
-| `--outdir <dir>`        | Write bundled output to a directory                  |
-| `--minify`              | Minify the output for production                     |
-| `--format <format>`     | Output format (`esm` by default)                     |
-| `--code-splitting`      | Enable code splitting                                |
-| `--platform <platform>` | Bundle for `browser` or `deno` (default: `deno`)     |
-| `--sourcemap`           | Include source maps (`linked`, `inline`, `external`) |
-| `--watch`               | Automatically rebuild on file changes                |
-| `--inline-imports`      | Inline imported modules (`true` or `false`)          |
+| Flag                    | Description                                              |
+| ----------------------- | -------------------------------------------------------- |
+| `-o`, `--output <file>` | Write bundled output to a file                           |
+| `--outdir <dir>`        | Write bundled output to a directory                      |
+| `--minify`              | Minify the output for production                         |
+| `--format <format>`     | Output format (`esm` by default)                         |
+| `--code-splitting`      | Enable code splitting                                    |
+| `--platform <platform>` | Bundle for `browser` or `deno` (default: `deno`)         |
+| `--sourcemap`           | Include source maps (`linked`, `inline`, `external`)     |
+| `--watch`               | Automatically rebuild on file changes                    |
+| `--inline-imports`      | Inline imported modules (`true` or `false`)              |
+| `--packages <how>`      | How to handle packages: `bundle` (default) or `external` |
+| `--external <pkg>`      | Exclude a module or package from the bundle              |
+| `--keep-names`          | Keep original function and class names                   |
+
+For the full flag list, run `deno bundle --help`.
+
+:::tip Bundling a single-file executable
+
+To produce a standalone binary rather than a JavaScript file, use
+[`deno compile`](/runtime/reference/cli/compile/), which can also bundle and
+minify its input with the `--bundle` and `--minify` flags.
+
+:::
 
 ---
 
@@ -234,7 +247,7 @@ Now, let's bundle:
 $ deno bundle --platform=browser app.jsx -o bundle.js
 ⚠️ deno bundle is experimental and subject to changes
 Bundled 9 modules in 99ms
-  app.bundle.js 874.67KB
+  bundle.js 874.67KB
 ```
 
 At this point, we're ready to serve our page, let's use
