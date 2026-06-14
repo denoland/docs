@@ -11,13 +11,23 @@ oldUrl:
 
 Deno uses
 [ECMAScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
-as its module system, the official standard for JavaScript. You share code
-between files with standard `import` and `export` statements and run it
+as its primary module system, the official standard for JavaScript. You share
+code between files with standard `import` and `export` statements and run it
 directly, with no bundler or build step. This is the same module system browsers
 use, so the code you write stays portable across environments.
 
-Deno does not use CommonJS (`require`) by default, but
-[supports it for Node compatibility](/runtime/fundamentals/node/).
+Deno also runs Node's older CommonJS modules (`require` and `module.exports`),
+so existing npm packages and Node projects work without conversion. The two
+systems are fully supported and interoperate, but ECMAScript modules are
+recommended for new code; reach for CommonJS mainly when a dependency or an
+existing project still uses it.
+
+Deno decides which system a file uses from its extension and the nearest
+`package.json`: a `.mjs` file is always an ES module, a `.cjs` file is always
+CommonJS, and `.js` and `.ts` files are treated as ES modules unless a
+`package.json` sets `"type": "commonjs"`. The rest of this page covers ES
+modules; see [CommonJS support](/runtime/fundamentals/node/#commonjs-support)
+for how `require`, module resolution, and ESM/CommonJS interop work.
 
 ## Importing modules
 
