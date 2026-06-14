@@ -33,7 +33,7 @@ using a
 
 ```json title="deno.json"
 {
-  "unstable": ["bare-node-builtins", "webgpu"]
+  "unstable": ["sloppy-imports", "webgpu"]
 }
 ```
 
@@ -47,16 +47,26 @@ variable of a given name, rather than being passed as a flag or
 [`deno.json`](/runtime/fundamentals/configuration/) configuration option. Flags
 that are settable via environment variables will be noted below.
 
-Here's an example of setting the `--unstable-bare-node-builtins` flag via
+Here's an example of setting the `--unstable-sloppy-imports` flag via
 environment variable:
 
 ```sh
-export DENO_UNSTABLE_BARE_NODE_BUILTINS=true
+export DENO_UNSTABLE_SLOPPY_IMPORTS=true
 ```
 
 ## `--unstable-bare-node-builtins`
 
 **Environment variable:** `DENO_UNSTABLE_BARE_NODE_BUILTINS`
+
+:::note
+
+As of Deno 2.9, importing Node built-in modules without a `node:` specifier is
+**stable** and works by default, so this flag is no longer needed for that. See
+[Node built-in modules](/runtime/fundamentals/node/#node-built-in-modules). The
+flag still applies to importing npm packages without an `npm:` specifier when
+you manage your Node.js dependencies manually.
+
+:::
 
 This flag enables you to
 [import Node.js built-in modules](/runtime/fundamentals/node/#node-built-in-modules)
