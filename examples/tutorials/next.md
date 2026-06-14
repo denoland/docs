@@ -49,7 +49,6 @@ compatibility, update your `deno.json` file with the following configuration:
 ```json deno.json
 {
   "unstable": [
-    "bare-node-builtins",
     "detect-cjs",
     "node-globals",
     "unsafe-proto",
