@@ -1197,6 +1197,12 @@ export const items = [
     category: "AI",
   },
   {
+    title: "Build an agent with tool use",
+    href: "/examples/anthropic_tool_use/",
+    type: "example",
+    category: "AI",
+  },
+  {
     title: "Connect to OpenAI - Chat completion",
     href: "/examples/openai_chat_completion/",
     type: "example",
