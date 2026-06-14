@@ -859,5 +859,5 @@ This allows for smooth integration between Deno and npm/pnpm ecosystems during
 migration or in hybrid projects.
 
 For more information on configuring your project, check out the
-[Configuration with deno.json](/examples/configuration_with_deno_json/)
+[Configuration with deno.json](/runtime/fundamentals/configuration/)
 tutorial.

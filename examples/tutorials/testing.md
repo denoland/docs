@@ -714,4 +714,4 @@ For more information about testing in Deno, check out:
 
 - [Testing documentation](/runtime/test/)
 - [Mocking data for tests](/runtime/test/mocking/)
-- [Writing benchmark tests](/examples/benchmarking/)
+- [Writing benchmark tests](/examples/write_benchmarks/)
