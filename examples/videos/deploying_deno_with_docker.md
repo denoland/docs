@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Deploying Deno with Docker"
 description: "Learn how to containerize a Deno application with Docker and deploy it to a compatible cloud environment."
 url: /examples/deploying_deno_with_docker/

@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-01-27
 title: "Set and get environment variables"
 description: "Learn how to set and get environment variables in a sandbox."
 url: /examples/sandbox_environment_variables/

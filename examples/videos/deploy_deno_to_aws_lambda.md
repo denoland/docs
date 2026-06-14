@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Deploy Deno to AWS Lambda"
 description: "Learn how to deploy a Deno application to AWS Lambda using a Dockerfile and the aws-lambda-adapter community runtime."
 url: /examples/deploy_deno_to_aws_lambda/

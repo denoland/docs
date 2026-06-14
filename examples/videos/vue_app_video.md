@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Build a Vue app"
 description: "Watch how to build a Vue app with a Deno backend, from project setup to a working application."
 url: /examples/vue_app_video/

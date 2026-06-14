@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Interoperability with Node.js"
 description: "Learn how to use Node.js built-in APIs, npm modules, and JSR packages in your Deno projects."
 url: /examples/interoperability_with_nodejs/

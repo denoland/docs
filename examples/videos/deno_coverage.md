@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "Deno coverage"
 description: "Learn how to measure test coverage in Deno projects. Watch how to generate coverage reports, analyze code coverage metrics, and use the HTML report feature."
 url: /examples/deno_coverage/

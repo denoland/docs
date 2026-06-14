@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Compatibility with Node & npm"
 description: "Learn how to integrate Deno into existing Node.js projects using npm modules and Node standard libraries, without major rewrites."
 url: /examples/backward_compat_with_node_npm/

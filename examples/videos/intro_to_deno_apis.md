@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Introduction to Deno APIs"
 description: "Explore Deno's built-in APIs for file system operations, command line arguments, environment variables, and serving HTTP requests."
 url: /examples/intro_to_deno_apis/

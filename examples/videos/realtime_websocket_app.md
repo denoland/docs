@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Build a Realtime WebSocket Application"
 description: "Learn how to build a realtime application in Deno using the standard WebSocket API."
 url: /examples/realtime_websocket_app/

@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-02
 title: "Management via CLI"
 description: "How to manage Deno Sandbox with the Deno CLI."
 ---

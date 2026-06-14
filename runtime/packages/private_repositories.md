@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "Private repositories"
 description: "Load remote modules from private repositories with DENO_AUTH_TOKENS: bearer tokens, basic auth, and a GitHub walkthrough."
 oldUrl:

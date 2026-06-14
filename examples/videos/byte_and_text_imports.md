@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Byte and text imports"
 description: "Learn how to import bytes and text files directly into your module graph for automatic tree shaking and more."
 url: /examples/byte_and_text_imports/

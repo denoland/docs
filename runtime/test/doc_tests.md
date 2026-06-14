@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "Documentation tests"
 description: "Run the code examples in your JSDoc comments and markdown files as tests with deno test --doc, so your documentation never goes stale."
 oldUrl:

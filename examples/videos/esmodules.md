@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "ECMAScript Modules"
 description: "Learn how Deno uses standard ECMAScript modules to import and share JavaScript and TypeScript code."
 url: /examples/esmodules/

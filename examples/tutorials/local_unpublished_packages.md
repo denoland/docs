@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "Use local and unpublished packages"
 description: "Work with code that isn't on a registry: link a local package copy with the links field, import straight from HTTPS URLs including private GitHub repos, and know which specifiers Deno does not support."
 url: /examples/local_unpublished_packages_tutorial/

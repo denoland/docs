@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-01-28
 title: Security
 description: "Understand the defense-in-depth model behind Deno Sandbox: isolation, secrets, network controls, and auditing."
 ---

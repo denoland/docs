@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Publishing Modules with JSR"
 description: "Discover JSR, the TypeScript-first registry for modern JavaScript, and learn how to install and publish packages with it."
 url: /examples/publishing_modules_with_jsr/

@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-01-27
 title: "Upload files and directories"
 description: "Learn how to upload files and directories to a sandbox."
 url: /examples/sandbox_upload_files/

@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Configuration with Deno JSON"
 description: "Learn how to use deno.json to manage dependencies, configure tasks, customize formatting and linting, and work with import maps."
 url: /examples/configuration_with_deno_json/
