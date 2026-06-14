@@ -1191,6 +1191,12 @@ export const items = [
     category: "AI",
   },
   {
+    title: "Connect to Claude (Anthropic API)",
+    href: "/examples/anthropic_chat_completion/",
+    type: "example",
+    category: "AI",
+  },
+  {
     title: "Connect to OpenAI - Chat completion",
     href: "/examples/openai_chat_completion/",
     type: "example",
