@@ -148,7 +148,6 @@ With React, use `react-dom/server`:
   "imports": {
     "react": "npm:react@^19",
     "react-dom": "npm:react-dom@^19",
-    "react-dom/server": "npm:react-dom@^19/server",
     "@types/react": "npm:@types/react@^19"
   }
 }
@@ -220,6 +219,9 @@ names in `jsxPrecompileSkipElements`:
     "jsx": "precompile",
     "jsxImportSource": "preact",
     "jsxPrecompileSkipElements": ["a", "link"]
+  },
+  "imports": {
+    "preact": "npm:preact@^10"
   }
 }
 ```
