@@ -176,8 +176,53 @@ matching `.sha256sum` file for verifying the download.
 
 ## Docker
 
-For more information and instructions on the official Docker images:
-[https://github.com/denoland/deno_docker](https://github.com/denoland/deno_docker)
+Official images are published to both
+[Docker Hub](https://hub.docker.com/r/denoland/deno) and the
+[GitHub Container Registry](https://github.com/denoland/deno/pkgs/container/deno)
+in several variants:
+
+| Tag                        | Base             |
+| -------------------------- | ---------------- |
+| `denoland/deno:debian`     | Debian (default) |
+| `denoland/deno:ubuntu`     | Ubuntu           |
+| `denoland/deno:alpine`     | Alpine Linux     |
+| `denoland/deno:distroless` | Distroless       |
+| `denoland/deno:bin`        | Binary only      |
+
+Each tag is also published with a version, for example `denoland/deno:2.3.1`,
+and pinning to a version is recommended for reproducible builds.
+
+A typical `Dockerfile` caches dependencies as a separate layer and runs as the
+non-root `deno` user:
+
+```dockerfile
+FROM denoland/deno:debian
+
+WORKDIR /app
+
+# Cache dependencies as their own layer
+COPY deno.* ./
+RUN deno install
+
+# Copy the rest of the source and cache the entrypoint
+COPY . .
+RUN deno cache main.ts
+
+USER deno
+EXPOSE 8000
+
+CMD ["run", "--allow-net", "main.ts"]
+```
+
+Build and run it:
+
+```shell
+docker build -t my-app .
+docker run -it -p 8000:8000 my-app
+```
+
+See the [deno_docker repository](https://github.com/denoland/deno_docker) for
+the full set of examples and configuration options.
 
 ## Installation location
 
