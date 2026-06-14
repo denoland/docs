@@ -5,14 +5,6 @@
 export const items = [
   // Basics
   {
-    title: "What is Deno?",
-    href: "/examples/what_is_deno/",
-    externalURL:
-      "https://www.youtube.com/watch?v=KPTOo4k8-GE&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe",
-    type: "video",
-    category: "Basics",
-  },
-  {
     title: "Run a script",
     href: "/examples/run_script_tutorial/",
     type: "tutorial",
@@ -31,14 +23,6 @@ export const items = [
     category: "Basics",
   },
   {
-    title: "Your Deno Dev Environment",
-    href: "/examples/deno_dev_environment/",
-    externalURL:
-      "https://www.youtube.com/watch?v=BFfrGrLm2tw&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=3",
-    type: "video",
-    category: "Basics",
-  },
-  {
     title: "Initialize a project",
     href: "/examples/initialize_project_tutorial/",
     type: "tutorial",
@@ -48,22 +32,6 @@ export const items = [
     title: "Executable scripts",
     href: "/examples/hashbang_tutorial/",
     type: "tutorial",
-    category: "Basics",
-  },
-  {
-    title: "All-in-one tooling",
-    href: "/examples/all-in-one_tooling/",
-    externalURL:
-      "https://www.youtube.com/watch?v=-4e9DkUrCr4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=5",
-    type: "video",
-    category: "Basics",
-  },
-  {
-    title: "Tasks and configuration with deno.json",
-    href: "/examples/configuration_with_deno_json/",
-    externalURL:
-      "https://www.youtube.com/watch?v=bTmO5Tfgke4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=10",
-    type: "video",
     category: "Basics",
   },
   {
@@ -97,22 +65,6 @@ export const items = [
     category: "Basics",
   },
   {
-    title: "Interoperability with Node.js",
-    href: "/examples/interoperability_with_nodejs/",
-    externalURL:
-      "https://www.youtube.com/watch?v=mgX1ymfqPSQ&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=2",
-    type: "video",
-    category: "Basics",
-  },
-  {
-    title: "Introduction to Deno APIs",
-    href: "/examples/intro_to_deno_apis/",
-    externalURL:
-      "https://www.youtube.com/watch?v=p28ujFMrdA0&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=7",
-    type: "video",
-    category: "Basics",
-  },
-  {
     title: "Simple API server",
     href: "/examples/simple_api_tutorial/",
     type: "tutorial",
@@ -122,20 +74,6 @@ export const items = [
     title: "Simple file server",
     href: "/examples/file_server_tutorial/",
     type: "tutorial",
-    category: "Basics",
-  },
-  {
-    title: "Formatting with Deno fmt",
-    href: "/examples/deno_fmt/",
-    externalURL: "https://www.youtube.com/watch?v=Ouzso9gQqnc",
-    type: "video",
-    category: "Basics",
-  },
-  {
-    title: "Benchmarking with Deno bench",
-    href: "/examples/deno_bench/",
-    externalURL: "https://www.youtube.com/watch?v=IVde_GTN6TM",
-    type: "video",
     category: "Basics",
   },
   {
@@ -162,30 +100,6 @@ export const items = [
     title: "Import modules from npm",
     href: "/examples/npm/",
     type: "example",
-    category: "Modules and package management",
-  },
-  {
-    title: "Compatibility with Node & npm",
-    href: "/examples/backward_compat_with_node_npm/",
-    externalURL:
-      "https://www.youtube.com/watch?v=QPLchkJ7eas&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=12",
-    type: "video",
-    category: "Modules and package management",
-  },
-  {
-    title: "ECMAScript Modules",
-    href: "/examples/esmodules/",
-    externalURL:
-      "https://www.youtube.com/watch?v=cTFBiwYY3vs&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=9",
-    type: "video",
-    category: "Modules and package management",
-  },
-  {
-    title: "Publishing Modules with JSR",
-    href: "/examples/publishing_modules_with_jsr/",
-    externalURL:
-      "https://www.youtube.com/watch?v=7uiL4WYvZVs&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=8",
-    type: "video",
     category: "Modules and package management",
   },
   {
@@ -395,14 +309,6 @@ export const items = [
     category: "Network",
   },
   {
-    title: "Build a Realtime WebSocket Application",
-    href: "/examples/realtime_websocket_app/",
-    externalURL:
-      "https://www.youtube.com/watch?v=FC4IrkHEg4A&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=15",
-    type: "video",
-    category: "Network",
-  },
-  {
     title: "UDP listener: Ping",
     href: "/examples/udp_listener/",
     type: "example",
@@ -527,14 +433,8 @@ export const items = [
 
   // System
   {
-    title: "Handling OS signals",
+    title: "Listen for OS signals",
     href: "/examples/os_signals/",
-    type: "example",
-    category: "System",
-  },
-  {
-    title: "Benchmarking",
-    href: "/examples/benchmarking/",
     type: "example",
     category: "System",
   },
@@ -542,12 +442,6 @@ export const items = [
     title: "Create a subprocess",
     href: "/examples/subprocess_tutorial/",
     type: "tutorial",
-    category: "System",
-  },
-  {
-    title: "Subprocess Spawning",
-    href: "/examples/subprocess_running_files/",
-    type: "example",
     category: "System",
   },
   {
@@ -606,14 +500,6 @@ export const items = [
   },
 
   // Web standard APIs
-  {
-    title: "Browser APIs in Deno",
-    href: "/examples/browser_apis_in_deno/",
-    externalURL:
-      "https://www.youtube.com/watch?v=oxVwTT-rZRo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=6",
-    type: "video",
-    category: "Web standard APIs",
-  },
   {
     title: "Temporal API",
     href: "/examples/temporal/",
@@ -703,20 +589,6 @@ export const items = [
     category: "Encoding",
   },
   {
-    title: "Byte and text imports",
-    href: "/examples/byte_and_text_imports/",
-    externalURL: "https://www.youtube.com/watch?v=PAEI6mdlXwc",
-    type: "video",
-    category: "Encoding",
-  },
-  {
-    title: "Image bundling with deno compile",
-    href: "/examples/image_bundling_deno_compile/",
-    externalURL: "https://www.youtube.com/watch?v=qg_M0deBlfQ",
-    type: "video",
-    category: "Encoding",
-  },
-  {
     title: "Parsing and serializing CSV",
     href: "/examples/parsing_serializing_csv/",
     type: "example",
@@ -802,14 +674,6 @@ export const items = [
   },
 
   // CLI
-  {
-    title: "Build a Command Line Utility",
-    href: "/examples/command_line_utility/",
-    externalURL:
-      "https://www.youtube.com/watch?v=TUxj2TS5pNo&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=14",
-    type: "video",
-    category: "CLI",
-  },
   {
     title: "Input prompts",
     href: "/examples/prompts/",
@@ -911,20 +775,6 @@ export const items = [
     category: "Testing",
   },
   {
-    title: "Getting started with Deno test",
-    href: "/examples/deno_test/",
-    externalURL: "https://www.youtube.com/watch?v=gDtDVfsgHgs",
-    type: "video",
-    category: "Testing",
-  },
-  {
-    title: "Better testing with Deno coverage",
-    href: "/examples/deno_coverage/",
-    externalURL: "https://www.youtube.com/watch?v=P2BBYNPpgW8",
-    type: "video",
-    category: "Testing",
-  },
-  {
     title: "Testing web applications",
     href: "/examples/web_testing_tutorial/",
     type: "tutorial",
@@ -956,14 +806,6 @@ export const items = [
   },
 
   // Web frameworks and libraries
-  {
-    title: "TypeScript and JSX",
-    href: "/examples/ts_jsx/",
-    externalURL:
-      "https://www.youtube.com/watch?v=KoM8ahe8O74&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=11",
-    type: "video",
-    category: "Web frameworks and libraries",
-  },
   {
     title: "Build a React App",
     href: "/examples/react_tutorial/",
@@ -1031,31 +873,9 @@ export const items = [
     category: "Web frameworks and libraries",
   },
   {
-    title: "Build an API server with TypeScript",
-    href: "/examples/build_api_server_ts/",
-    externalURL:
-      "https://www.youtube.com/watch?v=J8kZ-s-5-ms&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=13",
-    type: "video",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Build a Vue app",
-    href: "/examples/vue_app_video/",
-    externalURL: "https://www.youtube.com/watch?v=MDPauM8fZDE",
-    type: "video",
-    category: "Web frameworks and libraries",
-  },
-  {
     title: "Build a SolidJS app",
     href: "/examples/solidjs_tutorial/",
     type: "tutorial",
-    category: "Web frameworks and libraries",
-  },
-  {
-    title: "Build a React app",
-    href: "/examples/react_app_video/",
-    externalURL: "https://www.youtube.com/watch?v=eStwt_2THd8",
-    type: "video",
     category: "Web frameworks and libraries",
   },
   {
@@ -1097,7 +917,7 @@ export const items = [
     category: "Databases",
   },
   {
-    title: "Redis",
+    title: "How to use Redis with Deno",
     href: "/examples/redis_tutorial/",
     type: "tutorial",
     category: "Databases",
@@ -1229,14 +1049,6 @@ export const items = [
     category: "Deploying Deno projects",
   },
   {
-    title: "Deploy Deno to AWS Lambda",
-    href: "/examples/deploy_deno_to_aws_lambda/",
-    externalURL:
-      "https://www.youtube.com/watch?v=_xLOrT3cWK4&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=17",
-    type: "video",
-    category: "Deploying Deno projects",
-  },
-  {
     title: "AWS Lightsail",
     href: "/examples/aws_lightsail_tutorial/",
     type: "tutorial",
@@ -1270,14 +1082,6 @@ export const items = [
     title: "Kinsta",
     href: "/examples/kinsta_tutorial/",
     type: "tutorial",
-    category: "Deploying Deno projects",
-  },
-  {
-    title: "Deploying Deno with Docker",
-    href: "/examples/deploying_deno_with_docker/",
-    externalURL:
-      "https://www.youtube.com/watch?v=VRryNeYm6yw&list=PLvvLnBDNuTEov9EBIp3MMfHlBxaKGRWTe&index=16",
-    type: "video",
     category: "Deploying Deno projects",
   },
 
@@ -1426,12 +1230,6 @@ export const items = [
     title: "Boot instantly with snapshots",
     href: "/examples/snapshots_tutorial/",
     type: "tutorial",
-    category: "Deno Sandbox",
-  },
-  {
-    title: "Boot a Python environment with snapshots",
-    href: "/examples/snapshot_python_video/",
-    type: "video",
     category: "Deno Sandbox",
   },
   {

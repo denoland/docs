@@ -180,7 +180,7 @@ Monitor system performance:
 1. Add custom spans and attributes to better understand your application
 2. Set up alerts based on latency or error conditions
 3. Deploy your application and collector to production using platforms like:
-   - [Fly.io](https://docs.deno.com/examples/deploying_deno_with_docker/)
+   - [Fly.io](https://docs.deno.com/runtime/reference/docker/)
    - [Digital Ocean](https://docs.deno.com/examples/digital_ocean_tutorial/)
    - [AWS Lightsail](https://docs.deno.com/examples/aws_lightsail_tutorial/)
 
