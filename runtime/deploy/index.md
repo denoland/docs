@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-14
 title: "Deploying your app"
 description: "Ways to run a Deno app in production: the managed Deno Deploy platform, containers and Docker, cloud and serverless providers, and self-hosting a standalone binary."
 ---
