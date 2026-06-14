@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-21
+last_modified: 2026-06-14
 title: "Security and permissions"
 description: "A guide to Deno's security model: secure-by-default execution, the permission sandbox, evaluating and executing untrusted code, and the permission broker. See the Permissions reference for the flags."
 ---
