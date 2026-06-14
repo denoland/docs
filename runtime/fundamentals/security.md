@@ -15,7 +15,7 @@ your project.
 Before using Deno to run completely untrusted code, read the
 [section on executing untrusted code](#executing-untrusted-code) below.
 
-## Key Principles
+## Key principles
 
 Before diving into the specifics of permissions, it's important to understand
 the key principles of Deno's security model:
@@ -46,7 +46,7 @@ the key principles of Deno's security model:
   consulting the permission system. No `--allow-read` is required to load local
   files, and no `--allow-net` is required to fetch remote modules. The static
   graph includes static `import` statements and `import()` calls whose specifier
-  is a string literal — anything that can be resolved without running code. This
+  is a string literal: anything that can be resolved without running code. This
   exemption applies only to loading. Once code runs, anything it does still goes
   through the permission system, and `import()` calls with non-literal
   specifiers (e.g. `import(someVariable)`) are checked against `--allow-read` /
@@ -62,14 +62,83 @@ underlying operating system.
 ## Permissions
 
 Deno is sandboxed by default: code cannot touch the file system, network,
-environment, or run subprocesses unless you allow it. You grant or deny access
-with `--allow-*` / `--deny-*` flags (or at runtime through prompts), and you can
-store permissions in `deno.json`.
+environment, or run subprocesses unless you allow it. Permissions are not all or
+nothing. You grant them with `--allow-*` flags, and most can be scoped to
+specific resources, so a program gets exactly the access it needs and no more.
+
+Run a program with no flags and a sensitive operation is refused:
+
+```sh
+deno run main.ts
+# error: Requires net access to "example.com", run again with the --allow-net flag
+```
+
+Grant access scoped to just the host the program should reach:
+
+```sh
+deno run --allow-net=example.com main.ts
+```
+
+The same scoping works for the other permissions: `--allow-read=./data` limits
+reads to one directory, `--allow-env=API_KEY` to a single variable, and so on. A
+bare `--allow-net` with no value grants the whole category, which is broader
+than most programs need.
+
+When stdout is a terminal and you have not passed a flag, Deno pauses and asks
+instead of failing, so you can grant access interactively as it is requested:
+
+```console
+⚠️  Deno requests net access to "example.com". Run again with --allow-net to bypass this prompt.
+   Allow? [y/n/A] (y = yes, allow; n = no, deny; A = allow all net permissions) >
+```
+
+`--deny-*` flags override their `--allow-*` counterparts, so you can grant a
+broad category and carve out the sensitive parts:
+`--allow-read --deny-read=/etc` reads anything except `/etc`. At the other
+extreme, `-A` (`--allow-all`) grants everything and turns the sandbox off
+entirely, giving the same access as running code in Node, so reach for it
+sparingly.
 
 See the [Permissions reference](/runtime/reference/permissions/) for every
 permission and its flags, and
 [`permissions` in deno.json](/runtime/reference/deno_json/#permissions) for
 declaring them in your configuration file.
+
+### Permissions that bypass the sandbox
+
+A few permissions grant access to things Deno cannot sandbox, so granting them
+is effectively granting full access:
+
+- `--allow-run` lets the program spawn subprocesses, and a subprocess runs with
+  its own permissions, not the restricted set of the Deno process that started
+  it. A program that can run `deno` or a shell can launch a second program with
+  full access. Limit it to specific executables where you can
+  (`--allow-run=git`), and never combine `--allow-run=deno` with a sandboxed
+  parent.
+- `--allow-ffi` loads native libraries through [FFI](/runtime/fundamentals/ffi/)
+  or Node-API addons. Native code is not bound by Deno's permissions at all.
+
+Treat both as equivalent to `--allow-all` when deciding whether to trust the
+code you are running.
+
+### Adjusting permissions at runtime
+
+A program can inspect and tighten its own permissions through the
+[`Deno.permissions`](/api/deno/#permissions) API. `query` reports whether a
+permission is granted, `request` prompts for one on demand, and `revoke`
+downgrades a granted permission back to the prompt state:
+
+```ts
+// Read a config file at startup, then give up read access.
+const config = JSON.parse(await Deno.readTextFile("./config.json"));
+await Deno.permissions.revoke({ name: "read" });
+
+// Later reads now have to prompt again, and fail outright under --no-prompt.
+```
+
+Dropping permissions you no longer need after startup is a simple way to shrink
+the attack surface available to the rest of your code, including your
+dependencies.
 
 ## Evaluation of code
 
@@ -94,6 +163,9 @@ using all of these when executing arbitrary untrusted code:
 - Run `deno` with limited permissions and determine upfront what code actually
   needs to run (and prevent more code being loaded using `--frozen` lockfile and
   `--cached-only`).
+- Isolate the untrusted part in a
+  [Web Worker with a reduced permission set](/runtime/reference/web_platform_apis/#specifying-worker-permissions),
+  so it cannot inherit everything the main program was granted.
 - Use OS provided sandboxing mechanisms like `chroot`, `cgroups`, `seccomp`,
   etc.
 - Use a sandboxed environment like a VM or MicroVM (gVisor, Firecracker, etc).
@@ -111,7 +183,7 @@ dependencies safe over time.
 
 :::caution Advanced use only
 
-Using a permission broker changes Deno’s decision authority: CLI flags and
+Using a permission broker changes Deno's decision authority: CLI flags and
 prompts no longer apply. Ensure your broker process is resilient, audited, and
 available before enabling `DENO_PERMISSION_BROKER_PATH`.
 
