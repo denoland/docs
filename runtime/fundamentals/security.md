@@ -109,14 +109,20 @@ declaring them in your configuration file.
 A few permissions grant access to things Deno cannot sandbox, so granting them
 is effectively granting full access:
 
-- `--allow-run` lets the program spawn subprocesses, and a subprocess runs with
-  its own permissions, not the restricted set of the Deno process that started
-  it. A program that can run `deno` or a shell can launch a second program with
-  full access. Limit it to specific executables where you can
-  (`--allow-run=git`), and never combine `--allow-run=deno` with a sandboxed
-  parent.
+- `--allow-run` lets the program spawn subprocesses. A subprocess runs as a
+  separate program with its own permissions, not the restricted set you granted
+  the Deno process, so whatever it does happens outside the sandbox. This is why
+  `--allow-run=deno` is especially dangerous: a script that can start a new
+  `deno` process can start it with `--allow-all`, inheriting none of the
+  parent's limits and escaping the sandbox entirely. Grant `--allow-run` only
+  for specific, trusted executables where you can (`--allow-run=git`), and avoid
+  giving a sandboxed program the ability to launch `deno` or a shell.
 - `--allow-ffi` loads native libraries through [FFI](/runtime/fundamentals/ffi/)
-  or Node-API addons. Native code is not bound by Deno's permissions at all.
+  or Node-API addons. Deno enforces permissions in the JavaScript layer, but a
+  native library runs as compiled machine code in the same process and can issue
+  system calls directly. Once loaded, it can read files, open sockets, or do
+  anything the operating system lets the process do, regardless of which
+  `--allow-*` flags you passed.
 
 Treat both as equivalent to `--allow-all` when deciding whether to trust the
 code you are running.
@@ -124,8 +130,11 @@ code you are running.
 ### Adjusting permissions at runtime
 
 A program can inspect and tighten its own permissions through the
-[`Deno.permissions`](/api/deno/#permissions) API. `query` reports whether a
-permission is granted, `request` prompts for one on demand, and `revoke`
+[`Deno.permissions`](/api/deno/#permissions) API.
+[`Deno.permissions.query`](/api/deno/#query-permissions) reports whether a
+permission is granted,
+[`Deno.permissions.request`](/api/deno/#request-permissions) prompts for one on
+demand, and [`Deno.permissions.revoke`](/api/deno/#revoke-permissions)
 downgrades a granted permission back to the prompt state:
 
 ```ts
