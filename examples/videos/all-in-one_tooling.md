@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "All-in-one tooling"
 description: "Learn about Deno's built-in developer tools. Watch how to use the integrated formatter, linter, and test runner to improve code quality without additional configuration or third-party dependencies."
 url: /examples/all-in-one_tooling/

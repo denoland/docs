@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "Add and remove dependencies"
 description: "Manage project dependencies with deno add and deno remove: npm and JSR packages, version pinning, dev dependencies, and aliasing packages in your import map."
 url: /examples/add_remove_dependencies_tutorial/

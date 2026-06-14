@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "Build an API server with TypeScript"
 description: "A guide to creating a RESTful API server using Hono and TypeScript in Deno. Watch how to implement CRUD operations, handle routing, manage data persistence, and build a production-ready backend service."
 url: /examples/build_api_server_ts/

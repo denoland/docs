@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Use Testing Library with Deno"
 description: "Test DOM behavior with @testing-library/dom and happy-dom in deno test: querying by role and text, simulating events, and the permissions the setup needs."
 url: /examples/testing_library_tutorial/

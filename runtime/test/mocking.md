@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "Mocking and test doubles"
 description: "Isolate the code under test with spies, stubs, mocks, and fake time using the Deno Standard Library's @std/testing package."
 oldUrl:

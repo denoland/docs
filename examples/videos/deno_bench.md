@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-15
 title: "Benchmarking with Deno bench"
 description: "Learn how to measure code performance using Deno's built-in benchmarking tool. Discover baseline comparisons, grouped benchmarks, and precise measurement techniques for optimizing your TypeScript and JavaScript code."
 url: /examples/deno_bench/

@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "TypeScript and JSX"
 description: "Learn how Deno runs TypeScript and JSX out of the box, with zero configuration or extra tooling required."
 url: /examples/ts_jsx/

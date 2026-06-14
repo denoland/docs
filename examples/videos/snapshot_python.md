@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-26
 title: "Safe Cloud Code Execution with Snapshots"
 description: "Deno Sandbox lets you spin up isolated cloud VMs programmatically.  With the snapshots feature, you can pre-install an entire environment once and boot it without waiting for installs every time after."
 url: /examples/snapshot_python_video/

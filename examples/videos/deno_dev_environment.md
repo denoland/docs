@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "Your Deno Dev Environment"
 description: "Learn how to set up your Deno development environment. Watch how to install Deno, configure VS Code, enable type checking and autocomplete, and optimize your TypeScript development workflow."
 url: /examples/deno_dev_environment/

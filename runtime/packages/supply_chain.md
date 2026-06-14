@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "Supply chain management"
 description: "Keep Deno dependencies deterministic and safe: lockfile discipline, minimum dependency age, deno audit, intentional updates, and a recommended CI baseline."
 ---
