@@ -1,12 +1,12 @@
 ---
 last_modified: 2026-06-15
 title: "Peer dependencies"
-description: "How Deno resolves npm peer dependencies: what peerDependencies mean, providing them from your own project, how the node_modules layout affects resolution, optional peers, and fixing unmet peer dependency errors."
+description: "Peer dependencies are an npm and package.json feature. deno.json has no peerDependencies field or equivalent. How Deno resolves peer dependencies when you consume npm packages, the node_modules layout caveat, optional peers, and fixing unmet-peer errors."
 ---
 
-A peer dependency is a package that one of your dependencies expects _your_
-project to provide, instead of bundling its own copy. Packages declare them in
-the `peerDependencies` field of their `package.json`:
+Peer dependencies are an npm feature. A package declares them in its
+`package.json` to say it expects the project that installs it to provide a
+compatible copy of another package, instead of bundling its own:
 
 ```json title="package.json (inside an npm package)"
 {
@@ -22,17 +22,29 @@ share a single copy of a package. A React component library, for example,
 declares `react` as a peer dependency so it renders with the exact React your
 app already uses, rather than pulling in a second, possibly mismatched, copy.
 
-## How Deno resolves peer dependencies
+## `peerDependencies` lives in `package.json`, not `deno.json`
 
-Deno reads the `peerDependencies` of the npm packages you install and resolves
-them from your project's dependency graph, the same way npm and other package
-managers do. The package that declares the peer dependency uses the version your
-project provides.
+`peerDependencies` is a `package.json` field, and that is the only place Deno
+reads peer dependencies from. **`deno.json` has no `peerDependencies` field and
+no equivalent.** Its `imports` map resolves module specifiers to locations; it
+is an import map, not an npm-style manifest that separates regular, dev, and
+peer dependencies.
 
-Because the host project is expected to supply the package, you list the peer
-dependency among your own dependencies. Add it to the `imports` in `deno.json`
-(or to `dependencies` in `package.json` if you use one) alongside the package
-that needs it:
+In practice that means:
+
+- **Authoring a package.** If you publish a package that needs the host project
+  to supply a dependency, you declare that in a `package.json` using
+  `peerDependencies`. There is no way to express it in `deno.json`.
+- **Consuming a package.** When you install an npm package, Deno reads its
+  `peerDependencies` and resolves them from your project's dependency graph, the
+  same way npm does. You satisfy a peer dependency by making the package
+  resolvable in your project, whether your project uses `deno.json` or
+  `package.json`.
+
+## Providing a peer dependency
+
+Add the peer dependency alongside the package that needs it. In a `deno.json`
+project, list both in `imports`:
 
 ```json title="deno.json"
 {
@@ -43,8 +55,11 @@ that needs it:
 }
 ```
 
-With both listed, `some-react-plugin` resolves its `react` peer dependency to
-the same `npm:react@^19` your application imports.
+`some-react-plugin` then resolves its `react` peer dependency to the same
+`npm:react@^19` your application imports. You are not declaring a peer
+dependency here, only making `react` available in the graph so the plugin's
+declared peer can resolve to it. In a `package.json` project, you list `react`
+in `dependencies`, exactly as you would in Node.
 
 ## node_modules layout and peer dependencies
 
@@ -71,7 +86,8 @@ manually-managed `node_modules` directory):
 
 ## Optional peer dependencies
 
-A package can mark a peer dependency as optional through `peerDependenciesMeta`:
+A package can mark a peer dependency as optional through `peerDependenciesMeta`
+in its `package.json`:
 
 ```json title="package.json (inside an npm package)"
 {
