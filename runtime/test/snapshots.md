@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "Snapshot testing"
 description: "Capture program output as reference snapshots with @std/testing, compare against them on every run, and update them with deno test -- --update."
 oldUrl:

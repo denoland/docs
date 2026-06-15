@@ -34,6 +34,25 @@ export const sidebar = [
       {
         title: "Dependency management",
         href: "/runtime/packages/",
+        disclosure: true,
+        items: [
+          {
+            title: "Publishing",
+            href: "/runtime/packages/publishing/",
+          },
+          {
+            title: "Supply chain",
+            href: "/runtime/packages/supply_chain/",
+          },
+          {
+            title: "Peer dependencies",
+            href: "/runtime/packages/peer_dependencies/",
+          },
+          {
+            title: "Private repositories",
+            href: "/runtime/packages/private_repositories/",
+          },
+        ],
       },
       {
         title: "Web development",
@@ -81,14 +100,32 @@ export const sidebar = [
       {
         title: "Debugging",
         href: "/runtime/fundamentals/debugging/",
+        disclosure: true,
+        items: [
+          {
+            title: "CPU profiling",
+            href: "/runtime/fundamentals/cpu_profiling/",
+          },
+        ],
       },
       {
         title: "Migrating from Node",
         href: "/runtime/migrate/",
+        disclosure: true,
+        items: [
+          {
+            title: "Package manager",
+            href: "/runtime/migrate/switch_package_manager/",
+          },
+        ],
       },
       {
         title: "Building CLI apps",
         href: "/runtime/cli_apps/",
+      },
+      {
+        title: "Deploying your app",
+        href: "/runtime/deploy/",
       },
     ],
   },

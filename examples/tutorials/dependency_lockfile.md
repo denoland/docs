@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "Lock dependencies with deno.lock"
 description: "Use deno.lock for reproducible installs: what the lockfile records, reviewing lockfile diffs, frozen lockfiles for CI with --frozen and deno ci, and regenerating or relocating the lockfile."
 url: /examples/dependency_lockfile_tutorial/
@@ -123,4 +124,4 @@ deno install
 Set `"lock": false` to disable the lockfile entirely (not recommended for
 applications). For the full picture, including supply chain practices built on
 the lockfile, see
-[Integrity checking and lock files](/runtime/packages/#integrity-checking-and-lock-files).
+[Integrity checking and lock files](/runtime/packages/#lockfile-and-reproducible-installs).

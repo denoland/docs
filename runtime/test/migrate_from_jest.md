@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "Migrating from Jest"
 description: "Move a Jest test suite to deno test: describe/it via node:test, expect mappings, mock function equivalents, snapshot testing, fake timers, and translating Jest configuration."
 ---

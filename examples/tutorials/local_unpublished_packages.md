@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "Use local and unpublished packages"
 description: "Work with code that isn't on a registry: link a local package copy with the links field, import straight from HTTPS URLs including private GitHub repos, and know which specifiers Deno does not support."
 url: /examples/local_unpublished_packages_tutorial/
@@ -85,7 +86,7 @@ change underneath you.
 For private repositories, set `DENO_AUTH_TOKENS` to a personal access token
 scoped to the host, e.g.
 `DENO_AUTH_TOKENS=a1b2c3d4e5f6@raw.githubusercontent.com`; see
-[Private repositories](/runtime/packages/#private-repositories) for details.
+[Private repositories](/runtime/packages/private_repositories/) for details.
 
 :::caution
 
