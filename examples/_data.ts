@@ -1023,6 +1023,12 @@ export const items = [
     category: "AI",
   },
   {
+    title: "Stream a Claude response to the browser",
+    href: "/examples/anthropic_sse/",
+    type: "example",
+    category: "AI",
+  },
+  {
     title: "Connect to OpenAI - Chat completion",
     href: "/examples/openai_chat_completion/",
     type: "example",
