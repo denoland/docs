@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-06-15
 title: "deno task"
 oldUrl:
   - /runtime/tools/task_runner/
@@ -591,9 +591,9 @@ files. That can lead to errors such as `Argument list too long` or type-checking
 files you didn't intend to.
 
 For `deno check` and `deno fmt`, prefer running them without glob arguments and
-using the [`exclude`](/runtime/fundamentals/configuration/) option in your
-`deno.json` (`node_modules` is excluded by default), or disable recursion for
-the task with `shopt -u globstar`.
+using the [`exclude`](/runtime/reference/deno_json/#include-and-exclude) option
+in your `deno.json` (`node_modules` is excluded by default), or disable
+recursion for the task with `shopt -u globstar`.
 
 :::
 
