@@ -849,6 +849,30 @@ export const items = [
     category: "Web frameworks and libraries",
   },
   {
+    title: "Upload files to S3-compatible storage",
+    href: "/examples/s3_upload/",
+    type: "example",
+    category: "Web frameworks and libraries",
+  },
+  {
+    title: "Accept payments with Stripe Checkout",
+    href: "/examples/stripe_checkout/",
+    type: "example",
+    category: "Web frameworks and libraries",
+  },
+  {
+    title: "Send email with Resend",
+    href: "/examples/send_email/",
+    type: "example",
+    category: "Web frameworks and libraries",
+  },
+  {
+    title: "Send email with SendGrid",
+    href: "/examples/send_email_sendgrid/",
+    type: "example",
+    category: "Web frameworks and libraries",
+  },
+  {
     title: "Build an Astro site with Deno",
     href: "/examples/astro_tutorial/",
     type: "tutorial",
@@ -1787,6 +1811,30 @@ export const items = [
   {
     title: "HTTP server: Verifying webhook signatures",
     href: "/examples/http_server_webhooks/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Sign in with GitHub (OAuth)",
+    href: "/examples/oauth_github/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Authentication with Auth.js",
+    href: "/examples/authjs_github/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Email and password auth with Better Auth",
+    href: "/examples/better_auth/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Protect routes with JWT in Hono",
+    href: "/examples/hono_jwt_auth/",
     type: "example",
     category: "Network",
   },
