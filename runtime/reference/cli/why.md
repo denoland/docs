@@ -10,9 +10,9 @@ description: "Explain why a package is installed by showing its dependency chain
 The `deno why` command explains why a particular package is in your dependency
 tree by printing every path from your project's direct dependencies down to the
 queried package. It reads the
-[lockfile](/runtime/fundamentals/modules/#integrity-checking-and-lock-files), so
-it works regardless of which node_modules / npm resolver mode you use and
-without touching the network.
+[lockfile](/runtime/packages/#lockfile-and-reproducible-installs), so it works
+regardless of which node_modules / npm resolver mode you use and without
+touching the network.
 
 It pairs with [`deno add`](/runtime/reference/cli/add/) and
 [`deno remove`](/runtime/reference/cli/remove/): once you know _why_ a

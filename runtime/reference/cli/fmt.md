@@ -14,7 +14,7 @@ description: "Format your code with Deno's built-in formatter"
 
 Deno ships with a built-in code formatter based on [dprint](https://dprint.dev/)
 that auto-formats your code to a consistent style. For a broader overview, see
-[Linting and Formatting](/runtime/fundamentals/linting_and_formatting/).
+[Linting and Formatting](/runtime/lint_and_format/).
 
 ## Basic usage
 
@@ -79,8 +79,8 @@ Customize formatting options in your `deno.json`:
 }
 ```
 
-See the [Configuration](/runtime/fundamentals/configuration/#formatting) page
-for all available options.
+See the [Configuration](/runtime/reference/deno_json/#formatting) page for all
+available options.
 
 ## Including and excluding files
 
@@ -116,6 +116,8 @@ deno fmt --ignore=dist/,build/
 | JSONC                | `.jsonc`                                               |                                                                                        |
 | CSS                  | `.css`                                                 |                                                                                        |
 | HTML                 | `.html`                                                |                                                                                        |
+| XML                  | `.xml`                                                 |                                                                                        |
+| SVG                  | `.svg`                                                 |                                                                                        |
 | [Nunjucks][Nunjucks] | `.njk`                                                 |                                                                                        |
 | [Vento][Vento]       | `.vto`                                                 |                                                                                        |
 | YAML                 | `.yml`, `.yaml`                                        |                                                                                        |

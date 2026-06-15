@@ -72,7 +72,7 @@ This comment tells Deno to use the types from the `@types/express` package.
 
 When you initialized the project, Deno set up a task which will run the main.ts
 file, you can see it in the `deno.json` file. Update the `dev` task to include
-the [`--allow-net`](/runtime/fundamentals/security/#network-access) flag:
+the [`--allow-net`](/runtime/reference/permissions/#network-access) flag:
 
 ```jsonc
 {

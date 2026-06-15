@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-01-27
 title: "Interactive JavaScript REPL"
 description: "Learn how to provide an interactive Deno REPL in a sandbox."
 url: /examples/sandbox_javascript_repl/

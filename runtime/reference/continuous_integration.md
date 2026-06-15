@@ -1,16 +1,16 @@
 ---
-last_modified: 2025-11-21
+last_modified: 2026-06-14
 title: "Continuous integration"
 description: "Guide to setting up continuous integration (CI) pipelines for Deno projects. Learn how to configure GitHub Actions workflows, run tests and linting in CI, handle cross-platform builds, and optimize pipeline performance with caching."
 oldUrl: /runtime/manual/advanced/continuous_integration
 ---
 
 Deno's built-in tools make it easy to set up Continuous Integration (CI)
-pipelines for your projects. [Testing](/runtime/fundamentals/testing),
-[linting and formatting](/runtime/fundamentals/linting_and_formatting/) your
-code can all be done with the corresponding commands `deno test`, `deno lint`
-and `deno fmt`. In addition, you can generate code coverage reports from test
-results with `deno coverage` in pipelines.
+pipelines for your projects. [Testing](/runtime/test/),
+[linting and formatting](/runtime/lint_and_format/) your code can all be done
+with the corresponding commands `deno test`, `deno lint` and `deno fmt`. In
+addition, you can generate code coverage reports from test results with
+`deno coverage` in pipelines.
 
 ## Setting up a basic pipeline
 
@@ -52,7 +52,7 @@ To expand the workflow, add any of the `deno` subcommands that you might need:
 ```yaml
 # Install the locked dependencies as a single reproducible step
 # (Deno 2.8+). Equivalent to `deno install --frozen` plus npm
-# lifecycle-script handling — see the deno ci reference page.
+# lifecycle-script handling.
 - run: deno ci
 
 # Check if the code is formatted according to Deno's default
@@ -71,6 +71,9 @@ To expand the workflow, add any of the `deno` subcommands that you might need:
 # stored as a .lcov file which integrates well with services such as Codecov, Coveralls and Travis CI.
 - run: deno coverage --lcov cov/ > cov.lcov
 ```
+
+See the [`deno ci`](/runtime/reference/cli/ci/) reference for exactly what it
+installs and the flags it accepts.
 
 ## Cross-platform workflows
 
@@ -118,7 +121,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        deno-version: [v1.x]
+        deno-version: [v2.x]
         canary: [false]
         include:
           - deno-version: canary

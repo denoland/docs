@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-05-28
 title: Command line interface
-description: "A comprehensive guide to using Deno's command-line interface (CLI). Learn about running scripts, managing permissions, using watch mode, and configuring Deno's runtime behavior through command-line flags and options."
+description: "Practical patterns for Deno's command-line interface: passing script arguments, runtime flag ordering, watch mode and its exclusions, and hot module replacement."
 oldUrl:
   - /manual/getting_started/command_line_interface
   - /runtime/manual/getting_started/command_line_interface/
@@ -16,31 +16,10 @@ standalone binaries, and a lot more. Each subcommand (`run`, `test`, `fmt`,
 `deno <subcommand> --help` to see them.
 
 For the complete list of subcommands and flags, see the
-[CLI reference](/runtime/reference/cli/). This page covers the patterns you'll
-hit early on: how to run code, how to pass arguments, and how to use watch mode.
-
-## Running scripts
-
-You can run a local TypeScript or JavaScript file by specifying its path
-relative to the current working directory:
-
-```shell
-deno run main.ts
-```
-
-Deno supports running scripts directly from URLs. This is particularly useful
-for quickly testing or running code without downloading it first:
-
-```shell
-deno run https://docs.deno.com/examples/scripts/hello_world.ts
-```
-
-You can also run a script by piping it through standard input. This is useful
-for integrating with other command-line tools or dynamically generating scripts:
-
-```shell
-cat main.ts | deno run -
-```
+[CLI reference](/runtime/reference/cli/). For the basics of running code (files,
+URLs, stdin, tasks, the permission flags), see the
+[Running code guide](/runtime/run/). This page covers the patterns that trip
+people up early: passing arguments, flag ordering, and watch mode's details.
 
 ## Passing script arguments
 
@@ -126,6 +105,34 @@ from expanding the glob:
 ```shell
 deno run --watch --watch-exclude='*.js' main.ts
 ```
+
+### Hot module replacement
+
+`deno run` also supports the `--watch-hmr` flag, which hot-replaces changed
+modules in the running process instead of restarting it. This keeps your
+application's state across edits. If hot replacement fails, the process falls
+back to a full restart.
+
+```shell
+deno run --watch-hmr main.ts
+```
+
+#### Editors with atomic save
+
+Some editors use "atomic save" (also called safe write), where the editor writes
+your changes to a temporary file and then renames it over the original on each
+save. On Linux this replaces the file with a new one on disk, which can detach
+the file watcher used by `--watch-hmr` after the first change. The symptom is
+that hot replacement works once and then stops detecting further edits to that
+module.
+
+If you hit this, disable atomic save in your editor:
+
+- **Helix**: set `[editor] atomic-save = false` (it is enabled by default).
+- **Neovim/Vim**: set `:set backupcopy=yes`.
+
+Plain `--watch` is not affected, because each change triggers a full restart
+that re-establishes the watchers.
 
 ## Where to go next
 

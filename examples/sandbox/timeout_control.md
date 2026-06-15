@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-09
 title: "Control sandbox timeout"
 description: "Learn how to control how long your sandbox stays alive using the timeout option."
 url: /examples/sandbox_timeout_control/

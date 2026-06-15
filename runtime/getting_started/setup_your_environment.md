@@ -320,8 +320,8 @@ stdout the completions. Current shells that are supported:
 Output the completions and add them to the environment:
 
 ```shell
-> deno completions bash > /usr/local/etc/bash_completion.d/deno.bash
-> source /usr/local/etc/bash_completion.d/deno.bash
+deno completions bash > /usr/local/etc/bash_completion.d/deno.bash
+source /usr/local/etc/bash_completion.d/deno.bash
 ```
 
 ### PowerShell example
@@ -329,8 +329,8 @@ Output the completions and add them to the environment:
 Output the completions:
 
 ```shell
-> deno completions powershell >> $profile
-> .$profile
+deno completions powershell >> $profile
+.$profile
 ```
 
 This will create a Powershell profile at
@@ -342,13 +342,13 @@ will be run whenever you launch the PowerShell.
 You should have a directory where the completions can be saved:
 
 ```shell
-> mkdir ~/.zsh
+mkdir ~/.zsh
 ```
 
 Then output the completions:
 
 ```shell
-> deno completions zsh > ~/.zsh/_deno
+deno completions zsh > ~/.zsh/_deno
 ```
 
 And ensure the completions get loaded in your `~/.zshrc`:
@@ -372,8 +372,8 @@ zsh and can make it easier to manage your shell configuration.
 Create the directory to store the completions and output the completions:
 
 ```shell
-> mkdir ~/.oh-my-zsh/custom/plugins/deno
-> deno completions zsh > ~/.oh-my-zsh/custom/plugins/deno/_deno
+mkdir ~/.oh-my-zsh/custom/plugins/deno
+deno completions zsh > ~/.oh-my-zsh/custom/plugins/deno/_deno
 ```
 
 Then your `.zshrc` might look something like this:
@@ -393,8 +393,20 @@ Output the completions to a `deno.fish` file into the completions directory in
 the fish config folder:
 
 ```shell
-> deno completions fish > ~/.config/fish/completions/deno.fish
+deno completions fish > ~/.config/fish/completions/deno.fish
 ```
+
+### Dynamic completions
+
+Pass the `--dynamic` flag to generate completions that are aware of your
+project. Currently this lets your shell suggest the task names defined in your
+`deno.json` when you type `deno task <TAB>`:
+
+```shell
+deno completions --dynamic zsh > ~/.zsh/_deno
+```
+
+Dynamic completions are unstable and may change in a future release.
 
 ## Building your own LSP integration
 

@@ -159,13 +159,30 @@ cargo install deno --locked
 
 Deno binaries can also be installed manually, by downloading a zip file at
 [github.com/denoland/deno/releases](https://github.com/denoland/deno/releases).
-These packages contain just a single executable file. You will have to set the
-executable bit on macOS and Linux.
+Each release ships one archive per platform, containing a single executable:
+
+| Platform                    | Asset                                |
+| --------------------------- | ------------------------------------ |
+| Windows x86_64              | `deno-x86_64-pc-windows-msvc.zip`    |
+| Windows ARM64               | `deno-aarch64-pc-windows-msvc.zip`   |
+| macOS ARM64 (Apple Silicon) | `deno-aarch64-apple-darwin.zip`      |
+| macOS x86_64 (Intel)        | `deno-x86_64-apple-darwin.zip`       |
+| Linux x86_64                | `deno-x86_64-unknown-linux-gnu.zip`  |
+| Linux ARM64                 | `deno-aarch64-unknown-linux-gnu.zip` |
+
+Unzip the archive and place the `deno` executable somewhere on your `PATH`. You
+will have to set the executable bit on macOS and Linux. Each asset has a
+matching `.sha256sum` file for verifying the download.
 
 ## Docker
 
-For more information and instructions on the official Docker images:
-[https://github.com/denoland/deno_docker](https://github.com/denoland/deno_docker)
+Deno publishes official images to
+[Docker Hub](https://hub.docker.com/r/denoland/deno) and the
+[GitHub Container Registry](https://github.com/denoland/deno/pkgs/container/deno),
+in `debian`, `ubuntu`, `alpine`, `distroless`, and `bin` variants.
+
+See [Deno and Docker](/runtime/reference/docker/) for Dockerfiles, multi-stage
+builds, Docker Compose, and other best practices.
 
 ## Installation location
 

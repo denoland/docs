@@ -28,7 +28,7 @@ creates JavaScript bindings to the functions they export.
 ## Security considerations
 
 FFI requires explicit permission using the
-[`--allow-ffi`](/runtime/fundamentals/security#ffi-foreign-function-interface)
+[`--allow-ffi`](/runtime/reference/permissions/#ffi-(foreign-function-interface))
 flag, as native code runs outside of Deno's security sandbox:
 
 ```sh

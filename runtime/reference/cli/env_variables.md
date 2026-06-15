@@ -10,8 +10,8 @@ There are several environment variables which can impact the behavior of Deno:
 Audit every permission access (allowed or denied). Set to a file path to write a
 JSONL audit log, or to the literal value `otel` to emit each access as an
 OpenTelemetry log record via the configured exporter. See
-[permissions](/runtime/fundamentals/security/#permission-flags) for the field
-set and the OTel attribute names.
+[permissions](/runtime/reference/permissions/) for the field set and the OTel
+attribute names.
 
 ### DENO_AUTH_TOKENS
 

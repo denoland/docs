@@ -1,4 +1,4 @@
-import { Sidebar, SidebarNav } from "../types.ts";
+import type { Sidebar, SidebarNavItem } from "../types.ts";
 
 export const sidebar = [
   {
@@ -39,7 +39,7 @@ export const sidebar = [
         href: "/deploy/reference/builds/",
       },
       {
-        title: "Environment Variables and Contexts",
+        title: "Env Vars and Contexts",
         href: "/deploy/reference/env_vars_and_contexts/",
       },
       {
@@ -177,4 +177,4 @@ export const SidebarNav = [
     title: "Subhosting",
     href: "/subhosting/manual/",
   },
-] satisfies SidebarNav;
+] satisfies SidebarNavItem[];

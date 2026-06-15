@@ -567,6 +567,15 @@
           "usage": "--tunnel[=<tunnel>]"
         },
         {
+          "name": "use-env-proxy",
+          "short": null,
+          "long": "use-env-proxy",
+          "required": false,
+          "help": "Use HTTP_PROXY, HTTPS_PROXY, and NO_PROXY for node:http/node:https",
+          "help_heading": null,
+          "usage": "--use-env-proxy"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
@@ -3489,6 +3498,24 @@
           "help": "Create a self-extracting binary that extracts the embedded file system to disk on first run and then runs from there",
           "help_heading": "Compile options",
           "usage": "--self-extracting"
+        },
+        {
+          "name": "bundle",
+          "short": null,
+          "long": "bundle",
+          "required": false,
+          "help": "\u001b[33mExperimental.\u001b[39m Bundle the entrypoint with esbuild before embedding, instead of shipping the whole node_modules tree.\n  \u001b[38;5;245mProduces a smaller binary with faster startup, at the cost of dropping dynamic require/import patterns that can't be statically traced.\u001b[39m",
+          "help_heading": "Compile options",
+          "usage": "--bundle"
+        },
+        {
+          "name": "minify",
+          "short": null,
+          "long": "minify",
+          "required": false,
+          "help": "\u001b[33mExperimental.\u001b[39m Minify the bundled output. Only meaningful with \u001b[36m--bundle\u001b[39m.\n  \u001b[38;5;245mReduces both the embedded bundle size and runtime memory use, at the cost of less readable stack traces.\u001b[39m",
+          "help_heading": "Compile options",
+          "usage": "--minify"
         },
         {
           "name": "ext",
@@ -6600,15 +6627,6 @@
           "usage": "--set-version <VERSION>"
         },
         {
-          "name": "no-deno-shim",
-          "short": null,
-          "long": "no-deno-shim",
-          "required": false,
-          "help": "Don't automatically add @deno/shim-deno dependency",
-          "help_heading": null,
-          "usage": "--no-deno-shim"
-        },
-        {
           "name": "no-source-maps",
           "short": null,
           "long": "no-source-maps",
@@ -7307,6 +7325,15 @@
           "help": "Disable prefixing the output of concurrently-executing tasks with the task name",
           "help_heading": null,
           "usage": "--no-prefix"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
         },
         {
           "name": "node-modules-dir",
@@ -9453,6 +9480,11 @@
       "example": null
     },
     {
+      "name": "DENO_PATCH_REACT_CVE",
+      "description": "Enable load-time source patches mitigating known React Server\nComponents CVEs (CVE-2025-55182, CVE-2025-55184).",
+      "example": null
+    },
+    {
       "name": "DENO_SERVE_ADDRESS",
       "description": "Override address for Deno.serve",
       "example": "(\"tcp:0.0.0.0:8080\", \"unix:/tmp/deno.sock\", or \"vsock:1234:5678\")"
@@ -9501,6 +9533,11 @@
       "name": "NO_PROXY",
       "description": "Comma-separated list of hosts which do not use a proxy.",
       "example": "(module downloads, fetch)"
+    },
+    {
+      "name": "NODE_USE_ENV_PROXY",
+      "description": "If set to 1, node:http and node:https honor HTTP_PROXY,\nHTTPS_PROXY, and NO_PROXY from the environment.",
+      "example": null
     },
     {
       "name": "NPM_CONFIG_REGISTRY",

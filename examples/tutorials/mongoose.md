@@ -6,6 +6,7 @@ url: /examples/mongoose_tutorial/
 oldUrl:
   - /runtime/manual/examples/how_to_with_npm/mongoose/
   - /runtime/tutorials/how_to_with_npm/mongoose/
+  - /examples/mongoose/
 ---
 
 [Mongoose](https://mongoosejs.com/) is a popular, schema-based library that
@@ -15,8 +16,7 @@ MongoDB validation, casting, and other relevant business logic.
 This tutorial will show you how to setup Mongoose and MongoDB with your Deno
 project.
 
-[View source](https://github.com/denoland/examples/tree/main/with-mongoose) or
-[check out the video guide](https://youtu.be/dmZ9Ih0CR9g).
+[View source](https://github.com/denoland/examples/tree/main/with-mongoose).
 
 ## Creating a Mongoose Model
 

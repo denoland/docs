@@ -60,6 +60,40 @@ if (sidebar) {
   });
 }
 
+if (sidebar) {
+  // Opt-in disclosure groups (item.disclosure in a section's _data.ts).
+  // Each group is independent: opening one never closes another. The server
+  // renders the active trail open; other groups restore the user's last
+  // choice from localStorage, defaulting to collapsed. The legacy accordion
+  // above is untouched and handles all non-opted-in groups.
+  sidebar.querySelectorAll("[data-disclosure]").forEach((group) => {
+    const list = group.querySelector(":scope > ul");
+    const buttons = group.querySelectorAll("[data-disclosure-toggle]");
+    if (!list) return;
+    const storageKey = `sidebar-open:${list.id}`;
+
+    const setOpen = (open, persist) => {
+      group.setAttribute("data-open", String(open));
+      list.hidden = !open;
+      buttons.forEach((b) => b.setAttribute("aria-expanded", String(open)));
+      if (persist) localStorage.setItem(storageKey, String(open));
+    };
+
+    if (
+      group.getAttribute("data-open") !== "true" &&
+      localStorage.getItem(storageKey) === "true"
+    ) {
+      setOpen(true, false);
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setOpen(group.getAttribute("data-open") !== "true", true);
+      });
+    });
+  });
+}
+
 // Wire up the hamburger toggle button
 if (sidebar && button) {
   button.addEventListener("click", () => {
@@ -163,31 +197,63 @@ if (currentSidebarItem) {
 const desktopToc = document.querySelector("#toc");
 
 if (desktopToc) {
-  const tocItems = document.querySelectorAll("#toc a");
-  const pageHeadings = document.querySelectorAll(
-    ".markdown-body :where(h1, h2, h3, h4, h5, h6)",
+  const tocItems = Array.from(document.querySelectorAll("#toc a"));
+  // Only track headings that actually have an entry in the TOC — otherwise a
+  // heading without a TOC link would clear the active item and leave nothing
+  // highlighted.
+  const headings = Array.from(
+    document.querySelectorAll(
+      ".markdown-body :where(h1, h2, h3, h4, h5, h6)",
+    ),
+  ).filter(
+    (h) => h.id && document.querySelector(`#toc a[href="#${h.id}"]`),
   );
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const id = entry.target.id;
-        const tocLink = document.querySelector(`#toc a[href="#${id}"]`);
 
-        if (entry.isIntersecting) {
-          tocItems.forEach((item) => item.classList.remove("active"));
-          if (tocLink) {
-            tocLink.classList.add("active");
-          }
+  if (headings.length > 0) {
+    const updateActive = () => {
+      const header = document.querySelector("header");
+      const line = (header ? header.getBoundingClientRect().height : 64) + 24;
+
+      // The active section is the last heading whose top has scrolled past the
+      // line just below the sticky header.
+      let current = headings[0];
+      for (const h of headings) {
+        if (h.getBoundingClientRect().top - line <= 0) {
+          current = h;
+        } else {
+          break;
         }
-      });
-    },
-    {
-      rootMargin: "-0% 0px -75% 0px",
-      threshold: 0.5,
-    },
-  );
+      }
 
-  pageHeadings.forEach((heading) => {
-    observer.observe(heading);
-  });
+      // When scrolled to the very bottom, pin to the last heading so short
+      // trailing sections still register.
+      const atBottom = window.innerHeight + Math.ceil(window.scrollY) >=
+        document.documentElement.scrollHeight - 2;
+      if (atBottom) {
+        current = headings[headings.length - 1];
+      }
+
+      const activeHref = `#${current.id}`;
+      tocItems.forEach((item) => {
+        item.classList.toggle(
+          "active",
+          item.getAttribute("href") === activeHref,
+        );
+      });
+    };
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        updateActive();
+        ticking = false;
+      });
+    };
+
+    document.addEventListener("scroll", onScroll, { passive: true });
+    globalThis.addEventListener("resize", onScroll, { passive: true });
+    updateActive();
+  }
 }
