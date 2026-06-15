@@ -1874,6 +1874,12 @@ export const items = [
     type: "example",
     category: "Web standard APIs",
   },
+  {
+    title: "Use Vite with Deno",
+    href: "/examples/vite_tutorial/",
+    type: "tutorial",
+    category: "Web frameworks and libraries",
+  },
 ];
 
 // Section order on the landing page and in the sidebar.

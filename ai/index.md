@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-19
 title: "AI entrypoint"
 description: "Overview and key resources for LLMs and AI agents using the Deno docs"
 url: /ai/

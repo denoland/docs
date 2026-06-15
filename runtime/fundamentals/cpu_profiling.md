@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "CPU profiling"
 description: "Profile Deno programs with the built-in CPU profiler: collecting profiles, Markdown and flamegraph reports, Chrome DevTools analysis, and profiling tips."
 ---

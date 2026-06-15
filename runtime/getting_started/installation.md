@@ -176,8 +176,13 @@ matching `.sha256sum` file for verifying the download.
 
 ## Docker
 
-For more information and instructions on the official Docker images:
-[https://github.com/denoland/deno_docker](https://github.com/denoland/deno_docker)
+Deno publishes official images to
+[Docker Hub](https://hub.docker.com/r/denoland/deno) and the
+[GitHub Container Registry](https://github.com/denoland/deno/pkgs/container/deno),
+in `debian`, `ubuntu`, `alpine`, `distroless`, and `bin` variants.
+
+See [Deno and Docker](/runtime/reference/docker/) for Dockerfiles, multi-stage
+builds, Docker Compose, and other best practices.
 
 ## Installation location
 

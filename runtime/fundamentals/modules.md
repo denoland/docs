@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-06-14
 title: "Modules"
 description: "Learn how Deno's ECMAScript module system works: importing local and third-party modules, import attributes, import maps, and supported import types such as Wasm and data URLs."
 oldUrl:
@@ -11,15 +11,23 @@ oldUrl:
 
 Deno uses
 [ECMAScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
-as its default module system to align with modern JavaScript standards and to
-promote a more efficient and consistent development experience. It's the
-official standard for JavaScript modules, allows for better tree-shaking,
-improved tooling integration, and native support across different environments.
+as its primary module system, the official standard for JavaScript. You share
+code between files with standard `import` and `export` statements and run it
+directly, with no bundler or build step. This is the same module system browsers
+use, so the code you write stays portable across environments.
 
-By adopting ECMAScript modules, Deno ensures compatibility with the
-ever-evolving JavaScript ecosystem. For developers, this means a streamlined and
-predictable module system that avoids the complexities associated with legacy
-module formats like CommonJS.
+Deno also runs Node's older CommonJS modules (`require` and `module.exports`),
+so existing npm packages and Node projects work without conversion. The two
+systems are fully supported and interoperate, but ECMAScript modules are
+recommended for new code; reach for CommonJS mainly when a dependency or an
+existing project still uses it.
+
+Deno decides which system a file uses from its extension and the nearest
+`package.json`: a `.mjs` file is always an ES module, a `.cjs` file is always
+CommonJS, and `.js` and `.ts` files are treated as ES modules unless a
+`package.json` sets `"type": "commonjs"`. The rest of this page covers ES
+modules; see [CommonJS support](/runtime/fundamentals/node/#commonjs-support)
+for how `require`, module resolution, and ESM/CommonJS interop work.
 
 ## Importing modules
 
@@ -51,6 +59,65 @@ import { add } from "./calc";
 // CORRECT: includes file extension
 import { add } from "./calc.ts";
 ```
+
+## Dynamic imports
+
+The `import` statements above are static: the specifier is a string literal and
+the module loads before your code runs. You can also load a module on demand
+with the `import()` function, which returns a promise for the module's
+namespace:
+
+```ts title="main.ts"
+const { add } = await import("./calc.ts");
+
+console.log(add(1, 2)); // 3
+```
+
+Because `import()` runs at runtime, the specifier can be computed and the module
+is only fetched and evaluated when the call executes. This is useful for loading
+code conditionally or keeping a rarely used feature out of the startup path:
+
+```ts
+if (Deno.args.includes("--greet")) {
+  const { greet } = await import("./greet.ts");
+  greet();
+}
+```
+
+A dynamic `import()` whose specifier is a string literal is part of the static
+module graph and loads without extra permissions. One whose specifier is
+computed at runtime is checked against the permission system when it runs: local
+paths need `--allow-read` and remote URLs need `--allow-import`. See
+[Security](/runtime/fundamentals/security/) for details.
+
+## Import metadata
+
+Inside any module, `import.meta` exposes information about the current module
+and helpers for resolving paths relative to it:
+
+```ts title="main.ts"
+console.log(import.meta.url); // file:///path/to/main.ts
+console.log(import.meta.main); // true if this is the entry module
+console.log(import.meta.filename); // /path/to/main.ts (local modules only)
+console.log(import.meta.dirname); // /path/to (local modules only)
+console.log(import.meta.resolve("./data.json")); // resolves a specifier to a URL
+```
+
+`import.meta.main` is a common way to make a file work both as an entry point
+and as an importable library:
+
+```ts title="server.ts"
+export function createServer() {/* ... */}
+
+// Only start the server when run directly, not when imported.
+if (import.meta.main) {
+  createServer();
+}
+```
+
+`filename` and `dirname` are `undefined` for remote modules. For a full
+walkthrough, see the
+[module metadata tutorial](/examples/module_metadata_tutorial/).
 
 ## Import attributes
 
@@ -112,7 +179,7 @@ property from the namespace:
 ```ts title="main.ts"
 import defer * as expensive from "./expensive.ts";
 
-console.log("startup is fast — expensive.ts has not run yet");
+console.log("startup is fast: expensive.ts has not run yet");
 
 // Touching any property triggers synchronous evaluation
 console.log(expensive.value);

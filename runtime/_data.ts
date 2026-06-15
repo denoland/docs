@@ -45,6 +45,10 @@ export const sidebar = [
             href: "/runtime/packages/supply_chain/",
           },
           {
+            title: "Peer dependencies",
+            href: "/runtime/packages/peer_dependencies/",
+          },
+          {
             title: "Private repositories",
             href: "/runtime/packages/private_repositories/",
           },
@@ -111,6 +115,10 @@ export const sidebar = [
       {
         title: "Building CLI apps",
         href: "/runtime/cli_apps/",
+      },
+      {
+        title: "Deploying your app",
+        href: "/runtime/deploy/",
       },
     ],
   },

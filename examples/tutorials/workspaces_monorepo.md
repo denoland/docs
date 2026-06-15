@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Configure a monorepo with workspaces"
 description: "Set up a Deno workspace with multiple packages: member names and exports, glob patterns, root-only options, shared imports, and centralized dependency versions with catalogs."
 url: /examples/workspaces_monorepo_tutorial/

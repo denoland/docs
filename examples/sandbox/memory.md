@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-09
 title: "Configure sandbox memory"
 description: "Learn how to configure the memory allocated to a sandbox"
 url: /examples/sandbox_memory/

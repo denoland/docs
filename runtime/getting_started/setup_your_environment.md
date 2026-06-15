@@ -396,6 +396,18 @@ the fish config folder:
 deno completions fish > ~/.config/fish/completions/deno.fish
 ```
 
+### Dynamic completions
+
+Pass the `--dynamic` flag to generate completions that are aware of your
+project. Currently this lets your shell suggest the task names defined in your
+`deno.json` when you type `deno task <TAB>`:
+
+```shell
+deno completions --dynamic zsh > ~/.zsh/_deno
+```
+
+Dynamic completions are unstable and may change in a future release.
+
 ## Building your own LSP integration
 
 If you're building or maintaining a community integration with the Deno language
