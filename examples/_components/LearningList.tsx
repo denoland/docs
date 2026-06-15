@@ -14,11 +14,18 @@ export function TypeIcon({ type }: { type: string }) {
   }
 }
 
+const difficultyDot: Record<string, string> = {
+  beginner: "bg-green-500",
+  intermediate: "bg-yellow-500",
+  advanced: "bg-red-500",
+};
+
 export function LearningList(
   props: {
     title: string;
     items: SidebarItem[];
     descriptions?: Record<string, string>;
+    difficulties?: Record<string, string>;
     isReference?: boolean;
   },
 ) {
@@ -41,6 +48,7 @@ export function LearningList(
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 !pl-0 !list-none">
         {props.items.map((item) => {
           const description = props.descriptions?.[item.href];
+          const difficulty = props.difficulties?.[item.href];
           return (
             <li className="!mt-0" data-category={item.type}>
               <a
@@ -60,6 +68,18 @@ export function LearningList(
                 {description && (
                   <span className="text-sm text-foreground-secondary line-clamp-2">
                     {description}
+                  </span>
+                )}
+                {difficulty && (
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-2 text-xs capitalize text-foreground-secondary">
+                    <span
+                      className={`inline-block w-1.5 h-1.5 rounded-full ${
+                        difficultyDot[difficulty] ?? "bg-foreground-tertiary"
+                      }`}
+                      aria-hidden="true"
+                    >
+                    </span>
+                    {difficulty}
                   </span>
                 )}
               </a>

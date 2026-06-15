@@ -27,7 +27,10 @@ function FeaturedStar() {
 }
 
 export default function LandingPage(
-  { descriptions }: { descriptions?: Record<string, string> },
+  { descriptions, difficulties }: {
+    descriptions?: Record<string, string>;
+    difficulties?: Record<string, string>;
+  },
 ) {
   const counts = { example: 0, tutorial: 0, video: 0 };
   for (const category of sidebar) {
@@ -43,6 +46,7 @@ export default function LandingPage(
           title={item.title}
           items={item.items}
           descriptions={descriptions}
+          difficulties={difficulties}
           isReference={cookbookCategories.includes(item.title)}
         />
       );

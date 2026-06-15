@@ -38,6 +38,9 @@ export default function* (
   // One-sentence description per item href, sourced from the example
   // scripts' doc comments and the tutorial/video pages' frontmatter.
   const descriptions: Record<string, string> = {};
+  // Difficulty per example href, from the script's @difficulty tag. Only
+  // examples declare one; tutorials and videos are left without a badge.
+  const difficulties: Record<string, string> = {};
 
   for (const file of walkSync("./examples/scripts/", { exts: [".ts"] })) {
     const content = Deno.readTextFileSync(file.path);
@@ -46,6 +49,9 @@ export default function* (
     const description = firstSentence(parsed.description);
     if (description) {
       descriptions[`/examples/${label}/`] = description;
+    }
+    if (parsed.difficulty) {
+      difficulties[`/examples/${label}/`] = parsed.difficulty;
     }
   }
 
@@ -59,6 +65,11 @@ export default function* (
   yield {
     url: `/examples/`,
     title: `Deno examples and tutorials`,
-    content: <data.comp.LandingPage descriptions={descriptions} />,
+    content: (
+      <data.comp.LandingPage
+        descriptions={descriptions}
+        difficulties={difficulties}
+      />
+    ),
   };
 }
