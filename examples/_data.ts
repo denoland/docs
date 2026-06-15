@@ -867,6 +867,12 @@ export const items = [
     category: "Web frameworks and libraries",
   },
   {
+    title: "Send email with SendGrid",
+    href: "/examples/send_email_sendgrid/",
+    type: "example",
+    category: "Web frameworks and libraries",
+  },
+  {
     title: "Build an Astro site with Deno",
     href: "/examples/astro_tutorial/",
     type: "tutorial",
@@ -1811,6 +1817,18 @@ export const items = [
   {
     title: "Sign in with GitHub (OAuth)",
     href: "/examples/oauth_github/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Sign in with GitHub using Arctic",
+    href: "/examples/oauth_arctic/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Protect routes with JWT in Hono",
+    href: "/examples/hono_jwt_auth/",
     type: "example",
     category: "Network",
   },
