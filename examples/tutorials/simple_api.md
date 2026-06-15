@@ -1,5 +1,7 @@
 ---
+last_modified: 2025-09-24
 title: "Simple API server"
+description: "Build a simple link shortener API with Deno KV and web standard primitives, then deploy it to Deno Deploy."
 url: /examples/simple_api_tutorial/
 oldUrl:
   - /deploy/tutorials/simple-api/

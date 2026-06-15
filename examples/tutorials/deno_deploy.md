@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-07
 title: "Deploy an app with Deno Deploy"
 description: "A step-by-step tutorial for deploying your first Deno application to Deno Deploy."
 url: /examples/deno_deploy_tutorial/

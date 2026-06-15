@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-04-11
 title: "Write a file server"
 description: "Tutorial on building a file server with Deno. Learn how to handle HTTP requests, serve static files, implement streaming responses, and use the standard library's file server module for production deployments."
 url: /examples/file_server_tutorial/
@@ -109,8 +110,7 @@ you will see the contents of your local directory.
 
 ### Using the @std/http file server in a Deno project
 
-To use the file-server in a
-[Deno project](/runtime/getting_started/first_project), you can add it to your
+To use the file-server in a [Deno project](/runtime/), you can add it to your
 `deno.json` file with:
 
 ```sh

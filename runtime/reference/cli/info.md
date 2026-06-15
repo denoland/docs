@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-05-16
 title: "deno info"
 oldUrl:
   - /runtime/manual/tools/dependency_inspector/
@@ -10,12 +11,20 @@ openGraphTitle: "deno info"
 description: "Inspect the dependencies of your project"
 ---
 
+`deno info` displays information about a module's dependency tree. See
+[Modules](/runtime/fundamentals/modules/) for more about how Deno resolves and
+caches dependencies.
+
+When you pass a local file, `deno info <file>` automatically discovers a
+`deno.json` or `deno.jsonc` configuration file in the current directory or a
+parent directory. Use `--config <file>` to specify a different configuration
+file, or `--no-config` to disable automatic config discovery.
+
 ## Example
 
-```shell
-$ deno info jsr:@std/http@1.0.0-rc.5/file-server
-local: /home/lucacasonato/.cache/deno/deps/https/jsr.io/3a0e5ef03d2090c75c81daf771ed9a73009518adfe688c333dc11d8006dc3598
-emit: /home/lucacasonato/.cache/deno/gen/https/jsr.io/3a0e5ef03d2090c75c81daf771ed9a73009518adfe688c333dc11d8006dc3598.js
+```sh
+deno info jsr:@std/http/file-server
+local: /home/user/.cache/deno/deps/https/jsr.io/...
 type: TypeScript
 dependencies: 40 unique
 size: 326.42KB
@@ -104,11 +113,19 @@ https://jsr.io/@std/http/1.0.0-rc.5/file_server.ts (24.74KB)
 
 Dependency inspector works with any local or remote ES modules.
 
+## JSON output
+
+Use `--json` to get machine-readable output, useful for tooling and CI:
+
+```sh
+deno info --json main.ts
+```
+
 ## Cache location
 
 `deno info` can be used to display information about cache location:
 
-```shell
+```sh
 deno info
 DENO_DIR location: "/Users/deno/Library/Caches/deno"
 Remote modules cache: "/Users/deno/Library/Caches/deno/deps"

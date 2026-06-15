@@ -12,9 +12,21 @@ export default function codeblockTitlePlugin(md: any) {
   ) {
     const render = defaultRender(tokens, idx, options, env, self);
 
-    const maybeTitle = (tokens[idx].info ?? "").match(/title="(.+?)"/)?.[1];
+    const info = tokens[idx].info ?? "";
+    let maybeTitle = info.match(/title="(.+?)"/)?.[1];
+
+    if (!maybeTitle) {
+      const lang = info.split(/\s+/)[0];
+      if (lang === "sh" || lang === "bash") {
+        maybeTitle = ">_";
+      }
+    }
+
     if (maybeTitle) {
-      return `<div><div class="markdownBlockTitle">${maybeTitle}</div>${render}</div>`;
+      const titleHtml = maybeTitle === ">_"
+        ? `<span aria-label="Terminal" role="img">&gt;_</span>`
+        : maybeTitle;
+      return `<div><div class="markdownBlockTitle">${titleHtml}</div>${render}</div>`;
     }
 
     return render;

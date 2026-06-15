@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-10
 title: "@std/internal"
 description: "The internal package for @std. Do not use this directly."
 jsr: jsr:@std/internal

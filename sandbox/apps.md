@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-19
 title: "Programmatic management of Deno Deploy Apps"
 description: "Use the @deno/sandbox Client to create, list, update, and delete Deno Deploy apps programmatically."
 ---

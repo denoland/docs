@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-07
 title: OIDC
 description: The Deno Deploy runtime environment acts as an OpenID Connect (OIDC) provider, enabling you to integrate with third-party services that support OIDC authentication.
 ---

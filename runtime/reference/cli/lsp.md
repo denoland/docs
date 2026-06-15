@@ -1,6 +1,11 @@
 ---
+last_modified: 2024-10-07
 title: "deno lsp"
 oldUrl: /runtime/manual/tools/lsp/
+command: lsp
+openGraphLayout: "/open_graph/cli-commands.jsx"
+openGraphTitle: "deno lsp"
+description: "Start the Deno language server, used by editors for IntelliSense, formatting, and diagnostics"
 ---
 
 :::info
@@ -11,13 +16,22 @@ IDEs with go-to-definition support and automatic code formatting.
 :::
 
 Starts the Deno language server. The language server is used by editors to
-provide features like intellisense, code formatting, and more. Read more about
-[integrating with the Deno LSP](/runtime/reference/lsp_integration/).
+provide features like IntelliSense, code formatting, and more.
 
-## Description
+## Usage
 
-The 'deno lsp' subcommand provides a way for code editors and IDEs to interact
-with Deno using the Language Server Protocol.
+```sh
+deno lsp
+```
 
-Read more about
-[how to connect editors and IDEs to `deno lsp`](https://deno.land/manual@v1.42.4/getting_started/setup_your_environment#editors-and-ides).
+The language server communicates over stdin/stdout using the
+[Language Server Protocol](https://microsoft.github.io/language-server-protocol/).
+You typically don't run this directly — your editor starts it automatically.
+
+## Editor setup
+
+For instructions on configuring your editor to use the Deno language server,
+see:
+
+- [Deno & VS Code](/runtime/reference/vscode/)
+- [LSP integration](/runtime/reference/lsp_integration/) for other editors

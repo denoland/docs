@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-05
 title: "Unstable feature flags"
 oldUrl:
   - /runtime/tools/unstable_flags/
@@ -42,9 +43,9 @@ The possible values in the `unstable` array are the flag names with the
 ## Configuration via environment variables
 
 Some flags can be enabled by setting a value (any value) for an environment
-variable of a given name, rather than being passed as a flag or `deno.json`
-configuration option. Flags that are settable via environment variables will be
-noted below.
+variable of a given name, rather than being passed as a flag or
+[`deno.json`](/runtime/fundamentals/configuration/) configuration option. Flags
+that are settable via environment variables will be noted below.
 
 Here's an example of setting the `--unstable-bare-node-builtins` flag via
 environment variable:
@@ -195,8 +196,8 @@ new Worker(`data:application/javascript;base64,${btoa(`postMessage("ok");`)}`, {
 
 ## `--unstable-cron`
 
-Enabling this flag makes the [`Deno.cron`](/deploy/kv/manual/cron) API available
-on the `Deno` namespace.
+Enabling this flag makes the [`Deno.cron`](/runtime/fundamentals/cron/) API
+available on the `Deno` namespace.
 
 ## `--unstable-kv`
 
@@ -261,3 +262,20 @@ console.log(`Next week: ${nextWeek}`);
 const zonedDateTime = Temporal.Now.zonedDateTimeISO("America/New_York");
 console.log(`Time in New York: ${zonedDateTime}`);
 ```
+
+## `--unstable-tsgo`
+
+Type-checks with TypeScript's native compiler (written in Go), which is often
+around 10 times faster than the default JavaScript `tsc`. Deno integrates the
+native compiler with its own module resolution and types, so Deno code
+type-checks normally.
+
+```sh
+deno check --unstable-tsgo main.ts
+```
+
+It can also be enabled with the `DENO_UNSTABLE_TSGO=1` environment variable or
+`"unstable": ["tsgo"]` in `deno.json`. This is a preview feature and is not yet
+feature-complete. See
+[TypeScript](/runtime/fundamentals/typescript/#faster-type-checking-with-the-native-compiler-tsgo)
+for details.

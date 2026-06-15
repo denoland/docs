@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-20
 title: "About Deno Deploy"
 description: "Guide to Deno Deploy features, comparison with Deploy Classic, and getting started instructions for deployment."
 ---

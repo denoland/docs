@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-11-04
 title: "Stability and releases"
 description: "Guide to Deno's stability guarantees and release process. Covering release channels, long-term support (LTS), unstable features, versioning policy, and how Deno maintains backward compatibility."
 oldUrl:

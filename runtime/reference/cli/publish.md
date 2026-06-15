@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-04-11
 title: "deno publish"
 oldUrl: /runtime/manual/tools/publish/
 command: publish
@@ -7,14 +8,17 @@ openGraphTitle: "deno publish"
 description: "Publish your package or workspace to the JSR registry"
 ---
 
+`deno publish` publishes your package to the [JSR](https://jsr.io/) registry.
+
 ## Package Requirements
 
 Your package must have a `name` and `version` and an `exports` field in its
-`deno.json` or `jsr.json` file.
+[`deno.json`](/runtime/fundamentals/configuration/) or `jsr.json` file.
 
 - The `name` field must be unique and follow the `@<scope_name>/<package_name>`
   convention.
-- The `version` field must be a valid semver version.
+- The `version` field must be a valid semver version. To bump it as part of your
+  release flow, see [`deno bump-version`](/runtime/reference/cli/bump_version/).
 - The `exports` field must point to the main entry point of the package. The
   exports field can either be specified as a single string, or as an object
   mapping entrypoint names to paths in your package.
@@ -32,35 +36,54 @@ Example:
 Before you publish your package, you must create it in the registry by visiting
 [JSR - Publish a package](https://jsr.io/new).
 
+## Excluding a workspace member
+
+When run inside a [workspace](/runtime/fundamentals/workspaces/), `deno publish`
+tries to publish every member that has a `name` and `exports`, and errors if any
+of them is missing a `version`. To opt a member out, for example an internal
+helper package that only exists to host shared `tasks`, set `"publish": false`
+in that member's `deno.json`:
+
+```jsonc title="internal-helpers/deno.json"
+{
+  "name": "@scope/internal-helpers",
+  "publish": false
+}
+```
+
+The member stays part of the workspace but is skipped by `deno publish`. See
+[Excluding a workspace member from publish](/runtime/fundamentals/workspaces/#excluding-a-workspace-member-from-publish)
+for the full discussion.
+
 ## Examples
 
 Publish your current workspace
 
-```bash
+```sh
 deno publish
 ```
 
 Publish your current workspace with a specific token, bypassing interactive
 authentication
 
-```bash
+```sh
 deno publish --token c00921b1-0d4f-4d18-b8c8-ac98227f9275
 ```
 
 Publish and check for errors in remote modules
 
-```bash
+```sh
 deno publish --check=all
 ```
 
 Perform a dry run to simulate publishing.
 
-```bash
+```sh
 deno publish --dry-run
 ```
 
 Publish using settings from a specific configuration file
 
-```bash
+```sh
 deno publish --config custom-config.json
 ```

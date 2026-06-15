@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-19
 title: Applications
 description: "Guide to managing applications in Deno Deploy, including app creation, configuration, GitHub integration, and deployment options."
 ---

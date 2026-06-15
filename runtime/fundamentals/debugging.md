@@ -1,6 +1,7 @@
 ---
+last_modified: 2026-05-20
 title: "Debugging"
-description: "Complete guide to debugging Deno applications. Learn to use Chrome DevTools, VS Code debugger, and other debugging techniques for TypeScript/JavaScript code in Deno."
+description: "Debug Deno programs with the V8 inspector: Chrome DevTools, VS Code and JetBrains setup, network inspection, worker debugging, and the --inspect flag family."
 oldUrl:
   - /runtime/manual/getting_started/debugging_your_code/
   - /runtime/manual/basics/debugging_your_code/
@@ -28,6 +29,34 @@ step through your code.
 
 ```sh
 deno run --inspect your_script.ts
+```
+
+You can optionally specify a host and port for the inspector server. Both the
+full address and a bare port number are accepted:
+
+```sh
+# Default: listen on 127.0.0.1:9229
+deno run --inspect your_script.ts
+
+# Custom port
+deno run --inspect=9230 your_script.ts
+
+# Custom host and port
+deno run --inspect=0.0.0.0:9229 your_script.ts
+```
+
+### --inspect-publish-uid
+
+By default, Deno prints the inspector WebSocket URL to stderr when it starts
+listening. You can control this with `--inspect-publish-uid`:
+
+- `stderr` (default) — prints the URL to stderr on startup
+- `http` — exposes the URL via the `/json/list` HTTP endpoint on the inspector
+  port, instead of printing it; useful for programmatic tooling that polls for
+  available targets
+
+```sh
+deno run --inspect --inspect-publish-uid=http your_script.ts
 ```
 
 :::note
@@ -67,8 +96,7 @@ deno run --inspect-brk your_script.ts
 ## Example with Chrome DevTools
 
 Let's try debugging a program using Chrome Devtools. For this, we'll use
-[@std/http/file-server](https://jsr.io/@std/http#file-server), a static file
-server.
+[`@std/http/file-server`](/runtime/reference/std/http/), a static file server.
 
 Use the `--inspect-brk` flag to break execution on the first line:
 
@@ -126,6 +154,144 @@ curl http://0.0.0.0:4507/
 At this point we can introspect the contents of the request and go step-by-step
 to debug the code.
 
+## Inspecting network traffic
+
+Starting with Deno 2.8, Chrome DevTools can inspect network traffic made by your
+program in the same way it inspects traffic in a browser tab. Run your program
+with `--inspect-wait` (or `--inspect` / `--inspect-brk`), open
+`chrome://inspect` in a Chromium derived browser, click **Inspect** on the Deno
+target, and switch to the **Network** tab.
+
+The following built-in APIs are wired into the Network tab:
+
+- `fetch()` — requests appear with `Type: fetch`
+- `node:http` and `node:https` client requests (`http.request`, `http.get`,
+  `https.request`, `https.get`) — the **Type** column reflects the response
+  content-type (e.g. `json`, `document`), so any npm library that issues HTTP
+  requests through `node:http` shows up alongside `fetch()` traffic
+- `WebSocket` — client connections appear alongside HTTP requests, with
+  handshake status and headers from the upgrade response, message frames, and a
+  close event when the socket is closed
+- [`Deno.upgradeWebSocket()`](/api/deno/~/Deno.upgradeWebSocket) — server-side
+  WebSocket upgrades are instrumented too, so you can inspect both sides of a
+  connection from a Deno-to-Deno handshake
+
+For each request you can see the URL, method, status code, request and response
+headers, request and response bodies, and timing information.
+
+Let's try it with a small program that uses `fetch()`:
+
+```ts title="net.ts"
+const res = await fetch("https://api.github.com/repos/denoland/deno");
+console.log(res.status, (await res.json()).stargazers_count);
+```
+
+Run it with `--inspect-wait` so the program pauses until DevTools connects:
+
+```sh
+$ deno run --inspect-wait --allow-net net.ts
+Debugger listening on ws://127.0.0.1:9229/...
+Visit chrome://inspect to connect to the debugger.
+Deno is waiting for debugger to connect.
+```
+
+Open `chrome://inspect`, click **Inspect** on the Deno target, and switch to the
+**Network** tab. The `fetch()` request shows up as a regular network entry, with
+the request and response panes populated:
+
+![fetch() request in the Network tab](./images/debugger-network-fetch.png)
+
+Click a request to see its headers, payload, response body, and timing
+breakdown:
+
+![Inspecting response headers and body](./images/debugger-network-response.png)
+
+The same applies to `node:http` and `node:https`, so npm libraries that issue
+HTTP requests through Node's built-in client (rather than `fetch()`) also show
+up in the Network tab. For example:
+
+```ts title="node-http.ts"
+import https from "node:https";
+
+const options = {
+  hostname: "api.github.com",
+  path: "/repos/denoland/deno",
+  headers: { "User-Agent": "deno-docs-example" },
+};
+
+https.get(options, (res) => {
+  let body = "";
+  res.on("data", (chunk) => body += chunk);
+  res.on(
+    "end",
+    () => console.log(res.statusCode, JSON.parse(body).stargazers_count),
+  );
+});
+```
+
+```sh
+$ deno run --inspect-wait --allow-net node-http.ts
+```
+
+The request appears in the Network tab with the same headers, body, and timing
+information as a `fetch()` request — the **Type** column reflects the response
+content-type (`json` for this example):
+
+![node:https request in the Network tab](./images/debugger-network-node-http.png)
+
+`WebSocket` connections appear in the same Network tab, with messages and the
+close event surfaced as the connection progresses:
+
+![WebSocket connection in the Network tab](./images/debugger-network-websocket.png)
+
+Server-side WebSockets created with
+[`Deno.upgradeWebSocket()`](/api/deno/~/Deno.upgradeWebSocket) are also
+instrumented, so you can inspect both sides of a connection — the outgoing
+client `WebSocket` and the server upgrade that accepts it. For example, a small
+echo server:
+
+```ts title="ws-server.ts"
+Deno.serve({ port: 8000 }, (req) => {
+  if (req.headers.get("upgrade") !== "websocket") {
+    return new Response("send a WebSocket request", { status: 426 });
+  }
+  const { socket, response } = Deno.upgradeWebSocket(req);
+  socket.onmessage = (e) => socket.send(`echo: ${e.data}`);
+  return response;
+});
+```
+
+```sh
+$ deno run --inspect-wait --allow-net ws-server.ts
+```
+
+After connecting DevTools and resuming execution, connect to the server from
+another terminal (for example with `deno eval`):
+
+```sh
+deno eval 'const ws = new WebSocket("ws://localhost:8000");
+  ws.onopen = () => ws.send("hello");
+  ws.onmessage = (e) => { console.log(e.data); ws.close(); };'
+```
+
+The upgrade and the message frames show up in the Network tab of the server's
+DevTools session:
+
+![Deno.upgradeWebSocket() in the Network tab](./images/debugger-network-upgrade-websocket.png)
+
+The same events are also exposed through `node:inspector` for programmatic
+clients, so tooling that already speaks the Chrome DevTools Protocol against
+Node can attach to Deno and observe the same network traffic without any
+changes.
+
+:::note
+
+When no debugger is attached, the network instrumentation has effectively no
+overhead — the events are only emitted while a session has opted in via
+`Network.enable`.
+
+:::
+
 ## VSCode
 
 Deno can be debugged using VSCode. This is best done with help from the official
@@ -176,133 +342,12 @@ two events is the time taken to execute the op. This flag can be useful for
 performance profiling, debugging hanging programs, or understanding how Deno
 works under the hood.
 
-## CPU Profiling
+## CPU profiling
 
-Deno includes built-in support for V8 CPU profiling, which helps you identify
-performance bottlenecks in your code. Use the `--cpu-prof` flag to capture a CPU
-profile during program execution:
-
-```sh
-deno run --cpu-prof your_script.ts
-# or with deno eval
-deno eval --cpu-prof "for (let i = 0; i < 1e8; i++) {}"
-```
-
-When your program exits, Deno will write a `.cpuprofile` file to the current
-directory (e.g., `CPU.1769017882255.25986.cpuprofile`). This file can be loaded
-into Chrome DevTools (Performance tab) or other V8 profile viewers for analysis.
-
-### CPU profiling flags
-
-| Flag                                 | Description                                                                                                      |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| `--cpu-prof`                         | Enable CPU profiling. Profile is written to disk on exit.                                                        |
-| `--cpu-prof-dir=<DIR>`               | Directory where the CPU profile will be written. Defaults to current directory. Implicitly enables `--cpu-prof`. |
-| `--cpu-prof-name=<NAME>`             | Filename for the CPU profile. Defaults to `CPU.<timestamp>.<pid>.cpuprofile`.                                    |
-| `--cpu-prof-interval=<MICROSECONDS>` | Sampling interval in microseconds. Default is `1000` (1ms). Lower values give more detail but larger files.      |
-| `--cpu-prof-md`                      | Generate a human-readable Markdown report alongside the `.cpuprofile` file.                                      |
-| `--cpu-prof-flamegraph`              | Generate an interactive SVG flamegraph alongside the `.cpuprofile` file.                                         |
-
-:::note
-
-CPU profiles report line numbers from the transpiled JavaScript code, not the
-original TypeScript source. This is a limitation of V8's profiler. For
-TypeScript files, the reported line numbers may not match your source code
-directly.
-
-:::
-
-### Analyzing profiles in Chrome DevTools
-
-To analyze the `.cpuprofile` file:
-
-1. Open Chrome DevTools (F12)
-2. Go to the **Performance** tab
-3. Click the **Load profile** button (up arrow icon)
-4. Select your `.cpuprofile` file
-
-The DevTools will display a flame chart and detailed breakdown of where time was
-spent in your application.
-
-### Example: Markdown report
-
-The `--cpu-prof-md` flag generates a Markdown summary that's easy to read
-without loading the profile into DevTools:
-
-```sh
-deno run -A --cpu-prof --cpu-prof-md server.js
-```
-
-This creates both a `.cpuprofile` file and a `.md` file with a report like:
-
-```md
-# CPU Profile
-
-| Duration | Samples | Interval | Functions |
-| -------- | ------- | -------- | --------- |
-| 833.06ms | 641     | 1000us   | 10        |
-
-**Top 10:** `op_crypto_get_random_values` 98.5%, `(garbage collector)` 0.7%,
-`getRandomValues` 0.6%, `assertBranded` 0.2%
-
-## Hot Functions (Self Time)
-
-| Self% |     Self | Total% |    Total | Function                      | Location          |
-| ----: | -------: | -----: | -------: | ----------------------------- | ----------------- |
-| 98.5% | 533.00ms |  98.5% | 533.00ms | `op_crypto_get_random_values` | [native code]     |
-|  0.7% |   4.00ms |   0.7% |   4.00ms | `(garbage collector)`         | [native code]     |
-|  0.6% |   3.00ms |   0.6% |   3.00ms | `getRandomValues`             | 00_crypto.js:5274 |
-|  0.2% |   1.00ms |   0.2% |   1.00ms | `assertBranded`               | 00_webidl.js:1149 |
-
-## Call Tree (Total Time)
-
-| Total% |    Total | Self% |     Self | Function                      | Location          |
-| -----: | -------: | ----: | -------: | ----------------------------- | ----------------- |
-|  16.8% |  91.00ms | 16.8% |  91.00ms | `(anonymous)`                 | server.js:1       |
-|   0.6% |   3.00ms |  0.6% |   3.00ms | `getRandomValues`             | 00_crypto.js:5274 |
-|  98.5% | 533.00ms | 98.5% | 533.00ms | `op_crypto_get_random_values` | [native code]     |
-
-## Function Details
-
-### `op_crypto_get_random_values`
-
-[native code] | Self: 98.5% (533.00ms) | Total: 98.5% (533.00ms) | Samples: 533
-```
-
-The report includes:
-
-- **Summary**: Total duration, sample count, sampling interval, and function
-  count
-- **Top 10**: Quick overview of the most expensive functions
-- **Hot Functions**: Functions sorted by self time (time spent in the function
-  itself, excluding callees)
-- **Call Tree**: Hierarchical view showing the call stack and time distribution
-- **Function Details**: Per-function breakdown with sample counts
-
-### Example: Interactive flamegraph
-
-The `--cpu-prof-flamegraph` flag generates a self-contained, interactive SVG
-flamegraph that you can open directly in a browser — no external tools required:
-
-```sh
-deno run --cpu-prof --cpu-prof-flamegraph your_script.ts
-```
-
-This creates both a `.cpuprofile` file and an `.svg` file. Open the SVG in any
-browser to explore the profile interactively:
-
-- **Click** any frame to zoom into that subtree
-- **Reset Zoom** button to restore the full view
-- **Ctrl+F** or the **Search** button for regex-based function search with
-  highlighting and matched percentage
-- **Invert** checkbox to flip into an icicle graph (root at top)
-- **Hover** any frame to see the function name and sample count
-
-The flamegraph also works with `deno eval`:
-
-```sh
-deno eval --cpu-prof --cpu-prof-flamegraph "for (let i = 0; i < 1e8; i++) {}"
-```
+Deno has a built-in CPU profiler: collect a profile while your program runs,
+then read it as a Markdown report, an interactive flamegraph, or in Chrome
+DevTools. See [CPU profiling](/runtime/fundamentals/cpu_profiling/) for the
+flags, report formats, and analysis tips.
 
 ## OpenTelemetry integration
 
@@ -329,6 +374,39 @@ including:
 For full details on Deno's OpenTelemetry integration, including custom metrics,
 traces, and configuration options, see the
 [OpenTelemetry documentation](/runtime/fundamentals/open_telemetry).
+
+## Debugging Web Workers
+
+Starting with Deno 2.7, Web Workers can be debugged through Chrome DevTools and
+VS Code. When you run your program with any `--inspect` flag, each spawned
+worker appears as a separate target in `chrome://inspect` alongside the main
+thread.
+
+```ts title="main.ts"
+const worker = new Worker(import.meta.resolve("./worker.ts"), {
+  type: "module",
+});
+worker.postMessage("start");
+```
+
+```ts title="worker.ts"
+self.onmessage = (e) => {
+  console.log("Worker received:", e.data);
+  // Set breakpoints here in DevTools
+};
+```
+
+```sh
+deno run --inspect-brk --allow-read main.ts
+```
+
+Open `chrome://inspect`, and you will see both `main.ts` and `worker.ts` listed
+as separate inspectable targets. Click **Inspect** on the worker target to open
+a dedicated DevTools panel for that worker where you can set breakpoints, step
+through code, and inspect variables independently of the main thread.
+
+In VS Code with the Deno extension, workers appear as separate threads in the
+**Call Stack** panel of the debugger.
 
 ## TLS session debugging
 

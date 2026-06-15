@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "How to use Redis with Deno"
 description: "Step-by-step guide to using Redis with Deno. Learn how to set up caching, implement message brokers, handle data streaming, and optimize your applications with Redis's in-memory data store."
 url: /examples/redis_tutorial/
@@ -8,7 +9,9 @@ oldUrl:
 ---
 
 [Redis](https://redis.io/) is an in-memory data store you can use for caching,
-as a message broker, or for streaming data.
+as a message broker, or for streaming data. If you just need to connect and send
+commands, see the [Redis quick start](/examples/redis/); this tutorial builds
+something more complete on top of it.
 
 [View source here.](https://github.com/denoland/examples/tree/main/with-redis)
 

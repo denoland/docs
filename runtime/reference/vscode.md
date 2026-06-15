@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-08-20
 title: "Deno & Visual Studio Code"
 description: "Complete guide to using Deno with Visual Studio Code. Learn about extension setup, workspace configuration, debugging, testing, task automation, and advanced IDE features for Deno development."
 oldUrl:
@@ -170,18 +171,18 @@ Individual hosts/origins can be enabled or disabled by editing the **Deno >
 Suggest > Imports: Hosts** setting - `deno.suggest.imports.hosts` in the
 appropriate `settings.json`.
 
-## Caching remote modules
+## Caching dependencies
 
-Deno supports remote modules and will fetch remote modules and store them
-locally in a cache. When you do something like `deno run`, `deno test`,
-`deno info` or `deno install` on the command line, the Deno CLI will go and try
-to fetch any remote modules and their dependencies and populate the cache.
+Deno downloads your dependencies (npm and JSR packages, and any remote URL
+modules) once and stores them in a local cache. When you run a command like
+`deno run`, `deno test`, `deno info`, or `deno install`, the CLI fetches any
+dependencies that aren't cached yet and populates the cache.
 
-While developing code in the editor, if the module is not in the cache, you will
-get a diagnostic such as
-`Uncached or missing remote URL: "https://deno.land/example/mod.ts"` for any
-missing remote modules. Deno will not automatically try to cache the module,
-unless it is a completion from a registry import suggestion (see above).
+While developing in the editor, if a dependency isn't cached you'll get a
+diagnostic such as
+`Uncached or missing remote URL: "https://deno.land/x/example/mod.ts"` for the
+missing dependency. Deno will not automatically cache it, unless it is a
+completion from a registry import suggestion (see above).
 
 In addition to running a command on a command line, the extension provides ways
 to cache dependencies within the editor. A missing dependency will have a _quick
@@ -220,8 +221,9 @@ _References_ setting mentioned above.
 
 The Deno CLI includes a
 [built-in testing API](/runtime/reference/lsp_integration/#testing) available
-under `Deno.test`. The extension and language server have a code lens enabled by
-default which provides the ability to run a test from within the editor.
+under [`Deno.test`](/api/deno/~/Deno.test). The extension and language server
+have a code lens enabled by default which provides the ability to run a test
+from within the editor.
 
 When you have a block of code that provides a test:
 
@@ -250,8 +252,8 @@ adjust the arguments provided when doing `deno test`, you can do so by setting
 the `deno.codeLens.testArgs` setting.
 
 The extension will also try to track if in the same module you destructure the
-`Deno.test` function or assign it to a variable. So you can do something like
-this and still have the code lens work:
+[`Deno.test`](/api/deno/~/Deno.test) function or assign it to a variable. So you
+can do something like this and still have the code lens work:
 
 ```ts
 const { test: denoTest } = Deno;
@@ -298,7 +300,7 @@ that's ok.)
 While the extension communicates directly with the language server, there are
 times when you might prefer to run Deno commands via the CLI. You can define
 tasks in a `deno.json` file in the root of your workspace in a
-[`tasks` field](/runtime/fundamentals/configuration/#tasks).
+[`tasks` field](/runtime/reference/deno_json/#tasks).
 
 ## Using a development container
 

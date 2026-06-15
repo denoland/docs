@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "Run a script"
 description: "A guide to creating and running basic scripts with Deno. Learn how to write and execute JavaScript and TypeScript code, understand runtime environments, and get started with fundamental Deno concepts."
 url: /examples/run_script_tutorial/

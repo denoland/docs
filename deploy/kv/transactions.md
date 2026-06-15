@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-07
 title: "Transactions"
 oldUrl:
   - /runtime/manual/runtime/kv/transactions/

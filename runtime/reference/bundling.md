@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-09-11
 title: "Bundling"
 description: "An overview of `deno bundle` subcommand that can be used to produce a single file application created from multiple source files for optimized execution."
 ---
@@ -59,30 +60,43 @@ single output file.
 
 ## Options Overview
 
-| Flag                    | Description                                          |
-| ----------------------- | ---------------------------------------------------- |
-| `-o`, `--output <file>` | Write bundled output to a file                       |
-| `--outdir <dir>`        | Write bundled output to a directory                  |
-| `--minify`              | Minify the output for production                     |
-| `--format <format>`     | Output format (`esm` by default)                     |
-| `--code-splitting`      | Enable code splitting                                |
-| `--platform <platform>` | Bundle for `browser` or `deno` (default: `deno`)     |
-| `--sourcemap`           | Include source maps (`linked`, `inline`, `external`) |
-| `--watch`               | Automatically rebuild on file changes                |
-| `--inline-imports`      | Inline imported modules (`true` or `false`)          |
+| Flag                    | Description                                              |
+| ----------------------- | -------------------------------------------------------- |
+| `-o`, `--output <file>` | Write bundled output to a file                           |
+| `--outdir <dir>`        | Write bundled output to a directory                      |
+| `--minify`              | Minify the output for production                         |
+| `--format <format>`     | Output format (`esm` by default)                         |
+| `--code-splitting`      | Enable code splitting                                    |
+| `--platform <platform>` | Bundle for `browser` or `deno` (default: `deno`)         |
+| `--sourcemap`           | Include source maps (`linked`, `inline`, `external`)     |
+| `--watch`               | Automatically rebuild on file changes                    |
+| `--inline-imports`      | Inline imported modules (`true` or `false`)              |
+| `--packages <how>`      | How to handle packages: `bundle` (default) or `external` |
+| `--external <pkg>`      | Exclude a module or package from the bundle              |
+| `--keep-names`          | Keep original function and class names                   |
+
+For the full flag list, run `deno bundle --help`.
+
+:::tip Bundling a single-file executable
+
+To produce a standalone binary rather than a JavaScript file, use
+[`deno compile`](/runtime/reference/cli/compile/), which can also bundle and
+minify its input with the `--bundle` and `--minify` flags.
+
+:::
 
 ---
 
 ## Runtime API
 
-In addition to the CLI, you can use `Deno.bundle()` to programmatically bundle
-your JavaScript or TypeScript files. This allows you to integrate bundling into
-your build processes and workflows.
+In addition to the CLI, you can use [`Deno.bundle()`](/api/deno/~/Deno.bundle)
+to programmatically bundle your JavaScript or TypeScript files. This allows you
+to integrate bundling into your build processes and workflows.
 
 :::note
 
-This API was added in Deno v2.5. The `Deno.bundle()` API is experimental and
-must be used with the `--unstable-bundle` flag.
+This API was added in Deno v2.5. The [`Deno.bundle()`](/api/deno/~/Deno.bundle)
+API is experimental and must be used with the `--unstable-bundle` flag.
 
 :::
 
@@ -233,12 +247,11 @@ Now, let's bundle:
 $ deno bundle --platform=browser app.jsx -o bundle.js
 ⚠️ deno bundle is experimental and subject to changes
 Bundled 9 modules in 99ms
-  app.bundle.js 874.67KB
+  bundle.js 874.67KB
 ```
 
 At this point, we're ready to serve our page, let's use
-[`@std/http/file-server` from JSR](https://jsr.io/@std/http/file-server) to
-serve our app:
+[`@std/http/file-server`](/runtime/reference/std/http/) to serve our app:
 
 ```bash
 $ deno run -ENR jsr:@std/http/file-server

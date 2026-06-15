@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-10
 title: "Web development"
 description: "A guide to web development with Deno. Learn about supported frameworks like Fresh, Next.js, and Astro, along with built-in features for building modern web applications."
 oldUrl:
@@ -50,16 +51,16 @@ To better understand how JSX and Deno interface under the hood, read on
 
 ## Fresh
 
-[Fresh](https://fresh.deno.dev/) is the most popular web framework for Deno. It
+[Fresh](https://usefresh.dev/) is the most popular web framework for Deno. It
 uses a model where you send no JavaScript to clients by default.
 
 To get started with a Fresh app, you can use the following command and follow
 the cli prompts to create your app:
 
 ```sh
-deno run -A -r https://fresh.deno.dev
+deno run -Ar jsr:@fresh/init
 cd my-fresh-app
-deno task start
+deno task dev
 ```
 
 This will create a new Fresh app and run it with Deno. You can then open your
@@ -198,4 +199,4 @@ deno run --allow-net server.ts
 ## Node projects
 
 Deno will run your Node.js projects out the box. Check out our guide on
-[migrating your Node.js project to Deno](/runtime/fundamentals/node/#migrating-from-node.js-to-deno).
+[migrating your Node.js project to Deno](/runtime/migrate/).

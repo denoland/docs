@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-03-10
 title: "How to use Planetscale with Deno"
 description: "Step-by-step guide to using Planetscale with Deno. Learn how to set up serverless MySQL databases, manage connections, execute queries, and build scalable applications with Planetscale's developer-friendly platform."
 url: /examples/planetscale_tutorial/

@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-02
 title: Cron
 description: "Scheduling and managing cron jobs in Deno Deploy, including defining cron jobs in code, execution lifecycle, retries, and observability."
 ---
@@ -6,6 +7,12 @@ description: "Scheduling and managing cron jobs in Deno Deploy, including defini
 Cron jobs are scheduled tasks that run automatically on a defined schedule. You
 define cron jobs in your code using the `Deno.cron()` API, deploy your
 application, and the platform discovers and runs them on schedule.
+
+[`Deno.cron()`](/runtime/fundamentals/cron/) is a Deno runtime API — it ships
+with Deno itself. Deno Deploy builds on top of that runtime API: it discovers
+your `Deno.cron()` definitions at deployment time, schedules and invokes them,
+handles retries, and surfaces runs in the dashboard and logs, so you don't need
+to keep a long-running process up yourself.
 
 ## Defining cron jobs in code
 

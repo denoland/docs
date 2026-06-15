@@ -101,7 +101,7 @@ For code blocks that should be tested:
 - Ensure examples in documentation are correct and runnable
 - Use triple backticks with language identifiers to enable testable code blocks
 - Follow the guidelines in
-  [Documentation Tests](/runtime/reference/documentation/)
+  [Documentation Tests](/runtime/test/#documentation-tests)
 
 ## Formatting Elements
 

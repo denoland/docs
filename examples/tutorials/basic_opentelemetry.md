@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-25
 title: "Getting Started with OpenTelemetry in Deno"
 description: "Set up basic OpenTelemetry instrumentation in a Deno application. This tutorial covers creating a simple HTTP server with custom metrics and traces, and viewing the telemetry data."
 url: /examples/basic_opentelemetry_tutorial/
@@ -21,7 +22,7 @@ Let's start by creating a basic HTTP server that simulates a small web
 application:
 
 ```ts title="server.ts"
-import { metrics, trace } from "npm:@opentelemetry/api@1";
+import { metrics, SpanStatusCode, trace } from "npm:@opentelemetry/api@1";
 
 // Create a tracer and meter for our application
 const tracer = trace.getTracer("my-server", "1.0.0");
@@ -93,7 +94,7 @@ Deno.serve({ port: 8000 }, (req) => {
       if (error instanceof Error) {
         span.recordException(error);
         span.setStatus({
-          code: trace.SpanStatusCode.ERROR,
+          code: SpanStatusCode.ERROR,
           message: error.message,
         });
       }

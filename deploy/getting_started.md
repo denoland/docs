@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-26
 title: "Getting started"
 description: "Step-by-step guide to creating and configuring your first Deno Deploy application, including organization setup, build configuration, environment variables, and deployment monitoring."
 ---

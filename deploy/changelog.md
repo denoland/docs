@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-19
 title: "Deno Deploy changelog"
 description: "Listing notable progress in the development and evolution of Deno Deploy"
 ---

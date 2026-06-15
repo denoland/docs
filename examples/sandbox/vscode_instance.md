@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-01-27
 title: "Provide a VSCode instance in a sandbox"
 description: "Learn how to provide a VSCode instance in a sandbox."
 url: /examples/sandbox_vscode_instance/

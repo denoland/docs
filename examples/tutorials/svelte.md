@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-05-17
 title: "Build a SvelteKit App"
 description: "A tutorial on building SvelteKit applications with Deno. Learn how to set up a SvelteKit project, implement file-based routing, manage state with load functions, and create a full-stack TypeScript application."
 url: /examples/svelte_tutorial/
@@ -292,6 +293,11 @@ This will:
 
 The built app will be ready for deployment on platforms that support Deno, such
 as Deno Deploy.
+
+If you do not plan to deploy to Deno Deploy or another Deno-compatible platform,
+visit the
+[SvelteKit adapter documentation](https://svelte.dev/docs/kit/adapters) to
+configure the right adapter for your hosting provider.
 
 You can deploy this app to your favorite cloud provider. We recommend using
 [Deno Deploy](https://deno.com/deploy) for a simple and easy deployment

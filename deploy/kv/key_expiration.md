@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-07
 title: "Key Expiration (TTL for keys)"
 oldUrl:
   - /kv/manual/key_expiration/

@@ -37,6 +37,34 @@ function flagsToInlineCode(text: string): string {
   return text.replaceAll(FLAGS_RE, "`$&`");
 }
 
+/**
+ * Parse the usage string to extract the value type.
+ * Examples:
+ *   "--config <FILE>"          → "FILE"
+ *   "--fail-fast[=<N>]"        → "N"
+ *   "--coverage[=<DIR>]"       → "DIR"
+ *   "--no-check[=<NO_CHECK_TYPE>]" → "NO_CHECK_TYPE"
+ *   "--no-run"                 → null (boolean flag)
+ */
+function parseValueType(usage: string): string | null {
+  const match = usage.match(/<([^>]+)>/);
+  if (!match) return null;
+
+  const raw = match[1];
+  // Clean up common patterns
+  return raw
+    .replace(/\.\.\.$/, "")
+    .trim();
+}
+
+/**
+ * Determine if a flag is boolean (no value) or takes a value.
+ * Optional values like `--flag[=<VAL>]` are marked as optional.
+ */
+function isOptionalValue(usage: string): boolean {
+  return usage.includes("[=<") || usage.includes("[<");
+}
+
 export default function renderCommand(
   commandName: string,
   helpers: Lume.Helpers,
@@ -47,7 +75,7 @@ export default function renderCommand(
 
   const toc: TableOfContentsItem_[] = [];
 
-  // Add null check for command.about
+  // Process the about text (description from CLI help)
   let about = "";
   if (command.about) {
     about = command.about.replaceAll(
@@ -102,7 +130,7 @@ export default function renderCommand(
     );
   }
 
-  const args = [];
+  // Separate args into positional args and grouped options
   const options: Record<string, ArgType[]> = {};
 
   for (const arg of command.args) {
@@ -113,9 +141,7 @@ export default function renderCommand(
     if (arg.long) {
       const key = arg.help_heading ?? "Options";
       options[key] ??= [];
-      options[key].push(arg);
-    } else {
-      args.push(arg);
+      options[key].push(arg as ArgType);
     }
   }
 
@@ -127,26 +153,22 @@ export default function renderCommand(
         </div>
         <div>
           <pre class="!mb-0 !p-6">
-            <code>{command.usage.replaceAll(ANSI_RE, "").slice("usage: ".length)}</code>
+            <code>
+              {command.usage.replaceAll(ANSI_RE, "").slice("usage: ".length)}
+            </code>
           </pre>
         </div>
       </div>
 
       {about && (
-        <>
-          <div
-            class="flex flex-col gap-4"
-            dangerouslySetInnerHTML={{ __html: helpers.md(about) }}
-          />
-        </>
+        <div
+          class="flex flex-col gap-4"
+          dangerouslySetInnerHTML={{ __html: helpers.md(about) }}
+        />
       )}
 
       {Object.entries(options).map(([heading, flags]) => {
         const id = heading.toLowerCase().replace(/\s/g, "-");
-
-        const renderedFlags = flags.toSorted((a: ArgType, b: ArgType) =>
-          a.long.localeCompare(b.long)
-        ).map((flag: ArgType) => renderOption(id, flag, helpers));
 
         toc.push({
           text: heading,
@@ -159,7 +181,13 @@ export default function renderCommand(
             <h2 id={id}>
               {heading} <HeaderAnchor id={id} />
             </h2>
-            {renderedFlags}
+            <div class="flex flex-col gap-8 mt-4">
+              {flags
+                .toSorted((a: ArgType, b: ArgType) =>
+                  a.long.localeCompare(b.long)
+                )
+                .map((flag: ArgType) => renderOption(id, flag, helpers))}
+            </div>
           </>
         );
       })}
@@ -174,9 +202,11 @@ export default function renderCommand(
 
 function renderOption(group: string, arg: ArgType, helpers: Lume.Helpers) {
   const id = `${group}-${arg.long}`;
+  const valueType = parseValueType(arg.usage);
+  const optional = isOptionalValue(arg.usage);
 
-  let docsLink = null;
-  // Add null check for arg.help
+  // Extract docs link from help text if present
+  let docsLink: string | null = null;
   let help = arg.help ? arg.help.replaceAll(ANSI_RE, "") : "";
   if (help) {
     const helpLines = help.split("\n");
@@ -191,24 +221,33 @@ function renderOption(group: string, arg: ArgType, helpers: Lume.Helpers) {
     }
   }
 
+  // Build the flag display: --long, -short
+  const longFlag = "--" + arg.long;
+  const flagDisplay = arg.short ? `${longFlag}, -${arg.short}` : longFlag;
+
   return (
-    <>
-      <h3 id={id}>
-        <code>
-          {docsLink
-            ? <a href={docsLink}>{"--" + arg.long}</a>
-            : ("--" + arg.long)}
-        </code>{" "}
+    <div id={id}>
+      <div class="flex items-baseline justify-between gap-4 flex-wrap">
+        <div class="flex items-baseline gap-2">
+          <code class="text-sm font-semibold">
+            {docsLink ? <a href={docsLink}>{flagDisplay}</a> : flagDisplay}
+          </code>
+          {valueType && (
+            <span class="text-xs text-foreground-secondary">
+              {"<"}
+              {valueType}
+              {">"}
+              {optional && (
+                <span class="text-foreground-tertiary ml-1">optional</span>
+              )}
+            </span>
+          )}
+        </div>
         <HeaderAnchor id={id} />
-      </h3>
-      {arg.short && (
-        <p class="text-sm">
-          Short flag: <code>-{arg.short}</code>
-        </p>
-      )}
-      {arg.help && (
+      </div>
+      {help && (
         <div
-          class="block !whitespace-pre-line"
+          class="mt-2 text-sm !whitespace-pre-line"
           dangerouslySetInnerHTML={{
             __html: helpers.md(
               flagsToInlineCode(help) +
@@ -217,6 +256,6 @@ function renderOption(group: string, arg: ArgType, helpers: Lume.Helpers) {
           }}
         />
       )}
-    </>
+    </div>
   );
 }

@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-09
 title: "Error handling"
 description: "Learn how to handle errors in a sandbox."
 url: /examples/sandbox_error_handling/

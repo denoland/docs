@@ -2,14 +2,15 @@
  * @title Importing text files
  * @difficulty beginner
  * @tags cli
- * @run --unstable-raw-imports https://docs.deno.com/examples/scripts/importing_text.ts
+ * @run <url>
  * @resource {https://github.com/whatwg/html/issues/9444} HTML specification proposal
- * @group Unstable APIs
+ * @group Basics
  *
  * Text files can be imported in JS and TS files using the `import` keyword.
  * This makes including static data in a library much easier.
  *
- * Using this feature requires `--unstable-raw-imports` CLI flag.
+ * Stable as of Deno 2.8 — no flag required. (Binary `bytes` imports are still
+ * experimental and require `--unstable-raw-imports`.)
  */
 
 // File: ./main.ts

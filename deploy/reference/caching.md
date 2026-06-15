@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-27
 title: CDN and caching
 description: "HTTP caching in Deno Deploy: cache control headers, cache tags, invalidation API, and best practices for edge caching."
 ---

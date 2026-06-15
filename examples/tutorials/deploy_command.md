@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-09-29
 title: "Deploy an app with the deno deploy command"
 description: "Step-by-step tutorial for using the deno deploy CLI command to create and deploy your first application to Deno Deploy."
 url: /examples/deploy_command_tutorial/

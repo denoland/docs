@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-11-05
 title: "Jupyter Kernel for Deno"
 oldUrl: /runtime/manual/tools/jupyter/
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -50,8 +51,8 @@ Jupyter Notebooks are available right out of the box.
 
 ## Rich content output
 
-`Deno.jupyter` namespaces provides helper function for displaying rich content
-in your notebooks
+[`Deno.jupyter`](/api/deno/~/Deno.jupyter) namespaces provides helper function
+for displaying rich content in your notebooks
 [using MIME types that Jupyter supports](https://docs.jupyter.org/en/latest/reference/mimetype.html).
 
 ---
@@ -86,7 +87,8 @@ You can also use `Deno.jupyter.$display` instead of typing
 :::
 
 This is a regular function, so you you can use any library you want to format
-the output - eg. use `@std/fmt/colors` to provide a colorful output:
+the output - eg. use [`@std/fmt/colors`](/runtime/reference/std/fmt/) to provide
+a colorful output:
 
 ```ts
 import * as colors from "jsr:@std/fmt/colors";
@@ -100,8 +102,8 @@ import * as colors from "jsr:@std/fmt/colors";
 }
 ```
 
-You can also use `Deno.jupyter.display` function to directly display the MIME
-bundle:
+You can also use [`Deno.jupyter.display`](/api/deno/~/Deno.jupyter.display)
+function to directly display the MIME bundle:
 
 ```js
 await Deno.jupyter.display({
@@ -118,11 +120,11 @@ display based on its capabilities.
 
 ---
 
-`Deno.jupyter` provides several helper methods for rich output of common media
-types.
+[`Deno.jupyter`](/api/deno/~/Deno.jupyter) provides several helper methods for
+rich output of common media types.
 
-`Deno.jupyter.html` is a tagged template that will render the provided string as
-an HTML in the notebook.
+[`Deno.jupyter.html`](/api/deno/~/Deno.jupyter.html) is a tagged template that
+will render the provided string as an HTML in the notebook.
 
 ```js
 Deno.jupyter.html`<h1>Hello, world!</h1>
@@ -132,8 +134,8 @@ Deno.jupyter.html`<h1>Hello, world!</h1>
 
 ![`Deno.jupyter.html` API example](../images/jupyter-html.png)
 
-`Deno.jupyter.md` is a tagged template that will render provided string as a
-Markdown document in the notebook.
+[`Deno.jupyter.md`](/api/deno/~/Deno.jupyter.md) is a tagged template that will
+render provided string as a Markdown document in the notebook.
 
 ```js
 Deno.jupyter
@@ -144,8 +146,8 @@ Deno.jupyter
 
 ![`Deno.jupyter.md` API example](../images/jupyter-md.png)
 
-`Deno.jupyter.svg` is a tagged template that will render provided string as an
-SVG figure in the notebook.
+[`Deno.jupyter.svg`](/api/deno/~/Deno.jupyter.svg) is a tagged template that
+will render provided string as an SVG figure in the notebook.
 
 ```js
 Deno.jupyter.svg`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -155,8 +157,8 @@ Deno.jupyter.svg`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
 
 ![`Deno.jupyter.svg` API example](../images/jupyter-svg.png)
 
-`Deno.jupyter.image` is function that will render a JPG or PNG image. You can
-pass a filepath, or already read bytes:
+[`Deno.jupyter.image`](/api/deno/~/Deno.jupyter.image) is function that will
+render a JPG or PNG image. You can pass a filepath, or already read bytes:
 
 ```js
 Deno.jupyter.image("./cat.jpg");
@@ -180,8 +182,9 @@ notebook.
 
 ## IO pub channel broadcasting
 
-`Deno.jupyter.broadcast` allows to publish messages to the IO pub channel
-allowing to provide live updates as the cell is evaluated.
+[`Deno.jupyter.broadcast`](/api/deno/~/Deno.jupyter.broadcast) allows to publish
+messages to the IO pub channel allowing to provide live updates as the cell is
+evaluated.
 
 Consider this example that prints a message before we start a computation and
 another when the computation is finished:
@@ -205,7 +208,7 @@ await Deno.jupyter.broadcast("update_display_data", {
 
 <figure>
 
-<video class="w-full" alt="`Deno.jupyter.broadcast` API example" autoplay muted loop playsinline controls src="../images/jupyter-broadcast.mp4"></video>
+<video class="w-full" alt="[`Deno.jupyter.broadcast`](/api/deno/~/Deno.jupyter.broadcast) API example" autoplay muted loop playsinline controls src="../images/jupyter-broadcast.mp4"></video>
 
 <figcaption><span style="font-family: monospace;">Deno.jupyter.broadcast</span> API example</figcaption>
 

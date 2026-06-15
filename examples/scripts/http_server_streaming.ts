@@ -13,7 +13,7 @@
 
 function handler(_req: Request): Response {
   // Set up a variable to store a timer ID, and the ReadableStream.
-  let timer: number | undefined = undefined;
+  let timer: ReturnType<typeof setInterval> | undefined = undefined;
   const body = new ReadableStream({
     // When the stream is first created, start an interval that will emit a
     // chunk every second containing the current time.
@@ -40,5 +40,23 @@ function handler(_req: Request): Response {
   });
 }
 
-// To start the server on the default port, call `Deno.serve` with the handler.
-Deno.serve(handler);
+// An async generator is often a more natural producer. ReadableStream.from
+// turns any async iterable into a stream usable as a Response body.
+async function* ticks(): AsyncGenerator<Uint8Array> {
+  const encoder = new TextEncoder();
+  for (let i = 1; i <= 3; i++) {
+    yield encoder.encode(`tick ${i}\n`);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  }
+}
+
+function iteratorHandler(_req: Request): Response {
+  return new Response(ReadableStream.from(ticks()), {
+    headers: { "content-type": "text/plain" },
+  });
+}
+
+// Serve the interval stream on / and the generator stream on /ticks.
+Deno.serve((req) =>
+  new URL(req.url).pathname === "/ticks" ? iteratorHandler(req) : handler(req)
+);

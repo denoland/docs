@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-05-20
 title: "Web Platform APIs"
 description: "A guide to the Web Platform APIs available in Deno. Learn about fetch, events, workers, storage, and other web standard APIs, including implementation details and deviations from browser specifications."
 oldUrl:
@@ -58,7 +59,7 @@ implemented as specified in the
 - The `referrer`, `referrerPolicy`, `mode`, `credentials`, `cache`, `integrity`,
   `keepalive`, and `window` properties and their relevant behaviours in
   `RequestInit` are not implemented. The relevant fields are not present on the
-  `Request` object.
+  [`Request`](/api/web/~/Request) object.
 - Request body upload streaming is supported (on HTTP/1.1 and HTTP/2). Unlike
   the current fetch proposal, the implementation supports duplex streaming.
 - The `set-cookie` header is not concatenated when iterated over in the
@@ -97,6 +98,55 @@ Notes on fetching local files:
   determine things like the content type or content length.
 - Response bodies are streamed from the Rust side, so large files are available
   in chunks, and can be cancelled.
+
+## Structured Clone & Transferable Objects
+
+Deno supports [`structuredClone()`](/api/web/~/structuredClone) and
+[`postMessage()`](/api/web/~/Worker) for cloning and transferring objects across
+contexts (e.g. between the main thread and Web Workers).
+
+### Serializable types
+
+These types can be cloned with `structuredClone()` and sent via `postMessage()`:
+
+| Type                                      | Notes                                                                                        |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Primitives                                | `string`, `number`, `boolean`, `null`, `undefined`, `bigint`                                 |
+| `Array`, `Object`, `Map`, `Set`           | Including nested structures and circular references                                          |
+| `Date`, `RegExp`                          |                                                                                              |
+| `ArrayBuffer`, `TypedArray`, `DataView`   | Copied by default, or transferred (see below)                                                |
+| `Error` types                             | `Error`, `EvalError`, `RangeError`, `ReferenceError`, `SyntaxError`, `TypeError`, `URIError` |
+| [`Blob`](/api/web/~/Blob)                 | Requires Deno 2.8+                                                                           |
+| [`File`](/api/web/~/File)                 | Requires Deno 2.8+                                                                           |
+| [`DOMException`](/api/web/~/DOMException) |                                                                                              |
+| [`CryptoKey`](/api/web/~/CryptoKey)       |                                                                                              |
+
+### Transferable types
+
+These types can be _transferred_ (not copied) via the `transfer` option in
+`structuredClone()` or the `transfer` list in `postMessage()`. After transfer,
+the original object becomes unusable:
+
+| Type                                            | Notes                                    |
+| ----------------------------------------------- | ---------------------------------------- |
+| [`ArrayBuffer`](/api/web/~/ArrayBuffer)         | Moves the backing memory to the receiver |
+| [`MessagePort`](/api/web/~/MessagePort)         | Transfers the port to another context    |
+| [`ReadableStream`](/api/web/~/ReadableStream)   | Transfers the stream to another context  |
+| [`WritableStream`](/api/web/~/WritableStream)   | Transfers the stream to another context  |
+| [`TransformStream`](/api/web/~/TransformStream) | Transfers the stream to another context  |
+
+```ts
+// Clone a Blob
+const blob = new Blob(["hello"], { type: "text/plain" });
+const cloned = structuredClone(blob);
+console.log(await cloned.text()); // "hello"
+
+// Transfer an ArrayBuffer through a MessageChannel
+const buffer = new ArrayBuffer(1024);
+const ch = new MessageChannel();
+ch.port1.postMessage(buffer, [buffer]);
+// buffer.byteLength is now 0 (transferred)
+```
 
 ## CustomEvent and EventTarget
 
@@ -189,8 +239,8 @@ const worker = new Worker("./workers/hello.ts", { type: "module" });
 :::note
 
 For the above use cases, it is preferable to pass URLs in full rather than
-relying on `--location`. You can manually base a relative URL using the `URL`
-constructor if needed.
+relying on `--location`. You can manually base a relative URL using the
+[`URL`](/api/web/~/URL) constructor if needed.
 
 :::
 
@@ -254,9 +304,9 @@ the `type: "module"` option when creating a new worker.
 
 Use of relative module specifiers in the main worker are only supported with
 `--location <href>` passed on the CLI. This is not recommended for portability.
-You can instead use the `URL` constructor and `import.meta.url` to easily create
-a specifier for some nearby script. Dedicated workers, however, have a location
-and this capability by default.
+You can instead use the [`URL`](/api/web/~/URL) constructor and
+`import.meta.url` to easily create a specifier for some nearby script. Dedicated
+workers, however, have a location and this capability by default.
 
 ```ts
 // Good
@@ -488,6 +538,226 @@ const worker = new Worker(import.meta.resolve("./worker.js"), {
 });
 ```
 
+## OffscreenCanvas
+
+Starting in Deno 2.8, the
+[`OffscreenCanvas`](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas)
+API is available. `OffscreenCanvas` is a canvas that lives outside any DOM and
+can be used anywhere (including Web Workers) for off-thread rendering and image
+generation.
+
+### Supported rendering contexts
+
+`OffscreenCanvas#getContext` accepts two of the spec-defined context ids:
+
+- `"bitmaprenderer"`: returns an
+  [`ImageBitmapRenderingContext`](https://developer.mozilla.org/en-US/docs/Web/API/ImageBitmapRenderingContext)
+  for displaying an `ImageBitmap` produced via `createImageBitmap`.
+- `"webgpu"`: returns a
+  [`GPUCanvasContext`](https://developer.mozilla.org/en-US/docs/Web/API/GPUCanvasContext)
+  for rendering with WebGPU.
+
+Calling `getContext` with `"2d"`, `"webgl"`, or `"webgl2"` returns `null`; these
+contexts are not implemented in Deno.
+
+### Example: encoding an image to PNG
+
+Decode an image into an `ImageBitmap`, place it on an `OffscreenCanvas` via the
+`bitmaprenderer` context, and write the result to disk:
+
+```ts
+const data = await Deno.readFile("./input.jpg");
+const bitmap = await createImageBitmap(new Blob([data]));
+
+const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
+const ctx = canvas.getContext("bitmaprenderer")!;
+ctx.transferFromImageBitmap(bitmap);
+
+const blob = await canvas.convertToBlob({ type: "image/png" });
+await Deno.writeFile(
+  "./output.png",
+  new Uint8Array(await blob.arrayBuffer()),
+);
+```
+
+Typical uses:
+
+- producing thumbnails, format conversions, or social-card images at request
+  time without spinning up a headless browser,
+- running off-thread image work inside a Web Worker,
+- driving WebGPU rendering targets that don't need a window.
+
+## Geometry Interfaces
+
+Starting in Deno 2.8, the
+[Geometry Interfaces Module Level 1](https://drafts.fxtf.org/geometry/) types
+are available as globals. These are the same types you'd find in a browser:
+
+- [`DOMMatrix`](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrix) /
+  [`DOMMatrixReadOnly`](https://developer.mozilla.org/en-US/docs/Web/API/DOMMatrixReadOnly):
+  4×4 transform matrices for 2D and 3D operations.
+- [`DOMPoint`](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint) /
+  [`DOMPointReadOnly`](https://developer.mozilla.org/en-US/docs/Web/API/DOMPointReadOnly):
+  points in 2D / 3D space.
+- [`DOMRect`](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect) /
+  [`DOMRectReadOnly`](https://developer.mozilla.org/en-US/docs/Web/API/DOMRectReadOnly):
+  axis-aligned rectangles.
+- [`DOMQuad`](https://developer.mozilla.org/en-US/docs/Web/API/DOMQuad): a
+  quadrilateral defined by four points.
+
+```ts
+const m = new DOMMatrix().translateSelf(10, 20).scaleSelf(2);
+const p = new DOMPoint(1, 1).matrixTransform(m);
+console.log(p.x, p.y); // 12 22
+```
+
+These types are useful for graphics work; applying transforms to canvas
+drawings, computing layout math, or porting browser code that depends on
+geometry types.
+
+## navigator
+
+Deno implements a subset of the
+[`navigator`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator)
+global. The following properties are available:
+
+- `navigator.userAgent` — always `"Deno/<version>"`
+- `navigator.platform` — the underlying OS platform (e.g. `"Linux x86_64"`,
+  `"MacIntel"`, `"Win32"`). Added in Deno 2.7.
+- `navigator.hardwareConcurrency` — number of logical CPU cores
+
+```ts
+console.log(navigator.userAgent); // "Deno/2.7.0"
+console.log(navigator.platform); // e.g. "Linux x86_64", "MacIntel", "Win32"
+console.log(navigator.hardwareConcurrency); // e.g. 8
+```
+
+## Temporal
+
+The [Temporal API](https://tc39.es/proposal-temporal/docs/) is a modern
+date/time library that replaces `Date` for most use cases. It was stabilized in
+Deno 2.7 and is available as a global without any flags.
+
+```ts
+// Current date/time in local timezone
+const now = Temporal.Now.plainDateTimeISO();
+console.log(now.toString()); // e.g. "2025-03-12T10:30:00"
+
+// Parse a date
+const date = Temporal.PlainDate.from("2025-03-12");
+console.log(date.month); // 3
+
+// Timezone-aware
+const zonedNow = Temporal.Now.zonedDateTimeISO("America/New_York");
+console.log(zonedNow.timeZoneId); // "America/New_York"
+```
+
+Prior to Deno 2.7, Temporal required the `--unstable-temporal` flag.
+
+## CompressionStream and DecompressionStream
+
+Deno supports
+[`CompressionStream`](https://developer.mozilla.org/en-US/docs/Web/API/CompressionStream)
+and
+[`DecompressionStream`](https://developer.mozilla.org/en-US/docs/Web/API/DecompressionStream)
+for streaming compression and decompression.
+
+### Supported formats
+
+| Format      | String          | Notes              |
+| ----------- | --------------- | ------------------ |
+| gzip        | `"gzip"`        | RFC 1952           |
+| deflate     | `"deflate"`     | zlib (RFC 1950)    |
+| deflate-raw | `"deflate-raw"` | raw DEFLATE (1951) |
+| Brotli      | `"brotli"`      | Added in Deno 2.7  |
+
+```ts
+// Compress with Brotli
+const input = new TextEncoder().encode("Hello, Deno!");
+const cs = new CompressionStream("brotli");
+const writer = cs.writable.getWriter();
+writer.write(input);
+writer.close();
+const compressed = await new Response(cs.readable).arrayBuffer();
+
+// Decompress
+const ds = new DecompressionStream("brotli");
+const writer2 = ds.writable.getWriter();
+writer2.write(new Uint8Array(compressed));
+writer2.close();
+const result = await new Response(ds.readable).text();
+console.log(result); // "Hello, Deno!"
+```
+
+## Web Crypto
+
+Deno supports the
+[Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API)
+via `crypto.subtle`. Starting with Deno 2.7, SHA-3 hash algorithms are
+supported:
+
+- `SHA3-256`
+- `SHA3-384`
+- `SHA3-512`
+
+```ts
+const data = new TextEncoder().encode("Hello, Deno!");
+const hash = await crypto.subtle.digest("SHA3-256", data);
+console.log(new Uint8Array(hash));
+```
+
+## createImageBitmap
+
+Deno supports
+[`createImageBitmap()`](https://developer.mozilla.org/en-US/docs/Web/API/createImageBitmap)
+for decoding images into `ImageBitmap` objects that can be used with
+[`OffscreenCanvas`](#offscreencanvas).
+
+### Supported input formats
+
+| Format | Notes             |
+| ------ | ----------------- |
+| PNG    |                   |
+| JPEG   |                   |
+| BMP    |                   |
+| GIF    | Added in Deno 2.7 |
+| WebP   | Added in Deno 2.7 |
+
+```ts
+const data = await Deno.readFile("./image.gif");
+const bitmap = await createImageBitmap(new Blob([data]));
+console.log(bitmap.width, bitmap.height);
+```
+
+## File locking
+
+[`Deno.FsFile`](/api/deno/~/Deno.FsFile) supports advisory file locking to
+coordinate access between processes:
+
+- [`lock(exclusive?)`](/api/deno/~/Deno.FsFile.prototype.lock) — acquires a
+  lock. Shared (read) by default; pass `true` for exclusive (write). Blocks if
+  an incompatible lock is held.
+- [`lockSync(exclusive?)`](/api/deno/~/Deno.FsFile.prototype.lockSync) —
+  synchronous variant of `lock()`.
+- [`tryLock(exclusive?)`](/api/deno/~/Deno.FsFile.prototype.tryLock) —
+  non-blocking. Returns `true` if the lock was acquired, `false` otherwise.
+  Added in Deno 2.7.
+- [`tryLockSync(exclusive?)`](/api/deno/~/Deno.FsFile.prototype.tryLockSync) —
+  synchronous variant of `tryLock()`.
+
+```ts
+const file = await Deno.open("./data.txt", { read: true, write: true });
+
+const locked = await file.tryLock(true); // exclusive
+if (locked) {
+  await file.write(new TextEncoder().encode("hello"));
+  await file.unlock();
+} else {
+  console.log("File is locked by another process, skipping.");
+}
+file.close();
+```
+
 ## Deviations of other APIs from spec
 
 ### Cache API
@@ -497,9 +767,13 @@ Only the following APIs are implemented:
 - [CacheStorage::open()](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/open)
 - [CacheStorage::has()](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/has)
 - [CacheStorage::delete()](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/delete)
+- [CacheStorage::keys()](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/keys)
+  (Deno 2.8+)
 - [Cache::match()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/match)
 - [Cache::put()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/put)
 - [Cache::delete()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/delete)
+- [Cache::keys()](https://developer.mozilla.org/en-US/docs/Web/API/Cache/keys)
+  (Deno 2.8+)
 
 A few things that are different compared to browsers:
 

@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-12
 title: "deno deploy"
 command: deploy
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -39,7 +40,7 @@ Creates a new application in Deno Deploy. When run without flags, an interactive
 wizard walks you through each step. When any configuration flag is provided, the
 command runs in non-interactive mode (useful for CI/CD pipelines and scripting).
 
-```bash
+```sh
 deno deploy create [root-path]
 ```
 
@@ -127,13 +128,13 @@ you through each configuration step:
 
 Create an app interactively:
 
-```bash
+```sh
 deno deploy create
 ```
 
 Create a local dynamic app with all flags (non-interactive):
 
-```bash
+```sh
 deno deploy create \
   --org my-org \
   --app my-api \
@@ -149,7 +150,7 @@ deno deploy create \
 
 Create a static site:
 
-```bash
+```sh
 deno deploy create \
   --org my-org \
   --app my-site \
@@ -165,7 +166,7 @@ deno deploy create \
 
 Use a framework preset (fewer flags needed since the preset provides defaults):
 
-```bash
+```sh
 deno deploy create \
   --org my-org \
   --app my-fresh-app \
@@ -178,7 +179,7 @@ deno deploy create \
 
 Deploy from a GitHub repo:
 
-```bash
+```sh
 deno deploy create \
   --org my-org \
   --app my-app \
@@ -195,7 +196,7 @@ deno deploy create \
 
 Manage environment variables for your deployed applications.
 
-```bash
+```sh
 deno deploy env
 ```
 
@@ -207,7 +208,7 @@ deno deploy env
 
 #### List environment variables
 
-```bash
+```sh
 deno deploy env list
 ```
 
@@ -215,7 +216,7 @@ Lists all environment variables in an application.
 
 #### Add environment variable
 
-```bash
+```sh
 deno deploy env add <variable> <value>
 ```
 
@@ -226,7 +227,7 @@ Adds an environment variable to the application.
 - `--secret` - Mark the variable as a secret. Secret values are hidden in the
   dashboard and in `env list` output.
 
-```bash
+```sh
 deno deploy env add DATABASE_URL "postgresql://user:pass@localhost/db"
 
 # Add a secret environment variable
@@ -235,13 +236,13 @@ deno deploy env add API_KEY "sk-secret-value" --secret
 
 #### Update environment variable value
 
-```bash
+```sh
 deno deploy env update-value <variable> <value>
 ```
 
 Updates the value of an existing environment variable.
 
-```bash
+```sh
 deno deploy env update-value API_KEY "new-api-key-value"
 ```
 
@@ -250,7 +251,7 @@ deno deploy env update-value API_KEY "new-api-key-value"
 Environment variables can be made available to specific contexts such as
 Production, Preview, Local, and Build.
 
-```bash
+```sh
 deno deploy env update-contexts <variable> [contexts...]
 ```
 
@@ -258,19 +259,19 @@ Updates the contexts of an environment variable in the application:
 
 #### Delete environment variable
 
-```bash
+```sh
 deno deploy env delete <variable>
 ```
 
 Deletes an environment variable from the application.
 
-```bash
+```sh
 deno deploy env delete OLD_API_KEY
 ```
 
 #### Load environment variables from file
 
-```bash
+```sh
 deno deploy env load <file>
 ```
 
@@ -284,7 +285,7 @@ accordingly.
 - `--non-secrets <keys...>` - Keys from the `.env` file that should be treated
   as non-secrets, overriding the auto-detection
 
-```bash
+```sh
 deno deploy env load .env.production
 
 # Load and treat specific keys as non-secrets
@@ -295,7 +296,7 @@ deno deploy env load .env.production --non-secrets PUBLIC_URL SITE_NAME
 
 Manage database instances for your organization.
 
-```bash
+```sh
 deno deploy database
 ```
 
@@ -306,7 +307,7 @@ deno deploy database
 
 #### Provision a database
 
-```bash
+```sh
 deno deploy database provision <name> --kind <denokv|prisma> [--region <region>]
 ```
 
@@ -318,7 +319,7 @@ Creates a new database instance.
 - `--region <region>` - The primary region for the database (required for
   Prisma)
 
-```bash
+```sh
 # Provision a Deno KV database
 deno deploy database provision my-kv-db --kind denokv
 
@@ -328,7 +329,7 @@ deno deploy database provision my-pg-db --kind prisma --region us-east-1
 
 #### Link an external database
 
-```bash
+```sh
 deno deploy database link <name> [connectionString]
 ```
 
@@ -344,7 +345,7 @@ connection string or use individual flags.
 - `--cert <cert>` - SSL certificate for the connection
 - `--dry-run` - Test the connection without actually linking
 
-```bash
+```sh
 # Link using a connection string
 deno deploy database link my-db "postgres://user:pass@host:5432/mydb"
 
@@ -361,51 +362,51 @@ deno deploy database link my-db "postgres://user:pass@host:5432/mydb" --dry-run
 
 #### Assign a database to an app
 
-```bash
+```sh
 deno deploy database assign <name> [--app <name>]
 ```
 
 Assigns a database instance to an application. If `--app` is not provided, you
 will be prompted to select one interactively.
 
-```bash
+```sh
 deno deploy database assign my-db --app my-api
 ```
 
 #### Detach a database from an app
 
-```bash
+```sh
 deno deploy database detach <name> [--app <name>]
 ```
 
 Removes the connection between a database instance and an application.
 
-```bash
+```sh
 deno deploy database detach my-db --app my-api
 ```
 
 #### Query a database
 
-```bash
+```sh
 deno deploy database query <name> <database> [query...]
 ```
 
 Executes a SQL query against a database.
 
-```bash
+```sh
 deno deploy database query my-db mydb "SELECT * FROM users LIMIT 10"
 ```
 
 #### List databases
 
-```bash
+```sh
 deno deploy database list [search]
 ```
 
 Lists all database instances in the organization. Also available as
 `database ls`.
 
-```bash
+```sh
 # List all databases
 deno deploy database list
 
@@ -415,14 +416,14 @@ deno deploy database list my-db
 
 #### Delete a database
 
-```bash
+```sh
 deno deploy database delete <name>
 ```
 
 Permanently deletes a database instance. Also available as `database remove` or
 `database rm`.
 
-```bash
+```sh
 deno deploy database delete my-old-db
 ```
 
@@ -431,7 +432,7 @@ deno deploy database delete my-old-db
 Sets the default organization and application for subsequent commands, so you
 don't have to pass `--org` and `--app` every time.
 
-```bash
+```sh
 deno deploy switch [--org <name>] [--app <name>]
 ```
 
@@ -442,7 +443,7 @@ When run without flags, an interactive prompt lets you select the org and app.
 - `--org <name>` - The organization to switch to
 - `--app <name>` - The application to switch to
 
-```bash
+```sh
 # Switch interactively
 deno deploy switch
 
@@ -454,7 +455,7 @@ deno deploy switch --org my-company --app my-api
 
 Removes the stored authentication token.
 
-```bash
+```sh
 deno deploy logout
 ```
 
@@ -462,7 +463,7 @@ deno deploy logout
 
 Stream logs from a deployed application.
 
-```bash
+```sh
 deno deploy logs
 ```
 
@@ -474,7 +475,7 @@ deno deploy logs
 - `--start <date>` - The starting timestamp of the logs
 - `--end <date>` - The ending timestamp of the logs (requires --start)
 
-```bash
+```sh
 deno deploy logs --org my-org --app my-app --start "2024-01-01T00:00:00Z"
 ```
 
@@ -482,7 +483,7 @@ deno deploy logs --org my-org --app my-app --start "2024-01-01T00:00:00Z"
 
 Interact with running sandboxes directly from the Deploy CLI.
 
-```bash
+```sh
 deno deploy sandbox --help
 ```
 
@@ -495,7 +496,7 @@ deno deploy sandbox --help
 
 #### List sandboxes
 
-```bash
+```sh
 deno deploy sandbox list --org my-org
 ```
 
@@ -503,7 +504,7 @@ Lists every sandbox in the organization along with status details.
 
 #### Kill a sandbox
 
-```bash
+```sh
 deno deploy sandbox kill <sandbox-id> --org my-org
 ```
 
@@ -511,7 +512,7 @@ Immediately terminates the specified sandbox when you no longer need it.
 
 #### SSH into a sandbox
 
-```bash
+```sh
 deno deploy sandbox ssh <sandbox-id> --org my-org
 ```
 
@@ -528,7 +529,7 @@ applications.
 [Configure AWS integration](/deploy/reference/cloud_connections/#aws%3A-easy-setup-with-deno-deploy-setup-aws)
 for use as a Cloud Connection in your application.
 
-```bash
+```sh
 deno deploy setup-aws --org <name> --app <name>
 ```
 
@@ -538,7 +539,7 @@ deno deploy setup-aws --org <name> --app <name>
 - `--org <name>` - The name of the organization (required)
 - `--app <name>` - The name of the application (required)
 
-```bash
+```sh
 deno deploy setup-aws --org my-org --app my-app
 ```
 
@@ -547,7 +548,7 @@ deno deploy setup-aws --org my-org --app my-app
 [Configure Google Cloud Platform integration](/deploy/reference/cloud_connections/#setting-up-gcp)
 for use as a Cloud Connection in your application.
 
-```bash
+```sh
 deno deploy setup-gcp --org <name> --app <name>
 ```
 
@@ -557,7 +558,7 @@ deno deploy setup-gcp --org <name> --app <name>
 - `--org <name>` - The name of the organization (required)
 - `--app <name>` - The name of the application (required)
 
-```bash
+```sh
 deno deploy setup-gcp --org my-org --app my-app
 ```
 
@@ -565,7 +566,7 @@ deno deploy setup-gcp --org my-org --app my-app
 
 ### Basic deployment
 
-```bash
+```sh
 # Deploy current directory to production
 deno deploy --prod
 
@@ -575,7 +576,7 @@ deno deploy --org my-company --app my-api --prod
 
 ### Creating applications
 
-```bash
+```sh
 # Start the interactive creation wizard
 deno deploy create
 
@@ -594,7 +595,7 @@ deno deploy create --org my-company --app my-docs \
 
 ### Switching context
 
-```bash
+```sh
 # Set a default org and app so you don't have to pass --org/--app every time
 deno deploy switch --org my-company --app my-api
 
@@ -605,7 +606,7 @@ deno deploy logs
 
 ### Database management
 
-```bash
+```sh
 # Provision a Deno KV database
 deno deploy database provision my-kv --kind denokv --org my-company
 
@@ -621,7 +622,7 @@ deno deploy database query my-pg mydb "SELECT count(*) FROM users"
 
 ### Environment setup
 
-```bash
+```sh
 # Set up environment variables
 deno deploy env add DATABASE_URL "postgresql://..." --secret
 deno deploy env add SITE_NAME "My App"
@@ -632,7 +633,7 @@ deno deploy env load .env.production
 
 ### Monitoring
 
-```bash
+```sh
 # View recent logs
 deno deploy logs --org my-company --app my-api
 
@@ -644,7 +645,7 @@ deno deploy logs --org my-company --app my-api \
 
 ### Cloud integration
 
-```bash
+```sh
 # Set up AWS integration
 deno deploy setup-aws --org my-company --app my-api
 

@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-15
 title: "deno compile"
 oldUrl:
   - /runtime/manual/tools/compile/
@@ -20,14 +21,48 @@ permission flags.
 deno compile --allow-read --allow-net jsr:@std/http/file-server
 ```
 
-[Script arguments](/runtime/getting_started/command_line_interface/#passing-script-arguments)
-can be partially embedded.
+[Script arguments](/runtime/run/#passing-script-arguments) can be partially
+embedded.
 
-```console
+```sh
 deno compile --allow-read --allow-net jsr:@std/http/file-server -p 8080
 
 ./file_server --help
 ```
+
+## Framework detection
+
+Starting in Deno 2.8, `deno compile .` (or `deno compile <directory>`) detects
+common web frameworks and produces an entrypoint that knows how to start them.
+The detected build script is run first, so the compiled binary always contains a
+fresh build.
+
+Supported frameworks:
+
+- Next.js
+- Astro
+- Fresh (1.x and 2.x)
+- Remix
+- SvelteKit
+- Nuxt
+- SolidStart
+- TanStack Start
+- Vite (SSR mode)
+
+```sh
+# In a Next.js / Astro / Fresh / etc. project
+deno compile .
+
+# Or pointing at a specific app directory
+deno compile ./apps/web
+```
+
+Generated entrypoints use `import.meta.dirname` so framework asset paths resolve
+correctly against the [virtual filesystem](#including-data-files-or-directories)
+inside the compiled binary.
+
+If the project doesn't match any supported framework, `deno compile` will error
+out.
 
 ## Cross Compilation
 
@@ -52,6 +87,23 @@ Deno supports cross compiling to all targets regardless of the host platform.
 | macOS   | ARM64        | `aarch64-apple-darwin`      |
 | Linux   | x86_64       | `x86_64-unknown-linux-gnu`  |
 | Linux   | ARM64        | `aarch64-unknown-linux-gnu` |
+
+## The denort binary
+
+`deno compile` embeds your program into `denort` ("Deno runtime"): a stripped
+build of Deno that contains only what's needed to run a compiled program, with
+none of the tooling subcommands. Using `denort` as the base instead of the full
+`deno` binary is what keeps compiled executables smaller.
+
+The first time you compile for a given Deno version and target, Deno downloads
+the matching `denort-<target>.zip` from `dl.deno.land` and caches it in
+`DENO_DIR`. This is also how cross-compilation works: compiling with `--target`
+fetches that platform's `denort`. Subsequent compiles reuse the cached binary
+and work offline.
+
+To use a custom or locally built runtime as the base, set the `DENORT_BIN`
+environment variable to its path. Deno also picks up a `denort` binary placed
+next to the `deno` executable.
 
 ## Icons
 
@@ -86,7 +138,7 @@ const calculator = await import(specifier);
 To include non-statically analyzable dynamic imports, specify an
 `--include <path>` flag.
 
-```shell
+```sh
 deno compile --include calc.ts --include better_calc.ts main.ts
 ```
 
@@ -95,7 +147,7 @@ deno compile --include calc.ts --include better_calc.ts main.ts
 Starting in Deno 2.1, you can include files or directories in the executable by
 specifying them via the `--include <path>` flag.
 
-```shell
+```sh
 deno compile --include names.csv --include data main.ts
 ```
 
@@ -113,6 +165,26 @@ const dataFiles = Deno.readDirSync(import.meta.dirname + "/data");
 Note this currently only works for files on the file system and not remote
 files.
 
+### Configuring `include` / `exclude` in `deno.json`
+
+The `--include` and `--exclude` paths can be set declaratively in `deno.json` so
+you don't have to repeat them on every `deno compile` invocation:
+
+```jsonc title="deno.json"
+{
+  "compile": {
+    "include": ["names.csv", "data", "worker.ts"],
+    "exclude": ["data/secrets", "**/*.test.ts"]
+  }
+}
+```
+
+CLI flags are merged with the config: `--include` and `--exclude` add to the
+lists in `deno.json` rather than replacing them. See the
+[Compile config](/runtime/reference/deno_json/#compile-config) section in the
+configuration guide for more details, including how to declare `permissions` on
+the same block.
+
 ## Workers
 
 Similarly to non-statically analyzable dynamic imports, code for
@@ -121,7 +193,7 @@ executable by default. There are two ways to include workers:
 
 1. Use the `--include <path>` flag to include the worker code.
 
-```shell
+```sh
 deno compile --include worker.ts main.ts
 ```
 
@@ -132,9 +204,69 @@ deno compile --include worker.ts main.ts
 import "./worker.ts";
 ```
 
-```shell
+```sh
 deno compile main.ts
 ```
+
+## Bundling dependencies
+
+:::caution
+
+`--bundle` is experimental and subject to change. Some dynamic patterns are not
+yet supported (see [Limitations](#limitations) below).
+
+:::
+
+By default, `deno compile` embeds the entire resolved `node_modules` tree in the
+executable. For projects with many npm dependencies this can make binaries large
+and slow to start. The `--bundle` flag instead runs your entrypoint through the
+bundler before embedding, so only the code your program actually reaches ends up
+in the binary.
+
+```sh
+deno compile --bundle main.ts
+```
+
+For a pure-ESM dependency tree, tree-shaking removes everything unused and the
+npm payload is dropped entirely, producing a much smaller binary. When a
+CommonJS package or a native addon (`.node`) is reached, the relevant packages
+are embedded so they keep working at runtime, but unreached packages are still
+left out.
+
+`--bundle` understands several real-world patterns automatically:
+
+- **CommonJS and native addons** — CJS dependencies and `.node` native addons
+  are detected and the packages that provide them are embedded.
+- **Workers** — `new Worker(new URL("./worker.ts", import.meta.url), ...)` calls
+  are discovered, each worker is bundled separately and embedded alongside the
+  main bundle.
+- **`package.json` reads** — packages that read their own `package.json` at
+  runtime (for example to report a version) have it included automatically.
+
+### Minifying the bundle
+
+Combine `--bundle` with `--minify` to minify the bundled output. This reduces
+both the embedded bundle size and runtime memory use, at the cost of less
+readable stack traces.
+
+```sh
+deno compile --bundle --minify main.ts
+```
+
+`--minify` is only meaningful together with `--bundle`.
+
+### Limitations
+
+Because bundling relies on statically analyzing your code, patterns that can't
+be traced are dropped from the binary:
+
+- Dynamic `require()` / `import()` of specifiers that aren't string literals.
+- Workers spawned with computed URLs, or spawned from transitive dependencies
+  rather than your own source.
+
+If your program relies on these, either keep them statically analyzable, add the
+needed files with [`--include`](#including-data-files-or-directories), or
+compile without `--bundle`.
 
 ## Self-Extracting Executables
 
@@ -143,7 +275,7 @@ file system. The `--self-extracting` flag changes this behavior so that the
 binary extracts all embedded files to disk on first run and uses real file
 system operations at runtime.
 
-```shell
+```sh
 deno compile --self-extracting main.ts
 ```
 
@@ -180,9 +312,9 @@ trade-offs:
 By default, on macOS, the compiled executable will be signed using an ad-hoc
 signature which is the equivalent of running `codesign -s -`:
 
-```shell
-$ deno compile -o main main.ts
-$ codesign --verify -vv ./main
+```sh
+deno compile -o main main.ts
+codesign --verify -vv ./main
 
 ./main: valid on disk
 ./main: satisfies its Designated Requirement
@@ -191,7 +323,7 @@ $ codesign --verify -vv ./main
 You can specify a signing identity when code signing the executable just like
 you would do with any other macOS executable:
 
-```shell
+```sh
 codesign -s "Developer ID Application: Your Name" ./main
 ```
 
@@ -204,9 +336,9 @@ for more information on codesigning and notarization on macOS.
 On Windows, the compiled executable can be signed using the `SignTool.exe`
 utility.
 
-```shell
-$ deno compile -o main.exe main.ts
-$ signtool sign /fd SHA256 main.exe
+```sh
+deno compile -o main.exe main.ts
+signtool sign /fd SHA256 main.exe
 ```
 
 ## Unavailable in executables

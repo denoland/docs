@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-01-20
 title: Runtime
 description: "Details about the Deno Deploy runtime environment, including application lifecycle, startup, shutdown, and cold start optimization."
 ---

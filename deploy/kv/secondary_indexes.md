@@ -1,4 +1,5 @@
 ---
+last_modified: 2025-10-23
 title: "Secondary Indexes"
 oldUrl:
   - /runtime/manual/runtime/kv/secondary_indexes

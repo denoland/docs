@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-25
 title: Environment Variables and Contexts
 description: "Guide to managing environment variables and contexts in Deno Deploy, including variable types, creation, editing, and accessing them in your code."
 oldUrl: /deploy/reference/env-vars-and-contexts/
@@ -141,13 +142,13 @@ Environment variables have the following limits:
 Deno Deploy provides these predefined environment variables in all contexts:
 
 - `DENO_DEPLOY`: `true` - Indicates that the code is running in Deno Deploy.
-- `DENO_DEPLOY_ORGANIZATION_ID`: The ID of the organization that owns the
-  application. This is a UUID.
-- `DENO_DEPLOY_ORGANIZATION_SLUG`: The slug of the organization that owns the
+- `DENO_DEPLOY_ORG_ID`: The ID of the organization that owns the application.
+- This is a UUID.
+- `DENO_DEPLOY_ORG_SLUG`: The slug of the organization that owns the
   application. This is the human-readable identifier used in URLs that was set
   when creating the organization.
-- `DENO_DEPLOY_APPLICATION_ID`: The ID of the application. This is a UUID.
-- `DENO_DEPLOY_APPLICATION_SLUG`: The slug of the application. This is the
+- `DENO_DEPLOY_APP_ID`: The ID of the application. This is a UUID.
+- `DENO_DEPLOY_APP_SLUG`: The slug of the application. This is the
   human-readable identifier used in URLs that was set when creating the
   application, or changed later in the application settings.
 - `DENO_DEPLOY_BUILD_ID`: The ID of the currently running build.

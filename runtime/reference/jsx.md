@@ -1,61 +1,32 @@
 ---
-title: "JSX"
-description: "Complete guide to using JSX in Deno. Learn about JSX configuration options, automatic runtime features, development transforms, and Deno's optimized precompile transform for server-side rendering."
+last_modified: 2026-06-13
+title: "JSX and React"
+description: "Configure JSX in Deno for React, Preact, or Hono: the automatic runtime, server-side rendering and its permission caveat, the precompile transform, and per-file pragmas."
 oldUrl:
   - /deploy/manual/using-jsx/
   - /runtime/manual/advanced/jsx_dom/jsx/
   - /runtime/manual/advanced/jsx/
 ---
 
-Deno has built-in support for JSX in both `.jsx` files and `.tsx` files. JSX in
-Deno can be handy for server-side rendering or generating code for browser
-consumption.
+Deno runs JSX in `.jsx` and `.tsx` files with no build step. This page covers
+how to configure it: which UI library to target, how to render JSX to HTML on
+the server, and the options that control the transform. If you are building an
+app with a framework, the framework usually sets this up for you. See
+[Web development](/runtime/fundamentals/web_dev/) for Fresh, Next.js, and
+others.
 
-## Default configuration
-
-The Deno CLI has a default configuration for JSX that is different than the
-defaults for `tsc`. Effectively Deno uses the following
-[TypeScript compiler](https://www.typescriptlang.org/docs/handbook/compiler-options.html)
-options by default:
-
-```json title="deno.json"
-{
-  "compilerOptions": {
-    "jsx": "react",
-    "jsxFactory": "React.createElement",
-    "jsxFragmentFactory": "React.Fragment"
-  }
-}
-```
-
-Using the `"react"` option will convert JSX into the following JavaScript code:
-
-```jsx
-// input
-const jsx = (
-  <div className="foo">
-    <MyComponent value={2} />
-  </div>
-);
-
-// output:
-const jsx = React.createElement(
-  "div",
-  { className: "foo" },
-  React.createElement(MyComponent, { value: 2 }),
-);
-```
-
-## JSX automatic runtime (recommended)
-
-In React 17, the React team added what they called
-[the _new_ JSX transforms](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
-This enhanced and modernized the API for JSX transforms as well as provided a
-mechanism to automatically add relevant JSX imports so that you don't have to do
-this yourself. This is the recommended way to use JSX.
-
-To use the newer JSX runtime transform change the compiler options in your
+JSX needs a library to turn tags like `<h1>` into values at runtime. Deno
+supports [React](https://react.dev/), [Preact](https://preactjs.com/), and
+[Hono](https://hono.dev/), selected through the `jsxImportSource` setting in
 `deno.json`.
+
+## Set up JSX
+
+Configure JSX once in your `deno.json` with the automatic runtime. This is the
+recommended setup: you write JSX and Deno inserts the right imports for you, so
+you never import the JSX factory by hand.
+
+For React:
 
 ```json title="deno.json"
 {
@@ -64,262 +35,161 @@ To use the newer JSX runtime transform change the compiler options in your
     "jsxImportSource": "react"
   },
   "imports": {
-    "react": "npm:react",
-    "@types/react": "npm:@types/react"
+    "react": "npm:react@^19",
+    "@types/react": "npm:@types/react@^19"
   }
 }
 ```
 
-:::note install dependencies
+`@types/react` is what gives you type checking and editor autocomplete for JSX.
+After editing the `imports`, run `deno install` to download and cache the
+packages.
 
-When manually adding imports to your `deno.json` file, remember to run
-`deno install` to download and cache the dependencies.
-
-:::
-
-Behind the scenes the `jsxImportSource` setting will always append a
-`/jsx-runtime` to the import specifier.
-
-```js
-// This import will be inserted automatically
-import { jsx as _jsx } from "react/jsx-runtime";
-```
-
-Using the `"react-jsx"` option will convert JSX into the following JavaScript
-code:
-
-```jsx
-// input
-const jsx = (
-  <div className="foo">
-    <MyComponent value={2} />
-  </div>
-);
-
-// output
-import { jsx as _jsx } from "react/jsx-runtime";
-const jsx = _jsx(
-  "div",
-  {
-    className: "foo",
-    children: _jsx(MyComponent, { value: 2 }),
-  },
-);
-```
-
-If you want to use [Preact](https://preactjs.com/) instead of React you can
-update the `jsxImportSource` value accordingly.
-
-```diff title="deno.json"
-  {
-    "compilerOptions": {
-      "jsx": "react-jsx",
--     "jsxImportSource": "react"
-+     "jsxImportSource": "preact"
-    },
-    "imports": {
--     "react": "npm:react"
-+     "preact": "npm:preact"
-    }
-  }
-```
-
-### Development transform
-
-Setting the `"jsx"` option to `"react-jsxdev"` instead of `"react-jsx"` will
-pass additional debugging information to each JSX node. The additional
-information is the file path, line number and column number of the callsite of
-each JSX node.
-
-This information is typically used in frameworks to enhance the debugging
-experience during development. In React this information is used to enhance
-stack traces and show where a component was instantiated in the React developer
-tools browser extension.
-
-Using the `"react-jsxdev"` option will convert JSX into the following JavaScript
-code:
-
-```jsx
-// input
-const jsx = (
-  <div className="foo">
-    <MyComponent value={2} />
-  </div>
-);
-
-// output
-import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
-const _jsxFileName = "file:///input.tsx";
-const jsx = _jsxDEV(
-  "div",
-  {
-    className: "foo",
-    children: _jsxDEV(
-      MyComponent,
-      {
-        value: 2,
-      },
-      void 0,
-      false,
-      {
-        fileName: _jsxFileName,
-        lineNumber: 3,
-        columnNumber: 5,
-      },
-      this,
-    ),
-  },
-  void 0,
-  false,
-  {
-    fileName: _jsxFileName,
-    lineNumber: 1,
-    columnNumber: 14,
-  },
-  this,
-);
-```
-
-:::caution
-
-Only use the `"react-jsxdev"` information during development and not in
-production.
-
-:::
-
-### Using the JSX import source pragma
-
-Whether you have a JSX import source configured for your project, or if you are
-using the default "legacy" configuration, you can add the JSX import source
-pragma to a `.jsx` or `.tsx` module, and Deno will respect it.
-
-The `@jsxImportSource` pragma needs to be in the leading comments of the module.
-For example to use Preact from esm.sh, you would do something like this:
-
-```jsx
-/** @jsxImportSource https://esm.sh/preact */
-
-export function App() {
-  return (
-    <div>
-      <h1>Hello, world!</h1>
-    </div>
-  );
-}
-```
-
-### `jsxImportSourceTypes`
-
-In certain cases, a library may not provide types. To specify the types, you can
-use the `@jsxImportSourceTypes` pragma:
-
-```jsx
-/** @jsxImportSource npm:react@^18.3 */
-/** @jsxImportSourceTypes npm:@types/react@^18.3 */
-
-export function Hello() {
-  return <div>Hello!</div>;
-}
-```
-
-Or specify via the `jsxImportSourceTypes` compiler option in a _deno.json_:
+For Preact, point `jsxImportSource` at `preact` instead. Preact ships its own
+types, so no separate `@types` package is needed:
 
 ```json title="deno.json"
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "npm:react@^18.3",
-    "jsxImportSourceTypes": "npm:@types/react@^18.3"
+    "jsxImportSource": "preact"
+  },
+  "imports": {
+    "preact": "npm:preact@^10"
   }
 }
 ```
 
-## JSX precompile transform
+With either configuration, a component is just a function that returns JSX:
 
-Deno ships with a
-[new JSX transform](https://deno.com/blog/v1.38#fastest-jsx-transform) that is
-optimized for server-side rendering. It can be up to **7-20x faster** than the
-other JSX transform options. The difference is that the precompile transform
-analyses your JSX statically and stores precompiled HTML strings if possible.
-That way a lot of time creating JSX objects can be avoided.
-
-To use the precompile transform, set the `jsx` option to `"precompile"`.
-
-```diff title="deno.json"
-  {
-    "compilerOptions": {
-+     "jsx": "precompile",
-      "jsxImportSource": "preact"
-    },
-    "imports": {
-      "preact": "npm:preact"
-    }
-  }
+```tsx title="hello.tsx"
+export function Hello() {
+  return <h1>Hello, world!</h1>;
+}
 ```
 
-To prevent JSX nodes representing HTML elements from being precompiled, you can
-add them to the `jsxPrecompileSkipElements` setting.
+:::note Legacy classic runtime
 
-```diff title="deno.json"
-  {
-    "compilerOptions": {
-      "jsx": "precompile",
-      "jsxImportSource": "preact",
-+     "jsxPrecompileSkipElements": ["a", "link"]
-    },
-    "imports": {
-      "preact": "npm:preact"
-    }
-  }
-```
-
-:::note
-
-The `precompile` transform works best with [Preact](https://preactjs.com/) or
-[Hono](https://hono.dev/). It is not supported in React.
+Deno's built-in default predates the automatic runtime: it is the classic
+`"react"` transform, which compiles JSX to `React.createElement` calls and
+expects a `React` variable to be in scope. Code that relies on the default
+throws `ReferenceError: React is not defined` at runtime unless you import React
+into every JSX file. Prefer the automatic runtime above for new projects.
 
 :::
 
-Using the `"precompile"` option will convert JSX into the following JavaScript
-code:
+## Choose React, Preact, or Hono
 
-```jsx
-// input
-const jsx = (
-  <div className="foo">
-    <MyComponent value={2} />
-  </div>
-);
+All three work in Deno. Which one to pick depends on what you are building:
 
-// output:
-import {
-  jsx as _jsx,
-  jsxTemplate as _jsxTemplate,
-} from "npm:preact/jsx-runtime";
-const $$_tpl_1 = [
-  '<div class="foo">',
-  "</div>",
-];
-function MyComponent() {
-  return null;
+- **Preact** is a small, fast, React-compatible library. It is a strong choice
+  for server-rendered HTML and works with the
+  [precompile transform](#speed-up-server-rendering) for maximum speed.
+  [Fresh](https://fresh.deno.dev/), Deno's web framework, uses Preact.
+- **Hono** brings its own JSX runtime (`hono/jsx`) aimed at server-side
+  rendering and edge deployments. Choose it when you are already building an API
+  or site with Hono.
+- **React** is the right choice when you need the React ecosystem: React-only
+  libraries, React Server Components, or an existing React codebase. Its server
+  renderer is heavier than Preact's and does not support the precompile
+  transform.
+
+You can switch libraries later by changing `jsxImportSource` and the matching
+import. The JSX you write stays the same.
+
+## Render JSX to HTML on the server
+
+To send HTML from a server, render your components to a string and return it in
+a [`Response`](/api/web/~/Response). The renderer differs per library.
+
+With Preact, use
+[`preact-render-to-string`](https://www.npmjs.com/package/preact-render-to-string):
+
+```json title="deno.json"
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
+  },
+  "imports": {
+    "preact": "npm:preact@^10",
+    "preact-render-to-string": "npm:preact-render-to-string@^6"
+  }
 }
-const jsx = _jsxTemplate(
-  $$_tpl_1,
-  _jsx(MyComponent, {
-    value: 2,
-  }),
-);
 ```
 
-## Rendering JSX in server responses
+```tsx title="server.tsx"
+import { render } from "preact-render-to-string";
 
-When using JSX for server-side rendering in Deno, you need to convert your JSX
-components to HTML strings that can be sent in a Response. This is particularly
-useful when building web applications with Deno.serve.
+function App() {
+  return <h1>Hello from Preact</h1>;
+}
 
-### Using Preact with renderToString
+Deno.serve((_req) => {
+  const html = `<!DOCTYPE html>${render(<App />)}`;
+  return new Response(html, {
+    headers: { "content-type": "text/html; charset=utf-8" },
+  });
+});
+```
 
-For Preact applications, you can use the `preact-render-to-string` package:
+```sh
+deno run -N server.tsx
+```
+
+With React, use `react-dom/server`:
+
+```json title="deno.json"
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  },
+  "imports": {
+    "react": "npm:react@^19",
+    "react-dom": "npm:react-dom@^19",
+    "@types/react": "npm:@types/react@^19"
+  }
+}
+```
+
+```tsx title="server.tsx"
+import { renderToString } from "react-dom/server";
+
+function App() {
+  return <h1>Hello from React</h1>;
+}
+
+Deno.serve((_req) => {
+  const html = `<!DOCTYPE html>${renderToString(<App />)}`;
+  return new Response(html, {
+    headers: { "content-type": "text/html; charset=utf-8" },
+  });
+});
+```
+
+:::caution React's server renderer needs `--allow-env`
+
+`react-dom/server` reads `process.env.NODE_ENV`, so a React server fails with
+`NotCapable: Requires env access to "NODE_ENV"` unless you grant environment
+access. Run it with `-E` (or `--allow-env`) alongside the network flag:
+
+```sh
+deno run -N -E server.tsx
+```
+
+Preact's renderer does not read the environment, so it needs no extra
+permission.
+
+:::
+
+## Speed up server rendering
+
+Deno ships a
+[precompile transform](https://deno.com/blog/v1.38#fastest-jsx-transform) built
+for server-side rendering. It analyzes your JSX at build time and turns static
+markup into prebuilt HTML strings, so the server skips most of the work of
+creating JSX objects on each request. Set `jsx` to `"precompile"`:
 
 ```json title="deno.json"
 {
@@ -328,67 +198,94 @@ For Preact applications, you can use the `preact-render-to-string` package:
     "jsxImportSource": "preact"
   },
   "imports": {
-    "preact": "npm:preact@^10.26.6",
-    "preact-render-to-string": "npm:preact-render-to-string@^6.5.13"
+    "preact": "npm:preact@^10",
+    "preact-render-to-string": "npm:preact-render-to-string@^6"
   }
 }
 ```
 
-Then in your server code:
+The precompile transform works with **Preact and Hono**. It does **not** work
+with React: React's `jsx-runtime` does not export the `jsxTemplate` helper the
+transform relies on, so a React project configured this way fails to run with
+`SyntaxError: ... does not provide an export named 'jsxTemplate'`. Use the
+`"react-jsx"` runtime with React instead.
 
-```tsx title="server.tsx"
-import { renderToString } from "preact-render-to-string";
-
-const App = () => {
-  return <h1>Hello world</h1>;
-};
-
-Deno.serve(() => {
-  const html = `<!DOCTYPE html>${renderToString(<App />)}`;
-  return new Response(html, {
-    headers: { "Content-Type": "text/html; charset=utf-8" },
-  });
-});
-```
-
-This approach works well with the precompile transform, providing optimal
-performance for server-side rendering.
-
-### Using React with renderToString
-
-If you're using React instead of Preact, you can use React's own server
-rendering capabilities:
+If some elements must not be precompiled into static strings, list their tag
+names in `jsxPrecompileSkipElements`:
 
 ```json title="deno.json"
 {
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsx": "precompile",
+    "jsxImportSource": "preact",
+    "jsxPrecompileSkipElements": ["a", "link"]
   },
   "imports": {
-    "react": "npm:react@^18.2.0",
-    "react-dom": "npm:react-dom@^18.2.0",
-    "react-dom/server": "npm:react-dom@^18.2.0/server"
+    "preact": "npm:preact@^10"
   }
 }
 ```
 
-And in your server code:
+## Configure JSX per file with pragmas
 
-```tsx title="server.tsx"
-import { renderToString } from "react-dom/server";
+When most of your project uses one setup but a single file needs another, set
+the import source for that file with a pragma comment instead of changing
+`deno.json`. This is common for standalone scripts that have no project
+configuration. The pragma must appear in the file's leading comments:
 
-const App = () => {
-  return <h1>Hello from React</h1>;
-};
+```tsx title="snippet.tsx"
+/** @jsxImportSource npm:preact */
 
-Deno.serve(() => {
-  const html = `<!DOCTYPE html>${renderToString(<App />)}`;
-  return new Response(html, {
-    headers: { "Content-Type": "text/html; charset=utf-8" },
-  });
-});
+export function App() {
+  return <h1>Hello from a one-off script</h1>;
+}
 ```
 
-With these configurations, your Deno server can efficiently render JSX
-components to HTML and serve them to clients.
+If the library does not ship its own types, point Deno at a separate types
+package with `@jsxImportSourceTypes`:
+
+```tsx
+/** @jsxImportSource npm:react@^19 */
+/** @jsxImportSourceTypes npm:@types/react@^19 */
+
+export function Hello() {
+  return <div>Hello!</div>;
+}
+```
+
+The same `jsxImportSourceTypes` is also available as a compiler option in
+`deno.json` for projects whose JSX library ships no types.
+
+## Transform options reference
+
+The `jsx` compiler option selects how Deno compiles JSX. Set it in `deno.json`
+under `compilerOptions`:
+
+| `jsx` value      | What it does                                                                                 |
+| ---------------- | -------------------------------------------------------------------------------------------- |
+| `"react-jsx"`    | Automatic runtime. Inserts imports from `<jsxImportSource>/jsx-runtime`. Recommended.        |
+| `"react-jsxdev"` | Automatic runtime with debug info (file, line, column) added to each node. Development only. |
+| `"precompile"`   | Optimized server-rendering transform for Preact and Hono. Fastest for SSR.                   |
+| `"react"`        | Legacy classic transform. Compiles to `React.createElement`; needs `React` in scope.         |
+
+Related settings:
+
+- `jsxImportSource`: the module JSX imports come from (`react`, `preact`,
+  `hono/jsx`). Deno appends `/jsx-runtime` automatically.
+- `jsxImportSourceTypes`: a types package to use when the JSX library ships
+  none.
+- `jsxPrecompileSkipElements`: tag names to leave out of the precompile
+  transform.
+
+For the full set of TypeScript compiler options Deno supports, see the
+[`deno.json` reference](/runtime/reference/deno_json/) and
+[Configuring TypeScript](/runtime/reference/ts_config_migration/).
+
+## Next steps
+
+- [Web development](/runtime/fundamentals/web_dev/): build apps with Fresh,
+  Next.js, Astro, and other frameworks that configure JSX for you.
+- [HTTP server](/runtime/fundamentals/http_server/): serve the HTML your
+  components render.
+- [Configuration file](/runtime/reference/deno_json/): every `deno.json` field,
+  including `compilerOptions`.
