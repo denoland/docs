@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-07-11
+last_modified: 2026-06-15
 title: "How to export telemetry data to Grafana"
 description: "Complete guide to exporting telemetry data with OpenTelemetry and Grafana. Learn how to configure collectors, visualize traces, and monitor application performance."
 url: /examples/grafana_tutorial/

@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-07-11
+last_modified: 2026-06-15
 title: "How to export telemetry data to Honeycomb"
 description: "Complete guide to exporting telemetry data with OpenTelemetry and Honeycomb.io. Learn how to configure collectors, visualize traces, and monitor application performance."
 url: /examples/honeycomb_tutorial/
