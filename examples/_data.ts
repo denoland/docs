@@ -1029,6 +1029,24 @@ export const items = [
     category: "AI",
   },
   {
+    title: "Get structured JSON output from Claude",
+    href: "/examples/anthropic_structured_output/",
+    type: "example",
+    category: "AI",
+  },
+  {
+    title: "RAG: ground Claude's answer in your documents",
+    href: "/examples/anthropic_rag/",
+    type: "example",
+    category: "AI",
+  },
+  {
+    title: "Connect to an MCP server from a client",
+    href: "/examples/mcp_client/",
+    type: "example",
+    category: "AI",
+  },
+  {
     title: "Connect to OpenAI - Chat completion",
     href: "/examples/openai_chat_completion/",
     type: "example",
