@@ -22,7 +22,7 @@ export default function (
         hasSubNav ? "" : "border-b border-b-foreground-tertiary"
       }`}
     >
-      <div class="grid grid-cols-[auto_1fr] md:grid-cols-[auto_auto_1fr] h-[var(--header-height)] gap-x-4 items-center justify-between px-4 w-full max-w-7xl mx-auto xlplus:px-0">
+      <div class="grid grid-cols-[auto_1fr] md:grid-cols-[auto_auto_1fr] h-[var(--header-height)] gap-x-4 items-center justify-between px-4 w-full max-w-[var(--layout-max-width)] mx-auto xlplus:px-0">
         <a
           href="https://deno.com"
           title="Deno main website"

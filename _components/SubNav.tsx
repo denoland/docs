@@ -45,12 +45,14 @@ export default function (
 
   return (
     <nav class="flex items-center pl-4 bg-header-highlight z-10 h-[var(--subnav-height)] overflow-x-auto xlplus:pl-0">
-      <ul class="flex w-full max-w-7xl mx-auto items-center gap-6">
+      <ul class="flex w-full max-w-[var(--layout-max-width)] mx-auto items-center gap-6">
         {navData.map((nav: SidebarNavItem) => (
           <li key={nav.href}>
             <a
               className={`whitespace-nowrap text-sm md:text-base p-0 text-gray-800 block relative after:absolute after:bottom-0 after:left-0 after:origin-right after:transition-transform after:scale-x-0 after:block after:w-full after:h-px after:bg-gray-800 hover:after:scale-x-100 hover:after:origin-left ${
-                nav.href === activeHref ? "font-bold" : ""
+                nav.href === activeHref
+                  ? "font-bold after:scale-x-100! after:origin-left"
+                  : ""
               }`}
               data-active={nav.href === activeHref}
               {...(currentUrl === nav.href

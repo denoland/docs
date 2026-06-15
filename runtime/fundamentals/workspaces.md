@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-04-16
+last_modified: 2026-06-15
 title: "Workspaces and monorepos"
 description: "A guide to managing workspaces and monorepos in Deno. Learn about workspace configuration, package management, dependency resolution, and how to structure multi-package projects effectively."
 oldUrl: /runtime/manual/basics/workspaces
@@ -251,7 +251,7 @@ COPY project-b/ /app/project-b/
 This preserves the workspace resolution mechanism that Deno uses to find and
 import workspace dependencies.
 
-### Multiple package entries
+## Multiple package entries
 
 The `exports` property details the entry points and exposes which modules should
 be importable by users of your package.
@@ -281,7 +281,7 @@ following entries:
 - `@scope/my-package/foo`
 - `@scope/my-package/other`
 
-### Publishing workspace packages to registries
+## Publishing workspace packages to registries
 
 Workspaces make it easy to publish packages to registries like JSR or NPM. You
 can publish individual workspace members while keeping their development
@@ -311,6 +311,35 @@ cd my-package
 deno publish
 ```
 
+#### Excluding a workspace member from publish
+
+Workspaces often contain members that are not meant to be published, such as
+internal helpers, examples, or packages that only exist to host shared `tasks`.
+By default `deno publish` will try to publish every workspace member that has a
+`name` and `exports`, and will error if any of them is missing a `version`.
+
+To opt a member out of `deno publish`, set `"publish": false` in that member's
+`deno.json`:
+
+```jsonc title="internal-helpers/deno.json"
+{
+  "name": "@scope/internal-helpers",
+  "tasks": {
+    "build": "deno run -A scripts/build.ts"
+  },
+  "publish": false
+}
+```
+
+The member is still part of the workspace. Its `tasks` run, its `imports` are
+resolved, and other members can depend on it, but `deno publish` skips it
+entirely and won't complain about a missing `version`.
+
+This applies to `deno.json` members only. Workspace members defined solely by a
+`package.json` are npm packages and are never candidates for `deno publish`
+(which targets JSR), so no opt-out is needed for them. `package.json`'s
+`"private": true` field is not read by Deno.
+
 #### Managing interdependent packages
 
 When publishing packages from a workspace with interdependencies, use consistent
@@ -328,7 +357,7 @@ When publishing packages that depend on other workspace members, Deno will
 automatically replace workspace references with proper registry references in
 the published code.
 
-### Migrating from `npm` workspaces
+## Migrating from `npm` workspaces
 
 Deno workspaces support using a Deno-first package from an existing npm package.
 In this example, we mix and match a Deno library called `@deno/hi`, with a
@@ -469,6 +498,7 @@ root and its members:
 | test.include         | ✅        | ✅      |                                                                                                                                                                                                                 |
 | test.exclude         | ✅        | ✅      |                                                                                                                                                                                                                 |
 | test.files           | ⚠️        | ❌      | Deprecated                                                                                                                                                                                                      |
+| publish              | ❌        | ✅      | Set to `false` to exclude a member from `deno publish`. See [Excluding a workspace member from publish](#excluding-a-workspace-member-from-publish).                                                            |
 | publish.include      | ✅        | ✅      |                                                                                                                                                                                                                 |
 | publish.exclude      | ✅        | ✅      |                                                                                                                                                                                                                 |
 | bench.include        | ✅        | ✅      |                                                                                                                                                                                                                 |
@@ -604,6 +634,11 @@ deno task --cwd=add build
 
 ## Sharing and managing dependencies
 
+Workspace members can share dependencies, depend on each other, and resolve
+version conflicts member by member. To pin one version of a dependency for the
+whole workspace, see [`catalog:`](#centralized-dependency-versions-with-catalog)
+below.
+
 Workspaces provide powerful ways to share and manage dependencies across
 projects:
 
@@ -663,7 +698,7 @@ This approach allows you to:
 3. Test and develop interdependent modules together
 4. Gradually migrate monolithic codebases to modular architecture
 
-## Using workspace protocol in package.json
+### Using workspace protocol in package.json
 
 Deno supports workspace protocol specifiers in `package.json` files. These are
 useful when you have npm packages that depend on other packages within the
@@ -683,6 +718,115 @@ The following workspace protocol specifiers are supported:
 - `workspace:*` - Use the latest version available in the workspace
 - `workspace:~` - Use the workspace version with only patch-level changes
 - `workspace:^` - Use the workspace version with semver-compatible changes
+
+## Centralized dependency versions with `catalog:`
+
+When several workspace members depend on the same npm package, keeping their
+versions in sync usually means editing every member's `package.json` whenever
+you bump a version. The `catalog:` protocol — added in Deno 2.8 and compatible
+with the equivalent feature in pnpm, Bun, and Yarn — lets the workspace root
+declare a single version requirement, and each member references it by name from
+its `package.json` dependencies. (The `catalog:` specifier itself is only read
+from `package.json` files; the catalog definition can live in either `deno.json`
+or `package.json` at the workspace root.)
+
+Define a catalog in the root `deno.json`:
+
+```jsonc title="deno.json"
+{
+  "workspace": ["./packages/a", "./packages/b"],
+  "catalog": {
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "chalk": "^5.3.0"
+  }
+}
+```
+
+A member references the entry with `catalog:` (the default catalog):
+
+```json title="packages/a/package.json"
+{
+  "dependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  }
+}
+```
+
+To bump everyone to a new React version, edit the catalog once.
+
+### Named catalogs
+
+Use the plural `catalogs` field when different members need different versions
+of the same package — for example, while migrating between major versions:
+
+```jsonc title="deno.json"
+{
+  "workspace": ["./packages/a", "./packages/b"],
+  "catalogs": {
+    "react18": {
+      "react": "^18.3.0",
+      "react-dom": "^18.3.0"
+    },
+    "react19": {
+      "react": "^19.0.0",
+      "react-dom": "^19.0.0"
+    }
+  }
+}
+```
+
+Members select a catalog by name:
+
+```json title="packages/a/package.json"
+{
+  "dependencies": {
+    "react": "catalog:react18",
+    "react-dom": "catalog:react18"
+  }
+}
+```
+
+```json title="packages/b/package.json"
+{
+  "dependencies": {
+    "react": "catalog:react19",
+    "react-dom": "catalog:react19"
+  }
+}
+```
+
+`catalog:` (with no name) and `catalog:default` are equivalent and resolve to
+the singular `catalog` field.
+
+### Catalogs in `package.json`
+
+Catalogs can also live in the root `package.json`, which keeps configuration
+together for projects that haven't moved to `deno.json`:
+
+```json title="package.json"
+{
+  "catalog": {
+    "react": "^19.0.0"
+  },
+  "catalogs": {
+    "testing": {
+      "vitest": "^2.0.0"
+    }
+  }
+}
+```
+
+If both `deno.json` and `package.json` define catalogs at the workspace root,
+`package.json` wins entirely — the two are not merged.
+
+### Restrictions
+
+- Catalogs are root-only. Defining `catalog` or `catalogs` inside a workspace
+  member emits a diagnostic.
+- Members must reference a catalog name that exists. A missing entry produces a
+  resolution error during install or run.
 
 ## npm and pnpm workspace compatibility
 
@@ -715,5 +859,4 @@ This allows for smooth integration between Deno and npm/pnpm ecosystems during
 migration or in hybrid projects.
 
 For more information on configuring your project, check out the
-[Configuration with deno.json](/examples/configuration_with_deno_json/)
-tutorial.
+[Configuration with deno.json](/runtime/fundamentals/configuration/) tutorial.

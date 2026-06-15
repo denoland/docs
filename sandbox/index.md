@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-19
 title: "Deno Sandbox"
 description: "Overview of the Deno Sandbox microVM platform on Deploy, including capabilities, security model, and ideal use cases."
 ---

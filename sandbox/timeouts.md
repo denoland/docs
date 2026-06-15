@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-02
 title: "Sandbox Timeouts"
 description: "Understand how long Deno Sandbox stays alive, how to extend or reconnect to them, and when to promote work to a Deno Deploy app."
 ---

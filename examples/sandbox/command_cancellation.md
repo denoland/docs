@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-01-27
 title: "Command cancellation"
 description: "Learn how to cancel commands in a sandbox."
 url: /examples/sandbox_command_cancellation/

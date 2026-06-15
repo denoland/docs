@@ -2,7 +2,7 @@
  * @title Importing binary files
  * @difficulty beginner
  * @tags cli
- * @run <url>
+ * @run --unstable-raw-imports <url>
  * @resource {https://github.com/whatwg/html/issues/9444} HTML specification proposal
  * @group Unstable APIs
  *

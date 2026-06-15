@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-05
+last_modified: 2026-05-20
 title: "deno upgrade"
 oldUrl: /runtime/manual/tools/upgrade/
 command: upgrade
@@ -88,6 +88,27 @@ on GitHub:
 curl -sL https://github.com/denoland/deno/releases/download/v2.7.0/deno-x86_64-unknown-linux-gnu.zip.sha256sum
 ```
 
+## Delta updates
+
+Starting in Deno 2.8, `deno upgrade` downloads small binary patches (deltas)
+instead of the full release archive when upgrading between recent stable
+versions. This typically reduces the download from tens of megabytes to a few
+megabytes.
+
+Deltas are applied automatically when available, there is nothing to opt into.
+If a patch is missing or fails verification, `deno upgrade` transparently falls
+back to downloading the full archive.
+
+To force a full download (for example, in environments that cache release
+archives) pass `--no-delta`:
+
+```sh
+deno upgrade --no-delta
+```
+
+Each delta patch and the resulting binary are verified against the SHA-256
+checksums published with the release before being installed.
+
 ## Canary build
 
 By default, Deno will upgrade from the official GitHub releases. You can specify
@@ -97,3 +118,30 @@ the `--canary` build flag for the latest canary build:
 # Upgrade to the latest canary build
 deno upgrade --canary
 ```
+
+## Install a build from a pull request
+
+Starting in Deno 2.8, `deno upgrade pr <number>` downloads the binary built by
+CI for a specific deno PR and installs it. This is handy when you need to verify
+a fix before it has shipped in a release.
+
+```sh
+# Install the binary built by CI for PR #12345
+deno upgrade pr 12345
+
+# A `#` prefix is also accepted
+deno upgrade pr '#12345'
+
+# Write to a path instead of replacing the current binary
+deno upgrade --output ./deno-test pr 12345
+
+# See what would be downloaded without replacing
+deno upgrade --dry-run pr 12345
+```
+
+This subcommand requires the [`gh` CLI](https://cli.github.com/) to be installed
+and authenticated. `deno upgrade` uses `gh` to look up the PR's CI run and
+download the matching `{profile}-{os}-{arch}-deno` artifact (for example
+`release-linux-x86_64-deno`), preferring release builds and falling back to
+debug. The downloaded binary is verified to run before it replaces the current
+executable.

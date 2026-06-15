@@ -22,8 +22,8 @@ You can see the
 :::info Deploy your own
 
 Want to skip the tutorial and deploy the finished app right now? Click the
-button below to instantly deploy your own copy of the complete SvelteKit
-dinosaur app to Deno Deploy. You'll get a live, working application that you can
+button below to instantly deploy your own copy of the complete Next.js dinosaur
+app to Deno Deploy. You'll get a live, working application that you can
 customize and modify as you learn!
 
 [![Deploy on Deno](https://deno.com/button)](https://console.deno.com/new?clone=https://github.com/denoland/tutorial-with-next)
@@ -327,5 +327,5 @@ For a walkthrough of deploying your app, check out the
 🦕 Now you can build and run a Next.js app with Deno! To build on your app you
 could consider [adding a database](/runtime/tutorials/connecting_to_databases/)
 to replace your `data.json` file, or consider
-[writing some tests](/runtime/fundamentals/testing/) to make your app reliable
-and production ready.
+[writing some tests](/runtime/test/) to make your app reliable and production
+ready.
