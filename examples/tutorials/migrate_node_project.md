@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Use Deno in an existing Node.js project"
 description: "Run an existing Node.js project with Deno without rewriting it: install from package.json, run npm scripts with deno task, use node: built-ins, and adopt Deno's built-in tooling incrementally."
 url: /examples/migrate_node_project_tutorial/

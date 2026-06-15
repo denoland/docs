@@ -45,6 +45,10 @@ export const sidebar = [
             href: "/runtime/packages/supply_chain/",
           },
           {
+            title: "Peer dependencies",
+            href: "/runtime/packages/peer_dependencies/",
+          },
+          {
             title: "Private repositories",
             href: "/runtime/packages/private_repositories/",
           },
@@ -96,6 +100,13 @@ export const sidebar = [
       {
         title: "Debugging",
         href: "/runtime/fundamentals/debugging/",
+        disclosure: true,
+        items: [
+          {
+            title: "CPU profiling",
+            href: "/runtime/fundamentals/cpu_profiling/",
+          },
+        ],
       },
       {
         title: "Migrating from Node",
@@ -111,6 +122,10 @@ export const sidebar = [
       {
         title: "Building CLI apps",
         href: "/runtime/cli_apps/",
+      },
+      {
+        title: "Deploying your app",
+        href: "/runtime/deploy/",
       },
     ],
   },

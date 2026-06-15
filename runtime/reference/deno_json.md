@@ -345,7 +345,7 @@ To exempt specific packages, use the object form with an `exclude` list:
 
 The same control is available as the `--minimum-dependency-age` CLI flag and as
 `min-release-age` in
-[`.npmrc`](/runtime/fundamentals/node/#npmrc-configuration).
+[`.npmrc`](/runtime/fundamentals/node/#.npmrc-configuration).
 
 ## Node modules directory
 

@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-13
 title: "Expose HTTP"
 description: "Learn how to expose HTTP endpoints from Deno Sandbox, enabling you to run web servers, APIs, and preview environments at the edge."
 ---

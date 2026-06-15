@@ -15,13 +15,14 @@
 // Import the express module from npm using an npm: prefix, and appending a
 // version number. Dependencies from npm can be configured in an import map
 // also.
-import express from "npm:express@4.18.2";
+// @ts-types="npm:@types/express@4"
+import express, { type Request, type Response } from "npm:express@4.18.2";
 
 // Create an express server
 const app = express();
 
 // Configure a route that will process HTTP GET requests
-app.get("/", (_req, res) => {
+app.get("/", (_req: Request, res: Response) => {
   res.send("Welcome to the Dinosaur API!");
 });
 

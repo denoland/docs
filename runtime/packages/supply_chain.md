@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "Supply chain management"
 description: "Keep Deno dependencies deterministic and safe: lockfile discipline, minimum dependency age, deno audit, intentional updates, and a recommended CI baseline."
 ---
@@ -78,7 +79,7 @@ absolute cutoff date (`2025-09-16`) or RFC3339 timestamp, or `0` to disable. The
 field also supports an object form that exempts specific packages; see the
 [`minimumDependencyAge` reference](/runtime/reference/deno_json/#minimum-dependency-age)
 for the full shape, and
-[`.npmrc` configuration](/runtime/fundamentals/node/#npmrc-configuration) for
+[`.npmrc` configuration](/runtime/fundamentals/node/#.npmrc-configuration) for
 the other npm-registry options Deno reads.
 
 ## Typical CI pattern

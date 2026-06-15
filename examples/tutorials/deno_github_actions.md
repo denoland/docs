@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Run Deno in GitHub Actions"
 description: "Set up a GitHub Actions workflow for a Deno project: install Deno with setup-deno, cache dependencies, run fmt, lint and test, install with a frozen lockfile, and test across Deno versions."
 url: /examples/deno_github_actions_tutorial/
