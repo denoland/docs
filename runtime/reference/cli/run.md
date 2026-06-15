@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-12
+last_modified: 2026-05-20
 title: "deno run"
 oldUrl: /runtime/manual/tools/run/
 command: run
@@ -26,7 +26,7 @@ By default, Deno runs programs in a sandbox without access to disk, network or
 ability to spawn subprocesses. This is because the Deno runtime is
 [secure by default](/runtime/fundamentals/security/). You can grant or deny
 required permissions using the
-[`--allow-*` and `--deny-*` flags](/runtime/fundamentals/security/#permissions-list).
+[`--allow-*` and `--deny-*` flags](/runtime/reference/permissions/).
 
 ### Permissions examples
 
@@ -66,6 +66,20 @@ deno run --allow-net --watch server.ts
 
 Deno's watcher will notify you of changes in the console, and will warn in the
 console if there are errors while you work.
+
+The same `--watch` flag is also accepted by
+[`deno test`](/runtime/reference/cli/test/),
+[`deno serve`](/runtime/reference/cli/serve/), and
+[`deno bench`](/runtime/reference/cli/bench/).
+
+:::info Deno 2.8
+
+When the watcher restarts the process, Deno sends `SIGTERM` first so `unload`
+event listeners and `process.exit` hooks run, then waits 500ms before the hard
+kill. This gives graceful-shutdown code time to flush resources between
+restarts.
+
+:::
 
 ## Running a package.json script
 

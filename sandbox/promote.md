@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-01-28
 title: "Promote Deno Sandbox to Deploy Apps"
 description: "Learn how to promote a sandbox to a full Deno Deploy app for production use."
 ---

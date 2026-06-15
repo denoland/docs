@@ -17,7 +17,8 @@ Your package must have a `name` and `version` and an `exports` field in its
 
 - The `name` field must be unique and follow the `@<scope_name>/<package_name>`
   convention.
-- The `version` field must be a valid semver version.
+- The `version` field must be a valid semver version. To bump it as part of your
+  release flow, see [`deno bump-version`](/runtime/reference/cli/bump_version/).
 - The `exports` field must point to the main entry point of the package. The
   exports field can either be specified as a single string, or as an object
   mapping entrypoint names to paths in your package.
@@ -34,6 +35,25 @@ Example:
 
 Before you publish your package, you must create it in the registry by visiting
 [JSR - Publish a package](https://jsr.io/new).
+
+## Excluding a workspace member
+
+When run inside a [workspace](/runtime/fundamentals/workspaces/), `deno publish`
+tries to publish every member that has a `name` and `exports`, and errors if any
+of them is missing a `version`. To opt a member out, for example an internal
+helper package that only exists to host shared `tasks`, set `"publish": false`
+in that member's `deno.json`:
+
+```jsonc title="internal-helpers/deno.json"
+{
+  "name": "@scope/internal-helpers",
+  "publish": false
+}
+```
+
+The member stays part of the workspace but is skipped by `deno publish`. See
+[Excluding a workspace member from publish](/runtime/fundamentals/workspaces/#excluding-a-workspace-member-from-publish)
+for the full discussion.
 
 ## Examples
 

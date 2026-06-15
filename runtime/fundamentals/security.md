@@ -1,12 +1,7 @@
 ---
-last_modified: 2026-03-26
+last_modified: 2026-06-14
 title: "Security and permissions"
-description: "A guide to Deno's security model and permissions system. Learn about secure defaults, permission flags, runtime prompts, and how to safely execute code with granular access controls."
-oldUrl:
-  - /runtime/manual/basics/permissionsDeno/
-  - /manual/basics/permissions
-  - /runtime/manual/basics/permissions
-  - /runtime/manual/getting_started/permissions
+description: "A guide to Deno's security model: secure-by-default execution, the permission sandbox, evaluating and executing untrusted code, and the permission broker. See the Permissions reference for the flags."
 ---
 
 Deno is secure by default. Unless you specifically enable it, a program run with
@@ -20,7 +15,7 @@ your project.
 Before using Deno to run completely untrusted code, read the
 [section on executing untrusted code](#executing-untrusted-code) below.
 
-## Key Principles
+## Key principles
 
 Before diving into the specifics of permissions, it's important to understand
 the key principles of Deno's security model:
@@ -45,11 +40,17 @@ the key principles of Deno's security model:
 - **Code can not escalate its privileges without user consent**: Code executing
   in a Deno runtime can not escalate its privileges without the user agreeing
   explicitly to an escalation via interactive prompt or a invocation time flag.
-- **The initial static module graph can import local files without
-  restrictions**: All files that are imported in the initial static module graph
-  can be imported without restrictions, so even if an explicit read permission
-  is not granted for that file. This does not apply to any dynamic module
-  imports.
+- **The initial static module graph can import modules without restrictions**:
+  All modules that are imported in the initial static module graph (local files,
+  npm packages, jsr packages, and remote URLs) are loaded by the runtime without
+  consulting the permission system. No `--allow-read` is required to load local
+  files, and no `--allow-net` is required to fetch remote modules. The static
+  graph includes static `import` statements and `import()` calls whose specifier
+  is a string literal: anything that can be resolved without running code. This
+  exemption applies only to loading. Once code runs, anything it does still goes
+  through the permission system, and `import()` calls with non-literal
+  specifiers (e.g. `import(someVariable)`) are checked against `--allow-read` /
+  `--allow-import` at runtime.
 
 These key principles are designed to provide an environment where a user can
 execute code with minimal risk of harm to the host machine or network. The
@@ -60,473 +61,93 @@ underlying operating system.
 
 ## Permissions
 
-By default, access to most system I/O is denied. There are some I/O operations
-that are allowed in a limited capacity, even by default. These are described
-below.
+Deno is sandboxed by default: code cannot touch the file system, network,
+environment, or run subprocesses unless you allow it. Permissions are not all or
+nothing. You grant them with `--allow-*` flags, and most can be scoped to
+specific resources, so a program gets exactly the access it needs and no more.
 
-To enable these operations, the user must explicitly grant permission to the
-Deno runtime. This is done by passing the `--allow-read`, `--allow-write`,
-`--allow-net`, `--allow-env`, and `--allow-run` flags to the `deno` command.
-
-During execution of a script, a user can also explicitly grant permission to
-specific files, directories, network addresses, environment variables, and
-subprocesses when prompted by the runtime. Prompts are not shown if
-stdout/stderr are not a TTY, or when the `--no-prompt` flag is passed to the
-`deno` command.
-
-Users can also explicitly disallow access to specific resources by using the
-`--deny-read`, `--deny-write`, `--deny-net`, `--deny-env`, and `--deny-run`
-flags. These flags take precedence over the allow flags. For example, if you
-allow network access but deny access to a specific domain, the deny flag will
-take precedence.
-
-Deno also provides a `--allow-all` flag that grants all permissions to the
-script. This **disables** the security sandbox entirely, and should be used with
-caution. The `--allow-all` has the same security properties as running a script
-in Node.js (ie none).
-
-Definition: `-A, --allow-all`
+Run a program with no flags and a sensitive operation is refused:
 
 ```sh
-deno run -A script.ts
-deno run --allow-all script.ts
+deno run main.ts
+# error: Requires net access to "example.com", run again with the --allow-net flag
 ```
 
-By default, Deno will not generate a stack trace for permission requests as it
-comes with a hit to performance. Users can enable stack traces with the
-`DENO_TRACE_PERMISSIONS` environment variable to `1`.
-
-Deno can also generate an audit log of all accessed permissions; this can be
-achieved using the `DENO_AUDIT_PERMISSIONS` environment variable to a path. This
-works regardless if permissions are allowed or not. The output is in JSONL
-format, where each line is an object with the following keys:
-
-- `v`: the version of the format
-- `datetime`: when the permission was accessed, in RFC 3339 format
-- `permission`: the name of the permission
-- `value`: the value that the permission was accessed with, or `null` if it was
-  accessed with no value
-
-A schema for this can be found in
-[permission-audit.v1.json](https://github.com/denoland/deno/blob/main/cli/schemas/permission-audit.v1.json).
-
-In addition, this env var can be combined with the above-mentioned
-`DENO_TRACE_PERMISSIONS`, which then adds a new `stack` field to the entries
-which is an array contain all the stack trace frames.
-
-### Configuration file
-
-Deno supports storing permissions in the deno.json/deno.jsonc file. Read more
-under [configuration](/runtime/fundamentals/configuration/#permissions).
-
-### File system access
-
-By default, executing code can not read or write arbitrary files on the file
-system. This includes listing the contents of directories, checking for the
-existence of a given file, and opening or connecting to Unix sockets.
-
-Access to read files is granted using the `--allow-read` (or `-R`) flag, and
-access to write files is granted using the `--allow-write` (or `-W`) flag. These
-flags can be specified with a list of paths to allow access to specific files or
-directories and any subdirectories in them.
-
-Definition: `--allow-read[=<PATH>...]` or `-R[=<PATH>...]`
-
-PATHs may be separated by comma (`,`) characters. To include a comma character
-in the PATH, it must be doubled. (Example: `this file,, contains a comma.txt`)
+Grant access scoped to just the host the program should reach:
 
 ```sh
-# Allow all reads from file system
-deno run -R script.ts
-# or 
-deno run --allow-read script.ts
-
-# Allow reads from file foo.txt and bar.txt only
-deno run --allow-read=foo.txt,bar.txt script.ts
-
-# Allow reads from any file in any subdirectory of ./node_modules
-deno run --allow-read=node_modules script.ts
+deno run --allow-net=example.com main.ts
 ```
 
-Definition: `--deny-read[=<PATH>...]`
+The same scoping works for the other permissions: `--allow-read=./data` limits
+reads to one directory, `--allow-env=API_KEY` to a single variable, and so on. A
+bare `--allow-net` with no value grants the whole category, which is broader
+than most programs need.
 
-```sh
-# Allow reading files in /etc but disallow reading /etc/hosts
-deno run --allow-read=/etc --deny-read=/etc/hosts script.ts
+When stdout is a terminal and you have not passed a flag, Deno pauses and asks
+instead of failing, so you can grant access interactively as it is requested:
 
-# Deny all read access to disk, disabling permission prompts for reads.
-deno run --deny-read script.ts
+```console
+⚠️  Deno requests net access to "example.com". Run again with --allow-net to bypass this prompt.
+   Allow? [y/n/A] (y = yes, allow; n = no, deny; A = allow all net permissions) >
 ```
 
-Definition: `--allow-write[=<PATH>...]` or `-W[=<PATH>...]`
+`--deny-*` flags override their `--allow-*` counterparts, so you can grant a
+broad category and carve out the sensitive parts:
+`--allow-read --deny-read=/etc` reads anything except `/etc`. At the other
+extreme, `-A` (`--allow-all`) grants everything and turns the sandbox off
+entirely, giving the same access as running code in Node, so reach for it
+sparingly.
 
-```sh
-# Allow all writes to file system
-deno run -W script.ts
-# or 
-deno run --allow-write script.ts
+See the [Permissions reference](/runtime/reference/permissions/) for every
+permission and its flags, and
+[`permissions` in deno.json](/runtime/reference/deno_json/#permissions) for
+declaring them in your configuration file.
 
-# Allow writes to file foo.txt and bar.txt only
-deno run --allow-write=foo.txt,bar.txt script.ts
+### Permissions that bypass the sandbox
+
+A few permissions grant access to things Deno cannot sandbox, so granting them
+is effectively granting full access:
+
+- `--allow-run` lets the program spawn subprocesses. A subprocess runs as a
+  separate program with its own permissions, not the restricted set you granted
+  the Deno process, so whatever it does happens outside the sandbox. This is why
+  `--allow-run=deno` is especially dangerous: a script that can start a new
+  `deno` process can start it with `--allow-all`, inheriting none of the
+  parent's limits and escaping the sandbox entirely. Grant `--allow-run` only
+  for specific, trusted executables where you can (`--allow-run=git`), and avoid
+  giving a sandboxed program the ability to launch `deno` or a shell.
+- `--allow-ffi` loads native libraries through [FFI](/runtime/fundamentals/ffi/)
+  or Node-API addons. Deno enforces permissions in the JavaScript layer, but a
+  native library runs as compiled machine code in the same process and can issue
+  system calls directly. Once loaded, it can read files, open sockets, or do
+  anything the operating system lets the process do, regardless of which
+  `--allow-*` flags you passed.
+
+Treat both as equivalent to `--allow-all` when deciding whether to trust the
+code you are running.
+
+### Adjusting permissions at runtime
+
+A program can inspect and tighten its own permissions through the
+[`Deno.permissions`](/api/deno/#permissions) API.
+[`Deno.permissions.query`](/api/deno/#query-permissions) reports whether a
+permission is granted,
+[`Deno.permissions.request`](/api/deno/#request-permissions) prompts for one on
+demand, and [`Deno.permissions.revoke`](/api/deno/#revoke-permissions)
+downgrades a granted permission back to the prompt state:
+
+```ts
+// Read a config file at startup, then give up read access.
+const config = JSON.parse(await Deno.readTextFile("./config.json"));
+await Deno.permissions.revoke({ name: "read" });
+
+// Later reads now have to prompt again, and fail outright under --no-prompt.
 ```
 
-Definition: `--deny-write[=<PATH>...]`
-
-```sh
-# Allow reading files in current working directory 
-# but disallow writing to ./secrets directory.
-deno run --allow-write=./ --deny-write=./secrets script.ts
-
-# Deny all write access to disk, disabling permission prompts.
-deno run --deny-write script.ts
-```
-
-Some APIs in Deno are implemented using file system operations under the hood,
-even though they do not provide direct read/write access to specific files.
-These APIs read and write to disk but do not require any explicit read/write
-permissions. Some examples of these APIs are:
-
-- `localStorage`
-- Deno KV
-- `caches`
-- `Blob`
-
-Because these APIs are implemented using file system operations, users can use
-them to consume file system resources like storage space, even if they do not
-have direct access to the file system.
-
-During module loading, Deno can load files from disk. This sometimes requires
-explicit permissions, and sometimes is allowed by default:
-
-- All files that are imported from the entrypoint module in a way that they can
-  be statically analyzed are allowed to be read by default. This includes static
-  `import` statements and dynamic `import()` calls where the argument is a
-  string literal that points to a specific file or a directory of files. The
-  full list of files that are in this list can be printed using
-  `deno info <entrypoint>`.
-- Files that are dynamically imported in a way that can not be statically
-  analyzed require runtime read permissions.
-- Files inside of a `node_modules/` directory are allowed to be read by default.
-
-When fetching modules from the network, or when transpiling code from TypeScript
-to JavaScript, Deno uses the file system as a cache. This means that file system
-resources like storage space can be consumed by Deno even if the user has not
-explicitly granted read/write permissions.
-
-#### Symbolic links
-
-When reading or writing through a symbolic link, Deno checks permissions based
-on the symlink's location, not the target it points to. This means if you have
-`--allow-read=/app`, you can read through a symlink at `/app/link` even if it
-points to a file outside `/app`.
-
-However, Deno prevents privilege escalation through symlinks. If a symlink
-resolves to a sensitive system path, additional permissions are required:
-
-- **`/proc`, `/dev`, `/sys` (Linux)**: Reading or writing through symlinks that
-  resolve to these paths requires `--allow-all`, as these paths can expose
-  sensitive system information.
-- **`/proc/**/environ`**: Requires `--allow-env` since it exposes environment
-  variables.
-- **`/dev/null`, `/dev/zero`, `/dev/random`, `/dev/urandom`**: These safe device
-  files are always accessible without additional permissions.
-
-Creating symlinks with [`Deno.symlink()`](/api/deno/~/Deno.symlink) requires
-both `--allow-read` and `--allow-write` with full access (not path-specific),
-because symlinks can point to arbitrary locations.
-
-> **Note**: Symlinks that already exist on the filesystem can be read through
-> using the permissions for the symlink's location. The full read/write
-> permission requirement only applies to _creating_ new symlinks with
-> [`Deno.symlink()`](/api/deno/~/Deno.symlink).
-
-### Network access
-
-By default, executing code can not make network requests, open network listeners
-or perform DNS resolution. This includes making HTTP requests, opening TCP/UDP
-sockets, and listening for incoming connections on TCP or UDP.
-
-Network access is granted using the `--allow-net` flag. This flag can be
-specified with a list of hosts to allow access to specific network addresses. A
-host can be a hostname or IP address, optionally with a port.
-
-Hostnames do not allow subdomains, unless explicitly listed. To allow any
-subdomain for a hostname, `*` can be used as wildcard for any subdomain.
-
-Definition: `--allow-net[=<HOST>...]` or `-N[=<HOST>...]`
-
-```sh
-# Allow network access
-deno run -N script.ts
-# or
-deno run --allow-net script.ts
-
-# Allow network access to github.com and jsr.io
-deno run --allow-net=github.com,jsr.io script.ts
-
-# Allow all subdomains for example.com
-deno run --allow-net="*.example.com" script.ts
-
-# A hostname at port 80:
-deno run --allow-net=example.com:80 script.ts
-
-# An IPv4 address on port 443
-deno run --allow-net=1.1.1.1:443 script.ts
-
-# An IPv6 address, all ports allowed
-deno run --allow-net=[2606:4700:4700::1111] script.ts
-```
-
-Definition: `--deny-net[=<HOST>...]`
-
-```sh
-# Allow access to network, but deny access 
-# to github.com and jsr.io
-deno run --allow-net --deny-net=github.com,jsr.io script.ts
-
-# Deny all network access, disabling permission prompts.
-deno run --deny-net script.ts
-```
-
-During module loading, Deno can load modules from the network. By default Deno
-allows loading modules from the following locations using both static and
-dynamic imports, without requiring explicit network access:
-
-- `https://deno.land/`
-- `https://jsr.io/`
-- `https://esm.sh/`
-- `https://raw.githubusercontent.com`
-- `https://gist.githubusercontent.com`
-
-These locations are trusted "public good" registries that are not expected to
-enable data exfiltration through URL paths. You can add more trusted registries
-using the `--allow-import` flag.
-
-In addition Deno allows importing any NPM package through `npm:` specifiers.
-
-Deno also sends requests to `https://dl.deno.land/` at most once a day to check
-for updates to the Deno CLI. This can be disabled using `DENO_NO_UPDATE_CHECK=1`
-environment var.
-
-### Environment variables
-
-By default, executing code can not read or write environment variables. This
-includes reading environment variables, and setting new values.
-
-Access to environment variables is granted using the `--allow-env` flag. This
-flag can be specified with a list of environment variables to allow access to
-specific environment variables. Starting with Deno v2.1, you can now specify
-suffix wildcards to allow “scoped” access to environmental variables.
-
-Definition: `--allow-env[=<VARIABLE_NAME>...]` or `-E[=<VARIABLE_NAME>...]`
-
-```sh
-# Allow access to all environment variables
-deno run -E script.ts
-# or
-deno run --allow-env script.ts
-
-# Allow HOME and FOO environment variables
-deno run --allow-env=HOME,FOO script.ts
-
-# Allow access to all environment variables starting with AWS_
-deno run --allow-env="AWS_*" script.ts
-```
-
-Definition: `--deny-env[=<VARIABLE_NAME>...]`
-
-```sh
-# Allow all environment variables except 
-# AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.
-deno run \
-  --allow-env \
-  --deny-env=AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY \
-  script.ts
-
-# Deny all access to env variables, disabling permission prompts.
-deno run --deny-env script.ts
-```
-
-> Note for Windows users: environment variables are case insensitive on Windows,
-> so Deno also matches them case insensitively (on Windows only).
-
-Deno reads certain environment variables on startup, such as `DENO_DIR` and
-`NO_COLOR` ([see the full list](/runtime/reference/cli/env_variables/)).
-
-The value of the `NO_COLOR` environment variable is visible to all code running
-in the Deno runtime, regardless of whether the code has been granted permission
-to read environment variables.
-
-### System Information
-
-By default, executing code can not access system information, such as the
-operating system release, system uptime, load average, network interfaces, and
-system memory information.
-
-Access to system information is granted using the `--allow-sys` flag. This flag
-can be specified with a list of allowed interfaces from the list defined in
-[Deno.SysPermissionDescriptor](/api/deno/~/Deno.SysPermissionDescriptor). These
-strings map to functions in the `Deno` namespace that provide OS info, like
-[Deno.systemMemoryInfo](https://docs.deno.com/api/deno/~/Deno.SystemMemoryInfo).
-
-Definition: `--allow-sys[=<API_NAME>...]` or `-S[=<API_NAME>...]`
-
-```sh
-# Allow all system information APIs
-deno run -S script.ts
-# or
-deno run --allow-sys script.ts
-
-# Allow systemMemoryInfo and osRelease APIs
-deno run --allow-sys="systemMemoryInfo,osRelease" script.ts
-```
-
-Definition: `--deny-sys[=<API_NAME>...]`
-
-```sh
-# Allow accessing all system information but "networkInterfaces"
-deno run --allow-sys --deny-sys="networkInterfaces" script.ts
-
-# Deny all access to system information, disabling permission prompts.
-deno run --deny-sys script.ts
-```
-
-### Subprocesses
-
-Code executing inside of a Deno runtime can not spawn subprocesses by default,
-as this would constitute a violation of the principle that code can not escalate
-its privileges without user consent.
-
-Deno provides a mechanism for executing subprocesses, but this requires explicit
-permission from the user. This is done using the `--allow-run` flag.
-
-Any subprocesses you spawn from your program run independently from the
-permissions granted to the parent process. This means the child processes can
-access system resources regardless of the permissions you granted to the Deno
-process that spawned it. This is often referred to as privilege escalation.
-
-Because of this, make sure you carefully consider if you want to grant a program
-`--allow-run` access: it essentially invalidates the Deno security sandbox. If
-you really need to spawn a specific executable, you can reduce the risk by
-limiting which programs a Deno process can start by passing specific executable
-names to the `--allow-run` flag.
-
-Definition: `--allow-run[=<PROGRAM_NAME>...]`
-
-```sh
-# Allow running all subprocesses
-deno run --allow-run script.ts
-
-# Allow running "curl" and "whoami" subprocesses
-deno run --allow-run="curl,whoami" script.ts
-```
-
-:::caution
-
-You probably don't ever want to use `--allow-run=deno` unless the parent process
-has `--allow-all`, as being able to spawn a `deno` process means the script can
-spawn another `deno` process with full permissions.
-
-:::
-
-Definition: `--deny-run[=<PROGRAM_NAME>...]`
-
-```sh
-# Allow running running all programs, but "whoami" and "ps".
-deno run --allow-run --deny-run="whoami,ps" script.ts
-
-# Deny all access for spawning subprocessing, disabling
-# permission prompts.
-deno run --deny-run script.ts
-```
-
-By default `npm` packages will not have their post-install scripts executed
-during installation (like with `deno install`), as this would allow arbitrary
-code execution. When running with the `--allow-scripts` flag, post-install
-scripts for npm packages will be executed as a subprocess.
-
-### FFI (Foreign Function Interface)
-
-Deno provides an
-[FFI mechanism for executing code written in other languages](/runtime/fundamentals/ffi/),
-such as Rust, C, or C++, from within a Deno runtime. This is done using the
-[`Deno.dlopen`](/api/deno/~/Deno.dlopen) API, which can load shared libraries
-and call functions from them.
-
-By default, executing code can not use the
-[`Deno.dlopen`](/api/deno/~/Deno.dlopen) API, as this would constitute a
-violation of the principle that code can not escalate it's privileges without
-user consent.
-
-In addition to [`Deno.dlopen`](/api/deno/~/Deno.dlopen), FFI can also be used
-via Node-API (NAPI) native addons. These are also not allowed by default.
-
-Both [`Deno.dlopen`](/api/deno/~/Deno.dlopen) and NAPI native addons require
-explicit permission using the `--allow-ffi` flag. This flag can be specified
-with a list of files or directories to allow access to specific dynamic
-libraries.
-
-_Like subprocesses, dynamic libraries are not run in a sandbox and therefore do
-not have the same security restrictions as the Deno process they are being
-loaded into. Therefore, use with extreme caution._
-
-Definition: `--allow-ffi[=<PATH>...]`
-
-```sh
-# Allow loading dynamic all libraries
-deno run --allow-ffi script.ts
-
-# Allow loading dynamic libraries from a specific path
-deno run --allow-ffi=./libfoo.so script.ts
-```
-
-Definition: `--deny-ffi[=<PATH>...]`
-
-```sh
-# Allow loading all dynamic libraries, but ./libfoo.so
-deno run --allow-ffi --deny-ffi=./libfoo.so script.ts
-
-# Deny loading all dynamic libraries, disabling permission prompts.
-deno run --deny-ffi script.ts
-```
-
-### Importing from the Web
-
-Allow importing code from the Web. By default Deno limits hosts you can import
-code from. This is true for both static and dynamic imports.
-
-If you want to dynamically import code, either using the `import()` or the
-`new Worker()` APIs, additional permissions need to be granted. Importing from
-the local file system [requires `--allow-read`](#file-system-access), but Deno
-also allows to import from `http:` and `https:` URLs. In such case you will need
-to specify an explicit `--allow-import` flag:
-
-```sh
-# allow importing code from `https://example.com`
-$ deno run --allow-import=example.com main.ts
-```
-
-By default Deno allows importing sources from following hosts:
-
-- `deno.land`
-- `esm.sh`
-- `jsr.io`
-- `cdn.jsdelivr.net`
-- `raw.githubusercontent.com`
-- `gist.githubusercontent.com`
-
-Imports are only allowed using HTTPS.
-
-This allow list is applied by default for static imports, and by default to
-dynamic imports if the `--allow-import` flag is specified.
-
-```sh
-# allow dynamically importing code from `https://deno.land`
-$ deno run --allow-import main.ts
-```
-
-Note that specifying an allow list for `--allow-import` will override the list
-of default hosts.
+Dropping permissions you no longer need after startup is a simple way to shrink
+the attack surface available to the rest of your code, including your
+dependencies.
 
 ## Evaluation of code
 
@@ -551,11 +172,31 @@ using all of these when executing arbitrary untrusted code:
 - Run `deno` with limited permissions and determine upfront what code actually
   needs to run (and prevent more code being loaded using `--frozen` lockfile and
   `--cached-only`).
+- Isolate the untrusted part in a
+  [Web Worker with a reduced permission set](/runtime/reference/web_platform_apis/#specifying-worker-permissions),
+  so it cannot inherit everything the main program was granted.
 - Use OS provided sandboxing mechanisms like `chroot`, `cgroups`, `seccomp`,
   etc.
 - Use a sandboxed environment like a VM or MicroVM (gVisor, Firecracker, etc).
 
+## Auditing dependencies
+
+The permission sandbox controls what code can do at runtime, but it does not
+tell you whether your dependencies contain known vulnerabilities. Deno ships
+[`deno audit`](/runtime/reference/cli/audit/) to scan your dependencies against
+vulnerability databases, which is useful as a CI gate. See
+[supply chain management](/runtime/packages/supply_chain/) for keeping
+dependencies safe over time.
+
 ## Permission broker
+
+:::caution Advanced use only
+
+Using a permission broker changes Deno's decision authority: CLI flags and
+prompts no longer apply. Ensure your broker process is resilient, audited, and
+available before enabling `DENO_PERMISSION_BROKER_PATH`.
+
+:::
 
 For centralized and policy-driven permission decisions, Deno can delegate all
 permission checks to an external broker process. Enable this by setting the
@@ -606,11 +247,3 @@ Example message flow:
 -> req {"v":1,"pid":10234,"id":5,"datetime":"2025-01-01T00:00:04.000Z","permission":"env","value":null}
 <- res {"id":5,"result":"deny","reason":"Environment access is denied."}
 ```
-
-:::caution Advanced use only
-
-Using a permission broker changes Deno’s decision authority: CLI flags and
-prompts no longer apply. Ensure your broker process is resilient, audited, and
-available before enabling `DENO_PERMISSION_BROKER_PATH`.
-
-:::

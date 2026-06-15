@@ -4,7 +4,7 @@ import { Sidebar } from "../types.ts";
 
 export const sidebar = [
   {
-    title: "Getting started",
+    title: "Get started",
     items: [
       {
         title: "Welcome to Deno",
@@ -15,21 +15,125 @@ export const sidebar = [
         href: "/runtime/getting_started/installation/",
       },
       {
-        title: "First project",
-        href: "/runtime/getting_started/first_project/",
-      },
-      {
         title: "Setup your environment",
         href: "/runtime/getting_started/setup_your_environment/",
-      },
-      {
-        title: "Command line interface",
-        href: "/runtime/getting_started/command_line_interface/",
       },
     ],
   },
   {
-    title: "Fundamentals",
+    title: "Guides",
+    items: [
+      {
+        title: "Running code",
+        href: "/runtime/run/",
+        disclosure: true,
+        items: [
+          {
+            title: "Watch mode and HMR",
+            href: "/runtime/run/watch_mode/",
+          },
+        ],
+      },
+      {
+        title: "Dependency management",
+        href: "/runtime/packages/",
+        disclosure: true,
+        items: [
+          {
+            title: "Publishing",
+            href: "/runtime/packages/publishing/",
+          },
+          {
+            title: "Supply chain",
+            href: "/runtime/packages/supply_chain/",
+          },
+          {
+            title: "Peer dependencies",
+            href: "/runtime/packages/peer_dependencies/",
+          },
+          {
+            title: "Private repositories",
+            href: "/runtime/packages/private_repositories/",
+          },
+        ],
+      },
+      {
+        title: "Web development",
+        href: "/runtime/fundamentals/web_dev/",
+      },
+      {
+        title: "HTTP Server",
+        href: "/runtime/fundamentals/http_server/",
+      },
+      {
+        title: "Testing",
+        href: "/runtime/test/",
+        disclosure: true,
+        items: [
+          {
+            title: "Mocking",
+            href: "/runtime/test/mocking/",
+          },
+          {
+            title: "Snapshots",
+            href: "/runtime/test/snapshots/",
+          },
+          {
+            title: "Coverage",
+            href: "/runtime/test/coverage/",
+          },
+          {
+            title: "Documentation tests",
+            href: "/runtime/test/doc_tests/",
+          },
+          {
+            title: "Sanitizers",
+            href: "/runtime/test/sanitizers/",
+          },
+          {
+            title: "Migrating from Jest",
+            href: "/runtime/test/migrate_from_jest/",
+          },
+        ],
+      },
+      {
+        title: "Linting and formatting",
+        href: "/runtime/lint_and_format/",
+      },
+      {
+        title: "Debugging",
+        href: "/runtime/fundamentals/debugging/",
+        disclosure: true,
+        items: [
+          {
+            title: "CPU profiling",
+            href: "/runtime/fundamentals/cpu_profiling/",
+          },
+        ],
+      },
+      {
+        title: "Migrating from Node",
+        href: "/runtime/migrate/",
+        disclosure: true,
+        items: [
+          {
+            title: "Package manager",
+            href: "/runtime/migrate/switch_package_manager/",
+          },
+        ],
+      },
+      {
+        title: "Building CLI apps",
+        href: "/runtime/cli_apps/",
+      },
+      {
+        title: "Deploying your app",
+        href: "/runtime/deploy/",
+      },
+    ],
+  },
+  {
+    title: "Concepts",
     items: [
       {
         title: "TypeScript",
@@ -44,48 +148,16 @@ export const sidebar = [
         href: "/runtime/fundamentals/security/",
       },
       {
-        title: "Modules and dependencies",
+        title: "Modules",
         href: "/runtime/fundamentals/modules/",
       },
       {
-        title: "Configuration",
+        title: "Config files",
         href: "/runtime/fundamentals/configuration/",
-      },
-      {
-        title: "Web development",
-        href: "/runtime/fundamentals/web_dev/",
-      },
-      {
-        title: "Testing",
-        href: "/runtime/fundamentals/testing/",
-      },
-      {
-        title: "Debugging",
-        href: "/runtime/fundamentals/debugging/",
       },
       {
         title: "Workspaces",
         href: "/runtime/fundamentals/workspaces/",
-      },
-      {
-        title: "Linting and formatting",
-        href: "/runtime/fundamentals/linting_and_formatting/",
-      },
-      {
-        title: "HTTP Server",
-        href: "/runtime/fundamentals/http_server/",
-      },
-      {
-        title: "FFI",
-        href: "/runtime/fundamentals/ffi/",
-      },
-      {
-        title: "OpenTelemetry",
-        href: "/runtime/fundamentals/open_telemetry/",
-      },
-      {
-        title: "Cron",
-        href: "/runtime/fundamentals/cron/",
       },
       {
         title: "Stability and releases",
@@ -94,8 +166,61 @@ export const sidebar = [
     ],
   },
   {
-    title: "Reference guides",
+    title: "Advanced",
     items: [
+      {
+        title: "FFI",
+        href: "/runtime/fundamentals/ffi/",
+      },
+      {
+        title: "WebAssembly",
+        href: "/runtime/reference/wasm/",
+      },
+      {
+        title: "Cron",
+        href: "/runtime/fundamentals/cron/",
+      },
+      {
+        title: "OpenTelemetry",
+        href: "/runtime/fundamentals/open_telemetry/",
+      },
+      {
+        title: "Loader hooks",
+        href: "/runtime/reference/loader_hooks/",
+      },
+      {
+        title: "Lint plugins",
+        href: "/runtime/reference/lint_plugins/",
+      },
+      {
+        title: "Bundling",
+        href: "/runtime/reference/bundling/",
+      },
+      {
+        title: "Docker",
+        href: "/runtime/reference/docker/",
+      },
+      {
+        title: "Continuous integration",
+        href: "/runtime/reference/continuous_integration/",
+      },
+      {
+        title: "JSX and React",
+        href: "/runtime/reference/jsx/",
+      },
+      {
+        title: "Deno & VS Code",
+        href: "/runtime/reference/vscode/",
+      },
+    ],
+  },
+  {
+    title: "Reference",
+    items: [
+      {
+        title: "Overview",
+        href: "/runtime/reference/",
+      },
       {
         title: "CLI",
         href: "/runtime/reference/cli/",
@@ -117,12 +242,20 @@ export const sidebar = [
             href: "/runtime/reference/cli/bench/",
           },
           {
+            title: "deno bump-version",
+            href: "/runtime/reference/cli/bump_version/",
+          },
+          {
             title: "deno bundle",
             href: "/runtime/reference/cli/bundle/",
           },
           {
             title: "deno check",
             href: "/runtime/reference/cli/check/",
+          },
+          {
+            title: "deno ci",
+            href: "/runtime/reference/cli/ci/",
           },
           {
             title: "deno clean",
@@ -185,6 +318,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/outdated/",
           },
           {
+            title: "deno pack",
+            href: "/runtime/reference/cli/pack/",
+          },
+          {
             title: "deno publish",
             href: "/runtime/reference/cli/publish/",
           },
@@ -221,6 +358,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/test/",
           },
           {
+            title: "deno transpile",
+            href: "/runtime/reference/cli/transpile/",
+          },
+          {
             title: "deno types",
             href: "/runtime/reference/cli/types/",
           },
@@ -239,6 +380,10 @@ export const sidebar = [
           {
             title: "deno unstable flags",
             href: "/runtime/reference/cli/unstable_flags/",
+          },
+          {
+            title: "deno why",
+            href: "/runtime/reference/cli/why/",
           },
           {
             title: "deno x",
@@ -291,6 +436,7 @@ export const sidebar = [
             "ulid",
             "uuid",
             "webgpu",
+            "xml",
             "yaml",
           ].map((name) => ({
             title: name,
@@ -299,90 +445,45 @@ export const sidebar = [
         ],
       },
       {
-        title: "Configuring TypeScript",
-        href: "/runtime/reference/ts_config_migration/",
+        title: "deno.json",
+        href: "/runtime/reference/deno_json/",
       },
       {
-        title: "Continuous integration",
-        href: "/runtime/reference/continuous_integration/",
+        title: "TypeScript",
+        href: "/runtime/reference/ts_config_migration/",
       },
       {
         title: "Environment variables",
         href: "/runtime/reference/env_variables/",
       },
       {
-        title: "Deno & VS Code",
-        href: "/runtime/reference/vscode/",
-      },
-      {
-        title: "Using JSX and React",
-        href: "/runtime/reference/jsx/",
-      },
-      {
-        title: "Testing code in docs",
-        href: "/runtime/reference/documentation/",
-      },
-      {
-        title: "Bundling",
-        href: "/runtime/reference/bundling/",
-      },
-      {
-        title: "Lint plugins",
-        href: "/runtime/reference/lint_plugins/",
-      },
-      {
-        title: "WebAssembly",
-        href: "/runtime/reference/wasm/",
-      },
-      {
-        title: "Migration guide",
-        href: "/runtime/reference/migration_guide/",
+        title: "Permissions",
+        href: "/runtime/reference/permissions/",
       },
       {
         title: "LSP integration",
         href: "/runtime/reference/lsp_integration/",
       },
       {
-        title: "Docker",
-        href: "/runtime/reference/docker/",
+        title: "Lint rules",
+        href: "/lint/",
       },
     ],
   },
   {
-    title: "Contributing and support",
+    title: "Contributing",
     items: [
       {
-        title: "Contributing to Deno",
-        items: [
-          {
-            title: "Contributing overview",
-            href: "/runtime/contributing/",
-          },
-          {
-            title: "Architecture",
-            href: "/runtime/contributing/architecture/",
-          },
-          {
-            title: "Profiling",
-            href: "/runtime/contributing/profiling/",
-          },
-          {
-            title: "Release schedule",
-            href: "/runtime/contributing/release_schedule/",
-          },
-          {
-            title: "Style guide",
-            href: "/runtime/contributing/style_guide/",
-          },
-          {
-            title: "Documentation",
-            href: "/runtime/contributing/docs/",
-          },
-          {
-            title: "Examples",
-            href: "/runtime/contributing/examples/",
-          },
-        ],
+        title: "Overview",
+        href: "/runtime/contributing/",
+      },
+      {
+        title: "Architecture",
+        href: "/runtime/contributing/architecture/",
+      },
+      {
+        title: "Style guide",
+        href: "/runtime/contributing/style_guide/",
       },
       {
         title: "Help",

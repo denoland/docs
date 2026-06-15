@@ -6,6 +6,8 @@
  * @resource {https://docs.deno.com/api/web/~/Temporal} Temporal API reference documentation
  * @resource {https://tc39.es/proposal-temporal/docs} Temporal API proposal documentation
  * @group Web APIs
+ *
+ * An example of using the Temporal API to work with dates, times, and timestamps.
  */
 
 // Get the current date

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-12
+last_modified: 2026-06-15
 title: "deno task"
 oldUrl:
   - /runtime/tools/task_runner/
@@ -88,18 +88,22 @@ pattern. A wildcard pattern is specified with the `*` character.
 ```json title="deno.json"
 {
   "tasks": {
-    "build-client": "deno run -RW client/build.ts",
-    "build-server": "deno run -RW server/build.ts"
+    "build:client": "deno run -RW client/build.ts",
+    "build:server": "deno run -RW server/build.ts"
   }
 }
 ```
 
-Running `deno task "build-*"` will run both `build-client` and `build-server`
+Running `deno task "build:*"` will run both `build:client` and `build:server`
 tasks.
+
+For multi-word task names, we recommend using `:` as the separator (e.g.
+`build:client`, `test:unit`, `lint:fix`) to match the convention used in the npm
+ecosystem and to group related tasks for wildcard matching.
 
 :::note
 
-**When using a wildcard** make sure to quote the task name (eg. `"build-*"`),
+**When using a wildcard** make sure to quote the task name (eg. `"build:*"`),
 otherwise your shell might try to expand the wildcard character, leading to
 surprising errors.
 
@@ -141,6 +145,15 @@ Listening on http://localhost:8000/
 Dependency tasks are executed in parallel, with the default parallel limit being
 equal to number of cores on your machine. To change this limit, use the
 `DENO_JOBS` environmental variable.
+
+:::info Deno 2.8
+
+When tasks run in parallel, each output line is prefixed with the task name that
+produced it (color-coded per task). Prefixes stay attached even when a task
+forks subprocesses, so a parallel `build` + `test` + `lint` run stays legible
+without an external multiplexer.
+
+:::
 
 Dependencies are tracked and if multiple tasks depend on the same task, that
 task will only be run once:
@@ -210,16 +223,16 @@ useful to logically group several tasks together:
 ```json title="deno.json"
 {
   "tasks": {
-    "dev-client": "deno run --watch client/mod.ts",
-    "dev-server": "deno run --watch sever/mod.ts",
+    "dev:client": "deno run --watch client/mod.ts",
+    "dev:server": "deno run --watch server/mod.ts",
     "dev": {
-      "dependencies": ["dev-client", "dev-server"]
+      "dependencies": ["dev:client", "dev:server"]
     }
   }
 }
 ```
 
-Running `deno task dev` will run both `dev-client` and `dev-server` in parallel.
+Running `deno task dev` will run both `dev:client` and `dev:server` in parallel.
 
 ## Node and npx binary support
 
@@ -567,6 +580,23 @@ echo data[0-9].csv
 
 The supported glob characters are `*`, `?`, and `[`/`]`.
 
+:::caution
+
+Because `globstar` is enabled by default (see [Shell options](#shell-options)),
+`**` recurses into **all** descendant directories, including `node_modules`.
+This differs from some interactive shells where `**` is not recursive unless
+explicitly enabled, so a task like `deno check **/*.ts` can expand to far more
+files than the same command typed in your terminal, sweeping in dependency
+files. That can lead to errors such as `Argument list too long` or type-checking
+files you didn't intend to.
+
+For `deno check` and `deno fmt`, prefer running them without glob arguments and
+using the [`exclude`](/runtime/reference/deno_json/#include-and-exclude) option
+in your `deno.json` (`node_modules` is excluded by default), or disable
+recursion for the task with `shopt -u globstar`.
+
+:::
+
 ### Shell options
 
 `deno task` supports shell options in Deno 2.6.6 and above to control glob
@@ -582,6 +612,10 @@ enabled.
 - **pipefail** - When enabled, the exit code of a pipeline is the exit code of
   the last command to exit with a non-zero status, or zero if all commands exit
   successfully. Enable with `set -o pipefail`.
+- **errexit** (Deno 2.8+) - When enabled, a sequential list aborts on the first
+  command that exits non-zero. Enable with `set -e` or `set -o errexit`; disable
+  again with `set +e` or `set +o errexit`. Useful when porting a shell script
+  that relies on `set -e` semantics into a `tasks` block.
 
 Examples:
 
@@ -595,7 +629,9 @@ Examples:
     // disable globstar
     "task3": "shopt -u globstar && echo **/*.ts",
     // enable pipefail
-    "task4": "set -o pipefail && cat missing.txt | echo 'hello'"
+    "task4": "set -o pipefail && cat missing.txt | echo 'hello'",
+    // abort the sequential list on the first failing command
+    "task5": "set -e; build_step_one; build_step_two; build_step_three"
   }
 }
 ```
@@ -641,6 +677,10 @@ box on Windows, Mac, and Linux.
   environment variables.
 - [`xargs`](https://man7.org/linux/man-pages/man1/xargs.1p.html) - Builds
   arguments from stdin and executes a command.
+- [`:`](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/colon.html) -
+  The POSIX null command. Does nothing and always exits with status `0` (Deno
+  2.8+). Handy as a no-op placeholder in conditionals or for parameter-expansion
+  side effects.
 
 If you find a useful flag missing on a command or have any suggestions for
 additional commands that should be supported out of the box, then please
@@ -658,3 +698,49 @@ file if it is discovered. Note that Deno does not respect or support any npm
 life cycle events like `preinstall` or `postinstall`—you must explicitly run the
 script entries you want to run (ex.
 `deno install --entrypoint main.ts && deno task postinstall`).
+
+## Command Resolution
+
+When a task command references a binary (e.g., `ohm`, `tsc`, `eslint`), Deno
+resolves it using the following order:
+
+1. `node_modules/.bin/` - if the task's directory or a parent directory has a
+   `node_modules/.bin/` folder, Deno looks there first. Note that
+   `deno add npm:<pkg>` updates `deno.json` imports and `deno.lock` but does not
+   create a `node_modules` directory. The `node_modules` directory is only
+   created when using `deno install` or other npm-compatible tooling.
+
+2. `package.json` `bin` field - when a dependency defines a `bin` field in its
+   `package.json`, Deno automatically makes those commands available within task
+   scripts through its npm compatibility layer.
+
+3. System `PATH` - if the command is not found above, Deno falls back to
+   searching the system `PATH`.
+
+### Example
+
+Given a `package.json` with:
+
+```json
+{
+  "dependencies": {
+    "@ohm-js/cli": "^2.0.0"
+  }
+}
+```
+
+And a `deno.json` with:
+
+```json
+{
+  "tasks": {
+    "generate": "ohm src/grammar.ohm -o src/grammar.js"
+  }
+}
+```
+
+Running `deno task generate` will:
+
+1. Look for `ohm` in `node_modules/.bin/ohm`
+2. If found, execute it using Deno's Node.js compatibility layer
+3. The command runs under Deno's runtime, not Node.js.

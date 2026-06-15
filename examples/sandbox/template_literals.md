@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-01-27
 title: "Template literal commands with variable interpolation"
 description: "Learn how to use template literal commands with variable interpolation in a sandbox."
 url: /examples/sandbox_template_literals/

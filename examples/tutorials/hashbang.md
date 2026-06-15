@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-05-21
 title: "Executable scripts"
 description: "Guide to creating executable scripts with Deno. Learn about hashbangs, file permissions, cross-platform compatibility, and how to create command-line tools that can run directly from the terminal."
 url: /examples/hashbang_tutorial/
@@ -28,40 +28,49 @@ Linux (WSL) or use a Unix-like shell like
 
 :::
 
-We'll make a simple script that prints the Deno installation path using the
-[Deno.env](/api/deno/~/Deno.env) API.
+We'll make a small command-line greeter that reads its first argument from
+[Deno.args](/api/deno/~/Deno.args) and falls back to a default when none is
+supplied. This is the shape almost every Deno CLI tool starts with.
 
 Create a file named `hashbang.ts` with the following content:
 
 ```ts title="hashbang.ts"
-#!/usr/bin/env -S deno run --allow-env
-const path = Deno.env.get("DENO_INSTALL");
+#!/usr/bin/env -S deno run
+const name = Deno.args[0] ?? "world";
 
-console.log("Deno Install Path:", path);
+console.log(`Hello, ${name}!`);
 ```
 
-This script tells the system to use the deno runtime to run the script. The -S
-flag splits the command into arguments and indicates that the following argument
-(`deno run --allow-env`) should be passed to the env command.
+The first line is the hashbang. It tells the system to run the file with
+`/usr/bin/env`, which then locates `deno` on your `PATH` and invokes `deno run`
+on the script. The `-S` flag splits `deno run` into separate arguments so `env`
+treats them correctly; without `-S` the whole string would be passed as a single
+argument name and `env` would fail to find a program called `deno run`. There
+are no `--allow-*` flags here because the script only reads from `Deno.args`,
+which is always available. Deno prompts for permissions only when the script
+tries to use a sandboxed API.
 
-The script then retrieves the value associated with the environment variable
-named `DENO_INSTALL` with `Deno.env.get()` and assigns it to a variable called
-`path`. Finally, it prints the path to the console using `console.log()`.
+`Deno.args` is an array of the arguments that follow the script name on the
+command line. `Deno.args[0]` is the first one; `?? "world"` substitutes
+`"world"` when no argument was supplied.
 
 ### Execute the script
 
-In order to execute the script, you may need to give the script execution
-permissions, you can do so using the `chmod` command with a `+x` flag (for
-execute):
+Before running the file directly, give it execute permission with `chmod` (you
+only need to do this once per file):
 
 ```sh
 chmod +x hashbang.ts
 ```
 
-You can execute the script directly in the command line with:
+Now invoke it from the command line. With no arguments it uses the default; pass
+a name and it greets that name instead:
 
-```sh
-./hashbang.ts
+```console
+$ ./hashbang.ts
+Hello, world!
+$ ./hashbang.ts Ada
+Hello, Ada!
 ```
 
 ## Using hashbang in files with no extension

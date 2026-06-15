@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-14
+last_modified: 2026-06-15
 title: Installation
 description: "A Guide to installing Deno on different operating systems. Includes instructions for Windows, macOS, and Linux using various package managers, manual installation methods, and Docker containers."
 oldUrl:
@@ -8,22 +8,19 @@ oldUrl:
   - /runtime/fundamentals/installation
 ---
 
-Deno works on macOS, Linux, and Windows. Deno is a single binary executable. It
-has no external dependencies. On macOS, both M1 (arm64) and Intel (x64)
-executables are provided. On Windows, both ARM64 and x64 are supported. On
-Linux, only x64 is supported.
+Deno is a single binary executable with no external dependencies. It runs on
+macOS, Linux, and Windows, on both x64 and arm64 architectures.
 
 ## Download and install
 
 [deno_install](https://github.com/denoland/deno_install) provides convenience
 scripts to download and install the binary. The shell and PowerShell install
 scripts place the `deno` executable in `$HOME/.deno/bin` (or `$Home\.deno\bin`
-on Windows) by default — see
-[Customizing the install directory](#customizing-the-install-directory) below to
-install Deno somewhere else.
+on Windows) by default; see [Binary location](#binary-location) below to install
+Deno somewhere else.
 
 <deno-tabs group-id="operating-systems">
-<deno-tab value="mac" label="macOS" default>
+<deno-tab value="linux" label="Linux">
 
 Using Shell:
 
@@ -37,8 +34,26 @@ Using [npm](https://npmjs.com/package/deno):
 npm install -g deno
 ```
 
-> <small>The startup time of the Deno command gets affected if it's installed
-> via npm. We recommend the shell install script for better performance.</small>
+Using [Nix](https://nixos.org/download.html):
+
+```shell
+nix-shell -p deno
+```
+
+</deno-tab>
+<deno-tab value="mac" label="macOS" default>
+
+Using Shell:
+
+```shell
+curl -fsSL https://deno.land/install.sh | sh
+```
+
+Using [npm](https://npmjs.com/package/deno):
+
+```shell
+npm install -g deno
+```
 
 Using [Homebrew](https://formulae.brew.sh/formula/deno):
 
@@ -56,33 +71,6 @@ Using [Nix](https://nixos.org/download.html):
 
 ```shell
 nix-shell -p deno
-```
-
-Using [asdf](https://asdf-vm.com/):
-
-```shell
-asdf plugin add deno https://github.com/asdf-community/asdf-deno.git
-
-# Download and install the latest version of Deno
-asdf install deno latest
-
-# To set as the default version of Deno globally
-asdf set -u deno latest
-
-# To set as the default version of Deno locally (current project only)
-asdf set deno latest
-```
-
-Using [vfox](https://vfox.dev/):
-
-```shell
-vfox add deno
-
-# Download and install the latest version of Deno
-vfox install deno@latest
-
-# To set the version of Deno globally
-vfox use --global deno
 ```
 
 </deno-tab>
@@ -104,10 +92,6 @@ Using [npm](https://npmjs.com/package/deno):
 npm install -g deno
 ```
 
-> <small>The startup time of the Deno command gets affected if it's installed
-> via npm. We recommend the PowerShell install script for better
-> performance.</small>
-
 Using [Scoop](https://scoop.sh/):
 
 ```shell
@@ -126,41 +110,19 @@ Using [Winget](https://github.com/microsoft/winget-cli):
 winget install DenoLand.Deno
 ```
 
-Using [vfox](https://vfox.dev/):
-
-```shell
-vfox add deno
-
-# Download and install the latest version of Deno
-vfox install deno@latest
-
-# To set the version of Deno globally
-vfox use --global deno
-```
-
 </deno-tab>
-<deno-tab value="linux" label="Linux">
-
-Using Shell:
-
-```shell
-curl -fsSL https://deno.land/install.sh | sh
-```
-
-Using [npm](https://npmjs.com/package/deno):
-
-```shell
-npm install -g deno
-```
+</deno-tabs>
 
 > <small>The startup time of the Deno command gets affected if it's installed
-> via npm. We recommend the shell install script for better performance.</small>
+> via npm. We recommend the official install script (shell or PowerShell) for
+> better performance.</small>
 
-Using [Nix](https://nixos.org/download.html):
+Deno does not publish an official apt repository. On Debian or Ubuntu, use the
+shell installer above for the recommended installation path.
 
-```shell
-nix-shell -p deno
-```
+### Cross-platform package managers
+
+These version managers work on macOS, Linux, and Windows.
 
 Using [asdf](https://asdf-vm.com/):
 
@@ -189,17 +151,57 @@ vfox install deno@latest
 vfox use --global deno
 ```
 
-</deno-tab>
-</deno-tabs>
+You can also build and install from source using
+[Cargo](https://crates.io/crates/deno):
 
-### Customizing the install directory
+```shell
+cargo install deno --locked
+```
 
-By default the shell and PowerShell install scripts install Deno to
-`$HOME/.deno/bin`. Set the `DENO_INSTALL` environment variable before running
-the script to install to a different location — the binary is then placed in
-`$DENO_INSTALL/bin`.
+## Manual download
 
-On macOS and Linux, set `DENO_INSTALL` when invoking the piped shell so the
+Deno binaries can also be installed manually, by downloading a zip file at
+[github.com/denoland/deno/releases](https://github.com/denoland/deno/releases).
+Each release ships one archive per platform, containing a single executable:
+
+| Platform                    | Asset                                |
+| --------------------------- | ------------------------------------ |
+| Windows x86_64              | `deno-x86_64-pc-windows-msvc.zip`    |
+| Windows ARM64               | `deno-aarch64-pc-windows-msvc.zip`   |
+| macOS ARM64 (Apple Silicon) | `deno-aarch64-apple-darwin.zip`      |
+| macOS x86_64 (Intel)        | `deno-x86_64-apple-darwin.zip`       |
+| Linux x86_64                | `deno-x86_64-unknown-linux-gnu.zip`  |
+| Linux ARM64                 | `deno-aarch64-unknown-linux-gnu.zip` |
+
+Unzip the archive and place the `deno` executable somewhere on your `PATH`. You
+will have to set the executable bit on macOS and Linux. Each asset has a
+matching `.sha256sum` file for verifying the download.
+
+## Docker
+
+Deno publishes official images to
+[Docker Hub](https://hub.docker.com/r/denoland/deno) and the
+[GitHub Container Registry](https://github.com/denoland/deno/pkgs/container/deno),
+in `debian`, `ubuntu`, `alpine`, `distroless`, and `bin` variants.
+
+See [Deno and Docker](/runtime/reference/docker/) for Dockerfiles, multi-stage
+builds, Docker Compose, and other best practices.
+
+## Installation location
+
+### Binary location
+
+When installed via the shell or PowerShell script, the `deno` binary is placed
+in the following default location:
+
+| Platform      | Default path                       |
+| ------------- | ---------------------------------- |
+| macOS / Linux | `$HOME/.deno/bin/deno`             |
+| Windows       | `%USERPROFILE%\.deno\bin\deno.exe` |
+
+Override the install directory by setting the `DENO_INSTALL` environment
+variable before running the install script; the binary is then placed in
+`$DENO_INSTALL/bin`. On macOS and Linux, set it on the piped shell itself so the
 installer (not just `curl`) sees the variable:
 
 ```shell
@@ -213,36 +215,35 @@ $env:DENO_INSTALL = "C:\deno"
 irm https://deno.land/install.ps1 | iex
 ```
 
-Remember to add the new `bin` directory to your `PATH` so the `deno` command is
-available in your shell. See the
+Remember to add the new `bin` directory to your `PATH`. See the
 [`deno_install` README](https://github.com/denoland/deno_install) for the
 canonical behavior and other supported options.
 
-You can also build and install from source using
-[Cargo](https://crates.io/crates/deno):
+When installed via a package manager (Homebrew, Scoop, etc.), the binary
+location is managed by that package manager.
 
-```shell
-cargo install deno --locked
-```
+### Cache location
 
-Deno binaries can also be installed manually, by downloading a zip file at
-[github.com/denoland/deno/releases](https://github.com/denoland/deno/releases).
-These packages contain just a single executable file. You will have to set the
-executable bit on macOS and Linux.
+Downloaded dependencies and compiled artefacts are stored in Deno's cache
+directory. It defaults to a platform-specific path:
 
-## Docker
+| Platform | Default path                |
+| -------- | --------------------------- |
+| Linux    | `$HOME/.cache/deno`         |
+| macOS    | `$HOME/Library/Caches/deno` |
+| Windows  | `%LOCALAPPDATA%\deno`       |
 
-For more information and instructions on the official Docker images:
-[https://github.com/denoland/deno_docker](https://github.com/denoland/deno_docker)
+Override it by setting the `DENO_DIR` environment variable (see
+[Environment variables](/runtime/reference/env_variables/)). Run `deno info` to
+print the directory currently in use.
 
 ## Testing your installation
 
 To test your installation, run `deno --version`. If this prints the Deno version
 to the console the installation was successful.
 
-Use `deno help` to see help text documenting Deno's flags and usage. Get a
-detailed guide on the CLI
-[here](/runtime/getting_started/command_line_interface/).
+Use `deno help` to see help text documenting Deno's flags and usage. For a guide
+to every subcommand, see the [CLI reference](/runtime/reference/cli/).
 
 ### If you see "command not found"
 
@@ -257,8 +258,7 @@ your `PATH` yet. To fix this:
   defaults to `~/.deno/bin` on macOS and Linux; for npm-based installs, run
   `npm config get prefix` to find the directory containing the global `bin`.
 - If you customised the install location, the binary lives at
-  `$DENO_INSTALL/bin/deno` — see
-  [Customizing the install directory](#customizing-the-install-directory).
+  `$DENO_INSTALL/bin/deno` — see [Binary location](#binary-location).
 
 ## Updating
 
@@ -266,6 +266,24 @@ To update a previously installed version of Deno, you can run:
 
 ```shell
 deno upgrade
+```
+
+Or using [Homebrew](https://formulae.brew.sh/formula/deno) (macOS):
+
+```shell
+brew upgrade deno
+```
+
+Or using [Scoop](https://scoop.sh/) (Windows):
+
+```shell
+scoop update deno
+```
+
+Or using [Chocolatey](https://chocolatey.org/packages/deno) (Windows):
+
+```shell
+choco upgrade deno
 ```
 
 Or using [Winget](https://github.com/microsoft/winget-cli) (Windows):
@@ -281,8 +299,48 @@ unzip it, and replace your current executable with it.
 You can also use this utility to install a specific version of Deno:
 
 ```shell
-deno upgrade --version 1.0.1
+deno upgrade --version 2.7.0
 ```
+
+## Uninstalling
+
+If you installed Deno using the shell or PowerShell install script, first clear
+the Deno cache directory (`$DENO_DIR`):
+
+```shell
+deno clean
+```
+
+Then remove the Deno installation directory:
+
+<deno-tabs group-id="operating-systems">
+<deno-tab value="mac" label="macOS / Linux" default>
+
+```shell
+rm -rf ~/.deno
+```
+
+Finally, remove the line that sources Deno's env file from your shell config
+(`~/.bashrc`, `~/.zshrc`, `~/.profile`, etc.). The shell install script appends
+a line like `. "$HOME/.deno/env"` — delete that line. Fish users should
+additionally remove `~/.config/fish/conf.d/deno.fish`.
+
+</deno-tab>
+<deno-tab value="windows" label="Windows">
+
+```powershell
+Remove-Item -Recurse -Force "$env:USERPROFILE\.deno"
+```
+
+Then remove the Deno `bin` directory from your `PATH` environment variable via
+System Settings.
+
+</deno-tab>
+</deno-tabs>
+
+If you installed Deno via a package manager (Homebrew, Scoop, Chocolatey, etc.),
+use that package manager's uninstall command instead (e.g.
+`brew uninstall deno`, `scoop uninstall deno`).
 
 ## Building from source
 

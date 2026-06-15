@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-12
+last_modified: 2026-05-20
 title: "deno install"
 oldUrl:
   - /runtime/manual/tools/script_installer/
@@ -36,6 +36,15 @@ Use this command to install particular packages and add them to `deno.json` or
 deno install jsr:@std/testing npm:express
 ```
 
+:::info Deno 2.8
+
+Unprefixed package names are treated as npm packages by default, so the `npm:`
+prefix is no longer required at the CLI. `deno install express` is equivalent to
+`deno install npm:express`. JSR packages still need the `jsr:` prefix to stay
+unambiguous. The `npm:` prefix remains required in `import` specifiers.
+
+:::
+
 :::tip
 
 You can also use `deno add` which is an alias to `deno install [PACKAGES]`
@@ -45,6 +54,46 @@ You can also use `deno add` which is an alias to `deno install [PACKAGES]`
 If your project has a `package.json` file, the packages coming from npm will be
 added to `dependencies` in `package.json`. Otherwise all packages will be added
 to `deno.json`.
+
+### deno install --os and --arch
+
+Starting in Deno 2.8, `deno install` accepts `--os` and `--arch` flags so you
+can install npm packages targeting a different platform than the one you're
+running on. This is most useful for pre-installing packages with native binaries
+— for example, building a deployment artifact on a macOS dev machine that will
+eventually run on Linux/arm64.
+
+The flags accept Node.js-compatible values, the same strings that
+`process.platform` and `process.arch` produce.
+
+```sh
+# Install npm packages for linux/arm64
+deno install --os linux --arch arm64
+
+# Install for windows/x64
+deno install --os win32 --arch x64
+
+# Override just the architecture; --os defaults to the current system
+deno install --arch x64
+```
+
+`--os` and `--arch` are local-install-only and conflict with `--global`.
+
+### deno install --package-json
+
+By default, Deno picks the configuration file to write to (`deno.json` or
+`package.json`) based on which one is closest to the current working directory.
+Starting in Deno 2.8, `--package-json` forces dependencies to be written to
+`package.json`, regardless of any nearby `deno.json`. If no `package.json`
+exists yet, one is created.
+
+```sh
+deno install --package-json npm:express jsr:@std/path
+```
+
+JSR packages added with `--package-json` are written in their npm-compatible
+form (`npm:@jsr/...`). The same flag works on `deno add`, `deno remove`, and
+`deno uninstall`.
 
 ### deno install --entrypoint [FILES]
 
@@ -176,6 +225,54 @@ deno install --global --compile -A npm:@anthropic-ai/claude-code
 This combines the behavior of [`deno compile`](/runtime/reference/cli/compile/)
 with global installation — producing a native binary placed in the installation
 root (same as `--global` without `--compile`).
+
+### deno install --prod
+
+Use this command to install only production dependencies, skipping
+`devDependencies` from `package.json`.
+
+```sh
+deno install --prod
+```
+
+This is useful when deploying an application where development dependencies like
+test frameworks or build tools are not needed.
+
+The `--prod` flag conflicts with `--global` and `--dev`.
+
+In CI environments, prefer [`deno ci --prod`](/runtime/reference/cli/ci/), which
+also enforces a frozen lockfile and removes any pre-existing `node_modules`
+before installing.
+
+#### --skip-types
+
+When combined with `--prod`, the `--skip-types` flag additionally skips
+`@types/*` packages from both `package.json` dependencies and `deno.json`
+imports:
+
+```sh
+deno install --prod --skip-types
+```
+
+:::caution
+
+The `--skip-types` flag identifies type packages by checking if the package name
+starts with `@types/`. This heuristic may not cover all type-only packages.
+
+:::
+
+#### --prod with --entrypoint
+
+When `--prod` is combined with `--entrypoint`, the module graph is built as
+"code only", which excludes type-only dependencies:
+
+```sh
+deno install --prod --entrypoint main.ts
+```
+
+This provides the most precise production install — only dependencies that are
+actually imported at runtime by the specified entrypoint (and its transitive
+imports) will be installed.
 
 ## Native Node.js addons
 

@@ -1,16 +1,43 @@
 import { ExampleIcon } from "../examples/_components/ExampleIcon.tsx";
-import { LearningList } from "../examples/_components/LearningList.tsx";
+import {
+  LearningList,
+  TypeIcon,
+} from "../examples/_components/LearningList.tsx";
 import { TutorialIcon } from "../examples/_components/TutorialIcon.tsx";
 import { VideoIcon } from "../examples/_components/VideoIcon.tsx";
-import { sidebar } from "../examples/_data.ts";
+import { featuredItems, sidebar } from "../examples/_data.ts";
 
-export default function LandingPage() {
+function FeaturedStar() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="0.95rem"
+      height="0.95rem"
+      className="inline-block align-baseline fill-primary shrink-0"
+      aria-hidden="true"
+    >
+      <path d="M12 2l2.92 6.26 6.58.84-4.84 4.57 1.26 6.53L12 17l-5.92 3.2 1.26-6.53L2.5 9.1l6.58-.84z" />
+    </svg>
+  );
+}
+
+export default function LandingPage(
+  { descriptions }: { descriptions?: Record<string, string> },
+) {
+  const counts = { example: 0, tutorial: 0, video: 0 };
+  for (const category of sidebar) {
+    for (const item of category.items) {
+      counts[item.type as keyof typeof counts]++;
+    }
+  }
+  const total = counts.example + counts.tutorial + counts.video;
   const componentsPerSidebarItem = sidebar.map(
     (item: { title: string; items: any[] }) => {
       return (
         <LearningList
           title={item.title}
           items={item.items}
+          descriptions={descriptions}
         />
       );
     },
@@ -36,13 +63,75 @@ export default function LandingPage() {
             src="/examples.png"
           />
         </div>
-        <div className="flex flex-col gap-4 w-full mb-8 p-4 border border-blue-100 dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary rounded md:flex-wrap md:justify-start md:items-center md:flex-row">
+        <details
+          id="guide-request-box"
+          className="mb-8 p-4 border border-blue-100 dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary rounded"
+        >
+          <summary className="cursor-pointer">
+            <span className="font-semibold">
+              Can't find what you're looking for?
+            </span>{" "}
+            <span className="text-primary underline underline-offset-4">
+              Request a new guide
+            </span>
+          </summary>
+          <form id="guide-request-form" className="mt-4 max-w-prose space-y-3">
+            <textarea
+              className="block w-full p-2 border border-foreground-tertiary bg-white dark:bg-background-primary rounded"
+              name="guide-request-comment"
+              required
+              minLength={3}
+              placeholder="What would you like a guide or example for?"
+            >
+            </textarea>
+            <input
+              type="text"
+              className="block w-full p-2 border border-foreground-tertiary bg-white dark:bg-background-primary rounded"
+              name="guide-request-contact"
+              placeholder="GitHub username (optional, you'll be @mentioned)"
+            />
+            <p className="text-xs text-gray-600 dark:text-gray-400 italic">
+              Your request will be posted as an issue in the denoland/docs
+              GitHub repo.
+            </p>
+            <button type="submit" className="btn">Request guide</button>
+          </form>
+        </details>
+
+        <section className="mb-10">
+          <h2 className="text-lg md:text-xl font-semibold mb-4">Featured</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {featuredItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="group relative flex flex-col gap-1 p-4 pr-12 rounded-lg border border-foreground-tertiary bg-background-secondary !no-underline hover:border-primary transition-colors duration-150"
+              >
+                <span
+                  className="absolute top-4 right-4"
+                  title={item.type}
+                  aria-label={item.type}
+                >
+                  <TypeIcon type={item.type} />
+                </span>
+                <span className="font-semibold !text-foreground-primary group-hover:underline underline-offset-4 decoration-primary">
+                  <FeaturedStar /> {item.title}
+                </span>
+                <span className="text-sm text-foreground-secondary">
+                  {item.description}
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section className="flex flex-col gap-4 w-full mb-8 p-4 border border-blue-100 dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary rounded md:flex-wrap md:justify-start md:items-center md:flex-row">
           <h2 className="font-semibold">
             Filter by type:
           </h2>
           <label for="example" className="flex gap-2 items-center mr-4">
-            <ExampleIcon />
-            <span>Examples:</span>
+            <ExampleIcon size="1.5rem" />
+            <span>Examples ({counts.example})</span>
             <span className="switch">
               <input
                 type="checkbox"
@@ -56,8 +145,8 @@ export default function LandingPage() {
           </label>
 
           <label for="tutorial" className="flex gap-2 items-center mr-4">
-            <TutorialIcon />
-            <span>Tutorials:</span>
+            <TutorialIcon size="1.5rem" />
+            <span>Tutorials ({counts.tutorial})</span>
             <span className="switch">
               <input
                 type="checkbox"
@@ -71,8 +160,8 @@ export default function LandingPage() {
           </label>
 
           <label for="video" className="flex gap-2 items-center mr-4">
-            <VideoIcon />
-            <span>Videos:</span>
+            <VideoIcon size="1.5rem" />
+            <span>Videos ({counts.video})</span>
             <span className="switch">
               <input
                 type="checkbox"
@@ -84,11 +173,30 @@ export default function LandingPage() {
               <span className="slider"></span>
             </span>
           </label>
-        </div>
 
-        <div className="unfiltered columns-1 sm:columns-2 lg:columns-3 gap-8 mb-8 w-[100%] markdown-body">
+          <span className="md:ml-auto text-sm text-foreground-secondary">
+            {total} items total
+          </span>
+        </section>
+
+        <nav
+          className="flex flex-wrap gap-2 mb-10"
+          aria-label="Example categories"
+        >
+          {sidebar.map((category: { title: string }) => (
+            <a
+              key={category.title}
+              href={`#${category.title.toLowerCase().replace(/\s+/g, "-")}`}
+              className="px-3 py-1 rounded-full border border-foreground-tertiary text-sm !no-underline text-foreground-secondary hover:border-primary hover:text-primary transition-colors duration-150"
+            >
+              {category.title}
+            </a>
+          ))}
+        </nav>
+
+        <section className="unfiltered mb-8 w-full markdown-body">
           {componentsPerSidebarItem}
-        </div>
+        </section>
         <div className="fully-filtered">
           <h2 class="text-2xl font-semibold sm:text-3xl md:text-4xl">
             Oops! You've filtered everything
@@ -102,29 +210,6 @@ export default function LandingPage() {
           />
         </div>
       </main>
-      <aside class="px-8 xl:px-0 max-w-7xl mb-24 space-y-4 border-t pt-8">
-        <h2 class="text-2xl md:text-3xl font-bold">
-          We welcome contributions!
-        </h2>
-        <p class="text-balance pt-4 mt-3">
-          Looking for an example that isn't here? Or want to add one of your
-          own? Check out our{" "}
-          <a
-            href="https://github.com/denoland/deno-docs?tab=readme-ov-file#examples"
-            class="text-primary underline"
-          >
-            GitHub repository
-          </a>.
-        </p>
-        <p>
-          <a
-            href="/runtime/contributing/examples/"
-            class="text-primary underline mt-4 font-bold"
-          >
-            Commit an example and we'll send you stickers!
-          </a>
-        </p>
-      </aside>
     </>
   );
 }

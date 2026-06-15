@@ -130,7 +130,7 @@
           "short": null,
           "long": "unstable-raw-imports",
           "required": false,
-          "help": "Enable unstable 'bytes' and 'text' imports.",
+          "help": "Enable unstable 'bytes' imports.",
           "help_heading": "Unstable options",
           "usage": "--unstable-raw-imports"
         },
@@ -223,6 +223,15 @@
           "help": "Sets the node modules management mode for npm packages",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
         },
         {
           "name": "vendor",
@@ -427,7 +436,7 @@
           "short": null,
           "long": "watch-hmr",
           "required": false,
-          "help": "Watch for file changes and restart process automatically.\n  \u001b[38;5;245mLocal files from entry point module graph are watched by default.\n  Additional paths might be watched by passing them as arguments to this flag.\u001b[39m",
+          "help": "Watch for file changes and hot-replace modules. The process restarts if hot replacement fails.\n  \u001b[38;5;245mLocal files from entry point module graph are watched by default.\n  Additional paths might be watched by passing them as arguments to this flag.\u001b[39m",
           "help_heading": "File watching options",
           "usage": "--watch-hmr[=<FILES>...]"
         },
@@ -558,6 +567,15 @@
           "usage": "--tunnel[=<tunnel>]"
         },
         {
+          "name": "use-env-proxy",
+          "short": null,
+          "long": "use-env-proxy",
+          "required": false,
+          "help": "Use HTTP_PROXY, HTTPS_PROXY, and NO_PROXY for node:http/node:https",
+          "help_heading": null,
+          "usage": "--use-env-proxy"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
@@ -678,7 +696,7 @@
           "short": null,
           "long": "unstable-raw-imports",
           "required": false,
-          "help": "Enable unstable 'bytes' and 'text' imports.",
+          "help": "Enable unstable 'bytes' imports.",
           "help_heading": "Unstable options",
           "usage": "--unstable-raw-imports"
         },
@@ -771,6 +789,15 @@
           "help": "Sets the node modules management mode for npm packages",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
         },
         {
           "name": "vendor",
@@ -1011,7 +1038,7 @@
           "short": null,
           "long": "watch-hmr",
           "required": false,
-          "help": "Watch for file changes and restart process automatically.\n  \u001b[38;5;245mLocal files from entry point module graph are watched by default.\n  Additional paths might be watched by passing them as arguments to this flag.\u001b[39m",
+          "help": "Watch for file changes and hot-replace modules. The process restarts if hot replacement fails.\n  \u001b[38;5;245mLocal files from entry point module graph are watched by default.\n  Additional paths might be watched by passing them as arguments to this flag.\u001b[39m",
           "help_heading": "File watching options",
           "usage": "--watch-hmr[=<FILES>...]"
         },
@@ -1147,7 +1174,7 @@
     },
     {
       "name": "add",
-      "about": "Add dependencies to your configuration file.\n  \u001b[38;5;245mdeno add jsr:@std/path\u001b[39m\n\nYou can also add npm packages:\n  \u001b[38;5;245mdeno add npm:react\u001b[39m\n\nOr multiple dependencies at once:\n  \u001b[38;5;245mdeno add jsr:@std/path jsr:@std/assert npm:chalk\u001b[39m",
+      "about": "Add dependencies to your configuration file.\n  \u001b[38;5;245mdeno add express\u001b[39m\n\nUnprefixed packages default to npm. Use jsr: prefix for jsr packages:\n  \u001b[38;5;245mdeno add jsr:@std/path\u001b[39m\n\nOr multiple dependencies at once:\n  \u001b[38;5;245mdeno add express jsr:@std/path\u001b[39m",
       "args": [
         {
           "name": "packages",
@@ -1217,7 +1244,7 @@
           "short": null,
           "long": "npm",
           "required": false,
-          "help": "assume unprefixed package names are npm packages",
+          "help": "assume unprefixed package names are npm packages (default)",
           "help_heading": null,
           "usage": "--npm"
         },
@@ -1238,6 +1265,15 @@
           "help": "Save exact version without the caret (^)",
           "help_heading": null,
           "usage": "--save-exact"
+        },
+        {
+          "name": "package-json",
+          "short": null,
+          "long": "package-json",
+          "required": false,
+          "help": "Force using package.json for dependency management instead of deno.json",
+          "help_heading": null,
+          "usage": "--package-json"
         }
       ],
       "subcommands": [],
@@ -1318,6 +1354,15 @@
           "help": "Ignore advisories matching the given CVE IDs",
           "help_heading": null,
           "usage": "--ignore <CVE>"
+        },
+        {
+          "name": "fix",
+          "short": null,
+          "long": "fix",
+          "required": false,
+          "help": "Automatically fix vulnerabilities by upgrading packages",
+          "help_heading": null,
+          "usage": "--fix"
         }
       ],
       "subcommands": [],
@@ -1371,6 +1416,15 @@
           "help": "Install only updating the lockfile",
           "help_heading": null,
           "usage": "--lockfile-only"
+        },
+        {
+          "name": "package-json",
+          "short": null,
+          "long": "package-json",
+          "required": false,
+          "help": "Force using package.json for dependency management instead of deno.json",
+          "help_heading": null,
+          "usage": "--package-json"
         }
       ],
       "subcommands": [],
@@ -1484,7 +1538,7 @@
           "short": null,
           "long": "unstable-raw-imports",
           "required": false,
-          "help": "Enable unstable 'bytes' and 'text' imports.",
+          "help": "Enable unstable 'bytes' imports.",
           "help_heading": "Unstable options",
           "usage": "--unstable-raw-imports"
         },
@@ -1577,6 +1631,15 @@
           "help": "Sets the node modules management mode for npm packages",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
         },
         {
           "name": "vendor",
@@ -1974,6 +2037,15 @@
           "usage": "--node-modules-dir[=<MODE>]"
         },
         {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
+        },
+        {
           "name": "vendor",
           "short": null,
           "long": "vendor",
@@ -2342,6 +2414,15 @@
           "usage": "--node-modules-dir[=<MODE>]"
         },
         {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
+        },
+        {
           "name": "vendor",
           "short": null,
           "long": "vendor",
@@ -2606,7 +2687,7 @@
           "short": null,
           "long": "unstable-raw-imports",
           "required": false,
-          "help": "Enable unstable 'bytes' and 'text' imports.",
+          "help": "Enable unstable 'bytes' imports.",
           "help_heading": "Unstable options",
           "usage": "--unstable-raw-imports"
         },
@@ -2690,6 +2771,15 @@
           "help": "Sets the node modules management mode for npm packages",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
         },
         {
           "name": "vendor",
@@ -2863,6 +2953,33 @@
           "usage": "--v8-flags[=<V8_FLAGS>...]"
         },
         {
+          "name": "watch",
+          "short": null,
+          "long": "watch",
+          "required": false,
+          "help": "Watch for file changes and restart process automatically.\n  \u001b[38;5;245mOnly local files from entry point module graph are watched.\u001b[39m",
+          "help_heading": "File watching options",
+          "usage": "--watch"
+        },
+        {
+          "name": "watch-exclude",
+          "short": null,
+          "long": "watch-exclude",
+          "required": false,
+          "help": "Exclude provided files/patterns from watch mode",
+          "help_heading": "File watching options",
+          "usage": "--watch-exclude[=<FILES>...]"
+        },
+        {
+          "name": "no-clear-screen",
+          "short": null,
+          "long": "no-clear-screen",
+          "required": false,
+          "help": "Do not clear terminal screen when under watch mode",
+          "help_heading": "File watching options",
+          "usage": "--no-clear-screen"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
@@ -2914,6 +3031,15 @@
           "help": "Sets the node modules management mode for npm packages",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
         },
         {
           "name": "vendor",
@@ -3036,7 +3162,7 @@
           "short": null,
           "long": "unstable-raw-imports",
           "required": false,
-          "help": "Enable unstable 'bytes' and 'text' imports.",
+          "help": "Enable unstable 'bytes' imports.",
           "help_heading": "Unstable options",
           "usage": "--unstable-raw-imports"
         },
@@ -3129,6 +3255,15 @@
           "help": "Sets the node modules management mode for npm packages",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
         },
         {
           "name": "vendor",
@@ -3363,6 +3498,24 @@
           "help": "Create a self-extracting binary that extracts the embedded file system to disk on first run and then runs from there",
           "help_heading": "Compile options",
           "usage": "--self-extracting"
+        },
+        {
+          "name": "bundle",
+          "short": null,
+          "long": "bundle",
+          "required": false,
+          "help": "\u001b[33mExperimental.\u001b[39m Bundle the entrypoint with esbuild before embedding, instead of shipping the whole node_modules tree.\n  \u001b[38;5;245mProduces a smaller binary with faster startup, at the cost of dropping dynamic require/import patterns that can't be statically traced.\u001b[39m",
+          "help_heading": "Compile options",
+          "usage": "--bundle"
+        },
+        {
+          "name": "minify",
+          "short": null,
+          "long": "minify",
+          "required": false,
+          "help": "\u001b[33mExperimental.\u001b[39m Minify the bundled output. Only meaningful with \u001b[36m--bundle\u001b[39m.\n  \u001b[38;5;245mReduces both the embedded bundle size and runtime memory use, at the cost of less readable stack traces.\u001b[39m",
+          "help_heading": "Compile options",
+          "usage": "--minify"
         },
         {
           "name": "ext",
@@ -3974,7 +4127,7 @@
           "short": null,
           "long": "unstable-raw-imports",
           "required": false,
-          "help": "Enable unstable 'bytes' and 'text' imports.",
+          "help": "Enable unstable 'bytes' imports.",
           "help_heading": "Unstable options",
           "usage": "--unstable-raw-imports"
         },
@@ -4067,6 +4220,15 @@
           "help": "Sets the node modules management mode for npm packages",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
         },
         {
           "name": "vendor",
@@ -4813,6 +4975,15 @@
           "usage": "--node-modules-dir[=<MODE>]"
         },
         {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
+        },
+        {
           "name": "vendor",
           "short": null,
           "long": "vendor",
@@ -4845,7 +5016,7 @@
     },
     {
       "name": "install",
-      "about": "Installs dependencies either in the local project or globally to a bin directory.\n\n\u001b[32mLocal installation\u001b[39m\n\nAdd dependencies to the local project's configuration (\u001b[38;5;245mdeno.json / package.json\u001b[39m) and installs them\nin the package cache. If no dependency is specified, installs all dependencies listed in the config file.\nIf the \u001b[38;5;245m--entrypoint\u001b[39m flag is passed, installs the dependencies of the specified entrypoint(s).\n\n  \u001b[38;5;245mdeno install\u001b[39m\n  \u001b[38;5;245mdeno install jsr:@std/bytes\u001b[39m\n  \u001b[38;5;245mdeno install npm:chalk\u001b[39m\n  \u001b[38;5;245mdeno install --entrypoint entry1.ts entry2.ts\u001b[39m\n\n\u001b[32mGlobal installation\u001b[39m\n\nIf the \u001b[1m--global\u001b[22m flag is set, installs a script as an executable in the installation root's bin directory.\n\n  \u001b[38;5;245mdeno install --global --allow-net --allow-read jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno install -g https://examples.deno.land/color-logging.ts\u001b[39m\n\nTo change the executable name, use \u001b[36m-n\u001b[39m/\u001b[36m--name\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read -n serve jsr:@std/http/file-server\u001b[39m\n\nThe executable name is inferred by default:\n  - Attempt to take the file stem of the URL path. The above example would\n    become \u001b[38;5;245mfile_server\u001b[39m.\n  - If the file stem is something generic like \u001b[38;5;245mmain\u001b[39m, \u001b[38;5;245mmod\u001b[39m, \u001b[38;5;245mindex\u001b[39m or \u001b[38;5;245mcli\u001b[39m,\n    and the path has no parent, take the file name of the parent path. Otherwise\n    settle with the generic name.\n  - If the resulting name has an \u001b[38;5;245m@...\u001b[39m suffix, strip it.\n\nTo change the installation root, use \u001b[36m--root\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read --root /usr/local jsr:@std/http/file-server\u001b[39m\n\nThe installation root is determined, in order of precedence:\n  - \u001b[38;5;245m--root\u001b[39m option\n  - \u001b[38;5;245mDENO_INSTALL_ROOT\u001b[39m environment variable\n  - \u001b[38;5;245m$HOME/.deno\u001b[39m\n\nThese must be added to the path manually if required.",
+      "about": "Installs dependencies either in the local project or globally to a bin directory.\n\n\u001b[32mLocal installation\u001b[39m\n\nAdd dependencies to the local project's configuration (\u001b[38;5;245mdeno.json / package.json\u001b[39m) and installs them\nin the package cache. If no dependency is specified, installs all dependencies listed in the config file.\nIf the \u001b[38;5;245m--entrypoint\u001b[39m flag is passed, installs the dependencies of the specified entrypoint(s).\n\n  \u001b[38;5;245mdeno install\u001b[39m\n  \u001b[38;5;245mdeno install express\u001b[39m\n  \u001b[38;5;245mdeno install jsr:@std/bytes\u001b[39m\n  \u001b[38;5;245mdeno install --entrypoint entry1.ts entry2.ts\u001b[39m\n\n\u001b[32mGlobal installation\u001b[39m\n\nIf the \u001b[1m--global\u001b[22m flag is set, installs a script as an executable in the installation root's bin directory.\n\n  \u001b[38;5;245mdeno install --global --allow-net --allow-read jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno install -g https://examples.deno.land/color-logging.ts\u001b[39m\n\nTo change the executable name, use \u001b[36m-n\u001b[39m/\u001b[36m--name\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read -n serve jsr:@std/http/file-server\u001b[39m\n\nThe executable name is inferred by default:\n  - Attempt to take the file stem of the URL path. The above example would\n    become \u001b[38;5;245mfile_server\u001b[39m.\n  - If the file stem is something generic like \u001b[38;5;245mmain\u001b[39m, \u001b[38;5;245mmod\u001b[39m, \u001b[38;5;245mindex\u001b[39m or \u001b[38;5;245mcli\u001b[39m,\n    and the path has no parent, take the file name of the parent path. Otherwise\n    settle with the generic name.\n  - If the resulting name has an \u001b[38;5;245m@...\u001b[39m suffix, strip it.\n\nTo change the installation root, use \u001b[36m--root\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read --root /usr/local jsr:@std/http/file-server\u001b[39m\n\nThe installation root is determined, in order of precedence:\n  - \u001b[38;5;245m--root\u001b[39m option\n  - \u001b[38;5;245mDENO_INSTALL_ROOT\u001b[39m environment variable\n  - \u001b[38;5;245m$HOME/.deno\u001b[39m\n\nThese must be added to the path manually if required.",
       "args": [
         {
           "name": "unstable-bare-node-builtins",
@@ -4951,7 +5122,7 @@
           "short": null,
           "long": "unstable-raw-imports",
           "required": false,
-          "help": "Enable unstable 'bytes' and 'text' imports.",
+          "help": "Enable unstable 'bytes' imports.",
           "help_heading": "Unstable options",
           "usage": "--unstable-raw-imports"
         },
@@ -5044,6 +5215,15 @@
           "help": "Sets the node modules management mode for npm packages",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
         },
         {
           "name": "vendor",
@@ -5329,7 +5509,7 @@
           "short": null,
           "long": "npm",
           "required": false,
-          "help": "assume unprefixed package names are npm packages",
+          "help": "assume unprefixed package names are npm packages (default)",
           "help_heading": null,
           "usage": "--npm"
         },
@@ -5361,6 +5541,51 @@
           "usage": "--lockfile-only"
         },
         {
+          "name": "package-json",
+          "short": null,
+          "long": "package-json",
+          "required": false,
+          "help": "Force using package.json for dependency management instead of deno.json",
+          "help_heading": null,
+          "usage": "--package-json"
+        },
+        {
+          "name": "os",
+          "short": null,
+          "long": "os",
+          "required": false,
+          "help": "Target OS for npm package installation (e.g., linux, darwin, win32)",
+          "help_heading": null,
+          "usage": "--os <os>"
+        },
+        {
+          "name": "arch",
+          "short": null,
+          "long": "arch",
+          "required": false,
+          "help": "Target architecture for npm package installation (e.g., x64, arm64)",
+          "help_heading": null,
+          "usage": "--arch <arch>"
+        },
+        {
+          "name": "prod",
+          "short": null,
+          "long": "prod",
+          "required": false,
+          "help": "Only install production dependencies (excludes devDependencies)",
+          "help_heading": null,
+          "usage": "--prod"
+        },
+        {
+          "name": "skip-types",
+          "short": null,
+          "long": "skip-types",
+          "required": false,
+          "help": "Exclude @types/* packages from installation.\n\u001b[33mBe careful, as it uses a name-based heuristic and may skip packages that ship runtime code.\u001b[39m",
+          "help_heading": null,
+          "usage": "--skip-types"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
@@ -5372,6 +5597,194 @@
       ],
       "subcommands": [],
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno install\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[cmd]...\u001b[0m \u001b[32m[--\u001b[0m \u001b[32m[SCRIPT_ARG]...\u001b[0m\u001b[32m]\u001b[0m"
+    },
+    {
+      "name": "ci",
+      "about": "Install dependencies in a clean, reproducible way for CI environments.\n\nSimilar to \u001b[38;5;245mnpm ci\u001b[39m: requires a \u001b[38;5;245mdeno.lock\u001b[39m file, removes any existing \u001b[38;5;245mnode_modules\u001b[39m\ndirectory, and then installs strictly from the lockfile. Errors if \u001b[38;5;245mdeno.lock\u001b[39m\nis missing or out of date with the config file.\n\n  \u001b[38;5;245mdeno ci\u001b[39m\n  \u001b[38;5;245mdeno ci --prod\u001b[39m",
+      "args": [
+        {
+          "name": "unstable-bare-node-builtins",
+          "short": null,
+          "long": "unstable-bare-node-builtins",
+          "required": false,
+          "help": "Enable unstable bare node builtins feature",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-bundle",
+          "short": null,
+          "long": "unstable-bundle",
+          "required": false,
+          "help": "Enable unstable bundle runtime API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bundle"
+        },
+        {
+          "name": "unstable-cron",
+          "short": null,
+          "long": "unstable-cron",
+          "required": false,
+          "help": "Enable unstable `Deno.cron` API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
+        },
+        {
+          "name": "unstable-kv",
+          "short": null,
+          "long": "unstable-kv",
+          "required": false,
+          "help": "Enable unstable KV APIs",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-net",
+          "short": null,
+          "long": "unstable-net",
+          "required": false,
+          "help": "enable unstable net APIs",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
+        },
+        {
+          "name": "unstable-node-globals",
+          "short": null,
+          "long": "unstable-node-globals",
+          "required": false,
+          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-node-globals"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-raw-imports",
+          "short": null,
+          "long": "unstable-raw-imports",
+          "required": false,
+          "help": "Enable unstable 'bytes' imports.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-raw-imports"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
+        },
+        {
+          "name": "unstable-tsgo",
+          "short": null,
+          "long": "unstable-tsgo",
+          "required": false,
+          "help": "Enable unstable TypeScript Go integration",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-tsgo"
+        },
+        {
+          "name": "unstable-unsafe-proto",
+          "short": null,
+          "long": "unstable-unsafe-proto",
+          "required": false,
+          "help": "Enable unsafe __proto__ support. This is a security risk.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-unsafe-proto"
+        },
+        {
+          "name": "unstable-webgpu",
+          "short": null,
+          "long": "unstable-webgpu",
+          "required": false,
+          "help": "Enable unstable WebGPU APIs",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-webgpu"
+        },
+        {
+          "name": "unstable-worker-options",
+          "short": null,
+          "long": "unstable-worker-options",
+          "required": false,
+          "help": "Enable unstable Web Worker APIs",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-worker-options"
+        },
+        {
+          "name": "prod",
+          "short": null,
+          "long": "prod",
+          "required": false,
+          "help": "Only install production dependencies (excludes devDependencies)",
+          "help_heading": null,
+          "usage": "--prod"
+        },
+        {
+          "name": "skip-types",
+          "short": null,
+          "long": "skip-types",
+          "required": false,
+          "help": "Exclude @types/* packages from installation.\n\u001b[33mBe careful, as it uses a name-based heuristic and may skip packages that ship runtime code.\u001b[39m",
+          "help_heading": null,
+          "usage": "--skip-types"
+        },
+        {
+          "name": "unstable",
+          "short": null,
+          "long": "unstable",
+          "required": false,
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
+          "help_heading": "Unstable options",
+          "usage": "--unstable"
+        }
+      ],
+      "subcommands": [],
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno ci\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
     },
     {
       "name": "json_reference",
@@ -5543,6 +5956,15 @@
           "help": "Install only updating the lockfile",
           "help_heading": null,
           "usage": "--lockfile-only"
+        },
+        {
+          "name": "package-json",
+          "short": null,
+          "long": "package-json",
+          "required": false,
+          "help": "Force using package.json for dependency management instead of deno.json",
+          "help_heading": null,
+          "usage": "--package-json"
         }
       ],
       "subcommands": [],
@@ -6075,6 +6497,176 @@
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno publish\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
     },
     {
+      "name": "pack",
+      "about": "Create an npm-compatible tarball from a Deno project",
+      "args": [
+        {
+          "name": "unstable-bare-node-builtins",
+          "short": null,
+          "long": "unstable-bare-node-builtins",
+          "required": false,
+          "help": "Enable unstable bare node builtins feature",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
+        },
+        {
+          "name": "unstable-tsgo",
+          "short": null,
+          "long": "unstable-tsgo",
+          "required": false,
+          "help": "Enable unstable TypeScript Go integration",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-tsgo"
+        },
+        {
+          "name": "output",
+          "short": "o",
+          "long": "output",
+          "required": false,
+          "help": "Output file path (defaults to <name>-<version>.tgz)",
+          "help_heading": null,
+          "usage": "--output <FILE>"
+        },
+        {
+          "name": "config",
+          "short": "c",
+          "long": "config",
+          "required": false,
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help_heading": null,
+          "usage": "--config <FILE>"
+        },
+        {
+          "name": "no-config",
+          "short": null,
+          "long": "no-config",
+          "required": false,
+          "help": "Disable automatic loading of the configuration file",
+          "help_heading": null,
+          "usage": "--no-config"
+        },
+        {
+          "name": "dry-run",
+          "short": null,
+          "long": "dry-run",
+          "required": false,
+          "help": "Show what would be packed without creating the tarball",
+          "help_heading": null,
+          "usage": "--dry-run"
+        },
+        {
+          "name": "allow-slow-types",
+          "short": null,
+          "long": "allow-slow-types",
+          "required": false,
+          "help": "Skip fast-check type extraction; .d.ts files are omitted from the output",
+          "help_heading": null,
+          "usage": "--allow-slow-types"
+        },
+        {
+          "name": "allow-dirty",
+          "short": null,
+          "long": "allow-dirty",
+          "required": false,
+          "help": "Allow packing if the repository has uncommitted changes",
+          "help_heading": null,
+          "usage": "--allow-dirty"
+        },
+        {
+          "name": "set-version",
+          "short": null,
+          "long": "set-version",
+          "required": false,
+          "help": "Override the version in the tarball",
+          "help_heading": null,
+          "usage": "--set-version <VERSION>"
+        },
+        {
+          "name": "no-source-maps",
+          "short": null,
+          "long": "no-source-maps",
+          "required": false,
+          "help": "Don't include source maps in the output",
+          "help_heading": null,
+          "usage": "--no-source-maps"
+        },
+        {
+          "name": "files",
+          "short": null,
+          "long": null,
+          "required": false,
+          "help": "List of file patterns to include",
+          "help_heading": null,
+          "usage": "[files]..."
+        },
+        {
+          "name": "ignore",
+          "short": null,
+          "long": "ignore",
+          "required": false,
+          "help": "Ignore files matching these patterns",
+          "help_heading": null,
+          "usage": "--ignore=<ignore>..."
+        },
+        {
+          "name": "unstable",
+          "short": null,
+          "long": "unstable",
+          "required": false,
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
+          "help_heading": "Unstable options",
+          "usage": "--unstable"
+        }
+      ],
+      "subcommands": [],
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno pack\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[files]...\u001b[0m"
+    },
+    {
       "name": "repl",
       "about": "Starts a read-eval-print-loop, which lets you interactively build up program state in the global context.\nIt is especially useful for quick prototyping and checking snippets of code.\n\nTypeScript is supported, however it is not type-checked, only transpiled.",
       "args": [
@@ -6182,7 +6774,7 @@
           "short": null,
           "long": "unstable-raw-imports",
           "required": false,
-          "help": "Enable unstable 'bytes' and 'text' imports.",
+          "help": "Enable unstable 'bytes' imports.",
           "help_heading": "Unstable options",
           "usage": "--unstable-raw-imports"
         },
@@ -6284,6 +6876,15 @@
           "help": "Sets the node modules management mode for npm packages",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
         },
         {
           "name": "vendor",
@@ -6595,7 +7196,7 @@
           "short": null,
           "long": "unstable-raw-imports",
           "required": false,
-          "help": "Enable unstable 'bytes' and 'text' imports.",
+          "help": "Enable unstable 'bytes' imports.",
           "help_heading": "Unstable options",
           "usage": "--unstable-raw-imports"
         },
@@ -6717,6 +7318,24 @@
           "usage": "--eval"
         },
         {
+          "name": "no-prefix",
+          "short": null,
+          "long": "no-prefix",
+          "required": false,
+          "help": "Disable prefixing the output of concurrently-executing tasks with the task name",
+          "help_heading": null,
+          "usage": "--no-prefix"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
+        },
+        {
           "name": "node-modules-dir",
           "short": null,
           "long": "node-modules-dir",
@@ -6724,6 +7343,15 @@
           "help": "Sets the node modules management mode for npm packages",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
         },
         {
           "name": "tunnel",
@@ -6855,7 +7483,7 @@
           "short": null,
           "long": "unstable-raw-imports",
           "required": false,
-          "help": "Enable unstable 'bytes' and 'text' imports.",
+          "help": "Enable unstable 'bytes' imports.",
           "help_heading": "Unstable options",
           "usage": "--unstable-raw-imports"
         },
@@ -6948,6 +7576,15 @@
           "help": "Sets the node modules management mode for npm packages",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
         },
         {
           "name": "vendor",
@@ -7166,6 +7803,24 @@
           "usage": "--trace-leaks"
         },
         {
+          "name": "sanitize-ops",
+          "short": null,
+          "long": "sanitize-ops",
+          "required": false,
+          "help": "Enable the ops sanitizer, which ensures that all async ops started in a test are completed before the test ends",
+          "help_heading": "Testing options",
+          "usage": "--sanitize-ops"
+        },
+        {
+          "name": "sanitize-resources",
+          "short": null,
+          "long": "sanitize-resources",
+          "required": false,
+          "help": "Enable the resources sanitizer, which ensures that all resources opened in a test are closed before the test ends",
+          "help_heading": "Testing options",
+          "usage": "--sanitize-resources"
+        },
+        {
           "name": "doc",
           "short": null,
           "long": "doc",
@@ -7350,6 +8005,266 @@
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno test\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[files]...\u001b[0m \u001b[32m[--\u001b[0m \u001b[32m[SCRIPT_ARG]...\u001b[0m\u001b[32m]\u001b[0m"
     },
     {
+      "name": "transpile",
+      "about": "Transpile TypeScript/JSX/TSX files to JavaScript.\n\n  \u001b[38;5;245mdeno transpile main.ts\u001b[39m\n\nOutput to a specific file:\n  \u001b[38;5;245mdeno transpile main.ts -o main.js\u001b[39m\n\nOutput to a directory:\n  \u001b[38;5;245mdeno transpile src/*.ts --outdir dist\u001b[39m\n\nWith source maps:\n  \u001b[38;5;245mdeno transpile main.ts --source-map separate\u001b[39m\n\nGenerate declaration files:\n  \u001b[38;5;245mdeno transpile main.ts -o out.js --declaration\u001b[39m\n\nNote: --declaration always writes .d.ts files to disk (next to the source or in --outdir).",
+      "args": [
+        {
+          "name": "unstable-bare-node-builtins",
+          "short": null,
+          "long": "unstable-bare-node-builtins",
+          "required": false,
+          "help": "Enable unstable bare node builtins feature",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bare-node-builtins"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
+        },
+        {
+          "name": "unstable-tsgo",
+          "short": null,
+          "long": "unstable-tsgo",
+          "required": false,
+          "help": "Enable unstable TypeScript Go integration",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-tsgo"
+        },
+        {
+          "name": "import-map",
+          "short": null,
+          "long": "import-map",
+          "required": false,
+          "help": "Load import map file from local file or remote URL\n  \u001b[38;5;245mDocs: https://docs.deno.com/runtime/manual/basics/import_maps\u001b[39m",
+          "help_heading": "Dependency management options",
+          "usage": "--import-map <FILE>"
+        },
+        {
+          "name": "no-remote",
+          "short": null,
+          "long": "no-remote",
+          "required": false,
+          "help": "Do not resolve remote modules",
+          "help_heading": "Dependency management options",
+          "usage": "--no-remote"
+        },
+        {
+          "name": "no-npm",
+          "short": null,
+          "long": "no-npm",
+          "required": false,
+          "help": "Do not resolve npm modules",
+          "help_heading": "Dependency management options",
+          "usage": "--no-npm"
+        },
+        {
+          "name": "node-modules-dir",
+          "short": null,
+          "long": "node-modules-dir",
+          "required": false,
+          "help": "Sets the node modules management mode for npm packages",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
+        },
+        {
+          "name": "vendor",
+          "short": null,
+          "long": "vendor",
+          "required": false,
+          "help": "Toggles local vendor folder usage for remote modules and a node_modules folder for npm packages",
+          "help_heading": "Dependency management options",
+          "usage": "--vendor[=<vendor>]"
+        },
+        {
+          "name": "conditions",
+          "short": null,
+          "long": "conditions",
+          "required": false,
+          "help": "Use this argument to specify custom conditions for npm package exports. You can also use DENO_CONDITIONS env var.\n\nDocs: https://docs.deno.com/go/conditional-exports",
+          "help_heading": null,
+          "usage": "--conditions <conditions>"
+        },
+        {
+          "name": "config",
+          "short": "c",
+          "long": "config",
+          "required": false,
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help_heading": null,
+          "usage": "--config <FILE>"
+        },
+        {
+          "name": "no-config",
+          "short": null,
+          "long": "no-config",
+          "required": false,
+          "help": "Disable automatic loading of the configuration file",
+          "help_heading": null,
+          "usage": "--no-config"
+        },
+        {
+          "name": "reload",
+          "short": "r",
+          "long": "reload",
+          "required": false,
+          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help_heading": "Dependency management options",
+          "usage": "--reload[=<CACHE_BLOCKLIST>...]"
+        },
+        {
+          "name": "lock",
+          "short": null,
+          "long": "lock",
+          "required": false,
+          "help": "Check the specified lock file. (If value is not provided, defaults to \"./deno.lock\")",
+          "help_heading": "Dependency management options",
+          "usage": "--lock [<FILE>]"
+        },
+        {
+          "name": "no-lock",
+          "short": null,
+          "long": "no-lock",
+          "required": false,
+          "help": "Disable auto discovery of the lock file",
+          "help_heading": "Dependency management options",
+          "usage": "--no-lock"
+        },
+        {
+          "name": "frozen",
+          "short": null,
+          "long": "frozen",
+          "required": false,
+          "help": "Error out if lockfile is out of date",
+          "help_heading": "Dependency management options",
+          "usage": "--frozen[=<BOOLEAN>]"
+        },
+        {
+          "name": "cert",
+          "short": null,
+          "long": "cert",
+          "required": false,
+          "help": "Load certificate authority from PEM encoded file",
+          "help_heading": null,
+          "usage": "--cert <FILE>"
+        },
+        {
+          "name": "minimum-dependency-age",
+          "short": null,
+          "long": "minimum-dependency-age",
+          "required": false,
+          "help": "(Unstable) The age in minutes, ISO-8601 duration or RFC3339 absolute timestamp (e.g. '120' for two hours, 'P2D' for two days, '2025-09-16' for cutoff date, '2025-09-16T12:00:00+00:00' for cutoff time, '0' to disable)",
+          "help_heading": null,
+          "usage": "--minimum-dependency-age <minimum-dependency-age>"
+        },
+        {
+          "name": "file",
+          "short": null,
+          "long": null,
+          "required": false,
+          "help": null,
+          "help_heading": null,
+          "usage": "[file]..."
+        },
+        {
+          "name": "output",
+          "short": "o",
+          "long": "output",
+          "required": false,
+          "help": "Output file path (for single file transpilation)",
+          "help_heading": null,
+          "usage": "--output <output>"
+        },
+        {
+          "name": "outdir",
+          "short": null,
+          "long": "outdir",
+          "required": false,
+          "help": "Output directory for transpiled files",
+          "help_heading": null,
+          "usage": "--outdir <outdir>"
+        },
+        {
+          "name": "source-map",
+          "short": null,
+          "long": "source-map",
+          "required": false,
+          "help": "Source map mode: none, inline, or separate",
+          "help_heading": null,
+          "usage": "--source-map <source-map>"
+        },
+        {
+          "name": "declaration",
+          "short": null,
+          "long": "declaration",
+          "required": false,
+          "help": "Generate .d.ts declaration files (requires type-checking via tsc)",
+          "help_heading": null,
+          "usage": "--declaration"
+        },
+        {
+          "name": "unstable",
+          "short": null,
+          "long": "unstable",
+          "required": false,
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
+          "help_heading": "Unstable options",
+          "usage": "--unstable"
+        }
+      ],
+      "subcommands": [],
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno transpile\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[file]...\u001b[0m"
+    },
+    {
       "name": "types",
       "about": "Print runtime TypeScript declarations.\n\n  \u001b[38;5;245mdeno types > lib.deno.d.ts\u001b[39m\n\nThe declaration file could be saved and used for typing information.",
       "args": [],
@@ -7504,6 +8419,15 @@
           "usage": "--checksum <checksum>"
         },
         {
+          "name": "no-delta",
+          "short": null,
+          "long": "no-delta",
+          "required": false,
+          "help": "Disable delta updates and always download the full archive",
+          "help_heading": "Upgrade options",
+          "usage": "--no-delta"
+        },
+        {
           "name": "cert",
           "short": null,
           "long": "cert",
@@ -7515,6 +8439,86 @@
       ],
       "subcommands": [],
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno upgrade\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[VERSION]...\u001b[0m"
+    },
+    {
+      "name": "bump-version",
+      "about": "Update version in the configuration file.\n  \u001b[38;5;245mdeno bump-version patch\u001b[39m       \u001b[38;5;245m# 1.4.6 -> 1.4.7\u001b[39m\n  \u001b[38;5;245mdeno bump-version minor\u001b[39m       \u001b[38;5;245m# 1.4.6 -> 1.5.0\u001b[39m\n  \u001b[38;5;245mdeno bump-version major\u001b[39m       \u001b[38;5;245m# 1.4.6 -> 2.0.0\u001b[39m\n  \u001b[38;5;245mdeno bump-version prepatch\u001b[39m    \u001b[38;5;245m# 1.4.6 -> 1.4.7-0\u001b[39m\n  \u001b[38;5;245mdeno bump-version preminor\u001b[39m    \u001b[38;5;245m# 1.4.6 -> 1.5.0-0\u001b[39m\n  \u001b[38;5;245mdeno bump-version premajor\u001b[39m    \u001b[38;5;245m# 1.4.6 -> 2.0.0-0\u001b[39m\n  \u001b[38;5;245mdeno bump-version prerelease\u001b[39m  \u001b[38;5;245m# 1.4.7-0 -> 1.4.7-1\u001b[39m\n\nWhen invoked at a workspace root, the same increment is applied to every\nmember package and jsr: references in the root import map are updated.\nWithout an increment, per-package bumps are derived from conventional\ncommit messages between the latest tag and the current branch and a\nrelease note is prepended to \u001b[38;5;245mReleases.md\u001b[39m.",
+      "args": [
+        {
+          "name": "increment",
+          "short": null,
+          "long": null,
+          "required": false,
+          "help": "Version increment type",
+          "help_heading": null,
+          "usage": "[increment]"
+        },
+        {
+          "name": "workspace",
+          "short": "w",
+          "long": "workspace",
+          "required": false,
+          "help": "Bump every package in the workspace (auto-detected at the workspace root)",
+          "help_heading": null,
+          "usage": "--workspace"
+        },
+        {
+          "name": "no-workspace",
+          "short": null,
+          "long": "no-workspace",
+          "required": false,
+          "help": "Disable workspace mode and only bump the deno.json/package.json in the current directory",
+          "help_heading": null,
+          "usage": "--no-workspace"
+        },
+        {
+          "name": "dry-run",
+          "short": null,
+          "long": "dry-run",
+          "required": false,
+          "help": "Print the planned changes without writing any files",
+          "help_heading": null,
+          "usage": "--dry-run"
+        },
+        {
+          "name": "start",
+          "short": null,
+          "long": "start",
+          "required": false,
+          "help": "[conventional-commits mode] Git ref to start from. Default: latest tag (git describe --tags --abbrev=0)",
+          "help_heading": null,
+          "usage": "--start <REF>"
+        },
+        {
+          "name": "base",
+          "short": null,
+          "long": "base",
+          "required": false,
+          "help": "[conventional-commits mode] Git ref to compare against. Default: current branch",
+          "help_heading": null,
+          "usage": "--base <REF>"
+        },
+        {
+          "name": "import-map",
+          "short": null,
+          "long": "import-map",
+          "required": false,
+          "help": "Path to the import map to rewrite jsr: version constraints in. Defaults to the root deno.json (or its importMap target)",
+          "help_heading": null,
+          "usage": "--import-map <PATH>"
+        },
+        {
+          "name": "release-notes",
+          "short": null,
+          "long": "release-notes",
+          "required": false,
+          "help": "[conventional-commits mode] Path to the release notes file to prepend. Default: Releases.md",
+          "help_heading": null,
+          "usage": "--release-notes <PATH>"
+        }
+      ],
+      "subcommands": [],
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno bump-version\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[increment]\u001b[0m"
     },
     {
       "name": "vendor",
@@ -7595,6 +8599,50 @@
       ],
       "subcommands": [],
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno vendor\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+    },
+    {
+      "name": "why",
+      "about": "Show why a package is installed, displaying the dependency chain from your project's direct dependencies to the specified package.\n  \u001b[38;5;245mdeno why express\u001b[39m\n\nShow why a specific version is installed\n  \u001b[38;5;245mdeno why express@4.18.2\u001b[39m",
+      "args": [
+        {
+          "name": "lock",
+          "short": null,
+          "long": "lock",
+          "required": false,
+          "help": "Check the specified lock file. (If value is not provided, defaults to \"./deno.lock\")",
+          "help_heading": "Dependency management options",
+          "usage": "--lock [<FILE>]"
+        },
+        {
+          "name": "no-lock",
+          "short": null,
+          "long": "no-lock",
+          "required": false,
+          "help": "Disable auto discovery of the lock file",
+          "help_heading": "Dependency management options",
+          "usage": "--no-lock"
+        },
+        {
+          "name": "frozen",
+          "short": null,
+          "long": "frozen",
+          "required": false,
+          "help": "Error out if lockfile is out of date",
+          "help_heading": "Dependency management options",
+          "usage": "--frozen[=<BOOLEAN>]"
+        },
+        {
+          "name": "package",
+          "short": null,
+          "long": null,
+          "required": true,
+          "help": "The package name (and optional version) to explain",
+          "help_heading": null,
+          "usage": "<package>"
+        }
+      ],
+      "subcommands": [],
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno why\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m<package>\u001b[0m"
     },
     {
       "name": "x",
@@ -7704,7 +8752,7 @@
           "short": null,
           "long": "unstable-raw-imports",
           "required": false,
-          "help": "Enable unstable 'bytes' and 'text' imports.",
+          "help": "Enable unstable 'bytes' imports.",
           "help_heading": "Unstable options",
           "usage": "--unstable-raw-imports"
         },
@@ -7797,6 +8845,15 @@
           "help": "Sets the node modules management mode for npm packages",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
         },
         {
           "name": "vendor",
@@ -7995,6 +9052,15 @@
           "help": "Assume confirmation for all prompts",
           "help_heading": null,
           "usage": "--yes"
+        },
+        {
+          "name": "package",
+          "short": "p",
+          "long": "package",
+          "required": false,
+          "help": "Package to install (use when the binary name differs from the package name)",
+          "help_heading": null,
+          "usage": "--package <package>"
         },
         {
           "name": "check",
@@ -8196,6 +9262,13 @@
           "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help install\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
         },
         {
+          "name": "ci",
+          "about": null,
+          "args": [],
+          "subcommands": [],
+          "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help ci\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+        },
+        {
           "name": "json_reference",
           "about": null,
           "args": [],
@@ -8252,6 +9325,13 @@
           "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help publish\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
         },
         {
+          "name": "pack",
+          "about": null,
+          "args": [],
+          "subcommands": [],
+          "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help pack\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+        },
+        {
           "name": "repl",
           "about": null,
           "args": [],
@@ -8271,6 +9351,13 @@
           "args": [],
           "subcommands": [],
           "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help test\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+        },
+        {
+          "name": "transpile",
+          "about": null,
+          "args": [],
+          "subcommands": [],
+          "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help transpile\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
         },
         {
           "name": "types",
@@ -8294,11 +9381,25 @@
           "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help upgrade\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
         },
         {
+          "name": "bump-version",
+          "about": null,
+          "args": [],
+          "subcommands": [],
+          "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help bump-version\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+        },
+        {
           "name": "vendor",
           "about": null,
           "args": [],
           "subcommands": [],
           "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help vendor\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+        },
+        {
+          "name": "why",
+          "about": null,
+          "args": [],
+          "subcommands": [],
+          "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help why\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
         },
         {
           "name": "x",
@@ -8379,6 +9480,11 @@
       "example": null
     },
     {
+      "name": "DENO_PATCH_REACT_CVE",
+      "description": "Enable load-time source patches mitigating known React Server\nComponents CVEs (CVE-2025-55182, CVE-2025-55184).",
+      "example": null
+    },
+    {
       "name": "DENO_SERVE_ADDRESS",
       "description": "Override address for Deno.serve",
       "example": "(\"tcp:0.0.0.0:8080\", \"unix:/tmp/deno.sock\", or \"vsock:1234:5678\")"
@@ -8427,6 +9533,11 @@
       "name": "NO_PROXY",
       "description": "Comma-separated list of hosts which do not use a proxy.",
       "example": "(module downloads, fetch)"
+    },
+    {
+      "name": "NODE_USE_ENV_PROXY",
+      "description": "If set to 1, node:http and node:https honor HTTP_PROXY,\nHTTPS_PROXY, and NO_PROXY from the environment.",
+      "example": null
     },
     {
       "name": "NPM_CONFIG_REGISTRY",
