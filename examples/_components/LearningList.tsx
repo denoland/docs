@@ -19,13 +19,20 @@ export function LearningList(
     title: string;
     items: SidebarItem[];
     descriptions?: Record<string, string>;
+    isReference?: boolean;
   },
 ) {
   const anchor = props.title.toLowerCase().replace(/\s+/g, "-");
   return (
     <section className="mb-10">
       <h2 id={anchor} className="text-lg md:text-xl font-semibold mb-4 mt-0">
-        {props.title}&nbsp;
+        {props.title}
+        {props.isReference && (
+          <span className="ml-2 align-middle text-xs font-medium uppercase tracking-wide text-foreground-secondary border border-foreground-tertiary rounded px-1.5 py-0.5">
+            Reference
+          </span>
+        )}
+        &nbsp;
         <a class="header-anchor" href={`#${anchor}`}>
           <span class="sr-only">Jump to heading</span>
           <span aria-hidden="true" class="anchor-end">#</span>

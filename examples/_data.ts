@@ -2067,5 +2067,32 @@ export const featuredItems = [
   },
 ];
 
+// A short, ordered path for people new to Deno, rendered as a numbered strip
+// at the top of the landing page.
+export const startHere = [
+  { title: "Run a script", href: "/examples/run_script_tutorial/" },
+  { title: "Hello World", href: "/examples/hello_world/" },
+  {
+    title: "Built in TypeScript support",
+    href: "/examples/typescript_support/",
+  },
+  {
+    title: "Initialize a project",
+    href: "/examples/initialize_project_tutorial/",
+  },
+  { title: "Simple API server", href: "/examples/simple_api_tutorial/" },
+  { title: "Writing tests", href: "/examples/writing_tests/" },
+];
+
+// Categories that are copy-paste reference snippets rather than
+// walkthrough-style guides. The landing page tags these as "Reference" so
+// newcomers can tell them apart from tutorial-grade content.
+export const cookbookCategories = [
+  "File system",
+  "System",
+  "Web standard APIs",
+  "Encoding",
+];
+
 export const sectionTitle = "Examples";
 export const sectionHref = "/examples/";

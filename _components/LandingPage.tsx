@@ -5,7 +5,12 @@ import {
 } from "../examples/_components/LearningList.tsx";
 import { TutorialIcon } from "../examples/_components/TutorialIcon.tsx";
 import { VideoIcon } from "../examples/_components/VideoIcon.tsx";
-import { featuredItems, sidebar } from "../examples/_data.ts";
+import {
+  cookbookCategories,
+  featuredItems,
+  sidebar,
+  startHere,
+} from "../examples/_data.ts";
 
 function FeaturedStar() {
   return (
@@ -38,6 +43,7 @@ export default function LandingPage(
           title={item.title}
           items={item.items}
           descriptions={descriptions}
+          isReference={cookbookCategories.includes(item.title)}
         />
       );
     },
@@ -97,6 +103,32 @@ export default function LandingPage(
             <button type="submit" className="btn">Request guide</button>
           </form>
         </details>
+
+        <section className="mb-10">
+          <h2 className="text-lg md:text-xl font-semibold mb-4">
+            New to Deno? Start here
+          </h2>
+          <ol className="flex flex-wrap gap-2 !pl-0 !list-none !mt-0">
+            {startHere.map((item, i) => (
+              <li key={item.href} className="!mt-0">
+                <a
+                  href={item.href}
+                  className="group inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-foreground-tertiary bg-background-secondary !no-underline hover:border-primary transition-colors duration-150"
+                >
+                  <span
+                    className="flex items-center justify-center w-5 h-5 rounded-full bg-primary text-white text-xs font-semibold shrink-0"
+                    aria-hidden="true"
+                  >
+                    {i + 1}
+                  </span>
+                  <span className="font-medium !text-foreground-primary group-hover:underline underline-offset-4 decoration-primary">
+                    {item.title}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
 
         <section className="mb-10">
           <h2 className="text-lg md:text-xl font-semibold mb-4">Featured</h2>
