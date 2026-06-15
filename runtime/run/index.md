@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Run code"
 description: "Run JavaScript and TypeScript with Deno: the secure-by-default permission model, running files, URLs and stdin, watch mode, and project tasks."
 ---

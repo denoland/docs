@@ -4,12 +4,10 @@ title: "Lint Plugins"
 description: "Guide to creating and using custom lint plugins in Deno. Learn how to write custom lint rules, use selectors for AST matching, implement fixes, and test your plugins using Deno's lint plugin API."
 ---
 
-:::caution
+:::note
 
-This is an experimental feature and requires Deno `2.2.0` or newer.
-
-The plugin API is currently marked as "unstable" since it is subject to changes
-in the future.
+The lint plugin API is available in Deno `2.2.0` and later, with no unstable
+flag required. The API is still evolving and may change in a future release.
 
 :::
 

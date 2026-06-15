@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "Test coverage"
 description: "Collect coverage data with deno test --coverage and turn it into terminal summaries, HTML reports, and lcov files for CI with deno coverage."
 oldUrl:

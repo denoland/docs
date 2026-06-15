@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-08
+last_modified: 2026-06-15
 title: "Migrate from Node.js"
 description: "How to move a Node.js project to Deno: use Deno as a drop-in package manager, run your existing project and package.json scripts, understand how CommonJS and ES modules are resolved, and map your Node commands to Deno."
 oldUrl:
@@ -31,18 +31,12 @@ cd my-node-app
 deno install
 ```
 
-You can keep running the app with Node from here, using Deno only as a faster
-package manager, or manage dependencies with Deno's built-in commands:
-
-```sh
-deno add    npm:express   # add a dependency
-deno remove express       # remove one
-deno outdated             # see what has newer versions
-```
-
-Deno understands dependencies declared in both `package.json` and `deno.json`,
-and individual npm packages can also be imported inline with `npm:` specifiers.
-See [Dependency management](/runtime/packages/) for the full picture.
+From here you can keep running the app with Node and use Deno only as a faster,
+more secure package manager. Deno reads dependencies from both `package.json`
+and `deno.json`. For the full npm, yarn, and pnpm command mapping, what Deno
+does differently (lifecycle scripts, auditing, lockfiles), and the caveats to
+know, see
+[Switch your package manager to Deno](/runtime/migrate/switch_package_manager/).
 
 ## Run your project with Deno
 

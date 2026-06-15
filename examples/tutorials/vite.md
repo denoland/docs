@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-13
 title: "Use Vite with Deno"
 description: "Step-by-step tutorial on building a front-end app with Vite and Deno. Learn how to scaffold a project, install dependencies, run the dev server with hot module replacement, and build for production."
 url: /examples/vite_tutorial/

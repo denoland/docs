@@ -156,6 +156,40 @@ it:
 deno test --no-check
 ```
 
+### Faster type checking with the native compiler (tsgo)
+
+TypeScript's [native compiler](https://devblogs.microsoft.com/typescript/),
+written in Go and often around 10 times faster than the JavaScript `tsc`, is
+integrated into Deno behind an unstable flag. Unlike running the standalone
+`tsgo` binary, Deno's integration understands Deno's module resolution and
+types, so `jsr:` and `npm:` specifiers and the `Deno` global all resolve as
+usual.
+
+Enable it for a single command with the `DENO_UNSTABLE_TSGO` environment
+variable or the `--unstable-tsgo` flag:
+
+```sh
+DENO_UNSTABLE_TSGO=1 deno check main.ts
+deno check --unstable-tsgo main.ts
+```
+
+Or turn it on for a whole project in `deno.json`:
+
+```json title="deno.json"
+{
+  "unstable": ["tsgo"]
+}
+```
+
+:::caution
+
+This is an unstable, preview feature. The native compiler is not yet
+feature-complete, so some programs that type-check with the default compiler may
+report different results. Don't rely on it for CI or release builds yet, and
+please [report issues](https://github.com/denoland/deno/issues).
+
+:::
+
 ## Configuring TypeScript compiler options
 
 Deno's defaults are strict and modern, so most projects need no configuration at

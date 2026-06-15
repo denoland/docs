@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-01-27
 title: "Stream output to a local file"
 description: "Learn how to stream output to a local file in a sandbox."
 url: /examples/sandbox_stream_output/

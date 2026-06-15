@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Reference"
 description: "Look it up: the full deno CLI, configuration, the standard library, and runtime APIs."
 ---

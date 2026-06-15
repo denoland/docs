@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Run npm lifecycle scripts"
 description: "Allow npm postinstall and other lifecycle scripts in Deno with deno approve-scripts, and persist approvals with the allowScripts field in deno.json."
 url: /examples/npm_lifecycle_scripts_tutorial/
