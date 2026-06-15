@@ -1023,6 +1023,12 @@ export const items = [
     category: "AI",
   },
   {
+    title: "Stream a Claude response to the browser",
+    href: "/examples/anthropic_sse/",
+    type: "example",
+    category: "AI",
+  },
+  {
     title: "Get structured JSON output from Claude",
     href: "/examples/anthropic_structured_output/",
     type: "example",
