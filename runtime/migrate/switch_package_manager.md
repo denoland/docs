@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-15
 title: "Switch your package manager to Deno"
 description: "Use Deno as a drop-in replacement for npm, yarn, or pnpm while still running your app with Node: a command mapping, secure installs, and the differences to know."
 ---
