@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-08
+last_modified: 2026-06-15
 title: "Migrate from Node.js"
 description: "How to move a Node.js project to Deno: use Deno as a drop-in package manager, run your existing project and package.json scripts, understand how CommonJS and ES modules are resolved, and map your Node commands to Deno."
 oldUrl:
