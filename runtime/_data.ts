@@ -18,10 +18,6 @@ export const sidebar = [
         title: "Setup your environment",
         href: "/runtime/getting_started/setup_your_environment/",
       },
-      {
-        title: "Command line interface",
-        href: "/runtime/getting_started/command_line_interface/",
-      },
     ],
   },
   {
@@ -30,6 +26,13 @@ export const sidebar = [
       {
         title: "Running code",
         href: "/runtime/run/",
+        disclosure: true,
+        items: [
+          {
+            title: "Watch mode and HMR",
+            href: "/runtime/run/watch_mode/",
+          },
+        ],
       },
       {
         title: "Dependency management",

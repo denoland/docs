@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-12
+last_modified: 2026-06-15
 title: "deno init"
 oldUrl: /runtime/manual/tools/init/
 command: init
@@ -136,8 +136,7 @@ this:
 ```
 
 Now, you can start your web server, which
-[watches for changes](/runtime/getting_started/command_line_interface/#watch-mode),
-by running `deno task dev`.
+[watches for changes](/runtime/run/watch_mode/), by running `deno task dev`.
 
 ```sh
 deno task dev
@@ -176,8 +175,7 @@ this:
 ```
 
 Now, you can run the project, which
-[watches for changes](/runtime/getting_started/command_line_interface/#watch-mode),
-by running `deno task dev`.
+[watches for changes](/runtime/run/watch_mode/), by running `deno task dev`.
 
 ```sh
 deno task dev
