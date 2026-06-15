@@ -21,9 +21,10 @@ Node.js compatibility. Pick the row that matches what you're building:
 ## Start without a framework
 
 Deno ships an HTTP server in the runtime, so for APIs, webhooks, and small sites
-you may not need a framework at all. `Deno.serve` takes a handler that receives
-a standard [`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request)
-and returns a
+you may not need a framework at all. [`Deno.serve`](/api/deno/~/Deno.serve)
+takes a handler that receives a standard
+[`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) and
+returns a
 [`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Response), the
 same objects you already know from the browser. Here is a server that returns an
 HTML page, a JSON API route, and a static file:
