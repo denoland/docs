@@ -45,6 +45,10 @@ export const sidebar = [
             href: "/runtime/packages/supply_chain/",
           },
           {
+            title: "Peer dependencies",
+            href: "/runtime/packages/peer_dependencies/",
+          },
+          {
             title: "Private repositories",
             href: "/runtime/packages/private_repositories/",
           },
