@@ -1052,6 +1052,36 @@ export const items = [
     type: "example",
     category: "AI",
   },
+  {
+    title: "Stream a chat response from OpenAI",
+    href: "/examples/openai_streaming/",
+    type: "example",
+    category: "AI",
+  },
+  {
+    title: "Build an agent with OpenAI function calling",
+    href: "/examples/openai_tool_use/",
+    type: "example",
+    category: "AI",
+  },
+  {
+    title: "Stream an OpenAI response to the browser",
+    href: "/examples/openai_sse/",
+    type: "example",
+    category: "AI",
+  },
+  {
+    title: "Get structured JSON output from OpenAI",
+    href: "/examples/openai_structured_output/",
+    type: "example",
+    category: "AI",
+  },
+  {
+    title: "RAG: ground an OpenAI answer in your documents",
+    href: "/examples/openai_rag/",
+    type: "example",
+    category: "AI",
+  },
 
   // Deploying Deno projects
   {
