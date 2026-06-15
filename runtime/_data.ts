@@ -19,6 +19,10 @@ export const sidebar = [
         href: "/runtime/getting_started/setup_your_environment/",
       },
       {
+        title: "Deno & VS Code",
+        href: "/runtime/reference/vscode/",
+      },
+      {
         title: "Command line interface",
         href: "/runtime/getting_started/command_line_interface/",
       },
@@ -53,6 +57,10 @@ export const sidebar = [
       {
         title: "Web development",
         href: "/runtime/fundamentals/web_dev/",
+      },
+      {
+        title: "JSX and React",
+        href: "/runtime/reference/jsx/",
       },
       {
         title: "HTTP Server",
@@ -112,9 +120,22 @@ export const sidebar = [
         title: "Building CLI apps",
         href: "/runtime/cli_apps/",
       },
+    ],
+  },
+  {
+    title: "Deploying",
+    items: [
       {
-        title: "Deploying your app",
+        title: "Overview",
         href: "/runtime/deploy/",
+      },
+      {
+        title: "Docker",
+        href: "/runtime/reference/docker/",
+      },
+      {
+        title: "Continuous integration",
+        href: "/runtime/reference/continuous_integration/",
       },
     ],
   },
@@ -152,7 +173,7 @@ export const sidebar = [
     ],
   },
   {
-    title: "Advanced",
+    title: "Runtime APIs",
     items: [
       {
         title: "FFI",
@@ -174,29 +195,18 @@ export const sidebar = [
         title: "Loader hooks",
         href: "/runtime/reference/loader_hooks/",
       },
-      {
-        title: "Lint plugins",
-        href: "/runtime/reference/lint_plugins/",
-      },
+    ],
+  },
+  {
+    title: "Build tooling",
+    items: [
       {
         title: "Bundling",
         href: "/runtime/reference/bundling/",
       },
       {
-        title: "Docker",
-        href: "/runtime/reference/docker/",
-      },
-      {
-        title: "Continuous integration",
-        href: "/runtime/reference/continuous_integration/",
-      },
-      {
-        title: "JSX and React",
-        href: "/runtime/reference/jsx/",
-      },
-      {
-        title: "Deno & VS Code",
-        href: "/runtime/reference/vscode/",
+        title: "Lint plugins",
+        href: "/runtime/reference/lint_plugins/",
       },
     ],
   },
