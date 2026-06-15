@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-02
+last_modified: 2026-06-15
 title: "deno compile"
 oldUrl:
   - /runtime/manual/tools/compile/
@@ -21,8 +21,8 @@ permission flags.
 deno compile --allow-read --allow-net jsr:@std/http/file-server
 ```
 
-[Script arguments](/runtime/getting_started/command_line_interface/#passing-script-arguments)
-can be partially embedded.
+[Script arguments](/runtime/run/#passing-script-arguments) can be partially
+embedded.
 
 ```sh
 deno compile --allow-read --allow-net jsr:@std/http/file-server -p 8080

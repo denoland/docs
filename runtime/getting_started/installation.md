@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-01
+last_modified: 2026-06-15
 title: Installation
 description: "A Guide to installing Deno on different operating systems. Includes instructions for Windows, macOS, and Linux using various package managers, manual installation methods, and Docker containers."
 oldUrl:
@@ -222,9 +222,8 @@ print the directory currently in use.
 To test your installation, run `deno --version`. If this prints the Deno version
 to the console the installation was successful.
 
-Use `deno help` to see help text documenting Deno's flags and usage. Get a
-detailed guide on the CLI
-[here](/runtime/getting_started/command_line_interface/).
+Use `deno help` to see help text documenting Deno's flags and usage. For a guide
+to every subcommand, see the [CLI reference](/runtime/reference/cli/).
 
 ### If you see "command not found"
 

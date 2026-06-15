@@ -1,7 +1,13 @@
 ---
-last_modified: 2026-06-11
+last_modified: 2026-06-15
 title: "Run code"
-description: "Run JavaScript and TypeScript with Deno: the secure-by-default permission model, running files, URLs and stdin, watch mode, and project tasks."
+description: "Run JavaScript and TypeScript with Deno: the secure-by-default permission model, running files, URLs and stdin, script arguments, watch mode, and project tasks."
+oldUrl:
+  - /manual/getting_started/command_line_interface
+  - /runtime/manual/getting_started/command_line_interface/
+  - /runtime/getting_started/command_line_interface/
+  - /runtime/fundamentals/command_line_interface/
+  - /runtime/manual/tools/
 ---
 
 Deno runs JavaScript and TypeScript directly (no build step, no config) behind a
@@ -45,6 +51,45 @@ sandbox entirely. That is handy in trusted environments, but it gives up the
 guarantees. See [Permissions](/runtime/reference/permissions/) for every flag
 and [Security](/runtime/fundamentals/security/) for the model behind them.
 
+## Passing script arguments
+
+Arguments for your own script go **after** the script name; Deno passes them
+through in [`Deno.args`](/api/deno/~/Deno.args):
+
+```ts title="main.ts"
+console.log(Deno.args);
+```
+
+```shell
+$ deno run main.ts arg1 arg2 arg3
+[ "arg1", "arg2", "arg3" ]
+```
+
+For anything beyond a flat list, parse the arguments with
+[`parseArgs` from `jsr:@std/cli`](https://jsr.io/@std/cli/doc/parse-args/~/parseArgs)
+or
+[`parseArgs` from `node:util`](https://nodejs.org/api/util.html#utilparseargsconfig).
+
+### Argument and flag ordering
+
+:::caution
+
+Anything passed after the script name is a script argument, not a Deno runtime
+flag. This is a common source of confusion, so make sure runtime flags appear
+**before** the script name.
+
+:::
+
+This leads to the following pitfall:
+
+```shell
+# Good. We grant net permission to net_client.ts.
+deno run --allow-net net_client.ts
+
+# Bad! --allow-net was passed to Deno.args, throws a net permission error.
+deno run net_client.ts --allow-net
+```
+
 ## Run from a URL or stdin
 
 Deno can run code straight from a URL (handy for one-off tools and installers)
@@ -68,8 +113,8 @@ deno run --watch main.ts
 ```
 
 `deno test`, `deno fmt`, and others accept `--watch` too. For what gets watched,
-excluding paths, and hot module replacement, see the
-[CLI patterns page](/runtime/getting_started/command_line_interface/#watch-mode).
+excluding paths, and hot module replacement, see
+[Watch mode and HMR](/runtime/run/watch_mode/).
 
 ## Run project tasks
 
