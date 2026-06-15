@@ -1821,12 +1821,6 @@ export const items = [
     category: "Network",
   },
   {
-    title: "Sign in with GitHub using Arctic",
-    href: "/examples/oauth_arctic/",
-    type: "example",
-    category: "Network",
-  },
-  {
     title: "Authentication with Auth.js",
     href: "/examples/authjs_github/",
     type: "example",
