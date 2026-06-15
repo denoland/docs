@@ -28,7 +28,7 @@
   "lint-ignore": "/runtime/reference/cli/lint/#ignore-directives",
   "lint": "/runtime/reference/cli/lint/",
   "lsp": "/runtime/reference/cli/lsp/",
-  "peer-deps": "/runtime/fundamentals/node/#using-npm-packages",
+  "peer-deps": "/runtime/packages/peer_dependencies/",
   "permission-broker": "/runtime/fundamentals/security/#permission-broker",
   "permission-sets": "/runtime/fundamentals/configuration/#permissions",
   "permissions": "/runtime/fundamentals/security/",
