@@ -1827,6 +1827,18 @@ export const items = [
     category: "Network",
   },
   {
+    title: "Authentication with Auth.js",
+    href: "/examples/authjs_github/",
+    type: "example",
+    category: "Network",
+  },
+  {
+    title: "Email and password auth with Better Auth",
+    href: "/examples/better_auth/",
+    type: "example",
+    category: "Network",
+  },
+  {
     title: "Protect routes with JWT in Hono",
     href: "/examples/hono_jwt_auth/",
     type: "example",
