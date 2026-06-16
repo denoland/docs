@@ -1,8 +1,17 @@
 ---
-last_modified: 2026-06-10
+last_modified: 2026-06-16
 title: "Error reporting"
 description: "Capture uncaught errors, unhandled rejections, and Rust panics — show a native alert and POST a JSON report to your server."
 ---
+
+:::info Coming in Deno 2.9
+
+`deno desktop` ships in Deno v2.9.0 and is not in a stable release yet. To try
+it now, run `deno upgrade --canary` to install the
+[`canary`](/runtime/reference/cli/upgrade/) build. The command, configuration
+keys, and TypeScript APIs may still change before the feature is stable.
+
+:::
 
 `deno desktop` apps automatically catch:
 

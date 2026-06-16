@@ -1,8 +1,17 @@
 ---
-last_modified: 2026-06-10
+last_modified: 2026-06-16
 title: "Frameworks"
 description: "Run Next.js, Astro, Fresh, Remix, Nuxt, SvelteKit, SolidStart, TanStack Start, and Vite SSR projects as desktop apps with no code changes."
 ---
+
+:::info Coming in Deno 2.9
+
+`deno desktop` ships in Deno v2.9.0 and is not in a stable release yet. To try
+it now, run `deno upgrade --canary` to install the
+[`canary`](/runtime/reference/cli/upgrade/) build. The command, configuration
+keys, and TypeScript APIs may still change before the feature is stable.
+
+:::
 
 Point `deno desktop` at a directory and it auto-detects the framework, picks the
 right entry point, embeds the build output in the binary, and runs the

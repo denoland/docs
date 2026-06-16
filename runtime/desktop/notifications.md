@@ -1,8 +1,17 @@
 ---
-last_modified: 2026-06-10
+last_modified: 2026-06-16
 title: "Notifications"
 description: "Show native OS notifications from deno desktop apps with the standard Web Notifications API — permission flow, options, and events."
 ---
+
+:::info Coming in Deno 2.9
+
+`deno desktop` ships in Deno v2.9.0 and is not in a stable release yet. To try
+it now, run `deno upgrade --canary` to install the
+[`canary`](/runtime/reference/cli/upgrade/) build. The command, configuration
+keys, and TypeScript APIs may still change before the feature is stable.
+
+:::
 
 `deno desktop` implements the standard
 [Web Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notification).

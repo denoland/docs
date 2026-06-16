@@ -1,15 +1,17 @@
 ---
-last_modified: 2026-06-10
+last_modified: 2026-06-16
 title: "deno desktop"
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno desktop"
 description: "Build self-contained desktop applications from a Deno project"
 ---
 
-:::info Experimental
+:::info Coming in Deno 2.9
 
-`deno desktop` is new in Deno 2.8. The command, configuration keys, and
-TypeScript APIs are still evolving and may change before the feature is stable.
+`deno desktop` ships in Deno v2.9.0 and is not in a stable release yet. To try
+it now, run `deno upgrade --canary` to install the
+[`canary`](/runtime/reference/cli/upgrade/) build. The command, configuration
+keys, and TypeScript APIs may still change before the feature is stable.
 
 :::
 

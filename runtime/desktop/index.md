@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-10
+last_modified: 2026-06-16
 title: "Desktop apps"
 description: "Build self-contained desktop applications from a Deno project, with framework auto-detection, hot reload, native windowing, auto-update, and cross-platform distribution."
 ---
@@ -9,11 +9,12 @@ a Next.js app — into a self-contained desktop application. The output is a
 redistributable binary that bundles your code, the Deno runtime, and a web
 rendering engine into one bundle per platform.
 
-:::info Experimental
+:::info Coming in Deno 2.9
 
-`deno desktop` is new in Deno 2.9. The command, configuration keys, and
-TypeScript APIs described in this section may change before the feature is
-considered stable.
+`deno desktop` ships in Deno v2.9.0 and is not in a stable release yet. To try
+it now, run `deno upgrade --canary` to install the
+[`canary`](/runtime/reference/cli/upgrade/) build. The command, configuration
+keys, and TypeScript APIs may still change before the feature is stable.
 
 :::
 
