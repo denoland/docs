@@ -121,7 +121,6 @@ deno fmt --ignore=dist/,build/
 | [Nunjucks][Nunjucks] | `.njk`                                                 |                                                                                        |
 | [Vento][Vento]       | `.vto`                                                 |                                                                                        |
 | YAML                 | `.yml`, `.yaml`                                        |                                                                                        |
-| Sass                 | `.sass`                                                |                                                                                        |
 | SCSS                 | `.scss`                                                |                                                                                        |
 | LESS                 | `.less`                                                |                                                                                        |
 | Jupyter Notebook     | `.ipynb`                                               |                                                                                        |
