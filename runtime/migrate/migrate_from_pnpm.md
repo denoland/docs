@@ -4,16 +4,16 @@ description: "How to move a pnpm project to Deno: install dependencies from your
 last_modified: 2026-06-16
 ---
 
-pnpm is a package manager, not a runtime, so most of what you are "migrating"
-is configuration rather than code. Deno reads your existing `package.json`,
+pnpm is a package manager, not a runtime, so most of what you are "migrating" is
+configuration rather than code. Deno reads your existing `package.json`,
 installs the same npm dependencies, and runs your scripts, so a single-package
 pnpm project usually needs no changes at all.
 
 The one place pnpm differs from npm, Yarn, and Bun is where it stores workspace
-configuration. npm, Yarn, and Bun keep their workspace globs in
-`package.json` under `workspaces`, which Deno reads directly. pnpm keeps them in
-a separate `pnpm-workspace.yaml` file, which Deno does not read. If your project
-is a workspace, that file is the one thing you convert by hand, covered below.
+configuration. npm, Yarn, and Bun keep their workspace globs in `package.json`
+under `workspaces`, which Deno reads directly. pnpm keeps them in a separate
+`pnpm-workspace.yaml` file, which Deno does not read. If your project is a
+workspace, that file is the one thing you convert by hand, covered below.
 
 ## Run your project
 
@@ -27,9 +27,10 @@ deno run main.ts
 
 `deno install` reads your existing `package.json` and resolves the same npm
 packages, like `pnpm install`. It writes a `node_modules` directory and its own
-[`deno.lock`](/runtime/fundamentals/configuration/#dependency-lockfile). Deno
-does not read `pnpm-lock.yaml`; it resolves your `package.json` dependencies
-fresh on the first install.
+[`deno.lock`](/runtime/packages/#lockfile-and-reproducible-installs). Deno does
+not read `pnpm-lock.yaml`; it resolves your `package.json` dependencies fresh on
+the first install. The `node_modules` layout will feel familiar: like pnpm, Deno
+uses an isolated layout where each package only sees its declared dependencies.
 
 Scripts defined in `package.json` run with
 [`deno task`](/runtime/reference/cli/task/), the equivalent of `pnpm run`:
@@ -51,22 +52,26 @@ behavior, then tighten the flags later. See
 
 ### Dependencies
 
-| pnpm                 | Deno                 |
-| -------------------- | -------------------- |
-| `pnpm install`       | `deno install`       |
-| `pnpm add <pkg>`     | `deno add npm:<pkg>` |
-| `pnpm remove <pkg>`  | `deno remove <pkg>`  |
-| `pnpm update`        | `deno update`        |
-| `pnpm outdated`      | `deno outdated`      |
+| pnpm                             | Deno                    |
+| -------------------------------- | ----------------------- |
+| `pnpm install`                   | `deno install`          |
+| `pnpm add <pkg>`                 | `deno add npm:<pkg>`    |
+| `pnpm add -D <pkg>`              | `deno add -D npm:<pkg>` |
+| `pnpm remove <pkg>`              | `deno remove <pkg>`     |
+| `pnpm update`                    | `deno update`           |
+| `pnpm outdated`                  | `deno outdated`         |
+| `pnpm install --frozen-lockfile` | `deno ci`               |
+| `pnpm audit`                     | `deno audit`            |
+| `pnpm why <pkg>`                 | `deno why <pkg>`        |
 
 ### Run and execute
 
-| pnpm                 | Deno                 |
-| -------------------- | -------------------- |
-| `pnpm <script>`      | `deno task <script>` |
-| `pnpm run <script>`  | `deno task <script>` |
-| `pnpm dlx <pkg>`     | `deno x npm:<pkg>`   |
-| `pnpm exec <cmd>`    | `deno task <cmd>`    |
+| pnpm                | Deno                 |
+| ------------------- | -------------------- |
+| `pnpm <script>`     | `deno task <script>` |
+| `pnpm run <script>` | `deno task <script>` |
+| `pnpm dlx <pkg>`    | `deno x npm:<pkg>`   |
+| `pnpm exec <cmd>`   | `deno task <cmd>`    |
 
 </div>
 
@@ -111,11 +116,10 @@ if it has no other configuration left in it. See
 
 ### Catalogs
 
-If your workspace uses pnpm
-[catalogs](https://pnpm.io/catalogs) to share dependency versions across
-members, Deno supports the same `catalog:` protocol (added in Deno 2.8). Move
-the catalog definitions out of `pnpm-workspace.yaml` and into the root
-`deno.json` using the same field names:
+If your workspace uses pnpm [catalogs](https://pnpm.io/catalogs) to share
+dependency versions across members, Deno supports the same `catalog:` protocol
+(added in Deno 2.8). Move the catalog definitions out of `pnpm-workspace.yaml`
+and into the root `deno.json` using the same field names:
 
 ```json title="deno.json"
 {
@@ -144,8 +148,8 @@ counterpart. Plan around them rather than translating them:
 - **`overrides`.** Force a transitive dependency to a specific version through
   the `npm:` resolution your project already uses, or with an
   [import map](/runtime/fundamentals/configuration/) entry.
-- **`patchedDependencies`.** Deno has no built-in patch-package mechanism. Vendor
-  the dependency or maintain the patch in your own fork.
+- **`patchedDependencies`.** Deno has no built-in patch-package mechanism.
+  Vendor the dependency or maintain the patch in your own fork.
 - **`registries`, `packageExtensions`, and similar tuning.** These configure
   pnpm's resolver specifically and do not carry over.
 
@@ -156,7 +160,9 @@ counterpart. Plan around them rather than translating them:
 - **[Migrate from Node.js](/runtime/migrate/).** If you are also moving the
   runtime, this covers CommonJS and ES module resolution and the Node built-ins
   Deno supports.
-- **[Workspaces](/runtime/fundamentals/workspaces/).** How Deno resolves members,
-  shared imports, and catalogs in detail.
+- **[Workspaces](/runtime/fundamentals/workspaces/).** How Deno resolves
+  members, shared imports, and catalogs in detail.
 - **[Dependency management](/runtime/packages/).** npm, JSR, and `package.json`
   workflows.
+- **[Supply chain management](/runtime/packages/supply_chain/).** `deno audit`,
+  lockfile discipline, and minimum dependency age.
