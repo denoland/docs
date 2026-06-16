@@ -43,7 +43,7 @@ match wins.
 | TanStack Start  | `@tanstack/{react,solid}-start` in `package.json`        |
 | Vite (SSR mode) | `vite.config.*` plus a `server.{js,ts,mjs}` entry        |
 
-If none match, `deno desktop` falls back to treating the path as a script — the
+If none match, `deno desktop` falls back to treating the path as a script, the
 same as `deno desktop main.ts`. You write a
 [`Deno.serve()`](/api/deno/~/Deno.serve) handler and serve your own UI.
 
@@ -56,7 +56,7 @@ When a framework is detected, the CLI:
 2. **Embeds the build output** into the binary's virtual filesystem (`.next/`,
    `dist/`, `.output/`, `_fresh/`, `build/`, etc., depending on the framework).
 3. **Self-extracts the VFS at runtime** so framework code finds its build output
-   relative to its own working directory — Next.js looks under `.next/`, Astro
+   relative to its own working directory. Next.js looks under `.next/`, Astro
    under `dist/`, and so on.
 4. **Runs the framework server** as your
    [`Deno.serve()`](/api/deno/~/Deno.serve) handler. The webview navigates to
@@ -154,8 +154,8 @@ server in middleware mode.
 
 ## Forcing a framework or opting out
 
-There is no flag to force detection. To opt out — to ship a framework project
-without using detection — pass an explicit script entry:
+There is no flag to force detection. To opt out (to ship a framework project
+without using detection), pass an explicit script entry:
 
 ```sh
 deno desktop ./my-server.ts

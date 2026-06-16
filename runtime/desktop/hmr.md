@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-16
 title: "Hot module replacement"
-description: "deno desktop --hmr keeps the runtime and rendering backend alive across edits — framework dev servers in framework projects, V8 hot-swap in everything else."
+description: "deno desktop --hmr keeps the runtime and rendering backend alive across edits: framework dev servers in framework projects, V8 hot-swap in everything else."
 ---
 
 :::info Coming in Deno 2.9
@@ -34,7 +34,7 @@ reconnect.
 When framework detection identifies your project (see
 [Frameworks](/runtime/desktop/frameworks/)), `--hmr` runs the framework's own
 dev server instead of its production server. The webview connects to that dev
-server directly — fast refresh, state preservation, and error overlays all work
+server directly: fast refresh, state preservation, and error overlays all work
 the same as in a browser tab.
 
 ```sh
@@ -65,7 +65,7 @@ Deno.serve((req) => {
 deno desktop --hmr main.ts
 ```
 
-Edit `main.ts` — change the response body, add a route — and the change applies
+Edit `main.ts` (change the response body, add a route) and the change applies
 on save. The runtime does not restart, the webview does not reload, the
 listening socket stays bound.
 
@@ -75,7 +75,7 @@ listening socket stays bound.
 Live values stay the same:
 
 - Module-level state (top-level `let`, top-level `Map`, etc.) is preserved.
-- Open file handles, network connections, child processes — all preserved.
+- Open file handles, network connections, child processes: all preserved.
 - The HTTP listener is preserved.
 - Timers and intervals keep firing on their original schedule unless you
   `clearTimeout` / `clearInterval` them.
@@ -95,9 +95,9 @@ So:
 
 - Top-level statements that have already executed (a `console.log` at module
   scope only runs when the module is first loaded).
-- The signature of a class — adding fields, changing constructors. The class
-  declaration is replaced; existing instances keep their old shape.
-- The set of imports — adding a new `import` line requires a full reload.
+- The signature of a class, such as adding fields or changing constructors. The
+  class declaration is replaced; existing instances keep their old shape.
+- The set of imports. Adding a new `import` line requires a full reload.
 
 When the change is too disruptive to apply incrementally, `--hmr` falls back to
 a full reload of the affected module. If even that is not safe (for example,
@@ -106,8 +106,8 @@ a warning suggesting a full restart.
 
 ## Browser-side HMR
 
-The webview is a browser. Browser HMR — fast refresh in React, Vue's HMR
-runtime, etc. — runs entirely inside the rendering backend, talking to your dev
+The webview is a browser. Browser HMR (fast refresh in React, Vue's HMR
+runtime, etc.) runs entirely inside the rendering backend, talking to your dev
 server. `deno desktop --hmr` does not interfere with it; if your framework wires
 browser HMR up, it works as designed.
 
@@ -119,7 +119,7 @@ two coexist:
 - A change to your [`Deno.serve()`](/api/deno/~/Deno.serve) handler or a binding
   implementation → Deno-side HMR applies it inside the runtime.
 
-You almost never need to think about the split — both happen on save.
+You almost never need to think about the split; both happen on save.
 
 ## Limitations and caveats
 

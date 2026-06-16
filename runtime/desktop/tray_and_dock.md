@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-16
 title: "Tray and dock"
-description: "Add icons to the OS status area and the macOS dock — tooltips, dark-mode variants, click events, and right-click context menus."
+description: "Add icons to the OS status area and the macOS dock: tooltips, dark-mode variants, click events, and right-click context menus."
 ---
 
 :::info Coming in Deno 2.9
@@ -16,7 +16,7 @@ keys, and TypeScript APIs may still change before the feature is stable.
 [`Deno.Tray`](/api/deno/~/Deno.Tray) puts an icon in the system status area
 (macOS menu bar extras, Windows system tray, Linux AppIndicator).
 [`Deno.dock`](/api/deno/~/Deno.dock) is a singleton that controls the app's dock
-/ taskbar presence — badge, bounce, visibility, and a custom menu.
+/ taskbar presence: badge, bounce, visibility, and a custom menu.
 
 Menus on both use the [`Deno.MenuItem`](/runtime/desktop/menus/) type.
 
@@ -43,7 +43,7 @@ tray.addEventListener("menuclick", (e) => {
 ### Lifecycle
 
 The icon stays in the status area until you call `tray.destroy()` (or the
-process exits). Multiple trays can coexist — useful for app indicators that need
+process exits). Multiple trays can coexist, useful for app indicators that need
 separate control surfaces.
 
 ```ts
@@ -79,13 +79,13 @@ contrast for dark menu bars (macOS 10.14+, modern Linux). Without one, the same
 icon is used in both modes.
 
 For best results, use a **template image** style (mostly opaque silhouette,
-transparent elsewhere) at a small size — 22×22 logical pixels for macOS, 16×16
+transparent elsewhere) at a small size: 22×22 logical pixels for macOS, 16×16
 for Windows.
 
 ### Tooltip
 
 ```ts
-tray.setTooltip("My App — 3 unread");
+tray.setTooltip("My App: 3 unread");
 tray.setTooltip(null); // remove tooltip
 ```
 
@@ -150,8 +150,8 @@ left-click produces these events.
 
 ### Popover panels
 
-For the classic menu-bar-app pattern — click the tray icon to toggle a small
-floating window anchored under it — use `attachPanel()`:
+For the classic menu-bar-app pattern, click the tray icon to toggle a small
+floating window anchored under it, then use `attachPanel()`:
 
 ```ts
 const tray = new Deno.Tray();
@@ -178,7 +178,7 @@ panel.hide();
 panel.toggle();
 console.log(panel.visible);
 panel.destroy(); // detach and close the panel window
-panel.window; // the underlying BrowserWindow — bind(), executeJs(), etc.
+panel.window; // the underlying BrowserWindow: bind(), executeJs(), etc.
 ```
 
 The panel is a convenience built on the primitives. For full control, create a
@@ -205,7 +205,7 @@ tray on:
 - **macOS**: status menu items (NSStatusItem).
 - **Windows**: system tray (NotifyIcon).
 - **Linux**: AppIndicator / KStatusNotifierItem. Requires a desktop environment
-  that surfaces them — most do, but some minimal i3 setups need extras like
+  that surfaces them. Most do, but some minimal i3 setups need extras like
   `swaync` or `polybar` configuration.
 
 If the backend cannot create a tray icon, the constructor's underlying `trayId`
@@ -227,7 +227,7 @@ Deno.dock.setBadge(null); // clear (null or empty string)
 ```
 
 Sets a text badge on the dock icon (macOS) or taskbar icon (Windows); on Linux
-it prefixes the focused window's title. Badges are short — typically a count;
+it prefixes the focused window's title. Badges are short, typically a count;
 the OS truncates long strings.
 
 ### Bounce
@@ -248,7 +248,7 @@ Deno.dock.setVisible(false); // remove the app from the dock
 Deno.dock.setVisible(true); // restore it
 ```
 
-macOS only — controls the app's activation policy. A hidden app does not appear
+macOS only; controls the app's activation policy. A hidden app does not appear
 in the dock or the Cmd-Tab switcher, which is what you want for a menu-bar-only
 app. The application keeps running and can still show windows; users reach it
 via Spotlight or the tray icon. No-op on Windows and Linux.
@@ -267,7 +267,7 @@ Deno.dock.addEventListener("menuclick", (e) => {
 });
 ```
 
-macOS only — a custom right-click menu on the dock icon. Clicks are delivered as
+macOS only; a custom right-click menu on the dock icon. Clicks are delivered as
 `menuclick` events on `Deno.dock`.
 
 ### Reopen event

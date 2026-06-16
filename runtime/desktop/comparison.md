@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-16
 title: "Comparison with other tools"
-description: "How deno desktop compares to Electron, Electrobun, Tauri, and Dioxus — language, engine, process model, app size, ecosystem, and what's built-in."
+description: "How deno desktop compares to Electron, Electrobun, Tauri, and Dioxus across language, engine, process model, app size, ecosystem, and what's built-in."
 ---
 
 :::info Coming in Deno 2.9
@@ -25,8 +25,8 @@ technologies. Here is how it compares to the alternatives.
 | **Consistent rendering**    | Yes                    | No              | No                   | No               | Yes (CEF)                |
 | **Process model**           | Multi-process          | Multi-process   | Multi-process        | Single process   | Multi-thread             |
 | **Backend ↔ UI**            | IPC                    | IPC             | IPC                  | Native Rust      | In-process channels      |
-| **App size**                | ~100 MB+               | ~14 MB          | ~2–10 MB             | ~5 MB            | varies (CEF or system)   |
-| **npm / Node compat**       | Yes (it is Node)       | Yes (via Bun)   | No                   | No               | Yes (Deno's Node compat) |
+| **App size**                | ~100 MB+               | ~14 MB          | ~2–10 MB             | ~5 MB            | ~40 MB / ~150 MB (CEF)   |
+| **npm / Node compat**       | Yes                    | Yes             | No                   | No               | Yes                      |
 | **Framework auto-detect**   | No                     | No              | No                   | No               | Yes                      |
 | **HMR**                     | No                     | Yes             | Yes (Vite-based)     | Yes (`dx serve`) | Yes                      |
 | **Built-in auto-update**    | Full binary            | bsdiff          | Plugin               | None             | bsdiff                   |
@@ -48,41 +48,41 @@ which has to compile for the target). Electrobun only ships on macOS. Electron
 supports cross-platform builds via electron-builder, but needs Node and
 platform-specific signing tools per target.
 
-**Full Node compatibility, with a choice of engine.** Electron bundles both
+**Full Node compatibility, with a choice of backend.** Electron bundles both
 Chromium and Node, but is massive. Tauri and Dioxus are small but have no JS
 ecosystem. `deno desktop` defaults to the OS webview (small, like Tauri) yet
-still gives you the full Node compat layer through Deno — including `npm:`
-imports in your handlers and `bindings` — and can bundle Chromium (CEF) when you
-need consistent rendering.
+still gives you the full Node compat layer through Deno, including `npm:` imports
+in your handlers and `bindings`, and can bundle Chromium (CEF) when you need
+consistent rendering.
 
 **In-process bindings instead of IPC.** Electron / Electrobun / Tauri all use
 socket-based IPC between the backend and the UI. Calls serialize, cross a
 process boundary, and deserialize. `deno desktop` runs the Deno runtime and the
-rendering backend inside the same process, talking over tokio channels. Values
-are still encoded as JSON across the call, but there is no cross-process
+rendering backend inside the same process, talking over in-process channels.
+Values are still encoded as JSON across the call, but there is no cross-process
 round-trip.
 
 **Built-in auto-update with binary diffs.** Electron ships full binaries.
 Tauri's update plugin downloads full builds. Electrobun and `deno desktop` both
 do `bsdiff` patches, but `deno desktop` integrates the update flow with the
-runtime — no separate updater binary, automatic rollback, manifest polling all
+runtime: no separate updater binary, automatic rollback, manifest polling all
 in one API.
 
 ## What other tools are good at
 
-**Electron — ecosystem.** Years of tooling, packaging, and signing machinery.
+**Electron: ecosystem.** Years of tooling, packaging, and signing machinery.
 Every major editor and chat app uses it. If you need mature plugin ecosystems
 (Spectron, electron-builder, autoUpdater abstractions), Electron has them.
 
-**Tauri — small footprint and mobile.** Tauri's binaries are an order of
+**Tauri: small footprint and mobile.** Tauri's binaries are an order of
 magnitude smaller than `deno desktop` (or Electron) and Tauri 2 supports iOS and
 Android. If size or mobile is the priority, Tauri wins.
 
-**Electrobun — fast iteration on macOS.** Electrobun's start-up speed and HMR
-are excellent on macOS. If you only ship Mac apps and like the Bun ecosystem, it
-is a strong choice.
+**Electrobun: fast iteration on macOS.** Electrobun has good start-up speed and
+HMR on macOS. If you only ship Mac apps and work in the Bun ecosystem, it is
+worth a look.
 
-**Dioxus — Rust-only.** No JS runtime at all. If you are writing everything in
+**Dioxus: Rust-only.** No JS runtime at all. If you are writing everything in
 Rust and want a unified codebase, Dioxus is a good pick.
 
 ## What `deno desktop` doesn't have yet
@@ -104,7 +104,7 @@ one place:
   [notifications](/runtime/desktop/notifications/) and
   [system tray / dock](/runtime/desktop/tray_and_dock/) APIs _are_ available.
 - **Runtime permissions for desktop apps** (a permission prompt on every
-  filesystem / network access — Deno's permission system applied to desktop
+  filesystem / network access, i.e. Deno's permission system applied to desktop
   sandboxing).
 - **Shared CEF runtime across apps.** Every app currently bundles its own CEF
   copy. A managed shared runtime would drop binary sizes to a few MB per app. On

@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-16
 title: "Notifications"
-description: "Show native OS notifications from deno desktop apps with the standard Web Notifications API — permission flow, options, and events."
+description: "Show native OS notifications from deno desktop apps with the standard Web Notifications API: permission flow, options, and events."
 ---
 
 :::info Coming in Deno 2.9
@@ -16,8 +16,8 @@ keys, and TypeScript APIs may still change before the feature is stable.
 `deno desktop` implements the standard
 [Web Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notification).
 The same `Notification` constructor you would use in a browser shows a **native
-OS notification** — macOS User Notifications, Windows toast notifications, or
-the Linux desktop notification service — from your Deno-side code.
+OS notification** (macOS User Notifications, Windows toast notifications, or
+the Linux desktop notification service) from your Deno-side code.
 
 ```ts
 const n = new Notification("Build complete", {
@@ -40,7 +40,7 @@ the current state with `Notification.permission` and request it with
 if (Notification.permission !== "granted") {
   const permission = await Notification.requestPermission();
   if (permission !== "granted") {
-    // The user declined — don't try to notify.
+    // The user declined, don't try to notify.
     return;
   }
 }
@@ -53,8 +53,8 @@ of the most recent query or request. `requestPermission()` triggers a system
 prompt the first time the user has not yet decided, and resolves to `"granted"`,
 `"denied"`, or `"default"`.
 
-For the live OS state — including whether the platform has a permission model at
-all — query the Permissions API:
+For the live OS state, including whether the platform has a permission model at
+all, query the Permissions API:
 
 ```ts
 const status = await navigator.permissions.query({ name: "notifications" });
@@ -146,5 +146,5 @@ const n = new Notification("Connecting…");
 n.close();
 ```
 
-Notifications are otherwise fire-and-forget — the OS owns them once shown, and
+Notifications are otherwise fire-and-forget. The OS owns them once shown, and
 `close()` is a best-effort request.

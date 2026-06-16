@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-16
 title: "Windows"
-description: "Create and manage native windows with Deno.BrowserWindow — lifecycle, multiple windows, sizing, navigation, keyboard / mouse / focus events, and native window handles."
+description: "Create and manage native windows with Deno.BrowserWindow: lifecycle, multiple windows, sizing, navigation, keyboard / mouse / focus events, and native window handles."
 ---
 
 :::info Coming in Deno 2.9
@@ -17,9 +17,9 @@ The [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) class controls native
 windows. A window opens automatically when your binary starts and is navigated
 to your local [HTTP server](/runtime/desktop/serving/). The **first**
 `new Deno.BrowserWindow()` you construct adopts that initial window; every
-construction after that opens a new one. All windows share the same Deno runtime
-— there is one tokio runtime per process, regardless of how many windows are
-open.
+construction after that opens a new one. All windows share the same Deno
+runtime: there is one async runtime per process, regardless of how many windows
+are open.
 
 ## Creating windows
 
@@ -43,10 +43,10 @@ The constructor accepts a `BrowserWindowOptions` object:
 
 | Option                | Type      | Default | Notes                                                                   |
 | --------------------- | --------- | ------- | ----------------------------------------------------------------------- |
-| `title`               | `string`  | —       | Window title.                                                           |
+| `title`               | `string`  | none    | Window title.                                                           |
 | `width`               | `number`  | `800`   | Initial width in logical pixels.                                        |
 | `height`              | `number`  | `600`   | Initial height in logical pixels.                                       |
-| `x`, `y`              | `number`  | —       | Initial position; centered if omitted.                                  |
+| `x`, `y`              | `number`  | none    | Initial position; centered if omitted.                                  |
 | `resizable`           | `boolean` | `true`  | Whether the user can resize the window.                                 |
 | `alwaysOnTop`         | `boolean` | `false` | Keep the window above others.                                           |
 | `frameless`           | `boolean` | `false` | Remove the title bar and window chrome. Creation-only.                  |
@@ -58,7 +58,7 @@ alive until `close()` is called or the user closes it from the OS.
 
 `frameless`, `noActivate`, and `transparentTitlebar` can only be set at creation
 time. `frameless` + `noActivate` together are the building blocks for tray /
-menu-bar popovers — see [`Tray.attachPanel`](/runtime/desktop/tray_and_dock/).
+menu-bar popovers; see [`Tray.attachPanel`](/runtime/desktop/tray_and_dock/).
 
 Multiple windows are independent: each has its own size, position, focus state,
 and webview. They can navigate to different paths or different origins, set
@@ -83,7 +83,7 @@ Each window has a stable numeric id:
 console.log(win.windowId);
 ```
 
-Closing a window does not stop the runtime — the process keeps running until all
+Closing a window does not stop the runtime; the process keeps running until all
 windows are closed (or you call [`Deno.exit()`](/api/deno/~/Deno.exit)).
 
 ## Size and position
@@ -107,7 +107,7 @@ Sizes are in logical pixels. The OS handles HiDPI scaling.
 ## Title
 
 ```ts
-win.setTitle("My App — Untitled");
+win.setTitle("My App: Untitled");
 ```
 
 Use a stable prefix plus a document-specific suffix; this is what users see in
@@ -120,7 +120,7 @@ const port = Deno.env.get("DENO_SERVE_ADDRESS")!.split(":").pop();
 win.navigate(`http://127.0.0.1:${port}`);
 ```
 
-Navigation works with any URL the embedded webview can load — most commonly the
+Navigation works with any URL the embedded webview can load, most commonly the
 local HTTP server (see [HTTP serving](/runtime/desktop/serving/)), but also
 `https://` URLs, `file://` URLs, and `data:` URLs.
 
@@ -163,7 +163,7 @@ win.onblur = () => console.log("blurred");
 
 The pointer and keyboard events mirror their browser equivalents
 (`KeyboardEvent`, `MouseEvent`, `WheelEvent`). `resize`, `move`, `menuclick`,
-and `contextmenuclick` are `CustomEvent`s carrying a `detail` payload — see
+and `contextmenuclick` are `CustomEvent`s carrying a `detail` payload; see
 [Menus](/runtime/desktop/menus/) for the menu events.
 
 ```ts
@@ -196,7 +196,7 @@ const surface = win.getNativeWindow();
 
 `getNativeWindow()` wraps the window's native surface as a
 [`Deno.UnsafeWindowSurface`](/api/deno/~/Deno.UnsafeWindowSurface) so you can
-render to it with WebGPU. Request a GPU adapter first — the call throws if there
+render to it with WebGPU. Request a GPU adapter first; the call throws if there
 is no active WebGPU context:
 
 ```ts
@@ -229,7 +229,7 @@ tasks (timers, pending fetches, etc.). To exit explicitly:
 Deno.exit(0);
 ```
 
-To prevent close — for example, to show a "Save?" dialog — listen for `close`
+To prevent close (for example, to show a "Save?" dialog), listen for `close`
 and call `event.preventDefault()`:
 
 ```ts

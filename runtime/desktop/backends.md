@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-16
 title: "Backends"
-description: "Pick a rendering engine for your desktop app — bundled Chromium, the OS webview, or raw windowing. Tradeoffs and how to switch."
+description: "Pick a rendering engine for your desktop app: bundled Chromium, the OS webview, or raw windowing. Tradeoffs and how to switch."
 ---
 
 :::info Coming in Deno 2.9
@@ -45,7 +45,7 @@ a feature only Chromium ships (e.g. WebGPU on Linux).
 deno desktop --backend webview main.ts
 ```
 
-**The operating system's own webview** — WKWebView on macOS, WebView2 on
+**The operating system's own webview**: WKWebView on macOS, WebView2 on
 Windows, WebKitGTK on Linux.
 
 - Smaller app size (just your code + the backend shim).
@@ -114,5 +114,5 @@ megabytes for CEF). Subsequent builds use the cache.
 ## Cross-compilation
 
 `--target` and `--all-targets` work with any backend. The CLI downloads the
-prebuilt backend archive matching the target triple — no local engine toolchain
-needed. See [Distribution](/runtime/desktop/distribution/).
+prebuilt backend archive matching the target triple, with no local engine
+toolchain needed. See [Distribution](/runtime/desktop/distribution/).

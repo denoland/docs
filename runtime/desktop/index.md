@@ -4,8 +4,8 @@ title: "Desktop apps"
 description: "Build self-contained desktop applications from a Deno project, with framework auto-detection, hot reload, native windowing, auto-update, and cross-platform distribution."
 ---
 
-`deno desktop` turns a Deno project — anything from a single TypeScript file to
-a Next.js app — into a self-contained desktop application. The output is a
+`deno desktop` turns a Deno project (anything from a single TypeScript file to
+a Next.js app) into a self-contained desktop application. The output is a
 redistributable binary that bundles your code, the Deno runtime, and a web
 rendering engine into one bundle per platform.
 
@@ -35,11 +35,11 @@ integration.
   macOS, Windows, and Linux.
 - **Framework auto-detection.** Point `deno desktop` at a Next.js, Astro, Fresh,
   Remix, Nuxt, SvelteKit, SolidStart, TanStack Start, or Vite SSR project and it
-  runs — the production server in release mode, the dev server with hot reload
+  runs: the production server in release mode, the dev server with hot reload
   under `--hmr`. No code changes are required to take an existing web project to
   the desktop.
 - **In-process bindings instead of IPC.** Backend and UI communication goes
-  through tokio channels, not socket-based IPC, so there is no serialization
+  through in-process channels, not socket-based IPC, so there is no serialization
   step between your Deno code and the webview.
 - **Cross-compile from one machine.** The same machine can build for macOS,
   Windows, and Linux. Backends are downloaded as needed, not built locally.
@@ -72,40 +72,40 @@ The compiled binary opens a window pointed at a local HTTP server bound to your
 ```
 
 [`Deno.serve()`](/api/deno/~/Deno.serve) automatically binds to the address the
-webview navigates to — you do not need to pass a port or hostname. See
+webview navigates to, so you do not need to pass a port or hostname. See
 [HTTP serving](/runtime/desktop/serving/) for details.
 
 ## What's in this section
 
-- [Configuration](/runtime/desktop/configuration/) — the `desktop` block in
+- [Configuration](/runtime/desktop/configuration/): the `desktop` block in
   `deno.json`.
-- [Backends](/runtime/desktop/backends/) — CEF, webview, raw; how to choose.
-- [HTTP serving](/runtime/desktop/serving/) —
+- [Backends](/runtime/desktop/backends/): CEF, webview, raw; how to choose.
+- [HTTP serving](/runtime/desktop/serving/):
   [`Deno.serve()`](/api/deno/~/Deno.serve) integration and the serving model.
-- [Frameworks](/runtime/desktop/frameworks/) — Next.js, Astro, Fresh, Remix,
+- [Frameworks](/runtime/desktop/frameworks/): Next.js, Astro, Fresh, Remix,
   Nuxt, SvelteKit, and others.
-- [Windows](/runtime/desktop/windows/) —
+- [Windows](/runtime/desktop/windows/):
   [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) lifecycle, multiple
   windows, events.
-- [Bindings](/runtime/desktop/bindings/) — calling Deno code from the webview
+- [Bindings](/runtime/desktop/bindings/): calling Deno code from the webview
   via `bindings.<name>()`.
-- [Menus](/runtime/desktop/menus/) — application and context menus.
-- [Tray and dock](/runtime/desktop/tray_and_dock/) — system status icons and the
+- [Menus](/runtime/desktop/menus/): application and context menus.
+- [Tray and dock](/runtime/desktop/tray_and_dock/): system status icons and the
   macOS dock.
-- [Dialogs](/runtime/desktop/dialogs/) — `prompt()`, `alert()`, `confirm()` as
+- [Dialogs](/runtime/desktop/dialogs/): `prompt()`, `alert()`, `confirm()` as
   native popups.
-- [Notifications](/runtime/desktop/notifications/) — native OS notifications via
+- [Notifications](/runtime/desktop/notifications/): native OS notifications via
   the Web `Notification` API.
-- [Hot module replacement](/runtime/desktop/hmr/) — `--hmr` for framework and
+- [Hot module replacement](/runtime/desktop/hmr/): `--hmr` for framework and
   non-framework apps.
-- [DevTools](/runtime/desktop/devtools/) — unified DevTools attached to both the
+- [DevTools](/runtime/desktop/devtools/): unified DevTools attached to both the
   Deno runtime and the webview.
-- [Auto-update](/runtime/desktop/auto_update/) —
+- [Auto-update](/runtime/desktop/auto_update/):
   [`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate), manifests, bsdiff,
   rollback.
-- [Error reporting](/runtime/desktop/error_reporting/) — capturing uncaught
+- [Error reporting](/runtime/desktop/error_reporting/): capturing uncaught
   exceptions and panics.
-- [Distribution](/runtime/desktop/distribution/) — cross-compilation, output
+- [Distribution](/runtime/desktop/distribution/): cross-compilation, output
   formats, installers.
-- [Comparison](/runtime/desktop/comparison/) — how `deno desktop` relates to
+- [Comparison](/runtime/desktop/comparison/): how `deno desktop` relates to
   Electron, Tauri, Electrobun, Dioxus.

@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-16
 title: "Distribution"
-description: "Cross-compile a deno desktop app for macOS, Windows, and Linux from one machine, and produce per-platform output formats — .app, .dmg, .exe directory, AppImage."
+description: "Cross-compile a deno desktop app for macOS, Windows, and Linux from one machine, and produce per-platform output formats: .app, .dmg, .exe directory, AppImage."
 ---
 
 :::info Coming in Deno 2.9
@@ -51,8 +51,8 @@ The output extension determines the format:
 
 | Output       | Produced by                                  |
 | ------------ | -------------------------------------------- |
-| `MyApp.app/` | Default — `.app` bundle.                     |
-| `MyApp.dmg`  | `hdiutil` — drag-to-Applications disk image. |
+| `MyApp.app/` | Default; `.app` bundle.                      |
+| `MyApp.dmg`  | `hdiutil`; drag-to-Applications disk image.  |
 
 The `.app` bundle has the standard layout:
 
@@ -77,7 +77,7 @@ run so frameworks like Next.js find their build output relative to CWD.
 
 | Output   | Produced by                                            |
 | -------- | ------------------------------------------------------ |
-| `MyApp/` | Default — directory with a launcher and support files. |
+| `MyApp/` | Default; directory with a launcher and support files.  |
 
 The `MyApp/` directory contains:
 
@@ -98,7 +98,7 @@ Setup, NSIS, or WiX with the directory as input.
 
 | Output            | Produced by                                   |
 | ----------------- | --------------------------------------------- |
-| `my-app/`         | Default — app directory with launcher script. |
+| `my-app/`         | Default; app directory with launcher script.  |
 | `my-app.AppImage` | Single-file portable bundle.                  |
 
 The app directory layout:
@@ -112,11 +112,11 @@ my-app/
   AppIcon.png             # icon (optional)
 ```
 
-`AppImage` is the most portable Linux format — one file, no install step, runs
+`AppImage` is the most portable Linux format: one file, no install step, runs
 on any modern distro. `deno desktop` builds it directly: it packs the app
 directory into a SquashFS image and prepends the AppImage Type-2 runtime, adding
 the required `AppRun`, `.desktop`, and icon entries. There is no external tool
-to install — no `appimagetool` — and it works from any build host, so you can
+to install (no `appimagetool`), and it works from any build host, so you can
 produce a Linux `.AppImage` while cross-compiling from macOS or Windows.
 
 `.deb` / `.rpm` packaging is not yet implemented. For now, use `fpm` or
@@ -128,7 +128,7 @@ The output path can be set in three places, in priority order:
 
 1. The `--output` CLI flag.
 2. The `desktop.output` field in `deno.json` (per-platform).
-3. The default — the project name, with the platform-appropriate extension.
+3. The default: the project name, with the platform-appropriate extension.
 
 ```sh
 # Override per build:
@@ -159,7 +159,7 @@ Cross-compiling from one OS to another requires:
 Both downloads are SHA-256 verified and cached under `<deno_dir>/`.
 
 There is **no Rust toolchain involved** in cross-compiling a desktop app. You
-are not compiling Rust on the host — you are downloading prebuilt artifacts for
+are not compiling Rust on the host; you are downloading prebuilt artifacts for
 the target and packaging them with your code. This is the same model as
 `deno compile --target`.
 
@@ -202,7 +202,7 @@ Cross-compiling from a single host (e.g. only running on `ubuntu-latest` with
 ## Code signing
 
 On macOS, `deno desktop` code-signs the bundle for you. By default it applies an
-**ad-hoc** signature (`-`), which gives the app a stable code identity — enough
+**ad-hoc** signature (`-`), which gives the app a stable code identity, enough
 for the OS to grant [notification](/runtime/desktop/notifications/) permission,
 but not enough to distribute without Gatekeeper warnings. The CEF helper
 processes' bundle identifiers are harmonized with the main bundle id
@@ -224,7 +224,7 @@ To produce a distributable, notarizable bundle, set a real signing identity in
 ```
 
 With a real identity, the bundle is signed with Hardened Runtime and a secure
-timestamp. **Notarization is still a separate step** — submit the signed bundle
+timestamp. **Notarization is still a separate step**. Submit the signed bundle
 with `xcrun notarytool submit` and staple the ticket.
 
 On Windows, sign the produced executables (the backend `.exe` and `denort.dll`
@@ -234,5 +234,5 @@ in the output directory) externally for now, e.g.
 ## Distributing updates after release
 
 Once your binary is in users' hands, ship updates via
-[`Deno.autoUpdate()`](/runtime/desktop/auto_update/) — `bsdiff` patches shipped
+[`Deno.autoUpdate()`](/runtime/desktop/auto_update/): `bsdiff` patches shipped
 from your own server, no app store required.

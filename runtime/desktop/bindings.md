@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-16
 title: "Bindings"
-description: "Call Deno-side functions from webview JavaScript via win.bind() — type-safe RPC over in-process channels, with no IPC and no serialization beyond the call boundary."
+description: "Call Deno-side functions from webview JavaScript via win.bind(): type-safe RPC over in-process channels, with no IPC and no serialization beyond the call boundary."
 ---
 
 :::info Coming in Deno 2.9
@@ -14,8 +14,8 @@ keys, and TypeScript APIs may still change before the feature is stable.
 :::
 
 `win.bind(name, handler)` exposes a Deno-side function to the webview. From the
-webview, call it as `bindings.<name>(args)` — the call returns a `Promise` that
-resolves with the handler's return value.
+webview, call it as `bindings.<name>(args)`, and the call returns a `Promise`
+that resolves with the handler's return value.
 
 ```ts title="Deno side"
 win.bind("readSettings", async () => {
@@ -38,14 +38,13 @@ await bindings.saveSettings(settings);
 
 Bindings are **not** IPC. The Deno runtime and the rendering backend run as
 threads / processes inside the same address space (CEF) or coordinated process
-group (WebView). Calls go through `tokio::sync::mpsc` channels and `oneshot`
-channels for responses; the backend dispatches them via a notify / poll pattern
-in its run loop.
+group (WebView). Calls go through in-process channels, and the backend
+dispatches them from its run loop.
 
 This avoids the cross-process round-trip that socket-based IPC frameworks
 (Electron's `ipcMain` / `ipcRenderer`, Tauri's `invoke`) impose. Arguments and
 results are still encoded as they cross the realm boundary, but the transport is
-in-process tokio channels — no socket, no cross-process scheduling.
+in-process: no socket, no cross-process scheduling.
 
 In practical terms: bindings are fast enough that you do not need to worry about
 call frequency for typical app workloads.
@@ -60,7 +59,7 @@ bindings.foo; // function
 bindings.foo("a", 1); // Promise<unknown>
 ```
 
-The proxy does not validate names — typing `bindings.readSetings` instead of
+The proxy does not validate names: typing `bindings.readSetings` instead of
 `bindings.readSettings` does not throw at the property access; it throws when
 you call it (the call rejects because no such binding is registered).
 
@@ -74,7 +73,7 @@ webview and the Deno runtime. This means:
 - `Uint8Array`: supported, for passing binary data.
 - `undefined` and optional properties: dropped during serialization.
 - `Date`, `Map`, `Set`, `RegExp`, typed arrays other than `Uint8Array`,
-  `ArrayBuffer`: **not** preserved — convert them to a JSON-compatible shape (a
+  `ArrayBuffer`: **not** preserved. Convert them to a JSON-compatible shape (a
   `Date` becomes a string, a `Map` becomes `{}`) before sending.
 - Functions, DOM nodes, prototypes, and cyclic references: not transferable.
 - Errors thrown by a handler: delivered to the webview as
@@ -102,7 +101,7 @@ await bindings.delay(500);
 
 ## Errors
 
-A handler that throws — synchronously or via a rejected promise — causes the
+A handler that throws, synchronously or via a rejected promise, causes the
 webview-side call to reject:
 
 ```ts
@@ -198,7 +197,7 @@ If you are coming from Electron's `ipcMain.handle('channel', handler)` /
 | --------------------------------------------------- | ---------------------------------------------- |
 | `ipcMain.handle('channel', (e, ...args) => result)` | `win.bind('channel', (...args) => result)`     |
 | `ipcRenderer.invoke('channel', ...args)`            | `bindings.channel(...args)`                    |
-| `contextBridge.exposeInMainWorld('api', {...})`     | Not needed — `bindings` is exposed by default. |
+| `contextBridge.exposeInMainWorld('api', {...})`     | Not needed; `bindings` is exposed by default.  |
 
 The `event` object Electron passes as the first arg has no equivalent because
 there is no separate process to attribute the call to. Per-window context lives

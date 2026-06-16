@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-16
 title: "Auto-update"
-description: "Ship binary-diff updates to deno desktop apps with Deno.autoUpdate() — bsdiff patches, manifest polling, automatic rollback on failed launch."
+description: "Ship binary-diff updates to deno desktop apps with Deno.autoUpdate(): bsdiff patches, manifest polling, automatic rollback on failed launch."
 ---
 
 :::info Coming in Deno 2.9
@@ -16,10 +16,9 @@ keys, and TypeScript APIs may still change before the feature is stable.
 [`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) polls a release server for
 new versions, downloads binary-diff patches, applies them to the runtime dylib,
 and stages the result for the next launch. If the next launch fails, the runtime
-rolls back to the previous version automatically.
-
-The update mechanism is inspired by Electrobun: small `bsdiff` patches instead
-of full binary downloads, and rollback baked into the launcher.
+rolls back to the previous version automatically. Updates ship as small
+`bsdiff` patches instead of full binary downloads, with rollback baked into the
+launcher.
 
 :::note Platform support
 
@@ -56,8 +55,11 @@ console.log(Deno.desktopVersion); // "1.4.0", or null if no version was set
 ```
 
 If [`Deno.desktopVersion`](/api/deno/~/Deno.desktopVersion) is `null`,
-[`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) is a no-op — the runtime
-warns once and returns.
+[`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) is a no-op: the runtime warns
+once and returns. This is also what happens under `deno run`, since a
+non-compiled program has no baked-in version. `Deno.autoUpdate()` does not throw
+there, so you can leave the call in your code and run the same entry point with
+`deno run` during development.
 
 ## Calling `autoUpdate()`
 
@@ -109,7 +111,7 @@ is an object carrying the patch filename and its **SHA-256 hash**:
 | `version` | The latest available version. Compared with [`Deno.desktopVersion`](/api/deno/~/Deno.desktopVersion).                                                            |
 | `patches` | Map of from-version → `{ name, sha256 }`. `name` is the patch filename relative to the manifest's URL; `sha256` is the lowercase hex SHA-256 of the patch bytes. |
 
-The `sha256` is **required** — the runtime refuses to apply a patch whose bytes
+The `sha256` is **required**: the runtime refuses to apply a patch whose bytes
 don't hash to the declared value, so a tampered or truncated download can never
 be applied.
 
@@ -117,7 +119,7 @@ Old versions you no longer want to support can be omitted from `patches`. Users
 on those versions log a "no patch available for X" message and stay on their
 current version.
 
-The update URL **must** be `https://` — the runtime refuses to poll a plaintext
+The update URL **must** be `https://`: the runtime refuses to poll a plaintext
 endpoint.
 
 ### Signed manifests
@@ -181,8 +183,8 @@ anything else runs, using three files next to the runtime dylib:
 - On a later launch, if `<dylib>.backup` and `<dylib>.update-ok` both exist, the
   previous update is confirmed good and both files are cleaned up.
 - If `<dylib>.backup` exists but `<dylib>.update-ok` does not, the last update
-  started but never confirmed — it crashed during startup. The launcher restores
-  `<dylib>.backup` over the dylib, rolling back. The next
+  started but never confirmed, meaning it crashed during startup. The launcher
+  restores `<dylib>.backup` over the dylib, rolling back. The next
   [`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) call then fires
   `onRollback` with the reason.
 
@@ -191,7 +193,7 @@ happened beyond seeing the same version they had before.
 
 ## Generating patches
 
-A patch is a `bsdiff` of the app's runtime dylib between two releases — the file
+A patch is a `bsdiff` of the app's runtime dylib between two releases, the file
 the updater patches, which lives inside your built app. `qbsdiff` reads the
 `bsdiff` 4.x format, so the classic `bsdiff` CLI produces compatible output:
 
@@ -236,7 +238,7 @@ Deno.autoUpdate({
   host.
 - **Test patches against a real install.** A patch that applies cleanly but
   produces a non-bootable binary triggers rollback, but only after a failed
-  launch — your users see a brief startup failure once. Run the patched binary
+  launch, so your users see a brief startup failure once. Run the patched binary
   in CI before publishing the manifest.
 - **Choose a sensible interval.** Hourly is fine for most apps. Polling more
   often than every few minutes is wasteful for both you and your users.

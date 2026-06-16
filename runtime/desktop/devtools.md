@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-16
 title: "DevTools"
-description: "Attach Chrome DevTools to a deno desktop app — single session shows both the Deno runtime V8 and the renderer V8 as inspectable targets."
+description: "Attach Chrome DevTools to a deno desktop app: a single session shows both the Deno runtime V8 and the renderer V8 as inspectable targets."
 ---
 
 :::info Coming in Deno 2.9
@@ -14,7 +14,7 @@ keys, and TypeScript APIs may still change before the feature is stable.
 :::
 
 `deno desktop` exposes **unified DevTools**: a single Chrome DevTools session
-that attaches to both V8 isolates inside your app — the **Deno runtime** (your
+that attaches to both V8 isolates inside your app: the **Deno runtime** (your
 handlers, bindings, top-level code) and the **renderer** (webview-side
 JavaScript). One Console dropdown, one Sources panel with both threads, one
 debugging session.
@@ -26,7 +26,7 @@ deno desktop --inspect main.ts
 ```
 
 Then open `chrome://inspect` (or `edge://inspect`). The app appears as a target.
-Click "inspect" — DevTools opens with both isolates attached.
+Click "inspect" and DevTools opens with both isolates attached.
 
 Three flags control startup behavior:
 
@@ -49,15 +49,15 @@ deno desktop --inspect-wait main.ts
 
 After attaching, the DevTools UI shows:
 
-- **Sources** — both isolates appear in the **Threads** sidebar. Set
+- **Sources**: both isolates appear in the **Threads** sidebar. Set
   breakpoints, step through, inspect the call stack on either side.
-- **Console** — a **target dropdown** at the top of the panel switches between
+- **Console**: a **target dropdown** at the top of the panel switches between
   **Renderer** (the webview) and **Deno** (the runtime). Console output from
   each isolate is labelled.
-- **Network** — requests originating from the webview (the webview's `fetch`,
+- **Network**: requests originating from the webview (the webview's `fetch`,
   `XMLHttpRequest`, image loads). Requests made from the Deno side via `fetch`
   are not currently surfaced here.
-- **Performance / Memory** — profile each isolate separately; switch via the
+- **Performance / Memory**: profile each isolate separately; switch via the
   same target dropdown.
 
 Source maps are honored on both sides. TypeScript files in the Deno runtime show
@@ -77,7 +77,7 @@ win.openDevtools({ deno: false }); // renderer only
 win.openDevtools({ renderer: false }); // Deno runtime only
 ```
 
-`openDevtools()` shows a DevTools window inside the app — useful for shipping a
+`openDevtools()` shows a DevTools window inside the app, useful for shipping a
 debug build with built-in inspection without needing `chrome://inspect`.
 
 ## How it works
@@ -98,7 +98,7 @@ DevTools     │  CDP Multiplexer (Deno CLI)      │
 
 The mux presents itself as one CDP "browser target" with two children: a "page"
 target for the renderer and a "worker" target for the Deno runtime. DevTools'
-built-in multi-target support handles the rest — the same mechanism it uses for
+built-in multi-target support handles the rest, the same mechanism it uses for
 `iframe` and `worker` debugging on the open web.
 
 No CDP protocol changes, no DevTools fork, no frontend modifications.
@@ -110,9 +110,9 @@ Unified DevTools is implemented for the **CEF** backend. On other backends:
 | Backend   | DevTools status                                 |
 | --------- | ----------------------------------------------- |
 | `cef`     | Full unified DevTools.                          |
-| `webview` | Not currently supported — system webviews speak |
+| `webview` | Not currently supported; system webviews speak  |
 |           | a different inspector protocol.                 |
-| `raw`     | Deno-side `--inspect` only — there is no        |
+| `raw`     | Deno-side `--inspect` only; there is no          |
 |           | renderer to inspect.                            |
 
 If `--inspect` is passed with a backend that does not support unified DevTools,
@@ -122,8 +122,8 @@ normal `deno run --inspect` session.
 ## Debugging across the binding boundary
 
 When a webview-side `bindings.foo()` call enters a Deno-side handler, the two
-sides currently appear as separate stack traces. Cross-realm correlation —
-automatically stitching a renderer call into the Deno handler stack — is on the
+sides currently appear as separate stack traces. Cross-realm correlation
+(automatically stitching a renderer call into the Deno handler stack) is on the
 roadmap. Today, you can switch threads in the Sources panel to follow execution
 manually.
 
@@ -148,6 +148,6 @@ against the renderer's `bindings.readSettings()` invocation visible under
 - The WebView backend has no DevTools integration.
 - The renderer Network panel does not show Deno-side `fetch` calls.
 - Cross-realm step-through (clicking a `bindings.foo()` call and stepping into
-  the Deno handler) is not yet implemented — switch threads manually.
+  the Deno handler) is not yet implemented; switch threads manually.
 - `--inspect-brk` pauses both isolates before navigation. Resuming each one is
-  independent — you may need to click "Resume" on each thread.
+  independent, so you may need to click "Resume" on each thread.

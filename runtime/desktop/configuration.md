@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-16
 title: "Configuration"
-description: "Configure deno desktop in deno.json — app metadata, icons, backend selection, output paths, error reporting, and the auto-update server."
+description: "Configure deno desktop in deno.json: app metadata, icons, backend selection, output paths, error reporting, and the auto-update server."
 ---
 
 :::info Coming in Deno 2.9
@@ -14,7 +14,7 @@ keys, and TypeScript APIs may still change before the feature is stable.
 :::
 
 All configuration for `deno desktop` lives in the `desktop` block in
-`deno.json`. Most fields are optional — a project with no `desktop` block at all
+`deno.json`. Most fields are optional; a project with no `desktop` block at all
 still compiles, using sensible defaults.
 
 ## Full example
@@ -194,7 +194,7 @@ alert, and optionally `POST` a JSON report to a server.
 }
 ```
 
-If unset, error reporting is in "alert only" mode — uncaught errors still show a
+If unset, error reporting is in "alert only" mode: uncaught errors still show a
 native alert, but no report is sent.
 
 See [Error reporting](/runtime/desktop/error_reporting/) for the report schema.
@@ -203,7 +203,7 @@ See [Error reporting](/runtime/desktop/error_reporting/) for the report schema.
 
 The compiled binary runs with the current working directory set to the user's
 `cwd`, not the directory containing the binary. If your app needs to find files
-relative to itself — framework build outputs, static assets — use `import.meta`
+relative to itself (framework build outputs, static assets), use `import.meta`
 or the framework's own resolution; do not assume
 [`Deno.cwd()`](/api/deno/~/Deno.cwd).
 

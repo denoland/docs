@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-16
 title: "HTTP serving"
-description: "How Deno.serve() works inside a desktop app — automatic port binding, the DENO_SERVE_ADDRESS env var, and serving local UI to the embedded webview."
+description: "How Deno.serve() works inside a desktop app: automatic port binding, the DENO_SERVE_ADDRESS env var, and serving local UI to the embedded webview."
 ---
 
 :::info Coming in Deno 2.9
@@ -14,9 +14,9 @@ keys, and TypeScript APIs may still change before the feature is stable.
 :::
 
 A `deno desktop` app serves its UI over local HTTP and points the embedded
-webview at it. This keeps the app structure identical to a normal Deno website —
-[`Deno.serve()`](/api/deno/~/Deno.serve) is the entry point, every request flows
-through your handler — but with no port to manage and no remote network
+webview at it. This keeps the app structure identical to a normal Deno website.
+[`Deno.serve()`](/api/deno/~/Deno.serve) is the entry point and every request
+flows through your handler, but with no port to manage and no remote network
 exposure.
 
 ## How it works
@@ -26,7 +26,7 @@ When the binary starts:
 1. The runtime picks an unused local port and sets the `DENO_SERVE_ADDRESS`
    environment variable to `tcp:127.0.0.1:<port>`.
 2. Your code calls `Deno.serve(...)`. The serve API reads `DENO_SERVE_ADDRESS`
-   (set by Deno itself in this mode, not by the user) and binds to that port —
+   (set by Deno itself in this mode, not by the user) and binds to that port,
    ignoring whatever port you pass.
 3. The webview navigates to `http://127.0.0.1:<port>` once the listener is
    ready.
@@ -83,11 +83,11 @@ matter for desktop apps:
   at it. See [Frameworks](/runtime/desktop/frameworks/).
 
 The cost is a single network hop within `127.0.0.1` per request. For UI serving
-— HTML, CSS, bundled JS, JSON API responses — this is negligible.
+(HTML, CSS, bundled JS, JSON API responses) this is negligible.
 
 For high-throughput Deno → webview communication where the overhead matters, use
 [bindings](/runtime/desktop/bindings/), which bypass HTTP entirely and route
-through tokio channels.
+through in-process channels.
 
 ## Network exposure
 
@@ -97,13 +97,13 @@ never binds to a public interface, even if you pass `0.0.0.0` to
 machine cannot reach your server.
 
 If you need to serve users on other machines (a self-hosted local server), do
-not use `deno desktop` for that part of your stack — use `deno run` with an
+not use `deno desktop` for that part of your stack. Use `deno run` with an
 explicit address, or build a separate service.
 
 ## Custom port behavior
 
 You cannot override the port [`Deno.serve()`](/api/deno/~/Deno.serve) binds to
-inside `deno desktop`. This is intentional — the webview needs to navigate to
+inside `deno desktop`. This is intentional: the webview needs to navigate to
 the same port the runtime is listening on, and the runtime is the source of
 truth for that value.
 

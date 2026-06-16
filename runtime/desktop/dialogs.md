@@ -14,7 +14,7 @@ keys, and TypeScript APIs may still change before the feature is stable.
 :::
 
 The familiar browser globals `prompt()`, `alert()`, and `confirm()` work inside
-`deno desktop` apps — but instead of reading from the terminal, they show
+`deno desktop` apps, but instead of reading from the terminal, they show
 **native popup dialogs**.
 
 This makes desktop apps feel native without any platform-specific code, and
@@ -28,12 +28,12 @@ Shows a modal dialog with an OK button. Returns `void`.
 alert("Save complete.");
 ```
 
-The current window is the parent — clicking outside the dialog does not dismiss
+The current window is the parent: clicking outside the dialog does not dismiss
 it; the user must click OK.
 
 ## `confirm(message)`
 
-Shows a modal dialog with OK and Cancel. Returns `boolean` — `true` for OK,
+Shows a modal dialog with OK and Cancel. Returns `boolean`: `true` for OK,
 `false` for Cancel.
 
 ```ts
@@ -57,7 +57,7 @@ if (name !== null) {
 ## When they fire
 
 These functions block the calling code (synchronously) until the user responds.
-They run **on the Deno runtime thread**, not the webview — so they do not freeze
+They run **on the Deno runtime thread**, not the webview, so they do not freeze
 the rendered UI, but they do pause your handler.
 
 ```ts
@@ -71,16 +71,16 @@ win.addEventListener("menuclick", (e) => {
 ```
 
 If you call them from the webview side (via JavaScript inside the rendered
-page), the webview's own native dialogs are used instead — `window.alert()`,
+page), the webview's own native dialogs are used instead: `window.alert()`,
 `window.confirm()`, and `window.prompt()` as the browser implements them. The
 behavior is similar: a native modal scoped to that webview.
 
 ## Differences from terminal Deno
 
-In a normal `deno run` script, these functions read from / write to the terminal
-— `prompt` reads a line of stdin, `confirm` accepts `y` / `n`. That terminal
-behavior would be invisible inside a desktop app, so `deno desktop` swaps them
-out for native dialogs without any code change on your part.
+In a normal `deno run` script, these functions read from / write to the
+terminal: `prompt` reads a line of stdin, `confirm` accepts `y` / `n`. That
+terminal behavior would be invisible inside a desktop app, so `deno desktop`
+swaps them out for native dialogs without any code change on your part.
 
 ## File and folder dialogs
 
@@ -114,7 +114,7 @@ A native file-picker API is on the roadmap.
 
 ## Notifications
 
-System notifications have a dedicated API — the standard Web `Notification`
+System notifications have a dedicated API: the standard Web `Notification`
 constructor, callable from your Deno-side code. See
 [Notifications](/runtime/desktop/notifications/).
 

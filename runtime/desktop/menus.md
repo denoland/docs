@@ -21,7 +21,7 @@ Both use the same [`Deno.MenuItem`](/api/deno/~/Deno.MenuItem) type.
 
 ## `MenuItem` shape
 
-`MenuItem` is a tagged union — each entry is one of four shapes:
+`MenuItem` is a tagged union: each entry is one of four shapes:
 
 ```ts
 type MenuItem =
@@ -150,7 +150,7 @@ branch on platform for the most common shortcuts.
 
 ### Roles
 
-A `{ role: { role } }` item maps to a standard OS menu command — the platform
+A `{ role: { role } }` item maps to a standard OS menu command: the platform
 provides the label, accelerator, and behavior. Use roles for the conventional
 commands so they behave natively (and so macOS wires up the standard Edit-menu
 keyboard shortcuts):
@@ -163,13 +163,14 @@ const paste: Deno.MenuItem = { role: { role: "paste" } };
 
 Common roles include `quit`, `undo`, `redo`, `cut`, `copy`, `paste`,
 `selectAll`, `minimize`, and `close`. A role item needs no `id` and never fires
-a `menuclick` event — the OS handles it directly.
+a `menuclick` event; the OS handles it directly.
 
 ### macOS menu bar peculiarities
 
 On macOS, the **first** top-level submenu is the application menu (the one with
-your app's name) — its label is replaced with the app name. Put the standard app
-roles (such as `quit`) there. If you do not provide one, a default is generated.
+your app's name), and its label is replaced with the app name. Put the standard
+app roles (such as `quit`) there. If you do not provide one, a default is
+generated.
 
 The Edit menu's standard items (Cut, Copy, Paste, Select All, Undo, Redo) work
 natively when you include them as `role` items.
@@ -201,14 +202,14 @@ win.addEventListener("contextmenuclick", (e) => {
 ```
 
 Context-menu clicks arrive as `contextmenuclick` events, while application-menu
-clicks arrive as `menuclick` — so you don't need to namespace ids to tell them
+clicks arrive as `menuclick`, so you don't need to namespace ids to tell them
 apart.
 
 ## Dynamic menus
 
 The application menu can be replaced at any time by calling `setApplicationMenu`
-again — the OS replaces the menu in place. There is no "update single item" API;
-rebuild the array and call `setApplicationMenu` when state changes:
+again, and the OS replaces the menu in place. There is no "update single item"
+API; rebuild the array and call `setApplicationMenu` when state changes:
 
 ```ts
 function rebuildEditMenu(canUndo: boolean) {

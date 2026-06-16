@@ -26,13 +26,13 @@ deno desktop --output MyApp.app main.ts
 ```
 
 The entrypoint is optional. A bare `deno desktop` (or `deno desktop .`) detects
-a supported framework — Next.js, Astro, Fresh, and others — in the current
+a supported framework (Next.js, Astro, Fresh, and others) in the current
 directory and builds it without any code changes. See
 [Frameworks](/runtime/desktop/frameworks/).
 
-This page covers the command-line flags. For the full guide — backends,
+This page covers the command-line flags. For the full guide (backends,
 [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow), bindings, auto-update,
-DevTools, and distribution — see the [Desktop apps section](/runtime/desktop/).
+DevTools, and distribution) see the [Desktop apps section](/runtime/desktop/).
 
 ## Runtime flags
 
@@ -65,7 +65,7 @@ deno desktop --output ./dist/MyApp.dmg main.ts
 
 Use `--icon` to set the application icon (`.ico` on Windows, `.icns` or `.png`
 on macOS), and `--include` / `--exclude` to add or remove files from the
-compiled binary. These can also be configured in `deno.json` — see
+compiled binary. These can also be configured in `deno.json`; see
 [Configuration](/runtime/desktop/configuration/).
 
 ## Cross-compilation

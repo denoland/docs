@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-16
 title: "Error reporting"
-description: "Capture uncaught errors, unhandled rejections, and Rust panics — show a native alert and POST a JSON report to your server."
+description: "Capture uncaught errors, unhandled rejections, and Rust panics, showing a native alert and POSTing a JSON report to your server."
 ---
 
 :::info Coming in Deno 2.9
@@ -20,7 +20,7 @@ keys, and TypeScript APIs may still change before the feature is stable.
 - Rust panics inside the runtime or the rendering backend.
 
 When one of these happens, the runtime shows a native alert with the error
-message, and — if you have configured a reporting URL — `POST`s a JSON report.
+message, and, if you have configured a reporting URL, `POST`s a JSON report.
 
 ## Configuration
 
@@ -38,7 +38,7 @@ Set `desktop.errorReporting.url` in your `deno.json`:
 
 The URL must use `https://` or `file://`. Plain `http://` is rejected, since
 reports carry stack traces and runtime context that anyone on-path could read. A
-`file://` URL is useful for local testing — the runtime appends the JSON to that
+`file://` URL is useful for local testing: the runtime appends the JSON to that
 path instead of making an HTTP request.
 
 If `errorReporting.url` is not set, the alert still appears but no report is
@@ -69,7 +69,7 @@ sent.
 | `arch`       | string                             | [`Deno.build.arch`](/api/deno/~/Deno.build.arch).                                  |
 
 The `Content-Type` header is `application/json`. Reports are sent as a single
-POST with no retry — if your server is down, the report is lost. For
+POST with no retry. If your server is down, the report is lost. For
 high-importance reports, queue them locally and resend on next launch.
 
 ## What gets reported
@@ -78,15 +78,15 @@ high-importance reports, queue them locally and resend on next launch.
 | -------------------------------------------- | ---------------------------------------------- |
 | Uncaught exception in Deno-side code         | Yes.                                           |
 | Unhandled rejection in Deno-side code        | Yes.                                           |
-| Uncaught exception in renderer-side JS       | Yes — caught via the renderer's `error` event. |
+| Uncaught exception in renderer-side JS       | Yes; caught via the renderer's `error` event.  |
 | Rust panic in the Deno runtime               | Yes.                                           |
-| Rust panic in the rendering backend (CEF, …) | Yes — the backend bridges these.               |
-| `console.error` / `console.warn`             | No — these are not errors.                     |
+| Rust panic in the rendering backend (CEF, …) | Yes; the backend bridges these.                |
+| `console.error` / `console.warn`             | No; these are not errors.                      |
 | Exceptions you `try`/`catch` yourself        | No.                                            |
 
 Errors thrown inside a [binding](/runtime/desktop/bindings/) handler propagate
 to the webview side and reject the calling promise. They are **not** reported as
-uncaught errors — the webview catches them. To report them anyway, log them
+uncaught errors; the webview catches them. To report them anyway, log them
 yourself in the binding handler.
 
 ## Suppressing the alert
@@ -97,7 +97,7 @@ no way to suppress it from user code: the runtime registers its `error` and
 `unhandledrejection` handlers before your code runs, so a `preventDefault()` in
 a listener you add later does not stop the alert or the report.
 
-To keep an error from triggering the alert, prevent it from becoming uncaught —
+To keep an error from triggering the alert, prevent it from becoming uncaught:
 handle it with `try`/`catch` (or local error handling) in your code and binding
 implementations:
 
@@ -107,7 +107,7 @@ win.bind("readFile", async (path) => {
     return await Deno.readTextFile(path);
   } catch (e) {
     reportToOwnTelemetry(e);
-    return null; // handled — no alert
+    return null; // handled, no alert
   }
 });
 ```
