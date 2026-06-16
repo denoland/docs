@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-01-27
 title: "Serve a web framework"
 description: "Create a package.json, install deps, run a web framework (Express), and expose it publicly from a sandbox"
 url: /examples/sandbox_web_framework/

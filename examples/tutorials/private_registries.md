@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-11
 title: "Use private npm registries"
 description: "Configure Deno to install npm packages from private registries: .npmrc scoped registries and auth tokens, the NPM_CONFIG_REGISTRY override, DENO_AUTH_TOKENS, and worked setups for Azure Artifacts and JFrog Artifactory."
 url: /examples/private_registries_tutorial/

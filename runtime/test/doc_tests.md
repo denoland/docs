@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-15
 title: "Documentation tests"
 description: "Run the code examples in your JSDoc comments and markdown files as tests with deno test --doc, so your documentation never goes stale."
 oldUrl:
@@ -119,6 +120,43 @@ Deno.test("example.ts$4-10.ts", async () => {
   assertEquals(sum, 3);
 });
 ```
+
+## Hashbang and narrowed permissions
+
+If a code example starts with a [hashbang](/examples/hashbang_tutorial/), it is
+validated against supported Deno cli flags, and permissions flags are forwarded
+to the generated [`Deno.test`](/api/deno/~/Deno.test).
+
+````ts
+/**
+ * Prints the value of an environment variable.
+ *
+ * ```ts
+ * #!/usr/bin/env -S deno run --allow-env=MY_ENV_VAR
+ * console.log(Deno.env.get("MY_ENV_VAR"));
+ * ```
+ */
+````
+
+Below is how each permission flag is interpreted:
+
+| Flag                | Generated permissions                                |
+| ------------------- | ---------------------------------------------------- |
+| `--allow-all`       | Inherits all permissions from `deno test`            |
+| `--allow-*`         | Inherits the specified permission from `deno test`   |
+| `--allow-*=…`       | Restrict the specified permission to provided values |
+| `--deny-*`          | Explicitly revoke the specified permission           |
+| `--deny-*=…`        | Currently unsupported (results in a test failure)    |
+| `--permission-set`  | Currently unsupported (ignored)                      |
+| `--ignore-*`        | Currently unsupported (ignored)                      |
+| No permission flags | None                                                 |
+
+:::note
+
+A code example never runs with broader permissions than what `deno test` was
+granted, even if the hashbang itself specifies broader ones.
+
+:::
 
 ## Skipping code blocks
 

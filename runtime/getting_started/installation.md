@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-01
+last_modified: 2026-06-15
 title: Installation
 description: "A Guide to installing Deno on different operating systems. Includes instructions for Windows, macOS, and Linux using various package managers, manual installation methods, and Docker containers."
 oldUrl:
@@ -176,8 +176,13 @@ matching `.sha256sum` file for verifying the download.
 
 ## Docker
 
-For more information and instructions on the official Docker images:
-[https://github.com/denoland/deno_docker](https://github.com/denoland/deno_docker)
+Deno publishes official images to
+[Docker Hub](https://hub.docker.com/r/denoland/deno) and the
+[GitHub Container Registry](https://github.com/denoland/deno/pkgs/container/deno),
+in `debian`, `ubuntu`, `alpine`, `distroless`, and `bin` variants.
+
+See [Deno and Docker](/runtime/reference/docker/) for Dockerfiles, multi-stage
+builds, Docker Compose, and other best practices.
 
 ## Installation location
 
@@ -217,9 +222,8 @@ print the directory currently in use.
 To test your installation, run `deno --version`. If this prints the Deno version
 to the console the installation was successful.
 
-Use `deno help` to see help text documenting Deno's flags and usage. Get a
-detailed guide on the CLI
-[here](/runtime/getting_started/command_line_interface/).
+Use `deno help` to see help text documenting Deno's flags and usage. For a guide
+to every subcommand, see the [CLI reference](/runtime/reference/cli/).
 
 ### If you see "command not found"
 

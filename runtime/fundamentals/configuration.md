@@ -1,36 +1,76 @@
 ---
-last_modified: 2026-03-09
+last_modified: 2026-06-14
 title: "Config files"
-description: "How Deno projects are configured: the deno.json file, .jsonc support and discovery, how package.json is used for Node compatibility, and an overview of what you can configure. See the deno.json reference for every field."
+description: "How Deno projects are configured: first-class package.json support, the deno.json file for Deno's own tooling, .jsonc support and discovery, and an overview of what you can configure. See the deno.json reference for every field."
 oldUrl:
   - /runtime/manual/getting_started/configuration_file/
 ---
 
-You can configure Deno using a `deno.json` file. This file can be used to
-configure the TypeScript compiler, linter, formatter, and other Deno tools.
+Deno reads two configuration files: Node's `package.json` and its own
+`deno.json`. Both are first-class and both are optional, so Deno works with
+either one or both together. The rule of thumb:
 
-The configuration file supports `.json` and
+- Use a **`package.json`** for dependencies and scripts. Deno reads it directly,
+  so most Node.js projects run with no changes and you do not need a `deno.json`
+  at all.
+- Add a **`deno.json`** when you want to configure Deno's own tooling, such as
+  the formatter, linter, TypeScript compiler, or tasks.
+
+## package.json
+
+Deno has first-class `package.json` support. Point Deno at an existing Node.js
+project and it resolves the same npm dependencies from `package.json` and runs
+the project's `scripts` with [`deno task`](/runtime/reference/cli/task/), with
+no `deno.json` and no conversion step:
+
+```sh
+deno install        # install the dependencies from package.json
+deno task <script>  # run a script defined in package.json
+```
+
+A `package.json` configures your project's dependencies and scripts, but it does
+not configure Deno itself. Deno-specific settings such as the formatter, linter,
+TypeScript compiler options, and lockfile behavior live only in `deno.json`.
+When both files are present, Deno reads dependencies from each and takes its own
+configuration from `deno.json`.
+
+This is what lets you adopt Deno incrementally: keep running an app on Node
+while using Deno as a faster drop-in package manager, run your existing scripts
+with `deno task`, and add a `deno.json` for Deno's toolchain when you are ready.
+The [Migrate from Node.js](/runtime/migrate/) guide walks through each step, and
+[Node compatibility in Deno](/runtime/fundamentals/node/) covers how the runtime
+maps Node's APIs and module resolution.
+
+## deno.json
+
+`deno.json` is where you configure Deno itself: tasks, dependencies, and tools
+like the TypeScript compiler, linter, and formatter. It is optional; a minimal
+file looks like this:
+
+```json title="deno.json"
+{
+  "tasks": {
+    "dev": "deno run --watch main.ts"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@^1"
+  },
+  "fmt": {
+    "lineWidth": 100
+  }
+}
+```
+
+It supports `.json` and
 [`.jsonc`](https://code.visualstudio.com/docs/languages/json#_json-with-comments)
-extensions.
+extensions, so with `deno.jsonc` you can add comments and trailing commas.
 
-Deno will automatically detect a `deno.json` or `deno.jsonc` configuration file
-if it's in your current working directory or parent directories. The `--config`
-flag can be used to specify a different configuration file.
-
-## package.json support
-
-For compatibility with Node.js projects, Deno also reads an existing
-`package.json`. You don't need to add a `deno.json` to run a Node project: Deno
-resolves the project's dependencies from `package.json`, and you can run its
-`scripts` with [`deno task`](/runtime/reference/cli/task/).
-
-A `package.json` is not, however, a way to configure Deno itself. Deno-specific
-settings such as the linter, formatter, TypeScript compiler options, and
-lockfile are read only from `deno.json`. When both files are present, Deno reads
-dependencies from each and uses `deno.json` for its own configuration.
-
-Read more about
-[Node compatibility in Deno](/runtime/fundamentals/node/#node-compatibility).
+Deno automatically detects a `deno.json` or `deno.jsonc` file in your current
+working directory or any parent directory, which is what makes a project's
+settings apply to every file under it. Use the `--config` flag to point at a
+different file. In a monorepo, a root `deno.json` can define a
+[workspace](/runtime/fundamentals/workspaces/) whose members each carry their
+own `deno.json`.
 
 ## What you can configure
 

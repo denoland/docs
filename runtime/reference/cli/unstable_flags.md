@@ -272,3 +272,20 @@ console.log(`Next week: ${nextWeek}`);
 const zonedDateTime = Temporal.Now.zonedDateTimeISO("America/New_York");
 console.log(`Time in New York: ${zonedDateTime}`);
 ```
+
+## `--unstable-tsgo`
+
+Type-checks with TypeScript's native compiler (written in Go), which is often
+around 10 times faster than the default JavaScript `tsc`. Deno integrates the
+native compiler with its own module resolution and types, so Deno code
+type-checks normally.
+
+```sh
+deno check --unstable-tsgo main.ts
+```
+
+It can also be enabled with the `DENO_UNSTABLE_TSGO=1` environment variable or
+`"unstable": ["tsgo"]` in `deno.json`. This is a preview feature and is not yet
+feature-complete. See
+[TypeScript](/runtime/fundamentals/typescript/#faster-type-checking-with-the-native-compiler-tsgo)
+for details.

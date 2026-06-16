@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "Lock dependencies with deno.lock"
 description: "Use deno.lock for reproducible installs: what the lockfile records, reviewing lockfile diffs, frozen lockfiles for CI with --frozen and deno ci, and regenerating or relocating the lockfile."
 url: /examples/dependency_lockfile_tutorial/

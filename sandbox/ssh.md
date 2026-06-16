@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-01-28
 title: "SSH"
 description: "How to open secure SSH access into a sandbox for interactive debugging, editor sessions, or long-running processes."
 ---

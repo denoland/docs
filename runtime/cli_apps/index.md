@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-06-12
 title: "Build CLI apps"
 description: "Build command-line tools with Deno: read arguments and stdin, prompt the user, set exit codes, compile to a single self-contained executable, and distribute your tool."
 ---

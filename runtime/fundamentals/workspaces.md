@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-06-15
 title: "Workspaces and monorepos"
 description: "A guide to managing workspaces and monorepos in Deno. Learn about workspace configuration, package management, dependency resolution, and how to structure multi-package projects effectively."
 oldUrl: /runtime/manual/basics/workspaces
@@ -859,5 +859,4 @@ This allows for smooth integration between Deno and npm/pnpm ecosystems during
 migration or in hybrid projects.
 
 For more information on configuring your project, check out the
-[Configuration with deno.json](/examples/configuration_with_deno_json/)
-tutorial.
+[Configuration with deno.json](/runtime/fundamentals/configuration/) tutorial.

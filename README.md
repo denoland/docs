@@ -134,6 +134,15 @@ files in their respective content directories.
 Static files (like screenshots) can be included directly in the `runtime`,
 `deploy`, or `kv` folders, and referenced by relative URLs in your markdown.
 
+### Keep `last_modified` fresh
+
+Every content page carries a `last_modified: YYYY-MM-DD` field in its
+frontmatter. Whenever you change a page, bump that date to the day of the change
+in the same pull request. CI enforces this: the `frontmatter_test` checks that
+every page has a valid `last_modified`, and the Freshness workflow fails when a
+page is edited without bumping it. Run `deno task check:freshness` locally to
+check your branch.
+
 ### Guides teach, reference enumerates
 
 A topic's depth lives in exactly one place. Guide pages (like `/runtime/test/`
