@@ -7,7 +7,7 @@ description: "Add icons to the OS status area and the macOS dock — tooltips, d
 :::info Coming in Deno 2.9
 
 `deno desktop` ships in Deno v2.9.0 and is not in a stable release yet. To try
-it now, run `deno upgrade --canary` to install the
+it now, run `deno upgrade canary` to install the
 [`canary`](/runtime/reference/cli/upgrade/) build. The command, configuration
 keys, and TypeScript APIs may still change before the feature is stable.
 
