@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-05
+last_modified: 2026-06-16
 title: "Unstable feature flags"
 oldUrl:
   - /runtime/tools/unstable_flags/
@@ -52,32 +52,6 @@ environment variable:
 
 ```sh
 export DENO_UNSTABLE_SLOPPY_IMPORTS=true
-```
-
-## `--unstable-bare-node-builtins`
-
-**Environment variable:** `DENO_UNSTABLE_BARE_NODE_BUILTINS`
-
-:::note
-
-As of Deno 2.9, importing Node built-in modules without a `node:` specifier is
-**stable** and works by default, so this flag is no longer needed for that. See
-[Node built-in modules](/runtime/fundamentals/node/#node-built-in-modules). The
-flag still applies to importing npm packages without an `npm:` specifier when
-you manage your Node.js dependencies manually.
-
-:::
-
-This flag enables you to
-[import Node.js built-in modules](/runtime/fundamentals/node/#node-built-in-modules)
-without a `node:` specifier, as in the example below. You can also use this flag
-to enable npm packages without an `npm:` specifier if you are manually managing
-your Node.js dependencies.
-
-```ts title="example.ts"
-import { readFileSync } from "fs";
-
-console.log(readFileSync("deno.json", { encoding: "utf8" }));
 ```
 
 ## `--unstable-detect-cjs`

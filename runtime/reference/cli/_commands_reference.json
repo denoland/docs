@@ -27,15 +27,6 @@
       "about": "Run a JavaScript or TypeScript program, or a task or script.\n\nBy default all programs are run in sandbox without access to disk, network or ability to spawn subprocesses.\n  \u001b[38;5;245mdeno run https://docs.deno.com/hello_world.ts\u001b[39m\n\nGrant permission to read from disk and listen to network:\n  \u001b[38;5;245mdeno run --allow-read --allow-net jsr:@std/http/file-server\u001b[39m\n\nGrant permission to read allow-listed files from disk:\n  \u001b[38;5;245mdeno run --allow-read=/etc jsr:@std/http/file-server\u001b[39m\n\nGrant all permissions:\n  \u001b[38;5;245mdeno run -A jsr:@std/http/file-server\u001b[39m\n\nSpecifying the filename '-' to read the file from stdin.\n  \u001b[38;5;245mcurl https://docs.deno.com/hello_world.ts | deno run -\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/run\u001b[39m",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-bundle",
           "short": null,
           "long": "unstable-bundle",
@@ -592,15 +583,6 @@
       "name": "serve",
       "about": "Run a server defined in a main module\n\nThe serve command uses the default exports of the main module to determine which servers to start.\n\nStart a server defined in server.ts:\n  \u001b[38;5;245mdeno serve server.ts\u001b[39m\n\nStart a server defined in server.ts, watching for changes and running on port 5050:\n  \u001b[38;5;245mdeno serve --watch --port 5050 server.ts\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/serve\u001b[39m",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
@@ -1435,15 +1417,6 @@
       "about": "Run benchmarks using Deno's built-in bench tool.\n\nEvaluate the given files, run all benches declared with 'Deno.bench()' and report results to standard output:\n  \u001b[38;5;245mdeno bench src/fetch_bench.ts src/signal_bench.ts\u001b[39m\n\nIf you specify a directory instead of a file, the path is expanded to all contained files matching the glob \u001b[36m{*_,*.,}bench.{js,mjs,ts,mts,jsx,tsx}\u001b[39m:\n  \u001b[38;5;245mdeno bench src/\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/bench\u001b[39m",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-bundle",
           "short": null,
           "long": "unstable-bundle",
@@ -1929,15 +1902,6 @@
       "about": "Output a single JavaScript file with all dependencies.\n\n  deno bundle jsr:@std/http/file-server -o file-server.bundle.js\n\nIf no output file is given, the output is written to standard output:\n\n  deno bundle jsr:@std/http/file-server\n",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-detect-cjs",
           "short": null,
           "long": "unstable-detect-cjs",
@@ -2306,15 +2270,6 @@
       "about": "Cache and compile remote dependencies.\n\nDownload and compile a module with all of its static dependencies and save them in the local cache, without running any code:\n  \u001b[38;5;245mdeno cache jsr:@std/http/file-server\u001b[39m\n\nFuture runs of this module will trigger no downloads or compilation unless --reload is specified\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/cache\u001b[39m",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-detect-cjs",
           "short": null,
           "long": "unstable-detect-cjs",
@@ -2583,15 +2538,6 @@
       "name": "check",
       "about": "Download and type-check without execution.\n\n  \u001b[38;5;245mdeno check jsr:@std/http/file-server\u001b[39m\n\nUnless --reload is specified, this command will not re-download already cached dependencies\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/check\u001b[39m",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
@@ -3058,15 +3004,6 @@
       "name": "compile",
       "about": "Compiles the given script into a self contained executable.\n\n  \u001b[38;5;245mdeno compile --allow-read --allow-net jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno compile --output file_server jsr:@std/http/file-server\u001b[39m\n\nAny flags specified which affect runtime behavior will be applied to the resulting binary.\n\nThis allows distribution of a Deno application to systems that do not have Deno installed.\nUnder the hood, it bundles a slimmed down version of the Deno runtime along with your\nJavaScript or TypeScript code.\n\nCross-compiling to different target architectures is supported using the \u001b[36m--target\u001b[39m flag.\nOn the first invocation of `deno compile`, Deno will download the relevant binary and cache it in \u001b[36m$DENO_DIR\u001b[39m.\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/compile\u001b[39m\n",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
@@ -3721,15 +3658,6 @@
       "about": "Show documentation for a module.\n\nOutput documentation to standard output:\n    \u001b[38;5;245mdeno doc ./path/to/module.ts\u001b[39m\n\nOutput documentation in HTML format:\n    \u001b[38;5;245mdeno doc --html --name=\"My library\" ./path/to/module.ts\u001b[39m\n\nLint a module for documentation diagnostics:\n    \u001b[38;5;245mdeno doc --lint ./path/to/module.ts\u001b[39m\n\nTarget a specific symbol:\n    \u001b[38;5;245mdeno doc ./path/to/module.ts MyClass.someField\u001b[39m\n\nShow documentation for runtime built-ins:\n    \u001b[38;5;245mdeno doc\u001b[39m\n    \u001b[38;5;245mdeno doc --filter Deno.Listener\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/doc\u001b[39m",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-detect-cjs",
           "short": null,
           "long": "unstable-detect-cjs",
@@ -4023,15 +3951,6 @@
       "name": "eval",
       "about": "Evaluate JavaScript from the command line.\n  \u001b[38;5;245mdeno eval \"console.log('hello world')\"\u001b[39m\n\nTo evaluate as TypeScript:\n  \u001b[38;5;245mdeno eval --ext=ts \"const v: string = 'hello'; console.log(v)\"\u001b[39m\n\nThis command has implicit access to all permissions.\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/eval\u001b[39m",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
@@ -4777,15 +4696,6 @@
       "about": "Show information about a module or the cache directories.\n\nGet information about a module:\n  \u001b[38;5;245mdeno info jsr:@std/http/file-server\u001b[39m\n\nThe following information is shown:\n  local: Local path of the file\n  type: JavaScript, TypeScript, or JSON\n  emit: Local path of compiled source code (TypeScript only)\n  dependencies: Dependency tree of the source file\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/info\u001b[39m",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-detect-cjs",
           "short": null,
           "long": "unstable-detect-cjs",
@@ -5018,15 +4928,6 @@
       "name": "install",
       "about": "Installs dependencies either in the local project or globally to a bin directory.\n\n\u001b[32mLocal installation\u001b[39m\n\nAdd dependencies to the local project's configuration (\u001b[38;5;245mdeno.json / package.json\u001b[39m) and installs them\nin the package cache. If no dependency is specified, installs all dependencies listed in the config file.\nIf the \u001b[38;5;245m--entrypoint\u001b[39m flag is passed, installs the dependencies of the specified entrypoint(s).\n\n  \u001b[38;5;245mdeno install\u001b[39m\n  \u001b[38;5;245mdeno install express\u001b[39m\n  \u001b[38;5;245mdeno install jsr:@std/bytes\u001b[39m\n  \u001b[38;5;245mdeno install --entrypoint entry1.ts entry2.ts\u001b[39m\n\n\u001b[32mGlobal installation\u001b[39m\n\nIf the \u001b[1m--global\u001b[22m flag is set, installs a script as an executable in the installation root's bin directory.\n\n  \u001b[38;5;245mdeno install --global --allow-net --allow-read jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno install -g https://examples.deno.land/color-logging.ts\u001b[39m\n\nTo change the executable name, use \u001b[36m-n\u001b[39m/\u001b[36m--name\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read -n serve jsr:@std/http/file-server\u001b[39m\n\nThe executable name is inferred by default:\n  - Attempt to take the file stem of the URL path. The above example would\n    become \u001b[38;5;245mfile_server\u001b[39m.\n  - If the file stem is something generic like \u001b[38;5;245mmain\u001b[39m, \u001b[38;5;245mmod\u001b[39m, \u001b[38;5;245mindex\u001b[39m or \u001b[38;5;245mcli\u001b[39m,\n    and the path has no parent, take the file name of the parent path. Otherwise\n    settle with the generic name.\n  - If the resulting name has an \u001b[38;5;245m@...\u001b[39m suffix, strip it.\n\nTo change the installation root, use \u001b[36m--root\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read --root /usr/local jsr:@std/http/file-server\u001b[39m\n\nThe installation root is determined, in order of precedence:\n  - \u001b[38;5;245m--root\u001b[39m option\n  - \u001b[38;5;245mDENO_INSTALL_ROOT\u001b[39m environment variable\n  - \u001b[38;5;245m$HOME/.deno\u001b[39m\n\nThese must be added to the path manually if required.",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
@@ -5603,15 +5504,6 @@
       "about": "Install dependencies in a clean, reproducible way for CI environments.\n\nSimilar to \u001b[38;5;245mnpm ci\u001b[39m: requires a \u001b[38;5;245mdeno.lock\u001b[39m file, removes any existing \u001b[38;5;245mnode_modules\u001b[39m\ndirectory, and then installs strictly from the lockfile. Errors if \u001b[38;5;245mdeno.lock\u001b[39m\nis missing or out of date with the config file.\n\n  \u001b[38;5;245mdeno ci\u001b[39m\n  \u001b[38;5;245mdeno ci --prod\u001b[39m",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-bundle",
           "short": null,
           "long": "unstable-bundle",
@@ -6089,15 +5981,6 @@
       "about": "Lint JavaScript/TypeScript source code.\n\n  \u001b[38;5;245mdeno lint\u001b[39m\n  \u001b[38;5;245mdeno lint myfile1.ts myfile2.js\u001b[39m\n\nPrint result as JSON:\n  \u001b[38;5;245mdeno lint --json\u001b[39m\n\nRead from stdin:\n  \u001b[38;5;245mcat file.ts | deno lint -\u001b[39m\n  \u001b[38;5;245mcat file.ts | deno lint --json -\u001b[39m\n\nList available rules:\n  \u001b[38;5;245mdeno lint --rules\u001b[39m\n\nTo ignore specific diagnostics, you can write an ignore comment on the preceding line with a rule name (or multiple):\n  \u001b[38;5;245m// deno-lint-ignore no-explicit-any\u001b[39m\n  \u001b[38;5;245m// deno-lint-ignore require-await no-empty\u001b[39m\n\nTo ignore linting on an entire file, you can add an ignore comment at the top of the file:\n  \u001b[38;5;245m// deno-lint-ignore-file\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/lint\u001b[39m\n",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-detect-cjs",
           "short": null,
           "long": "unstable-detect-cjs",
@@ -6331,15 +6214,6 @@
       "about": "Publish the current working directory's package or workspace to JSR",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-detect-cjs",
           "short": null,
           "long": "unstable-detect-cjs",
@@ -6501,15 +6375,6 @@
       "about": "Create an npm-compatible tarball from a Deno project",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-detect-cjs",
           "short": null,
           "long": "unstable-detect-cjs",
@@ -6670,15 +6535,6 @@
       "name": "repl",
       "about": "Starts a read-eval-print-loop, which lets you interactively build up program state in the global context.\nIt is especially useful for quick prototyping and checking snippets of code.\n\nTypeScript is supported, however it is not type-checked, only transpiled.",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
@@ -7093,15 +6949,6 @@
       "about": "Run a task defined in the configuration file:\n  \u001b[38;5;245mdeno task build\u001b[39m\n\nList all available tasks (from config files in the current and ancestor directories):\n  \u001b[38;5;245mdeno task\u001b[39m\n\nEvaluate a task from string:\n  \u001b[38;5;245mdeno task --eval \"echo $(pwd)\"\u001b[39m",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-bundle",
           "short": null,
           "long": "unstable-bundle",
@@ -7379,15 +7226,6 @@
       "name": "test",
       "about": "Run tests using Deno's built-in test runner.\n\nEvaluate the given modules, run all tests declared with \u001b[1mDeno.\u001b[33m\u001b[22mtest()\u001b[39m and report results to standard output:\n  \u001b[38;5;245mdeno test src/fetch_test.ts src/signal_test.ts\u001b[39m\n\nDirectory arguments are expanded to all contained files matching the glob \u001b[36m{*_,*.,}test.{js,mjs,ts,mts,jsx,tsx}\u001b[39m\nor \u001b[36m**/__tests__/**\u001b[39m:\n \u001b[38;5;245mdeno test src/\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/test\u001b[39m",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
@@ -8009,15 +7847,6 @@
       "about": "Transpile TypeScript/JSX/TSX files to JavaScript.\n\n  \u001b[38;5;245mdeno transpile main.ts\u001b[39m\n\nOutput to a specific file:\n  \u001b[38;5;245mdeno transpile main.ts -o main.js\u001b[39m\n\nOutput to a directory:\n  \u001b[38;5;245mdeno transpile src/*.ts --outdir dist\u001b[39m\n\nWith source maps:\n  \u001b[38;5;245mdeno transpile main.ts --source-map separate\u001b[39m\n\nGenerate declaration files:\n  \u001b[38;5;245mdeno transpile main.ts -o out.js --declaration\u001b[39m\n\nNote: --declaration always writes .d.ts files to disk (next to the source or in --outdir).",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-detect-cjs",
           "short": null,
           "long": "unstable-detect-cjs",
@@ -8525,15 +8354,6 @@
       "about": "`deno vendor` was removed in Deno 2.\n\nSee the Deno 1.x to 2.x Migration Guide for migration instructions: https://docs.deno.com/runtime/manual/advanced/migrate_deprecations",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-detect-cjs",
           "short": null,
           "long": "unstable-detect-cjs",
@@ -8648,15 +8468,6 @@
       "name": "x",
       "about": "Execute a binary from npm or jsr, like npx",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
