@@ -107,7 +107,7 @@ export default function ExamplePage({ example }: Props) {
         {example.parsed.additionalResources.length > 0 && (
           <div class="col-span-3 pt-6 mt-8 border-t-1 border-gray-200">
             <h2 class="mt-0">Additional resources</h2>
-            <ul class="list-none mt-1">
+            <ul class="list-disc pl-5 mt-1 marker:text-foreground-secondary">
               {example.parsed.additionalResources.map(([link, title]) => (
                 <li
                   class="text-gray-700 hover:text-gray-900"

@@ -45,9 +45,8 @@ It applies to `deno check` along with other subcommands like `deno fmt` and
 }
 ```
 
-See
-[include and exclude](/runtime/fundamentals/configuration/#include-and-exclude)
-in the configuration reference for the full glob syntax, including how to
+See [include and exclude](/runtime/reference/deno_json/#include-and-exclude) in
+the configuration reference for the full glob syntax, including how to
 un-exclude a sub-path.
 
 ## Type-checking remote modules

@@ -15,7 +15,7 @@ description: "Run the Deno linter to check your code for errors and apply automa
 
 Deno ships with a built-in linter that analyzes your code for potential errors,
 bugs, and stylistic issues. For a broader overview, see
-[Linting and Formatting](/runtime/fundamentals/linting_and_formatting/).
+[Linting and Formatting](/runtime/lint_and_format/).
 
 ## Basic usage
 
@@ -80,8 +80,8 @@ Customize which rules are active in your `deno.json`:
 - **`include`** — additional individual rules to enable
 - **`exclude`** — rules to disable even if included by a tag
 
-See the [Configuration](/runtime/fundamentals/configuration/#linting) page for
-all available options.
+See the [Configuration](/runtime/reference/deno_json/#linting) page for all
+available options.
 
 ## Including and excluding files
 

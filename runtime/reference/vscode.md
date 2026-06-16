@@ -171,18 +171,18 @@ Individual hosts/origins can be enabled or disabled by editing the **Deno >
 Suggest > Imports: Hosts** setting - `deno.suggest.imports.hosts` in the
 appropriate `settings.json`.
 
-## Caching remote modules
+## Caching dependencies
 
-Deno supports remote modules and will fetch remote modules and store them
-locally in a cache. When you do something like `deno run`, `deno test`,
-`deno info` or `deno install` on the command line, the Deno CLI will go and try
-to fetch any remote modules and their dependencies and populate the cache.
+Deno downloads your dependencies (npm and JSR packages, and any remote URL
+modules) once and stores them in a local cache. When you run a command like
+`deno run`, `deno test`, `deno info`, or `deno install`, the CLI fetches any
+dependencies that aren't cached yet and populates the cache.
 
-While developing code in the editor, if the module is not in the cache, you will
-get a diagnostic such as
-`Uncached or missing remote URL: "https://deno.land/example/mod.ts"` for any
-missing remote modules. Deno will not automatically try to cache the module,
-unless it is a completion from a registry import suggestion (see above).
+While developing in the editor, if a dependency isn't cached you'll get a
+diagnostic such as
+`Uncached or missing remote URL: "https://deno.land/x/example/mod.ts"` for the
+missing dependency. Deno will not automatically cache it, unless it is a
+completion from a registry import suggestion (see above).
 
 In addition to running a command on a command line, the extension provides ways
 to cache dependencies within the editor. A missing dependency will have a _quick
@@ -300,7 +300,7 @@ that's ok.)
 While the extension communicates directly with the language server, there are
 times when you might prefer to run Deno commands via the CLI. You can define
 tasks in a `deno.json` file in the root of your workspace in a
-[`tasks` field](/runtime/fundamentals/configuration/#tasks).
+[`tasks` field](/runtime/reference/deno_json/#tasks).
 
 ## Using a development container
 

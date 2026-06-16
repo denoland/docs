@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-19
 title: Pricing and Limits
 description: Overview of Deno Subhosting pricing plans, resource limits, deployment restrictions, and performance constraints for your applications.
 ---

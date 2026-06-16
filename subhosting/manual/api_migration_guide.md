@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-03-19
 title: "Migrating from subhosting API v1 to v2"
 description: "Detailed guide for migrating from the Deno Deploy subhosting API v1 to v2, covering endpoint changes, deployment model differences, and new features like labels and layers."
 oldUrl:

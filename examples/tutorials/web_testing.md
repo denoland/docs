@@ -116,11 +116,11 @@ Deno.test("event handling test", () => {
 
 Testing components that make network requests requires mocking the fetch API.
 
-In the below example we will [mock](/examples/mocking_tutorial/) the `fetch` API
-to test a function that retrieves user data from an external API. The test
-creates a spy function that returns predefined responses based on the requested
-URL, allowing you to test both successful requests and error handling without
-making actual network calls:
+In the below example we will [mock](/runtime/test/mocking/) the `fetch` API to
+test a function that retrieves user data from an external API. The test creates
+a spy function that returns predefined responses based on the requested URL,
+allowing you to test both successful requests and error handling without making
+actual network calls:
 
 ```ts
 import { assertSpyCalls, spy } from "jsr:@std/testing/mock";

@@ -7,6 +7,14 @@ oldUrl:
   - /runtime/reference/migrate_deprecations/
 ---
 
+:::note Historical document
+
+This guide covers the one-time migration from Deno 1.x to Deno 2.x and is no
+longer actively updated. If you're coming to Deno from Node.js, see
+[Migrate from Node.js](/runtime/migrate/) instead.
+
+:::
+
 While we’ve accomplished a ton in Deno 1.x, the next major version is focused on
 using Deno **at scale**. This means seamless interoperability with Node.js and
 npm JavaScript infrastructure and supporting a wider range of projects and
@@ -60,15 +68,9 @@ mind. These teams work on complex codebases, sharing internal code, often using
 private registries.
 
 With Deno 2 your team can leverage private npm registries the same way you'd do
-with Node.js and npm, using an `.npmrc` file:
-
-```js title=".npmrc"
-@mycompany:registry=http://mycompany.com:8111/
-mycompany.com:8111/:_authToken=token
-```
-
-Learn more about private registry configuration
-[on `npm packages` page](/runtime/fundamentals/node/#private-registries).
+with Node.js and npm, using an `.npmrc` file. See
+[private registries](/runtime/fundamentals/node/#private-registries) for the
+configuration details.
 
 Deno 2 has workspace support, allowing you to mix Deno-first and Node-first
 packages in the same monorepo, making incremental adoption fast and
@@ -133,7 +135,7 @@ auto-installing behavior. The new default in Deno 2 is `manual`, which expects
 the user to keep this directory up to date manually.
 
 See
-[Node modules directory](https://docs.deno.com/runtime/fundamentals/configuration/#node-modules-directory)
+[Node modules directory](https://docs.deno.com/runtime/reference/deno_json/#node-modules-directory)
 for reference.
 
 ## CLI changes
@@ -192,7 +194,7 @@ Use the `--permit-no-files` CLI flag instead.
 - `--jobs`
 
 Use the
-[`DENO_JOBS`](https://docs.deno.com/runtime/manual/basics/env_variables/#special-environment-variables)
+[`DENO_JOBS`](/runtime/reference/env_variables/#special-environment-variables)
 environment variable instead.
 
 ```diff
@@ -304,8 +306,6 @@ See [deno#9795][deno#9795] for details.
 - `Deno.close()`
 
 Use the `.close()` method on the resource instead.
-
-<a href="#" id="rid">test</a>
 
 ```diff
   const conn = await Deno.connect({ port: 80 });
@@ -604,7 +604,7 @@ instead.
 ```diff
   using file = Deno.openSync("/foo/bar.txt", { read: true, write: true });
 
-  file.writeSync("new TextEncoder().encode("Hello, world!"));
+  file.writeSync(new TextEncoder().encode("Hello, world!"));
   file.truncateSync(1);
 - Deno.fsyncSync(file.rid);
 + file.syncSync();

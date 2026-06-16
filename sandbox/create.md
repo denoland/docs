@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-01-28
 title: "Create a Deno Sandbox"
 description: "Learn how to provision a sandbox with the static Sandbox.create() method and configure runtime, network, and lifecycle options."
 ---

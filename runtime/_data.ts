@@ -15,16 +15,8 @@ export const sidebar = [
         href: "/runtime/getting_started/installation/",
       },
       {
-        title: "First project",
-        href: "/runtime/getting_started/first_project/",
-      },
-      {
         title: "Setup your environment",
         href: "/runtime/getting_started/setup_your_environment/",
-      },
-      {
-        title: "Command line interface",
-        href: "/runtime/getting_started/command_line_interface/",
       },
     ],
   },
@@ -32,8 +24,38 @@ export const sidebar = [
     title: "Guides",
     items: [
       {
+        title: "Running code",
+        href: "/runtime/run/",
+        disclosure: true,
+        items: [
+          {
+            title: "Watch mode and HMR",
+            href: "/runtime/run/watch_mode/",
+          },
+        ],
+      },
+      {
         title: "Dependency management",
-        href: "/runtime/fundamentals/dependency_management/",
+        href: "/runtime/packages/",
+        disclosure: true,
+        items: [
+          {
+            title: "Publishing",
+            href: "/runtime/packages/publishing/",
+          },
+          {
+            title: "Supply chain",
+            href: "/runtime/packages/supply_chain/",
+          },
+          {
+            title: "Peer dependencies",
+            href: "/runtime/packages/peer_dependencies/",
+          },
+          {
+            title: "Private repositories",
+            href: "/runtime/packages/private_repositories/",
+          },
+        ],
       },
       {
         title: "Web development",
@@ -45,19 +67,68 @@ export const sidebar = [
       },
       {
         title: "Testing",
-        href: "/runtime/fundamentals/testing/",
+        href: "/runtime/test/",
+        disclosure: true,
+        items: [
+          {
+            title: "Mocking",
+            href: "/runtime/test/mocking/",
+          },
+          {
+            title: "Snapshots",
+            href: "/runtime/test/snapshots/",
+          },
+          {
+            title: "Coverage",
+            href: "/runtime/test/coverage/",
+          },
+          {
+            title: "Documentation tests",
+            href: "/runtime/test/doc_tests/",
+          },
+          {
+            title: "Sanitizers",
+            href: "/runtime/test/sanitizers/",
+          },
+          {
+            title: "Migrating from Jest",
+            href: "/runtime/test/migrate_from_jest/",
+          },
+        ],
       },
       {
         title: "Linting and formatting",
-        href: "/runtime/fundamentals/linting_and_formatting/",
+        href: "/runtime/lint_and_format/",
       },
       {
         title: "Debugging",
         href: "/runtime/fundamentals/debugging/",
+        disclosure: true,
+        items: [
+          {
+            title: "CPU profiling",
+            href: "/runtime/fundamentals/cpu_profiling/",
+          },
+        ],
       },
       {
         title: "Migrating from Node",
-        href: "/runtime/fundamentals/migrate_from_node/",
+        href: "/runtime/migrate/",
+        disclosure: true,
+        items: [
+          {
+            title: "Package manager",
+            href: "/runtime/migrate/switch_package_manager/",
+          },
+        ],
+      },
+      {
+        title: "Building CLI apps",
+        href: "/runtime/cli_apps/",
+      },
+      {
+        title: "Deploying your app",
+        href: "/runtime/deploy/",
       },
     ],
   },
@@ -81,7 +152,7 @@ export const sidebar = [
         href: "/runtime/fundamentals/modules/",
       },
       {
-        title: "Configuration",
+        title: "Config files",
         href: "/runtime/fundamentals/configuration/",
       },
       {
@@ -114,8 +185,8 @@ export const sidebar = [
         href: "/runtime/fundamentals/open_telemetry/",
       },
       {
-        title: "Module customization hooks",
-        href: "/runtime/reference/module_hooks/",
+        title: "Loader hooks",
+        href: "/runtime/reference/loader_hooks/",
       },
       {
         title: "Lint plugins",
@@ -134,16 +205,12 @@ export const sidebar = [
         href: "/runtime/reference/continuous_integration/",
       },
       {
-        title: "Using JSX and React",
+        title: "JSX and React",
         href: "/runtime/reference/jsx/",
       },
       {
         title: "Deno & VS Code",
         href: "/runtime/reference/vscode/",
-      },
-      {
-        title: "Deno 1.x to 2.x migration",
-        href: "/runtime/reference/migration_guide/",
       },
     ],
   },
@@ -223,6 +290,10 @@ export const sidebar = [
   {
     title: "Reference",
     items: [
+      {
+        title: "Overview",
+        href: "/runtime/reference/",
+      },
       {
         title: "CLI",
         href: "/runtime/reference/cli/",
@@ -451,12 +522,20 @@ export const sidebar = [
         ],
       },
       {
-        title: "Configuring TypeScript",
+        title: "deno.json",
+        href: "/runtime/reference/deno_json/",
+      },
+      {
+        title: "TypeScript",
         href: "/runtime/reference/ts_config_migration/",
       },
       {
         title: "Environment variables",
         href: "/runtime/reference/env_variables/",
+      },
+      {
+        title: "Permissions",
+        href: "/runtime/reference/permissions/",
       },
       {
         title: "LSP integration",
@@ -469,40 +548,19 @@ export const sidebar = [
     ],
   },
   {
-    title: "Contributing and support",
+    title: "Contributing",
     items: [
       {
-        title: "Contributing to Deno",
-        items: [
-          {
-            title: "Contributing overview",
-            href: "/runtime/contributing/",
-          },
-          {
-            title: "Architecture",
-            href: "/runtime/contributing/architecture/",
-          },
-          {
-            title: "Profiling",
-            href: "/runtime/contributing/profiling/",
-          },
-          {
-            title: "Release schedule",
-            href: "/runtime/contributing/release_schedule/",
-          },
-          {
-            title: "Style guide",
-            href: "/runtime/contributing/style_guide/",
-          },
-          {
-            title: "Documentation",
-            href: "/runtime/contributing/docs/",
-          },
-          {
-            title: "Examples",
-            href: "/runtime/contributing/examples/",
-          },
-        ],
+        title: "Overview",
+        href: "/runtime/contributing/",
+      },
+      {
+        title: "Architecture",
+        href: "/runtime/contributing/architecture/",
+      },
+      {
+        title: "Style guide",
+        href: "/runtime/contributing/style_guide/",
       },
       {
         title: "Help",

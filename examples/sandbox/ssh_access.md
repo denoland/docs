@@ -1,4 +1,5 @@
 ---
+last_modified: 2026-02-09
 title: "Provide SSH access to a sandbox"
 description: "Learn how to provide SSH access to a sandbox."
 url: /examples/sandbox_ssh_access/
