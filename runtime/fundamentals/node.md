@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-15
+last_modified: 2026-06-16
 title: "Node and npm Compatibility"
 description: "Guide to using Node.js modules and npm packages in Deno. Learn about compatibility features, importing npm packages, and differences between Node.js and Deno environments."
 oldUrl:
@@ -121,8 +121,8 @@ customize module resolution and loading from inside your program.
 **Bare imports work too.** Since Deno 2.9, a specifier that matches a Node
 built-in resolves to it even without the prefix, so `import * as os from "os"`
 runs with no prefix and no flag. Before 2.9 the bare form errored unless you
-passed `--unstable-bare-node-builtins`. Prefer the explicit `node:` form anyway:
-it is unambiguous, it is what the Deno LSP's quick-fixes insert, and it works in
+opted in with an unstable flag. Prefer the explicit `node:` form anyway: it is
+unambiguous, it is what the Deno LSP's quick-fixes insert, and it works in
 Node.js too. A `deno.json` `imports` entry or `package.json` dependency of the
 same name still wins over the built-in, and a `node_modules` package no longer
 shadows it, matching Node.js.

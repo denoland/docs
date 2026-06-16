@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-11
+last_modified: 2026-06-16
 title: "Use Deno in an existing Node.js project"
 description: "Run an existing Node.js project with Deno without rewriting it: install from package.json, run npm scripts with deno task, use node: built-ins, and adopt Deno's built-in tooling incrementally."
 url: /examples/migrate_node_project_tutorial/
@@ -77,6 +77,15 @@ Two compatibility rules cover almost everything else:
 - **CommonJS and ES modules both work**: `.cjs` and `.mjs` are unambiguous, and
   `.js` follows the `"type"` field of the nearest `package.json`. A
   `require()`-based project with `"type": "commonjs"` runs as-is.
+
+:::info
+
+As of Deno 2.9 the `node:` prefix is optional: a bare specifier like
+`import os from "os"` resolves to the built-in too, so unprefixed imports from a
+Node project run without changes. The explicit `node:` form is still recommended
+because it is unambiguous and works in Node.js as well.
+
+:::
 
 :::note
 
