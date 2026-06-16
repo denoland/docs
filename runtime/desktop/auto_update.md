@@ -56,9 +56,10 @@ console.log(Deno.desktopVersion); // "1.4.0", or null if no version was set
 If [`Deno.desktopVersion`](/api/deno/~/Deno.desktopVersion) is `null`,
 [`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) is a no-op: the runtime warns
 once and returns. This is also what happens under `deno run`, since a
-non-compiled program has no baked-in version. `Deno.autoUpdate()` does not throw
-there, so you can leave the call in your code and run the same entry point with
-`deno run` during development.
+non-compiled program has no baked-in version.
+[`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) does not throw there, so you
+can leave the call in your code and run the same entry point with `deno run`
+during development.
 
 ## Calling `autoUpdate()`
 

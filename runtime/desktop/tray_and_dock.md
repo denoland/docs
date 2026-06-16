@@ -268,7 +268,7 @@ Deno.dock.addEventListener("menuclick", (e) => {
 ```
 
 macOS only; a custom right-click menu on the dock icon. Clicks are delivered as
-`menuclick` events on `Deno.dock`.
+`menuclick` events on [`Deno.dock`](/api/deno/~/Deno.dock).
 
 ### Reopen event
 
