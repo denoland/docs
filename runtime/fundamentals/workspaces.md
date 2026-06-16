@@ -180,7 +180,11 @@ can use wildcard patterns to include multiple directories at once:
 }
 ```
 
+:::info
+
 Pattern support was added in Deno 2.1.
+
+:::
 
 The pattern matching syntax follows specific rules regarding folder depth:
 
