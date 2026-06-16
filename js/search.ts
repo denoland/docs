@@ -14,6 +14,45 @@ interface OramaDocument {
   command?: string;
 }
 
+// Minimal typing for the experimental browser Prompt API (Chrome's built-in,
+// on-device AI). It is feature-detected at runtime, so this is only a shape.
+// https://developer.chrome.com/docs/ai/prompt-api
+type LanguageModelAvailability =
+  | "unavailable"
+  | "downloadable"
+  | "downloading"
+  | "available";
+
+interface LanguageModelSession {
+  prompt(input: string): Promise<string>;
+  destroy(): void;
+}
+
+interface LanguageModelStatic {
+  availability(): Promise<LanguageModelAvailability>;
+  create(options?: {
+    initialPrompts?: {
+      role: "system" | "user" | "assistant";
+      content: string;
+    }[];
+  }): Promise<LanguageModelSession>;
+}
+
+function getLanguageModel(): LanguageModelStatic | undefined {
+  return (globalThis as { LanguageModel?: LanguageModelStatic }).LanguageModel;
+}
+
+// The on-device model has a small context window, so retrieved context is kept
+// compact: a handful of the top search hits, each truncated.
+const ASK_MAX_HITS = 5;
+const ASK_MAX_CHARS_PER_HIT = 500;
+const ASK_SYSTEM_PROMPT =
+  "You are the Deno documentation assistant. Answer the user's question " +
+  "using only the provided context from the Deno docs. Be concise and " +
+  "practical, and prefer Deno's recommended APIs. If the answer is not in " +
+  "the context, say you couldn't find it in the docs and point them to the " +
+  "linked pages. Never invent APIs, flags, or permissions.";
+
 // Configuration - Replace these with your actual Orama Cloud credentials
 const ORAMA_CONFIG = {
   projectId: "c9394670-656a-4f78-a551-c2603ee119e7",
@@ -29,6 +68,9 @@ class OramaSearch {
   private searchTimeout: number | null = null;
   private isResultsOpen = false;
   private selectedIndex = -1; // Track selected result for keyboard navigation
+  // Latest query + hits, reused by the Ask AI feature as retrieval context.
+  private lastTerm = "";
+  private lastHits: Hit<OramaDocument>[] = [];
 
   constructor() {
     this.init();
@@ -262,6 +304,9 @@ class OramaSearch {
         },
       });
 
+      this.lastTerm = term;
+      this.lastHits = results.hits as unknown as Hit<OramaDocument>[];
+
       this.renderResults(
         results as unknown as SearchResult<OramaDocument>,
         term,
@@ -321,6 +366,19 @@ class OramaSearch {
       });
 
     const resultsHtml = `
+      <div class="p-3 border-b border-foreground-tertiary bg-background-secondary">
+        <button
+          type="button"
+          id="ask-ai-button"
+          class="flex w-full items-center gap-2 px-3 py-2 rounded-lg text-sm text-left text-foreground-primary border border-foreground-tertiary hover:border-primary hover:text-primary transition-colors duration-150 cursor-pointer"
+        >
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+          </svg>
+          <span>Ask AI about “${this.escapeHtml(searchTerm)}”</span>
+        </button>
+        <div id="ask-ai-answer" class="hidden mt-3"></div>
+      </div>
       <div class="p-4 border-b border-foreground-tertiary bg-background-secondary">
         <div class="flex items-center justify-between">
           <h2 class="text-sm font-semibold text-foreground-primary" id="search-results__heading">Search Results</h2>
@@ -370,12 +428,109 @@ class OramaSearch {
 
     this.searchResults.innerHTML = resultsHtml;
 
+    const askButton = this.searchResults.querySelector("#ask-ai-button");
+    askButton?.addEventListener("click", () => this.runAsk());
+
     // Reset selection for new results
     this.selectedIndex = -1;
 
     if (this.ariaLiveRegion) {
       this.ariaLiveRegion.textContent =
         `${validResults.length} results found for "${searchTerm}"`;
+    }
+  }
+
+  // Build a compact context block from the current search hits, kept small
+  // for the on-device model's limited context window.
+  private buildAskContext(): string {
+    return this.lastHits
+      .slice(0, ASK_MAX_HITS)
+      .map((hit) => {
+        const url = hit.document.url || hit.document.path || "";
+        const title = this.cleanTitle(hit.document.title);
+        const body = (hit.document.content || "").slice(
+          0,
+          ASK_MAX_CHARS_PER_HIT,
+        );
+        return `## ${title} (${url})\n${body}`;
+      })
+      .join("\n\n");
+  }
+
+  private renderAskAnswer(answerEl: HTMLElement, answerText: string) {
+    const sources = this.lastHits
+      .slice(0, ASK_MAX_HITS)
+      .map((hit) => {
+        const url = hit.document.url || hit.document.path || "#";
+        const title = this.cleanTitle(hit.document.title);
+        return `<li><a class="text-primary hover:underline" href="${
+          this.escapeHtml(url)
+        }">${this.escapeHtml(title)}</a></li>`;
+      })
+      .join("");
+    answerEl.innerHTML = `
+      <div class="text-sm text-foreground-primary leading-relaxed whitespace-pre-wrap">${
+      this.escapeHtml(answerText)
+    }</div>
+      <p class="mt-3 text-xs font-semibold text-foreground-secondary">Sources</p>
+      <ul class="mt-1 text-xs space-y-0.5 !pl-0 !list-none">${sources}</ul>
+      <p class="mt-2 text-xs text-foreground-tertiary">AI-generated from the Deno docs. Verify against the linked pages.</p>
+    `;
+  }
+
+  // When no on-device model is available, hand off to Claude with the question
+  // and the most relevant doc links prefilled.
+  private renderAskFallback(answerEl: HTMLElement) {
+    const links = this.lastHits
+      .slice(0, ASK_MAX_HITS)
+      .map((h) => h.document.url || h.document.path || "")
+      .filter(Boolean)
+      .map((u) => `https://docs.deno.com${u}`);
+    const prompt =
+      `Answer this question about Deno using these documentation pages:\n${this.lastTerm}\n\n${
+        links.join("\n")
+      }`;
+    const claudeUrl = `https://claude.ai/new?q=${encodeURIComponent(prompt)}`;
+    answerEl.innerHTML = `
+      <p class="text-sm text-foreground-secondary">On-device AI isn't available in this browser. Ask Claude with the most relevant pages prefilled:</p>
+      <a class="inline-flex items-center gap-2 mt-2 text-sm text-primary hover:underline" href="${claudeUrl}" target="_blank" rel="noreferrer">Open in Claude &rarr;</a>
+    `;
+  }
+
+  // Synthesize an answer from the current search hits using the browser's
+  // built-in on-device model, falling back to a Claude hand-off otherwise.
+  async runAsk() {
+    const answerEl = this.searchResults?.querySelector(
+      "#ask-ai-answer",
+    ) as HTMLElement | null;
+    if (!answerEl || this.lastHits.length === 0) return;
+    answerEl.classList.remove("hidden");
+
+    const languageModel = getLanguageModel();
+    if (!languageModel) {
+      this.renderAskFallback(answerEl);
+      return;
+    }
+
+    answerEl.innerHTML =
+      `<p class="text-sm text-foreground-secondary">Thinking&hellip;</p>`;
+    try {
+      const availability = await languageModel.availability();
+      if (availability !== "available") {
+        this.renderAskFallback(answerEl);
+        return;
+      }
+      const session = await languageModel.create({
+        initialPrompts: [{ role: "system", content: ASK_SYSTEM_PROMPT }],
+      });
+      const answer = await session.prompt(
+        `Question: ${this.lastTerm}\n\nContext:\n${this.buildAskContext()}`,
+      );
+      session.destroy();
+      this.renderAskAnswer(answerEl, answer);
+    } catch (error) {
+      console.error("Ask AI error:", error);
+      this.renderAskFallback(answerEl);
     }
   }
 
