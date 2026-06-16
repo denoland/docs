@@ -127,6 +127,77 @@ export const sidebar = [
         href: "/runtime/cli_apps/",
       },
       {
+        title: "Desktop apps",
+        href: "/runtime/desktop/",
+        disclosure: true,
+        items: [
+          {
+            title: "Configuration",
+            href: "/runtime/desktop/configuration/",
+          },
+          {
+            title: "Backends",
+            href: "/runtime/desktop/backends/",
+          },
+          {
+            title: "HTTP serving",
+            href: "/runtime/desktop/serving/",
+          },
+          {
+            title: "Frameworks",
+            href: "/runtime/desktop/frameworks/",
+          },
+          {
+            title: "Windows",
+            href: "/runtime/desktop/windows/",
+          },
+          {
+            title: "Bindings",
+            href: "/runtime/desktop/bindings/",
+          },
+          {
+            title: "Menus",
+            href: "/runtime/desktop/menus/",
+          },
+          {
+            title: "Tray and dock",
+            href: "/runtime/desktop/tray_and_dock/",
+          },
+          {
+            title: "Dialogs",
+            href: "/runtime/desktop/dialogs/",
+          },
+          {
+            title: "Notifications",
+            href: "/runtime/desktop/notifications/",
+          },
+          {
+            title: "Hot module replacement",
+            href: "/runtime/desktop/hmr/",
+          },
+          {
+            title: "DevTools",
+            href: "/runtime/desktop/devtools/",
+          },
+          {
+            title: "Auto-update",
+            href: "/runtime/desktop/auto_update/",
+          },
+          {
+            title: "Error reporting",
+            href: "/runtime/desktop/error_reporting/",
+          },
+          {
+            title: "Distribution",
+            href: "/runtime/desktop/distribution/",
+          },
+          {
+            title: "Comparison",
+            href: "/runtime/desktop/comparison/",
+          },
+        ],
+      },
+      {
         title: "Deploying your app",
         href: "/runtime/deploy/",
       },
@@ -280,6 +351,10 @@ export const sidebar = [
           {
             title: "deno deploy",
             href: "/runtime/reference/cli/deploy/",
+          },
+          {
+            title: "deno desktop",
+            href: "/runtime/reference/cli/desktop/",
           },
           {
             title: "deno doc",

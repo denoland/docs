@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-08
+last_modified: 2026-06-16
 title: "Deno CLI Subcommands"
 oldUrl: "/runtime/reference/cli/all_commands"
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -55,6 +55,8 @@ below for more information on each subcommand.
 - [deno doc](/runtime/reference/cli/doc/) - generate documentation for a module
 - [deno deploy](/runtime/reference/cli/deploy) - Manage and publish your
   projects on the web
+- [deno desktop](/runtime/reference/cli/desktop/) - build a desktop app from the
+  current Deno project
 - [deno fmt](/runtime/reference/cli/fmt/) - format your code
 - [deno info](/runtime/reference/cli/info/) - inspect an ES module and all of
   its dependencies
