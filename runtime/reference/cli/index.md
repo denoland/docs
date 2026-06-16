@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-08
+last_modified: 2026-06-16
 title: "Deno CLI Subcommands"
 oldUrl: "/runtime/reference/cli/all_commands"
 openGraphLayout: "/open_graph/cli-commands.jsx"

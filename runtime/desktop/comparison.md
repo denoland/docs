@@ -18,22 +18,22 @@ technologies. Here is how it compares to the alternatives.
 
 ## At a glance
 
-|                             | Electron               | Electrobun      | Tauri                | Dioxus           | `deno desktop`           |
-| --------------------------- | ---------------------- | --------------- | -------------------- | ---------------- | ------------------------ |
-| **Language**                | JS/TS (Node.js)        | JS/TS (Bun)     | Rust + web frontend  | Rust             | JS/TS (Deno)             |
-| **Web engine**              | Bundled Chromium       | System WebView  | System WebView       | System WebView   | Bundled CEF or WebView   |
-| **Consistent rendering**    | Yes                    | No              | No                   | No               | Yes (CEF)                |
-| **Process model**           | Multi-process          | Multi-process   | Multi-process        | Single process   | Multi-thread             |
-| **Backend ↔ UI**            | IPC                    | IPC             | IPC                  | Native Rust      | In-process channels      |
-| **App size**                | ~100 MB+               | ~14 MB          | ~2–10 MB             | ~5 MB            | ~40 MB / ~150 MB (CEF)   |
-| **npm / Node compat**       | Yes                    | Yes             | No                   | No               | Yes                      |
-| **Framework auto-detect**   | No                     | No              | No                   | No               | Yes                      |
-| **HMR**                     | No                     | Yes             | Yes (Vite-based)     | Yes (`dx serve`) | Yes                      |
-| **Built-in auto-update**    | Full binary            | bsdiff          | Plugin               | None             | bsdiff                   |
-| **Built-in installers**     | Yes                    | No              | Yes                  | No               | Partial (DMG, AppImage)  |
-| **Cross-compile**           | Yes (electron-builder) | No (macOS only) | No (needs target OS) | No               | Yes (`--target`)         |
-| **macOS / Windows / Linux** | All three              | macOS only      | All three            | All three        | All three                |
-| **iOS / Android**           | No                     | No              | Yes                  | Yes              | Not yet                  |
+|                             | Electron               | Electrobun      | Tauri                | Dioxus           | `deno desktop`          |
+| --------------------------- | ---------------------- | --------------- | -------------------- | ---------------- | ----------------------- |
+| **Language**                | JS/TS (Node.js)        | JS/TS (Bun)     | Rust + web frontend  | Rust             | JS/TS (Deno)            |
+| **Web engine**              | Bundled Chromium       | System WebView  | System WebView       | System WebView   | Bundled CEF or WebView  |
+| **Consistent rendering**    | Yes                    | No              | No                   | No               | Yes (CEF)               |
+| **Process model**           | Multi-process          | Multi-process   | Multi-process        | Single process   | Multi-thread            |
+| **Backend ↔ UI**            | IPC                    | IPC             | IPC                  | Native Rust      | In-process channels     |
+| **App size**                | ~100 MB+               | ~14 MB          | ~2–10 MB             | ~5 MB            | ~40 MB / ~150 MB (CEF)  |
+| **npm / Node compat**       | Yes                    | Yes             | No                   | No               | Yes                     |
+| **Framework auto-detect**   | No                     | No              | No                   | No               | Yes                     |
+| **HMR**                     | No                     | Yes             | Yes (Vite-based)     | Yes (`dx serve`) | Yes                     |
+| **Built-in auto-update**    | Full binary            | bsdiff          | Plugin               | None             | bsdiff                  |
+| **Built-in installers**     | Yes                    | No              | Yes                  | No               | Partial (DMG, AppImage) |
+| **Cross-compile**           | Yes (electron-builder) | No (macOS only) | No (needs target OS) | No               | Yes (`--target`)        |
+| **macOS / Windows / Linux** | All three              | macOS only      | All three            | All three        | All three               |
+| **iOS / Android**           | No                     | No              | Yes                  | Yes              | Not yet                 |
 
 ## What `deno desktop` is good at
 
@@ -51,9 +51,9 @@ platform-specific signing tools per target.
 **Full Node compatibility, with a choice of backend.** Electron bundles both
 Chromium and Node, but is massive. Tauri and Dioxus are small but have no JS
 ecosystem. `deno desktop` defaults to the OS webview (small, like Tauri) yet
-still gives you the full Node compat layer through Deno, including `npm:` imports
-in your handlers and `bindings`, and can bundle Chromium (CEF) when you need
-consistent rendering.
+still gives you the full Node compat layer through Deno, including `npm:`
+imports in your handlers and `bindings`, and can bundle Chromium (CEF) when you
+need consistent rendering.
 
 **In-process bindings instead of IPC.** Electron / Electrobun / Tauri all use
 socket-based IPC between the backend and the UI. Calls serialize, cross a
@@ -65,8 +65,8 @@ round-trip.
 **Built-in auto-update with binary diffs.** Electron ships full binaries.
 Tauri's update plugin downloads full builds. Electrobun and `deno desktop` both
 do `bsdiff` patches, but `deno desktop` integrates the update flow with the
-runtime: no separate updater binary, automatic rollback, manifest polling all
-in one API.
+runtime: no separate updater binary, automatic rollback, manifest polling all in
+one API.
 
 ## What other tools are good at
 

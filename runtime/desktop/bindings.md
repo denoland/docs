@@ -193,11 +193,11 @@ the Deno side.
 If you are coming from Electron's `ipcMain.handle('channel', handler)` /
 `ipcRenderer.invoke('channel', ...)`, the mental model is identical:
 
-| Electron                                            | `deno desktop`                                 |
-| --------------------------------------------------- | ---------------------------------------------- |
-| `ipcMain.handle('channel', (e, ...args) => result)` | `win.bind('channel', (...args) => result)`     |
-| `ipcRenderer.invoke('channel', ...args)`            | `bindings.channel(...args)`                    |
-| `contextBridge.exposeInMainWorld('api', {...})`     | Not needed; `bindings` is exposed by default.  |
+| Electron                                            | `deno desktop`                                |
+| --------------------------------------------------- | --------------------------------------------- |
+| `ipcMain.handle('channel', (e, ...args) => result)` | `win.bind('channel', (...args) => result)`    |
+| `ipcRenderer.invoke('channel', ...args)`            | `bindings.channel(...args)`                   |
+| `contextBridge.exposeInMainWorld('api', {...})`     | Not needed; `bindings` is exposed by default. |
 
 The `event` object Electron passes as the first arg has no equivalent because
 there is no separate process to attribute the call to. Per-window context lives

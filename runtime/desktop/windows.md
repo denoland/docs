@@ -229,8 +229,8 @@ tasks (timers, pending fetches, etc.). To exit explicitly:
 Deno.exit(0);
 ```
 
-To prevent close (for example, to show a "Save?" dialog), listen for `close`
-and call `event.preventDefault()`:
+To prevent close (for example, to show a "Save?" dialog), listen for `close` and
+call `event.preventDefault()`:
 
 ```ts
 win.addEventListener("close", async (e) => {

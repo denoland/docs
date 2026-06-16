@@ -65,9 +65,9 @@ Deno.serve((req) => {
 deno desktop --hmr main.ts
 ```
 
-Edit `main.ts` (change the response body, add a route) and the change applies
-on save. The runtime does not restart, the webview does not reload, the
-listening socket stays bound.
+Edit `main.ts` (change the response body, add a route) and the change applies on
+save. The runtime does not restart, the webview does not reload, the listening
+socket stays bound.
 
 ### What persists across reloads
 
@@ -106,10 +106,10 @@ a warning suggesting a full restart.
 
 ## Browser-side HMR
 
-The webview is a browser. Browser HMR (fast refresh in React, Vue's HMR
-runtime, etc.) runs entirely inside the rendering backend, talking to your dev
-server. `deno desktop --hmr` does not interfere with it; if your framework wires
-browser HMR up, it works as designed.
+The webview is a browser. Browser HMR (fast refresh in React, Vue's HMR runtime,
+etc.) runs entirely inside the rendering backend, talking to your dev server.
+`deno desktop --hmr` does not interfere with it; if your framework wires browser
+HMR up, it works as designed.
 
 The Deno-side HMR described on this page is **separate** from browser HMR. The
 two coexist:

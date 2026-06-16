@@ -74,15 +74,15 @@ high-importance reports, queue them locally and resend on next launch.
 
 ## What gets reported
 
-| Source                                       | Captured?                                      |
-| -------------------------------------------- | ---------------------------------------------- |
-| Uncaught exception in Deno-side code         | Yes.                                           |
-| Unhandled rejection in Deno-side code        | Yes.                                           |
-| Uncaught exception in renderer-side JS       | Yes; caught via the renderer's `error` event.  |
-| Rust panic in the Deno runtime               | Yes.                                           |
-| Rust panic in the rendering backend (CEF, …) | Yes; the backend bridges these.                |
-| `console.error` / `console.warn`             | No; these are not errors.                      |
-| Exceptions you `try`/`catch` yourself        | No.                                            |
+| Source                                       | Captured?                                     |
+| -------------------------------------------- | --------------------------------------------- |
+| Uncaught exception in Deno-side code         | Yes.                                          |
+| Unhandled rejection in Deno-side code        | Yes.                                          |
+| Uncaught exception in renderer-side JS       | Yes; caught via the renderer's `error` event. |
+| Rust panic in the Deno runtime               | Yes.                                          |
+| Rust panic in the rendering backend (CEF, …) | Yes; the backend bridges these.               |
+| `console.error` / `console.warn`             | No; these are not errors.                     |
+| Exceptions you `try`/`catch` yourself        | No.                                           |
 
 Errors thrown inside a [binding](/runtime/desktop/bindings/) handler propagate
 to the webview side and reject the calling promise. They are **not** reported as

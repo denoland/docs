@@ -49,10 +49,10 @@ The output extension determines the format:
 
 ### macOS
 
-| Output       | Produced by                                  |
-| ------------ | -------------------------------------------- |
-| `MyApp.app/` | Default; `.app` bundle.                      |
-| `MyApp.dmg`  | `hdiutil`; drag-to-Applications disk image.  |
+| Output       | Produced by                                 |
+| ------------ | ------------------------------------------- |
+| `MyApp.app/` | Default; `.app` bundle.                     |
+| `MyApp.dmg`  | `hdiutil`; drag-to-Applications disk image. |
 
 The `.app` bundle has the standard layout:
 
@@ -75,9 +75,9 @@ run so frameworks like Next.js find their build output relative to CWD.
 
 ### Windows
 
-| Output   | Produced by                                            |
-| -------- | ------------------------------------------------------ |
-| `MyApp/` | Default; directory with a launcher and support files.  |
+| Output   | Produced by                                           |
+| -------- | ----------------------------------------------------- |
+| `MyApp/` | Default; directory with a launcher and support files. |
 
 The `MyApp/` directory contains:
 
@@ -96,10 +96,10 @@ Setup, NSIS, or WiX with the directory as input.
 
 ### Linux
 
-| Output            | Produced by                                   |
-| ----------------- | --------------------------------------------- |
-| `my-app/`         | Default; app directory with launcher script.  |
-| `my-app.AppImage` | Single-file portable bundle.                  |
+| Output            | Produced by                                  |
+| ----------------- | -------------------------------------------- |
+| `my-app/`         | Default; app directory with launcher script. |
+| `my-app.AppImage` | Single-file portable bundle.                 |
 
 The app directory layout:
 
@@ -112,11 +112,11 @@ my-app/
   AppIcon.png             # icon (optional)
 ```
 
-`AppImage` is the most portable Linux format: one file, no install step, runs
-on any modern distro. `deno desktop` builds it directly: it packs the app
-directory into a SquashFS image and prepends the AppImage Type-2 runtime, adding
-the required `AppRun`, `.desktop`, and icon entries. There is no external tool
-to install (no `appimagetool`), and it works from any build host, so you can
+`AppImage` is the most portable Linux format: one file, no install step, runs on
+any modern distro. `deno desktop` builds it directly: it packs the app directory
+into a SquashFS image and prepends the AppImage Type-2 runtime, adding the
+required `AppRun`, `.desktop`, and icon entries. There is no external tool to
+install (no `appimagetool`), and it works from any build host, so you can
 produce a Linux `.AppImage` while cross-compiling from macOS or Windows.
 
 `.deb` / `.rpm` packaging is not yet implemented. For now, use `fpm` or

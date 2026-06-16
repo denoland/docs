@@ -227,8 +227,8 @@ Deno.dock.setBadge(null); // clear (null or empty string)
 ```
 
 Sets a text badge on the dock icon (macOS) or taskbar icon (Windows); on Linux
-it prefixes the focused window's title. Badges are short, typically a count;
-the OS truncates long strings.
+it prefixes the focused window's title. Badges are short, typically a count; the
+OS truncates long strings.
 
 ### Bounce
 

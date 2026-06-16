@@ -16,9 +16,8 @@ keys, and TypeScript APIs may still change before the feature is stable.
 [`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) polls a release server for
 new versions, downloads binary-diff patches, applies them to the runtime dylib,
 and stages the result for the next launch. If the next launch fails, the runtime
-rolls back to the previous version automatically. Updates ship as small
-`bsdiff` patches instead of full binary downloads, with rollback baked into the
-launcher.
+rolls back to the previous version automatically. Updates ship as small `bsdiff`
+patches instead of full binary downloads, with rollback baked into the launcher.
 
 :::note Platform support
 

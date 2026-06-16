@@ -45,8 +45,8 @@ a feature only Chromium ships (e.g. WebGPU on Linux).
 deno desktop --backend webview main.ts
 ```
 
-**The operating system's own webview**: WKWebView on macOS, WebView2 on
-Windows, WebKitGTK on Linux.
+**The operating system's own webview**: WKWebView on macOS, WebView2 on Windows,
+WebKitGTK on Linux.
 
 - Smaller app size (just your code + the backend shim).
 - Rendering and feature support varies per platform and OS version.

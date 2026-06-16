@@ -103,9 +103,9 @@ explicit address, or build a separate service.
 ## Custom port behavior
 
 You cannot override the port [`Deno.serve()`](/api/deno/~/Deno.serve) binds to
-inside `deno desktop`. This is intentional: the webview needs to navigate to
-the same port the runtime is listening on, and the runtime is the source of
-truth for that value.
+inside `deno desktop`. This is intentional: the webview needs to navigate to the
+same port the runtime is listening on, and the runtime is the source of truth
+for that value.
 
 If you need to know where the server is bound, read `DENO_SERVE_ADDRESS`. It is
 in `tcp:127.0.0.1:<port>` form, so split off the port when you need an `http://`

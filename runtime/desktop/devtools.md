@@ -49,16 +49,16 @@ deno desktop --inspect-wait main.ts
 
 After attaching, the DevTools UI shows:
 
-- **Sources**: both isolates appear in the **Threads** sidebar. Set
-  breakpoints, step through, inspect the call stack on either side.
+- **Sources**: both isolates appear in the **Threads** sidebar. Set breakpoints,
+  step through, inspect the call stack on either side.
 - **Console**: a **target dropdown** at the top of the panel switches between
   **Renderer** (the webview) and **Deno** (the runtime). Console output from
   each isolate is labelled.
 - **Network**: requests originating from the webview (the webview's `fetch`,
   `XMLHttpRequest`, image loads). Requests made from the Deno side via `fetch`
   are not currently surfaced here.
-- **Performance / Memory**: profile each isolate separately; switch via the
-  same target dropdown.
+- **Performance / Memory**: profile each isolate separately; switch via the same
+  target dropdown.
 
 Source maps are honored on both sides. TypeScript files in the Deno runtime show
 up with their original line numbers; bundled webview JS maps back to its
@@ -107,13 +107,13 @@ No CDP protocol changes, no DevTools fork, no frontend modifications.
 
 Unified DevTools is implemented for the **CEF** backend. On other backends:
 
-| Backend   | DevTools status                                 |
-| --------- | ----------------------------------------------- |
-| `cef`     | Full unified DevTools.                          |
-| `webview` | Not currently supported; system webviews speak  |
-|           | a different inspector protocol.                 |
-| `raw`     | Deno-side `--inspect` only; there is no          |
-|           | renderer to inspect.                            |
+| Backend   | DevTools status                                |
+| --------- | ---------------------------------------------- |
+| `cef`     | Full unified DevTools.                         |
+| `webview` | Not currently supported; system webviews speak |
+|           | a different inspector protocol.                |
+| `raw`     | Deno-side `--inspect` only; there is no        |
+|           | renderer to inspect.                           |
 
 If `--inspect` is passed with a backend that does not support unified DevTools,
 the Deno side still runs an inspector and you can attach to it the same way as a

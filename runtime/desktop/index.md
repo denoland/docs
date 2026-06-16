@@ -4,8 +4,8 @@ title: "Desktop apps"
 description: "Build self-contained desktop applications from a Deno project, with framework auto-detection, hot reload, native windowing, auto-update, and cross-platform distribution."
 ---
 
-`deno desktop` turns a Deno project (anything from a single TypeScript file to
-a Next.js app) into a self-contained desktop application. The output is a
+`deno desktop` turns a Deno project (anything from a single TypeScript file to a
+Next.js app) into a self-contained desktop application. The output is a
 redistributable binary that bundles your code, the Deno runtime, and a web
 rendering engine into one bundle per platform.
 
@@ -39,8 +39,8 @@ integration.
   under `--hmr`. No code changes are required to take an existing web project to
   the desktop.
 - **In-process bindings instead of IPC.** Backend and UI communication goes
-  through in-process channels, not socket-based IPC, so there is no serialization
-  step between your Deno code and the webview.
+  through in-process channels, not socket-based IPC, so there is no
+  serialization step between your Deno code and the webview.
 - **Cross-compile from one machine.** The same machine can build for macOS,
   Windows, and Linux. Backends are downloaded as needed, not built locally.
 - **Built-in binary-diff auto-update.** Ship a single `latest.json` manifest and
@@ -87,8 +87,8 @@ webview navigates to, so you do not need to pass a port or hostname. See
 - [Windows](/runtime/desktop/windows/):
   [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) lifecycle, multiple
   windows, events.
-- [Bindings](/runtime/desktop/bindings/): calling Deno code from the webview
-  via `bindings.<name>()`.
+- [Bindings](/runtime/desktop/bindings/): calling Deno code from the webview via
+  `bindings.<name>()`.
 - [Menus](/runtime/desktop/menus/): application and context menus.
 - [Tray and dock](/runtime/desktop/tray_and_dock/): system status icons and the
   macOS dock.

@@ -16,8 +16,8 @@ keys, and TypeScript APIs may still change before the feature is stable.
 `deno desktop` implements the standard
 [Web Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notification).
 The same `Notification` constructor you would use in a browser shows a **native
-OS notification** (macOS User Notifications, Windows toast notifications, or
-the Linux desktop notification service) from your Deno-side code.
+OS notification** (macOS User Notifications, Windows toast notifications, or the
+Linux desktop notification service) from your Deno-side code.
 
 ```ts
 const n = new Notification("Build complete", {
