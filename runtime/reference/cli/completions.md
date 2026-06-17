@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-04-24
+last_modified: 2026-06-17
 title: "deno completions"
 oldUrl: /runtime/manual/tools/completions/
 command: completions
@@ -10,6 +10,15 @@ description: "Generate shell completions for Deno"
 
 You can use the output script to configure autocompletion for `deno` commands.
 For example: `deno un` -> <kbd>Tab</kbd> -> `deno uninstall`.
+
+:::note
+
+If you installed Deno with Homebrew, shell completions are installed and kept up
+to date for you, as long as your shell is configured to load completions from
+Homebrew's completions directory. In that case you do not need to run
+`deno completions` manually.
+
+:::
 
 ## Examples
 
