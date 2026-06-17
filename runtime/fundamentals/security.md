@@ -140,10 +140,9 @@ is effectively granting full access:
 
 Be careful when combining `--allow-write` with `--allow-run`. Write access to a
 directory that contains an allowed executable (or to the executable itself) lets
-a program overwrite that binary, or replace it with a symlink, so the next
-subprocess it spawns runs attacker-controlled code with the host's privileges.
-Avoid granting write access to directories that hold binaries you allow with
-`--allow-run`.
+a program overwrite that binary, so the next subprocess it spawns runs
+attacker-controlled code with the host's privileges. Avoid granting write access
+to directories that hold binaries you allow with `--allow-run`.
 
 Treat both as equivalent to `--allow-all` when deciding whether to trust the
 code you are running.
