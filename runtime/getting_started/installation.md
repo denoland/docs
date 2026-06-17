@@ -174,6 +174,9 @@ Unzip the archive and place the `deno` executable somewhere on your `PATH`. You
 will have to set the executable bit on macOS and Linux. Each asset has a
 matching `.sha256sum` file for verifying the download.
 
+On Linux, common `PATH` locations are `~/.local/bin` for your user account or
+`/usr/local/bin` for a system-wide install.
+
 ## Docker
 
 Deno publishes official images to
