@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-12
+last_modified: 2026-06-17
 title: "deno bundle"
 oldUrl: /runtime/manual/cli/bundler/
 command: bundle
@@ -45,6 +45,22 @@ Keep a dependency out of the bundle with `--external`:
 ```sh
 deno bundle --external npm:sharp -o output.js main.ts
 ```
+
+## Type checking
+
+`deno bundle` does not type-check your code by default. Enable type-checking
+with the `--check` flag:
+
+```sh
+# type-check local modules while bundling
+deno bundle --check -o output.js main.ts
+
+# also type-check remote modules
+deno bundle --check=all -o output.js main.ts
+```
+
+You can also skip type-checking explicitly with `--no-check`, and
+`--no-check=remote` ignores diagnostics from remote modules only.
 
 For more on bundling strategies with Deno, see the
 [Bundling](/runtime/reference/bundling/) guide.

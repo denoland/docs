@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-15
+last_modified: 2026-06-17
 title: Installation
 description: "A Guide to installing Deno on different operating systems. Includes instructions for Windows, macOS, and Linux using various package managers, manual installation methods, and Docker containers."
 oldUrl:
@@ -114,8 +114,12 @@ winget install DenoLand.Deno
 > via npm. We recommend the official install script (shell or PowerShell) for
 > better performance.</small>
 
-Deno does not publish an official apt repository. On Debian or Ubuntu, use the
-shell installer above for the recommended installation path.
+Deno does not publish an official apt repository, and the versions packaged by
+Linux distributions (such as Debian, Ubuntu, Arch, or the Snap Store) are
+community maintained and often lag behind the latest release. For the most
+up-to-date version on any Linux distribution, use the shell installer above (or
+the [manual download](#manual-download)), which always installs the current
+release.
 
 ### Cross-platform package managers
 
@@ -173,6 +177,18 @@ Each release ships one archive per platform, containing a single executable:
 Unzip the archive and place the `deno` executable somewhere on your `PATH`. You
 will have to set the executable bit on macOS and Linux. Each asset has a
 matching `.sha256sum` file for verifying the download.
+
+On Linux a common choice is `~/.local/bin` (per-user) or `/usr/local/bin`
+(system-wide). For example:
+
+```sh
+unzip deno-x86_64-unknown-linux-gnu.zip
+mkdir -p ~/.local/bin
+mv deno ~/.local/bin/
+chmod +x ~/.local/bin/deno
+# ensure the directory is on your PATH, then verify
+deno --version
+```
 
 ## Docker
 
