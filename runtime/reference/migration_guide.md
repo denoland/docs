@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-11-03
+last_modified: 2026-06-17
 title: "Deno 1.x to 2.x Migration Guide"
 description: "Comprehensive guide to migrating from Deno 1.x to 2.x. Learn about breaking changes, API updates, Node.js compatibility features, and how to update your codebase to work with Deno 2.x."
 oldUrl:
@@ -137,6 +137,27 @@ the user to keep this directory up to date manually.
 See
 [Node modules directory](https://docs.deno.com/runtime/reference/deno_json/#node-modules-directory)
 for reference.
+
+- `useUnknownInCatchVariables`
+
+Deno 2 enables TypeScript's `useUnknownInCatchVariables` by default. A caught
+value in a `catch` clause is now typed as `unknown` instead of `any`, so you
+must narrow it before accessing error properties:
+
+```ts
+try {
+  doSomething();
+} catch (err) {
+  // err is `unknown`
+  if (err instanceof Error) {
+    console.error(err.message);
+  }
+}
+```
+
+If you need the old behavior for a quick migration you can set
+`"useUnknownInCatchVariables": false` in your `deno.json` compiler options,
+though narrowing the error is recommended.
 
 ## CLI changes
 
