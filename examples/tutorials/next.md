@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2025-10-02
 title: "Build a Next.js App"
 description: "Walkthrough guide to building a Next.js application with Deno. Learn how to set up a project, create API routes, implement server-side rendering, and build a full-stack TypeScript application."
 url: /examples/next_tutorial/
@@ -73,16 +73,6 @@ deno task dev
 This will start the Next.js development server using Deno. The `deno task dev`
 command runs `dev` task in the package.json, which starts the Next.js
 development server with the necessary flags for CommonJS compatibility.
-
-:::note
-
-Recent versions of `create-next-app` enable Turbopack by default (the `dev`
-script is `next dev --turbopack`). Turbopack expects a Node.js executable and
-can fail under Deno with errors such as `program not found`. If you hit this,
-remove `--turbopack` from the `dev` script in `package.json` so Next.js falls
-back to its Webpack-based bundler.
-
-:::
 
 Visit [http://localhost:3000](http://localhost:3000) to see the app in the
 browser.
