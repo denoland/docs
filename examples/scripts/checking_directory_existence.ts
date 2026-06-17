@@ -22,8 +22,10 @@ await exists("./directory", { isDirectory: true }); // true
 await exists("./file", { isDirectory: true }); // false
 
 // Do not use the above function if performing a check directly before another operation on that folder.
-// Doing so creates a race condition. The `exists` function is not recommended for that usecase.
-// Consider this alternative which checks for existence of a folder without doing any other filesystem operations.
+// Doing so creates a time-of-check to time-of-use race condition: the folder can be created or removed
+// in the gap between `exists` returning and your next call, so the result may already be stale. That is
+// why `exists` is not recommended for that usecase. Prefer to attempt the operation directly and handle
+// the error, or probe with `Deno.lstat` as shown below and act on the result you get back.
 try {
   await Deno.lstat("./example_directory");
   console.log("Folder exists");

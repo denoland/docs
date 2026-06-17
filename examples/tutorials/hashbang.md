@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-21
+last_modified: 2026-06-17
 title: "Executable scripts"
 description: "Guide to creating executable scripts with Deno. Learn about hashbangs, file permissions, cross-platform compatibility, and how to create command-line tools that can run directly from the terminal."
 url: /examples/hashbang_tutorial/
@@ -49,6 +49,15 @@ argument name and `env` would fail to find a program called `deno run`. There
 are no `--allow-*` flags here because the script only reads from `Deno.args`,
 which is always available. Deno prompts for permissions only when the script
 tries to use a sandboxed API.
+
+:::note
+
+The `-S` flag is an extension provided by GNU coreutils and BSD/macOS `env`. It
+is not part of POSIX, so on systems that ship a more minimal `env` (for example
+some embedded or BusyBox environments) the hashbang may not work. On those
+systems, run the script explicitly with `deno run script.ts` instead.
+
+:::
 
 `Deno.args` is an array of the arguments that follow the script name on the
 command line. `Deno.args[0]` is the first one; `?? "world"` substitutes

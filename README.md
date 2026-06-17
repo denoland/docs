@@ -86,7 +86,7 @@ The link checker needs to run against a live server. Here's the workflow:
 2. **Run the link checker** (in another terminal):
 
    ```console
-   deno task check:links:local
+   deno task check:links
    ```
 
 This will check all links on your local site and report any issues.
@@ -108,7 +108,7 @@ git commit --no-verify
 
 **Note for Windows users**: If you're using Git Bash or WSL, the pre-commit hook
 should work normally. If you encounter issues, you can manually run
-`deno task check:links:local` before committing.
+`deno task check:links` before committing.
 
 The link checker also runs automatically in CI for all deployments.
 
