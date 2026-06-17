@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-12
+last_modified: 2026-06-15
 title: "deno compile"
 oldUrl:
   - /runtime/manual/tools/compile/
@@ -21,8 +21,8 @@ permission flags.
 deno compile --allow-read --allow-net jsr:@std/http/file-server
 ```
 
-[Script arguments](/runtime/getting_started/command_line_interface/#passing-script-arguments)
-can be partially embedded.
+[Script arguments](/runtime/run/#passing-script-arguments) can be partially
+embedded.
 
 ```sh
 deno compile --allow-read --allow-net jsr:@std/http/file-server -p 8080
@@ -207,6 +207,66 @@ import "./worker.ts";
 ```sh
 deno compile main.ts
 ```
+
+## Bundling dependencies
+
+:::caution
+
+`--bundle` is experimental and subject to change. Some dynamic patterns are not
+yet supported (see [Limitations](#limitations) below).
+
+:::
+
+By default, `deno compile` embeds the entire resolved `node_modules` tree in the
+executable. For projects with many npm dependencies this can make binaries large
+and slow to start. The `--bundle` flag instead runs your entrypoint through the
+bundler before embedding, so only the code your program actually reaches ends up
+in the binary.
+
+```sh
+deno compile --bundle main.ts
+```
+
+For a pure-ESM dependency tree, tree-shaking removes everything unused and the
+npm payload is dropped entirely, producing a much smaller binary. When a
+CommonJS package or a native addon (`.node`) is reached, the relevant packages
+are embedded so they keep working at runtime, but unreached packages are still
+left out.
+
+`--bundle` understands several real-world patterns automatically:
+
+- **CommonJS and native addons** — CJS dependencies and `.node` native addons
+  are detected and the packages that provide them are embedded.
+- **Workers** — `new Worker(new URL("./worker.ts", import.meta.url), ...)` calls
+  are discovered, each worker is bundled separately and embedded alongside the
+  main bundle.
+- **`package.json` reads** — packages that read their own `package.json` at
+  runtime (for example to report a version) have it included automatically.
+
+### Minifying the bundle
+
+Combine `--bundle` with `--minify` to minify the bundled output. This reduces
+both the embedded bundle size and runtime memory use, at the cost of less
+readable stack traces.
+
+```sh
+deno compile --bundle --minify main.ts
+```
+
+`--minify` is only meaningful together with `--bundle`.
+
+### Limitations
+
+Because bundling relies on statically analyzing your code, patterns that can't
+be traced are dropped from the binary:
+
+- Dynamic `require()` / `import()` of specifiers that aren't string literals.
+- Workers spawned with computed URLs, or spawned from transitive dependencies
+  rather than your own source.
+
+If your program relies on these, either keep them statically analyzable, add the
+needed files with [`--include`](#including-data-files-or-directories), or
+compile without `--bundle`.
 
 ## Self-Extracting Executables
 

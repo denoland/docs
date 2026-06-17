@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-06-15
 title: "deno task"
 oldUrl:
   - /runtime/tools/task_runner/
@@ -579,6 +579,23 @@ echo data[0-9].csv
 ```
 
 The supported glob characters are `*`, `?`, and `[`/`]`.
+
+:::caution
+
+Because `globstar` is enabled by default (see [Shell options](#shell-options)),
+`**` recurses into **all** descendant directories, including `node_modules`.
+This differs from some interactive shells where `**` is not recursive unless
+explicitly enabled, so a task like `deno check **/*.ts` can expand to far more
+files than the same command typed in your terminal, sweeping in dependency
+files. That can lead to errors such as `Argument list too long` or type-checking
+files you didn't intend to.
+
+For `deno check` and `deno fmt`, prefer running them without glob arguments and
+using the [`exclude`](/runtime/reference/deno_json/#include-and-exclude) option
+in your `deno.json` (`node_modules` is excluded by default), or disable
+recursion for the task with `shopt -u globstar`.
+
+:::
 
 ### Shell options
 

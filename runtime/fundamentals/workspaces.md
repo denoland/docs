@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-06-16
 title: "Workspaces and monorepos"
 description: "A guide to managing workspaces and monorepos in Deno. Learn about workspace configuration, package management, dependency resolution, and how to structure multi-package projects effectively."
 oldUrl: /runtime/manual/basics/workspaces
@@ -180,6 +180,12 @@ can use wildcard patterns to include multiple directories at once:
 }
 ```
 
+:::info
+
+Pattern support was added in Deno 2.1.
+
+:::
+
 The pattern matching syntax follows specific rules regarding folder depth:
 
 `some-path/*` matches files and directories directly within `some-path` (first
@@ -194,6 +200,38 @@ within `some-path`. For example, with `examples/*/*`, this includes
 Each `/*` segment in the pattern corresponds to a specific folder depth relative
 to the base path. This allows for precise targeting of workspace members at
 different levels within your directory structure.
+
+### Recursive matching
+
+Use `**` to match directories at any depth below a base path, instead of pinning
+to a single level. For example, `packages/**` matches `packages/foo`,
+`packages/foo/subpackage`, and any deeper directories that contain a config
+file:
+
+```json title="deno.json"
+{
+  "workspace": ["packages/**"]
+}
+```
+
+### Excluding members
+
+Prefix a pattern with `!` to exclude directories that an earlier pattern would
+otherwise include. This is handy when a wildcard sweeps up a directory you don't
+want as a workspace member. Both literal paths and globs work after the `!`:
+
+```json title="deno.json"
+{
+  "workspace": [
+    "packages/*",
+    "!packages/internal",
+    "!packages/*/fixtures"
+  ]
+}
+```
+
+Here `packages/*` includes every directory under `packages`, then the two
+exclusions drop `packages/internal` and any `fixtures` directory one level down.
 
 ## How Deno resolves workspace dependencies
 
@@ -859,5 +897,4 @@ This allows for smooth integration between Deno and npm/pnpm ecosystems during
 migration or in hybrid projects.
 
 For more information on configuring your project, check out the
-[Configuration with deno.json](/examples/configuration_with_deno_json/)
-tutorial.
+[Configuration with deno.json](/runtime/fundamentals/configuration/) tutorial.

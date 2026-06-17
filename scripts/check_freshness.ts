@@ -139,7 +139,12 @@ async function main() {
     }
 
     // The core freshness rule: content changed but the date didn't move.
-    if (baseLM !== null && headLM === baseLM) {
+    // A page already dated today is exempt: when the base version was itself
+    // last modified today (for example a second edit landing the same day, or a
+    // PR that touches a page already bumped on main today), the date cannot move
+    // without being set into the future, and "today" is already as fresh as it
+    // gets.
+    if (baseLM !== null && headLM === baseLM && headLM !== today) {
       violations.push(
         `${newPath}: page changed but 'last_modified' was not updated (still ${headLM}); set it to ${today}.`,
       );

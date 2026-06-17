@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @run -N --watch-hmr <url>
- * @resource {https://docs.deno.com/runtime/getting_started/command_line_interface/#watch-mode} Doc: Watch mode
+ * @resource {https://docs.deno.com/runtime/run/watch_mode/} Doc: Watch mode
  * @resource {/examples/http_server} Example: HTTP Server: Hello world
  * @group Network
  *

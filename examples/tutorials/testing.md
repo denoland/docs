@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-14
+last_modified: 2026-06-15
 title: "Writing tests"
 description: "Learn key concepts like test setup and structure, assertions, async testing, mocking, test fixtures, and code coverage"
 url: /examples/testing_tutorial/
@@ -714,4 +714,4 @@ For more information about testing in Deno, check out:
 
 - [Testing documentation](/runtime/test/)
 - [Mocking data for tests](/runtime/test/mocking/)
-- [Writing benchmark tests](/examples/benchmarking/)
+- [Writing benchmark tests](/examples/write_benchmarks/)

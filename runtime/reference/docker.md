@@ -1,8 +1,14 @@
 ---
-last_modified: 2025-12-16
+last_modified: 2026-06-14
 title: Deno and Docker
 description: "Complete guide to using Deno with Docker containers. Learn about official Deno images, writing Dockerfiles, multi-stage builds, workspace containerization, and Docker best practices for Deno applications."
 ---
+
+Docker is a common way to package and ship a Deno app: you build a reproducible
+image once and run it the same way everywhere. Deno publishes official base
+images, so the Dockerfile is usually short. This page covers writing that
+Dockerfile, keeping the image small with multi-stage builds, and the Compose,
+workspace, security, and health-check setups you reach for in production.
 
 ## Using Deno with Docker
 
@@ -28,13 +34,13 @@ CMD ["deno", "run", "--allow-net", "main.ts"]
 ```
 
 [`deno ci`](/runtime/reference/cli/ci/) performs a reproducible install from
-`deno.lock`. `--prod` skips `devDependencies`, and `--skip-types` drops
-`@types/*` packages — both shrink the resulting image without affecting runtime
+`deno.lock`. `--prod` skips `devDependencies` and `--skip-types` drops
+`@types/*` packages. Both shrink the resulting image without affecting runtime
 behavior.
 
-### Best Practices
+### Best practices
 
-#### Use Multi-stage Builds
+#### Use multi-stage builds
 
 For smaller production images:
 
@@ -64,10 +70,10 @@ CMD ["deno", "run", "--allow-net", "main.ts"]
 ```
 
 Without copying `$DENO_DIR`, `deno ci` only writes to Deno's global cache inside
-the builder stage — those files do not travel with `COPY --from=builder /app .`,
+the builder stage. Those files do not travel with `COPY --from=builder /app .`,
 so the container re-downloads dependencies on first run.
 
-#### Permission Flags
+#### Permission flags
 
 Specify required permissions explicitly:
 
@@ -75,7 +81,7 @@ Specify required permissions explicitly:
 CMD ["deno", "run", "--allow-net=api.example.com", "--allow-read=/data", "main.ts"]
 ```
 
-#### Development Container
+#### Development container
 
 For development with hot-reload:
 
@@ -88,7 +94,7 @@ COPY . .
 CMD ["deno", "run", "--watch", "--allow-net", "main.ts"]
 ```
 
-### Common Issues and Solutions
+### Common issues and solutions
 
 1. **Permission Denied Errors**
    - Use `--allow-*` flags appropriately
@@ -115,7 +121,7 @@ _build/
 node_modules/
 ```
 
-### Available Docker Tags
+### Available Docker tags
 
 Deno provides several official tags:
 
@@ -123,9 +129,10 @@ Deno provides several official tags:
 - `denoland/deno:alpine` - Alpine-based smaller image
 - `denoland/deno:distroless` - Google's distroless-based image
 - `denoland/deno:ubuntu` - Ubuntu-based image
-- `denoland/deno:1.x` - Specific version tags
+- `denoland/deno:2.x` - Pin to a specific release line (use the version you
+  target)
 
-### Environment Variables
+### Environment variables
 
 Common environment variables for Deno in Docker:
 
@@ -139,7 +146,7 @@ ENV DENO_NO_UPDATE_CHECK=1
 ENV DENO_NO_PROMPT=1
 ```
 
-### Running Tests in Docker
+### Running tests in Docker
 
 ```dockerfile
 FROM denoland/deno:latest
@@ -216,14 +223,14 @@ Put secrets like `POSTGRES_PASSWORD` in a `.env` file next to
 Start the services with `docker compose up`, or run in the background with
 `docker compose up -d`.
 
-### Health Checks
+### Health checks
 
 ```dockerfile
 HEALTHCHECK --interval=30s --timeout=3s \
   CMD deno eval "try { await fetch('http://localhost:8000/health'); } catch { Deno.exit(1); }"
 ```
 
-### Common Development Workflow
+### Common development workflow
 
 For local development:
 
@@ -237,7 +244,7 @@ docker run -it --rm \
   my-deno-app
 ```
 
-### Security Considerations
+### Security considerations
 
 - Run as non-root user:
 
@@ -260,12 +267,12 @@ CMD ["deno", "run", "--allow-net=api.example.com", "--allow-read=/app", "main.ts
 
 - Consider using `--deny-*` flags for additional security
 
-## Working with Workspaces in Docker
+## Working with workspaces in Docker
 
 When working with Deno workspaces (monorepos) in Docker, there are two main
 approaches:
 
-### 1. Full Workspace Containerization
+### 1. Full workspace containerization
 
 Include the entire workspace when you need all dependencies:
 
@@ -283,7 +290,7 @@ WORKDIR /app/project-a
 CMD ["deno", "run", "-A", "mod.ts"]
 ```
 
-### 2. Minimal Workspace Containerization
+### 2. Minimal workspace containerization
 
 For smaller images, include only required workspace members:
 
@@ -358,7 +365,7 @@ docker build -t project-a -f Dockerfile tmp-build-context
 rm -rf tmp-build-context
 ```
 
-### Best Practices
+### Best practices
 
 - Always include the root `deno.json` file
 - Maintain the same directory structure as development

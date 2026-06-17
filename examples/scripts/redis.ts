@@ -1,5 +1,5 @@
 /**
- * @title Connect to Redis
+ * @title Redis quick start
  * @difficulty intermediate
  * @tags cli, deploy
  * @run -N -E <url>
