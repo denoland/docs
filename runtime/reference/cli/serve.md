@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-05-01
+last_modified: 2026-06-17
 title: "deno serve"
 oldUrl: /runtime/manual/tools/serve/
 command: serve
@@ -32,6 +32,24 @@ By default, the server listens on port **8000**. Override it with `--port`:
 ```sh
 deno serve --port=3000 server.ts
 ```
+
+## `deno serve` vs `deno run`
+
+Both approaches start an HTTP server, and the difference is who calls
+[`Deno.serve()`](/api/deno/~/Deno.serve):
+
+- With `deno serve`, Deno calls [`Deno.serve()`](/api/deno/~/Deno.serve) for
+  you. Your file just exports a default object with a `fetch` handler. Deno owns
+  the listener, which lets it add features such as running multiple instances
+  across threads with [`--parallel`](#horizontal-scaling).
+- With `deno run`, you call [`Deno.serve()`](/api/deno/~/Deno.serve) yourself
+  inside the program. This gives you full control over the listen options and
+  the surrounding code, and is the right choice when the server is one part of a
+  larger program.
+
+Use `deno serve` when the program is primarily an HTTP server and you want Deno
+to manage it; use `deno run` with [`Deno.serve()`](/api/deno/~/Deno.serve) when
+you need to control how and when the server starts.
 
 ## Default export shape
 
