@@ -124,6 +124,11 @@ This flag enables this property. Note that it is not recommended to use this,
 but if you really need to use a package that relies on it, the escape hatch is
 now available to you.
 
+Starting in Deno 2.9, `--unsafe-proto` is a stable shorthand for the same
+behavior. It is spelled as an ordinary flag rather than an unstable one, so
+`deno run --unsafe-proto main.ts` and `deno run --unstable-unsafe-proto main.ts`
+are equivalent.
+
 ## `--unstable-webgpu`
 
 Enable the

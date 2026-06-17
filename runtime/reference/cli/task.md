@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-15
+last_modified: 2026-06-17
 title: "deno task"
 oldUrl:
   - /runtime/tools/task_runner/
@@ -108,6 +108,35 @@ otherwise your shell might try to expand the wildcard character, leading to
 surprising errors.
 
 :::
+
+Exclude tasks from a wildcard match by adding an exclusion group `(!a|b|c)` to
+the end of the pattern. Each listed value is matched against what the `*`
+captured. For example, given `test:unit`, `test:integration`, `test:e2e`, and
+`test:interactive` tasks:
+
+```sh
+deno task "test:*(!e2e|interactive)"
+```
+
+runs `test:unit` and `test:integration` but skips `test:e2e` and
+`test:interactive`. A pattern that has an exclusion group but no `*` is rejected,
+since there is nothing to exclude from.
+
+## Loading environment variables from a file
+
+Pass `--env-file` to load variables from a dotenv file into the task's shell
+environment, so every command in the task body inherits them:
+
+```sh
+# Load .env
+deno task --env-file start
+
+# Load a specific file
+deno task --env-file=.env.production start
+```
+
+The flag can be given more than once to load multiple files, with later files
+taking precedence. With no value it defaults to `.env`.
 
 ## Task dependencies
 

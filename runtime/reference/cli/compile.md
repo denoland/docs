@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-15
+last_modified: 2026-06-17
 title: "deno compile"
 oldUrl:
   - /runtime/manual/tools/compile/
@@ -63,6 +63,22 @@ inside the compiled binary.
 
 If the project doesn't match any supported framework, `deno compile` will error
 out.
+
+## Watch mode
+
+Pass `--watch` to rebuild the executable whenever a file in the compile graph
+changes:
+
+```sh
+deno compile --watch main.ts
+```
+
+Use `--watch-exclude` to keep specific paths from triggering a rebuild, and
+`--no-clear-screen` to preserve the terminal output between rebuilds:
+
+```sh
+deno compile --watch --watch-exclude=./dist --no-clear-screen main.ts
+```
 
 ## Cross Compilation
 

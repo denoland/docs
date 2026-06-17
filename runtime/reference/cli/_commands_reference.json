@@ -5500,6 +5500,13 @@
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno install\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[cmd]...\u001b[0m \u001b[32m[--\u001b[0m \u001b[32m[SCRIPT_ARG]...\u001b[0m\u001b[32m]\u001b[0m"
     },
     {
+      "name": "link",
+      "about": "Link a local JSR package into the current project for development.\n\nEach path must be a directory containing a deno.json with a JSR-style \"name\" field. The path is appended to the \"links\" array in the nearest deno.json, and modules imported by that package's name resolve to the local copy instead of the registry.",
+      "args": [],
+      "subcommands": [],
+      "usage": "Usage: deno link [OPTIONS] <PATH>..."
+    },
+    {
       "name": "ci",
       "about": "Install dependencies in a clean, reproducible way for CI environments.\n\nSimilar to \u001b[38;5;245mnpm ci\u001b[39m: requires a \u001b[38;5;245mdeno.lock\u001b[39m file, removes any existing \u001b[38;5;245mnode_modules\u001b[39m\ndirectory, and then installs strictly from the lockfile. Errors if \u001b[38;5;245mdeno.lock\u001b[39m\nis missing or out of date with the config file.\n\n  \u001b[38;5;245mdeno ci\u001b[39m\n  \u001b[38;5;245mdeno ci --prod\u001b[39m",
       "args": [
@@ -5861,6 +5868,13 @@
       ],
       "subcommands": [],
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno uninstall\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[name-or-package]\u001b[0m \u001b[32m[additional-packages]...\u001b[0m"
+    },
+    {
+      "name": "unlink",
+      "about": "Unlink a local JSR package from the current project.\n\nRemoves an entry from the \"links\" array in the nearest deno.json by path, by resolved path, or by the linked package's JSR name. The \"links\" field is removed entirely when it becomes empty.",
+      "args": [],
+      "subcommands": [],
+      "usage": "Usage: deno unlink [OPTIONS] <PATH_OR_NAME>..."
     },
     {
       "name": "outdated",

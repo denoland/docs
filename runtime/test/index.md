@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-06-17
 title: "Testing"
 description: "Write and run tests with Deno's built-in test runner: assertions, test steps, hooks, filtering, and reporters, with dedicated guides for mocking, snapshots, and coverage."
 oldUrl:
@@ -133,6 +133,80 @@ Deno.test({
 If a test times out the next test in the same file still runs normally.
 
 Setting `timeout` to `0` or omitting it means the test runs without a deadline.
+
+## Retrying and repeating tests
+
+Two per-test options control how many times a test runs. `retry` re-runs a
+failing test and passes if any attempt passes, which is useful for tolerating a
+known-flaky test. `repeats` runs the test several times and requires every run to
+pass, which is useful for catching flakiness:
+
+```ts
+Deno.test({
+  name: "flaky network call",
+  retry: 3, // re-run up to 3 times; pass if any attempt passes
+  async fn() {
+    const response = await fetch("https://example.com");
+    await response.body?.cancel();
+  },
+});
+
+Deno.test({
+  name: "must be deterministic",
+  repeats: 5, // run 5 times; fail if any run fails
+  fn() {
+    // ...
+  },
+});
+```
+
+The two options compose, so each repetition may itself be retried. Every attempt
+re-runs the `beforeEach` and `afterEach` hooks and captures a fresh leak-check
+baseline, so a resource leak is retried like any other failure.
+
+The `--retry` and `--repeats` flags set a default for the whole run. A test that
+sets its own option takes precedence, including an explicit `0` that opts the
+test out of a flag-provided default:
+
+```sh
+deno test --retry=2
+```
+
+## Parameterized tests
+
+`Deno.test.each` runs the same test body over a table of cases. It registers one
+real test per case, so each case reports independently and can be filtered or run
+on its own.
+
+Array cases are spread as positional arguments. The name template interpolates
+the case values with `printf`-style tokens (`%s`, `%d`/`%i`, `%f`, `%j`,
+`%o`/`%O`) consumed in order, plus `%#` for the zero-based case index:
+
+```ts
+import { assertEquals } from "jsr:@std/assert";
+
+Deno.test.each([
+  [1, 1, 2],
+  [2, 3, 5],
+])("add(%i, %i) = %i", (a, b, expected) => {
+  assertEquals(a + b, expected);
+});
+```
+
+Object or primitive cases are passed as a single argument. For object cases,
+`$key` (and `$key.nested`) in the template interpolates the matching property:
+
+```ts
+Deno.test.each([
+  { a: 1, b: 1, sum: 2 },
+  { a: 2, b: 3, sum: 5 },
+])("$a + $b = $sum", ({ a, b, sum }) => {
+  assertEquals(a + b, sum);
+});
+```
+
+`Deno.test.each` accepts the usual per-test options object and composes with the
+shorthands as `Deno.test.only.each` and `Deno.test.ignore.each`.
 
 ## Test Hooks
 

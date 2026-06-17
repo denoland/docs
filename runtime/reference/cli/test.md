@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-06-17
 title: "deno test"
 oldUrl: /runtime/manual/tools/test/
 command: test
@@ -142,6 +142,41 @@ Shuffle the order tests run in to catch hidden dependencies between tests:
 ```sh
 deno test --shuffle
 ```
+
+## Sharding
+
+Split a test suite across several machines with `--shard=<index>/<count>`, where
+`index` is 1-based. The discovered test files are sorted for a stable order and
+divided into `<count>` balanced groups; the run executes only the files in group
+`<index>`:
+
+```sh
+# On machine 1 of 3
+deno test --shard=1/3
+
+# On machine 2 of 3
+deno test --shard=2/3
+```
+
+Sharding is applied before `--shuffle`, so a given shard runs the same files on
+every machine regardless of the shuffle seed.
+
+## Retrying and repeating
+
+Set a run-wide default for retries and repetitions with `--retry` and
+`--repeats`:
+
+```sh
+# Re-run each failing test up to twice before reporting failure
+deno test --retry=2
+
+# Run every test three times and fail if any run fails
+deno test --repeats=3
+```
+
+A test that sets its own `retry` or `repeats` option overrides the flag. See
+[retrying and repeating tests](/runtime/test/#retrying-and-repeating-tests) for
+the per-test options.
 
 ## Leak detection
 

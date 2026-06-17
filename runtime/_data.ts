@@ -385,6 +385,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/jupyter/",
           },
           {
+            title: "deno link",
+            href: "/runtime/reference/cli/link/",
+          },
+          {
             title: "deno lint",
             href: "/runtime/reference/cli/lint/",
           },
@@ -443,6 +447,10 @@ export const sidebar = [
           {
             title: "deno uninstall",
             href: "/runtime/reference/cli/uninstall/",
+          },
+          {
+            title: "deno unlink",
+            href: "/runtime/reference/cli/unlink/",
           },
           {
             title: "deno update",

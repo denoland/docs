@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-09
+last_modified: 2026-06-17
 title: "Configuration file (deno.json)"
 description: "Reference for every deno.json field: dependencies and import maps, tasks, lint and fmt, lockfile, node_modules directory, TypeScript compiler options, unstable flags, include/exclude, exports, permissions, compile, and proxies."
 oldUrl:
@@ -132,6 +132,19 @@ to have the proper package name and metadata in `deno.json` or `package.json`,
 so that Deno knows what package it's dealing with. This provides greater
 flexibility and modularity, maintaining clean separation between your main code
 and external packages.
+
+Entries can also be globs, which is convenient for linking every package in a
+directory at once. Relative-path globs and `file://` URL globs are both
+supported, and a `!`-prefixed pattern excludes matches:
+
+```json title="deno.json"
+{
+  "links": [
+    "../packages/*",
+    "!../packages/internal-only"
+  ]
+}
+```
 
 ## Tasks
 
@@ -269,6 +282,7 @@ allowed values:
 | `typeLiteral.separatorKind`           | `semiColon`             | `comma`, `semiColon`                                        |
 | `useBraces`                           | `whenNotSingleLine`     | `maintain`, `whenNotSingleLine`, `always`, `preferNone`     |
 | `useTabs`                             | `false`                 | `true`, `false`                                             |
+| `json.trailingCommas`                 | `never`                 | `never`, `always`, `maintain`, `jsonc`                      |
 | `jsx.bracketPosition`                 | `nextLine`              | `maintain`, `sameLine`, `nextLine`                          |
 | `jsx.forceNewLinesSurroundingContent` | `false`                 | `true`, `false`                                             |
 | `jsx.multiLineParens`                 | `prefer`                | `never`, `prefer`, `always`                                 |
@@ -276,6 +290,12 @@ allowed values:
 | `unstable-sql`                        | `false`                 | `true`, `false`                                             |
 
 </div>
+
+`json.trailingCommas` controls trailing commas in JSON and JSONC files
+separately from the `trailingCommas` option, which applies to JavaScript and
+TypeScript. The `maintain` value keeps trailing commas as written, and the
+`jsonc` value adds trailing commas in `.jsonc` files while omitting them in
+`.json` files.
 
 Read more about [formatting your code with Deno](/runtime/lint_and_format/).
 
