@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-21
+last_modified: 2026-06-17
 title: "Permissions"
 description: "Reference for Deno's permission system: how the runtime sandbox works and how to grant or deny file system, network, environment, system, subprocess, FFI, and import access with the --allow and --deny flags."
 oldUrl:
@@ -381,6 +381,21 @@ deno run --allow-sys --deny-sys="networkInterfaces" script.ts
 # Deny all access to system information, disabling permission prompts.
 deno run --deny-sys script.ts
 ```
+
+Node compatibility APIs route through the same permission. Functions from
+[`node:os`](https://nodejs.org/api/os.html) map to these `--allow-sys` API
+names:
+
+| `node:os` function              | `--allow-sys` API name |
+| ------------------------------- | ---------------------- |
+| `os.cpus()`                     | `cpus`                 |
+| `os.totalmem()`, `os.freemem()` | `systemMemoryInfo`     |
+| `os.hostname()`                 | `hostname`             |
+| `os.networkInterfaces()`        | `networkInterfaces`    |
+| `os.userInfo()`                 | `uid`, `gid`           |
+| `os.release()`                  | `osRelease`            |
+| `os.uptime()`                   | `osUptime`             |
+| `os.loadavg()`                  | `loadavg`              |
 
 ## Subprocesses
 

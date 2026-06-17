@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-14
+last_modified: 2026-06-17
 title: "Security and permissions"
 description: "A guide to Deno's security model: secure-by-default execution, the permission sandbox, evaluating and executing untrusted code, and the permission broker. See the Permissions reference for the flags."
 ---
@@ -84,6 +84,20 @@ reads to one directory, `--allow-env=API_KEY` to a single variable, and so on. A
 bare `--allow-net` with no value grants the whole category, which is broader
 than most programs need.
 
+When an operation is refused (because the permission was not granted or was
+explicitly denied), Deno throws a `NotCapable` error. You can catch it like any
+other error if you want to handle missing permissions gracefully:
+
+```ts
+try {
+  await Deno.readTextFile("/etc/hosts");
+} catch (err) {
+  if (err instanceof Deno.errors.NotCapable) {
+    console.error("Missing read permission, run again with --allow-read");
+  }
+}
+```
+
 When stdout is a terminal and you have not passed a flag, Deno pauses and asks
 instead of failing, so you can grant access interactively as it is requested:
 
@@ -123,6 +137,13 @@ is effectively granting full access:
   system calls directly. Once loaded, it can read files, open sockets, or do
   anything the operating system lets the process do, regardless of which
   `--allow-*` flags you passed.
+
+Be careful when combining `--allow-write` with `--allow-run`. Write access to a
+directory that contains an allowed executable (or to the executable itself) lets
+a program overwrite that binary, or replace it with a symlink, so the next
+subprocess it spawns runs attacker-controlled code with the host's privileges.
+Avoid granting write access to directories that hold binaries you allow with
+`--allow-run`.
 
 Treat both as equivalent to `--allow-all` when deciding whether to trust the
 code you are running.

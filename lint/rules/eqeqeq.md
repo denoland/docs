@@ -23,3 +23,12 @@ if ("hello world" != input) {}
 if (a === 5) {}
 if ("hello world" !== input) {}
 ```
+
+This rule has no configuration options. If you intentionally want to use `==` or
+`!=` for a specific comparison (for example `value != null` to match both `null`
+and `undefined`), suppress the rule on that line with an ignore directive:
+
+```typescript
+// deno-lint-ignore eqeqeq
+if (value != null) {}
+```

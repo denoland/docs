@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-12
+last_modified: 2026-06-17
 title: "deno lint"
 oldUrl:
   - /runtime/tools/linter/
@@ -79,6 +79,12 @@ Customize which rules are active in your `deno.json`:
 - **`tags`** — rule sets to enable. Available tags: `recommended`, `fresh`
 - **`include`** — additional individual rules to enable
 - **`exclude`** — rules to disable even if included by a tag
+
+Many rules do not belong to any tag (for example `eqeqeq` or `no-console`).
+Those rules are not enabled by `tags` and must be turned on by listing them
+individually in `include`. You can check whether a rule has a tag with
+`deno lint --rules` or on each rule's page in the [lint rules](/lint/)
+reference.
 
 See the [Configuration](/runtime/reference/deno_json/#linting) page for all
 available options.

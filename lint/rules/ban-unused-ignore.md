@@ -16,8 +16,8 @@ detects unused, superfluous ignore directives.
 **Invalid:**
 
 ```typescript
-// Actually this line is valid since `export` means "used",
-// so this directive is superfluous
+// `export` counts as a use, so `foo` is not actually unused and the
+// directive below suppresses nothing. This rule flags it as superfluous.
 // deno-lint-ignore no-unused-vars
 export const foo = 42;
 ```
@@ -25,5 +25,11 @@ export const foo = 42;
 **Valid:**
 
 ```typescript
+// The directive is unnecessary here, so it is simply removed.
 export const foo = 42;
+
+// Here the directive is doing real work: `bar` is genuinely unused, so the
+// no-unused-vars directive is necessary and ban-unused-ignore leaves it alone.
+// deno-lint-ignore no-unused-vars
+const bar = 42;
 ```
