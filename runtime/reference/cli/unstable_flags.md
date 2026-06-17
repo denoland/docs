@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-05
+last_modified: 2026-06-17
 title: "Unstable feature flags"
 oldUrl:
   - /runtime/tools/unstable_flags/
@@ -217,6 +217,51 @@ Enable the
 [OpenTelemetry integration for Deno](/runtime/fundamentals/open_telemetry). This
 feature is now stable, so this flag is unnecessary in
 [Deno 2.4](https://deno.com/blog/v2.4)+.
+
+## `--unstable-raw-imports`
+
+Enable importing the raw contents of a file by adding an import attribute that
+declares the type. The imported value depends on the type you request:
+
+```ts title="example.ts"
+// import the file as a string
+import text from "./data.txt" with { type: "text" };
+// import the file as a Uint8Array
+import bytes from "./image.png" with { type: "bytes" };
+// import a stylesheet as a CSSStyleSheet
+import sheet from "./styles.css" with { type: "css" };
+
+console.log(typeof text); // string
+console.log(bytes.constructor.name); // Uint8Array
+console.log(sheet.constructor.name); // CSSStyleSheet
+```
+
+## `--unstable-bundle`
+
+Enable the unstable [`Deno.bundle`](/api/deno/~/Deno.bundle) runtime API for
+bundling JavaScript and TypeScript programmatically. See also the
+[`deno bundle`](/runtime/reference/cli/bundle/) command.
+
+## `--unstable-lazy-dynamic-imports`
+
+Lazily loads statically analyzable dynamic imports when not running with type
+checking, rather than loading them up front. Note that this may change the order
+in which semver specifiers are resolved.
+
+## `--unstable-npm-lazy-caching`
+
+Download npm dependencies only as they are actually referenced by an import,
+rather than installing every npm package listed in `package.json` on startup.
+
+## `--unstable-lockfile-v5`
+
+Use version 5 of the lockfile format.
+
+## `--unstable-no-legacy-abort`
+
+Use the abort signal in [`Deno.serve`](/api/deno/~/Deno.serve) without the
+legacy behavior. With this flag the server is not aborted when a request is
+handled successfully.
 
 ## `--unstable`
 
