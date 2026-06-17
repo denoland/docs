@@ -281,6 +281,24 @@ For a full checklist, optional toolchain improvements, and a Node-to-Deno
 command cheatsheet, see the
 [Migrating from Node.js to Deno guide](/runtime/migrate/).
 
+### Tools that spawn `node`
+
+Some native build tools resolve and run a `node` binary directly through the
+operating system, which bypasses the `node` interception Deno normally does for
+scripts and `child_process`. Next.js 16 is the motivating case: Turbopack's
+native addon spawns a pool of `node` workers to run CSS and font loaders, so
+`deno task dev` would fail those steps whenever no `node` binary is installed.
+
+To make a separate Node install unnecessary, Deno stands in for `node`. When no
+real `node` is found on your `PATH`, Deno places a `node` executable in its cache
+directory and prepends that directory to the `PATH` of the processes it starts.
+A tool that spawns `node` then reaches Deno, which translates the Node arguments
+and runs as if you had invoked `deno node ...`.
+
+This is best-effort and activates only when a real `node` is not already on
+`PATH`, so an existing Node installation is never shadowed. Set
+`DENO_DISABLE_NODE_SHIM=1` to turn the behavior off.
+
 ## Run an npm CLI tool
 
 You can run npm CLI tools (packages with `bin` entries) directly, the way you
