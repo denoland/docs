@@ -4,11 +4,16 @@
  * @tags cli
  * @run <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.Permissions} Doc: Deno.Permissions
+ * @resource {https://docs.deno.com/runtime/fundamentals/security/} Doc: Permissions and the --allow-* flags
  * @group CLI
  *
  * There are times where depending on the state of permissions
  * granted to a process, we want to do different things. This is
  * made very easy to do with the Deno permissions API.
+ *
+ * This example covers the runtime permissions API. To grant permissions when
+ * launching a program from the command line with flags like `--allow-read` or
+ * `--allow-net`, see the permissions reference linked above.
  */
 
 // In the most simple case, we can just request a permission by it's name.

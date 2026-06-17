@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-11-04
+last_modified: 2026-06-17
 title: "Deploying Deno to Cloudflare Workers"
 description: "Step-by-step tutorial on deploying Deno functions to Cloudflare Workers. Learn how to configure denoflare, create worker modules, test locally, and deploy your code to Cloudflare's global edge network."
 url: /examples/cloudflare_workers_tutorial/
@@ -99,3 +99,10 @@ Next, you can view your new function in your Cloudflare account:
 ![New function on Cloudflare Workers](./images/how-to/cloudflare-workers/main-on-cloudflare.png)
 
 Boom!
+
+## Deploying a Fresh app
+
+If you are building with [Fresh](https://fresh.deno.dev/), the framework has its
+own deployment guidance. See the
+[Fresh documentation](https://fresh.deno.dev/docs/) for how to deploy a Fresh
+app to Cloudflare Workers and other platforms.
