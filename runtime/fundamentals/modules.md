@@ -327,6 +327,15 @@ without the trailing `/`:
 }
 ```
 
+## Managing dependencies
+
+Now that you understand how Deno resolves and imports modules, see the
+[Dependency management guide](/runtime/packages/) for the day-to-day tasks:
+adding and removing packages with `deno add` / `deno
+remove`, pinning versions,
+overriding and vendoring dependencies, lockfiles and integrity checking, supply
+chain management, publishing your own modules, and using private registries.
+
 ## Updating versions from the command line
 
 You don't have to edit version numbers in `deno.json` by hand. To move
@@ -345,12 +354,3 @@ To increment your own package's `version` field between releases, use
 ```sh
 deno bump-version patch  # 1.4.6 -> 1.4.7 (also: minor, major, or a prerelease)
 ```
-
-## Managing dependencies
-
-Now that you understand how Deno resolves and imports modules, see the
-[Dependency management guide](/runtime/packages/) for the day-to-day tasks:
-adding and removing packages with `deno add` / `deno
-remove`, pinning versions,
-overriding and vendoring dependencies, lockfiles and integrity checking, supply
-chain management, publishing your own modules, and using private registries.

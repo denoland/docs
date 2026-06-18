@@ -23,26 +23,24 @@ existing Jest suite over? See
 
 ## `Deno.test` vs `node:test`
 
-Deno can run tests written for [Node's built-in test runner](/api/node/test/)
-(`import { test } from "node:test"`) as well as its own `Deno.test`. Which one
-to reach for depends on where the code needs to run:
+Deno supports two test APIs equally: its own `Deno.test` and Node's built-in
+[`node:test`](/api/node/test/) module. Both are first-class. `deno test`
+discovers, runs, and reports tests written with either one, core features like
+[coverage](/runtime/test/coverage/) and name filtering work the same regardless
+of which you use, and you can mix both in the same project. Neither is more
+supported than the other.
 
-- **Use `Deno.test`** for Deno-first projects. It needs no imports for the
-  runner itself, type-checks TypeScript with no extra setup, and is wired into
-  the rest of Deno's tooling: per-test [permissions](#tests-and-permissions),
-  [coverage](/runtime/test/coverage/), [snapshots](/runtime/test/snapshots/),
-  [sanitizers](/runtime/test/sanitizers/), and
-  [documentation tests](/runtime/test/doc_tests/). Output, filtering, and
-  reporters are all driven by the `deno test` command.
-- **Use `node:test`** when a suite has to run unchanged on both Node and Deno,
-  or when you are porting a Node project and don't want to rewrite its tests
-  yet. It runs under `deno test`, but it does not hook into the Deno-specific
-  features above (for example, the `permissions` option and the op/resource
-  sanitizers are `Deno.test` concepts).
+The difference is the API, not the level of support:
 
-Both runners can coexist in the same project, and `deno test` discovers and runs
-files using either one. For new Deno code, prefer `Deno.test`; keep `node:test`
-where cross-runtime portability is the priority.
+- `Deno.test` needs no import and exposes Deno-specific options, such as
+  per-test [permissions](#tests-and-permissions) and the op/resource
+  [sanitizer](/runtime/test/sanitizers/) toggles.
+- `node:test` (`import { test } from "node:test"`) uses the Node testing API, so
+  a suite written with it also runs unchanged on Node.js.
+
+Reach for `node:test` when you want a suite that is portable across Deno and
+Node, or when you're migrating a Node project; reach for `Deno.test` when you
+want the Deno-native ergonomics and options.
 
 ## Writing Tests
 
