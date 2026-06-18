@@ -1145,6 +1145,12 @@ export const items = [
     category: "Deploying Deno projects",
   },
   {
+    title: "AWS ECS Fargate",
+    href: "/examples/aws_ecs_fargate_tutorial/",
+    type: "tutorial",
+    category: "Deploying Deno projects",
+  },
+  {
     title: "Cloudflare workers",
     href: "/examples/cloudflare_workers_tutorial/",
     type: "tutorial",
