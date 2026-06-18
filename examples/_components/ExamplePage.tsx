@@ -9,7 +9,7 @@ export default function ExamplePage({ example }: Props) {
     file.snippets.map((snippet) => snippet.code).join("\n")
   ).join("\n");
   const url =
-    `https://github.com/denoland/deno-docs/blob/main/examples/scripts/${example.name}${
+    `https://github.com/denoland/docs/blob/main/examples/scripts/${example.name}${
       example.parsed.files.length > 1 ? "/main" : ""
     }`;
   const rawUrl = `https://docs.deno.com/examples/scripts/${example.name}${
@@ -81,8 +81,12 @@ export default function ExamplePage({ example }: Props) {
             >
               <pre className="highlight">
                 <code>
-                {example.parsed.run.startsWith("deno")
-                    ? example.parsed.run.replace("<url>", url)
+                {example.parsed.run.startsWith("deno test")
+                    ? `# deno test runs local files, so download the example first:\ncurl -O ${rawUrl}\n${
+                      example.parsed.run.replace("<url>", example.name)
+                    }`
+                    : example.parsed.run.startsWith("deno")
+                    ? example.parsed.run.replace("<url>", rawUrl)
                     : "deno run " +
                     example.parsed.run.replace("<url>", rawUrl)}
                 </code>
