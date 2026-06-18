@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-10-15
+last_modified: 2026-06-18
 title: Domains
 description: "Complete guide to domain management in Deno Deploy, including organization domains, custom domains, DNS configuration, TLS certificates, and domain assignments."
 ---
@@ -158,6 +158,40 @@ After adding a custom domain to your organization:
 4. If using a wildcard domain, choose whether to attach the base domain, the
    wildcard, or a specific subdomain
 5. Click "Assign Domain"
+
+## Redirecting one domain to another
+
+A custom domain serves whatever application you assign it to, so to make one
+domain redirect to another — for example, sending `example.com` to
+`www.example.com` so the `www` host is canonical — deploy a small application
+that issues the redirect and assign the redirecting domain to it.
+
+The redirect application is a single [`Deno.serve()`](/api/deno/~/Deno.serve)
+handler that rewrites the host while preserving the path and query string:
+
+```ts title="redirect.ts"
+Deno.serve((req) => {
+  const url = new URL(req.url);
+  const target = new URL(url.pathname + url.search, "https://www.example.com");
+  return Response.redirect(target, 301);
+});
+```
+
+`301` is a permanent redirect, which is what you want for a canonical host so
+browsers and search engines remember it. Use `302` if the redirect is only
+temporary.
+
+Then wire up the two domains:
+
+1. Assign the canonical domain (`www.example.com`) to your main application,
+   following
+   [Assigning a custom domain](#assigning-a-custom-domain-to-an-application).
+2. Deploy the redirect application above as a separate application and assign
+   the other domain (`example.com`) to it.
+
+Requests to the non-canonical domain now return a `301` to the same path on the
+canonical domain. To redirect the other way (`www` to the apex domain), swap the
+two domain assignments and change the target URL in the handler.
 
 ## Unassigning a custom domain from an application
 
