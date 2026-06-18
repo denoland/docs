@@ -625,11 +625,18 @@ global. The following properties are available:
 - `navigator.platform` — the underlying OS platform (e.g. `"Linux x86_64"`,
   `"MacIntel"`, `"Win32"`). Added in Deno 2.7.
 - `navigator.hardwareConcurrency` — number of logical CPU cores
+- `navigator.userAgentData` — a
+  [`NavigatorUAData`](https://developer.mozilla.org/en-US/docs/Web/API/NavigatorUAData)
+  object implementing the User-Agent Client Hints API. The low-entropy
+  properties `brands`, `mobile`, and `platform` are read synchronously, while
+  `getHighEntropyValues(hints)` resolves with additional details such as
+  `architecture`, `model`, and `platformVersion`.
 
 ```ts
 console.log(navigator.userAgent); // "Deno/2.7.0"
 console.log(navigator.platform); // e.g. "Linux x86_64", "MacIntel", "Win32"
 console.log(navigator.hardwareConcurrency); // e.g. 8
+console.log(navigator.userAgentData.brands); // e.g. [{ brand: "Deno", version: "2" }]
 ```
 
 ## Temporal
