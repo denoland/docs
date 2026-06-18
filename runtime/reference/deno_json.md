@@ -331,6 +331,16 @@ Deno uses lockfile by default, you can disable it with following configuration:
 }
 ```
 
+### Merge conflicts
+
+After merging branches, `deno.lock` can be left with git conflict markers. These
+markers make the file invalid JSON, which used to make Deno error out with
+`Lockfile may be corrupt`. Deno now resolves these conflicts for you: the next
+command that reads the lockfile merges the conflicting entries and rewrites a
+clean file. Most of the lockfile is a set of identity-keyed entries where a key
+always maps to the same value regardless of which branch wrote it, so the merge
+is a union and you do not need to edit the markers by hand.
+
 ## Minimum dependency age
 
 The `minimumDependencyAge` field stops Deno from installing npm or JSR package
