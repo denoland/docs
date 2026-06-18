@@ -101,17 +101,6 @@ export const sidebar = [
         href: "/runtime/lint_and_format/",
       },
       {
-        title: "Debugging",
-        href: "/runtime/fundamentals/debugging/",
-        disclosure: true,
-        items: [
-          {
-            title: "CPU profiling",
-            href: "/runtime/fundamentals/cpu_profiling/",
-          },
-        ],
-      },
-      {
         title: "Migrating from Node",
         href: "/runtime/migrate/",
         disclosure: true,
@@ -237,6 +226,23 @@ export const sidebar = [
     ],
   },
   {
+    title: "Diagnostics",
+    items: [
+      {
+        title: "Debugging",
+        href: "/runtime/fundamentals/debugging/",
+      },
+      {
+        title: "CPU profiling",
+        href: "/runtime/fundamentals/cpu_profiling/",
+      },
+      {
+        title: "OpenTelemetry",
+        href: "/runtime/fundamentals/open_telemetry/",
+      },
+    ],
+  },
+  {
     title: "Advanced",
     items: [
       {
@@ -250,10 +256,6 @@ export const sidebar = [
       {
         title: "Cron",
         href: "/runtime/fundamentals/cron/",
-      },
-      {
-        title: "OpenTelemetry",
-        href: "/runtime/fundamentals/open_telemetry/",
       },
       {
         title: "Loader hooks",
