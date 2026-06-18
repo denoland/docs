@@ -81,9 +81,18 @@ export default function Feedback({ file }: { file: string | undefined }) {
                   class="block w-full p-2 border border-foreground-tertiary bg-white dark:bg-background-primary rounded"
                   name="feedback-comment"
                   id="feedback-comment"
+                  // Keep maxlength in sync with MAX_COMMENT_LENGTH in
+                  // middleware/functions/feedback.ts and js/feedback.ts
+                  maxLength={2000}
                   placeholder="Your feedback will be posted as an issue in the denoland/docs GitHub repo"
                 >
                 </textarea>
+                <p
+                  id="feedback-comment-count"
+                  class="text-xs text-gray-600 dark:text-gray-400 text-right mt-1"
+                >
+                  0 / 2000
+                </p>
               </div>
               <div class="space-y-1">
                 <label for="feedback-contact">
