@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-14
+last_modified: 2026-06-18
 title: "Modules"
 description: "Learn how Deno's ECMAScript module system works: importing local and third-party modules, import attributes, import maps, and supported import types such as Wasm and data URLs."
 oldUrl:
