@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-09-29
+last_modified: 2026-06-18
 title: Observability
 description: "Comprehensive overview of monitoring features in Deno Deploy, including logs, traces, metrics, and filtering options."
 ---
@@ -45,6 +45,11 @@ Traces in Deno Deploy are captured in three ways:
 
 Traces are organized by application. The search bar lets you filter based on
 various attributes and span names.
+
+The Traces list shows top-level request traces. Custom spans you create through
+manual instrumentation appear as child spans nested within the request trace
+they run under, not as separate entries in the list. To find them, open the
+relevant request trace rather than looking for a standalone trace.
 
 Clicking a trace opens the trace overlay drawer, showing all spans within that
 trace in a waterfall view. This visualization displays the start time, end time,
