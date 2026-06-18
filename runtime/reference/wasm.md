@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-10-15
+last_modified: 2026-06-18
 title: "WebAssembly"
 description: "A guide to using WebAssembly (Wasm) in Deno. Learn about module imports, type checking, streaming APIs, optimization techniques, and how to work with various programming languages that compile to Wasm."
 oldUrl:
@@ -295,6 +295,97 @@ wasmbuild generates TypeScript definitions for your Rust functions, providing
 full type checking. The generated JavaScript can be used with bundlers like
 esbuild. Generated files can be committed directly to source control for easy
 deployment.
+
+## WebAssembly System Interface (WASI)
+
+The examples above instantiate Wasm modules that only exchange numbers and
+memory with JavaScript. The
+[WebAssembly System Interface (WASI)](https://wasi.dev/) is a standard set of
+imports that give a Wasm module access to operating-system-like capabilities,
+such as reading command-line arguments and environment variables, the clock, and
+(when you grant it) the file system. It is what lets a program written in Rust,
+C, or another language and compiled to Wasm run outside the browser, the same
+way it would as a native command-line binary.
+
+Deno supports both generations of WASI:
+
+- **WASI Preview 1** (`wasip1`) modules run through the
+  [`node:wasi`](https://nodejs.org/api/wasi.html) module.
+- **WASI Preview 2** (`wasip2`) components, built on the
+  [component model](https://component-model.bytecodealliance.org/), run with the
+  Bytecode Alliance's [`jco`](https://github.com/bytecodealliance/jco) tool,
+  which can also transpile a component to JavaScript you import like any module.
+
+### Running a WASI Preview 1 module
+
+Compile a program to the `wasm32-wasip1` target. Any toolchain that targets WASI
+works; with Rust:
+
+```sh
+rustc --target wasm32-wasip1 -O hello.rs -o hello.wasm
+```
+
+Run it from Deno with the `node:wasi` module. Construct a `WASI` instance with
+the arguments and environment variables the guest should see, instantiate the
+module with the WASI imports, and call `start`:
+
+```ts title="run.ts"
+import { WASI } from "node:wasi";
+
+const wasi = new WASI({
+  version: "preview1",
+  args: ["hello", "alpha", "beta"],
+  env: { GREETING: "hello-wasi" },
+});
+
+const bytes = await Deno.readFile(new URL("./hello.wasm", import.meta.url));
+const module = await WebAssembly.compile(bytes);
+const instance = await WebAssembly.instantiate(module, wasi.getImportObject());
+
+wasi.start(instance);
+```
+
+```sh
+deno run --allow-read run.ts
+```
+
+A WASI instance starts with no access to the real file system. To expose
+directories to the guest, pass a `preopens` map from the paths the module sees
+to real paths on disk, for example `preopens: { "/data": "./data" }`. The module
+can then read and write within `./data` (and your Deno process needs the
+matching `--allow-read` and `--allow-write` permissions).
+
+:::note
+
+`node:wasi` is an experimental Node.js API, so Deno prints an experimental
+warning when you use it.
+
+:::
+
+### Running a WASI Preview 2 component
+
+Preview 2 components are compiled to the `wasm32-wasip2` target:
+
+```sh
+rustc --target wasm32-wasip2 -O hello.rs -o hello.wasm
+```
+
+A component is not a plain Wasm module, so it does not load through the
+`WebAssembly` API or `node:wasi`. Run it directly with `jco`:
+
+```sh
+deno run -A npm:@bytecodealliance/jco run hello.wasm alpha beta
+```
+
+To call a component from your own code instead of running it as a command,
+transpile it to JavaScript with bindings:
+
+```sh
+deno run -A npm:@bytecodealliance/jco transpile hello.wasm -o out
+```
+
+This writes an ES module to `out/` that you can import like any other JavaScript
+module.
 
 ## Optimization
 
