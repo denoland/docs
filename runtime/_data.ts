@@ -226,7 +226,7 @@ export const sidebar = [
     ],
   },
   {
-    title: "Debugging & observability",
+    title: "Diagnostics",
     items: [
       {
         title: "Debugging",
