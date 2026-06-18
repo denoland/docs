@@ -47,6 +47,8 @@ Step-by-step guides for deploying a Deno app to specific providers:
 - [AWS Lambda](/examples/aws_lambda_tutorial/) for serverless functions
 - [AWS Lightsail](/examples/aws_lightsail_tutorial/) for container-based VM
   hosting
+- [AWS ECS Fargate](/examples/aws_ecs_fargate_tutorial/) for serverless
+  containers
 - [Google Cloud Run](/examples/google_cloud_run_tutorial/) for serverless
   containers
 - [DigitalOcean](/examples/digital_ocean_tutorial/) for container hosting
