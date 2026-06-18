@@ -58,6 +58,19 @@ export default function LintRulesIndex(
           If no tag is provided, then the <code>recommended</code>{" "}
           set of rules will be enabled by default.
         </p>
+        <p>
+          To turn a rule off, add it to{" "}
+          <a href="/runtime/reference/cli/lint/#configuring-rules-in-deno.json">
+            <code>lint.rules.exclude</code>
+          </a>{" "}
+          in{" "}
+          <code>deno.json</code>, or suppress a single diagnostic in your code
+          with a{" "}
+          <a href="/runtime/reference/cli/lint/#ignore-directives">
+            <code>// deno-lint-ignore</code>
+          </a>{" "}
+          comment.
+        </p>
         <input
           type="text"
           id="lint-rule-search"
