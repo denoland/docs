@@ -9,7 +9,11 @@ info: "`deno bundle` is currently an experimental subcommand and is subject to c
 ---
 
 `deno bundle` combines your module and all of its dependencies into a single
-JavaScript file, using [esbuild](https://esbuild.github.io/) under the hood.
+JavaScript file, using [esbuild](https://esbuild.github.io/) under the hood. It
+is useful for deploying or distributing a project as a single optimized file,
+but it is not currently intended as a replacement for complex or interactive
+build tools such as [Vite](https://vite.dev/) or
+[webpack](https://webpack.js.org/).
 
 ## Basic usage
 
