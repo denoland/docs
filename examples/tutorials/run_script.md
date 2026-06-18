@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-06-18
 title: "Run a script"
 description: "A guide to creating and running basic scripts with Deno. Learn how to write and execute JavaScript and TypeScript code, understand runtime environments, and get started with fundamental Deno concepts."
 url: /examples/run_script_tutorial/
@@ -103,5 +103,15 @@ Hello Kai
 ```
 
 🦕 Congratulations! Now you know how to create a simple script in both JS and TS
-and how to run it in Deno with the `deno run` command. Keep exploring the
-tutorials and examples to learn more about Deno!
+and how to run it in Deno with the `deno run` command.
+
+## Next steps
+
+Keep exploring Deno with these resources:
+
+- [Initialize a project](/examples/initialize_project_tutorial/) to structure a
+  larger app with a `deno.json` configuration file
+- [Set up your environment](/runtime/getting_started/setup_your_environment/)
+  with editor and IDE integration
+- [Fetch data](/examples/fetch_data_tutorial/) over the network from a script
+- [Browse all examples and tutorials](/examples/) for more things to build
