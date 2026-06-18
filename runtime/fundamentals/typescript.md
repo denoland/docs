@@ -370,6 +370,19 @@ Without a local `node_modules` (Deno's default global-cache mode), this
 automatic resolution does not apply; use the per-import `@ts-types` annotation
 shown above instead.
 
+### Typing dynamic imports
+
+The `@ts-types` directive only applies to static `import` statements, not to
+dynamic `import()`. To type a dynamic import of a module that ships without
+declarations, use a type assertion that points at the corresponding `@types`
+package:
+
+```ts title="main.ts"
+const { markedTerminal } = await import(
+  "npm:marked-terminal@7"
+) as typeof import("npm:@types/marked-terminal@6");
+```
+
 ### Providing types for HTTP modules
 
 Servers hosting JavaScript modules can advertise a declaration file in an
