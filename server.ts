@@ -10,7 +10,9 @@ import expires from "lume/middlewares/expires.ts";
 import createLlmsFilesMiddleware from "./middleware/llmsFiles.ts";
 import createMarkdownSourceMiddleware from "./middleware/markdownSource.ts";
 
-export const server = new Server({ root: "_site" });
+const port = Number(Deno.env.get("PORT") ?? 8000);
+
+export const server = new Server({ root: "_site", port });
 
 server.use(redirectsMiddleware);
 server.use(createMarkdownSourceMiddleware({ root: "_site" }));
@@ -28,4 +30,4 @@ server.use(expires({
 
 server.start();
 
-console.log("Listening on http://localhost:8000");
+console.log(`Listening on http://localhost:${port}`);
