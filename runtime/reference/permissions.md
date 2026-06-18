@@ -436,6 +436,33 @@ spawn another `deno` process with full permissions.
 
 :::
 
+### Subprocesses with `LD_*` and `DYLD_*` environment variables
+
+Spawning a subprocess with an environment variable whose name starts with `LD_`
+(such as `LD_LIBRARY_PATH` or `LD_PRELOAD`) or `DYLD_` (such as
+`DYLD_LIBRARY_PATH` or `DYLD_INSERT_LIBRARIES`) requires the unscoped
+`--allow-run` flag. A scoped allow list like `--allow-run=curl` is _not_
+sufficient, even when the value matches the one Deno was started with:
+
+```ts
+// Fails under `--allow-run=echo`, succeeds under `--allow-run` or `--allow-all`.
+new Deno.Command("echo", {
+  args: ["hello"],
+  env: { LD_PRELOAD: "/path/to/lib.so" },
+}).outputSync();
+```
+
+```console
+NotCapable: Requires --allow-run permissions to spawn subprocess with LD_PRELOAD
+environment variable. Alternatively, spawn with the environment variable unset.
+```
+
+These variables instruct the dynamic linker to load arbitrary shared libraries
+into the child process, so they can run code in the subprocess regardless of
+which executable you allowed. Restricting them to the unscoped `--allow-run`
+keeps a scoped allow list from being silently bypassed. If you don't need them,
+the simplest fix is to spawn the subprocess with the variable unset.
+
 Definition: `--deny-run[=<PROGRAM_NAME>...]`
 
 ```sh
