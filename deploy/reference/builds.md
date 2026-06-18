@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-02-25
+last_modified: 2026-06-18
 title: Builds
 description: "Detailed explanation of the build process in Deno Deploy, covering build triggers, stages, configuration options, caching, and the build environment."
 ---
@@ -109,8 +109,11 @@ repository if you're using a recognized framework or common build setup.
   - **Dynamic**: For applications that respond to requests using a server (API
     servers, server-rendered websites, etc.)
     - **Entrypoint**: The JavaScript or TypeScript file to execute
-    - **Arguments** (optional): Command-line arguments to pass to the
-      application
+    - **Arguments** (optional): Command-line arguments passed to the
+      application, after the entrypoint. These are not flags for the Deno
+      runtime: runtime flags such as `--unstable-*` cannot be passed, since the
+      runtime always runs with a fixed set of flags. See the
+      [runtime reference](/deploy/reference/runtime/) for details.
     - **Runtime working directory** (optional): The working directory for the
       application at runtime
     - **Runtime memory limit** (optional): The maximum amount of memory the
@@ -157,8 +160,10 @@ the entire configuration will be sourced from the file instead of the dashboard
     - `deploy.runtime.type`: Must be set to `"dynamic"`, or omitted (dynamic is
       the default).
     - `deploy.runtime.entrypoint`: The JavaScript or TypeScript file to execute.
-    - `deploy.runtime.args` (optional): Command-line arguments to pass to the
-      application.
+    - `deploy.runtime.args` (optional): Command-line arguments passed to the
+      application, after the entrypoint. These are not flags for the Deno
+      runtime; runtime flags such as `--unstable-*` cannot be passed. See the
+      [runtime reference](/deploy/reference/runtime/).
     - `deploy.runtime.cwd` (optional): The working directory for the application
       at runtime.
     - `deploy.runtime.memory_limit` (optional): The maximum amount of memory the
