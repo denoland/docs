@@ -21,9 +21,10 @@ from the JS ecosystem, such as Jest, Mocha, or AVA, with Deno. Moving an
 existing Jest suite over? See
 [Migrating from Jest](/runtime/test/migrate_from_jest/).
 
-## `Deno.test` vs `node:test`
+## [`Deno.test`](/api/deno/~/Deno.test) vs [`node:test`](/api/node/test/)
 
-Deno supports two test APIs equally: its own `Deno.test` and Node's built-in
+Deno supports two test APIs equally: its own
+[`Deno.test`](/api/deno/~/Deno.test) and Node's built-in
 [`node:test`](/api/node/test/) module. Both are first-class. `deno test`
 discovers, runs, and reports tests written with either one, core features like
 [coverage](/runtime/test/coverage/) and name filtering work the same regardless
@@ -32,15 +33,16 @@ supported than the other.
 
 The difference is the API, not the level of support:
 
-- `Deno.test` needs no import and exposes Deno-specific options, such as
-  per-test [permissions](#tests-and-permissions) and the op/resource
-  [sanitizer](/runtime/test/sanitizers/) toggles.
+- [`Deno.test`](/api/deno/~/Deno.test) needs no import and exposes Deno-specific
+  options, such as per-test [permissions](#tests-and-permissions) and the
+  op/resource [sanitizer](/runtime/test/sanitizers/) toggles.
 - `node:test` (`import { test } from "node:test"`) uses the Node testing API, so
   a suite written with it also runs unchanged on Node.js.
 
 Reach for `node:test` when you want a suite that is portable across Deno and
-Node, or when you're migrating a Node project; reach for `Deno.test` when you
-want the Deno-native ergonomics and options.
+Node, or when you're migrating a Node project; reach for
+[`Deno.test`](/api/deno/~/Deno.test) when you want the Deno-native ergonomics
+and options.
 
 ## Writing Tests
 
