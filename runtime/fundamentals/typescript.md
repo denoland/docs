@@ -350,7 +350,7 @@ directory, Deno picks them up automatically for every import of the package, the
 same way `tsc` does, with no annotation:
 
 ```sh
-deno add npm:lodash npm:@types/lodash
+deno add lodash @types/lodash
 ```
 
 ```ts title="main.ts"
