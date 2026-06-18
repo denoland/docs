@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-13
+last_modified: 2026-06-18
 title: "Cron"
 description: "Schedule recurring tasks in Deno with the Deno.cron() runtime API, an unstable feature enabled via --unstable-cron."
 ---
@@ -34,6 +34,22 @@ Deno.cron("log-a-message", "* * * * *", () => {
   console.log("This runs once a minute.");
 });
 ```
+
+A 5-field cron expression has one field per time unit, separated by spaces:
+
+```sh
+┌──────────── minute (0-59)
+│ ┌────────── hour (0-23)
+│ │ ┌──────── day of month (1-31)
+│ │ │ ┌────── month (1-12 or JAN-DEC)
+│ │ │ │ ┌──── day of week (0-6 or SUN-SAT, where 0 is Sunday)
+│ │ │ │ │
+* * * * *
+```
+
+Each field accepts an exact value, `*` (every value), a range (`1-5`), a list
+(`1,3,5`), or a step (`*/15` for every fifteenth unit). For example,
+`0 9 * * MON-FRI` runs at 09:00 UTC on weekdays.
 
 The schedule can be a standard 5-field cron expression or a structured object:
 
