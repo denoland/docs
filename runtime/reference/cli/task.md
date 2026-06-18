@@ -35,6 +35,21 @@ For example:
 }
 ```
 
+## Running a task only if it exists
+
+`deno task <name>` exits with a non-zero code when the named task is not defined.
+To make a task optional, pass `--if-present`. Deno then exits with code 0 and
+prints nothing when the task is missing, which is useful for shared CI scripts
+that call a task only some packages define:
+
+```sh
+deno task --if-present build
+```
+
+The flag only suppresses the not-found case for the named task. Listing tasks
+with a bare `deno task`, running a task that does exist, and real errors such as
+a missing task dependency are unaffected.
+
 ## Specifying the current working directory
 
 By default, `deno task` executes commands with the directory of the Deno
@@ -727,6 +742,15 @@ file if it is discovered. Note that Deno does not respect or support any npm
 life cycle events like `preinstall` or `postinstall`—you must explicitly run the
 script entries you want to run (ex.
 `deno install --entrypoint main.ts && deno task postinstall`).
+
+When `deno task` runs a `package.json` script, it sets the `npm_*` environment
+variables that npm exposes, so scripts that read them keep working. These include
+`npm_package_name`, `npm_package_version`, `npm_lifecycle_event` (the script
+name), `npm_lifecycle_script` (its command string), and `npm_config_user_agent`,
+along with `npm_execpath` and `npm_node_execpath` (both set to the path of the
+running `deno` executable) and `npm_command` (set to `run-script`). These
+variables are set only for `package.json` scripts. Tasks defined in `deno.json`
+do not receive them.
 
 ## Command Resolution
 
