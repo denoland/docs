@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-08-20
+last_modified: 2026-06-18
 title: "Deno & Visual Studio Code"
 description: "Complete guide to using Deno with Visual Studio Code. Learn about extension setup, workspace configuration, debugging, testing, task automation, and advanced IDE features for Deno development."
 oldUrl:
@@ -294,6 +294,59 @@ generate a configuration by: going to `Run and Debug` panel, clicking
 `create a launch.json file` and selecting the `Deno` option from the available
 debugger options. (The generated `type` of the configuration will be `node`;
 that's ok.)
+
+### Debugging a project that runs through a dev server
+
+The generated `Deno` configuration launches a single entry file directly. That
+does not fit projects whose dev task starts a long-running server through
+another tool, such as a [Fresh](https://fresh.deno.dev/) app, whose
+`deno task dev` runs Vite. For these, start the dev server with the inspector
+enabled and **attach** VS Code to it instead.
+
+First, add a task that runs your dev server under the Deno inspector. For a
+Fresh app whose `dev` task is `vite`, add a debug variant:
+
+```json title="deno.json"
+{
+  "tasks": {
+    "dev": "vite",
+    "dev:debug": "deno run --inspect -A npm:vite"
+  }
+}
+```
+
+`--inspect` starts the V8 inspector on `127.0.0.1:9229` without pausing. Use
+[`--inspect-wait`](/runtime/fundamentals/debugging/#--inspect-wait) instead if
+you need to debug code that runs during startup, before your first request.
+
+Then add an `attach` configuration to `.vscode/launch.json`:
+
+```json title=".vscode/launch.json"
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach to dev server",
+      "type": "node",
+      "request": "attach",
+      "port": 9229
+    }
+  ]
+}
+```
+
+Run `deno task dev:debug`, then start the "Attach to dev server" configuration
+from the `Run and Debug` panel. Breakpoints set in your server-side code (such
+as Fresh route handlers) are hit on the next matching request.
+
+:::note
+
+Vite loads and transforms route modules on demand, so a breakpoint in a route
+that hasn't been requested yet may show as "Unbound breakpoint" with a "Some of
+your breakpoints could not be set" warning. This is expected: the breakpoint
+binds once the route is first loaded, and it still pauses when that code runs.
+
+:::
 
 ## Tasks
 
