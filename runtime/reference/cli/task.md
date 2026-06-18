@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-15
+last_modified: 2026-06-18
 title: "deno task"
 oldUrl:
   - /runtime/tools/task_runner/
@@ -673,6 +673,8 @@ box on Windows, Mac, and Linux.
   shell to exit.
 - [`head`](https://man7.org/linux/man-pages/man1/head.1.html) - Output the first
   part of a file.
+- [`export`](https://man7.org/linux/man-pages/man1/export.1p.html) - Sets
+  environment variables and exports them to spawned commands.
 - [`unset`](https://man7.org/linux/man-pages/man1/unset.1p.html) - Unsets
   environment variables.
 - [`xargs`](https://man7.org/linux/man-pages/man1/xargs.1p.html) - Builds
