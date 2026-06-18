@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-18
 title: "Comparison with other tools"
 description: "How deno desktop compares to Electron, Electrobun, Tauri, and Dioxus across language, engine, process model, app size, ecosystem, and what's built-in."
 ---
