@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-06-18
 title: "deno x"
 command: x
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -68,6 +68,28 @@ The previous form `deno x typescript/tsc` still works.
 resolves the package's binary entry point, and executes it. The package is not
 added to your project's [`deno.json`](/runtime/fundamentals/configuration/) or
 `package.json`.
+
+## Authoring a package that runs with `deno x`
+
+How `deno x` finds something to execute depends on the registry:
+
+- **npm packages** expose runnable binaries through the `bin` field in
+  `package.json`. `deno x npm:<package>` runs the package's default binary, and
+  `deno x -p <package> <binary>` (or `deno x npm:<package>/<binary>`) selects a
+  specific one when the package ships several. To make your own npm package
+  runnable, publish it with a `bin` entry as you would for `npx`.
+- **JSR packages** are run by pointing `deno x` at an export that executes when
+  imported, for example `deno x jsr:@std/http/file-server`. To make your own JSR
+  package runnable, expose the entry point as a module export (guard top-level
+  side effects with `import.meta.main` so the module can still be imported as a
+  library), then document the subpath users should run, such as
+  `deno x jsr:@you/tool/cli`.
+
+If you want the tool available as a permanent command rather than run on demand,
+install it with [`deno install`](/runtime/reference/cli/install/) or compile it
+to a standalone executable. See [Build CLI apps](/runtime/cli_apps/) for the
+full workflow, and [Publishing modules](/runtime/packages/publishing/) for
+publishing to JSR.
 
 ## Permissions
 

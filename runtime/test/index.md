@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-06-18
 title: "Testing"
 description: "Write and run tests with Deno's built-in test runner: assertions, test steps, hooks, filtering, and reporters, with dedicated guides for mocking, snapshots, and coverage."
 oldUrl:
@@ -20,6 +20,29 @@ In addition to the built-in test runner, you can also use other test runners
 from the JS ecosystem, such as Jest, Mocha, or AVA, with Deno. Moving an
 existing Jest suite over? See
 [Migrating from Jest](/runtime/test/migrate_from_jest/).
+
+## `Deno.test` vs `node:test`
+
+Deno can run tests written for [Node's built-in test runner](/api/node/test/)
+(`import { test } from "node:test"`) as well as its own `Deno.test`. Which one
+to reach for depends on where the code needs to run:
+
+- **Use `Deno.test`** for Deno-first projects. It needs no imports for the
+  runner itself, type-checks TypeScript with no extra setup, and is wired into
+  the rest of Deno's tooling: per-test [permissions](#tests-and-permissions),
+  [coverage](/runtime/test/coverage/), [snapshots](/runtime/test/snapshots/),
+  [sanitizers](/runtime/test/sanitizers/), and
+  [documentation tests](/runtime/test/doc_tests/). Output, filtering, and
+  reporters are all driven by the `deno test` command.
+- **Use `node:test`** when a suite has to run unchanged on both Node and Deno,
+  or when you are porting a Node project and don't want to rewrite its tests
+  yet. It runs under `deno test`, but it does not hook into the Deno-specific
+  features above (for example, the `permissions` option and the op/resource
+  sanitizers are `Deno.test` concepts).
+
+Both runners can coexist in the same project, and `deno test` discovers and runs
+files using either one. For new Deno code, prefer `Deno.test`; keep `node:test`
+where cross-runtime portability is the priority.
 
 ## Writing Tests
 

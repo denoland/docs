@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-08-11
+last_modified: 2026-06-18
 title: "Fetch and stream data"
 description: "A tutorial on working with network requests in Deno. Learn how to use the fetch API for HTTP requests, handle responses, implement data streaming, and manage file uploads and downloads."
 url: /examples/fetch_data_tutorial/
@@ -53,6 +53,17 @@ deno run --allow-net fetch.js
 
 You should see the JSON data, HTML data as text, and an error message in the
 console.
+
+### HTTP/2
+
+You don't need to do anything special to use HTTP/2. When you `fetch()` an
+`https://` URL, Deno negotiates the protocol with the server over TLS (via ALPN)
+and uses HTTP/2 automatically when the server supports it, falling back to
+HTTP/1.1 otherwise. The `fetch` API is the same either way, so the same code
+talks to HTTP/1.1 and HTTP/2 servers without changes.
+
+On the server side, [`Deno.serve()`](/api/deno/~/Deno.serve) also speaks HTTP/2
+automatically when serving over TLS.
 
 ## Streaming data
 

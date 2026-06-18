@@ -327,6 +327,25 @@ without the trailing `/`:
 }
 ```
 
+## Updating versions from the command line
+
+You don't have to edit version numbers in `deno.json` by hand. To move
+dependencies to newer versions, run
+[`deno outdated`](/runtime/reference/cli/outdated/) to see what's behind, then
+`deno outdated --update` to bump them:
+
+```sh
+deno outdated            # list dependencies with newer versions available
+deno outdated --update   # update them in deno.json
+```
+
+To increment your own package's `version` field between releases, use
+[`deno bump-version`](/runtime/reference/cli/bump_version/):
+
+```sh
+deno bump-version patch  # 1.4.6 -> 1.4.7 (also: minor, major, or a prerelease)
+```
+
 ## Managing dependencies
 
 Now that you understand how Deno resolves and imports modules, see the

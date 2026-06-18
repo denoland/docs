@@ -382,6 +382,22 @@ deno run --allow-sys --deny-sys="networkInterfaces" script.ts
 deno run --deny-sys script.ts
 ```
 
+The interface names accepted by `--allow-sys` correspond to the functions in the
+`Deno` namespace that expose host information, such as `hostname`, `osRelease`,
+`osUptime`, `loadavg`, `networkInterfaces`, `systemMemoryInfo`, `uid`, `gid`,
+`username`, `cpus`, and `homedir`. See
+[Deno.SysPermissionDescriptor](/api/deno/~/Deno.SysPermissionDescriptor) for the
+full set of recognized names.
+
+The same flag gates the equivalent Node-compatibility APIs. Functions in
+[`node:os`](/api/node/os/) and [`node:process`](/api/node/process/) that read
+system information, such as `os.hostname()`, `os.cpus()`,
+`os.networkInterfaces()`, `os.freemem()`, `os.totalmem()`, `os.uptime()`,
+`process.getuid()`, and `process.getgid()`, require `--allow-sys` and map onto
+the same interface names. For example, calling `os.cpus()` needs
+`--allow-sys=cpus`, and `os.networkInterfaces()` needs
+`--allow-sys=networkInterfaces`.
+
 ## Subprocesses
 
 Code executing inside of a Deno runtime can not spawn subprocesses by default,
