@@ -378,10 +378,9 @@ declarations, use a type assertion that points at the corresponding `@types`
 package:
 
 ```ts title="main.ts"
-const { markedTerminal } =
-  await import("npm:marked-terminal@7") as typeof import(
-    "npm:@types/marked-terminal@6"
-  );
+const { markedTerminal } = await import(
+  "npm:marked-terminal@7"
+) as typeof import("npm:@types/marked-terminal@6");
 ```
 
 ### Providing types for HTTP modules
