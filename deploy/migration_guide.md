@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-19
+last_modified: 2026-06-18
 title: "Migrating from Deploy Classic to Deno Deploy"
 description: "Guide to migrating your applications from Deno Deploy Classic (dash.deno.com) to the new Deno Deploy (console.deno.com), including subhosting API migration."
 ---
@@ -141,10 +141,13 @@ Official SDKs for the v2 API:
 
 ## Regions
 
-Deploy Classic serves from 6 regions. The new Deploy currently has 2 regions,
-with the ability to self-host additional regions on your own infrastructure. If
-your application is latency-sensitive and depends on specific regions, please
-plan accordingly.
+Deploy Classic serves from 6 regions. The new Deploy currently has 2 regions, US
+(`us`) and Europe (`eu`), with the ability to self-host additional regions on
+your own infrastructure. Use `global` to serve from both regions. If your
+application is latency-sensitive and depends on specific regions, please plan
+accordingly. See the
+[`deno deploy` CLI reference](/runtime/reference/cli/deploy/#create-application)
+for the available region values.
 
 ## What's new
 
