@@ -339,6 +339,15 @@ Run `deno task dev:debug`, then start the "Attach to dev server" configuration
 from the `Run and Debug` panel. Breakpoints set in your server-side code (such
 as Fresh route handlers) are hit on the next matching request.
 
+:::note
+
+Vite loads and transforms route modules on demand, so a breakpoint in a route
+that hasn't been requested yet may show as "Unbound breakpoint" with a "Some of
+your breakpoints could not be set" warning. This is expected: the breakpoint
+binds once the route is first loaded, and it still pauses when that code runs.
+
+:::
+
 ## Tasks
 
 While the extension communicates directly with the language server, there are
