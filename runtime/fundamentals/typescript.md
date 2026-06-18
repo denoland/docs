@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-06-18
 title: "TypeScript support"
 description: "TypeScript is a first-class language in Deno. Run .ts files directly with no build step, type-check with deno check, reuse your tsconfig.json, and skip the toolchain you needed under Node.js."
 oldUrl:
@@ -340,6 +340,28 @@ the corresponding `@types` package:
 // @ts-types="npm:@types/lodash"
 import * as _ from "npm:lodash";
 ```
+
+### Applying types to every import
+
+`@ts-types` annotates a single import, so for a package you use throughout a
+project, repeating it at every import site gets tedious. There is no `deno.json`
+setting that maps a bare specifier like `npm:lodash` to its `@types` package
+globally. Instead, apply the annotation once by re-exporting the package from a
+small typed wrapper module, then import the wrapper everywhere:
+
+```ts title="lodash.ts"
+// @ts-types="npm:@types/lodash"
+export { default } from "npm:lodash";
+```
+
+```ts title="main.ts"
+import _ from "./lodash.ts"; // fully typed, no per-import annotation
+
+_.capitalize("hello");
+```
+
+Every module that imports the wrapper gets the types, and the `@ts-types`
+annotation lives in one place.
 
 ### Providing types for HTTP modules
 
