@@ -94,10 +94,11 @@ docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO:latest
 
 ## Create a task definition
 
-A [task definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html)
+A
+[task definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html)
 tells ECS how to run your container: which image, how much CPU and memory, and
-which ports to expose. Save the following as `task-definition.json`, substituting
-your account ID and region:
+which ports to expose. Save the following as `task-definition.json`,
+substituting your account ID and region:
 
 ```json title="task-definition.json"
 {
@@ -147,8 +148,8 @@ aws ecs create-cluster --cluster-name deno-cluster --region $AWS_REGION
 Now create a service that keeps one copy of the task running. Fargate needs to
 know which subnets and security group to launch into, and `assignPublicIp` lets
 the task pull the image and be reachable without a NAT gateway. Replace the
-subnet and security group IDs with ones from your VPC, and make sure the security
-group allows inbound traffic on port `8000`:
+subnet and security group IDs with ones from your VPC, and make sure the
+security group allows inbound traffic on port `8000`:
 
 ```shell
 aws ecs create-service \
