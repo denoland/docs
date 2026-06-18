@@ -193,23 +193,6 @@ export const sidebar = [
     ],
   },
   {
-    title: "Debugging & observability",
-    items: [
-      {
-        title: "Debugging",
-        href: "/runtime/fundamentals/debugging/",
-      },
-      {
-        title: "CPU profiling",
-        href: "/runtime/fundamentals/cpu_profiling/",
-      },
-      {
-        title: "OpenTelemetry",
-        href: "/runtime/fundamentals/open_telemetry/",
-      },
-    ],
-  },
-  {
     title: "Concepts",
     items: [
       {
@@ -239,6 +222,23 @@ export const sidebar = [
       {
         title: "Stability and releases",
         href: "/runtime/fundamentals/stability_and_releases/",
+      },
+    ],
+  },
+  {
+    title: "Debugging & observability",
+    items: [
+      {
+        title: "Debugging",
+        href: "/runtime/fundamentals/debugging/",
+      },
+      {
+        title: "CPU profiling",
+        href: "/runtime/fundamentals/cpu_profiling/",
+      },
+      {
+        title: "OpenTelemetry",
+        href: "/runtime/fundamentals/open_telemetry/",
       },
     ],
   },
