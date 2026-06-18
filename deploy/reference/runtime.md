@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-01-20
+last_modified: 2026-06-18
 title: Runtime
 description: "Details about the Deno Deploy runtime environment, including application lifecycle, startup, shutdown, and cold start optimization."
 ---
@@ -14,7 +14,8 @@ spawning subprocesses, and loading FFI and node native addons.
 
 The Deno runtime runs using `--allow-all` permissions.
 
-Custom flags cannot be passed to the Deno runtime.
+Custom flags, including `--unstable-*` flags, cannot be passed to the Deno
+runtime.
 
 ## Runtime environment
 
