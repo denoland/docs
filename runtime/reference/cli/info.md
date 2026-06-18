@@ -121,6 +121,10 @@ Use `--json` to get machine-readable output, useful for tooling and CI:
 deno info --json main.ts
 ```
 
+For npm dependencies, each entry in the `npmPackages` map includes a `localPath`
+field with the package's location in the on-disk Deno cache, which tooling can
+use to locate cached npm packages.
+
 ## Cache location
 
 `deno info` can be used to display information about cache location:
