@@ -110,3 +110,5 @@ webview navigates to, so you do not need to pass a port or hostname. See
   formats, installers.
 - [Comparison](/runtime/desktop/comparison/): how `deno desktop` relates to
   Electron, Tauri, Electrobun, Dioxus.
+- [`deno desktop` CLI reference](/runtime/reference/cli/desktop/): the command,
+  its flags, and the `deno.json` `desktop` schema.

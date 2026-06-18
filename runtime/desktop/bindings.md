@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-06-16
 title: "Bindings"
-description: "Call Deno-side functions from webview JavaScript via win.bind(): type-safe RPC over in-process channels, with no IPC and no serialization beyond the call boundary."
+description: "Call Deno-side functions from webview JavaScript via win.bind(): type-safe RPC over in-process channels, encoded at the boundary with no cross-process round-trip."
 ---
 
 :::info Coming in Deno 2.9
