@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-06-18
 title: "deno bundle"
 oldUrl: /runtime/manual/cli/bundler/
 command: bundle
