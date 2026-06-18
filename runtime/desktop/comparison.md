@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-18
 title: "Comparison with other tools"
 description: "How deno desktop compares to Electron, Electrobun, Tauri, and Dioxus across language, engine, process model, app size, ecosystem, and what's built-in."
 ---
@@ -18,22 +18,22 @@ technologies. Here is how it compares to the alternatives.
 
 ## At a glance
 
-|                             | Electron               | Electrobun      | Tauri                | Dioxus           | `deno desktop`          |
-| --------------------------- | ---------------------- | --------------- | -------------------- | ---------------- | ----------------------- |
-| **Language**                | JS/TS (Node.js)        | JS/TS (Bun)     | Rust + web frontend  | Rust             | JS/TS (Deno)            |
-| **Web engine**              | Bundled Chromium       | System WebView  | System WebView       | System WebView   | Bundled CEF or WebView  |
-| **Consistent rendering**    | Yes                    | No              | No                   | No               | Yes (CEF)               |
-| **Process model**           | Multi-process          | Multi-process   | Multi-process        | Single process   | Multi-thread            |
-| **Backend ↔ UI**            | IPC                    | IPC             | IPC                  | Native Rust      | In-process channels     |
-| **App size**                | ~100 MB+               | ~14 MB          | ~2–10 MB             | ~5 MB            | ~40 MB / ~150 MB (CEF)  |
-| **npm / Node compat**       | Yes                    | Yes             | No                   | No               | Yes                     |
-| **Framework auto-detect**   | No                     | No              | No                   | No               | Yes                     |
-| **HMR**                     | No                     | Yes             | Yes (Vite-based)     | Yes (`dx serve`) | Yes                     |
-| **Built-in auto-update**    | Full binary            | bsdiff          | Plugin               | None             | bsdiff                  |
-| **Built-in installers**     | Yes                    | No              | Yes                  | No               | Partial (DMG, AppImage) |
-| **Cross-compile**           | Yes (electron-builder) | No (macOS only) | No (needs target OS) | No               | Yes (`--target`)        |
-| **macOS / Windows / Linux** | All three              | macOS only      | All three            | All three        | All three               |
-| **iOS / Android**           | No                     | No              | Yes                  | Yes              | Not yet                 |
+|                             | Electron               | Electrobun      | Tauri                | Dioxus           | `deno desktop`                               |
+| --------------------------- | ---------------------- | --------------- | -------------------- | ---------------- | -------------------------------------------- |
+| **Language**                | JS/TS (Node.js)        | JS/TS (Bun)     | Rust + web frontend  | Rust             | JS/TS (Deno)                                 |
+| **Web engine**              | Bundled Chromium       | System WebView  | System WebView       | System WebView   | Bundled CEF or WebView                       |
+| **Consistent rendering**    | Yes                    | No              | No                   | No               | Yes (CEF)                                    |
+| **Process model**           | Multi-process          | Multi-process   | Multi-process        | Single process   | Multi-thread (CEF) / process group (WebView) |
+| **Backend ↔ UI**            | IPC                    | IPC             | IPC                  | Native Rust      | In-process channels                          |
+| **App size**                | ~100 MB+               | ~14 MB          | ~2–10 MB             | ~5 MB            | ~40 MB / ~150 MB (CEF)                       |
+| **npm / Node compat**       | Yes                    | Yes             | No                   | No               | Yes                                          |
+| **Framework auto-detect**   | No                     | No              | No                   | No               | Yes                                          |
+| **HMR**                     | No                     | Yes             | Yes (Vite-based)     | Yes (`dx serve`) | Yes                                          |
+| **Built-in auto-update**    | Full binary            | bsdiff          | Plugin               | None             | bsdiff                                       |
+| **Built-in installers**     | Yes                    | No              | Yes                  | No               | Partial (DMG, AppImage)                      |
+| **Cross-compile**           | Yes (electron-builder) | No (macOS only) | No (needs target OS) | No               | Yes (`--target`)                             |
+| **macOS / Windows / Linux** | All three              | macOS only      | All three            | All three        | All three                                    |
+| **iOS / Android**           | No                     | No              | Yes                  | Yes              | Not yet                                      |
 
 ## What `deno desktop` is good at
 

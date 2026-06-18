@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-17
 title: "HTTP serving"
 description: "How Deno.serve() works inside a desktop app: automatic port binding, the DENO_SERVE_ADDRESS env var, and serving local UI to the embedded webview."
 ---
@@ -112,7 +112,7 @@ in `tcp:127.0.0.1:<port>` form, so split off the port when you need an `http://`
 URL:
 
 ```ts
-const addr = Deno.env.get("DENO_SERVE_ADDRESS"); // "tcp:127.0.0.1:54321"
+const addr = Deno.env.get("DENO_SERVE_ADDRESS")!; // "tcp:127.0.0.1:54321"
 const port = addr.split(":").pop();
 console.log("Serving on:", `http://127.0.0.1:${port}`);
 ```
@@ -124,7 +124,7 @@ from the same local HTTP server by default. Use different paths per window to
 differentiate:
 
 ```ts
-const port = Deno.env.get("DENO_SERVE_ADDRESS").split(":").pop();
+const port = Deno.env.get("DENO_SERVE_ADDRESS")!.split(":").pop();
 const settings = new Deno.BrowserWindow();
 settings.navigate(`http://127.0.0.1:${port}/settings`);
 ```

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-17
 title: "Notifications"
 description: "Show native OS notifications from deno desktop apps with the standard Web Notifications API: permission flow, options, and events."
 ---
@@ -110,6 +110,8 @@ round-trip through the `icon` property, but the OS notification is shown without
 an icon. To use a file on disk, read it and encode it as a `data:` URL:
 
 ```ts
+import { encodeBase64 } from "jsr:@std/encoding/base64";
+
 const bytes = await Deno.readFile("./icons/alert.png");
 const dataUrl = "data:image/png;base64," + encodeBase64(bytes);
 new Notification("Heads up", { icon: dataUrl });
