@@ -3,32 +3,41 @@
  * @difficulty intermediate
  * @tags cli, deploy
  * @run -N -E <url>
- * @resource {https://jsr.io/@iuioiua/redis} redis on jsr.io
+ * @resource {https://github.com/redis/node-redis} node-redis on GitHub
  * @resource {https://redis.io/docs/getting-started/} Getting started with Redis
  * @resource {https://docs.deno.com/examples/redis_tutorial/} Tutorial: Build a caching layer with Redis
  * @group Databases
  *
- * Using the jsr:@iuioiua/redis module, you can connect to a Redis database running anywhere.
+ * Using the npm:redis module (node-redis), you can connect to a Redis database running anywhere.
  */
 
-// Import the `RedisClient` from jsr:@iuioiua/redis
-import { RedisClient } from "jsr:@iuioiua/redis";
+// Import `createClient` from the npm:redis module
+import { createClient } from "npm:redis@^4.5";
 
-// Create a TCP connection with the Redis server
-using redisConn = await Deno.connect({ port: 6379 });
+// Create a client, pointing it at your Redis server. The host and port below
+// default to a local instance; change them to connect to a remote server.
+const client = createClient({
+  socket: {
+    host: Deno.env.get("REDIS_HOSTNAME") ?? "127.0.0.1",
+    port: 6379,
+  },
+  // To connect to a password-protected server, also set credentials here:
+  // username: Deno.env.get("REDIS_USERNAME"),
+  // password: Deno.env.get("REDIS_PASSWORD"),
+});
 
-// Create an instance of 'RedisClient'
-const redisClient = new RedisClient(redisConn);
+// Open the connection before sending any commands
+await client.connect();
 
-// Authenticate with the server by sending the command "AUTH <username> <password>"
-await redisClient.sendCommand([
-  "AUTH",
-  Deno.env.get("REDIS_USERNAME")!,
-  Deno.env.get("REDIS_PASSWORD")!,
-]);
+// Set the "hello" key to the value "world"
+await client.set("hello", "world"); // "OK"
 
-// Set the "hello" key to have value "world" using the command "SET hello world"
-await redisClient.sendCommand(["SET", "hello", "world"]); // "OK"
+// Get the value stored at the "hello" key
+await client.get("hello"); // "world"
 
-// Get the "hello" key using the command "GET hello"
-await redisClient.sendCommand(["GET", "hello"]); // "world"
+// For commands without a dedicated method (such as RedisJSON's JSON.SET), use
+// `sendCommand` with each argument as a separate array element:
+await client.sendCommand(["JSON.SET", "user", "$", '{"name":"Lin"}']);
+
+// Close the connection when you're done
+await client.quit();
