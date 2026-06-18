@@ -8,9 +8,8 @@ export default function ReferenceSidebarNav(data: Lume.Data) {
       title: "Deno APIs",
       key: "deno",
       basePath: "/api/deno",
-      categoryLabel: "Deno APIs by category",
       items: [
-        { href: "/api/deno", title: "Deno specific APIs" },
+        { href: "/api/deno/about/", title: "About", isBottom: true },
         {
           href: "/api/deno/all_symbols",
           title: "All Deno symbols",
@@ -22,9 +21,8 @@ export default function ReferenceSidebarNav(data: Lume.Data) {
       title: "Web APIs",
       key: "web",
       basePath: "/api/web",
-      categoryLabel: "Web APIs by category",
       items: [
-        { href: "/api/web", title: "Web Platform Support" },
+        { href: "/api/web/about/", title: "About", isBottom: true },
         {
           href: "/api/web/all_symbols",
           title: "All web symbols",
@@ -36,9 +34,8 @@ export default function ReferenceSidebarNav(data: Lume.Data) {
       title: "Node APIs",
       key: "node",
       basePath: "/api/node",
-      categoryLabel: "Node APIs by namespace",
       items: [
-        { href: "/api/node", title: "Node support in deno" },
+        { href: "/api/node/about/", title: "About", isBottom: true },
         {
           href: "/api/node/all_symbols",
           title: "All node symbols",
@@ -87,7 +84,11 @@ function ApiSection({ section, currentUrl, apiCategories }: {
 
   return (
     <nav>
-      <SidebarCategoryHeading title={section.title} />
+      <SidebarCategoryHeading
+        title={section.title}
+        href={`${section.basePath}/`}
+        isActive={section.basePath === currentUrl && !isCategoryActive}
+      />
       <SidebarList>
         {/* Main section items */}
         {topItems.map((item: any) => (
@@ -100,26 +101,14 @@ function ApiSection({ section, currentUrl, apiCategories }: {
           </li>
         ))}
 
-        {/* Category accordion */}
-        <li>
-          <button
-            type="button"
-            data-accordion-toggle={`${section.key}APIs`}
-            data-active={isCategoryActive}
-            className="sub-nav-toggle block relative py-1 px-3 after:right-4 [font:inherit] after:translate-y-1/2 after:transition-transform after:duration-100 after:ease-in after:[background:url(./img/chevron.svg)_no-repeat_center] after:-top-0.5 after:block after:w-4 after:h-4 after:absolute w-full text-left"
-          >
-            {section.categoryLabel}
-          </button>
-          <SidebarList>
-            <CategoryItems
-              section={section}
-              apiCategories={apiCategories}
-              currentUrl={currentUrl}
-            />
-          </SidebarList>
-        </li>
+        {/* Categories, flat */}
+        <CategoryItems
+          section={section}
+          apiCategories={apiCategories}
+          currentUrl={currentUrl}
+        />
 
-        {/* Bottom items (All symbols) */}
+        {/* Bottom items (About, All symbols) */}
         {bottomItems.map((item: any) => {
           const isActive = item.href.replace(/\/$/, "") === currentUrl;
           return (

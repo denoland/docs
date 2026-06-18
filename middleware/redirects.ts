@@ -171,8 +171,6 @@ function addGoLinksAndRedirectLinks(redirects: Record<string, string>) {
     `🔗 addGoLinksAndRedirectLinks: Adding additional redirects...`,
   );
 
-  redirects["/api/"] = "/api/deno/";
-
   log.debug(
     `🔗 <cyan>redirectsMiddleware</cyan>: Reading redirects from 'go.json'...`,
   );
