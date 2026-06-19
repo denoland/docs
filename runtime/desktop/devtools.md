@@ -107,13 +107,11 @@ No CDP protocol changes, no DevTools fork, no frontend modifications.
 
 Unified DevTools is implemented for the **CEF** backend. On other backends:
 
-| Backend   | DevTools status                                |
-| --------- | ---------------------------------------------- |
-| `cef`     | Full unified DevTools.                         |
-| `webview` | Not currently supported; system webviews speak |
-|           | a different inspector protocol.                |
-| `raw`     | Deno-side `--inspect` only; there is no        |
-|           | renderer to inspect.                           |
+| Backend   | DevTools status                                                                |
+| --------- | ------------------------------------------------------------------------------ |
+| `cef`     | Full unified DevTools.                                                         |
+| `webview` | Not currently supported; system webviews speak a different inspector protocol. |
+| `raw`     | Deno-side `--inspect` only; there is no renderer to inspect.                   |
 
 If `--inspect` is passed with a backend that does not support unified DevTools,
 the Deno side still runs an inspector and you can attach to it the same way as a
