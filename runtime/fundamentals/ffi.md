@@ -115,9 +115,9 @@ This pattern also works inside an executable produced by
 
 ### Bundling a library with `deno compile`
 
-`Deno.dlopen` needs a real file on disk, so a dynamic library is not embedded in
-a compiled binary automatically. Include it explicitly with the `--include`
-flag:
+[`Deno.dlopen`](/api/deno/~/Deno.dlopen) needs a real file on disk, so a dynamic
+library is not embedded in a compiled binary automatically. Include it
+explicitly with the `--include` flag:
 
 ```sh
 deno compile --allow-ffi --include libexample.so main.ts
@@ -133,9 +133,9 @@ search path described above.
 
 ### Handling load failures
 
-`Deno.dlopen` throws synchronously when the library cannot be loaded or when a
-declared symbol is missing, so wrap the call in a `try`/`catch` to fail
-gracefully:
+[`Deno.dlopen`](/api/deno/~/Deno.dlopen) throws synchronously when the library
+cannot be loaded or when a declared symbol is missing, so wrap the call in a
+`try`/`catch` to fail gracefully:
 
 ```ts
 let dylib;
