@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-13
+last_modified: 2026-06-18
 title: "Foreign Function Interface (FFI)"
 description: "Learn how to use Deno's Foreign Function Interface (FFI) to call native libraries directly from JavaScript or TypeScript. Includes examples, best practices, and security considerations."
 ---
@@ -69,6 +69,94 @@ console.log(dylib.symbols.add(5, 3)); // 8
 
 dylib.close();
 ```
+
+## Loading libraries
+
+The first argument to [`Deno.dlopen()`](/api/deno/~/Deno.dlopen) is the path to
+the dynamic library. Deno hands this path to the operating system's dynamic
+loader (`dlopen` on Linux and macOS, `LoadLibrary` on Windows), so the way the
+file is located follows the OS rules, not Deno's module resolution.
+
+There are two ways to specify the library:
+
+- **A path with a separator** (for example `"./libexample.so"` or
+  `"/usr/lib/libexample.so"`) is opened from that exact location. A _relative_
+  path like `"./libexample.so"` is resolved against the **current working
+  directory of the process**, not against the location of your `.ts` file. This
+  is a common source of "could not open library" errors: running the same script
+  from a different directory changes where Deno looks.
+- **A bare name** with no separator (for example `"libexample.so"`) is left to
+  the OS to find on its standard search path. On Linux that means
+  `LD_LIBRARY_PATH` and the system cache (such as `/usr/lib`); on macOS the
+  `DYLD_*` paths; on Windows the executable's directory, the system directories,
+  and `PATH`. Use this form for libraries that are already installed
+  system-wide.
+
+### Resolving the path relative to your module
+
+To load a library that ships next to your source file regardless of the current
+working directory, resolve the path against `import.meta.url` instead of using a
+bare relative string:
+
+```ts
+// Always points at libexample.so sitting next to this module.
+const path = new URL("./libexample.so", import.meta.url).pathname;
+
+const dylib = Deno.dlopen(
+  path,
+  {
+    add: { parameters: ["i32", "i32"], result: "i32" },
+  } as const,
+);
+```
+
+This pattern also works inside an executable produced by
+[`deno compile`](/runtime/reference/cli/compile/) (see below).
+
+### Bundling a library with `deno compile`
+
+[`Deno.dlopen`](/api/deno/~/Deno.dlopen) needs a real file on disk, so a dynamic
+library is not embedded in a compiled binary automatically. Include it
+explicitly with the `--include` flag:
+
+```sh
+deno compile --allow-ffi --include libexample.so main.ts
+```
+
+At runtime Deno unpacks the included library to a temporary directory and points
+`import.meta.url` at it, so a module that resolves its path with
+`new URL("./libexample.so", import.meta.url).pathname` (as shown above) finds
+the bundled copy and the resulting binary runs on a machine that does not have
+the library installed. If you do not bundle the library, ship it alongside the
+executable and load it by a path relative to the binary, or rely on the system
+search path described above.
+
+### Handling load failures
+
+[`Deno.dlopen`](/api/deno/~/Deno.dlopen) throws synchronously when the library
+cannot be loaded or when a declared symbol is missing, so wrap the call in a
+`try`/`catch` to fail gracefully:
+
+```ts
+let dylib;
+try {
+  dylib = Deno.dlopen(
+    "./libexample.so",
+    {
+      add: { parameters: ["i32", "i32"], result: "i32" },
+    } as const,
+  );
+} catch (err) {
+  // A missing or unreadable file reports "Could not open library: ...".
+  // A missing function reports "Failed to register symbol <name>: ...".
+  console.error("Failed to load native library:", err.message);
+  Deno.exit(1);
+}
+```
+
+The error message distinguishes the two common cases: the file itself could not
+be opened (wrong path, missing file, or an architecture mismatch), or the file
+loaded but one of the symbols you declared was not found in it.
 
 ## Supported types
 
