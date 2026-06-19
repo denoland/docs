@@ -1,11 +1,11 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-06-19
 title: "deno run"
 oldUrl: /runtime/manual/tools/run/
 command: run
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno run"
-description: "Run a JavaScript or TypeScript program from a file or URL with Deno's runtime"
+description: "Run a JavaScript or TypeScript program with Deno's runtime"
 ---
 
 ## Usage
