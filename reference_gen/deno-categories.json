@@ -1,4 +1,5 @@
 {
+  "Bundler": "Bundle TypeScript and JavaScript code, along with their dependencies, into a single file. Useful for producing self-contained scripts for distribution or deployment.\n\nEg {@linkcode Deno.bundle}",
   "Cloud": "Tools for managing state, scheduling tasks, and interacting with key-value stores. \n\nEg {@linkcode Deno.openKv }, {@linkcode Deno.cron}",
   "Errors": "Error types and utilities for handling exceptions and custom error scenarios. Helps improve error handling and debugging. \n\nEg  {@linkcode Deno.errors.NotFound}",
   "Fetch": "HTTP client for fetching data across a network. Retrieve resources from servers, handle responses, and manage network requests. \n\nEg {@linkcode fetch}, {@linkcode Response}, {@linkcode Request}, {@linkcode Headers}",
