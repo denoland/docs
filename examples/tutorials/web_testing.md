@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-04-03
+last_modified: 2026-06-20
 title: "Testing web apps"
 description: "A comprehensive guide to testing web applications with Deno"
 url: "/examples/web_testing_tutorial/"

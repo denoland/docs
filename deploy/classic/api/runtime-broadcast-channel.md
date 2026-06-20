@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-19
+last_modified: 2026-06-20
 title: "BroadcastChannel"
 oldUrl:
   - /deploy/docs/runtime-broadcast-channel/

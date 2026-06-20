@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-19
+last_modified: 2026-06-20
 title: "HTTP Request"
 oldUrl:
   - /deploy/docs/runtime-request/
@@ -49,7 +49,7 @@ The return type is a `Request` instance.
 | [`body`][body]               | `Blob`, `BufferSource`, `FormData`, `URLSearchParams`, `USVString`, or `ReadableStream` | none           | The body of the request.                                   |
 | [`cache`][cache]             | `string`                                                                                | none           | The cache mode of the request.                             |
 | [`credentials`][credentials] | `string`                                                                                | `same-origin`  | The credentials mode of the request.                       |
-| [`integrity`][integrity]     | `string`                                                                                | none           | The cryptographic hash of the request's body.             |
+| [`integrity`][integrity]     | `string`                                                                                | none           | The cryptographic hash of the request's body.              |
 | [`mode`][mode]               | `string`                                                                                | `cors`         | The request mode you want to use.                          |
 | [`redirect`][redirect]       | `string`                                                                                | `follow`       | The mode of how redirects are handled.                     |
 | [`referrer`][referrer]       | `string`                                                                                | `about:client` | A `USVString` specifying `no-referrer`, `client` or a URL. |
@@ -65,7 +65,7 @@ The return type is a `Request` instance.
 | [`bodyUsed`][bodyused]             | `boolean`                                  | Indicates whether the body content is read.                                                                                  |
 | [`url`][url]                       | `USVString`                                | The URL of the request.                                                                                                      |
 | [`headers`][headers]               | [`Headers`](runtime-headers)               | The headers associated with the request.                                                                                     |
-| [`integrity`][integrity]           | `string`                                   | The cryptographic hash of the request's body.                                                                               |
+| [`integrity`][integrity]           | `string`                                   | The cryptographic hash of the request's body.                                                                                |
 | [`method`][method]                 | `string`                                   | The request's method (`POST`, `GET`, etc).                                                                                   |
 | [`mode`][mode]                     | `string`                                   | Indicates the mode of the request (e.g. `cors` ).                                                                            |
 | [`redirect`][redirect]             | `string`                                   | The mode of how redirects are handled.                                                                                       |

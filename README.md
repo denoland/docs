@@ -52,9 +52,9 @@ components and is generated during the build process.
 You can browse to it in the site at `/styleguide/`
 
 To avoid longer build times of the entire site and all of its content while
-developing UI elements and components, a styleguide-only build is available which
-performs the initial global configuration for the site, but then only generates
-and watches for changes in the `/styleguide` folder of the repo.
+developing UI elements and components, a styleguide-only build is available
+which performs the initial global configuration for the site, but then only
+generates and watches for changes in the `/styleguide` folder of the repo.
 
 To work on just the components and UI elements and review them within
 styleguide, run:

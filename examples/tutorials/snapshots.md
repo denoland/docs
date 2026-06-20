@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-02-24
+last_modified: 2026-06-20
 title: "Deno Sandbox Snapshots Tutorial"
 description: "Use read only images to create isolated and reproducible environments."
 url: "/examples/snapshots_tutorial/"
