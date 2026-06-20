@@ -31,7 +31,7 @@ deno task prod
 Which will start a Deno server on [localhost:8000](http://localhost:8000) used
 in production, which handles redirects.
 
-the above commands will defauilt to performing as complete build of the site
+the above commands will default to performing as complete build of the site
 including all of the more expensive operations. You can also perform a lighter
 build by running:
 
@@ -41,7 +41,7 @@ deno task build:light
 
 This will build the site without generating the Open Graph images and other more
 time-consuming operations which might be desirable to skip during local
-developement work.
+development work.
 
 ## Developing styles and components
 
@@ -52,9 +52,9 @@ components and is generated during the build process.
 You can browse to it in the site at `/styleguide/`
 
 To avoid longer build times of the entire site and all of its content while
-developing UI elements and components, a styleguide-only build is avaiable which
-performs the initial global configureation for the site, but then only generates
-and watches for changes in the `/styleguide` folder of the repo.
+developing UI elements and components, a styleguide-only build is available
+which performs the initial global configuration for the site, but then only
+generates and watches for changes in the `/styleguide` folder of the repo.
 
 To work on just the components and UI elements and review them within
 styleguide, run:

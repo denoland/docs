@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-06-20
 title: "Build a Database App with Drizzle ORM and Deno"
 description: "Step-by-step guide to building database applications with Drizzle ORM and Deno. Learn about schema management, type-safe queries, PostgreSQL integration, migrations, and how to implement CRUD operations."
 url: /examples/drizzle_tutorial/
@@ -115,7 +115,7 @@ Let's say our current database already has the following table schemas:
 
 ![Diagram of table schema in postgres](./images/how-to/drizzle/table-diagram.png)
 
-We'll run the following command to instrospect the database and populate several
+We'll run the following command to introspect the database and populate several
 files under a `./drizzle` directory:
 
 <figure>
