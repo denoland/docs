@@ -65,7 +65,7 @@ instance of `BroadcastChannel`.
 One use case for a message bus like the one enabled by `BroadcastChannel` is
 updating an in-memory cache of data between isolates running in different data
 centers across the network. In the example below, we show how you can configure
-a simple server that uses `BroadcastChannel` to synchornize state across all
+a simple server that uses `BroadcastChannel` to synchronize state across all
 running instances of the server.
 
 ```ts

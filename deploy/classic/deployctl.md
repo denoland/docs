@@ -128,7 +128,7 @@ the deployment being created and are not added to the list of
 ### Production Deployments
 
 Each deployment you create have a unique URL. In addition, a project has a
-"production URL" and custom domains routing trafffic to its "production"
+"production URL" and custom domains routing traffic to its "production"
 deployment. Deployments can be promoted to production at any time, or created
 directly as production using the `--prod` flag:
 

@@ -115,7 +115,7 @@ Let's say our current database already has the following table schemas:
 
 ![Diagram of table schema in postgres](./images/how-to/drizzle/table-diagram.png)
 
-We'll run the following command to instrospect the database and populate several
+We'll run the following command to introspect the database and populate several
 files under a `./drizzle` directory:
 
 <figure>

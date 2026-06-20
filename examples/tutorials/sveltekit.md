@@ -179,7 +179,7 @@ With this setup we have our "database"! Next to access it on a page.
 ### Loading data to be rendered
 
 We now need to create a `+page.server.ts` file which will be at the root of our
-routes directory. There should already be a `+page.svlete` there.
+routes directory. There should already be a `+page.svelte` there.
 
 ```
 src/routes/+page.server.ts

@@ -16,7 +16,7 @@ using Deno.
 
 ## Testing UI components and DOM manipulation
 
-Let's say you have a website that shows a uers's profile, you can set up a test
+Let's say you have a website that shows a user's profile, you can set up a test
 function to verify that the DOM element creation works correctly. This code sets
 up a basic card element then tests whether the created DOM structure matches
 what was expected.
