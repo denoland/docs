@@ -62,6 +62,10 @@ export const sidebar = [
         href: "/runtime/fundamentals/web_dev/",
       },
       {
+        title: "JSX and React",
+        href: "/runtime/reference/jsx/",
+      },
+      {
         title: "HTTP Server",
         href: "/runtime/fundamentals/http_server/",
       },
@@ -276,10 +280,6 @@ export const sidebar = [
       {
         title: "Continuous integration",
         href: "/runtime/reference/continuous_integration/",
-      },
-      {
-        title: "JSX and React",
-        href: "/runtime/reference/jsx/",
       },
       {
         title: "Deno & VS Code",
