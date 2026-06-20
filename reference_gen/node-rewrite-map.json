@@ -1,6 +1,5 @@
 {
   "assert": "./types/node/node__assert.d.ts",
-  "assert/strict": "./types/node/node__assert--strict.d.ts",
   "async_hooks": "./types/node/node__async_hooks.d.ts",
   "buffer": "./types/node/node__buffer.d.ts",
   "child_process": "./types/node/node__child_process.d.ts",
