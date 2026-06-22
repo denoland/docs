@@ -25,7 +25,7 @@ technologies. Here is how it compares to the alternatives.
 | **Consistent rendering**    | Yes                    | No                   | No                   | No               | Yes (CEF)                                    |
 | **Process model**           | Multi-process          | Multi-process        | Multi-process        | Single process   | Multi-thread (CEF) / process group (WebView) |
 | **Backend ↔ UI**            | IPC                    | IPC                  | IPC                  | Native Rust      | In-process channels                          |
-| **App size**                | ~100 MB+               | ~14 MB               | ~2–10 MB             | ~5 MB            | ~40 MB / ~150 MB (CEF)                       |
+| **App size**                | ~100 MB+               | ~61 MB               | ~2–10 MB             | ~5 MB            | ~40 MB / ~150 MB (CEF)                       |
 | **npm / Node compat**       | Yes                    | Yes                  | No                   | No               | Yes                                          |
 | **Framework auto-detect**   | No                     | No                   | No                   | No               | Yes                                          |
 | **HMR**                     | No                     | Yes                  | Yes (Vite-based)     | Yes (`dx serve`) | Yes                                          |
