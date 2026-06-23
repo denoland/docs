@@ -905,6 +905,17 @@ fields. The ones most likely to matter:
   min-release-age=3
   ```
 
+- **`trust-policy`**: with `no-downgrade`, refuses to resolve a package version
+  whose publishing-trust level (trusted publishing, provenance, or staged
+  publishing) is weaker than the one already recorded in your lockfile. Off by
+  default. See
+  [Publishing-trust policy](/runtime/packages/supply_chain/#publishing-trust-policy)
+  for the full picture.
+
+  ```ini title=".npmrc"
+  trust-policy=no-downgrade
+  ```
+
 - **`NPM_CONFIG_REGISTRY` env var**: overrides the registry set in `.npmrc`,
   matching npm's precedence (handy in CI when you want to redirect installs
   without editing the checked-in `.npmrc`).
