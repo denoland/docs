@@ -704,8 +704,8 @@ via `crypto.subtle`.
 
 ### Feature detection
 
-`SubtleCrypto.supports()` is a static method for synchronously checking whether a
-given algorithm and operation combination is available, without running the
+`SubtleCrypto.supports()` is a static method for synchronously checking whether
+a given algorithm and operation combination is available, without running the
 operation or catching an error. It takes the operation name, the algorithm, and
 an optional third argument, and returns a boolean. Added in Deno 2.9.
 
@@ -767,8 +767,8 @@ const signature = await crypto.subtle.sign("HMAC", key, data);
 Deno 2.9 adds the SHAKE, cSHAKE, TurboSHAKE, and KangarooTwelve
 extendable-output functions (XOFs). Unlike a fixed-size hash, an XOF can produce
 a digest of any length, so `crypto.subtle.digest` requires an `outputLength`
-option giving the output size in bits. `outputLength` must be a positive multiple
-of 8. The supported names are:
+option giving the output size in bits. `outputLength` must be a positive
+multiple of 8. The supported names are:
 
 - `SHAKE128`, `SHAKE256`
 - `cSHAKE128`, `cSHAKE256`
@@ -951,9 +951,9 @@ const valid = await crypto.subtle.verify(
 console.log(valid); // true
 ```
 
-`sign` and `verify` accept an optional `context`, a `BufferSource` that binds the
-signature to an application-specific value. The same `context` must be supplied
-to both calls:
+`sign` and `verify` accept an optional `context`, a `BufferSource` that binds
+the signature to an application-specific value. The same `context` must be
+supplied to both calls:
 
 ```ts
 const context = new TextEncoder().encode("v1");
@@ -1009,8 +1009,9 @@ the resulting ciphertext to recover the same secret. The parameter sets are
 
 The recipient generates a key pair and publishes the public (encapsulation) key.
 The sender calls `encapsulateKey`, which returns both the `ciphertext` to send
-back and a `sharedKey` `CryptoKey` for the algorithm named by its third argument.
-The recipient passes the ciphertext to `decapsulateKey` to derive the same key:
+back and a `sharedKey` `CryptoKey` for the algorithm named by its third
+argument. The recipient passes the ciphertext to `decapsulateKey` to derive the
+same key:
 
 ```ts
 const { publicKey, privateKey } = await crypto.subtle.generateKey(
@@ -1039,8 +1040,8 @@ const recovered = await crypto.subtle.decapsulateKey(
 );
 ```
 
-`encapsulateBits` and `decapsulateBits` are the lower-level variants: they return
-the raw shared secret as an `ArrayBuffer` instead of importing it as a
+`encapsulateBits` and `decapsulateBits` are the lower-level variants: they
+return the raw shared secret as an `ArrayBuffer` instead of importing it as a
 `CryptoKey`. A decapsulation (private) key also exposes `getPublicKey()`, which
 returns its matching encapsulation (public) key.
 

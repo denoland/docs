@@ -37,10 +37,10 @@ For example:
 
 ## Running a task only if it exists
 
-`deno task <name>` exits with a non-zero code when the named task is not defined.
-To make a task optional, pass `--if-present`. Deno then exits with code 0 and
-prints nothing when the task is missing, which is useful for shared CI scripts
-that call a task only some packages define:
+`deno task <name>` exits with a non-zero code when the named task is not
+defined. To make a task optional, pass `--if-present`. Deno then exits with code
+0 and prints nothing when the task is missing, which is useful for shared CI
+scripts that call a task only some packages define:
 
 ```sh
 deno task --if-present build
@@ -134,8 +134,8 @@ deno task "test:*(!e2e|interactive)"
 ```
 
 runs `test:unit` and `test:integration` but skips `test:e2e` and
-`test:interactive`. A pattern that has an exclusion group but no `*` is rejected,
-since there is nothing to exclude from.
+`test:interactive`. A pattern that has an exclusion group but no `*` is
+rejected, since there is nothing to exclude from.
 
 ## Loading environment variables from a file
 
@@ -744,13 +744,13 @@ script entries you want to run (ex.
 `deno install --entrypoint main.ts && deno task postinstall`).
 
 When `deno task` runs a `package.json` script, it sets the `npm_*` environment
-variables that npm exposes, so scripts that read them keep working. These include
-`npm_package_name`, `npm_package_version`, `npm_lifecycle_event` (the script
-name), `npm_lifecycle_script` (its command string), and `npm_config_user_agent`,
-along with `npm_execpath` and `npm_node_execpath` (both set to the path of the
-running `deno` executable) and `npm_command` (set to `run-script`). These
-variables are set only for `package.json` scripts. Tasks defined in `deno.json`
-do not receive them.
+variables that npm exposes, so scripts that read them keep working. These
+include `npm_package_name`, `npm_package_version`, `npm_lifecycle_event` (the
+script name), `npm_lifecycle_script` (its command string), and
+`npm_config_user_agent`, along with `npm_execpath` and `npm_node_execpath` (both
+set to the path of the running `deno` executable) and `npm_command` (set to
+`run-script`). These variables are set only for `package.json` scripts. Tasks
+defined in `deno.json` do not receive them.
 
 ## Command Resolution
 

@@ -290,10 +290,10 @@ native addon spawns a pool of `node` workers to run CSS and font loaders, so
 `deno task dev` would fail those steps whenever no `node` binary is installed.
 
 To make a separate Node install unnecessary, Deno stands in for `node`. When no
-real `node` is found on your `PATH`, Deno places a `node` executable in its cache
-directory and prepends that directory to the `PATH` of the processes it starts.
-A tool that spawns `node` then reaches Deno, which translates the Node arguments
-and runs as if you had invoked `deno node ...`.
+real `node` is found on your `PATH`, Deno places a `node` executable in its
+cache directory and prepends that directory to the `PATH` of the processes it
+starts. A tool that spawns `node` then reaches Deno, which translates the Node
+arguments and runs as if you had invoked `deno node ...`.
 
 This is best-effort and activates only when a real `node` is not already on
 `PATH`, so an existing Node installation is never shadowed. Set
