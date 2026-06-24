@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-06-24
 title: "Configuration file (deno.json)"
 description: "Reference for every deno.json field: dependencies and import maps, tasks, lint and fmt, lockfile, node_modules directory, TypeScript compiler options, unstable flags, include/exclude, exports, permissions, compile, and proxies."
 oldUrl:
