@@ -4,7 +4,7 @@ import ReferenceSidebarNav from "../../reference/_components/ReferenceSidebarNav
 export default function (data: Lume.Data) {
   const sectionData = data.sectionData;
   const currentUrl = data.currentUrl.replace(/\/$/, "");
-  const isReference = currentUrl.startsWith("/api/");
+  const isReference = currentUrl === "/api" || currentUrl.startsWith("/api/");
 
   if (isReference) {
     return <ReferenceSidebarNav {...data} />;

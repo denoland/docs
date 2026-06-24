@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-14
+last_modified: 2026-06-17
 title: "Config files"
 description: "How Deno projects are configured: first-class package.json support, the deno.json file for Deno's own tooling, .jsonc support and discovery, and an overview of what you can configure. See the deno.json reference for every field."
 oldUrl:
@@ -91,6 +91,7 @@ including:
 - [Exports](/runtime/reference/deno_json/#exports)
 - [Permissions](/runtime/reference/deno_json/#permissions)
 - [Compile options](/runtime/reference/deno_json/#compile-config)
+- [Minimum dependency age](/runtime/reference/deno_json/#minimum-dependency-age)
 
 See the reference for a
 [full example deno.json file](/runtime/reference/deno_json/#an-example-deno.json-file)

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-17
 title: "Desktop apps"
 description: "Build self-contained desktop applications from a Deno project, with framework auto-detection, hot reload, native windowing, auto-update, and cross-platform distribution."
 ---
@@ -39,8 +39,9 @@ integration.
   under `--hmr`. No code changes are required to take an existing web project to
   the desktop.
 - **In-process bindings instead of IPC.** Backend and UI communication goes
-  through in-process channels, not socket-based IPC, so there is no
-  serialization step between your Deno code and the webview.
+  through in-process channels, not socket-based IPC. Values are still encoded as
+  they cross the call boundary, but there is no cross-process round-trip between
+  your Deno code and the webview.
 - **Cross-compile from one machine.** The same machine can build for macOS,
   Windows, and Linux. Backends are downloaded as needed, not built locally.
 - **Built-in binary-diff auto-update.** Ship a single `latest.json` manifest and
@@ -109,3 +110,5 @@ webview navigates to, so you do not need to pass a port or hostname. See
   formats, installers.
 - [Comparison](/runtime/desktop/comparison/): how `deno desktop` relates to
   Electron, Tauri, Electrobun, Dioxus.
+- [`deno desktop` CLI reference](/runtime/reference/cli/desktop/): the command,
+  its flags, and the `deno.json` `desktop` schema.

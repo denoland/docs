@@ -59,7 +59,7 @@ const data = [
       },
       {
         label: "Deno API Reference",
-        href: "/api/deno/~/Deno",
+        href: "/api/deno/",
       },
     ],
   },

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-14
+last_modified: 2026-06-18
 title: "How to use MySQL2 with Deno"
 description: "Step-by-step guide to using MySQL2 with Deno. Learn how to set up database connections, execute queries, handle transactions, and build data-driven applications using MySQL's Node.js driver."
 url: /examples/mysql2_tutorial/
@@ -19,7 +19,7 @@ package and importing via `npm:mysql2`. This allows us to use its Promise
 wrapper and take advantage of top-level await.
 
 ```tsx
-import mysql from "npm:mysql2@^2.3.3/promise";
+import mysql from "npm:mysql2@^3/promise";
 ```
 
 ## Connecting to MySQL

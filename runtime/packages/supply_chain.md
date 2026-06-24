@@ -1,11 +1,11 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-06-19
 title: "Supply chain management"
 description: "Keep Deno dependencies deterministic and safe: lockfile discipline, minimum dependency age, deno audit, intentional updates, and a recommended CI baseline."
 ---
 
-Modern JavaScript projects pull code from many sources (JSR, npm, HTTPS URLs,
-local workspaces). Good supply chain management helps you achieve four goals:
+Modern JavaScript projects pull code from many sources (JSR, npm, local
+workspaces). Good supply chain management helps you achieve four goals:
 
 - Determinism: everyone (and your CI) runs the exact same code.
 - Security: unexpected upstream changes or compromises are detected early.
@@ -32,8 +32,8 @@ This page builds on
 4. Vendor when you need hermetic/offline builds (`"vendor": true`) or when you
    must patch third‑party code locally. Vendoring does not remove the need for a
    lockfile—it complements it.
-5. Prefer import map (`imports`) entries over raw HTTPS imports in larger
-   codebases to centralize version changes.
+5. Use `jsr:` and `npm:` specifiers with import map (`imports`) entries to
+   centralize version management.
 6. Periodically unfreeze and update consciously (for example on a weekly or
    sprint cadence) instead of ad‑hoc updates during feature work.
 7. Set a [minimum dependency age](#minimum-dependency-age) so freshly published

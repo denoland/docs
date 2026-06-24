@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-14
+last_modified: 2026-06-18
 title: "Deploying your app"
 description: "Ways to run a Deno app in production: the managed Deno Deploy platform, containers and Docker, cloud and serverless providers, and self-hosting a standalone binary."
 ---
@@ -47,6 +47,8 @@ Step-by-step guides for deploying a Deno app to specific providers:
 - [AWS Lambda](/examples/aws_lambda_tutorial/) for serverless functions
 - [AWS Lightsail](/examples/aws_lightsail_tutorial/) for container-based VM
   hosting
+- [AWS ECS Fargate](/examples/aws_ecs_fargate_tutorial/) for serverless
+  containers
 - [Google Cloud Run](/examples/google_cloud_run_tutorial/) for serverless
   containers
 - [DigitalOcean](/examples/digital_ocean_tutorial/) for container hosting

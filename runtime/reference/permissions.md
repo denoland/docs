@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-21
+last_modified: 2026-06-18
 title: "Permissions"
 description: "Reference for Deno's permission system: how the runtime sandbox works and how to grant or deny file system, network, environment, system, subprocess, FFI, and import access with the --allow and --deny flags."
 oldUrl:
@@ -382,6 +382,22 @@ deno run --allow-sys --deny-sys="networkInterfaces" script.ts
 deno run --deny-sys script.ts
 ```
 
+The interface names accepted by `--allow-sys` correspond to the functions in the
+`Deno` namespace that expose host information, such as `hostname`, `osRelease`,
+`osUptime`, `loadavg`, `networkInterfaces`, `systemMemoryInfo`, `uid`, `gid`,
+`username`, `cpus`, and `homedir`. See
+[Deno.SysPermissionDescriptor](/api/deno/~/Deno.SysPermissionDescriptor) for the
+full set of recognized names.
+
+The same flag gates the equivalent Node-compatibility APIs. Functions in
+[`node:os`](/api/node/os/) and [`node:process`](/api/node/process/) that read
+system information, such as `os.hostname()`, `os.cpus()`,
+`os.networkInterfaces()`, `os.freemem()`, `os.totalmem()`, `os.uptime()`,
+`process.getuid()`, and `process.getgid()`, require `--allow-sys` and map onto
+the same interface names. For example, calling `os.cpus()` needs
+`--allow-sys=cpus`, and `os.networkInterfaces()` needs
+`--allow-sys=networkInterfaces`.
+
 ## Subprocesses
 
 Code executing inside of a Deno runtime can not spawn subprocesses by default,
@@ -419,6 +435,33 @@ has `--allow-all`, as being able to spawn a `deno` process means the script can
 spawn another `deno` process with full permissions.
 
 :::
+
+### Subprocesses with `LD_*` and `DYLD_*` environment variables
+
+Spawning a subprocess with an environment variable whose name starts with `LD_`
+(such as `LD_LIBRARY_PATH` or `LD_PRELOAD`) or `DYLD_` (such as
+`DYLD_LIBRARY_PATH` or `DYLD_INSERT_LIBRARIES`) requires the unscoped
+`--allow-run` flag. A scoped allow list like `--allow-run=curl` is _not_
+sufficient, even when the value matches the one Deno was started with:
+
+```ts
+// Fails under `--allow-run=echo`, succeeds under `--allow-run` or `--allow-all`.
+new Deno.Command("echo", {
+  args: ["hello"],
+  env: { LD_PRELOAD: "/path/to/lib.so" },
+}).outputSync();
+```
+
+```console
+NotCapable: Requires --allow-run permissions to spawn subprocess with LD_PRELOAD
+environment variable. Alternatively, spawn with the environment variable unset.
+```
+
+These variables instruct the dynamic linker to load arbitrary shared libraries
+into the child process, so they can run code in the subprocess regardless of
+which executable you allowed. Restricting them to the unscoped `--allow-run`
+keeps a scoped allow list from being silently bypassed. If you don't need them,
+the simplest fix is to spawn the subprocess with the variable unset.
 
 Definition: `--deny-run[=<PROGRAM_NAME>...]`
 

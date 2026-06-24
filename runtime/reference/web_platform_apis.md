@@ -338,6 +338,37 @@ self.onmessage = (evt) => {
 };
 ```
 
+### Sending messages back to the main thread
+
+Communication goes both ways. The main thread sends data to the worker with
+`worker.postMessage()` and listens for replies with `worker.onmessage`. Inside
+the worker, `self.onmessage` receives messages and `self.postMessage()` sends
+results back:
+
+```ts title="main.ts"
+const worker = new Worker(import.meta.resolve("./worker.ts"), {
+  type: "module",
+});
+
+// Receive results from the worker
+worker.onmessage = (evt) => {
+  console.log("result from worker:", evt.data);
+};
+
+// Send work to the worker
+worker.postMessage(41);
+```
+
+```ts title="worker.ts"
+self.onmessage = (evt) => {
+  const result = evt.data + 1;
+  // Send the result back to the main thread
+  self.postMessage(result);
+};
+```
+
+Running `deno run --allow-read main.ts` prints `result from worker: 42`.
+
 ### Instantiation permissions
 
 Creating a new `Worker` instance is similar to a dynamic import; therefore Deno

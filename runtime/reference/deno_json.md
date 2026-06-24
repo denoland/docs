@@ -108,6 +108,31 @@ import { MyUtil } from "@/util.ts";
 This causes import specifiers starting with `@/` to be resolved relative to the
 import map's URL or file path.
 
+### Scoped mappings
+
+The `"scopes"` field lets you override import mappings for modules loaded from a
+particular path prefix, following the
+[import maps specification](https://github.com/WICG/import-maps#scoping-examples).
+Each key is a scope (a path prefix), and its value is an import map that applies
+only to modules whose specifier falls under that scope. This is useful when two
+dependencies need different versions of the same package.
+
+```json title="deno.json"
+{
+  "imports": {
+    "@std/assert": "jsr:@std/assert@^1.0.0"
+  },
+  "scopes": {
+    "./legacy/": {
+      "@std/assert": "jsr:@std/assert@^0.224.0"
+    }
+  }
+}
+```
+
+In this example modules under `./legacy/` resolve `@std/assert` to the older
+version, while the rest of the project uses the version from `"imports"`.
+
 ### Overriding packages
 
 The `links` field in `deno.json` allows you to override dependencies with local

@@ -14,7 +14,7 @@ Let's take a look at a concrete example:
 const obj = {
   count: 0,
   doSomethingLater() {
-    setTimeout(function () { // this function executes on the global scope; `this` evalutes to `globalThis`
+    setTimeout(function () { // this function executes on the global scope; `this` evaluates to `globalThis`
       this.count++;
       console.log(this.count);
     }, 300);

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-06-18
 title: "deno install"
 oldUrl:
   - /runtime/manual/tools/script_installer/
@@ -117,7 +117,7 @@ Download npm:express
 
 :::tip
 
-If you want to set up local `node_modules` directory, you can pass
+If you want to set up a local `node_modules` directory, you can pass the
 `--node-modules-dir=auto` flag.
 
 Some dependencies might not work correctly without a local `node_modules`
@@ -127,8 +127,8 @@ directory.
 
 ### deno install --global [PACKAGE_OR_URL]
 
-Use this command to install provide package or script as a globally available
-binary on your system.
+Use this command to install the provided package or script as a globally
+available binary on your system.
 
 This command creates a thin, executable shell script which invokes `deno` using
 the specified CLI flags and main module. It is placed in the installation root.

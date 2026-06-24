@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-06-18
 title: "deno bundle"
 oldUrl: /runtime/manual/cli/bundler/
 command: bundle
@@ -9,7 +9,11 @@ info: "`deno bundle` is currently an experimental subcommand and is subject to c
 ---
 
 `deno bundle` combines your module and all of its dependencies into a single
-JavaScript file, using [esbuild](https://esbuild.github.io/) under the hood.
+JavaScript file, using [esbuild](https://esbuild.github.io/) under the hood. It
+is useful for deploying or distributing a project as a single optimized file,
+but it is not currently intended as a replacement for complex or interactive
+build tools such as [Vite](https://vite.dev/) or
+[webpack](https://webpack.js.org/).
 
 ## Basic usage
 
@@ -54,6 +58,22 @@ Deno rolls up the types for each entry point into a single self-contained
 deno bundle main.ts --outdir dist --declaration
 # Produces dist/main.js and dist/main.d.ts
 ```
+
+## Type checking
+
+`deno bundle` does not type-check your code by default. Enable type-checking
+with the `--check` flag:
+
+```sh
+# type-check local modules while bundling
+deno bundle --check -o output.js main.ts
+
+# also type-check remote modules
+deno bundle --check=all -o output.js main.ts
+```
+
+You can also skip type-checking explicitly with `--no-check`, and
+`--no-check=remote` ignores diagnostics from remote modules only.
 
 ## The `browser` field
 
