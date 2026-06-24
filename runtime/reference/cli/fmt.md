@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-12
+last_modified: 2026-06-24
 title: "deno fmt"
 oldUrl:
   - /runtime/tools/formatter/
