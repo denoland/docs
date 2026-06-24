@@ -104,6 +104,45 @@ win.setAlwaysOnTop(true);
 
 Sizes are in logical pixels. The OS handles HiDPI scaling.
 
+### Persisting size and position
+
+Deno does not remember a window's size or position between runs, and you should
+not rely on the OS to restore them — some window managers do, but many don't (on
+Linux/KDE, for example, each launch opens at the constructor's defaults). If you
+want a window to reopen where the user left it, save its geometry to app-owned
+configuration and restore it on the next startup.
+
+Seed the constructor from the saved values, then write the geometry back
+whenever it changes:
+
+```ts
+const file = `${Deno.env.get("HOME")}/.myapp-window.json`;
+
+let saved: { width?: number; height?: number; x?: number; y?: number } = {};
+try {
+  saved = JSON.parse(await Deno.readTextFile(file));
+} catch {
+  // First run, or no saved state yet — fall back to defaults.
+}
+
+const win = new Deno.BrowserWindow({
+  title: "My App",
+  width: saved.width ?? 800,
+  height: saved.height ?? 600,
+  x: saved.x,
+  y: saved.y,
+});
+
+async function save() {
+  const [width, height] = win.getSize();
+  const [x, y] = win.getPosition();
+  await Deno.writeTextFile(file, JSON.stringify({ width, height, x, y }));
+}
+
+win.addEventListener("resize", save);
+win.addEventListener("move", save);
+```
+
 ## Title
 
 ```ts
