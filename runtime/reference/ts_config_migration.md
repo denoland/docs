@@ -167,6 +167,7 @@ The built-in libraries that are of interest to users:
 - `"dom.asynciterable"` - TypeScript currently does not include the DOM async
   iterables that Deno implements (plus several browsers), so we have implemented
   it ourselves until it becomes available in TypeScript.
+- `"deno.desktop"` - This is the library used when checking apps created with `deno desktop`. Check out [Desktop apps](/runtime/desktop/).
 
 These are common libraries that are not enabled by default, but are useful when
 writing code that is intended to also work in another runtime:
