@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-24
 title: "Windows"
 description: "Create and manage native windows with Deno.BrowserWindow: lifecycle, multiple windows, sizing, navigation, keyboard / mouse / focus events, and native window handles."
 ---
@@ -103,6 +103,13 @@ win.setAlwaysOnTop(true);
 ```
 
 Sizes are in logical pixels. The OS handles HiDPI scaling.
+
+Window size and position are not persisted by Deno. Some operating systems or
+window managers may remember a window's placement, but this behavior is not
+portable and should not be relied on. If your app should reopen where the user
+left it, store the values from `getSize()` / `getPosition()` in app-owned
+configuration, then pass `width`, `height`, `x`, and `y` when constructing the
+window on startup.
 
 ## Title
 
