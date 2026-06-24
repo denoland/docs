@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-17
+last_modified: 2026-06-24
 title: "Build a SvelteKit App"
 description: "A tutorial on building SvelteKit applications with Deno. Learn how to set up a SvelteKit project, implement file-based routing, manage state with load functions, and create a full-stack TypeScript application."
 url: /examples/svelte_tutorial/
