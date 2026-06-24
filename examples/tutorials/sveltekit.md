@@ -203,8 +203,8 @@ like or just add the following.
 
 ```html
 <script lang="ts">
-  /// src/routes/+page.svelte
-  let { data } = $props();
+/// src/routes/+page.svelte
+let { data } = $props();
 </script>
 
 <section class="mb-4 grid max-h-96 grid-cols-2 gap-4 overflow-y-auto">
@@ -265,7 +265,7 @@ own flair!
 
 ```html
 <script lang="ts">
-  import { page } from "$app/state";
+import { page } from "$app/state";
 </script>
 
 <h1>{page.status}: {page.error?.message}</h1>
@@ -280,8 +280,8 @@ showing our individual dinosaur!
 
 ```html
 <script lang="ts">
-  /// src/routes/[name]/+page.svelte
-  let { data } = $props();
+/// src/routes/[name]/+page.svelte
+let { data } = $props();
 </script>
 
 <h1>{data.name}</h1>
@@ -310,8 +310,8 @@ Here are a few things we want to achieve:
 
 ```html
 <script lang="ts">
-  import "../app.css";
-  let { children } = $props();
+import "../app.css";
+let { children } = $props();
 </script>
 
 <header class="flex flex-row place-content-between items-center p-4">

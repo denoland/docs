@@ -735,8 +735,8 @@ variable. The supported values are:
 - `always_off`: sample no traces.
 - `traceidratio`: sample a fraction of traces based on the trace ID.
 - `parentbased_always_on`, `parentbased_always_off`, `parentbased_traceidratio`:
-  respect the parent span's sampling decision when there is one, and fall back to
-  the matching root sampler otherwise.
+  respect the parent span's sampling decision when there is one, and fall back
+  to the matching root sampler otherwise.
 
 For the ratio-based samplers, `OTEL_TRACES_SAMPLER_ARG` sets the sampling
 probability as a number between `0` and `1`. It defaults to `1.0`:
@@ -826,10 +826,9 @@ limitations to be aware of:
 - The limits specified in the `OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT`,
   `OTEL_SPAN_LINK_COUNT_LIMIT`, `OTEL_EVENT_ATTRIBUTE_COUNT_LIMIT`, and
   `OTEL_LINK_ATTRIBUTE_COUNT_LIMIT` environment variable are not respected for
-  trace spans. The per-span attribute limit
-  (`OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT`, falling back to `OTEL_ATTRIBUTE_COUNT_LIMIT`)
-  and the per-span event limit (`OTEL_SPAN_EVENT_COUNT_LIMIT`) are respected, each
-  defaulting to 128.
+  trace spans. The per-span attribute limit (`OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT`,
+  falling back to `OTEL_ATTRIBUTE_COUNT_LIMIT`) and the per-span event limit
+  (`OTEL_SPAN_EVENT_COUNT_LIMIT`) are respected, each defaulting to 128.
 - The `OTEL_METRIC_EXPORT_TIMEOUT` environment variable is not respected.
 - HTTP methods are that are not known are not normalized to `_OTHER` in the
   `http.request.method` span attribute as per the OpenTelemetry semantic

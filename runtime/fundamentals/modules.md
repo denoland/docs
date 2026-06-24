@@ -168,12 +168,13 @@ Still experimental. Enable with the `--unstable-raw-imports` CLI flag or the
 
 :::
 
-A stylesheet can be imported with `with { type: "css" }`. The import evaluates to
-a
+A stylesheet can be imported with `with { type: "css" }`. The import evaluates
+to a
 [`CSSStyleSheet`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet),
-matching what browsers ship. This is mainly useful for running unmodified browser
-module graphs in Deno, such as server-side rendering or testing web components,
-where a CSS import would otherwise stop the module graph from loading:
+matching what browsers ship. This is mainly useful for running unmodified
+browser module graphs in Deno, such as server-side rendering or testing web
+components, where a CSS import would otherwise stop the module graph from
+loading:
 
 ```ts
 import sheet from "./styles.css" with { type: "css" };

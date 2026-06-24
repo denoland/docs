@@ -13,12 +13,14 @@
 >
   <style
     type="text/css"
-  >.st0 {
+  >
+  .st0 {
     fill: #f6b74e;
   }
   .st1 {
     fill: #d79b45;
-  }</style>
+  }
+  </style>
   <g>
     <path
       class="st0"

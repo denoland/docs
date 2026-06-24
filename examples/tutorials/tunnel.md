@@ -158,13 +158,13 @@ Then we'll modify our Svelte page to display these values:
 
 ```svelte title="src/routes/+page.svelte"
 <script lang="ts">
-  export let data: {
-    message: string;
-    username: string;
-    accent: string;
-  };
+export let data: {
+  message: string;
+  username: string;
+  accent: string;
+};
 
-  const { message, username, accent } = data;
+const { message, username, accent } = data;
 </script>
 
 <h1>Environment variable demo</h1>

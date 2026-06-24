@@ -183,10 +183,10 @@ Next, update `src/routes/+page.svelte` to display the dinosaur list:
 
 ```html title="src/routes/+page.svelte"
 <script lang="ts">
-  import type { PageProps } from "./$types";
+import type { PageProps } from "./$types";
 
-  let { data }: PageProps = $props();
-  let dinosaurs = data.dinosaurs;
+let { data }: PageProps = $props();
+let dinosaurs = data.dinosaurs;
 </script>
 
 <main>
@@ -239,10 +239,10 @@ details:
 
 ```html title="src/routes/[dinosaur]/+page.svelte"
 <script lang="ts">
-  import type { PageProps } from "./$types";
+import type { PageProps } from "./$types";
 
-  let { data }: PageProps = $props();
-  let dinosaur = data.dinosaur;
+let { data }: PageProps = $props();
+let dinosaur = data.dinosaur;
 </script>
 
 <div>

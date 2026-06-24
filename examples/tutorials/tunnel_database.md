@@ -148,7 +148,7 @@ Then, update the HTML to display the notes:
 
 ```svelte title="src/routes/+page.svelte"
 <script>
-  let { data } = $props();
+let { data } = $props();
 </script>
 <h1>Welcome to SvelteKit</h1>
 <ul>

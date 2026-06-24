@@ -12,7 +12,8 @@
         style="fill: none"
       />
     </clipPath>
-    <style>.tooling-cls-3 {
+    <style>
+    .tooling-cls-3 {
       fill: #040651;
     }
     .tooling-cls-4 {
@@ -26,7 +27,8 @@
     }
     .tooling-cls-7 {
       fill: #6e6eff;
-    }</style>
+    }
+    </style>
   </defs>
   <g id="Nav">
     <circle

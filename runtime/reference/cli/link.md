@@ -10,8 +10,8 @@ description: "Link a local JSR package into the current project for development"
 The `deno link` command points your project at a local copy of a JSR package so
 you can develop against it in place of the published version. It is the
 command-line equivalent of editing the
-[`links`](/runtime/reference/deno_json/#overriding-packages) array in `deno.json`
-by hand, and mirrors the workflow of `npm link` or `bun link`.
+[`links`](/runtime/reference/deno_json/#overriding-packages) array in
+`deno.json` by hand, and mirrors the workflow of `npm link` or `bun link`.
 
 ## Linking a package
 
@@ -36,7 +36,8 @@ deno link ../pkg-a ../pkg-b
 
 ## Removing a link
 
-Use [`deno unlink`](/runtime/reference/cli/unlink/) to stop using the local copy:
+Use [`deno unlink`](/runtime/reference/cli/unlink/) to stop using the local
+copy:
 
 ```sh
 deno unlink ../my-local-pkg

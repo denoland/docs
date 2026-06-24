@@ -331,15 +331,15 @@ up earlier and render them as links using the
 
 ```html title="Dinosaurs.vue"
 <script lang="ts">
-  import { defineComponent } from "vue";
+import { defineComponent } from "vue";
 
-  export default defineComponent({
-    async setup() {
-      const res = await fetch("/api/dinosaurs");
-      const dinosaurs = await res.json() as Dinosaur[];
-      return { dinosaurs };
-    },
-  });
+export default defineComponent({
+  async setup() {
+    const res = await fetch("/api/dinosaurs");
+    const dinosaurs = await res.json() as Dinosaur[];
+    return { dinosaurs };
+  },
+});
 </script>
 
 <template>
@@ -367,7 +367,7 @@ component. Add the following code to the `HomePage.vue` file:
 
 ```html title="HomePage.vue"
 <script setup lang="ts">
-  import Dinosaurs from "./Dinosaurs.vue";
+import Dinosaurs from "./Dinosaurs.vue";
 </script>
 <template>
   <h1>Welcome to the Dinosaur App! 🦕</h1>
@@ -410,22 +410,22 @@ Then update the `Dinosaur.vue` file:
 
 ```html title="Dinosaur.vue"
 <script lang="ts">
-  import { defineComponent } from "vue";
+import { defineComponent } from "vue";
 
-  export default defineComponent({
-    props: { dinosaur: String },
-    data(): ComponentData {
-      return {
-        dinosaurDetails: null,
-      };
-    },
-    async mounted() {
-      const res = await fetch(
-        `/api/dinosaurs/${this.dinosaur}`,
-      );
-      this.dinosaurDetails = await res.json();
-    },
-  });
+export default defineComponent({
+  props: { dinosaur: String },
+  data(): ComponentData {
+    return {
+      dinosaurDetails: null,
+    };
+  },
+  async mounted() {
+    const res = await fetch(
+      `/api/dinosaurs/${this.dinosaur}`,
+    );
+    this.dinosaurDetails = await res.json();
+  },
+});
 </script>
 
 <template>

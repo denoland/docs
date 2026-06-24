@@ -138,8 +138,8 @@ Setting `timeout` to `0` or omitting it means the test runs without a deadline.
 
 Two per-test options control how many times a test runs. `retry` re-runs a
 failing test and passes if any attempt passes, which is useful for tolerating a
-known-flaky test. `repeats` runs the test several times and requires every run to
-pass, which is useful for catching flakiness:
+known-flaky test. `repeats` runs the test several times and requires every run
+to pass, which is useful for catching flakiness:
 
 ```ts
 Deno.test({
@@ -175,8 +175,8 @@ deno test --retry=2
 ## Parameterized tests
 
 `Deno.test.each` runs the same test body over a table of cases. It registers one
-real test per case, so each case reports independently and can be filtered or run
-on its own.
+real test per case, so each case reports independently and can be filtered or
+run on its own.
 
 Array cases are spread as positional arguments. The name template interpolates
 the case values with `printf`-style tokens (`%s`, `%d`/`%i`, `%f`, `%j`,

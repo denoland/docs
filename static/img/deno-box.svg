@@ -12,7 +12,8 @@
         style="fill: none"
       />
     </clipPath>
-    <style>.outofthebox-cls-3 {
+    <style>
+    .outofthebox-cls-3 {
       fill: #040651;
     }
     .outofthebox-cls-4 {
@@ -26,7 +27,8 @@
     }
     .outofthebox-cls-7 {
       fill: #6e6eff;
-    }</style>
+    }
+    </style>
   </defs>
   <g id="Nav">
     <circle

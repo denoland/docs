@@ -57,9 +57,9 @@ deno bundle main.ts --outdir dist --declaration
 
 ## The `browser` field
 
-When bundling with `--platform=browser`, Deno honors the npm `browser` field in a
-dependency's `package.json`, including its object form. The object maps modules
-to browser-specific replacements:
+When bundling with `--platform=browser`, Deno honors the npm `browser` field in
+a dependency's `package.json`, including its object form. The object maps
+modules to browser-specific replacements:
 
 ```json
 {
