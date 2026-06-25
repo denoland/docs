@@ -44,6 +44,11 @@ Node, or when you're migrating a Node project; reach for
 [`Deno.test`](/api/deno/~/Deno.test) when you want the Deno-native ergonomics
 and options.
 
+`node:test`'s mocking utilities work too: `mock.timers` (fake timers for
+`setTimeout`, `setInterval`, `Date`, and the `node:timers` modules) and
+`mock.module` (replacing a module's exports for the duration of a test) are both
+implemented, so suites that rely on them run unchanged.
+
 ## Writing Tests
 
 To define a test in Deno, you use the [`Deno.test()`](/api/deno/~/Deno.test)

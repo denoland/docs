@@ -173,6 +173,10 @@ Details on each:
   Checked 1 file
   ```
 
+  Deno reports a current Node-compatible version: `process.version` is `v26.3.0`
+  and `process.versions.napi` is `10` (Node-API version 10), so packages that
+  gate on the Node or Node-API version see a modern runtime.
+
 - `Buffer` needs to be explicitly imported from the `node:buffer` module:
 
   ```js title="buffer.js"
@@ -260,6 +264,10 @@ What carries over from your `package.json`:
   they name, so a script that invokes `node` runs Node.
 - **Fields** like `"type"` are respected when resolving modules (see
   [CommonJS support](#commonjs-support)).
+- **`engines`** constraints are checked: `deno install` prints a warning for
+  each `package.json` whose `node` or `deno` version requirement isn't satisfied
+  by the current runtime, the same way npm and Yarn do. Other engine keys
+  (`npm`, `yarn`, `pnpm`) are ignored.
 
 Projects with a `package.json` default to the manual `node_modules` mode, which
 is why the explicit `deno install` step is needed. The
