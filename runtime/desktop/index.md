@@ -30,9 +30,9 @@ integration.
 
 - **Small by default, full Node compatibility.** The WebView backend uses the
   operating system's own webview for small binaries, and you still have the
-  entire npm ecosystem available through Deno's Node compat layer. Opt into
-  the bundled Chromium (CEF) backend when you need identical rendering across
-  macOS, Windows, and Linux.
+  entire npm ecosystem available through Deno's Node compat layer. Opt into the
+  bundled Chromium (CEF) backend when you need identical rendering across macOS,
+  Windows, and Linux.
 - **Framework auto-detection.** Point `deno desktop` at a Next.js, Astro, Fresh,
   Remix, Nuxt, SvelteKit, SolidStart, TanStack Start, or Vite SSR project and it
   runs: the production server in release mode, the dev server with hot reload
