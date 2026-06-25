@@ -429,7 +429,7 @@ deno run --allow-run="curl,whoami" script.ts
 ```
 
 Sending a signal to your own process does not require `--allow-run`, since it is
-equivalent to terminating yourself (like `Deno.exit`).
+equivalent to terminating yourself (like [`Deno.exit`](/api/deno/~/Deno.exit)).
 `Deno.kill(Deno.pid, ...)` and `process.kill(process.pid, ...)` work without the
 flag, so tools that re-raise a signal on their own PID (such as `signal-exit`,
 used by Vite) no longer force you to grant blanket run access.
