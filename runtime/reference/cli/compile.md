@@ -181,6 +181,16 @@ const dataFiles = Deno.readDirSync(import.meta.dirname + "/data");
 Note this currently only works for files on the file system and not remote
 files.
 
+`--include` treats embedded `.js` and `.ts` files as module-graph roots, so it
+resolves and transpiles them. To embed files exactly as they are, without any
+module resolution, use `--include-as-is` instead. This is the right choice for
+pre-built frontend bundles (for example Vite or webpack output) that are already
+processed and would fail to resolve as Deno modules:
+
+```sh
+deno compile --include-as-is ./dist main.ts
+```
+
 ### Configuring `include` / `exclude` in `deno.json`
 
 The `--include` and `--exclude` paths can be set declaratively in `deno.json` so
@@ -370,4 +380,14 @@ storage persists across runs in the platform's application data directory
   persistent database there instead of falling back to an in-memory one.
 
 Each compiled app gets its own location derived from its identity, so separate
-apps do not share storage.
+apps do not share storage. That identity comes from the `--app-name` flag, which
+is baked in at compile time and falls back to the output file name when omitted:
+
+```sh
+deno compile --app-name my-app main.ts
+```
+
+Because the name (not the module path) drives the directory, the store stays
+stable across runs even if you rename the binary, two binaries built with the
+same `--app-name` share a store, and differently named apps stay isolated.
+Recompiling with a different `--app-name` starts a fresh store.
