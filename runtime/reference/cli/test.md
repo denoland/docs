@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-06-25
 title: "deno test"
 oldUrl: /runtime/manual/tools/test/
 command: test
@@ -113,6 +113,25 @@ You can also output an `lcov` report for use with external tools:
 ```sh
 deno coverage --lcov coverage/ > coverage.lcov
 ```
+
+To fail the run when coverage drops below a target, set a threshold (for example
+`deno coverage --threshold=90`). See
+[coverage thresholds](/runtime/reference/cli/coverage/#coverage-thresholds) for
+per-metric configuration.
+
+## Parameterized tests
+
+Run the same test body over a table of cases with
+[`Deno.test.each`](/api/deno/~/Deno.test.each), which registers one
+independently reported test per case. See
+[Parameterized tests](/runtime/test/#parameterized-tests) for the name templates
+and case forms.
+
+## Snapshot testing
+
+Capture a value and compare it against a stored reference on every run with
+`assertSnapshot` from `@std/testing/snapshot`. See
+[Snapshot testing](/runtime/test/snapshots/).
 
 ## Reporters
 
