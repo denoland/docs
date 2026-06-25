@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-24
+last_modified: 2026-06-25
 title: "Testing"
 description: "Write and run tests with Deno's built-in test runner: assertions, test steps, hooks, filtering, and reporters, with dedicated guides for mocking, snapshots, and coverage."
 oldUrl:
@@ -197,9 +197,9 @@ deno test --retry=2
 
 ## Parameterized tests
 
-`Deno.test.each` runs the same test body over a table of cases. It registers one
-real test per case, so each case reports independently and can be filtered or
-run on its own.
+[`Deno.test.each`](/api/deno/~/Deno.test.each) runs the same test body over a
+table of cases. It registers one real test per case, so each case reports
+independently and can be filtered or run on its own.
 
 Array cases are spread as positional arguments. The name template interpolates
 the case values with `printf`-style tokens (`%s`, `%d`/`%i`, `%f`, `%j`,
@@ -228,8 +228,9 @@ Deno.test.each([
 });
 ```
 
-`Deno.test.each` accepts the usual per-test options object and composes with the
-shorthands as `Deno.test.only.each` and `Deno.test.ignore.each`.
+[`Deno.test.each`](/api/deno/~/Deno.test.each) accepts the usual per-test
+options object, and the `only` and `ignore` shorthands compose with it as
+`.only.each` and `.ignore.each`.
 
 ## Test Hooks
 
