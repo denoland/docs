@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-16
+last_modified: 2026-06-24
 title: "deno info"
 oldUrl:
   - /runtime/manual/tools/dependency_inspector/
@@ -120,6 +120,10 @@ Use `--json` to get machine-readable output, useful for tooling and CI:
 ```sh
 deno info --json main.ts
 ```
+
+For npm dependencies, each entry in the `npmPackages` map includes a `localPath`
+field with the package's location in the on-disk Deno cache, which tooling can
+use to locate cached npm packages.
 
 ## Cache location
 

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-25
 title: "Distribution"
 description: "Cross-compile a deno desktop app for macOS, Windows, and Linux from one machine, and produce per-platform output formats: .app, .dmg, .exe directory, AppImage."
 ---
@@ -75,9 +75,10 @@ run so frameworks like Next.js find their build output relative to CWD.
 
 ### Windows
 
-| Output   | Produced by                                           |
-| -------- | ----------------------------------------------------- |
-| `MyApp/` | Default; directory with a launcher and support files. |
+| Output      | Produced by                                           |
+| ----------- | ----------------------------------------------------- |
+| `MyApp/`    | Default; directory with a launcher and support files. |
+| `MyApp.msi` | Windows Installer package (per-machine install).      |
 
 The `MyApp/` directory contains:
 
@@ -90,9 +91,12 @@ MyApp/
   AppIcon.ico             # icon (optional)
 ```
 
-Zip the directory or feed it into an installer toolchain. Windows MSI output is
-not yet implemented; for now, use a third-party installer generator such as Inno
-Setup, NSIS, or WiX with the directory as input.
+Set a `.msi` output extension to build a Windows Installer package directly. It
+installs the app per-machine under `%ProgramFiles%\<AppName>\` and registers an
+uninstaller. The MSI is authored in pure Rust, so it cross-compiles from any
+host (only the target must be Windows). To package the directory another way,
+zip it or feed it into a third-party installer generator such as Inno Setup,
+NSIS, or WiX.
 
 ### Linux
 
@@ -100,6 +104,8 @@ Setup, NSIS, or WiX with the directory as input.
 | ----------------- | -------------------------------------------- |
 | `my-app/`         | Default; app directory with launcher script. |
 | `my-app.AppImage` | Single-file portable bundle.                 |
+| `my-app.deb`      | Debian/Ubuntu package.                       |
+| `my-app.rpm`      | Fedora/RHEL package.                         |
 
 The app directory layout:
 
@@ -119,8 +125,31 @@ required `AppRun`, `.desktop`, and icon entries. There is no external tool to
 install (no `appimagetool`), and it works from any build host, so you can
 produce a Linux `.AppImage` while cross-compiling from macOS or Windows.
 
-`.deb` / `.rpm` packaging is not yet implemented. For now, use `fpm` or
-`dpkg-deb` against the app directory.
+Set a `.deb` or `.rpm` output extension to build a Linux package directly. Both
+install the app under `/usr/lib/<pkg>/`, symlink a launcher into `/usr/bin/`,
+and register a `.desktop` entry and icon. Like the `.AppImage`, they are
+assembled in pure Rust and cross-compile from any host (only the target must be
+Linux).
+
+## Compressing the bundle
+
+Pass `--compress` to ship a self-extracting bundle. The heavy payload (the
+runtime and UI backend) is compressed inside the distributed app and unpacked to
+a per-user data directory on first launch, then reused on later runs. This
+shrinks the distributed artifact substantially, a webview hello-world drops from
+about 66 MB to 19 MB, in exchange for a one-time decompression on first launch.
+
+```sh
+# Self-extracting, compressed bundle
+deno desktop --compress main.ts
+
+# Choose the codec explicitly
+deno desktop --compress=xz main.ts
+deno desktop --compress=zstd main.ts
+```
+
+`xz` produces the smaller artifact; `zstd` trades some size for faster
+first-launch decompression.
 
 ## Choosing the output path
 

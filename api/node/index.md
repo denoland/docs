@@ -143,12 +143,5 @@ with high fidelity. For detailed compatibility information:
 
 ## Migration from Node.js
 
-When migrating from Node.js to Deno:
-
-1. **Update imports**: Use `node:` prefix for built-in modules
-2. **Check compatibility**: Verify your dependencies work with Deno
-3. **Use npm specifiers**: Import npm packages with `npm:` prefix
-4. **Review permissions**: Configure Deno's permission system as needed
-
-For more guidance, see our
+For a step-by-step guide to moving a Node.js project to Deno, see the
 [migration guide](/runtime/reference/migration_guide/).

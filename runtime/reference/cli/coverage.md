@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-06-24
 title: "deno coverage"
 oldUrl: /runtime/manual/tools/coverage/
 command: coverage
@@ -147,6 +147,50 @@ all files    |   80.0   |  90.5  |     83.3
 Function coverage measures the percentage of declared functions that were called
 at least once during the test run. The same data is also available in the `lcov`
 output.
+
+## Coverage thresholds
+
+By default `deno coverage` and `deno test --coverage` exit with code zero no
+matter how low the numbers are. To gate CI on coverage, set a minimum threshold
+and the command exits non-zero when coverage falls below it.
+
+Pass `--threshold` to `deno coverage` with a whole-number percentage. The value
+applies to all three metrics shown in the summary table: line, branch, and
+function coverage.
+
+```sh
+deno coverage --threshold=90
+```
+
+When you collect and check in a single step, pass `--coverage-threshold` to
+`deno test`:
+
+```sh
+deno test --coverage --coverage-threshold=90
+```
+
+To set a different target per metric, add a `coverage` section to `deno.json`.
+Each key under `thresholds` is optional and accepts a fractional percentage:
+
+```json
+{
+  "coverage": {
+    "thresholds": {
+      "lines": 90,
+      "branches": 80,
+      "functions": 90
+    }
+  }
+}
+```
+
+A metric with no configured threshold is not checked, so `branches: 80` passes
+for a file that has no branches. The check runs against the aggregate across
+every reported file, using the same numbers the summary table prints.
+
+When you pass the CLI flag, its single value applies to line, branch, and
+function coverage and overrides whatever the config sets for each metric. With
+no flag, the per-metric `deno.json` values are used.
 
 ## Output Formats
 

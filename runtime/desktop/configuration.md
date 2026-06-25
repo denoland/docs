@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-25
 title: "Configuration"
 description: "Configure deno desktop in deno.json: app metadata, icons, backend selection, output paths, error reporting, and the auto-update server."
 ---
@@ -138,11 +138,14 @@ The path's extension determines what is produced:
 | Extension on Windows | Output                                        |
 | -------------------- | --------------------------------------------- |
 | (none) / directory   | App directory with a `.bat` launcher and DLLs |
+| `.msi`               | Windows Installer package                     |
 
 | Extension on Linux | Output                             |
 | ------------------ | ---------------------------------- |
 | (none) / directory | App directory with launcher script |
 | `.AppImage`        | `.AppImage` single-file bundle     |
+| `.deb`             | Debian/Ubuntu package              |
+| `.rpm`             | Fedora/RHEL package                |
 
 The CLI flag `--output` overrides this for one build.
 

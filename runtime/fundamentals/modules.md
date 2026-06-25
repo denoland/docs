@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-19
+last_modified: 2026-06-25
 title: "Modules"
 description: "Learn how Deno's ECMAScript module system works: importing local and third-party modules, import attributes, import maps, and supported import types such as Wasm and data URLs."
 oldUrl:
@@ -168,6 +168,29 @@ Still experimental. Enable with the `--unstable-raw-imports` CLI flag or the
 
 :::
 
+A stylesheet can be imported with `with { type: "css" }`. The import evaluates
+to a
+[`CSSStyleSheet`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet),
+matching what browsers ship. This is mainly useful for running unmodified
+browser module graphs in Deno, such as server-side rendering or testing web
+components, where a CSS import would otherwise stop the module graph from
+loading:
+
+```ts
+import sheet from "./styles.css" with { type: "css" };
+
+console.log(sheet instanceof CSSStyleSheet);
+// true
+```
+
+:::info `css` imports
+
+Still experimental. Enable with the `--unstable-raw-imports` CLI flag or the
+`unstable.raw-import` option in
+[`deno.json`](/runtime/fundamentals/configuration/).
+
+:::
+
 ## Deferred module evaluation
 
 Starting in Deno 2.8, the
@@ -201,6 +224,11 @@ import { add } from "./add.wasm";
 
 console.log(add(1, 2));
 ```
+
+The named exports mirror the Wasm module's exports: functions, memories, and
+tables come through as their JavaScript objects, and a `global` export resolves
+to the value it holds rather than the `WebAssembly.Global` wrapper, matching the
+WebAssembly ES module integration.
 
 To learn more, visit
 [WebAssembly section](/runtime/reference/wasm/#wasm-modules)

@@ -110,8 +110,20 @@ export const sidebar = [
         disclosure: true,
         items: [
           {
-            title: "Package manager",
-            href: "/runtime/migrate/switch_package_manager/",
+            title: "Migrate from npm",
+            href: "/runtime/migrate/migrate_from_npm/",
+          },
+          {
+            title: "Migrate from Yarn",
+            href: "/runtime/migrate/migrate_from_yarn/",
+          },
+          {
+            title: "Migrate from pnpm",
+            href: "/runtime/migrate/migrate_from_pnpm/",
+          },
+          {
+            title: "Migrate from Bun",
+            href: "/runtime/migrate/migrate_from_bun/",
           },
         ],
       },
@@ -387,8 +399,16 @@ export const sidebar = [
             href: "/runtime/reference/cli/jupyter/",
           },
           {
+            title: "deno link",
+            href: "/runtime/reference/cli/link/",
+          },
+          {
             title: "deno lint",
             href: "/runtime/reference/cli/lint/",
+          },
+          {
+            title: "deno list",
+            href: "/runtime/reference/cli/list/",
           },
           {
             title: "deno outdated",
@@ -447,6 +467,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/uninstall/",
           },
           {
+            title: "deno unlink",
+            href: "/runtime/reference/cli/unlink/",
+          },
+          {
             title: "deno update",
             href: "/runtime/reference/cli/update/",
           },
@@ -457,6 +481,10 @@ export const sidebar = [
           {
             title: "deno unstable flags",
             href: "/runtime/reference/cli/unstable_flags/",
+          },
+          {
+            title: "deno watch",
+            href: "/runtime/reference/cli/watch/",
           },
           {
             title: "deno why",

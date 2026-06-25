@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-06-25
 title: "Configuration file (deno.json)"
 description: "Reference for every deno.json field: dependencies and import maps, tasks, lint and fmt, lockfile, node_modules directory, TypeScript compiler options, unstable flags, include/exclude, exports, permissions, compile, and proxies."
 oldUrl:
@@ -158,6 +158,36 @@ so that Deno knows what package it's dealing with. This provides greater
 flexibility and modularity, maintaining clean separation between your main code
 and external packages.
 
+### Prefer package.json for dependencies
+
+Set `preferPackageJson` to `true` to make dependency commands target
+`package.json` instead of `deno.json`:
+
+```jsonc title="deno.json"
+{
+  "preferPackageJson": true
+}
+```
+
+With this enabled, `deno add`, `deno install <pkg>`, and `deno remove` write to
+`package.json`, creating one if it does not exist. This is equivalent to passing
+`--package-json` on every invocation. Deno also warns when `imports` or `scopes`
+are still present in `deno.json`, since those dependencies should move to
+`package.json`.
+
+Entries can also be globs, which is convenient for linking every package in a
+directory at once. Relative-path globs and `file://` URL globs are both
+supported, and a `!`-prefixed pattern excludes matches:
+
+```json title="deno.json"
+{
+  "links": [
+    "../packages/*",
+    "!../packages/internal-only"
+  ]
+}
+```
+
 ## Tasks
 
 The `tasks` field in your `deno.json` file is used to define custom commands
@@ -288,12 +318,15 @@ allowed values:
 | `semiColons`                          | `true`                  | `true`, `false`                                             |
 | `singleBodyPosition`                  | `sameLineUnlessHanging` | `sameLine`, `nextLine`, `maintain`, `sameLineUnlessHanging` |
 | `singleQuote`                         | `false`                 | `true`, `false`                                             |
+| `sortNamedExports`                    | `caseInsensitive`       | `caseInsensitive`, `caseSensitive`, `maintain`              |
+| `sortNamedImports`                    | `caseInsensitive`       | `caseInsensitive`, `caseSensitive`, `maintain`              |
 | `spaceAround`                         | `false`                 | `true`, `false`                                             |
 | `spaceSurroundingProperties`          | `true`                  | `true`, `false`                                             |
 | `trailingCommas`                      | `always`                | `always`, `never`                                           |
 | `typeLiteral.separatorKind`           | `semiColon`             | `comma`, `semiColon`                                        |
 | `useBraces`                           | `whenNotSingleLine`     | `maintain`, `whenNotSingleLine`, `always`, `preferNone`     |
 | `useTabs`                             | `false`                 | `true`, `false`                                             |
+| `json.trailingCommas`                 | `never`                 | `never`, `always`, `maintain`, `jsonc`                      |
 | `jsx.bracketPosition`                 | `nextLine`              | `maintain`, `sameLine`, `nextLine`                          |
 | `jsx.forceNewLinesSurroundingContent` | `false`                 | `true`, `false`                                             |
 | `jsx.multiLineParens`                 | `prefer`                | `never`, `prefer`, `always`                                 |
@@ -301,6 +334,12 @@ allowed values:
 | `unstable-sql`                        | `false`                 | `true`, `false`                                             |
 
 </div>
+
+`json.trailingCommas` controls trailing commas in JSON and JSONC files
+separately from the `trailingCommas` option, which applies to JavaScript and
+TypeScript. The `maintain` value keeps trailing commas as written, and the
+`jsonc` value adds trailing commas in `.jsonc` files while omitting them in
+`.json` files.
 
 Read more about [formatting your code with Deno](/runtime/lint_and_format/).
 
@@ -336,6 +375,16 @@ Deno uses lockfile by default, you can disable it with following configuration:
 }
 ```
 
+### Merge conflicts
+
+After merging branches, `deno.lock` can be left with git conflict markers. These
+markers make the file invalid JSON, which used to make Deno error out with
+`Lockfile may be corrupt`. Deno now resolves these conflicts for you: the next
+command that reads the lockfile merges the conflicting entries and rewrites a
+clean file. Most of the lockfile is a set of identity-keyed entries where a key
+always maps to the same value regardless of which branch wrote it, so the merge
+is a union and you do not need to edit the markers by hand.
+
 ## Minimum dependency age
 
 The `minimumDependencyAge` field stops Deno from installing npm or JSR package
@@ -356,6 +405,10 @@ The value accepts an
 [ISO-8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) such as
 `P3D` or `PT72H`, a number of minutes (`120`), an absolute cutoff date
 (`2025-09-16`) or RFC3339 timestamp, or `0` to disable.
+
+Since Deno 2.9 a 24-hour minimum applies by default even when this field is
+unset; set an explicit value to widen or narrow the window, or `0` to turn it
+off.
 
 To exempt specific packages, use the object form with an `exclude` list:
 
@@ -403,6 +456,21 @@ When using workspaces, this setting can only be used in the workspace root.
 Specifying it in any of the members will result in warnings. The `"manual"`
 setting will only be applied automatically if there's a `package.json` file in
 the workspace root.
+
+### JSR dependencies in `node_modules`
+
+When a `node_modules` directory is in use, set `jsrDepsInNodeModules` to `true`
+to install `jsr:` dependencies through JSR's npm compatibility registry, the
+same way npm and pnpm handle them. Each `jsr:` specifier is rewritten to its npm
+form (`jsr:@david/dax` becomes `npm:@jsr/david__dax`, served from
+`https://npm.jsr.io`) and installed into `node_modules` alongside your npm
+packages. The option is off by default.
+
+```jsonc title="deno.json"
+{
+  "jsrDepsInNodeModules": true
+}
+```
 
 ## TypeScript compiler options
 

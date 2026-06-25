@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-06-25
 title: "deno add"
 command: add
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -59,3 +59,7 @@ form (`npm:@jsr/...`). The same flag works on
 [`deno install`](/runtime/reference/cli/install/),
 [`deno remove`](/runtime/reference/cli/remove/), and
 [`deno uninstall`](/runtime/reference/cli/uninstall/).
+
+To make this the default without passing the flag each time, set
+[`"preferPackageJson": true`](/runtime/reference/deno_json/#prefer-package-json-for-dependencies)
+in `deno.json`.

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-15
+last_modified: 2026-06-25
 title: "Node and npm Compatibility"
 description: "Guide to using Node.js modules and npm packages in Deno. Learn about compatibility features, importing npm packages, and differences between Node.js and Deno environments."
 oldUrl:
@@ -121,8 +121,8 @@ customize module resolution and loading from inside your program.
 **Bare imports work too.** Since Deno 2.9, a specifier that matches a Node
 built-in resolves to it even without the prefix, so `import * as os from "os"`
 runs with no prefix and no flag. Before 2.9 the bare form errored unless you
-passed `--unstable-bare-node-builtins`. Prefer the explicit `node:` form anyway:
-it is unambiguous, it is what the Deno LSP's quick-fixes insert, and it works in
+opted in with an unstable flag. Prefer the explicit `node:` form anyway: it is
+unambiguous, it is what the Deno LSP's quick-fixes insert, and it works in
 Node.js too. A `deno.json` `imports` entry or `package.json` dependency of the
 same name still wins over the built-in, and a `node_modules` package no longer
 shadows it, matching Node.js.
@@ -172,6 +172,10 @@ Details on each:
   Found 1 problem (1 fixable via --fix)
   Checked 1 file
   ```
+
+  Deno reports a current Node-compatible version: `process.version` is `v26.3.0`
+  and `process.versions.napi` is `10` (Node-API version 10), so packages that
+  gate on the Node or Node-API version see a modern runtime.
 
 - `Buffer` needs to be explicitly imported from the `node:buffer` module:
 
@@ -260,6 +264,10 @@ What carries over from your `package.json`:
   they name, so a script that invokes `node` runs Node.
 - **Fields** like `"type"` are respected when resolving modules (see
   [CommonJS support](#commonjs-support)).
+- **`engines`** constraints are checked: `deno install` prints a warning for
+  each `package.json` whose `node` or `deno` version requirement isn't satisfied
+  by the current runtime, the same way npm and Yarn do. Other engine keys
+  (`npm`, `yarn`, `pnpm`) are ignored.
 
 Projects with a `package.json` default to the manual `node_modules` mode, which
 is why the explicit `deno install` step is needed. The
@@ -280,6 +288,24 @@ install step) and try again.
 For a full checklist, optional toolchain improvements, and a Node-to-Deno
 command cheatsheet, see the
 [Migrating from Node.js to Deno guide](/runtime/migrate/).
+
+### Tools that spawn `node`
+
+Some native build tools resolve and run a `node` binary directly through the
+operating system, which bypasses the `node` interception Deno normally does for
+scripts and `child_process`. Next.js 16 is the motivating case: Turbopack's
+native addon spawns a pool of `node` workers to run CSS and font loaders, so
+`deno task dev` would fail those steps whenever no `node` binary is installed.
+
+To make a separate Node install unnecessary, Deno stands in for `node`. When no
+real `node` is found on your `PATH`, Deno places a `node` executable in its
+cache directory and prepends that directory to the `PATH` of the processes it
+starts. A tool that spawns `node` then reaches Deno, which translates the Node
+arguments and runs as if you had invoked `deno node ...`.
+
+This is best-effort and activates only when a real `node` is not already on
+`PATH`, so an existing Node installation is never shadowed. Set
+`DENO_DISABLE_NODE_SHIM=1` to turn the behavior off.
 
 ## Run an npm CLI tool
 
@@ -893,16 +919,29 @@ fields. The ones most likely to matter:
   //registry.mycompany.com/:email=ci@mycompany.com
   ```
 
-- **`min-release-age`** (Deno 2.8+): refuses to install package versions younger
-  than the configured age. Useful as a default supply-chain guard for all
-  installs. The same control is also available as the CLI flag
-  `--minimum-dependency-age` and the `minimumDependencyAge` field in
-  `deno.json`. See
+- **`min-release-age`**: refuses to install package versions younger than the
+  configured age, as a supply-chain guard. Since Deno 2.9 a 24-hour minimum is
+  applied by default even when nothing is set, so freshly published versions are
+  skipped automatically; set an explicit value to change the window, or `0` to
+  turn it off. The same control is available as the CLI flag
+  `--minimum-dependency-age`, the `minimumDependencyAge` field in `deno.json`,
+  and the `NPM_CONFIG_MIN_RELEASE_AGE` environment variable. See
   [Minimum dependency age](/runtime/packages/supply_chain/#minimum-dependency-age)
   for the full picture.
 
   ```ini title=".npmrc"
   min-release-age=3
+  ```
+
+- **`trust-policy`**: with `no-downgrade`, refuses to resolve a package version
+  whose publishing-trust level (trusted publishing, provenance, or staged
+  publishing) is weaker than the one already recorded in your lockfile. Off by
+  default. See
+  [Publishing-trust policy](/runtime/packages/supply_chain/#publishing-trust-policy)
+  for the full picture.
+
+  ```ini title=".npmrc"
+  trust-policy=no-downgrade
   ```
 
 - **`NPM_CONFIG_REGISTRY` env var**: overrides the registry set in `.npmrc`,

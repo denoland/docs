@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-13
+last_modified: 2026-06-25
 title: "Writing an HTTP Server"
 description: "A guide to creating HTTP servers in Deno. Learn about the Deno.serve API, request handling, WebSocket support, response streaming, and how to build production-ready HTTP/HTTPS servers with automatic compression."
 oldUrl:
@@ -275,13 +275,17 @@ HTTP/2 is also supported over cleartext with prior knowledge.
 
 ## Automatic body compression
 
-The HTTP server has built in automatic compression of response bodies. When a
-response is sent to a client, Deno determines if the response body can be safely
-compressed. This compression happens within the internals of Deno, so it is fast
-and efficient.
+The HTTP server can automatically compress response bodies, but this is off by
+default. Enable it for a single server with `automaticCompression: true`, or for
+the whole process by setting `DENO_SERVE_AUTOMATIC_COMPRESSION=1`:
 
-Currently Deno supports gzip and brotli compression. A body is automatically
-compressed if the following conditions are true:
+```ts
+Deno.serve({ automaticCompression: true }, () => new Response("hello"));
+```
+
+Compression happens within the internals of Deno, so it is fast and efficient.
+Deno supports gzip and brotli. Once enabled, a body is compressed if the
+following conditions are true:
 
 - The request has an
   [`Accept-Encoding`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding)
@@ -317,6 +321,17 @@ be compressed automatically:
   [`no-transform`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#other)
   value. This indicates that your server doesn’t want Deno or any downstream
   proxies to modify the response.
+
+## Request abort signal
+
+For historical reasons [`Deno.serve`](/api/deno/~/Deno.serve) fires the `abort`
+event on a request's [`signal`](/api/web/~/Request/signal) even when the handler
+returns successfully. This trips up some Node proxy libraries (such as
+`http-proxy`) that treat the abort as a real upstream failure. Pass
+`--unstable-no-legacy-abort` to opt into the corrected behavior, where `signal`
+only aborts when the client actually disconnects. Relying on the legacy behavior
+now prints a deprecation warning, since the corrected behavior will become the
+default.
 
 ## Serving WebSockets
 
