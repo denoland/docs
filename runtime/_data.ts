@@ -467,6 +467,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/unstable_flags/",
           },
           {
+            title: "deno watch",
+            href: "/runtime/reference/cli/watch/",
+          },
+          {
             title: "deno why",
             href: "/runtime/reference/cli/why/",
           },
