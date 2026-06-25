@@ -12,7 +12,8 @@
         style="fill: none"
       />
     </clipPath>
-    <style>.secure-cls-4 {
+    <style>
+    .secure-cls-4 {
       fill: #040651;
     }
     .secure-cls-5 {
@@ -21,16 +22,22 @@
     .secure-cls-6 {
       fill: #000059;
     }
-    .secure-cls-10, .secure-cls-11, .secure-cls-7, .secure-cls-8 {
+    .secure-cls-10,
+    .secure-cls-11,
+    .secure-cls-7,
+    .secure-cls-8 {
       fill: #fff;
     }
     .secure-cls-12 {
       fill: #6e6eff;
     }
-    .secure-cls-10, .secure-cls-11, .secure-cls-8 {
+    .secure-cls-10,
+    .secure-cls-11,
+    .secure-cls-8 {
       stroke: #050055;
     }
-    .secure-cls-10, .secure-cls-8 {
+    .secure-cls-10,
+    .secure-cls-8 {
       stroke-width: 3.45px;
     }
     .secure-cls-10 {
@@ -38,7 +45,8 @@
     }
     .secure-cls-11 {
       stroke-width: 3.17px;
-    }</style>
+    }
+    </style>
   </defs>
   <g id="Nav">
     <circle
