@@ -158,6 +158,23 @@ so that Deno knows what package it's dealing with. This provides greater
 flexibility and modularity, maintaining clean separation between your main code
 and external packages.
 
+### Prefer package.json for dependencies
+
+Set `preferPackageJson` to `true` to make dependency commands target
+`package.json` instead of `deno.json`:
+
+```jsonc title="deno.json"
+{
+  "preferPackageJson": true
+}
+```
+
+With this enabled, `deno add`, `deno install <pkg>`, and `deno remove` write to
+`package.json`, creating one if it does not exist. This is equivalent to passing
+`--package-json` on every invocation. Deno also warns when `imports` or `scopes`
+are still present in `deno.json`, since those dependencies should move to
+`package.json`.
+
 Entries can also be globs, which is convenient for linking every package in a
 directory at once. Relative-path globs and `file://` URL globs are both
 supported, and a `!`-prefixed pattern excludes matches:
