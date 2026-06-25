@@ -161,9 +161,9 @@ Classes can customize their own serialization by implementing
 ## Snapshots with node:test
 
 If you write tests with [`node:test`](/runtime/reference/cli/test/) instead of
-`Deno.test`, its own snapshot assertion is available too.
-`t.assert.fileSnapshot` serializes a value, writes it to a named file the first
-time, and compares against that file on later runs:
+[`Deno.test`](/api/deno/~/Deno.test), its own snapshot assertion is available
+too. `t.assert.fileSnapshot` serializes a value, writes it to a named file the
+first time, and compares against that file on later runs:
 
 ```ts title="node_snapshot_test.ts"
 import { test } from "node:test";
