@@ -389,6 +389,10 @@ The value accepts an
 `P3D` or `PT72H`, a number of minutes (`120`), an absolute cutoff date
 (`2025-09-16`) or RFC3339 timestamp, or `0` to disable.
 
+Since Deno 2.9 a 24-hour minimum applies by default even when this field is
+unset; set an explicit value to widen or narrow the window, or `0` to turn it
+off.
+
 To exempt specific packages, use the object form with an `exclude` list:
 
 ```jsonc title="deno.json"

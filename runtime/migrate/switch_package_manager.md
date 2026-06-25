@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-15
+last_modified: 2026-06-25
 title: "Switch your package manager to Deno"
 description: "Use Deno as a drop-in replacement for npm, yarn, or pnpm while still running your app with Node: a command mapping, secure installs, and the differences to know."
 ---
@@ -94,9 +94,10 @@ database with `--socket`.
 
 ### A waiting period for new releases
 
-Deno can refuse to install package versions younger than a configured age, which
+Deno refuses to install package versions younger than a configured age, which
 catches most malicious releases before they reach you, since they are typically
-detected and yanked within days:
+detected and yanked within days. Since Deno 2.9 this is on by default with a
+24-hour window; you can change it or turn it off:
 
 ```jsonc title="deno.json"
 {

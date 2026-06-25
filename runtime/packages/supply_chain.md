@@ -45,12 +45,16 @@ This page builds on
 
 ## Minimum dependency age
 
-Deno can refuse to install any package version that is younger than a configured
-age. This is a cheap, broad defence against npm supply-chain attacks: malicious
-versions are usually detected and yanked within days, so delaying installs by a
-similar window catches the bulk of them.
+Deno refuses to install package versions younger than a configured age. This is
+a cheap, broad defence against npm supply-chain attacks: malicious versions are
+usually detected and yanked within days, so delaying installs by a similar
+window catches the bulk of them.
 
-You can configure the same control in three places; pick whichever fits the
+Since Deno 2.9 this is on by default with a 24-hour window, so versions
+published in the last day are skipped even with no configuration. The settings
+below change that window or turn it off (set the age to `0`).
+
+You can configure the same control in several places; pick whichever fits the
 project:
 
 - **`deno.json`**, apply project-wide:

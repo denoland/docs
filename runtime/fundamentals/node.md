@@ -911,11 +911,13 @@ fields. The ones most likely to matter:
   //registry.mycompany.com/:email=ci@mycompany.com
   ```
 
-- **`min-release-age`** (Deno 2.8+): refuses to install package versions younger
-  than the configured age. Useful as a default supply-chain guard for all
-  installs. The same control is also available as the CLI flag
-  `--minimum-dependency-age` and the `minimumDependencyAge` field in
-  `deno.json`. See
+- **`min-release-age`**: refuses to install package versions younger than the
+  configured age, as a supply-chain guard. Since Deno 2.9 a 24-hour minimum is
+  applied by default even when nothing is set, so freshly published versions are
+  skipped automatically; set an explicit value to change the window, or `0` to
+  turn it off. The same control is available as the CLI flag
+  `--minimum-dependency-age`, the `minimumDependencyAge` field in `deno.json`,
+  and the `NPM_CONFIG_MIN_RELEASE_AGE` environment variable. See
   [Minimum dependency age](/runtime/packages/supply_chain/#minimum-dependency-age)
   for the full picture.
 
