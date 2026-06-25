@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-25
 title: "Node and npm Compatibility"
 description: "Guide to using Node.js modules and npm packages in Deno. Learn about compatibility features, importing npm packages, and differences between Node.js and Deno environments."
 oldUrl:
@@ -921,6 +921,17 @@ fields. The ones most likely to matter:
 
   ```ini title=".npmrc"
   min-release-age=3
+  ```
+
+- **`trust-policy`**: with `no-downgrade`, refuses to resolve a package version
+  whose publishing-trust level (trusted publishing, provenance, or staged
+  publishing) is weaker than the one already recorded in your lockfile. Off by
+  default. See
+  [Publishing-trust policy](/runtime/packages/supply_chain/#publishing-trust-policy)
+  for the full picture.
+
+  ```ini title=".npmrc"
+  trust-policy=no-downgrade
   ```
 
 - **`NPM_CONFIG_REGISTRY` env var**: overrides the registry set in `.npmrc`,
