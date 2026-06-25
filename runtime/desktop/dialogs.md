@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-24
+last_modified: 2026-06-25
 title: "Dialogs"
 description: "prompt(), alert(), and confirm() show native popup dialogs in deno desktop apps instead of terminal prompts."
 ---

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-24
+last_modified: 2026-06-25
 title: "Connect a Database to your local dev"
 description: "Connect a Postgres database to your local development server with Deno Deploy and Deno's tunnel feature"
 url: /examples/tunnel_database_tutorial/
