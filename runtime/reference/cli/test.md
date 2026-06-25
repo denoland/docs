@@ -129,8 +129,8 @@ and case forms.
 
 ## Snapshot testing
 
-Capture a value and compare it against a stored reference on every run with
-`assertSnapshot` from `@std/testing/snapshot`. See
+Capture a value and compare it against a stored reference on every run with the
+built-in `t.assertSnapshot`, updating with `--update-snapshots` (`-u`). See
 [Snapshot testing](/runtime/test/snapshots/).
 
 ## Reporters

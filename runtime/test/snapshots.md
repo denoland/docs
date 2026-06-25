@@ -1,7 +1,7 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-06-25
 title: "Snapshot testing"
-description: "Capture program output as reference snapshots with @std/testing, compare against them on every run, and update them with deno test -- --update."
+description: "Capture program output as reference snapshots with Deno's built-in test runner, compare against them on every run, and update them with deno test --update-snapshots."
 oldUrl:
   - /runtime/manual/basics/testing/snapshot_testing/
   - /examples/snapshot_test_tutorial/
@@ -14,55 +14,41 @@ for each property, you let the test runner record the entire serialized output
 once, then fail loudly whenever that output changes. This is ideal when the
 value you want to verify is large or hard to express by hand (rendered HTML, CLI
 output, API response shapes, error objects), or when the expected output changes
-often enough that maintaining manual assertions becomes a chore. The
-[Deno Standard Library](/runtime/reference/std/) ships this as the
-[`@std/testing/snapshot`](https://jsr.io/@std/testing/doc/snapshot) module.
+often enough that maintaining manual assertions becomes a chore. Deno's built-in
+test runner provides snapshot testing through the `t.assertSnapshot` method on
+the test context, with no imports or dependencies.
 
 ## Write your first snapshot test
 
-The `assertSnapshot` function serializes a value and compares it to a reference
-snapshot stored alongside your test file. It takes the test context `t` that
-Deno passes to your test function, which it uses to name the snapshot and locate
-the snapshot file.
+The test context `t` that Deno passes to each test has an `assertSnapshot`
+method. It serializes a value and compares it against a reference snapshot
+stored alongside your test file, using the test name to key the snapshot:
 
 ```ts title="example_test.ts"
-import { assertSnapshot } from "jsr:@std/testing/snapshot";
-
 Deno.test("isSnapshotMatch", async (t) => {
   const a = {
     hello: "world!",
     example: 123,
   };
-  await assertSnapshot(t, a);
+  await t.assertSnapshot(a);
 });
 ```
 
-No snapshot exists yet, so the first run must create one. New snapshots are only
-written when you run the tests in update mode:
+No snapshot exists yet, so the first run must create one. Snapshots are created
+and updated with the `--update-snapshots` flag (short form `-u`):
 
 ```bash
-deno test --allow-read --allow-write -- --update
+deno test --update-snapshots
 ```
 
-Two things to note about this command:
-
-- `--allow-read` and `--allow-write` are required because `assertSnapshot` reads
-  and writes snapshot files on disk. Without `--allow-read`, every call to
-  `assertSnapshot` fails with a permission error. You can scope both permissions
-  down to just the snapshot directory if you prefer.
-- The bare `--` separates flags for `deno test` from arguments passed to the
-  test files themselves. The `--update` flag (or its short form `-u`) must come
-  after the `--`, because it is read by the snapshot module, not by the Deno
-  CLI.
-
-Once the snapshot exists, run the test normally. Only read permission is needed:
+The runner manages the snapshot files itself, so no read or write permission is
+needed for snapshots in the default location. Once the snapshot exists, run the
+test normally; it passes if the serialized value still matches, or fails with an
+`AssertionError` showing a diff if it does not:
 
 ```bash
-deno test --allow-read
+deno test
 ```
-
-The test now passes if the serialized value matches the stored snapshot and
-fails with an `AssertionError` showing a diff if it does not.
 
 ## Read the snapshot file
 
@@ -99,25 +85,25 @@ change behavior and your snapshot tests start failing, or when you add new
 `assertSnapshot` calls, rerun the tests in update mode:
 
 ```bash
-deno test --allow-read --allow-write -- --update
+deno test --update-snapshots
 ```
 
-In update mode, any snapshot that does not match the current output is
-rewritten, and any missing snapshot is created. Snapshots that already match are
-left untouched. You can also pass `-u` instead of `--update`.
+Any snapshot that does not match the current output is rewritten, any missing
+snapshot is created, and snapshots that already match are left untouched. The
+run summary reports how many snapshots were updated or removed.
 
 After updating, inspect the diff of the `.snap` files with `git diff` before
 committing. The update command happily records bugs as the new expected output,
 so the human review of that diff is what gives snapshot tests their value.
 
 To try the full loop with the example above: change `hello: "world!"` to
-`hello: "everyone!"`, run `deno test --allow-read`, and watch the test fail with
-a diff. Then run the update command and the snapshot file is rewritten to match.
+`hello: "everyone!"`, run `deno test`, and watch the test fail with a diff. Then
+run `deno test --update-snapshots` and the snapshot file is rewritten to match.
 
-## Review snapshot diffs in CI
+## Verify snapshots in CI
 
 In CI you want to verify snapshots, never update them, so run the tests without
-the `--update` flag and without write permission:
+`--update-snapshots`:
 
 ```yaml title=".github/workflows/test.yml"
 name: Test
@@ -131,7 +117,7 @@ jobs:
         with:
           deno-version: v2.x
       - name: Run tests
-        run: deno test --allow-read
+        run: deno test
 ```
 
 If a pull request changes output, the CI run fails and the author must update
@@ -141,21 +127,16 @@ change is intentional.
 
 ## Control serialization and snapshot location
 
-`assertSnapshot` accepts an options object as its third argument for cases where
-the defaults do not fit:
+`t.assertSnapshot` accepts an options object as its second argument for cases
+where the defaults do not fit:
 
 ```ts title="serializer_test.ts"
-import { assertSnapshot, serialize } from "jsr:@std/testing/snapshot";
 import { stripAnsiCode } from "jsr:@std/fmt/colors";
-
-function customSerializer(actual: string) {
-  return serialize(stripAnsiCode(actual));
-}
 
 Deno.test("Custom Serializer", async (t) => {
   const output = "\x1b[34mHello World!\x1b[39m";
-  await assertSnapshot(t, output, {
-    serializer: customSerializer,
+  await t.assertSnapshot(output, {
+    serializer: (actual) => stripAnsiCode(actual),
   });
 });
 ```
@@ -168,15 +149,33 @@ The most useful options:
   file.
 - `name`: overrides the snapshot key, which otherwise defaults to the test name.
 - `dir` and `path`: control where the snapshot file is written, resolved
-  relative to the test file.
+  relative to the test file. A custom location requires read and write
+  permission.
 - `mode`: force `"assert"` or `"update"` behavior for a single call, regardless
-  of the `--update` flag.
+  of the `--update-snapshots` flag.
 
-Classes can also customize their own serialization by implementing
+Classes can customize their own serialization by implementing
 `Symbol.for("Deno.customInspect")`, since the default serializer is built on
-[`Deno.inspect`](/api/deno/~/Deno.inspect). See the
-[`@std/testing/snapshot` API documentation](https://jsr.io/@std/testing/doc/snapshot)
-for the full options reference and the `createAssertSnapshot` factory.
+[`Deno.inspect`](/api/deno/~/Deno.inspect).
+
+## Snapshots with node:test
+
+If you write tests with [`node:test`](/runtime/reference/cli/test/) instead of
+`Deno.test`, its own snapshot assertion is available too.
+`t.assert.fileSnapshot` serializes a value, writes it to a named file the first
+time, and compares against that file on later runs:
+
+```ts title="node_snapshot_test.ts"
+import { test } from "node:test";
+
+test("matches the saved output", (t) => {
+  t.assert.fileSnapshot({ id: 1, name: "ada" }, "./__snapshots__/user.json");
+});
+```
+
+See the
+[Node.js test runner docs](https://nodejs.org/api/test.html#snapshot-testing)
+for the full snapshot API.
 
 ## When not to snapshot
 
@@ -203,5 +202,3 @@ recorded output, and explicit assertions everywhere else.
   steps, and permissions.
 - [Mocking](/runtime/test/mocking/): spies, stubs, and faked time for the inputs
   your snapshots depend on.
-- [`@std/testing/snapshot` API docs](https://jsr.io/@std/testing/doc/snapshot):
-  every option, plus `createAssertSnapshot` for shared defaults.
