@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-24
+last_modified: 2026-06-25
 title: "Modules"
 description: "Learn how Deno's ECMAScript module system works: importing local and third-party modules, import attributes, import maps, and supported import types such as Wasm and data URLs."
 oldUrl:
@@ -224,6 +224,11 @@ import { add } from "./add.wasm";
 
 console.log(add(1, 2));
 ```
+
+The named exports mirror the Wasm module's exports: functions, memories, and
+tables come through as their JavaScript objects, and a `global` export resolves
+to the value it holds rather than the `WebAssembly.Global` wrapper, matching the
+WebAssembly ES module integration.
 
 To learn more, visit
 [WebAssembly section](/runtime/reference/wasm/#wasm-modules)

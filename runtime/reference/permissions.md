@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-06-25
 title: "Permissions"
 description: "Reference for Deno's permission system: how the runtime sandbox works and how to grant or deny file system, network, environment, system, subprocess, FFI, and import access with the --allow and --deny flags."
 oldUrl:
@@ -427,6 +427,12 @@ deno run --allow-run script.ts
 # Allow running "curl" and "whoami" subprocesses
 deno run --allow-run="curl,whoami" script.ts
 ```
+
+Sending a signal to your own process does not require `--allow-run`, since it is
+equivalent to terminating yourself (like `Deno.exit`).
+`Deno.kill(Deno.pid, ...)` and `process.kill(process.pid, ...)` work without the
+flag, so tools that re-raise a signal on their own PID (such as `signal-exit`,
+used by Vite) no longer force you to grant blanket run access.
 
 :::caution
 

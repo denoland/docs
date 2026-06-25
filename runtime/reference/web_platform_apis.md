@@ -60,6 +60,9 @@ implemented as specified in the
   `keepalive`, and `window` properties and their relevant behaviours in
   `RequestInit` are not implemented. The relevant fields are not present on the
   [`Request`](/api/web/~/Request) object.
+- The `priority` member of `RequestInit` (`"auto"`, `"high"`, or `"low"`) is
+  accepted and validated. Following the Fetch standard it is write-only, so it
+  is not exposed back as a property on the `Request` object.
 - Request body upload streaming is supported (on HTTP/1.1 and HTTP/2). Unlike
   the current fetch proposal, the implementation supports duplex streaming.
 - The `set-cookie` header is not concatenated when iterated over in the

@@ -322,6 +322,17 @@ be compressed automatically:
   value. This indicates that your server doesn’t want Deno or any downstream
   proxies to modify the response.
 
+## Request abort signal
+
+For historical reasons `Deno.serve` fires the `abort` event on a request's
+[`signal`](/api/web/~/Request/signal) even when the handler returns
+successfully. This trips up some Node proxy libraries (such as `http-proxy`)
+that treat the abort as a real upstream failure. Pass
+`--unstable-no-legacy-abort` to opt into the corrected behavior, where `signal`
+only aborts when the client actually disconnects. Relying on the legacy behavior
+now prints a deprecation warning, since the corrected behavior will become the
+default.
+
 ## Serving WebSockets
 
 Deno can upgrade incoming HTTP requests to a WebSocket. This allows you to

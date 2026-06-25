@@ -154,6 +154,13 @@ enclosed in triple backticks and have a language attribute.
 
 :::
 
+The markup formatters (HTML, XML, SVG, and the `--unstable-component` formats)
+and the style formatters (CSS, SCSS, and Less) were rebuilt to only adjust
+whitespace. They never reorder or rewrite tokens, and they pass unknown syntax
+(vendor extensions, future at-rules, template expressions, even broken markup)
+through unchanged instead of erroring, so formatting is more robust on
+real-world files.
+
 ## Ignoring code
 
 ### JavaScript / TypeScript / JSONC
