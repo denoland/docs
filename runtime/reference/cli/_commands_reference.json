@@ -6224,6 +6224,13 @@
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno lint\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[files]...\u001b[0m"
     },
     {
+      "name": "list",
+      "about": "List the dependencies declared in deno.json and package.json.\n  deno list\n\nShow the dependency tree two levels deep\n  deno list --depth 2",
+      "args": {},
+      "subcommands": [],
+      "usage": "Usage: deno list [OPTIONS] [filters]..."
+    },
+    {
       "name": "publish",
       "about": "Publish the current working directory's package or workspace to JSR",
       "args": [
