@@ -360,14 +360,7 @@
       flex-direction: column;
       row-gap: 0.5rem;
     }
-    & :where(
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6
-      ) {
+    & :where(h1, h2, h3, h4, h5, h6) {
       font-weight: bold;
       line-height: 1.2;
 
@@ -466,7 +459,8 @@
       font-size: 0.9em;
       line-height: 1.45;
 
-      th, td {
+      th,
+      td {
         /* Cap cell width so a single long cell wraps instead of stretching the
            whole table off-screen (e.g. the deploy comparison table). */
         max-width: 22rem;
@@ -579,7 +573,8 @@
       word-break: normal;
       margin-bottom: 0;
     }
-    .highlight pre, pre {
+    .highlight pre,
+    pre {
       color: var(--fgColor-default, var(--color-fg-default));
       background-color: var(--bgColor-muted, var(--color-canvas-subtle));
       border-radius: 6px;
@@ -600,7 +595,8 @@
       display: inline;
       overflow: visible;
     }
-    .csv-data td, .csv-data th {
+    .csv-data td,
+    .csv-data th {
       text-align: left;
       white-space: nowrap;
       padding: 5px;
@@ -668,7 +664,8 @@
       width: -moz-fit-content;
       width: fit-content;
     }
-    .highlight .token.keyword, .gfm-highlight .token.keyword {
+    .highlight .token.keyword,
+    .gfm-highlight .token.keyword {
       color: var(--color-prettylights-syntax-keyword);
     }
     .highlight .token.tag .token.class-name,
@@ -691,7 +688,8 @@
     .gfm-highlight .token.tag .token.attr-name {
       color: var(--color-prettylights-syntax-constant);
     }
-    .highlight .token.atrule, .gfm-highlight .token.atrule {
+    .highlight .token.atrule,
+    .gfm-highlight .token.atrule {
       color: var(--color-prettylights-syntax-keyword);
     }
     .highlight .token.punctuation,
@@ -700,17 +698,20 @@
     .gfm-highlight .token.function {
       color: var(--color-prettylights-syntax-entity);
     }
-    .highlight .token.string, .gfm-highlight .token.string {
+    .highlight .token.string,
+    .gfm-highlight .token.string {
       color: var(--color-prettylights-syntax-string);
     }
-    .highlight .token.comment, .gfm-highlight .token.comment {
+    .highlight .token.comment,
+    .gfm-highlight .token.comment {
       color: var(--color-prettylights-syntax-comment);
     }
     .highlight .token.class-name,
     .gfm-highlight .token.class-name {
       color: var(--color-prettylights-syntax-variable);
     }
-    .highlight .token.regex, .gfm-highlight .token.regex {
+    .highlight .token.regex,
+    .gfm-highlight .token.regex {
       color: var(--color-prettylights-syntax-string);
     }
     .highlight .token.regex .regex-delimiter,
@@ -723,11 +724,13 @@
     .gfm-highlight .token.property {
       color: var(--color-prettylights-syntax-entity-tag);
     }
-    .highlight .token.deleted, .gfm-highlight .token.deleted {
+    .highlight .token.deleted,
+    .gfm-highlight .token.deleted {
       color: var(--color-prettylights-syntax-markup-deleted-text);
       background-color: var(--color-prettylights-syntax-markup-deleted-bg);
     }
-    .highlight .token.inserted, .gfm-highlight .token.inserted {
+    .highlight .token.inserted,
+    .gfm-highlight .token.inserted {
       color: var(--color-prettylights-syntax-markup-inserted-text);
       background-color: var(--color-prettylights-syntax-markup-inserted-bg);
     }
@@ -771,7 +774,8 @@
       }
 
       .title {
-        @apply font-bold uppercase w-max max-w-full leading-none absolute -top-2 bg-background-raw z-10 px-2 left-4;
+        @apply font-bold uppercase w-max max-w-full leading-none absolute -top-2
+          bg-background-raw z-10 px-2 left-4;
       }
       &:where(.info, .note, .tip) .title {
         @apply text-runtime-700 dark:text-runtime-300;
@@ -1464,8 +1468,7 @@
     }
   }
 
-  body:has(.raw-container)
-    :is(#hamburger-button, [data-component="sidebar-nav"]) {
+  body:has(.raw-container) :is(#hamburger-button, [data-component="sidebar-nav"]) {
     display: none;
   }
 
@@ -2479,11 +2482,7 @@
   .ddoc .namespaceSection .namespaceItem[aria-label="deprecated"] {
     opacity: 0.6;
   }
-  .ddoc
-    .namespaceSection
-    .namespaceItem[aria-label="deprecated"]
-    .namespaceItemContent
-    > a {
+  .ddoc .namespaceSection .namespaceItem[aria-label="deprecated"] .namespaceItemContent > a {
     --tw-text-opacity: 1;
     color: rgb(120 113 108 / var(--tw-text-opacity));
     text-decoration-line: line-through;
@@ -2491,23 +2490,10 @@
     text-decoration-thickness: 2px;
   }
   .ddoc .namespaceSection .namespaceItem .namespaceItemContent > a,
-  .ddoc
-    .namespaceSection
-    .namespaceItem
-    .namespaceItemContent
-    .namespaceItemContentSubItems
-    & a {
+  .ddoc .namespaceSection .namespaceItem .namespaceItemContent .namespaceItemContentSubItems & a {
     text-decoration-line: underline;
   }
-  :is(
-    .ddoc .namespaceSection .namespaceItem .namespaceItemContent > a,
-    .ddoc
-      .namespaceSection
-      .namespaceItem
-      .namespaceItemContent
-      .namespaceItemContentSubItems
-      a
-  ):hover {
+  :is(.ddoc .namespaceSection .namespaceItem .namespaceItemContent > a, .ddoc .namespaceSection .namespaceItem .namespaceItemContent .namespaceItemContentSubItems a):hover {
     text-decoration-line: none;
   }
   .ddoc .namespaceSection .namespaceItem .namespaceItemContent > a {
@@ -2516,11 +2502,7 @@
     line-height: 1.25;
     display: block;
   }
-  .ddoc
-    .namespaceSection
-    .namespaceItem
-    .namespaceItemContent
-    .namespaceItemContentDoc {
+  .ddoc .namespaceSection .namespaceItem .namespaceItemContent .namespaceItemContentDoc {
     --tw-text-opacity: 1;
     color: rgb(87 83 78 / var(--tw-text-opacity));
     margin-top: 0.5rem;
@@ -2548,12 +2530,7 @@
       }
     }
   }
-  .ddoc
-    .namespaceSection
-    .namespaceItem
-    .namespaceItemContent
-    .namespaceItemContentSubItems
-    > li:not(:last-child):after {
+  .ddoc .namespaceSection .namespaceItem .namespaceItemContent .namespaceItemContentSubItems > li:not(:last-child):after {
     content: "|";
     -webkit-user-select: none;
     user-select: none;
@@ -2577,12 +2554,7 @@
     align-items: flex-start;
     display: flex;
   }
-  .ddoc
-    .symbolGroup
-    article > div:first-child
-    > div:first-child
-    > :not([hidden])
-    ~ :not([hidden]) {
+  .ddoc .symbolGroup article > div:first-child > div:first-child > :not([hidden]) ~ :not([hidden]) {
     --tw-space-y-reverse: 0;
     margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));

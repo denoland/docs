@@ -19,7 +19,7 @@ jobs:
       - name: Set up Deno
         uses: denoland/setup-deno@v2
         with:
-          deno-version: v2.x
+          deno-version: canary
 
       - name: Check last_modified freshness
         env:

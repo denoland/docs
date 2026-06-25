@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-25
 title: "Dialogs"
 description: "prompt(), alert(), and confirm() show native popup dialogs in deno desktop apps instead of terminal prompts."
 ---
@@ -94,10 +94,10 @@ first-class API. Until they are, two workarounds exist:
    ```html
    <input id="f" type="file" accept=".json">
    <script>
-     document.getElementById("f").addEventListener("change", async (e) => {
-       const file = e.target.files[0];
-       await bindings.handleFile(file.name, await file.arrayBuffer());
-     });
+   document.getElementById("f").addEventListener("change", async (e) => {
+     const file = e.target.files[0];
+     await bindings.handleFile(file.name, await file.arrayBuffer());
+   });
    </script>
    ```
 
