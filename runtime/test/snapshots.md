@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-06-25
 title: "Snapshot testing"
 description: "Capture program output as reference snapshots with @std/testing, compare against them on every run, and update them with deno test -- --update."
 oldUrl:
@@ -14,9 +14,43 @@ for each property, you let the test runner record the entire serialized output
 once, then fail loudly whenever that output changes. This is ideal when the
 value you want to verify is large or hard to express by hand (rendered HTML, CLI
 output, API response shapes, error objects), or when the expected output changes
-often enough that maintaining manual assertions becomes a chore. The
-[Deno Standard Library](/runtime/reference/std/) ships this as the
-[`@std/testing/snapshot`](https://jsr.io/@std/testing/doc/snapshot) module.
+often enough that maintaining manual assertions becomes a chore. Deno's built-in
+test runner provides this through `t.assertSnapshot`, and the
+[Deno Standard Library](/runtime/reference/std/) ships the same capability as
+the [`@std/testing/snapshot`](https://jsr.io/@std/testing/doc/snapshot) module.
+
+## Built-in snapshots
+
+The test context `t` that Deno passes to each test has an `assertSnapshot`
+method, so you can snapshot without importing anything:
+
+```ts title="example_test.ts"
+Deno.test("isSnapshotMatch", async (t) => {
+  const a = { hello: "world!", example: 123 };
+  await t.assertSnapshot(a);
+});
+```
+
+Create or update snapshots with the `--update-snapshots` flag (short form `-u`):
+
+```bash
+deno test --update-snapshots
+```
+
+Because the runner manages snapshot files itself, the built-in API differs from
+the standard library module in a few convenient ways:
+
+- The `--update-snapshots` / `-u` flag is read by the Deno CLI directly, not
+  after a bare `--`.
+- No read or write permission is needed for snapshots in the default
+  `__snapshots__` location; the runner reads and writes them for you. Custom
+  `dir` or `path` locations still require permissions.
+- The run summary reports how many snapshots were updated or removed.
+
+Snapshots use the same `__snapshots__/<test file>.snap` format and serializer as
+`@std/testing/snapshot`, so the file layout, review workflow, and serialization
+options in the rest of this page apply to both. `t.assertSnapshot` takes the
+same options object as its second argument.
 
 ## Write your first snapshot test
 
