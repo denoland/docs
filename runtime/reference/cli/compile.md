@@ -47,7 +47,7 @@ Supported frameworks:
 - Nuxt
 - SolidStart
 - TanStack Start
-- Vite (SSR mode)
+- Vite (SSR, plus SPA/MPA projects served as static output)
 
 ```sh
 # In a Next.js / Astro / Fresh / etc. project
