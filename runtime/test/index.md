@@ -350,6 +350,58 @@ and `test.exclude` in your
 [`deno test` reference](/runtime/reference/cli/test/#filtering) for the full
 filtering semantics.
 
+## Running affected tests
+
+While iterating on a change, running the whole suite on every save is wasteful.
+`deno test` can narrow a run to just the tests your change affects, selecting
+them by git history or by dependency. Both flags below do a single one-shot run,
+not a continuous watch.
+
+### Tests affected by your git changes
+
+`--changed` runs only the test modules affected by files you have changed in
+git. With no value it looks at the working tree, including staged, unstaged, and
+untracked files:
+
+```sh
+deno test --changed
+```
+
+Pass a git ref to also include everything committed since you branched off it.
+Deno compares against the merge-base (the `<ref>...HEAD` three-dot form that
+Vitest and Jest use), so it captures the full set of changes on your branch
+rather than just the latest commit:
+
+```sh
+# Every test affected since branching off main
+deno test --changed=origin/main
+```
+
+### Tests that depend on specific files
+
+`--related` runs the test modules that depend on the source files you name,
+without consulting git at all. Reach for it when you already know which modules
+you touched:
+
+```sh
+# Run the tests that import src/util.ts, directly or transitively
+deno test --related=src/util.ts
+```
+
+### How selection works
+
+For both flags, Deno builds the module graph of the collected test files and
+keeps only the tests that reach a changed or named file through their imports. A
+test in `cart_test.ts` runs when it imports `cart.ts` and `cart.ts` changed,
+even if that import is several modules deep; a test that imports none of the
+affected files is skipped. The flags compose with the rest of test selection, so
+you can still combine them with a directory argument, `--filter`, or
+`test.include`/`test.exclude` to narrow the run further.
+
+This is a good fit for a pre-commit hook or a fast local inner loop. CI that
+must verify everything should keep running the full suite, optionally split
+across machines with [`--shard`](/runtime/reference/cli/test/#sharding).
+
 ## Test definition selection
 
 Deno provides two options for selecting tests within the test definitions

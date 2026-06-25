@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-06-25
 title: "deno remove"
 command: remove
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -32,3 +32,15 @@ present) and remove the matching dependency from whichever file it is found in.
 
 Removing a dependency does not delete it from the global cache. To reclaim disk
 space, see [`deno clean`](/runtime/reference/cli/clean/).
+
+## Removing a global executable
+
+Pass `--global` (or `-g`) to remove a globally installed executable script, the
+same as [`deno uninstall --global`](/runtime/reference/cli/uninstall/):
+
+```sh
+deno remove --global serve
+```
+
+A global removal targets a single executable, so you cannot combine `--global`
+with multiple names. Use `--root` to target a custom installation root.

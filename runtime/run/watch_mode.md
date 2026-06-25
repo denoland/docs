@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-15
+last_modified: 2026-06-25
 title: "Watch mode and HMR"
 description: "Deno's built-in file watcher: re-run code on change with --watch, control what gets watched, and hot-replace modules with --watch-hmr."
 ---
@@ -56,6 +56,14 @@ back to a full restart.
 
 ```shell
 deno run --watch-hmr main.ts
+```
+
+Because this is such a common development workflow,
+[`deno watch`](/runtime/reference/cli/watch/) is a shorthand for
+`deno run --watch-hmr`:
+
+```shell
+deno watch main.ts
 ```
 
 ### Editors with atomic save
