@@ -86,7 +86,9 @@ deno test --related=src/util.ts
 ```
 
 Both flags filter the collected test files down to those that reach the changed
-or named files through the module graph.
+or named files through the module graph. See
+[Running affected tests](/runtime/test/#running-affected-tests) in the testing
+guide for the workflow and how selection works.
 
 ## Permissions
 
