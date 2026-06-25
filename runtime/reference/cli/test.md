@@ -60,6 +60,34 @@ To control which test files are collected in the first place, set `test.include`
 and `test.exclude` in your config file. See
 [include and exclude](/runtime/reference/deno_json/#include-and-exclude).
 
+## Running affected tests
+
+When iterating on a change, you can run only the tests touched by it instead of
+the whole suite. These are one-shot runs, not watch mode.
+
+`--changed` runs the test modules affected by files changed in git. With no
+value it uses the working tree (staged, unstaged, and untracked files); pass a
+ref to also include commits since the merge-base with that ref:
+
+```sh
+# Tests affected by uncommitted changes
+deno test --changed
+
+# Tests affected since branching off main
+deno test --changed=origin/main
+```
+
+`--related` runs the test modules that depend on specific source files, without
+consulting git:
+
+```sh
+# Tests that import src/util.ts
+deno test --related=src/util.ts
+```
+
+Both flags filter the collected test files down to those that reach the changed
+or named files through the module graph.
+
 ## Permissions
 
 Tests run with the same [permission model](/runtime/fundamentals/security/) as
