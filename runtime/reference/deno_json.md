@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-24
+last_modified: 2026-06-25
 title: "Configuration file (deno.json)"
 description: "Reference for every deno.json field: dependencies and import maps, tasks, lint and fmt, lockfile, node_modules directory, TypeScript compiler options, unstable flags, include/exclude, exports, permissions, compile, and proxies."
 oldUrl:
@@ -301,6 +301,8 @@ allowed values:
 | `semiColons`                          | `true`                  | `true`, `false`                                             |
 | `singleBodyPosition`                  | `sameLineUnlessHanging` | `sameLine`, `nextLine`, `maintain`, `sameLineUnlessHanging` |
 | `singleQuote`                         | `false`                 | `true`, `false`                                             |
+| `sortNamedExports`                    | `caseInsensitive`       | `caseInsensitive`, `caseSensitive`, `maintain`              |
+| `sortNamedImports`                    | `caseInsensitive`       | `caseInsensitive`, `caseSensitive`, `maintain`              |
 | `spaceAround`                         | `false`                 | `true`, `false`                                             |
 | `spaceSurroundingProperties`          | `true`                  | `true`, `false`                                             |
 | `trailingCommas`                      | `always`                | `always`, `never`                                           |
@@ -433,6 +435,21 @@ When using workspaces, this setting can only be used in the workspace root.
 Specifying it in any of the members will result in warnings. The `"manual"`
 setting will only be applied automatically if there's a `package.json` file in
 the workspace root.
+
+### JSR dependencies in `node_modules`
+
+When a `node_modules` directory is in use, set `jsrDepsInNodeModules` to `true`
+to install `jsr:` dependencies through JSR's npm compatibility registry, the
+same way npm and pnpm handle them. Each `jsr:` specifier is rewritten to its npm
+form (`jsr:@david/dax` becomes `npm:@jsr/david__dax`, served from
+`https://npm.jsr.io`) and installed into `node_modules` alongside your npm
+packages. The option is off by default.
+
+```jsonc title="deno.json"
+{
+  "jsrDepsInNodeModules": true
+}
+```
 
 ## TypeScript compiler options
 
