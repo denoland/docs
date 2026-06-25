@@ -57,13 +57,13 @@ same as `deno run main.ts`.
 
 ### Dependencies
 
-| Bun                | Deno                 |
-| ------------------ | -------------------- |
-| `bun install`      | `deno install`       |
-| `bun add <pkg>`    | `deno add npm:<pkg>` |
-| `bun remove <pkg>` | `deno remove <pkg>`  |
-| `bun update`       | `deno update`        |
-| `bun outdated`     | `deno outdated`      |
+| Bun                | Deno                |
+| ------------------ | ------------------- |
+| `bun install`      | `deno install`      |
+| `bun add <pkg>`    | `deno add <pkg>`    |
+| `bun remove <pkg>` | `deno remove <pkg>` |
+| `bun update`       | `deno update`       |
+| `bun outdated`     | `deno outdated`     |
 
 ### Run and execute
 
@@ -71,7 +71,7 @@ same as `deno run main.ts`.
 | ------------------ | -------------------- |
 | `bun file.ts`      | `deno file.ts`       |
 | `bun run <script>` | `deno task <script>` |
-| `bunx <pkg>`       | `deno x npm:<pkg>`   |
+| `bunx <pkg>`       | `dx <pkg>`           |
 
 ### Test, build, and toolchain
 
@@ -152,20 +152,18 @@ the Node APIs.
 
 ### bun:test to deno test
 
-`bun test` runs Jest-style tests imported from `bun:test`. Deno's test runner
-uses [`Deno.test`](/api/deno/~/Deno.test) instead, and the standard library
-covers the Jest-style pieces: `describe` and `it` come from
-[`@std/testing/bdd`](/runtime/reference/std/testing/), and `expect` comes from
-[`@std/expect`](/runtime/reference/std/expect/):
+`bun test` runs Jest-style tests imported from `bun:test`. Deno supports the
+[`node:test`](/runtime/reference/node_apis/) built-in, so the `describe` and
+`it` structure carries over directly; pair it with `node:assert` for assertions:
 
 ```ts title="add.test.ts"
-import { describe, it } from "jsr:@std/testing/bdd";
-import { expect } from "jsr:@std/expect";
+import { describe, it } from "node:test";
+import assert from "node:assert";
 import { add } from "./add.ts";
 
 describe("add", () => {
   it("adds two numbers", () => {
-    expect(add(1, 2)).toBe(3);
+    assert.strictEqual(add(1, 2), 3);
   });
 });
 ```
@@ -174,7 +172,9 @@ describe("add", () => {
 deno test
 ```
 
-Tests written against `node:test` also run under Deno. See
+If you want to keep Bun's Jest-style `expect` assertions, import `expect` from
+[`@std/expect`](/runtime/reference/std/expect/). Deno's own
+[`Deno.test`](/api/deno/~/Deno.test) runner is also available. See
 [Testing](/runtime/test/) for the full picture.
 
 ### The $ shell

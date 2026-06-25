@@ -54,17 +54,17 @@ behavior, then tighten the flags later. See
 
 ### Dependencies
 
-| Yarn                       | Deno                    |
-| -------------------------- | ----------------------- |
-| `yarn install`             | `deno install`          |
-| `yarn add <pkg>`           | `deno add npm:<pkg>`    |
-| `yarn add -D <pkg>`        | `deno add -D npm:<pkg>` |
-| `yarn remove <pkg>`        | `deno remove <pkg>`     |
-| `yarn up <pkg>`            | `deno update`           |
-| `yarn outdated`            | `deno outdated`         |
-| `yarn install --immutable` | `deno ci`               |
-| `yarn npm audit`           | `deno audit`            |
-| `yarn why <pkg>`           | `deno why <pkg>`        |
+| Yarn                       | Deno                |
+| -------------------------- | ------------------- |
+| `yarn install`             | `deno install`      |
+| `yarn add <pkg>`           | `deno add <pkg>`    |
+| `yarn add -D <pkg>`        | `deno add -D <pkg>` |
+| `yarn remove <pkg>`        | `deno remove <pkg>` |
+| `yarn up <pkg>`            | `deno update`       |
+| `yarn outdated`            | `deno outdated`     |
+| `yarn install --immutable` | `deno ci`           |
+| `yarn npm audit`           | `deno audit`        |
+| `yarn why <pkg>`           | `deno why <pkg>`    |
 
 ### Run and execute
 
@@ -73,7 +73,7 @@ behavior, then tighten the flags later. See
 | `node file.js`      | `deno file.js`       |
 | `yarn <script>`     | `deno task <script>` |
 | `yarn run <script>` | `deno task <script>` |
-| `yarn dlx <pkg>`    | `deno x npm:<pkg>`   |
+| `yarn dlx <pkg>`    | `dx <pkg>`           |
 
 </div>
 

@@ -61,17 +61,17 @@ behavior, then tighten the flags later. See
 
 ### Dependencies
 
-| npm                    | Deno                    |
-| ---------------------- | ----------------------- |
-| `npm install`          | `deno install`          |
-| `npm install <pkg>`    | `deno add npm:<pkg>`    |
-| `npm install -D <pkg>` | `deno add -D npm:<pkg>` |
-| `npm uninstall <pkg>`  | `deno remove <pkg>`     |
-| `npm update`           | `deno update`           |
-| `npm outdated`         | `deno outdated`         |
-| `npm ci`               | `deno ci`               |
-| `npm audit`            | `deno audit`            |
-| `npm explain <pkg>`    | `deno why <pkg>`        |
+| npm                    | Deno                |
+| ---------------------- | ------------------- |
+| `npm install`          | `deno install`      |
+| `npm install <pkg>`    | `deno add <pkg>`    |
+| `npm install -D <pkg>` | `deno add -D <pkg>` |
+| `npm uninstall <pkg>`  | `deno remove <pkg>` |
+| `npm update`           | `deno update`       |
+| `npm outdated`         | `deno outdated`     |
+| `npm ci`               | `deno ci`           |
+| `npm audit`            | `deno audit`        |
+| `npm explain <pkg>`    | `deno why <pkg>`    |
 
 ### Run and execute
 
@@ -79,7 +79,7 @@ behavior, then tighten the flags later. See
 | ------------------ | -------------------- |
 | `node file.js`     | `deno file.js`       |
 | `npm run <script>` | `deno task <script>` |
-| `npx <pkg>`        | `deno x npm:<pkg>`   |
+| `npx <pkg>`        | `dx <pkg>`           |
 
 </div>
 

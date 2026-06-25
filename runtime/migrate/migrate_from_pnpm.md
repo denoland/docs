@@ -55,17 +55,17 @@ behavior, then tighten the flags later. See
 
 ### Dependencies
 
-| pnpm                             | Deno                    |
-| -------------------------------- | ----------------------- |
-| `pnpm install`                   | `deno install`          |
-| `pnpm add <pkg>`                 | `deno add npm:<pkg>`    |
-| `pnpm add -D <pkg>`              | `deno add -D npm:<pkg>` |
-| `pnpm remove <pkg>`              | `deno remove <pkg>`     |
-| `pnpm update`                    | `deno update`           |
-| `pnpm outdated`                  | `deno outdated`         |
-| `pnpm install --frozen-lockfile` | `deno ci`               |
-| `pnpm audit`                     | `deno audit`            |
-| `pnpm why <pkg>`                 | `deno why <pkg>`        |
+| pnpm                             | Deno                |
+| -------------------------------- | ------------------- |
+| `pnpm install`                   | `deno install`      |
+| `pnpm add <pkg>`                 | `deno add <pkg>`    |
+| `pnpm add -D <pkg>`              | `deno add -D <pkg>` |
+| `pnpm remove <pkg>`              | `deno remove <pkg>` |
+| `pnpm update`                    | `deno update`       |
+| `pnpm outdated`                  | `deno outdated`     |
+| `pnpm install --frozen-lockfile` | `deno ci`           |
+| `pnpm audit`                     | `deno audit`        |
+| `pnpm why <pkg>`                 | `deno why <pkg>`    |
 
 ### Run and execute
 
@@ -73,7 +73,7 @@ behavior, then tighten the flags later. See
 | ------------------- | -------------------- |
 | `pnpm <script>`     | `deno task <script>` |
 | `pnpm run <script>` | `deno task <script>` |
-| `pnpm dlx <pkg>`    | `deno x npm:<pkg>`   |
+| `pnpm dlx <pkg>`    | `dx <pkg>`           |
 | `pnpm exec <cmd>`   | `deno task <cmd>`    |
 
 </div>
