@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-06-25
 title: "deno compile"
 oldUrl:
   - /runtime/manual/tools/compile/
@@ -357,7 +357,17 @@ deno compile -o main.exe main.ts
 signtool sign /fd SHA256 main.exe
 ```
 
-## Unavailable in executables
+## Persistent storage in executables
 
-- [Web Storage API](/runtime/reference/web_platform_apis/#web-storage)
-- [Web Cache](/api/web/~/Cache)
+A compiled binary is treated as a standalone application, so origin-bound
+storage persists across runs in the platform's application data directory
+(`%LOCALAPPDATA%` on Windows, `~/Library/Application Support` on macOS,
+`$XDG_DATA_HOME` on Linux):
+
+- [`localStorage`](/runtime/reference/web_platform_apis/#web-storage) and the
+  [Web Cache API](/api/web/~/Cache) read and write to that directory.
+- [`Deno.openKv()`](/api/deno/~/Deno.openKv) called without a path opens a
+  persistent database there instead of falling back to an in-memory one.
+
+Each compiled app gets its own location derived from its identity, so separate
+apps do not share storage.
