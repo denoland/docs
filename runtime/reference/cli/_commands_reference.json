@@ -6226,7 +6226,7 @@
     {
       "name": "list",
       "about": "List the dependencies declared in deno.json and package.json.\n  deno list\n\nShow the dependency tree two levels deep\n  deno list --depth 2",
-      "args": {},
+      "args": [],
       "subcommands": [],
       "usage": "Usage: deno list [OPTIONS] [filters]..."
     },
@@ -8444,7 +8444,7 @@
     {
       "name": "watch",
       "about": "Run a program in watch mode with hot module replacement. Shorthand for deno run --watch-hmr.\n  deno watch main.ts",
-      "args": {},
+      "args": [],
       "subcommands": [],
       "usage": "Usage: deno watch [OPTIONS] <SCRIPT_ARG>..."
     },
