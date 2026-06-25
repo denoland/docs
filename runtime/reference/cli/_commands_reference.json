@@ -8435,6 +8435,13 @@
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno vendor\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
     },
     {
+      "name": "watch",
+      "about": "Run a program in watch mode with hot module replacement. Shorthand for deno run --watch-hmr.\n  deno watch main.ts",
+      "args": {},
+      "subcommands": [],
+      "usage": "Usage: deno watch [OPTIONS] <SCRIPT_ARG>..."
+    },
+    {
       "name": "why",
       "about": "Show why a package is installed, displaying the dependency chain from your project's direct dependencies to the specified package.\n  \u001b[38;5;245mdeno why express\u001b[39m\n\nShow why a specific version is installed\n  \u001b[38;5;245mdeno why express@4.18.2\u001b[39m",
       "args": [
