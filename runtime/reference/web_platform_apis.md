@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-24
+last_modified: 2026-06-25
 title: "Web Platform APIs"
 description: "A guide to the Web Platform APIs available in Deno. Learn about fetch, events, workers, storage, and other web standard APIs, including implementation details and deviations from browser specifications."
 oldUrl:
@@ -662,6 +662,12 @@ global. The following properties are available:
   properties `brands`, `mobile`, and `platform` are read synchronously, while
   `getHighEntropyValues(hints)` resolves with additional details such as
   `architecture`, `model`, and `platformVersion`.
+- `navigator.locks` — a
+  [`LockManager`](https://developer.mozilla.org/en-US/docs/Web/API/LockManager)
+  implementing the
+  [Web Locks API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Locks_API),
+  for coordinating access to a named resource with `navigator.locks.request()`
+  and `navigator.locks.query()`.
 
 ```ts
 console.log(navigator.userAgent); // "Deno/2.7.0"
