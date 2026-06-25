@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-17
+last_modified: 2026-06-25
 title: "Linting and formatting"
 description: "A guide to Deno's built-in code quality tools. Learn how to use deno lint and deno fmt commands, configure rules, integrate with CI/CD pipelines, and maintain consistent code style across your projects."
 oldUrl:
@@ -164,6 +164,14 @@ The formatter is configured with the `fmt` field in your
 [`deno.json`](/runtime/reference/deno_json/#formatting) file. See
 [all formatting options](/runtime/reference/deno_json/#formatting) for the full
 list of settings and their defaults.
+
+`deno fmt` also reads [`.editorconfig`](https://editorconfig.org/) files and
+uses them to fill in any option you have not set through a CLI flag or the
+`deno.json` `fmt` block. The precedence is CLI flags, then `deno.json`, then
+`.editorconfig`, then the built-in defaults, so an `.editorconfig` value only
+applies when nothing higher up has set it. See
+[Inheriting settings from .editorconfig](/runtime/reference/cli/fmt/#inheriting-settings-from-.editorconfig)
+for the property mappings.
 
 ## Using other linters and formatters
 
