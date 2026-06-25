@@ -395,6 +395,10 @@ export const sidebar = [
             href: "/runtime/reference/cli/lint/",
           },
           {
+            title: "deno list",
+            href: "/runtime/reference/cli/list/",
+          },
+          {
             title: "deno outdated",
             href: "/runtime/reference/cli/outdated/",
           },
