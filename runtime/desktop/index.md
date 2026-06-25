@@ -28,9 +28,9 @@ integration.
 
 `deno desktop` is opinionated about those tradeoffs:
 
-- **Small by default, full Node compatibility.** The default WebView backend
-  uses the operating system's own webview for small binaries, and you still have
-  the entire npm ecosystem available through Deno's Node compat layer. Opt into
+- **Small by default, full Node compatibility.** The WebView backend uses the
+  operating system's own webview for small binaries, and you still have the
+  entire npm ecosystem available through Deno's Node compat layer. Opt into
   the bundled Chromium (CEF) backend when you need identical rendering across
   macOS, Windows, and Linux.
 - **Framework auto-detection.** Point `deno desktop` at a Next.js, Astro, Fresh,
