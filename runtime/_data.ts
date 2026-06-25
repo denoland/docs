@@ -110,8 +110,20 @@ export const sidebar = [
         disclosure: true,
         items: [
           {
-            title: "Package manager",
-            href: "/runtime/migrate/switch_package_manager/",
+            title: "Migrate from npm",
+            href: "/runtime/migrate/migrate_from_npm/",
+          },
+          {
+            title: "Migrate from Yarn",
+            href: "/runtime/migrate/migrate_from_yarn/",
+          },
+          {
+            title: "Migrate from pnpm",
+            href: "/runtime/migrate/migrate_from_pnpm/",
+          },
+          {
+            title: "Migrate from Bun",
+            href: "/runtime/migrate/migrate_from_bun/",
           },
         ],
       },
