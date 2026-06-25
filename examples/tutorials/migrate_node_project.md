@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-25
 title: "Use Deno in an existing Node.js project"
 description: "Run an existing Node.js project with Deno without rewriting it: install from package.json, run npm scripts with deno task, use node: built-ins, and adopt Deno's built-in tooling incrementally."
 url: /examples/migrate_node_project_tutorial/
@@ -81,9 +81,9 @@ Two compatibility rules cover almost everything else:
 :::info
 
 As of Deno 2.9 the `node:` prefix is optional: a bare specifier like
-`import os from "os"` resolves to the built-in too, so unprefixed imports from a
-Node project run without changes. The explicit `node:` form is still recommended
-because it is unambiguous and works in Node.js as well.
+`import os from "os"` resolves to the built-in module, so unprefixed imports
+from a Node project run without changes. The explicit `node:` form is still
+recommended because it is unambiguous and works in Node.js as well.
 
 :::
 

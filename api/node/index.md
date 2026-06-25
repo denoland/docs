@@ -143,21 +143,5 @@ with high fidelity. For detailed compatibility information:
 
 ## Migration from Node.js
 
-When migrating from Node.js to Deno:
-
-1. **Update imports**: Use `node:` prefix for built-in modules
-2. **Check compatibility**: Verify your dependencies work with Deno
-3. **Use npm specifiers**: Import npm packages with `npm:` prefix
-4. **Review permissions**: Configure Deno's permission system as needed
-
-:::info
-
-As of Deno 2.9 the `node:` prefix is optional for built-in modules: a bare
-specifier such as `import fs from "fs"` resolves to the built-in as well. The
-explicit `node:` form is still recommended because it is unambiguous and works
-in Node.js too.
-
-:::
-
-For more guidance, see our
+For a step-by-step guide to moving a Node.js project to Deno, see the
 [migration guide](/runtime/reference/migration_guide/).
