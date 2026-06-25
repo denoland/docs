@@ -1204,6 +1204,24 @@
           "usage": "--allow-scripts[=<PACKAGE>...]"
         },
         {
+          "name": "allow-import",
+          "short": "I",
+          "long": "allow-import",
+          "required": false,
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
+          "help_heading": null,
+          "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
+        },
+        {
+          "name": "deny-import",
+          "short": null,
+          "long": "deny-import",
+          "required": false,
+          "help": "Deny importing from remote hosts. Optionally specify denied IP addresses and host names, with ports as necessary.",
+          "help_heading": null,
+          "usage": "--deny-import[=<IP_OR_HOSTNAME>...]"
+        },
+        {
           "name": "lock",
           "short": null,
           "long": "lock",
@@ -1274,6 +1292,15 @@
           "help": "Force using package.json for dependency management instead of deno.json",
           "help_heading": null,
           "usage": "--package-json"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
         }
       ],
       "subcommands": [],
@@ -1309,6 +1336,15 @@
           "help": "Error out if lockfile is out of date",
           "help_heading": "Dependency management options",
           "usage": "--frozen[=<BOOLEAN>]"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
         },
         {
           "name": "level",
@@ -2145,6 +2181,15 @@
           "usage": "--check[=<CHECK_TYPE>]"
         },
         {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
+        },
+        {
           "name": "file",
           "short": null,
           "long": null,
@@ -2953,6 +2998,15 @@
           "usage": "--v8-flags[=<V8_FLAGS>...]"
         },
         {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
+        },
+        {
           "name": "watch",
           "short": null,
           "long": "watch",
@@ -3518,6 +3572,42 @@
           "usage": "--minify"
         },
         {
+          "name": "exclude-unused-npm",
+          "short": null,
+          "long": "exclude-unused-npm",
+          "required": false,
+          "help": "Embed only the npm packages reachable from the module graph (managed npm; no \u001b[36mnode_modules\u001b[39m directory).\n  \u001b[38;5;245mWithout this flag the full managed npm snapshot from the lockfile / package.json is embedded.\n  Reduces binary size when the lockfile contains packages the entrypoint does not import.\n  Skips packages that are only reached through non-statically-analyzable dynamic imports;\n  pass those with \u001b[36m--include npm:<pkg>\u001b[38;5;245m if needed.\u001b[39m",
+          "help_heading": "Compile options",
+          "usage": "--exclude-unused-npm"
+        },
+        {
+          "name": "watch",
+          "short": null,
+          "long": "watch",
+          "required": false,
+          "help": "Watch for file changes and restart process automatically.\n  \u001b[38;5;245mOnly local files from entry point module graph are watched.\u001b[39m",
+          "help_heading": "File watching options",
+          "usage": "--watch"
+        },
+        {
+          "name": "watch-exclude",
+          "short": null,
+          "long": "watch-exclude",
+          "required": false,
+          "help": "Exclude provided files/patterns from watch mode",
+          "help_heading": "File watching options",
+          "usage": "--watch-exclude[=<FILES>...]"
+        },
+        {
+          "name": "no-clear-screen",
+          "short": null,
+          "long": "no-clear-screen",
+          "required": false,
+          "help": "Do not clear terminal screen when under watch mode",
+          "help_heading": "File watching options",
+          "usage": "--no-clear-screen"
+        },
+        {
           "name": "ext",
           "short": null,
           "long": "ext",
@@ -3863,6 +3953,15 @@
           "help": "Deny importing from remote hosts. Optionally specify denied IP addresses and host names, with ports as necessary.",
           "help_heading": null,
           "usage": "--deny-import[=<IP_OR_HOSTNAME>...]"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
         },
         {
           "name": "json",
@@ -4858,6 +4957,15 @@
           "usage": "--deny-import[=<IP_OR_HOSTNAME>...]"
         },
         {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
+        },
+        {
           "name": "file",
           "short": null,
           "long": null,
@@ -5000,6 +5108,15 @@
           "help": "UNSTABLE: Outputs the information in JSON format",
           "help_heading": null,
           "usage": "--json"
+        },
+        {
+          "name": "minimum-dependency-age",
+          "short": null,
+          "long": "minimum-dependency-age",
+          "required": false,
+          "help": "(Unstable) The age in minutes, ISO-8601 duration or RFC3339 absolute timestamp (e.g. '120' for two hours, 'P2D' for two days, '2025-09-16' for cutoff date, '2025-09-16T12:00:00+00:00' for cutoff time, '0' to disable)",
+          "help_heading": null,
+          "usage": "--minimum-dependency-age <minimum-dependency-age>"
         },
         {
           "name": "unstable",
@@ -5774,6 +5891,15 @@
           "usage": "--skip-types"
         },
         {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
@@ -6063,6 +6189,15 @@
           "help": "Error out if lockfile is out of date",
           "help_heading": "Dependency management options",
           "usage": "--frozen[=<BOOLEAN>]"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
         },
         {
           "name": "update",
@@ -6484,6 +6619,15 @@
           "usage": "--no-check[=<NO_CHECK_TYPE>]"
         },
         {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
@@ -6652,6 +6796,15 @@
           "help": "Ignore files matching these patterns",
           "help_heading": null,
           "usage": "--ignore=<ignore>..."
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
         },
         {
           "name": "unstable",
@@ -8364,6 +8517,15 @@
           "help": "Error out if lockfile is out of date",
           "help_heading": "Dependency management options",
           "usage": "--frozen[=<BOOLEAN>]"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
         }
       ],
       "subcommands": [],
@@ -8515,6 +8677,15 @@
           "help": "[conventional-commits mode] Path to the release notes file to prepend. Default: Releases.md",
           "help_heading": null,
           "usage": "--release-notes <PATH>"
+        },
+        {
+          "name": "config",
+          "short": "c",
+          "long": "config",
+          "required": false,
+          "help": "Explicit path to the manifest file to bump.\n  \u001b[38;5;245mMay point to a `deno.json`/`deno.jsonc` or a `package.json`. When\n  set, single-file mode is forced (workspace auto-detection is bypassed).\n  Useful when both `deno.json` and `package.json` exist in the same\n  directory.\u001b[39m",
+          "help_heading": null,
+          "usage": "--config <FILE>"
         }
       ],
       "subcommands": [],
@@ -8630,6 +8801,15 @@
           "help": "Error out if lockfile is out of date",
           "help_heading": "Dependency management options",
           "usage": "--frozen[=<BOOLEAN>]"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
         },
         {
           "name": "package",
@@ -9054,6 +9234,15 @@
           "usage": "--yes"
         },
         {
+          "name": "ignore-scripts",
+          "short": null,
+          "long": "ignore-scripts",
+          "required": false,
+          "help": "Do not run npm lifecycle scripts for the given packages",
+          "help_heading": null,
+          "usage": "--ignore-scripts[=<PACKAGE>...]"
+        },
+        {
           "name": "package",
           "short": "p",
           "long": "package",
@@ -9435,6 +9624,11 @@
       "example": null
     },
     {
+      "name": "DENO_CONDITIONS",
+      "description": "Comma-separated list of custom conditions to resolve npm package\nexports and imports with. Equivalent to using the --conditions flag.",
+      "example": null
+    },
+    {
       "name": "DENO_COVERAGE_DIR",
       "description": "Set the directory for collecting code coverage profiles.\nEquivalent to using the --coverage flag.",
       "example": null
@@ -9448,6 +9642,11 @@
       "name": "DENO_INSTALL_ROOT",
       "description": "Set deno install's output directory",
       "example": "(defaults to $HOME/.deno/bin)"
+    },
+    {
+      "name": "DENO_JOBS",
+      "description": "Number of parallel workers used for the --parallel flag with the test\nsubcommand. Defaults to the number of available CPUs.",
+      "example": null
     },
     {
       "name": "DENO_KV_DB_MODE",
@@ -9472,6 +9671,11 @@
     {
       "name": "DENO_NO_PACKAGE_JSON",
       "description": "Disables auto-resolution of package.json.",
+      "example": null
+    },
+    {
+      "name": "DENO_NO_PROMPT",
+      "description": "Set to disable permission prompts on access\n(alternative to passing --no-prompt on invocation).",
       "example": null
     },
     {
@@ -9507,6 +9711,11 @@
     {
       "name": "DENO_USE_CGROUPS",
       "description": "Use cgroups to determine V8 memory limit.",
+      "example": null
+    },
+    {
+      "name": "DENO_V8_FLAGS",
+      "description": "Set V8 command line options. Equivalent to using the --v8-flags flag;\nflags passed via --v8-flags are appended after these.",
       "example": null
     },
     {
