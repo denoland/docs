@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-24
+last_modified: 2026-06-25
 title: "deno task"
 oldUrl:
   - /runtime/tools/task_runner/
@@ -187,8 +187,15 @@ Listening on http://localhost:8000/
 ```
 
 Dependency tasks are executed in parallel, with the default parallel limit being
-equal to number of cores on your machine. To change this limit, use the
-`DENO_JOBS` environmental variable.
+equal to number of cores on your machine. To change this limit for a single
+invocation, pass `--jobs` (short `-j`, also spelled `--concurrency`); to set it
+for the environment, use the `DENO_JOBS` environment variable. The flag takes
+precedence:
+
+```sh
+# Run workspace tasks fully sequentially
+deno task --recursive --jobs 1 build
+```
 
 :::info Deno 2.8
 
@@ -277,6 +284,37 @@ useful to logically group several tasks together:
 ```
 
 Running `deno task dev` will run both `dev:client` and `dev:server` in parallel.
+
+## Caching task results
+
+A task can skip work when none of its inputs have changed. Add a `files` field
+listing the input globs the task reads, and Deno fingerprints the command, its
+appended arguments, the contents of the matching files, and the values of any
+listed env vars, then skips the task on the next run when none of them changed.
+Caching is opt-in: a task with no `files` field always runs.
+
+```jsonc title="deno.json"
+{
+  "tasks": {
+    "build": {
+      "command": "deno run -RW build.ts",
+      "files": ["src/**/*.ts", "deno.json"],
+      "output": ["dist/"],
+      "env": ["NODE_ENV"]
+    }
+  }
+}
+```
+
+- `files` lists the input globs that make up the cache key. Declaring them is
+  what turns on caching for the task.
+- `output` lists the globs the task produces. On a cache hit they are restored
+  from the cache, so deleting `dist/` and re-running regenerates it.
+- `env` lists environment variable names whose values are part of the cache key,
+  so the task re-runs when one of them changes.
+
+A task's [dependency](#task-dependencies) fingerprints are folded into its own
+cache key, so a task re-runs whenever an upstream one did.
 
 ## Node and npx binary support
 
