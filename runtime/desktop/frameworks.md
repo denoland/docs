@@ -1,7 +1,7 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-06-27
 title: "Frameworks"
-description: "Run Next.js, Astro, Fresh, Remix, Nuxt, SvelteKit, SolidStart, TanStack Start, and Vite projects as desktop apps with no code changes."
+description: "Run Next.js, Astro, Fresh, Remix, React Router, Nuxt, SvelteKit, SolidStart, TanStack Start, and Vite projects as desktop apps."
 ---
 
 :::info Available in Deno 2.9
@@ -17,12 +17,13 @@ framework's production server (or dev server under `--hmr`) with the webview
 pointed at it.
 
 ```sh
-# Inside a Next.js / Astro / Fresh / etc. project:
+# Inside a Next.js / Astro / Fresh / React Router / etc. project:
 deno desktop .
 ```
 
-No code changes, no special adapter. The same project that runs as a web app
-ships as a desktop app.
+Most supported frameworks need no special adapter. Some frameworks have
+runtime-specific entry files; check the per-framework notes below before
+building.
 
 ## Detection
 
@@ -35,6 +36,7 @@ match wins.
 | Astro          | `astro.config.{mjs,ts,js}`                               |
 | Fresh          | `fresh.gen.ts` or `_fresh/` directory                    |
 | Remix          | `@remix-run/react` or `@remix-run/dev` in `package.json` |
+| React Router   | `@react-router/dev` in `package.json`                    |
 | Nuxt           | `nuxt.config.{ts,js,mjs}`                                |
 | SvelteKit      | `svelte.config.{js,ts}`                                  |
 | SolidStart     | `@solidjs/start` in `package.json`                       |
@@ -112,6 +114,75 @@ deno desktop .
 Production: runs `remix-serve` against the `build/` directory. Dev (under
 `--hmr`): `@remix-run/dev` CLI.
 
+### React Router
+
+React Router framework mode is detected by `@react-router/dev` in
+`package.json`. Both SPA mode (`ssr: false`) and server-side rendering are
+supported once the project builds successfully with Deno.
+
+React Router's default server entry targets Node.js and uses
+`renderToPipeableStream` from `react-dom/server`. Deno resolves
+`react-dom/server` to a Web Streams build that uses `renderToReadableStream`
+instead. Add a Deno-compatible `app/entry.server.tsx` before running
+`react-router build`; React Router also uses this file to prerender the SPA
+fallback when `ssr: false`.
+
+```tsx title="app/entry.server.tsx"
+import type { EntryContext } from "react-router";
+import { ServerRouter } from "react-router";
+import { renderToReadableStream } from "react-dom/server";
+import { isbot } from "isbot";
+
+export default async function handleRequest(
+  request: Request,
+  responseStatusCode: number,
+  responseHeaders: Headers,
+  routerContext: EntryContext,
+) {
+  if (request.method.toUpperCase() === "HEAD") {
+    return new Response(null, {
+      status: responseStatusCode,
+      headers: responseHeaders,
+    });
+  }
+
+  let statusCode = responseStatusCode;
+
+  const body = await renderToReadableStream(
+    <ServerRouter context={routerContext} url={request.url} />,
+    {
+      signal: request.signal,
+      onError(error: unknown) {
+        statusCode = 500;
+        console.error(error);
+      },
+    },
+  );
+
+  if (
+    isbot(request.headers.get("user-agent") || "") || routerContext.isSpaMode
+  ) {
+    await body.allReady;
+  }
+
+  responseHeaders.set("Content-Type", "text/html");
+  return new Response(body, {
+    headers: responseHeaders,
+    status: statusCode,
+  });
+}
+```
+
+Then build and package the app:
+
+```sh
+deno task build
+deno desktop .
+```
+
+Production serves static client assets from `build/client` and, for SSR
+projects, routes requests through `build/server/index.js`.
+
 ### Nuxt
 
 ```sh
@@ -147,8 +218,8 @@ Both use the Nitro framework underneath; detection handles them via the
 
 Vite projects are detected by a `vite.config.*` file or a `vite` dependency.
 This sits at the lowest bundler priority, so the meta-frameworks built on Vite
-(Astro, SvelteKit, Nuxt, Remix, SolidStart, TanStack Start) are matched by their
-own config or dependency first.
+(Astro, SvelteKit, Nuxt, Remix, React Router, SolidStart, TanStack Start) are
+matched by their own config or dependency first.
 
 - **SSR** (a `server.{ts,js,mjs}` entry alongside `vite.config.*`): the SSR
   entry runs directly in production, and dev (under `--hmr`) runs the Vite dev
