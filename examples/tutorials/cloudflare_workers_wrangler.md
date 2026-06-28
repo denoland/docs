@@ -63,6 +63,46 @@ definition file, `worker-configuration.d.ts`.
 deno task cf-typegen
 ```
 
+## Configure type checking
+
+The generated `worker-configuration.d.ts` provides the `Env` interface and the
+Cloudflare Workers runtime types (`ExportedHandler`, `Request`, `Response`, and
+the rest of the [workerd](https://github.com/cloudflare/workerd) global scope).
+Because Deno ships its own Web API globals by default, you need to tell Deno to
+use the Workers runtime types as the single source of truth. Otherwise type
+checking either can't find `Env`/`ExportedHandler`, or reports many conflicting
+global declarations.
+
+Add a `compilerOptions` block to your `deno.json`:
+
+```json
+{
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "types": ["./worker-configuration.d.ts"],
+    "skipLibCheck": true
+  },
+  "tasks": {
+    "deploy": "deno --allow-env --allow-run npm:wrangler deploy",
+    "dev": "deno npm:wrangler dev",
+    "start": "deno npm:wrangler dev",
+    "cf-typegen": "deno npm:wrangler types"
+  }
+}
+```
+
+- `"lib": ["esnext"]` removes Deno's default Web/DOM globals so the workerd
+  types from `worker-configuration.d.ts` are used instead of clashing with them.
+  If your project also uses Deno runtime APIs (`Deno.*`), use
+  `["esnext", "deno.ns"]`.
+- `"types": ["./worker-configuration.d.ts"]` loads the generated Workers types
+  project-wide, so `Env` and `ExportedHandler` resolve in your worker.
+- `"skipLibCheck": true` skips type checking inside declaration files, which the
+  generated file relies on.
+
+With this in place, `deno check` and your editor type-check the worker against
+the Cloudflare Workers runtime types.
+
 ## Create your function
 
 Now, create your worker script in `src/mod.ts`. It needs to export an object
