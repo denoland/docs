@@ -495,7 +495,7 @@ and call functions from them.
 
 By default, executing code can not use the
 [`Deno.dlopen`](/api/deno/~/Deno.dlopen) API, as this would constitute a
-violation of the principle that code can not escalate it's privileges without
+violation of the principle that code can not escalate its privileges without
 user consent.
 
 In addition to [`Deno.dlopen`](/api/deno/~/Deno.dlopen), FFI can also be used
