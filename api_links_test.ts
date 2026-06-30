@@ -9,6 +9,7 @@ const DIRS_TO_CHECK = ["./runtime"];
  * Matches: `Deno.serve`  `Deno.readFile()`  `Deno.FsFile`
  * Ignores: [`Deno.serve`](/api/deno/~/Deno.serve)  (already linked)
  * Ignores: references inside fenced code blocks
+ * Ignores: section headings (linking a heading breaks anchor nav, see #3358)
  */
 function findUnlinkedDenoApis(
   content: string,
@@ -25,6 +26,10 @@ function findUnlinkedDenoApis(
       continue;
     }
     if (inCodeBlock) continue;
+
+    // Skip headings: linking a section heading to the API reference breaks the
+    // on-this-page anchor navigation (see issue #3358).
+    if (/^#{1,6}\s/.test(line)) continue;
 
     // Match `Deno.something` or `Deno.something()` NOT preceded by [
     const regex = /(?<!\[)`(Deno\.[a-zA-Z]\w+(?:\.\w+)*?)(?:\(\))?`/g;
