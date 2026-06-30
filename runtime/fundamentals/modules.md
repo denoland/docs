@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-06-30
 title: "Modules"
 description: "Learn how Deno's ECMAScript module system works: importing local and third-party modules, import attributes, import maps, and supported import types such as Wasm and data URLs."
 oldUrl:
@@ -182,6 +182,44 @@ import sheet from "./styles.css" with { type: "css" };
 console.log(sheet instanceof CSSStyleSheet);
 // true
 ```
+
+Dynamic imports work the same way:
+
+```ts
+const { default: sheet } = await import("./styles.css", {
+  with: { type: "css" },
+});
+```
+
+Reading a CSS file from disk needs read permission, so run with `--allow-read`
+(or the narrower `--allow-read=./styles.css`).
+
+Deno implements the small slice of the `CSSStyleSheet` interface that browser
+module graphs rely on:
+
+- `cssRules` returns the sheet's top-level rules. Unlike the browser, this is a
+  **frozen array** of `CSSRule` (not a live `CSSRuleList`), and a fresh array is
+  created on each access.
+- `CSSRule.cssText` is the verbatim text of one top-level rule.
+- `replace(text)` and `replaceSync(text)` swap the sheet's contents. As with
+  constructed stylesheets in the browser, top-level `@import` rules are dropped.
+- The `new CSSStyleSheet()` constructor is available, but its `options` argument
+  (`media`, `disabled`, `baseURL`) is not supported.
+
+```ts
+import sheet from "./styles.css" with { type: "css" };
+
+for (const rule of sheet.cssRules) {
+  console.log(rule.cssText);
+}
+
+sheet.replaceSync("body { color: red; }");
+```
+
+Because Deno has no DOM, a sheet can't be adopted anywhere; the implementation
+is backed by the raw CSS text rather than a full CSS object model. `cssRules`
+uses a naive top-level rule split, so the live mutation methods `insertRule` and
+`deleteRule` are not implemented.
 
 :::info `css` imports
 
