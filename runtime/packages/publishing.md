@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-06-30
 title: "Publishing packages"
 description: "Publish Deno packages to JSR with deno publish, build npm-compatible tarballs with deno pack, and choose the right registry for your library."
 oldUrl:
