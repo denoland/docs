@@ -191,8 +191,10 @@ const { default: sheet } = await import("./styles.css", {
 });
 ```
 
-Reading a CSS file from disk needs read permission, so run with `--allow-read`
-(or the narrower `--allow-read=./styles.css`).
+Static imports and dynamic imports with a statically analyzable specifier are
+loaded as part of the module graph and need no permission. Only a dynamic import
+whose specifier can't be analyzed, such as `import(base + "styles.css")`, reads
+the file at runtime and therefore requires read permission (`--allow-read`).
 
 Deno implements the small slice of the `CSSStyleSheet` interface that browser
 module graphs rely on:
