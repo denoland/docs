@@ -4,12 +4,10 @@ title: "Distribution"
 description: "Cross-compile a deno desktop app for macOS, Windows, and Linux from one machine, and produce per-platform output formats: .app, .dmg, .exe directory, AppImage."
 ---
 
-:::info Coming in Deno 2.9
+:::info Available in Deno 2.9
 
-`deno desktop` ships in Deno v2.9.0 and is not in a stable release yet. To try
-it now, run `deno upgrade canary` to install the
-[`canary`](/runtime/reference/cli/upgrade/) build. The command, configuration
-keys, and TypeScript APIs may still change before the feature is stable.
+`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 :::
 
