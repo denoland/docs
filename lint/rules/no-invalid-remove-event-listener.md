@@ -4,8 +4,8 @@ tags: [recommended]
 
 Disallows passing inline or bound functions to `removeEventListener()`.
 
-`removeEventListener()` removes a listener only if it receives a reference to the
-_same_ function that was passed to `addEventListener()`. An inline function
+`removeEventListener()` removes a listener only if it receives a reference to
+the _same_ function that was passed to `addEventListener()`. An inline function
 expression, an arrow function, or a `.bind()` call each create a brand-new
 function every time they are evaluated, so they can never match a
 previously-added listener and the call silently does nothing.

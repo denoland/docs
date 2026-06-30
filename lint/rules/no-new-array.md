@@ -10,7 +10,8 @@ with any other single argument it creates an array containing that one
 _element_. This makes the intent unclear to readers and is a common source of
 bugs.
 
-Use an array literal when you want a list of elements, or `Array.from({ length:
+Use an array literal when you want a list of elements, or
+`Array.from({ length:
 n })` when you want an array of a given length.
 
 **Invalid:**

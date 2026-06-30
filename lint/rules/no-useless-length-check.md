@@ -8,8 +8,10 @@ Disallows redundant array length checks combined with `Array#every()` or
 `Array#every()` returns `true` for an empty array, and `Array#some()` returns
 `false` for an empty array. Because of this:
 
-- `array.length === 0 || array.every(...)` is equivalent to just `array.every(...)`.
-- `array.length !== 0 && array.some(...)` is equivalent to just `array.some(...)`.
+- `array.length === 0 || array.every(...)` is equivalent to just
+  `array.every(...)`.
+- `array.length !== 0 && array.some(...)` is equivalent to just
+  `array.some(...)`.
 
 The explicit length check is redundant and can be removed.
 
