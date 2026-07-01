@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-29
 title: "Workspaces and monorepos"
 description: "A guide to managing workspaces and monorepos in Deno. Learn about workspace configuration, package management, dependency resolution, and how to structure multi-package projects effectively."
 oldUrl: /runtime/manual/basics/workspaces
@@ -763,10 +763,23 @@ When several workspace members depend on the same npm package, keeping their
 versions in sync usually means editing every member's `package.json` whenever
 you bump a version. The `catalog:` protocol — added in Deno 2.8 and compatible
 with the equivalent feature in pnpm, Bun, and Yarn — lets the workspace root
-declare a single version requirement, and each member references it by name from
-its `package.json` dependencies. (The `catalog:` specifier itself is only read
-from `package.json` files; the catalog definition can live in either `deno.json`
-or `package.json` at the workspace root.)
+declare a single version requirement, and each member references it by name.
+
+A `catalog:` reference can appear in a member's `package.json` dependencies or,
+since Deno 2.9, in the `imports` of a member's `deno.json`. The catalog
+definition itself lives in either `deno.json` or `package.json` at the workspace
+root.
+
+:::info Catalogs are npm-only
+
+Catalogs only manage **npm** dependencies. A catalog entry is a bare package
+name mapped to a version requirement, and a `catalog:` reference always resolves
+to an `npm:` specifier — there is no way to point a catalog entry at a `jsr:`
+package. Manage `jsr:` dependencies through `imports` directly instead. Because
+catalog entries are treated as npm packages, `deno update` and `deno outdated`
+resolve them against the npm registry.
+
+:::
 
 Define a catalog in the root `deno.json`:
 
@@ -861,6 +874,8 @@ If both `deno.json` and `package.json` define catalogs at the workspace root,
 
 ### Restrictions
 
+- Catalogs are npm-only. Every entry resolves to an `npm:` package, so `jsr:`
+  (and other non-npm) dependencies cannot be managed through a catalog.
 - Catalogs are root-only. Defining `catalog` or `catalogs` inside a workspace
   member emits a diagnostic.
 - Members must reference a catalog name that exists. A missing entry produces a
