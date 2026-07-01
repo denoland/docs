@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-07-01
 title: "deno install"
 oldUrl:
   - /runtime/manual/tools/script_installer/
