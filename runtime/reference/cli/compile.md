@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-15
+last_modified: 2026-06-25
 title: "deno compile"
 oldUrl:
   - /runtime/manual/tools/compile/
@@ -47,7 +47,7 @@ Supported frameworks:
 - Nuxt
 - SolidStart
 - TanStack Start
-- Vite (SSR mode)
+- Vite (SSR, plus SPA/MPA projects served as static output)
 
 ```sh
 # In a Next.js / Astro / Fresh / etc. project
@@ -63,6 +63,22 @@ inside the compiled binary.
 
 If the project doesn't match any supported framework, `deno compile` will error
 out.
+
+## Watch mode
+
+Pass `--watch` to rebuild the executable whenever a file in the compile graph
+changes:
+
+```sh
+deno compile --watch main.ts
+```
+
+Use `--watch-exclude` to keep specific paths from triggering a rebuild, and
+`--no-clear-screen` to preserve the terminal output between rebuilds:
+
+```sh
+deno compile --watch --watch-exclude=./dist --no-clear-screen main.ts
+```
 
 ## Cross Compilation
 
@@ -164,6 +180,16 @@ const dataFiles = Deno.readDirSync(import.meta.dirname + "/data");
 
 Note this currently only works for files on the file system and not remote
 files.
+
+`--include` treats embedded `.js` and `.ts` files as module-graph roots, so it
+resolves and transpiles them. To embed files exactly as they are, without any
+module resolution, use `--include-as-is` instead. This is the right choice for
+pre-built frontend bundles (for example Vite or webpack output) that are already
+processed and would fail to resolve as Deno modules:
+
+```sh
+deno compile --include-as-is ./dist main.ts
+```
 
 ### Configuring `include` / `exclude` in `deno.json`
 
@@ -341,7 +367,27 @@ deno compile -o main.exe main.ts
 signtool sign /fd SHA256 main.exe
 ```
 
-## Unavailable in executables
+## Persistent storage in executables
 
-- [Web Storage API](/runtime/reference/web_platform_apis/#web-storage)
-- [Web Cache](/api/web/~/Cache)
+A compiled binary is treated as a standalone application, so origin-bound
+storage persists across runs in the platform's application data directory
+(`%LOCALAPPDATA%` on Windows, `~/Library/Application Support` on macOS,
+`$XDG_DATA_HOME` on Linux):
+
+- [`localStorage`](/runtime/reference/web_platform_apis/#web-storage) and the
+  [Web Cache API](/api/web/~/Cache) read and write to that directory.
+- [`Deno.openKv()`](/api/deno/~/Deno.openKv) called without a path opens a
+  persistent database there instead of falling back to an in-memory one.
+
+Each compiled app gets its own location derived from its identity, so separate
+apps do not share storage. That identity comes from the `--app-name` flag, which
+is baked in at compile time and falls back to the output file name when omitted:
+
+```sh
+deno compile --app-name my-app main.ts
+```
+
+Because the name (not the module path) drives the directory, the store stays
+stable across runs even if you rename the binary, two binaries built with the
+same `--app-name` share a store, and differently named apps stay isolated.
+Recompiling with a different `--app-name` starts a fresh store.

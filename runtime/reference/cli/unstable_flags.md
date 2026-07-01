@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-06-24
 title: "Unstable feature flags"
 oldUrl:
   - /runtime/tools/unstable_flags/
@@ -33,7 +33,7 @@ using a
 
 ```json title="deno.json"
 {
-  "unstable": ["bare-node-builtins", "webgpu"]
+  "unstable": ["sloppy-imports", "webgpu"]
 }
 ```
 
@@ -47,27 +47,11 @@ variable of a given name, rather than being passed as a flag or
 [`deno.json`](/runtime/fundamentals/configuration/) configuration option. Flags
 that are settable via environment variables will be noted below.
 
-Here's an example of setting the `--unstable-bare-node-builtins` flag via
+Here's an example of setting the `--unstable-sloppy-imports` flag via
 environment variable:
 
 ```sh
-export DENO_UNSTABLE_BARE_NODE_BUILTINS=true
-```
-
-## `--unstable-bare-node-builtins`
-
-**Environment variable:** `DENO_UNSTABLE_BARE_NODE_BUILTINS`
-
-This flag enables you to
-[import Node.js built-in modules](/runtime/fundamentals/node/#node-built-in-modules)
-without a `node:` specifier, as in the example below. You can also use this flag
-to enable npm packages without an `npm:` specifier if you are manually managing
-your Node.js dependencies.
-
-```ts title="example.ts"
-import { readFileSync } from "fs";
-
-console.log(readFileSync("deno.json", { encoding: "utf8" }));
+export DENO_UNSTABLE_SLOPPY_IMPORTS=true
 ```
 
 ## `--unstable-detect-cjs`
@@ -139,6 +123,11 @@ property to work correctly.
 This flag enables this property. Note that it is not recommended to use this,
 but if you really need to use a package that relies on it, the escape hatch is
 now available to you.
+
+Starting in Deno 2.9, `--unsafe-proto` is a stable shorthand for the same
+behavior. It is spelled as an ordinary flag rather than an unstable one, so
+`deno run --unsafe-proto main.ts` and `deno run --unstable-unsafe-proto main.ts`
+are equivalent.
 
 ## `--unstable-webgpu`
 

@@ -1,15 +1,13 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-30
 title: "Configuration"
-description: "Configure deno desktop in deno.json: app metadata, icons, backend selection, output paths, error reporting, and the auto-update server."
+description: "Configure deno desktop in deno.json: app metadata, icons, deep-link URL schemes, backend selection, output paths, error reporting, and the auto-update server."
 ---
 
-:::info Coming in Deno 2.9
+:::info Available in Deno 2.9
 
-`deno desktop` ships in Deno v2.9.0 and is not in a stable release yet. To try
-it now, run `deno upgrade canary` to install the
-[`canary`](/runtime/reference/cli/upgrade/) build. The command, configuration
-keys, and TypeScript APIs may still change before the feature is stable.
+`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 :::
 
@@ -23,6 +21,7 @@ still compiles, using sensible defaults.
 {
   "name": "my-app",
   "version": "1.4.0",
+  "exports": "./main.ts",
   "desktop": {
     "app": {
       "name": "My App",
@@ -31,7 +30,8 @@ still compiles, using sensible defaults.
         "macos": "./icons/app.icns",
         "windows": "./icons/app.ico",
         "linux": "./icons/app.png"
-      }
+      },
+      "deepLinks": ["myapp"]
     },
     "backend": "cef",
     "output": {
@@ -103,6 +103,52 @@ are assembled into the right container per platform.
 
 If no `icons` entry is set for a platform, the default Deno icon is used.
 
+### `app.deepLinks`
+
+Custom URL schemes (deep links) the app registers with the OS, so that opening a
+`<scheme>://...` link routes to your app. Each entry is a bare scheme name with
+no `://`.
+
+```jsonc
+"deepLinks": ["myapp"]
+```
+
+With the above, the OS treats `myapp://open/document/42` as belonging to your
+app. List several schemes if your app handles more than one:
+
+```jsonc
+"deepLinks": ["myapp", "myapp-beta"]
+```
+
+Scheme names follow the
+[RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986#section-3.1) grammar:
+they must start with an ASCII letter and may otherwise contain letters, digits,
+`+`, `-`, and `.`. Names are lowercased during registration. The reserved
+schemes `http`, `https`, `file`, `ftp`, `ws`, and `wss` are rejected, since
+registering them as app handlers would hijack normal browsing. An invalid or
+reserved scheme fails the build.
+
+Registration happens at bundle time, per platform:
+
+- **macOS** adds a `CFBundleURLTypes` entry (with your schemes under
+  `CFBundleURLSchemes`) to the bundle `Info.plist`. This is written before
+  code-signing so the signature stays valid.
+- **Linux** adds an `x-scheme-handler/<scheme>` MIME type to the `.desktop`
+  entry and ensures `Exec=` forwards the opened URL via the `%u` field code.
+- **Windows** has no in-bundle registration for protocol handlers, so the
+  bundler drops a `register-deep-links.bat` next to the launcher. It writes the
+  `HKCU\Software\Classes\<scheme>` keys pointing back at the launcher. An
+  installer (or the user) runs it once after install.
+
+:::info Registration only
+
+This registers the schemes with the OS so links are routed to your app. Handling
+the opened URL inside a running app (delivering the URL to your code) is coming
+in a later release; declare your schemes now so packaging and OS registration
+are in place.
+
+:::
+
 ## `backend`
 
 Which web rendering engine to embed. One of `"cef"`, `"webview"`, or `"raw"`.
@@ -138,11 +184,14 @@ The path's extension determines what is produced:
 | Extension on Windows | Output                                        |
 | -------------------- | --------------------------------------------- |
 | (none) / directory   | App directory with a `.bat` launcher and DLLs |
+| `.msi`               | Windows Installer package                     |
 
 | Extension on Linux | Output                             |
 | ------------------ | ---------------------------------- |
 | (none) / directory | App directory with launcher script |
 | `.AppImage`        | `.AppImage` single-file bundle     |
+| `.deb`             | Debian/Ubuntu package              |
+| `.rpm`             | Fedora/RHEL package                |
 
 The CLI flag `--output` overrides this for one build.
 
@@ -220,5 +269,6 @@ Configuration is validated at the start of `deno desktop`:
 - Icon paths must resolve to existing files.
 - Output paths must be writable.
 - `release.baseUrl` must parse as a URL.
+- `app.deepLinks` entries must be valid, non-reserved URL schemes.
 
 Errors are reported with the offending `deno.json` location.

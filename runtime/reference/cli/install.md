@@ -95,6 +95,10 @@ JSR packages added with `--package-json` are written in their npm-compatible
 form (`npm:@jsr/...`). The same flag works on `deno add`, `deno remove`, and
 `deno uninstall`.
 
+To make this behavior the default without passing the flag every time, set
+[`"preferPackageJson": true`](/runtime/reference/deno_json/#prefer-package-json-for-dependencies)
+in `deno.json`.
+
 ### deno install --entrypoint [FILES]
 
 Use this command to install all dependencies that are used in the provided files

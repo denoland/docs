@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-06-25
 title: "Web Platform APIs"
 description: "A guide to the Web Platform APIs available in Deno. Learn about fetch, events, workers, storage, and other web standard APIs, including implementation details and deviations from browser specifications."
 oldUrl:
@@ -60,6 +60,9 @@ implemented as specified in the
   `keepalive`, and `window` properties and their relevant behaviours in
   `RequestInit` are not implemented. The relevant fields are not present on the
   [`Request`](/api/web/~/Request) object.
+- The `priority` member of `RequestInit` (`"auto"`, `"high"`, or `"low"`) is
+  accepted and validated. Following the Fetch standard it is write-only, so it
+  is not exposed back as a property on the `Request` object.
 - Request body upload streaming is supported (on HTTP/1.1 and HTTP/2). Unlike
   the current fetch proposal, the implementation supports duplex streaming.
 - The `set-cookie` header is not concatenated when iterated over in the
@@ -656,11 +659,24 @@ global. The following properties are available:
 - `navigator.platform` — the underlying OS platform (e.g. `"Linux x86_64"`,
   `"MacIntel"`, `"Win32"`). Added in Deno 2.7.
 - `navigator.hardwareConcurrency` — number of logical CPU cores
+- `navigator.userAgentData` — a
+  [`NavigatorUAData`](https://developer.mozilla.org/en-US/docs/Web/API/NavigatorUAData)
+  object implementing the User-Agent Client Hints API. The low-entropy
+  properties `brands`, `mobile`, and `platform` are read synchronously, while
+  `getHighEntropyValues(hints)` resolves with additional details such as
+  `architecture`, `model`, and `platformVersion`.
+- `navigator.locks` — a
+  [`LockManager`](https://developer.mozilla.org/en-US/docs/Web/API/LockManager)
+  implementing the
+  [Web Locks API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Locks_API),
+  for coordinating access to a named resource with `navigator.locks.request()`
+  and `navigator.locks.query()`.
 
 ```ts
 console.log(navigator.userAgent); // "Deno/2.7.0"
 console.log(navigator.platform); // e.g. "Linux x86_64", "MacIntel", "Win32"
 console.log(navigator.hardwareConcurrency); // e.g. 8
+console.log(navigator.userAgentData.brands); // e.g. [{ brand: "Deno", version: "2" }]
 ```
 
 ## Temporal
@@ -724,8 +740,45 @@ console.log(result); // "Hello, Deno!"
 
 Deno supports the
 [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API)
-via `crypto.subtle`. Starting with Deno 2.7, SHA-3 hash algorithms are
-supported:
+via `crypto.subtle`.
+
+### Feature detection
+
+`SubtleCrypto.supports()` is a static method for synchronously checking whether
+a given algorithm and operation combination is available, without running the
+operation or catching an error. It takes the operation name, the algorithm, and
+an optional third argument, and returns a boolean. Added in Deno 2.9.
+
+```ts
+SubtleCrypto.supports("digest", "SHA3-256"); // true
+SubtleCrypto.supports("generateKey", "ChaCha20-Poly1305"); // true
+SubtleCrypto.supports("sign", "ML-DSA-65"); // true
+```
+
+The operation is one of `"encrypt"`, `"decrypt"`, `"sign"`, `"verify"`,
+`"digest"`, `"generateKey"`, `"deriveKey"`, `"deriveBits"`, `"importKey"`,
+`"exportKey"`, `"wrapKey"`, `"unwrapKey"`, `"encapsulateKey"`,
+`"encapsulateBits"`, `"decapsulateKey"`, `"decapsulateBits"`, or
+`"getPublicKey"`.
+
+The optional third argument is interpreted by operation: a length in bits for
+`"deriveBits"`, and a related algorithm otherwise, such as the derived-key
+algorithm for `"deriveKey"` or the shared-key algorithm for `"encapsulateKey"`
+and `"decapsulateKey"`.
+
+```ts
+// Will deriveKey produce an AES-GCM key from HKDF?
+SubtleCrypto.supports("deriveKey", "HKDF", { name: "AES-GCM", length: 256 });
+```
+
+`SubtleCrypto.supports()` is part of the WICG
+[Modern Algorithms in the Web Cryptography API](https://wicg.github.io/webcrypto-modern-algos/)
+draft.
+
+### SHA-3 hash algorithms
+
+Starting with Deno 2.7, the SHA-3 family of hash algorithms is supported by
+`crypto.subtle.digest`:
 
 - `SHA3-256`
 - `SHA3-384`
@@ -736,6 +789,301 @@ const data = new TextEncoder().encode("Hello, Deno!");
 const hash = await crypto.subtle.digest("SHA3-256", data);
 console.log(new Uint8Array(hash));
 ```
+
+An `HMAC` key can also use a SHA-3 hash. Pass the algorithm name as the `hash`
+when you generate or import the key:
+
+```ts
+const key = await crypto.subtle.generateKey(
+  { name: "HMAC", hash: "SHA3-256" },
+  true,
+  ["sign", "verify"],
+);
+const signature = await crypto.subtle.sign("HMAC", key, data);
+```
+
+### Extendable-output functions
+
+Deno 2.9 adds the SHAKE, cSHAKE, TurboSHAKE, and KangarooTwelve
+extendable-output functions (XOFs). Unlike a fixed-size hash, an XOF can produce
+a digest of any length, so `crypto.subtle.digest` requires an `outputLength`
+option giving the output size in bits. `outputLength` must be a positive
+multiple of 8. The supported names are:
+
+- `SHAKE128`, `SHAKE256`
+- `cSHAKE128`, `cSHAKE256`
+- `TurboSHAKE128`, `TurboSHAKE256`
+- `KT128` (also accepted as `KangarooTwelve`) and `KT256`
+
+```ts
+const data = new TextEncoder().encode("Hello, Deno!");
+
+// 256-bit (32-byte) SHAKE256 digest.
+const digest = await crypto.subtle.digest(
+  { name: "SHAKE256", outputLength: 256 },
+  data,
+);
+console.log(new Uint8Array(digest).length); // 32
+```
+
+`cSHAKE128` and `cSHAKE256` accept two optional `BufferSource` parameters that
+customize the function: `functionName`, a NIST-defined function name, and
+`customization`, a caller-defined domain separation string.
+
+```ts
+const digest = await crypto.subtle.digest(
+  {
+    name: "cSHAKE128",
+    outputLength: 256,
+    customization: new TextEncoder().encode("my-app"),
+  },
+  data,
+);
+```
+
+`TurboSHAKE128` and `TurboSHAKE256` accept an optional `domainSeparation` byte,
+which must be in the range `0x01` to `0x7F`:
+
+```ts
+const digest = await crypto.subtle.digest(
+  { name: "TurboSHAKE256", outputLength: 512, domainSeparation: 0x1f },
+  data,
+);
+```
+
+`KT128` and `KT256` are KangarooTwelve XOFs. They accept an optional
+`customization` `BufferSource`:
+
+```ts
+const digest = await crypto.subtle.digest(
+  { name: "KT128", outputLength: 256 },
+  data,
+);
+```
+
+### KMAC
+
+`KMAC128` and `KMAC256` are keyed message authentication codes built on cSHAKE.
+Added in Deno 2.9. Generate a key with a `length` in bits, then sign and verify
+with an `outputLength` in bits and an optional `customization` `BufferSource`:
+
+```ts
+const key = await crypto.subtle.generateKey(
+  { name: "KMAC128", length: 128 },
+  true,
+  ["sign", "verify"],
+);
+
+const data = new TextEncoder().encode("Hello, Deno!");
+const params = {
+  name: "KMAC128",
+  outputLength: 256,
+  customization: new TextEncoder().encode("Deno"),
+};
+const mac = await crypto.subtle.sign(params, key, data);
+const valid = await crypto.subtle.verify(params, key, mac, data);
+```
+
+KMAC keys can be imported and exported in the `"raw"`, `"raw-secret"`, and
+`"jwk"` formats.
+
+### Argon2
+
+`Argon2d`, `Argon2i`, and `Argon2id` are password-hashing key-derivation
+functions. Added in Deno 2.9. Import the password as a key in the `"raw-secret"`
+format with the `deriveBits` usage, then call `deriveBits`. The parameters are
+`memory` (memory cost in kibibytes), `passes` (iterations), `parallelism`
+(degree of parallelism), and a `nonce` `BufferSource` (the salt). `secretValue`
+and `associatedData` are optional `BufferSource` values:
+
+```ts
+const password = new TextEncoder().encode("correct horse battery staple");
+const key = await crypto.subtle.importKey(
+  "raw-secret",
+  password,
+  "Argon2id",
+  false,
+  ["deriveBits"],
+);
+
+const derived = await crypto.subtle.deriveBits(
+  {
+    name: "Argon2id",
+    memory: 65536,
+    passes: 3,
+    parallelism: 4,
+    nonce: crypto.getRandomValues(new Uint8Array(16)),
+  },
+  key,
+  256, // output length in bits
+);
+```
+
+### ChaCha20-Poly1305
+
+Deno 2.9 supports the `ChaCha20-Poly1305` authenticated encryption algorithm
+through `generateKey`, `encrypt`, and `decrypt`. Keys are always 256 bits:
+
+```ts
+const key = await crypto.subtle.generateKey(
+  { name: "ChaCha20-Poly1305" },
+  true,
+  ["encrypt", "decrypt"],
+);
+```
+
+Each `encrypt` and `decrypt` call takes a 12-byte `nonce` and optional
+`additionalData` that is authenticated but not encrypted. Use a fresh nonce for
+every message encrypted under the same key:
+
+```ts
+const nonce = crypto.getRandomValues(new Uint8Array(12));
+const data = new TextEncoder().encode("Hello, Deno!");
+
+const ciphertext = await crypto.subtle.encrypt(
+  { name: "ChaCha20-Poly1305", nonce },
+  key,
+  data,
+);
+
+const plaintext = await crypto.subtle.decrypt(
+  { name: "ChaCha20-Poly1305", nonce },
+  key,
+  ciphertext,
+);
+console.log(new TextDecoder().decode(plaintext)); // "Hello, Deno!"
+```
+
+The returned ciphertext includes the 16-byte Poly1305 authentication tag.
+
+### Post-quantum cryptography
+
+Deno 2.9 implements the NIST post-quantum algorithms from the WICG
+[Modern Algorithms in the Web Cryptography API](https://wicg.github.io/webcrypto-modern-algos/)
+draft: ML-DSA and SLH-DSA signatures, and ML-KEM key encapsulation.
+
+#### ML-DSA signatures
+
+`ML-DSA` (FIPS 204) is a lattice-based digital signature scheme. Three parameter
+sets are available, in increasing security level: `ML-DSA-44`, `ML-DSA-65`, and
+`ML-DSA-87`. Generate a key pair, then sign with the private key and verify with
+the public key:
+
+```ts
+const { publicKey, privateKey } = await crypto.subtle.generateKey(
+  { name: "ML-DSA-65" },
+  true,
+  ["sign", "verify"],
+);
+
+const data = new TextEncoder().encode("Hello, Deno!");
+const signature = await crypto.subtle.sign(
+  { name: "ML-DSA-65" },
+  privateKey,
+  data,
+);
+const valid = await crypto.subtle.verify(
+  { name: "ML-DSA-65" },
+  publicKey,
+  signature,
+  data,
+);
+console.log(valid); // true
+```
+
+`sign` and `verify` accept an optional `context`, a `BufferSource` that binds
+the signature to an application-specific value. The same `context` must be
+supplied to both calls:
+
+```ts
+const context = new TextEncoder().encode("v1");
+const signature = await crypto.subtle.sign(
+  { name: "ML-DSA-65", context },
+  privateKey,
+  data,
+);
+```
+
+ML-DSA keys can be imported and exported in the `"pkcs8"`, `"spki"`, `"jwk"`,
+`"raw-public"`, `"raw-private"`, and `"raw-seed"` formats.
+
+#### SLH-DSA signatures
+
+`SLH-DSA` (FIPS 205) is a stateless hash-based signature scheme. All twelve
+parameter sets are available, combining a hash family (`SHA2` or `SHAKE`), a
+security level (`128`, `192`, or `256`), and a `s` (small signature) or `f`
+(fast) tradeoff:
+
+- `SLH-DSA-SHA2-128s`, `SLH-DSA-SHA2-128f`, `SLH-DSA-SHA2-192s`,
+  `SLH-DSA-SHA2-192f`, `SLH-DSA-SHA2-256s`, `SLH-DSA-SHA2-256f`
+- `SLH-DSA-SHAKE-128s`, `SLH-DSA-SHAKE-128f`, `SLH-DSA-SHAKE-192s`,
+  `SLH-DSA-SHAKE-192f`, `SLH-DSA-SHAKE-256s`, `SLH-DSA-SHAKE-256f`
+
+SLH-DSA uses the same `generateKey`, `sign`, and `verify` flow as ML-DSA,
+including the optional `context`:
+
+```ts
+const { publicKey, privateKey } = await crypto.subtle.generateKey(
+  { name: "SLH-DSA-SHAKE-128f" },
+  true,
+  ["sign", "verify"],
+);
+
+const data = new TextEncoder().encode("Hello, Deno!");
+const signature = await crypto.subtle.sign(
+  { name: "SLH-DSA-SHAKE-128f" },
+  privateKey,
+  data,
+);
+```
+
+SLH-DSA keys can be imported and exported in the `"pkcs8"`, `"spki"`, `"jwk"`,
+`"raw-public"`, and `"raw-private"` formats.
+
+#### ML-KEM key encapsulation
+
+`ML-KEM` (FIPS 203) is a key-encapsulation mechanism: one party encapsulates a
+fresh shared secret to a recipient's public key, and the recipient decapsulates
+the resulting ciphertext to recover the same secret. The parameter sets are
+`ML-KEM-512`, `ML-KEM-768`, and `ML-KEM-1024`.
+
+The recipient generates a key pair and publishes the public (encapsulation) key.
+The sender calls `encapsulateKey`, which returns both the `ciphertext` to send
+back and a `sharedKey` `CryptoKey` for the algorithm named by its third
+argument. The recipient passes the ciphertext to `decapsulateKey` to derive the
+same key:
+
+```ts
+const { publicKey, privateKey } = await crypto.subtle.generateKey(
+  { name: "ML-KEM-768" },
+  true,
+  ["encapsulateKey", "decapsulateKey"],
+);
+
+// Sender: encapsulate a shared AES-GCM key to the recipient's public key.
+const { ciphertext, sharedKey } = await crypto.subtle.encapsulateKey(
+  { name: "ML-KEM-768" },
+  publicKey,
+  { name: "AES-GCM", length: 256 },
+  false,
+  ["encrypt", "decrypt"],
+);
+
+// Recipient: decapsulate the ciphertext to recover the same key.
+const recovered = await crypto.subtle.decapsulateKey(
+  { name: "ML-KEM-768" },
+  privateKey,
+  ciphertext,
+  { name: "AES-GCM", length: 256 },
+  false,
+  ["encrypt", "decrypt"],
+);
+```
+
+`encapsulateBits` and `decapsulateBits` are the lower-level variants: they
+return the raw shared secret as an `ArrayBuffer` instead of importing it as a
+`CryptoKey`. A decapsulation (private) key also exposes `getPublicKey()`, which
+returns its matching encapsulation (public) key.
 
 ## createImageBitmap
 

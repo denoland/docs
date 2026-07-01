@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-06-30
 title: "Publishing packages"
 description: "Publish Deno packages to JSR with deno publish, build npm-compatible tarballs with deno pack, and choose the right registry for your library."
 oldUrl:
@@ -76,6 +76,27 @@ In a [workspace](/runtime/fundamentals/workspaces/), `deno publish` publishes
 every workspace member that has a name and version, in dependency order. See
 [publishing workspace packages](/runtime/fundamentals/workspaces/#publishing-workspace-packages-to-registries)
 for the details.
+
+### Automating workspace releases
+
+`deno bump-version` can drive a whole workspace release. Run at the workspace
+root with no increment, it derives each member's version bump from the
+[Conventional Commits](https://www.conventionalcommits.org/) made since the last
+release, rewrites the `jsr:` constraints in the root import map so cross-package
+references stay in sync, and prepends a changelog entry to `Releases.md`. See
+[deriving bumps from Conventional Commits](/runtime/reference/cli/bump_version/#deriving-bumps-from-conventional-commits)
+for the rules and the flags that pin the commit range.
+
+The [Deno Standard Library](https://github.com/denoland/std) wires this into CI
+as a reference you can adapt. Its
+[`version_bump` workflow](https://github.com/denoland/std/blob/main/.github/workflows/version_bump.yml)
+runs `deno bump-version --import-map import_map.json`, formats the generated
+notes with `deno fmt`, then commits the result and opens a release PR carrying
+the per-package bumps and the new
+[`Releases.md`](https://github.com/denoland/std/blob/main/Releases.md) entry.
+Merging that PR and publishing a GitHub release triggers a second workflow that
+runs `deno publish` for every member, so a tagged release flows straight to JSR
+with no manual version edits.
 
 ## Keep going
 

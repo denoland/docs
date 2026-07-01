@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-06-29
 title: "Permissions"
 description: "Reference for Deno's permission system: how the runtime sandbox works and how to grant or deny file system, network, environment, system, subprocess, FFI, and import access with the --allow and --deny flags."
 oldUrl:
@@ -428,6 +428,12 @@ deno run --allow-run script.ts
 deno run --allow-run="curl,whoami" script.ts
 ```
 
+Sending a signal to your own process does not require `--allow-run`, since it is
+equivalent to terminating yourself (like [`Deno.exit`](/api/deno/~/Deno.exit)).
+`Deno.kill(Deno.pid, ...)` and `process.kill(process.pid, ...)` work without the
+flag, so tools that re-raise a signal on their own PID (such as `signal-exit`,
+used by Vite) no longer force you to grant blanket run access.
+
 :::caution
 
 You probably don't ever want to use `--allow-run=deno` unless the parent process
@@ -489,7 +495,7 @@ and call functions from them.
 
 By default, executing code can not use the
 [`Deno.dlopen`](/api/deno/~/Deno.dlopen) API, as this would constitute a
-violation of the principle that code can not escalate it's privileges without
+violation of the principle that code can not escalate its privileges without
 user consent.
 
 In addition to [`Deno.dlopen`](/api/deno/~/Deno.dlopen), FFI can also be used

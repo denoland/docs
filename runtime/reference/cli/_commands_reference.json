@@ -27,15 +27,6 @@
       "about": "Run a JavaScript or TypeScript program, or a task or script.\n\nBy default all programs are run in sandbox without access to disk, network or ability to spawn subprocesses.\n  \u001b[38;5;245mdeno run https://docs.deno.com/hello_world.ts\u001b[39m\n\nGrant permission to read from disk and listen to network:\n  \u001b[38;5;245mdeno run --allow-read --allow-net jsr:@std/http/file-server\u001b[39m\n\nGrant permission to read allow-listed files from disk:\n  \u001b[38;5;245mdeno run --allow-read=/etc jsr:@std/http/file-server\u001b[39m\n\nGrant all permissions:\n  \u001b[38;5;245mdeno run -A jsr:@std/http/file-server\u001b[39m\n\nSpecifying the filename '-' to read the file from stdin.\n  \u001b[38;5;245mcurl https://docs.deno.com/hello_world.ts | deno run -\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/run\u001b[39m",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-bundle",
           "short": null,
           "long": "unstable-bundle",
@@ -106,15 +97,6 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
-        },
-        {
-          "name": "unstable-node-globals",
-          "short": null,
-          "long": "unstable-node-globals",
-          "required": false,
-          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -220,7 +202,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -274,7 +256,7 @@
           "short": "r",
           "long": "reload",
           "required": false,
-          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
           "help_heading": "Dependency management options",
           "usage": "--reload[=<CACHE_BLOCKLIST>...]"
         },
@@ -418,7 +400,7 @@
           "short": null,
           "long": "check",
           "required": false,
-          "help": "Enable type-checking. This subcommand does not type-check by default\n  \u001b[38;5;245mIf the value of \"all\" is supplied, remote modules will be included.\n  Alternatively, the 'deno check' subcommand can be used\u001b[39m",
+          "help": "Enable type-checking. This subcommand does not type-check by default; pass \u001b[38;5;245m--check=all\u001b[39m to also type-check remote modules. Alternatively, use the \u001b[38;5;245m'deno check'\u001b[39m subcommand.",
           "help_heading": "Type checking options",
           "usage": "--check[=<CHECK_TYPE>]"
         },
@@ -589,18 +571,9 @@
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno run\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[SCRIPT_ARG]...\u001b[0m"
     },
     {
-      "name": "serve",
-      "about": "Run a server defined in a main module\n\nThe serve command uses the default exports of the main module to determine which servers to start.\n\nStart a server defined in server.ts:\n  \u001b[38;5;245mdeno serve server.ts\u001b[39m\n\nStart a server defined in server.ts, watching for changes and running on port 5050:\n  \u001b[38;5;245mdeno serve --watch --port 5050 server.ts\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/serve\u001b[39m",
+      "name": "watch",
+      "about": "Run a JavaScript or TypeScript program, watching for file changes and hot-replacing modules.\n\nThis is an alias for \u001b[36mdeno run --watch-hmr\u001b[39m. The process restarts if hot replacement fails.\n  \u001b[38;5;245mdeno watch main.ts\u001b[39m\n\nLocal files from the entry point module graph are watched by default. Additional paths can be passed with \u001b[36m--watch-hmr\u001b[39m:\n  \u001b[38;5;245mdeno watch --watch-hmr=./templates main.ts\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/run\u001b[39m",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
@@ -672,15 +645,6 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
-        },
-        {
-          "name": "unstable-node-globals",
-          "short": null,
-          "long": "unstable-node-globals",
-          "required": false,
-          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -786,7 +750,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -840,7 +804,555 @@
           "short": "r",
           "long": "reload",
           "required": false,
-          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
+          "help_heading": "Dependency management options",
+          "usage": "--reload[=<CACHE_BLOCKLIST>...]"
+        },
+        {
+          "name": "lock",
+          "short": null,
+          "long": "lock",
+          "required": false,
+          "help": "Check the specified lock file. (If value is not provided, defaults to \"./deno.lock\")",
+          "help_heading": "Dependency management options",
+          "usage": "--lock [<FILE>]"
+        },
+        {
+          "name": "no-lock",
+          "short": null,
+          "long": "no-lock",
+          "required": false,
+          "help": "Disable auto discovery of the lock file",
+          "help_heading": "Dependency management options",
+          "usage": "--no-lock"
+        },
+        {
+          "name": "frozen",
+          "short": null,
+          "long": "frozen",
+          "required": false,
+          "help": "Error out if lockfile is out of date",
+          "help_heading": "Dependency management options",
+          "usage": "--frozen[=<BOOLEAN>]"
+        },
+        {
+          "name": "cert",
+          "short": null,
+          "long": "cert",
+          "required": false,
+          "help": "Load certificate authority from PEM encoded file",
+          "help_heading": null,
+          "usage": "--cert <FILE>"
+        },
+        {
+          "name": "minimum-dependency-age",
+          "short": null,
+          "long": "minimum-dependency-age",
+          "required": false,
+          "help": "(Unstable) The age in minutes, ISO-8601 duration or RFC3339 absolute timestamp (e.g. '120' for two hours, 'P2D' for two days, '2025-09-16' for cutoff date, '2025-09-16T12:00:00+00:00' for cutoff time, '0' to disable)",
+          "help_heading": null,
+          "usage": "--minimum-dependency-age <minimum-dependency-age>"
+        },
+        {
+          "name": "inspect",
+          "short": null,
+          "long": "inspect",
+          "required": false,
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
+          "help_heading": "Debugging options",
+          "usage": "--inspect[=<HOST_PORT>]"
+        },
+        {
+          "name": "inspect-brk",
+          "short": null,
+          "long": "inspect-brk",
+          "required": false,
+          "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
+          "help_heading": "Debugging options",
+          "usage": "--inspect-brk[=<HOST_PORT>]"
+        },
+        {
+          "name": "inspect-wait",
+          "short": null,
+          "long": "inspect-wait",
+          "required": false,
+          "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
+          "help_heading": "Debugging options",
+          "usage": "--inspect-wait[=<HOST_PORT>]"
+        },
+        {
+          "name": "allow-scripts",
+          "short": null,
+          "long": "allow-scripts",
+          "required": false,
+          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
+          "help_heading": null,
+          "usage": "--allow-scripts[=<PACKAGE>...]"
+        },
+        {
+          "name": "cached-only",
+          "short": null,
+          "long": "cached-only",
+          "required": false,
+          "help": "Require that remote dependencies are already cached",
+          "help_heading": "Dependency management options",
+          "usage": "--cached-only"
+        },
+        {
+          "name": "location",
+          "short": null,
+          "long": "location",
+          "required": false,
+          "help": "Value of \u001b[38;5;245mglobalThis.location\u001b[39m used by some web APIs",
+          "help_heading": null,
+          "usage": "--location <HREF>"
+        },
+        {
+          "name": "v8-flags",
+          "short": null,
+          "long": "v8-flags",
+          "required": false,
+          "help": "To see a list of all available flags use --v8-flags=--help\n  \u001b[38;5;245mFlags can also be set via the DENO_V8_FLAGS environment variable.\n  Any flags set with this flag are appended after the DENO_V8_FLAGS environment variable\u001b[39m",
+          "help_heading": null,
+          "usage": "--v8-flags[=<V8_FLAGS>...]"
+        },
+        {
+          "name": "seed",
+          "short": null,
+          "long": "seed",
+          "required": false,
+          "help": "Set the random number generator seed",
+          "help_heading": null,
+          "usage": "--seed <NUMBER>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
+          "name": "require",
+          "short": null,
+          "long": "require",
+          "required": false,
+          "help": "A list of CommonJS modules that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--require <FILE>"
+        },
+        {
+          "name": "check",
+          "short": null,
+          "long": "check",
+          "required": false,
+          "help": "Enable type-checking. This subcommand does not type-check by default; pass \u001b[38;5;245m--check=all\u001b[39m to also type-check remote modules. Alternatively, use the \u001b[38;5;245m'deno check'\u001b[39m subcommand.",
+          "help_heading": "Type checking options",
+          "usage": "--check[=<CHECK_TYPE>]"
+        },
+        {
+          "name": "watch",
+          "short": null,
+          "long": "watch",
+          "required": false,
+          "help": "Watch for file changes and restart process automatically.\n  \u001b[38;5;245mLocal files from entry point module graph are watched by default.\n  Additional paths might be watched by passing them as arguments to this flag.\u001b[39m",
+          "help_heading": "File watching options",
+          "usage": "--watch[=<FILES>...]"
+        },
+        {
+          "name": "hmr",
+          "short": null,
+          "long": "watch-hmr",
+          "required": false,
+          "help": "Watch for file changes and hot-replace modules. The process restarts if hot replacement fails.\n  \u001b[38;5;245mLocal files from entry point module graph are watched by default.\n  Additional paths might be watched by passing them as arguments to this flag.\u001b[39m",
+          "help_heading": "File watching options",
+          "usage": "--watch-hmr[=<FILES>...]"
+        },
+        {
+          "name": "watch-exclude",
+          "short": null,
+          "long": "watch-exclude",
+          "required": false,
+          "help": "Exclude provided files/patterns from watch mode",
+          "help_heading": "File watching options",
+          "usage": "--watch-exclude[=<FILES>...]"
+        },
+        {
+          "name": "no-clear-screen",
+          "short": null,
+          "long": "no-clear-screen",
+          "required": false,
+          "help": "Do not clear terminal screen when under watch mode",
+          "help_heading": "File watching options",
+          "usage": "--no-clear-screen"
+        },
+        {
+          "name": "ext",
+          "short": null,
+          "long": "ext",
+          "required": false,
+          "help": "Set content type of the supplied file",
+          "help_heading": null,
+          "usage": "--ext <ext>"
+        },
+        {
+          "name": "script_arg",
+          "short": null,
+          "long": null,
+          "required": false,
+          "help": "Script arg",
+          "help_heading": null,
+          "usage": "[SCRIPT_ARG]..."
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
+        },
+        {
+          "name": "no-code-cache",
+          "short": null,
+          "long": "no-code-cache",
+          "required": false,
+          "help": "Disable V8 code cache feature",
+          "help_heading": null,
+          "usage": "--no-code-cache"
+        },
+        {
+          "name": "coverage",
+          "short": null,
+          "long": "coverage",
+          "required": false,
+          "help": "Collect coverage profile data into DIR. If DIR is not specified, it uses 'coverage/'.\n  \u001b[38;5;245mThis option can also be set via the DENO_COVERAGE_DIR environment variable.\u001b[39m",
+          "help_heading": null,
+          "usage": "--coverage[=<DIR>]"
+        },
+        {
+          "name": "cpu-prof",
+          "short": null,
+          "long": "cpu-prof",
+          "required": false,
+          "help": "Start the V8 CPU profiler on startup and write the profile to disk on exit. Profiles are written to the current directory by default",
+          "help_heading": null,
+          "usage": "--cpu-prof"
+        },
+        {
+          "name": "cpu-prof-dir",
+          "short": null,
+          "long": "cpu-prof-dir",
+          "required": false,
+          "help": "Directory where the V8 CPU profiles will be written. Implicitly enables --cpu-prof",
+          "help_heading": null,
+          "usage": "--cpu-prof-dir <DIR>"
+        },
+        {
+          "name": "cpu-prof-name",
+          "short": null,
+          "long": "cpu-prof-name",
+          "required": false,
+          "help": "Filename for the CPU profile (defaults to CPU.<timestamp>.<pid>.cpuprofile)",
+          "help_heading": null,
+          "usage": "--cpu-prof-name <NAME>"
+        },
+        {
+          "name": "cpu-prof-interval",
+          "short": null,
+          "long": "cpu-prof-interval",
+          "required": false,
+          "help": "Sampling interval in microseconds for CPU profiling (default: 1000)",
+          "help_heading": null,
+          "usage": "--cpu-prof-interval <MICROSECONDS>"
+        },
+        {
+          "name": "cpu-prof-md",
+          "short": null,
+          "long": "cpu-prof-md",
+          "required": false,
+          "help": "Generate a human-readable markdown report alongside the CPU profile",
+          "help_heading": null,
+          "usage": "--cpu-prof-md"
+        },
+        {
+          "name": "cpu-prof-flamegraph",
+          "short": null,
+          "long": "cpu-prof-flamegraph",
+          "required": false,
+          "help": "Generate an SVG flamegraph alongside the CPU profile",
+          "help_heading": null,
+          "usage": "--cpu-prof-flamegraph"
+        },
+        {
+          "name": "tunnel",
+          "short": "t",
+          "long": "tunnel",
+          "required": false,
+          "help": "Execute tasks with a tunnel to Deno Deploy.\n\n    Create a secure connection between your local machine and Deno Deploy,\n    providing access to centralised environment variables, logging,\n    and serving from your local environment to the public internet",
+          "help_heading": null,
+          "usage": "--tunnel[=<tunnel>]"
+        },
+        {
+          "name": "use-env-proxy",
+          "short": null,
+          "long": "use-env-proxy",
+          "required": false,
+          "help": "Use HTTP_PROXY, HTTPS_PROXY, and NO_PROXY for node:http/node:https",
+          "help_heading": null,
+          "usage": "--use-env-proxy"
+        },
+        {
+          "name": "unstable",
+          "short": null,
+          "long": "unstable",
+          "required": false,
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
+          "help_heading": "Unstable options",
+          "usage": "--unstable"
+        }
+      ],
+      "subcommands": [],
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno watch\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[SCRIPT_ARG]...\u001b[0m"
+    },
+    {
+      "name": "serve",
+      "about": "Run a server defined in a main module\n\nThe serve command uses the default exports of the main module to determine which servers to start.\n\nStart a server defined in server.ts:\n  \u001b[38;5;245mdeno serve server.ts\u001b[39m\n\nStart a server defined in server.ts, watching for changes and running on port 5050:\n  \u001b[38;5;245mdeno serve --watch --port 5050 server.ts\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/serve\u001b[39m",
+      "args": [
+        {
+          "name": "unstable-bundle",
+          "short": null,
+          "long": "unstable-bundle",
+          "required": false,
+          "help": "Enable unstable bundle runtime API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bundle"
+        },
+        {
+          "name": "unstable-cron",
+          "short": null,
+          "long": "unstable-cron",
+          "required": false,
+          "help": "Enable unstable `Deno.cron` API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
+        },
+        {
+          "name": "unstable-kv",
+          "short": null,
+          "long": "unstable-kv",
+          "required": false,
+          "help": "Enable unstable KV APIs",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-net",
+          "short": null,
+          "long": "unstable-net",
+          "required": false,
+          "help": "enable unstable net APIs",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-raw-imports",
+          "short": null,
+          "long": "unstable-raw-imports",
+          "required": false,
+          "help": "Enable unstable 'bytes' imports.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-raw-imports"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
+        },
+        {
+          "name": "unstable-tsgo",
+          "short": null,
+          "long": "unstable-tsgo",
+          "required": false,
+          "help": "Enable unstable TypeScript Go integration",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-tsgo"
+        },
+        {
+          "name": "unstable-unsafe-proto",
+          "short": null,
+          "long": "unstable-unsafe-proto",
+          "required": false,
+          "help": "Enable unsafe __proto__ support. This is a security risk.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-unsafe-proto"
+        },
+        {
+          "name": "unstable-webgpu",
+          "short": null,
+          "long": "unstable-webgpu",
+          "required": false,
+          "help": "Enable unstable WebGPU APIs",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-webgpu"
+        },
+        {
+          "name": "unstable-worker-options",
+          "short": null,
+          "long": "unstable-worker-options",
+          "required": false,
+          "help": "Enable unstable Web Worker APIs",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-worker-options"
+        },
+        {
+          "name": "no-check",
+          "short": null,
+          "long": "no-check",
+          "required": false,
+          "help": "Skip type-checking. If the value of \"remote\" is supplied, diagnostic errors from remote modules will be ignored",
+          "help_heading": "Type checking options",
+          "usage": "--no-check[=<NO_CHECK_TYPE>]"
+        },
+        {
+          "name": "import-map",
+          "short": null,
+          "long": "import-map",
+          "required": false,
+          "help": "Load import map file from local file or remote URL\n  \u001b[38;5;245mDocs: https://docs.deno.com/runtime/manual/basics/import_maps\u001b[39m",
+          "help_heading": "Dependency management options",
+          "usage": "--import-map <FILE>"
+        },
+        {
+          "name": "no-remote",
+          "short": null,
+          "long": "no-remote",
+          "required": false,
+          "help": "Do not resolve remote modules",
+          "help_heading": "Dependency management options",
+          "usage": "--no-remote"
+        },
+        {
+          "name": "no-npm",
+          "short": null,
+          "long": "no-npm",
+          "required": false,
+          "help": "Do not resolve npm modules",
+          "help_heading": "Dependency management options",
+          "usage": "--no-npm"
+        },
+        {
+          "name": "node-modules-dir",
+          "short": null,
+          "long": "node-modules-dir",
+          "required": false,
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
+        },
+        {
+          "name": "vendor",
+          "short": null,
+          "long": "vendor",
+          "required": false,
+          "help": "Toggles local vendor folder usage for remote modules and a node_modules folder for npm packages",
+          "help_heading": "Dependency management options",
+          "usage": "--vendor[=<vendor>]"
+        },
+        {
+          "name": "conditions",
+          "short": null,
+          "long": "conditions",
+          "required": false,
+          "help": "Use this argument to specify custom conditions for npm package exports. You can also use DENO_CONDITIONS env var.\n\nDocs: https://docs.deno.com/go/conditional-exports",
+          "help_heading": null,
+          "usage": "--conditions <conditions>"
+        },
+        {
+          "name": "config",
+          "short": "c",
+          "long": "config",
+          "required": false,
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help_heading": null,
+          "usage": "--config <FILE>"
+        },
+        {
+          "name": "no-config",
+          "short": null,
+          "long": "no-config",
+          "required": false,
+          "help": "Disable automatic loading of the configuration file",
+          "help_heading": null,
+          "usage": "--no-config"
+        },
+        {
+          "name": "reload",
+          "short": "r",
+          "long": "reload",
+          "required": false,
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
           "help_heading": "Dependency management options",
           "usage": "--reload[=<CACHE_BLOCKLIST>...]"
         },
@@ -1020,7 +1532,7 @@
           "short": null,
           "long": "check",
           "required": false,
-          "help": "Enable type-checking. This subcommand does not type-check by default\n  \u001b[38;5;245mIf the value of \"all\" is supplied, remote modules will be included.\n  Alternatively, the 'deno check' subcommand can be used\u001b[39m",
+          "help": "Enable type-checking. This subcommand does not type-check by default; pass \u001b[38;5;245m--check=all\u001b[39m to also type-check remote modules. Alternatively, use the \u001b[38;5;245m'deno check'\u001b[39m subcommand.",
           "help_heading": "Type checking options",
           "usage": "--check[=<CHECK_TYPE>]"
         },
@@ -1190,7 +1702,7 @@
           "short": "D",
           "long": "dev",
           "required": false,
-          "help": "Add the package as a dev dependency. Note: This only applies when adding to a `package.json` file.",
+          "help": "Add the package as a dev dependency (under `devDependencies`). Note: this only applies when adding to a `package.json` file.",
           "help_heading": null,
           "usage": "--dev"
         },
@@ -1202,6 +1714,24 @@
           "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
           "help_heading": null,
           "usage": "--allow-scripts[=<PACKAGE>...]"
+        },
+        {
+          "name": "allow-import",
+          "short": "I",
+          "long": "allow-import",
+          "required": false,
+          "help": "Allow importing from remote hosts. Optionally specify allowed IP addresses and host names, with ports as necessary. Default value: \u001b[38;5;245mdeno.land:443,jsr.io:443,esm.sh:443,raw.esm.sh:443,cdn.jsdelivr.net:443,raw.githubusercontent.com:443,gist.githubusercontent.com:443\u001b[39m",
+          "help_heading": null,
+          "usage": "--allow-import[=<IP_OR_HOSTNAME>...]"
+        },
+        {
+          "name": "deny-import",
+          "short": null,
+          "long": "deny-import",
+          "required": false,
+          "help": "Deny importing from remote hosts. Optionally specify denied IP addresses and host names, with ports as necessary.",
+          "help_heading": null,
+          "usage": "--deny-import[=<IP_OR_HOSTNAME>...]"
         },
         {
           "name": "lock",
@@ -1274,6 +1804,15 @@
           "help": "Force using package.json for dependency management instead of deno.json",
           "help_heading": null,
           "usage": "--package-json"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
         }
       ],
       "subcommands": [],
@@ -1309,6 +1848,15 @@
           "help": "Error out if lockfile is out of date",
           "help_heading": "Dependency management options",
           "usage": "--frozen[=<BOOLEAN>]"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
         },
         {
           "name": "level",
@@ -1370,7 +1918,7 @@
     },
     {
       "name": "remove",
-      "about": "Remove dependencies from the configuration file.\n  \u001b[38;5;245mdeno remove @std/path\u001b[39m\n\nYou can remove multiple dependencies at once:\n  \u001b[38;5;245mdeno remove @std/path @std/assert\u001b[39m\n",
+      "about": "Remove dependencies from the configuration file.\n  \u001b[38;5;245mdeno remove @std/path\u001b[39m\n\nYou can remove multiple dependencies at once:\n  \u001b[38;5;245mdeno remove @std/path @std/assert\u001b[39m\n\nWith the \u001b[36m--global\u001b[39m flag, this is an alias for \u001b[36mdeno uninstall --global\u001b[39m and\nremoves a globally installed executable script:\n  \u001b[38;5;245mdeno remove --global file_server\u001b[39m\n",
       "args": [
         {
           "name": "packages",
@@ -1380,6 +1928,24 @@
           "help": "List of packages to remove",
           "help_heading": null,
           "usage": "[packages]..."
+        },
+        {
+          "name": "root",
+          "short": null,
+          "long": "root",
+          "required": false,
+          "help": "Installation root",
+          "help_heading": null,
+          "usage": "--root <root>"
+        },
+        {
+          "name": "global",
+          "short": "g",
+          "long": "global",
+          "required": false,
+          "help": "Remove globally installed package or module",
+          "help_heading": null,
+          "usage": "--global"
         },
         {
           "name": "lock",
@@ -1434,15 +2000,6 @@
       "name": "bench",
       "about": "Run benchmarks using Deno's built-in bench tool.\n\nEvaluate the given files, run all benches declared with 'Deno.bench()' and report results to standard output:\n  \u001b[38;5;245mdeno bench src/fetch_bench.ts src/signal_bench.ts\u001b[39m\n\nIf you specify a directory instead of a file, the path is expanded to all contained files matching the glob \u001b[36m{*_,*.,}bench.{js,mjs,ts,mts,jsx,tsx}\u001b[39m:\n  \u001b[38;5;245mdeno bench src/\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/bench\u001b[39m",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
@@ -1514,15 +2071,6 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
-        },
-        {
-          "name": "unstable-node-globals",
-          "short": null,
-          "long": "unstable-node-globals",
-          "required": false,
-          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -1628,7 +2176,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -1682,7 +2230,7 @@
           "short": "r",
           "long": "reload",
           "required": false,
-          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
           "help_heading": "Dependency management options",
           "usage": "--reload[=<CACHE_BLOCKLIST>...]"
         },
@@ -1799,7 +2347,7 @@
           "short": null,
           "long": "check",
           "required": false,
-          "help": "Set type-checking behavior. This subcommand type-checks local modules by default, so adding --check is redundant\n  \u001b[38;5;245mIf the value of \"all\" is supplied, remote modules will be included.\n  Alternatively, the 'deno check' subcommand can be used\u001b[39m",
+          "help": "Set type-checking behavior. This subcommand type-checks local modules by default, so passing \u001b[38;5;245m--check\u001b[39m is redundant; pass \u001b[38;5;245m--check=all\u001b[39m to also type-check remote modules. Alternatively, use the \u001b[38;5;245m'deno check'\u001b[39m subcommand.",
           "help_heading": "Type checking options",
           "usage": "--check[=<CHECK_TYPE>]"
         },
@@ -1929,15 +2477,6 @@
       "about": "Output a single JavaScript file with all dependencies.\n\n  deno bundle jsr:@std/http/file-server -o file-server.bundle.js\n\nIf no output file is given, the output is written to standard output:\n\n  deno bundle jsr:@std/http/file-server\n",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-detect-cjs",
           "short": null,
           "long": "unstable-detect-cjs",
@@ -2032,7 +2571,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -2086,7 +2625,7 @@
           "short": "r",
           "long": "reload",
           "required": false,
-          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
           "help_heading": "Dependency management options",
           "usage": "--reload[=<CACHE_BLOCKLIST>...]"
         },
@@ -2140,9 +2679,18 @@
           "short": null,
           "long": "check",
           "required": false,
-          "help": "Enable type-checking. This subcommand does not type-check by default\n  \u001b[38;5;245mIf the value of \"all\" is supplied, remote modules will be included.\n  Alternatively, the 'deno check' subcommand can be used\u001b[39m",
+          "help": "Enable type-checking. This subcommand does not type-check by default; pass \u001b[38;5;245m--check=all\u001b[39m to also type-check remote modules. Alternatively, use the \u001b[38;5;245m'deno check'\u001b[39m subcommand.",
           "help_heading": "Type checking options",
           "usage": "--check[=<CHECK_TYPE>]"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
         },
         {
           "name": "file",
@@ -2262,6 +2810,15 @@
           "usage": "--platform <platform>"
         },
         {
+          "name": "declaration",
+          "short": null,
+          "long": "declaration",
+          "required": false,
+          "help": "Generate .d.ts declaration files alongside the bundle",
+          "help_heading": null,
+          "usage": "--declaration"
+        },
+        {
           "name": "allow-scripts",
           "short": null,
           "long": "allow-scripts",
@@ -2305,15 +2862,6 @@
       "name": "cache",
       "about": "Cache and compile remote dependencies.\n\nDownload and compile a module with all of its static dependencies and save them in the local cache, without running any code:\n  \u001b[38;5;245mdeno cache jsr:@std/http/file-server\u001b[39m\n\nFuture runs of this module will trigger no downloads or compilation unless --reload is specified\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/cache\u001b[39m",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-detect-cjs",
           "short": null,
@@ -2409,7 +2957,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -2463,7 +3011,7 @@
           "short": "r",
           "long": "reload",
           "required": false,
-          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
           "help_heading": "Dependency management options",
           "usage": "--reload[=<CACHE_BLOCKLIST>...]"
         },
@@ -2517,7 +3065,7 @@
           "short": null,
           "long": "check",
           "required": false,
-          "help": "Enable type-checking. This subcommand does not type-check by default\n  \u001b[38;5;245mIf the value of \"all\" is supplied, remote modules will be included.\n  Alternatively, the 'deno check' subcommand can be used\u001b[39m",
+          "help": "Enable type-checking. This subcommand does not type-check by default; pass \u001b[38;5;245m--check=all\u001b[39m to also type-check remote modules. Alternatively, use the \u001b[38;5;245m'deno check'\u001b[39m subcommand.",
           "help_heading": "Type checking options",
           "usage": "--check[=<CHECK_TYPE>]"
         },
@@ -2583,15 +3131,6 @@
       "name": "check",
       "about": "Download and type-check without execution.\n\n  \u001b[38;5;245mdeno check jsr:@std/http/file-server\u001b[39m\n\nUnless --reload is specified, this command will not re-download already cached dependencies\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/check\u001b[39m",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
@@ -2663,15 +3202,6 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
-        },
-        {
-          "name": "unstable-node-globals",
-          "short": null,
-          "long": "unstable-node-globals",
-          "required": false,
-          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -2768,7 +3298,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -2822,7 +3352,7 @@
           "short": "r",
           "long": "reload",
           "required": false,
-          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
           "help_heading": "Dependency management options",
           "usage": "--reload[=<CACHE_BLOCKLIST>...]"
         },
@@ -2953,6 +3483,15 @@
           "usage": "--v8-flags[=<V8_FLAGS>...]"
         },
         {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
+        },
+        {
           "name": "watch",
           "short": null,
           "long": "watch",
@@ -3028,7 +3567,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -3058,15 +3597,6 @@
       "name": "compile",
       "about": "Compiles the given script into a self contained executable.\n\n  \u001b[38;5;245mdeno compile --allow-read --allow-net jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno compile --output file_server jsr:@std/http/file-server\u001b[39m\n\nAny flags specified which affect runtime behavior will be applied to the resulting binary.\n\nThis allows distribution of a Deno application to systems that do not have Deno installed.\nUnder the hood, it bundles a slimmed down version of the Deno runtime along with your\nJavaScript or TypeScript code.\n\nCross-compiling to different target architectures is supported using the \u001b[36m--target\u001b[39m flag.\nOn the first invocation of `deno compile`, Deno will download the relevant binary and cache it in \u001b[36m$DENO_DIR\u001b[39m.\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/compile\u001b[39m\n",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
@@ -3138,15 +3668,6 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
-        },
-        {
-          "name": "unstable-node-globals",
-          "short": null,
-          "long": "unstable-node-globals",
-          "required": false,
-          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -3252,7 +3773,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -3306,7 +3827,7 @@
           "short": "r",
           "long": "reload",
           "required": false,
-          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
           "help_heading": "Dependency management options",
           "usage": "--reload[=<CACHE_BLOCKLIST>...]"
         },
@@ -3423,7 +3944,7 @@
           "short": null,
           "long": "check",
           "required": false,
-          "help": "Set type-checking behavior. This subcommand type-checks local modules by default, so adding --check is redundant\n  \u001b[38;5;245mIf the value of \"all\" is supplied, remote modules will be included.\n  Alternatively, the 'deno check' subcommand can be used\u001b[39m",
+          "help": "Set type-checking behavior. This subcommand type-checks local modules by default, so passing \u001b[38;5;245m--check\u001b[39m is redundant; pass \u001b[38;5;245m--check=all\u001b[39m to also type-check remote modules. Alternatively, use the \u001b[38;5;245m'deno check'\u001b[39m subcommand.",
           "help_heading": "Type checking options",
           "usage": "--check[=<CHECK_TYPE>]"
         },
@@ -3509,6 +4030,15 @@
           "usage": "--bundle"
         },
         {
+          "name": "app-name",
+          "short": null,
+          "long": "app-name",
+          "required": false,
+          "help": "Stable identity for the compiled app.\n  \u001b[38;5;245mDetermines where origin-bound storage such as the default `Deno.openKv()`,\n  `localStorage` and `caches` is persisted (under the platform's app data directory).\n  Defaults to the output file name. Set this to keep storage stable across renames.\u001b[39m",
+          "help_heading": "Compile options",
+          "usage": "--app-name <app-name>"
+        },
+        {
           "name": "minify",
           "short": null,
           "long": "minify",
@@ -3516,6 +4046,42 @@
           "help": "\u001b[33mExperimental.\u001b[39m Minify the bundled output. Only meaningful with \u001b[36m--bundle\u001b[39m.\n  \u001b[38;5;245mReduces both the embedded bundle size and runtime memory use, at the cost of less readable stack traces.\u001b[39m",
           "help_heading": "Compile options",
           "usage": "--minify"
+        },
+        {
+          "name": "exclude-unused-npm",
+          "short": null,
+          "long": "exclude-unused-npm",
+          "required": false,
+          "help": "Embed only the npm packages reachable from the module graph (managed npm; no \u001b[36mnode_modules\u001b[39m directory).\n  \u001b[38;5;245mWithout this flag the full managed npm snapshot from the lockfile / package.json is embedded.\n  Reduces binary size when the lockfile contains packages the entrypoint does not import.\n  Skips packages that are only reached through non-statically-analyzable dynamic imports;\n  pass those with \u001b[36m--include npm:<pkg>\u001b[38;5;245m if needed.\u001b[39m",
+          "help_heading": "Compile options",
+          "usage": "--exclude-unused-npm"
+        },
+        {
+          "name": "watch",
+          "short": null,
+          "long": "watch",
+          "required": false,
+          "help": "Watch for file changes and restart process automatically.\n  \u001b[38;5;245mOnly local files from entry point module graph are watched.\u001b[39m",
+          "help_heading": "File watching options",
+          "usage": "--watch"
+        },
+        {
+          "name": "watch-exclude",
+          "short": null,
+          "long": "watch-exclude",
+          "required": false,
+          "help": "Exclude provided files/patterns from watch mode",
+          "help_heading": "File watching options",
+          "usage": "--watch-exclude[=<FILES>...]"
+        },
+        {
+          "name": "no-clear-screen",
+          "short": null,
+          "long": "no-clear-screen",
+          "required": false,
+          "help": "Do not clear terminal screen when under watch mode",
+          "help_heading": "File watching options",
+          "usage": "--no-clear-screen"
         },
         {
           "name": "ext",
@@ -3611,6 +4177,527 @@
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno create\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[PACKAGE]\u001b[0m \u001b[32m[--\u001b[0m \u001b[32m[ARGS]...\u001b[0m\u001b[32m]\u001b[0m"
     },
     {
+      "name": "desktop",
+      "about": "Build and run desktop applications.\n\n  \u001b[38;5;245mdeno desktop main.tsx\u001b[39m\n  \u001b[38;5;245mdeno desktop --hmr main.tsx\u001b[39m\n  \u001b[38;5;245mdeno desktop --output MyApp.app main.tsx\u001b[39m\n  \u001b[38;5;245mdeno desktop\u001b[39m\n\nCompiles the given script into a desktop application using a backend for the UI\nlayer. The entrypoint can be a file, or omitted (or \u001b[36m.\u001b[39m) to auto-detect a\nsupported framework (Next.js, Astro, etc.) in the current directory.\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/desktop\u001b[39m\n",
+      "args": [
+        {
+          "name": "unstable-bundle",
+          "short": null,
+          "long": "unstable-bundle",
+          "required": false,
+          "help": "Enable unstable bundle runtime API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-bundle"
+        },
+        {
+          "name": "unstable-cron",
+          "short": null,
+          "long": "unstable-cron",
+          "required": false,
+          "help": "Enable unstable `Deno.cron` API",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-cron"
+        },
+        {
+          "name": "unstable-detect-cjs",
+          "short": null,
+          "long": "unstable-detect-cjs",
+          "required": false,
+          "help": "Treats ambiguous .js, .jsx, .ts, .tsx files as CommonJS modules in more cases",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-detect-cjs"
+        },
+        {
+          "name": "unstable-kv",
+          "short": null,
+          "long": "unstable-kv",
+          "required": false,
+          "help": "Enable unstable KV APIs",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-kv"
+        },
+        {
+          "name": "unstable-lazy-dynamic-imports",
+          "short": null,
+          "long": "unstable-lazy-dynamic-imports",
+          "required": false,
+          "help": "Lazily loads statically analyzable dynamic imports when not running with type checking. Warning: This may change the order of semver specifier resolution.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lazy-dynamic-imports"
+        },
+        {
+          "name": "unstable-lockfile-v5",
+          "short": null,
+          "long": "unstable-lockfile-v5",
+          "required": false,
+          "help": "Enable unstable lockfile v5",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-lockfile-v5"
+        },
+        {
+          "name": "unstable-net",
+          "short": null,
+          "long": "unstable-net",
+          "required": false,
+          "help": "enable unstable net APIs",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-net"
+        },
+        {
+          "name": "unstable-no-legacy-abort",
+          "short": null,
+          "long": "unstable-no-legacy-abort",
+          "required": false,
+          "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-no-legacy-abort"
+        },
+        {
+          "name": "unstable-npm-lazy-caching",
+          "short": null,
+          "long": "unstable-npm-lazy-caching",
+          "required": false,
+          "help": "Enable unstable lazy caching of npm dependencies, downloading them only as needed (disabled: all npm packages in package.json are installed on startup; enabled: only npm packages that are actually referenced in an import are installed",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-npm-lazy-caching"
+        },
+        {
+          "name": "unstable-raw-imports",
+          "short": null,
+          "long": "unstable-raw-imports",
+          "required": false,
+          "help": "Enable unstable 'bytes' imports.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-raw-imports"
+        },
+        {
+          "name": "unstable-sloppy-imports",
+          "short": null,
+          "long": "unstable-sloppy-imports",
+          "required": false,
+          "help": "Enable unstable resolving of specifiers by extension probing, .js to .ts, and directory probing",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-sloppy-imports"
+        },
+        {
+          "name": "unstable-tsgo",
+          "short": null,
+          "long": "unstable-tsgo",
+          "required": false,
+          "help": "Enable unstable TypeScript Go integration",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-tsgo"
+        },
+        {
+          "name": "unstable-unsafe-proto",
+          "short": null,
+          "long": "unstable-unsafe-proto",
+          "required": false,
+          "help": "Enable unsafe __proto__ support. This is a security risk.",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-unsafe-proto"
+        },
+        {
+          "name": "unstable-webgpu",
+          "short": null,
+          "long": "unstable-webgpu",
+          "required": false,
+          "help": "Enable unstable WebGPU APIs",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-webgpu"
+        },
+        {
+          "name": "unstable-worker-options",
+          "short": null,
+          "long": "unstable-worker-options",
+          "required": false,
+          "help": "Enable unstable Web Worker APIs",
+          "help_heading": "Unstable options",
+          "usage": "--unstable-worker-options"
+        },
+        {
+          "name": "no-check",
+          "short": null,
+          "long": "no-check",
+          "required": false,
+          "help": "Skip type-checking. If the value of \"remote\" is supplied, diagnostic errors from remote modules will be ignored",
+          "help_heading": "Type checking options",
+          "usage": "--no-check[=<NO_CHECK_TYPE>]"
+        },
+        {
+          "name": "import-map",
+          "short": null,
+          "long": "import-map",
+          "required": false,
+          "help": "Load import map file from local file or remote URL\n  \u001b[38;5;245mDocs: https://docs.deno.com/runtime/manual/basics/import_maps\u001b[39m",
+          "help_heading": "Dependency management options",
+          "usage": "--import-map <FILE>"
+        },
+        {
+          "name": "no-remote",
+          "short": null,
+          "long": "no-remote",
+          "required": false,
+          "help": "Do not resolve remote modules",
+          "help_heading": "Dependency management options",
+          "usage": "--no-remote"
+        },
+        {
+          "name": "no-npm",
+          "short": null,
+          "long": "no-npm",
+          "required": false,
+          "help": "Do not resolve npm modules",
+          "help_heading": "Dependency management options",
+          "usage": "--no-npm"
+        },
+        {
+          "name": "node-modules-dir",
+          "short": null,
+          "long": "node-modules-dir",
+          "required": false,
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-dir[=<MODE>]"
+        },
+        {
+          "name": "node-modules-linker",
+          "short": null,
+          "long": "node-modules-linker",
+          "required": false,
+          "help": "Sets the linker mode for npm packages (isolated or hoisted)",
+          "help_heading": "Dependency management options",
+          "usage": "--node-modules-linker=<MODE>"
+        },
+        {
+          "name": "vendor",
+          "short": null,
+          "long": "vendor",
+          "required": false,
+          "help": "Toggles local vendor folder usage for remote modules and a node_modules folder for npm packages",
+          "help_heading": "Dependency management options",
+          "usage": "--vendor[=<vendor>]"
+        },
+        {
+          "name": "conditions",
+          "short": null,
+          "long": "conditions",
+          "required": false,
+          "help": "Use this argument to specify custom conditions for npm package exports. You can also use DENO_CONDITIONS env var.\n\nDocs: https://docs.deno.com/go/conditional-exports",
+          "help_heading": null,
+          "usage": "--conditions <conditions>"
+        },
+        {
+          "name": "config",
+          "short": "c",
+          "long": "config",
+          "required": false,
+          "help": "Configure different aspects of deno including TypeScript, linting, and code formatting.\n  \u001b[38;5;245mTypically the configuration file will be called `deno.json` or `deno.jsonc` and\n  automatically detected; in that case this flag is not necessary.\n  Docs: https://docs.deno.com/go/config\u001b[39m",
+          "help_heading": null,
+          "usage": "--config <FILE>"
+        },
+        {
+          "name": "no-config",
+          "short": null,
+          "long": "no-config",
+          "required": false,
+          "help": "Disable automatic loading of the configuration file",
+          "help_heading": null,
+          "usage": "--no-config"
+        },
+        {
+          "name": "reload",
+          "short": "r",
+          "long": "reload",
+          "required": false,
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
+          "help_heading": "Dependency management options",
+          "usage": "--reload[=<CACHE_BLOCKLIST>...]"
+        },
+        {
+          "name": "lock",
+          "short": null,
+          "long": "lock",
+          "required": false,
+          "help": "Check the specified lock file. (If value is not provided, defaults to \"./deno.lock\")",
+          "help_heading": "Dependency management options",
+          "usage": "--lock [<FILE>]"
+        },
+        {
+          "name": "no-lock",
+          "short": null,
+          "long": "no-lock",
+          "required": false,
+          "help": "Disable auto discovery of the lock file",
+          "help_heading": "Dependency management options",
+          "usage": "--no-lock"
+        },
+        {
+          "name": "frozen",
+          "short": null,
+          "long": "frozen",
+          "required": false,
+          "help": "Error out if lockfile is out of date",
+          "help_heading": "Dependency management options",
+          "usage": "--frozen[=<BOOLEAN>]"
+        },
+        {
+          "name": "cert",
+          "short": null,
+          "long": "cert",
+          "required": false,
+          "help": "Load certificate authority from PEM encoded file",
+          "help_heading": null,
+          "usage": "--cert <FILE>"
+        },
+        {
+          "name": "minimum-dependency-age",
+          "short": null,
+          "long": "minimum-dependency-age",
+          "required": false,
+          "help": "(Unstable) The age in minutes, ISO-8601 duration or RFC3339 absolute timestamp (e.g. '120' for two hours, 'P2D' for two days, '2025-09-16' for cutoff date, '2025-09-16T12:00:00+00:00' for cutoff time, '0' to disable)",
+          "help_heading": null,
+          "usage": "--minimum-dependency-age <minimum-dependency-age>"
+        },
+        {
+          "name": "inspect",
+          "short": null,
+          "long": "inspect",
+          "required": false,
+          "help": "Activate inspector on host:port \u001b[38;5;245m[default: 127.0.0.1:9229]\u001b[39m. Host and port are optional. Using port 0 will assign a random free port.",
+          "help_heading": "Debugging options",
+          "usage": "--inspect[=<HOST_PORT>]"
+        },
+        {
+          "name": "inspect-brk",
+          "short": null,
+          "long": "inspect-brk",
+          "required": false,
+          "help": "Activate inspector on host:port, wait for debugger to connect and break at the start of user script",
+          "help_heading": "Debugging options",
+          "usage": "--inspect-brk[=<HOST_PORT>]"
+        },
+        {
+          "name": "inspect-wait",
+          "short": null,
+          "long": "inspect-wait",
+          "required": false,
+          "help": "Activate inspector on host:port and wait for debugger to connect before running user code",
+          "help_heading": "Debugging options",
+          "usage": "--inspect-wait[=<HOST_PORT>]"
+        },
+        {
+          "name": "allow-scripts",
+          "short": null,
+          "long": "allow-scripts",
+          "required": false,
+          "help": "Allow running npm lifecycle scripts for the given packages\n  \u001b[38;5;245mNote: Scripts will only be executed when using a node_modules directory (`--node-modules-dir`)\u001b[39m",
+          "help_heading": null,
+          "usage": "--allow-scripts[=<PACKAGE>...]"
+        },
+        {
+          "name": "cached-only",
+          "short": null,
+          "long": "cached-only",
+          "required": false,
+          "help": "Require that remote dependencies are already cached",
+          "help_heading": "Dependency management options",
+          "usage": "--cached-only"
+        },
+        {
+          "name": "location",
+          "short": null,
+          "long": "location",
+          "required": false,
+          "help": "Value of \u001b[38;5;245mglobalThis.location\u001b[39m used by some web APIs",
+          "help_heading": null,
+          "usage": "--location <HREF>"
+        },
+        {
+          "name": "v8-flags",
+          "short": null,
+          "long": "v8-flags",
+          "required": false,
+          "help": "To see a list of all available flags use --v8-flags=--help\n  \u001b[38;5;245mFlags can also be set via the DENO_V8_FLAGS environment variable.\n  Any flags set with this flag are appended after the DENO_V8_FLAGS environment variable\u001b[39m",
+          "help_heading": null,
+          "usage": "--v8-flags[=<V8_FLAGS>...]"
+        },
+        {
+          "name": "seed",
+          "short": null,
+          "long": "seed",
+          "required": false,
+          "help": "Set the random number generator seed",
+          "help_heading": null,
+          "usage": "--seed <NUMBER>"
+        },
+        {
+          "name": "preload",
+          "short": null,
+          "long": "preload",
+          "required": false,
+          "help": "A list of files that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--preload <FILE>"
+        },
+        {
+          "name": "require",
+          "short": null,
+          "long": "require",
+          "required": false,
+          "help": "A list of CommonJS modules that will be executed before the main module",
+          "help_heading": null,
+          "usage": "--require <FILE>"
+        },
+        {
+          "name": "check",
+          "short": null,
+          "long": "check",
+          "required": false,
+          "help": "Set type-checking behavior. This subcommand type-checks local modules by default, so passing \u001b[38;5;245m--check\u001b[39m is redundant; pass \u001b[38;5;245m--check=all\u001b[39m to also type-check remote modules. Alternatively, use the \u001b[38;5;245m'deno check'\u001b[39m subcommand.",
+          "help_heading": "Type checking options",
+          "usage": "--check[=<CHECK_TYPE>]"
+        },
+        {
+          "name": "inspect-renderer",
+          "short": null,
+          "long": "inspect-renderer",
+          "required": false,
+          "help": "Override the CEF renderer debugger listen address; defaults to an auto-allocated port",
+          "help_heading": "Debugging options",
+          "usage": "--inspect-renderer[=<HOST_PORT>]"
+        },
+        {
+          "name": "include",
+          "short": null,
+          "long": "include",
+          "required": false,
+          "help": "Includes an additional module or file/directory in the compiled executable.\n  \u001b[38;5;245mUse this flag if a dynamically imported module or a web worker main module\n  fails to load in the executable or to embed a file or directory in the executable.\n  This flag can be passed multiple times, to include multiple additional modules.\u001b[39m",
+          "help_heading": "Desktop options",
+          "usage": "--include <include>"
+        },
+        {
+          "name": "exclude",
+          "short": null,
+          "long": "exclude",
+          "required": false,
+          "help": "Excludes a file/directory in the compiled executable.\n  \u001b[38;5;245mUse this flag to exclude a specific file or directory within the included files.\u001b[39m",
+          "help_heading": "Desktop options",
+          "usage": "--exclude <exclude>"
+        },
+        {
+          "name": "output",
+          "short": "o",
+          "long": "output",
+          "required": false,
+          "help": "Output path \u001b[38;5;245m(e.g. MyApp.app, MyApp.dmg, MyApp.AppImage, MyApp.deb, MyApp.rpm, MyApp.msi)\u001b[39m",
+          "help_heading": "Desktop options",
+          "usage": "--output <output>"
+        },
+        {
+          "name": "target",
+          "short": null,
+          "long": "target",
+          "required": false,
+          "help": "Target OS architecture",
+          "help_heading": "Desktop options",
+          "usage": "--target <target>"
+        },
+        {
+          "name": "no-code-cache",
+          "short": null,
+          "long": "no-code-cache",
+          "required": false,
+          "help": "Disable V8 code cache feature",
+          "help_heading": null,
+          "usage": "--no-code-cache"
+        },
+        {
+          "name": "icon",
+          "short": null,
+          "long": "icon",
+          "required": false,
+          "help": "Set the application icon (.ico on Windows, .icns or .png on macOS)",
+          "help_heading": "Desktop options",
+          "usage": "--icon <icon>"
+        },
+        {
+          "name": "hmr",
+          "short": null,
+          "long": "hmr",
+          "required": false,
+          "help": "Run the desktop app with Hot Module Replacement enabled",
+          "help_heading": "Desktop options",
+          "usage": "--hmr"
+        },
+        {
+          "name": "backend",
+          "short": null,
+          "long": "backend",
+          "required": false,
+          "help": "Backend to use for the desktop app",
+          "help_heading": "Desktop options",
+          "usage": "--backend <backend>"
+        },
+        {
+          "name": "all-targets",
+          "short": null,
+          "long": "all-targets",
+          "required": false,
+          "help": "Build for all supported target platforms",
+          "help_heading": "Desktop options",
+          "usage": "--all-targets"
+        },
+        {
+          "name": "compress",
+          "short": null,
+          "long": "compress",
+          "required": false,
+          "help": "Make the packaged app self-extracting: the payload is compressed inside the app and unpacked on first launch. Off by default. Defaults to xz (decompressed by the system `tar` everywhere); zstd is smaller/faster but needs the `zstd` tool at runtime.",
+          "help_heading": "Desktop options",
+          "usage": "--compress [<compress>]"
+        },
+        {
+          "name": "ext",
+          "short": null,
+          "long": "ext",
+          "required": false,
+          "help": "Set content type of the supplied file",
+          "help_heading": null,
+          "usage": "--ext <ext>"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
+        },
+        {
+          "name": "script_arg",
+          "short": null,
+          "long": null,
+          "required": false,
+          "help": "Script arg",
+          "help_heading": null,
+          "usage": "[SCRIPT_ARG]..."
+        },
+        {
+          "name": "unstable",
+          "short": null,
+          "long": "unstable",
+          "required": false,
+          "help": "The `--unstable` flag has been deprecated. Use granular `--unstable-*` flags instead",
+          "help_heading": "Unstable options",
+          "usage": "--unstable"
+        }
+      ],
+      "subcommands": [],
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno desktop\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[SCRIPT_ARG]...\u001b[0m"
+    },
+    {
       "name": "completions",
       "about": "Output shell completion script to standard output.\n\n  \u001b[38;5;245mdeno completions bash > /usr/local/etc/bash_completion.d/deno.bash\u001b[39m\n  \u001b[38;5;245msource /usr/local/etc/bash_completion.d/deno.bash\u001b[39m",
       "args": [
@@ -3704,6 +4791,15 @@
           "usage": "--detailed"
         },
         {
+          "name": "threshold",
+          "short": null,
+          "long": "threshold",
+          "required": false,
+          "help": "Fail if coverage is below this percentage (0-100), applied to line, branch, and function coverage.\n  \u001b[38;5;245mPer-metric thresholds can be set in deno.json under \"coverage\": { \"thresholds\": { ... } }. The flag takes precedence.\u001b[39m",
+          "help_heading": null,
+          "usage": "--threshold=<PERCENT>"
+        },
+        {
           "name": "files",
           "short": null,
           "long": null,
@@ -3720,15 +4816,6 @@
       "name": "doc",
       "about": "Show documentation for a module.\n\nOutput documentation to standard output:\n    \u001b[38;5;245mdeno doc ./path/to/module.ts\u001b[39m\n\nOutput documentation in HTML format:\n    \u001b[38;5;245mdeno doc --html --name=\"My library\" ./path/to/module.ts\u001b[39m\n\nLint a module for documentation diagnostics:\n    \u001b[38;5;245mdeno doc --lint ./path/to/module.ts\u001b[39m\n\nTarget a specific symbol:\n    \u001b[38;5;245mdeno doc ./path/to/module.ts MyClass.someField\u001b[39m\n\nShow documentation for runtime built-ins:\n    \u001b[38;5;245mdeno doc\u001b[39m\n    \u001b[38;5;245mdeno doc --filter Deno.Listener\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/doc\u001b[39m",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-detect-cjs",
           "short": null,
@@ -3797,7 +4884,7 @@
           "short": "r",
           "long": "reload",
           "required": false,
-          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
           "help_heading": "Dependency management options",
           "usage": "--reload[=<CACHE_BLOCKLIST>...]"
         },
@@ -3863,6 +4950,15 @@
           "help": "Deny importing from remote hosts. Optionally specify denied IP addresses and host names, with ports as necessary.",
           "help_heading": null,
           "usage": "--deny-import[=<IP_OR_HOSTNAME>...]"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
         },
         {
           "name": "json",
@@ -4024,15 +5120,6 @@
       "about": "Evaluate JavaScript from the command line.\n  \u001b[38;5;245mdeno eval \"console.log('hello world')\"\u001b[39m\n\nTo evaluate as TypeScript:\n  \u001b[38;5;245mdeno eval --ext=ts \"const v: string = 'hello'; console.log(v)\"\u001b[39m\n\nThis command has implicit access to all permissions.\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/eval\u001b[39m",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-bundle",
           "short": null,
           "long": "unstable-bundle",
@@ -4103,15 +5190,6 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
-        },
-        {
-          "name": "unstable-node-globals",
-          "short": null,
-          "long": "unstable-node-globals",
-          "required": false,
-          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -4217,7 +5295,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -4271,7 +5349,7 @@
           "short": "r",
           "long": "reload",
           "required": false,
-          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
           "help_heading": "Dependency management options",
           "usage": "--reload[=<CACHE_BLOCKLIST>...]"
         },
@@ -4415,7 +5493,7 @@
           "short": null,
           "long": "check",
           "required": false,
-          "help": "Enable type-checking. This subcommand does not type-check by default\n  \u001b[38;5;245mIf the value of \"all\" is supplied, remote modules will be included.\n  Alternatively, the 'deno check' subcommand can be used\u001b[39m",
+          "help": "Enable type-checking. This subcommand does not type-check by default; pass \u001b[38;5;245m--check=all\u001b[39m to also type-check remote modules. Alternatively, use the \u001b[38;5;245m'deno check'\u001b[39m subcommand.",
           "help_heading": "Type checking options",
           "usage": "--check[=<CHECK_TYPE>]"
         },
@@ -4524,7 +5602,7 @@
     },
     {
       "name": "fmt",
-      "about": "Auto-format various file types.\n  \u001b[38;5;245mdeno fmt myfile1.ts myfile2.ts\u001b[39m\n\nSupported file types are:\n  \u001b[38;5;245mJavaScript, TypeScript, Markdown, JSON(C) and Jupyter Notebooks\u001b[39m\n\nSupported file types which are behind corresponding unstable flags (see formatting options):\n  \u001b[38;5;245mHTML, CSS, SCSS, SASS, LESS, YAML, Svelte, Vue, Astro and Angular\u001b[39m\n\nFormat stdin and write to stdout:\n  \u001b[38;5;245mcat file.ts | deno fmt -\u001b[39m\n\nCheck if the files are formatted:\n  \u001b[38;5;245mdeno fmt --check\u001b[39m\n\nIgnore formatting code by preceding it with an ignore comment:\n  \u001b[38;5;245m// deno-fmt-ignore\u001b[39m\n\nIgnore formatting a file by adding an ignore comment at the top of the file:\n  \u001b[38;5;245m// deno-fmt-ignore-file\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/fmt\u001b[39m",
+      "about": "Auto-format various file types.\n  \u001b[38;5;245mdeno fmt myfile1.ts myfile2.ts\u001b[39m\n\nSupported file types are:\n  \u001b[38;5;245mJavaScript, TypeScript, Markdown, JSON(C) and Jupyter Notebooks\u001b[39m\n\nSupported file types which are behind corresponding unstable flags (see formatting options):\n  \u001b[38;5;245mHTML, CSS, SCSS, LESS, YAML, Svelte, Vue, Astro and Angular\u001b[39m\n\nFormat stdin and write to stdout:\n  \u001b[38;5;245mcat file.ts | deno fmt -\u001b[39m\n\nCheck if the files are formatted:\n  \u001b[38;5;245mdeno fmt --check\u001b[39m\n\nIgnore formatting code by preceding it with an ignore comment:\n  \u001b[38;5;245m// deno-fmt-ignore\u001b[39m\n\nIgnore formatting a file by adding an ignore comment at the top of the file:\n  \u001b[38;5;245m// deno-fmt-ignore-file\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/fmt\u001b[39m",
       "args": [
         {
           "name": "config",
@@ -4680,6 +5758,15 @@
           "usage": "--no-semicolons[=<no-semicolons>]"
         },
         {
+          "name": "no-editorconfig",
+          "short": null,
+          "long": "no-editorconfig",
+          "required": false,
+          "help": "Don't read .editorconfig files to infer formatting options \u001b[38;5;245m[default: false]\u001b[39m",
+          "help_heading": "Formatting options",
+          "usage": "--no-editorconfig"
+        },
+        {
           "name": "unstable-component",
           "short": null,
           "long": "unstable-component",
@@ -4777,15 +5864,6 @@
       "about": "Show information about a module or the cache directories.\n\nGet information about a module:\n  \u001b[38;5;245mdeno info jsr:@std/http/file-server\u001b[39m\n\nThe following information is shown:\n  local: Local path of the file\n  type: JavaScript, TypeScript, or JSON\n  emit: Local path of compiled source code (TypeScript only)\n  dependencies: Dependency tree of the source file\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/info\u001b[39m",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-detect-cjs",
           "short": null,
           "long": "unstable-detect-cjs",
@@ -4858,6 +5936,15 @@
           "usage": "--deny-import[=<IP_OR_HOSTNAME>...]"
         },
         {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
+        },
+        {
           "name": "file",
           "short": null,
           "long": null,
@@ -4871,7 +5958,7 @@
           "short": "r",
           "long": "reload",
           "required": false,
-          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
           "help_heading": "Dependency management options",
           "usage": "--reload[=<CACHE_BLOCKLIST>...]"
         },
@@ -4970,7 +6057,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -5002,6 +6089,15 @@
           "usage": "--json"
         },
         {
+          "name": "minimum-dependency-age",
+          "short": null,
+          "long": "minimum-dependency-age",
+          "required": false,
+          "help": "(Unstable) The age in minutes, ISO-8601 duration or RFC3339 absolute timestamp (e.g. '120' for two hours, 'P2D' for two days, '2025-09-16' for cutoff date, '2025-09-16T12:00:00+00:00' for cutoff time, '0' to disable)",
+          "help_heading": null,
+          "usage": "--minimum-dependency-age <minimum-dependency-age>"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
@@ -5015,18 +6111,62 @@
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno info\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[file]\u001b[0m"
     },
     {
+      "name": "list",
+      "about": "List the dependencies declared in deno.json / package.json.\n\nShow declared dependencies and their resolved versions:\n  \u001b[38;5;245mdeno list\u001b[39m\n\nShow the dependency tree two levels deep:\n  \u001b[38;5;245mdeno list --depth 2\u001b[39m\n\nShow only production or only development dependencies:\n  \u001b[38;5;245mdeno list --prod\u001b[39m\n  \u001b[38;5;245mdeno list --dev\u001b[39m\n\nFilter by name (wildcards allowed, negate with a leading '!'):\n  \u001b[38;5;245mdeno list \"@std/*\"\u001b[39m\n  \u001b[38;5;245mdeno list \"react*\" \"!react-dom\"\u001b[39m\n\nInclude all workspace members:\n  \u001b[38;5;245mdeno list --recursive\u001b[39m\n\nUnlike \u001b[38;5;245mdeno info\u001b[39m, which walks the module graph from an entrypoint, this lists the\npackages a project declares as dependencies, similar to \u001b[38;5;245mnpm ls\u001b[39m / \u001b[38;5;245mpnpm list\u001b[39m.",
+      "args": [
+        {
+          "name": "filters",
+          "short": null,
+          "long": null,
+          "required": false,
+          "help": "Filters selecting which packages to list. Can include wildcards (*) to match multiple packages, and a leading '!' to exclude.",
+          "help_heading": null,
+          "usage": "[filters]..."
+        },
+        {
+          "name": "depth",
+          "short": null,
+          "long": "depth",
+          "required": false,
+          "help": "Maximum depth of the dependency tree to display (0 = direct dependencies only)",
+          "help_heading": null,
+          "usage": "--depth <depth>"
+        },
+        {
+          "name": "prod",
+          "short": null,
+          "long": "prod",
+          "required": false,
+          "help": "Only list production dependencies",
+          "help_heading": null,
+          "usage": "--prod"
+        },
+        {
+          "name": "dev",
+          "short": null,
+          "long": "dev",
+          "required": false,
+          "help": "Only list development dependencies",
+          "help_heading": null,
+          "usage": "--dev"
+        },
+        {
+          "name": "recursive",
+          "short": "r",
+          "long": "recursive",
+          "required": false,
+          "help": "Include all workspace members",
+          "help_heading": null,
+          "usage": "--recursive"
+        }
+      ],
+      "subcommands": [],
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno list\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[filters]...\u001b[0m"
+    },
+    {
       "name": "install",
       "about": "Installs dependencies either in the local project or globally to a bin directory.\n\n\u001b[32mLocal installation\u001b[39m\n\nAdd dependencies to the local project's configuration (\u001b[38;5;245mdeno.json / package.json\u001b[39m) and installs them\nin the package cache. If no dependency is specified, installs all dependencies listed in the config file.\nIf the \u001b[38;5;245m--entrypoint\u001b[39m flag is passed, installs the dependencies of the specified entrypoint(s).\n\n  \u001b[38;5;245mdeno install\u001b[39m\n  \u001b[38;5;245mdeno install express\u001b[39m\n  \u001b[38;5;245mdeno install jsr:@std/bytes\u001b[39m\n  \u001b[38;5;245mdeno install --entrypoint entry1.ts entry2.ts\u001b[39m\n\n\u001b[32mGlobal installation\u001b[39m\n\nIf the \u001b[1m--global\u001b[22m flag is set, installs a script as an executable in the installation root's bin directory.\n\n  \u001b[38;5;245mdeno install --global --allow-net --allow-read jsr:@std/http/file-server\u001b[39m\n  \u001b[38;5;245mdeno install -g https://examples.deno.land/color-logging.ts\u001b[39m\n\nTo change the executable name, use \u001b[36m-n\u001b[39m/\u001b[36m--name\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read -n serve jsr:@std/http/file-server\u001b[39m\n\nThe executable name is inferred by default:\n  - Attempt to take the file stem of the URL path. The above example would\n    become \u001b[38;5;245mfile_server\u001b[39m.\n  - If the file stem is something generic like \u001b[38;5;245mmain\u001b[39m, \u001b[38;5;245mmod\u001b[39m, \u001b[38;5;245mindex\u001b[39m or \u001b[38;5;245mcli\u001b[39m,\n    and the path has no parent, take the file name of the parent path. Otherwise\n    settle with the generic name.\n  - If the resulting name has an \u001b[38;5;245m@...\u001b[39m suffix, strip it.\n\nTo change the installation root, use \u001b[36m--root\u001b[39m:\n  \u001b[38;5;245mdeno install -g --allow-net --allow-read --root /usr/local jsr:@std/http/file-server\u001b[39m\n\nThe installation root is determined, in order of precedence:\n  - \u001b[38;5;245m--root\u001b[39m option\n  - \u001b[38;5;245mDENO_INSTALL_ROOT\u001b[39m environment variable\n  - \u001b[38;5;245m$HOME/.deno\u001b[39m\n\nThese must be added to the path manually if required.",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
@@ -5098,15 +6238,6 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
-        },
-        {
-          "name": "unstable-node-globals",
-          "short": null,
-          "long": "unstable-node-globals",
-          "required": false,
-          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -5212,7 +6343,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -5266,7 +6397,7 @@
           "short": "r",
           "long": "reload",
           "required": false,
-          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
           "help_heading": "Dependency management options",
           "usage": "--reload[=<CACHE_BLOCKLIST>...]"
         },
@@ -5401,7 +6532,7 @@
           "short": null,
           "long": "check",
           "required": false,
-          "help": "Set type-checking behavior. This subcommand type-checks local modules by default, so adding --check is redundant\n  \u001b[38;5;245mIf the value of \"all\" is supplied, remote modules will be included.\n  Alternatively, the 'deno check' subcommand can be used\u001b[39m",
+          "help": "Set type-checking behavior. This subcommand type-checks local modules by default, so passing \u001b[38;5;245m--check\u001b[39m is redundant; pass \u001b[38;5;245m--check=all\u001b[39m to also type-check remote modules. Alternatively, use the \u001b[38;5;245m'deno check'\u001b[39m subcommand.",
           "help_heading": "Type checking options",
           "usage": "--check[=<CHECK_TYPE>]"
         },
@@ -5500,7 +6631,7 @@
           "short": "D",
           "long": "dev",
           "required": false,
-          "help": "Add the package as a dev dependency. Note: This only applies when adding to a `package.json` file.",
+          "help": "Add the package as a dev dependency (under `devDependencies`). Note: this only applies when adding to a `package.json` file.",
           "help_heading": null,
           "usage": "--dev"
         },
@@ -5603,15 +6734,6 @@
       "about": "Install dependencies in a clean, reproducible way for CI environments.\n\nSimilar to \u001b[38;5;245mnpm ci\u001b[39m: requires a \u001b[38;5;245mdeno.lock\u001b[39m file, removes any existing \u001b[38;5;245mnode_modules\u001b[39m\ndirectory, and then installs strictly from the lockfile. Errors if \u001b[38;5;245mdeno.lock\u001b[39m\nis missing or out of date with the config file.\n\n  \u001b[38;5;245mdeno ci\u001b[39m\n  \u001b[38;5;245mdeno ci --prod\u001b[39m",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-bundle",
           "short": null,
           "long": "unstable-bundle",
@@ -5682,15 +6804,6 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
-        },
-        {
-          "name": "unstable-node-globals",
-          "short": null,
-          "long": "unstable-node-globals",
-          "required": false,
-          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -5772,6 +6885,15 @@
           "help": "Exclude @types/* packages from installation.\n\u001b[33mBe careful, as it uses a name-based heuristic and may skip packages that ship runtime code.\u001b[39m",
           "help_heading": null,
           "usage": "--skip-types"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
         },
         {
           "name": "unstable",
@@ -5972,7 +7094,7 @@
     },
     {
       "name": "outdated",
-      "about": "Find and update outdated dependencies.\nBy default, outdated dependencies are only displayed.\n\nDisplay outdated dependencies:\n  \u001b[38;5;245mdeno outdated\u001b[39m\n  \u001b[38;5;245mdeno outdated --compatible\u001b[39m\n\nUpdate dependencies to the latest semver compatible versions:\n  \u001b[38;5;245mdeno outdated --update\u001b[39m\nUpdate dependencies to the latest versions, ignoring semver requirements:\n  \u001b[38;5;245mdeno outdated --update --latest\u001b[39m\n\nFilters can be used to select which packages to act on. Filters can include wildcards (*) to match multiple packages.\n  \u001b[38;5;245mdeno outdated --update --latest \"@std/*\"\u001b[39m\n  \u001b[38;5;245mdeno outdated --update --latest \"react*\"\u001b[39m\nNote that filters act on their aliases configured in deno.json / package.json, not the actual package names:\n  Given \"foobar\": \"npm:react@17.0.0\" in deno.json or package.json, the filter \"foobar\" would update npm:react to\n  the latest version.\n  \u001b[38;5;245mdeno outdated --update --latest foobar\u001b[39m\nFilters can be combined, and negative filters can be used to exclude results:\n  \u001b[38;5;245mdeno outdated --update --latest \"@std/*\" \"!@std/fmt*\"\u001b[39m\n\nSpecific version requirements to update to can be specified:\n  \u001b[38;5;245mdeno outdated --update @std/fmt@^1.0.2\u001b[39m\n",
+      "about": "Find and update outdated dependencies.\nBy default, outdated dependencies are only displayed.\n\nDisplay outdated dependencies:\n  \u001b[38;5;245mdeno outdated\u001b[39m\n  \u001b[38;5;245mdeno outdated --compatible\u001b[39m\n\nUpdate dependencies to the latest semver compatible versions:\n  \u001b[38;5;245mdeno outdated --update\u001b[39m\nUpdate dependencies to the latest versions, ignoring semver requirements:\n  \u001b[38;5;245mdeno outdated --update --latest\u001b[39m\nUpdate dependencies within their existing version ranges, without editing deno.json / package.json (like \u001b[38;5;245mnpm update\u001b[39m):\n  \u001b[38;5;245mdeno outdated --update --lockfile-only\u001b[39m\n\nFilters can be used to select which packages to act on. Filters can include wildcards (*) to match multiple packages.\n  \u001b[38;5;245mdeno outdated --update --latest \"@std/*\"\u001b[39m\n  \u001b[38;5;245mdeno outdated --update --latest \"react*\"\u001b[39m\nNote that filters act on their aliases configured in deno.json / package.json, not the actual package names:\n  Given \"foobar\": \"npm:react@17.0.0\" in deno.json or package.json, the filter \"foobar\" would update npm:react to\n  the latest version.\n  \u001b[38;5;245mdeno outdated --update --latest foobar\u001b[39m\nFilters can be combined, and negative filters can be used to exclude results:\n  \u001b[38;5;245mdeno outdated --update --latest \"@std/*\" \"!@std/fmt*\"\u001b[39m\n\nSpecific version requirements to update to can be specified:\n  \u001b[38;5;245mdeno outdated --update @std/fmt@^1.0.2\u001b[39m\n",
       "args": [
         {
           "name": "filters",
@@ -6065,6 +7187,15 @@
           "usage": "--frozen[=<BOOLEAN>]"
         },
         {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
+        },
+        {
           "name": "update",
           "short": "u",
           "long": "update",
@@ -6078,6 +7209,112 @@
       "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno outdated\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[filters]...\u001b[0m"
     },
     {
+      "name": "link",
+      "about": "Link a local JSR package into the current project for development.\n\n  \u001b[38;5;245mdeno link ../my-local-pkg\u001b[39m\n\nEach path must be a directory containing a deno.json with a JSR-style \"name\" field.\nThe path is appended to the \"links\" array in the nearest deno.json, and modules\nimported by that package's name resolve to the local copy instead of the registry.\n\nTo stop using the local copy:\n  \u001b[38;5;245mdeno unlink ../my-local-pkg\u001b[39m\n  \u001b[38;5;245mdeno unlink @scope/name\u001b[39m\n",
+      "args": [
+        {
+          "name": "paths",
+          "short": null,
+          "long": null,
+          "required": false,
+          "help": "Paths to local package directories to link",
+          "help_heading": null,
+          "usage": "[paths]..."
+        },
+        {
+          "name": "lock",
+          "short": null,
+          "long": "lock",
+          "required": false,
+          "help": "Check the specified lock file. (If value is not provided, defaults to \"./deno.lock\")",
+          "help_heading": "Dependency management options",
+          "usage": "--lock [<FILE>]"
+        },
+        {
+          "name": "no-lock",
+          "short": null,
+          "long": "no-lock",
+          "required": false,
+          "help": "Disable auto discovery of the lock file",
+          "help_heading": "Dependency management options",
+          "usage": "--no-lock"
+        },
+        {
+          "name": "frozen",
+          "short": null,
+          "long": "frozen",
+          "required": false,
+          "help": "Error out if lockfile is out of date",
+          "help_heading": "Dependency management options",
+          "usage": "--frozen[=<BOOLEAN>]"
+        },
+        {
+          "name": "lockfile-only",
+          "short": null,
+          "long": "lockfile-only",
+          "required": false,
+          "help": "Install only updating the lockfile",
+          "help_heading": null,
+          "usage": "--lockfile-only"
+        }
+      ],
+      "subcommands": [],
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno link\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[paths]...\u001b[0m"
+    },
+    {
+      "name": "unlink",
+      "about": "Remove a linked local package from the current project.\n\n  \u001b[38;5;245mdeno unlink ../my-local-pkg\u001b[39m\n  \u001b[38;5;245mdeno unlink @scope/name\u001b[39m\n\nAccepts either a path that matches an existing entry in the \"links\" array,\nor the JSR-style name of a linked package.\n",
+      "args": [
+        {
+          "name": "names_or_paths",
+          "short": null,
+          "long": null,
+          "required": false,
+          "help": "Linked package names or paths to remove",
+          "help_heading": null,
+          "usage": "[names_or_paths]..."
+        },
+        {
+          "name": "lock",
+          "short": null,
+          "long": "lock",
+          "required": false,
+          "help": "Check the specified lock file. (If value is not provided, defaults to \"./deno.lock\")",
+          "help_heading": "Dependency management options",
+          "usage": "--lock [<FILE>]"
+        },
+        {
+          "name": "no-lock",
+          "short": null,
+          "long": "no-lock",
+          "required": false,
+          "help": "Disable auto discovery of the lock file",
+          "help_heading": "Dependency management options",
+          "usage": "--no-lock"
+        },
+        {
+          "name": "frozen",
+          "short": null,
+          "long": "frozen",
+          "required": false,
+          "help": "Error out if lockfile is out of date",
+          "help_heading": "Dependency management options",
+          "usage": "--frozen[=<BOOLEAN>]"
+        },
+        {
+          "name": "lockfile-only",
+          "short": null,
+          "long": "lockfile-only",
+          "required": false,
+          "help": "Install only updating the lockfile",
+          "help_heading": null,
+          "usage": "--lockfile-only"
+        }
+      ],
+      "subcommands": [],
+      "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno unlink\u001b[0m \u001b[32m[OPTIONS]\u001b[0m \u001b[32m[names_or_paths]...\u001b[0m"
+    },
+    {
       "name": "lsp",
       "about": "The 'deno lsp' subcommand provides a way for code editors and IDEs to interact with Deno\nusing the Language Server Protocol. Usually humans do not use this subcommand directly.\nFor example, 'deno lsp' can provide IDEs with go-to-definition support and automatic code formatting.\n\nHow to connect various editors and IDEs to 'deno lsp': https://docs.deno.com/go/lsp",
       "args": [],
@@ -6088,15 +7325,6 @@
       "name": "lint",
       "about": "Lint JavaScript/TypeScript source code.\n\n  \u001b[38;5;245mdeno lint\u001b[39m\n  \u001b[38;5;245mdeno lint myfile1.ts myfile2.js\u001b[39m\n\nPrint result as JSON:\n  \u001b[38;5;245mdeno lint --json\u001b[39m\n\nRead from stdin:\n  \u001b[38;5;245mcat file.ts | deno lint -\u001b[39m\n  \u001b[38;5;245mcat file.ts | deno lint --json -\u001b[39m\n\nList available rules:\n  \u001b[38;5;245mdeno lint --rules\u001b[39m\n\nTo ignore specific diagnostics, you can write an ignore comment on the preceding line with a rule name (or multiple):\n  \u001b[38;5;245m// deno-lint-ignore no-explicit-any\u001b[39m\n  \u001b[38;5;245m// deno-lint-ignore require-await no-empty\u001b[39m\n\nTo ignore linting on an entire file, you can add an ignore comment at the top of the file:\n  \u001b[38;5;245m// deno-lint-ignore-file\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/lint\u001b[39m\n",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-detect-cjs",
           "short": null,
@@ -6331,15 +7559,6 @@
       "about": "Publish the current working directory's package or workspace to JSR",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-detect-cjs",
           "short": null,
           "long": "unstable-detect-cjs",
@@ -6470,7 +7689,7 @@
           "short": null,
           "long": "check",
           "required": false,
-          "help": "Set type-checking behavior. This subcommand type-checks local modules by default, so adding --check is redundant\n  \u001b[38;5;245mIf the value of \"all\" is supplied, remote modules will be included.\n  Alternatively, the 'deno check' subcommand can be used\u001b[39m",
+          "help": "Set type-checking behavior. This subcommand type-checks local modules by default, so passing \u001b[38;5;245m--check\u001b[39m is redundant; pass \u001b[38;5;245m--check=all\u001b[39m to also type-check remote modules. Alternatively, use the \u001b[38;5;245m'deno check'\u001b[39m subcommand.",
           "help_heading": "Type checking options",
           "usage": "--check[=<CHECK_TYPE>]"
         },
@@ -6482,6 +7701,15 @@
           "help": "Skip type-checking. If the value of \"remote\" is supplied, diagnostic errors from remote modules will be ignored",
           "help_heading": "Type checking options",
           "usage": "--no-check[=<NO_CHECK_TYPE>]"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
         },
         {
           "name": "unstable",
@@ -6500,15 +7728,6 @@
       "name": "pack",
       "about": "Create an npm-compatible tarball from a Deno project",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-detect-cjs",
           "short": null,
@@ -6654,6 +7873,15 @@
           "usage": "--ignore=<ignore>..."
         },
         {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
+        },
+        {
           "name": "unstable",
           "short": null,
           "long": "unstable",
@@ -6670,15 +7898,6 @@
       "name": "repl",
       "about": "Starts a read-eval-print-loop, which lets you interactively build up program state in the global context.\nIt is especially useful for quick prototyping and checking snippets of code.\n\nTypeScript is supported, however it is not type-checked, only transpiled.",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
@@ -6750,15 +7969,6 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
-        },
-        {
-          "name": "unstable-node-globals",
-          "short": null,
-          "long": "unstable-node-globals",
-          "required": false,
-          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -6873,7 +8083,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -6927,7 +8137,7 @@
           "short": "r",
           "long": "reload",
           "required": false,
-          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
           "help_heading": "Dependency management options",
           "usage": "--reload[=<CACHE_BLOCKLIST>...]"
         },
@@ -7093,15 +8303,6 @@
       "about": "Run a task defined in the configuration file:\n  \u001b[38;5;245mdeno task build\u001b[39m\n\nList all available tasks (from config files in the current and ancestor directories):\n  \u001b[38;5;245mdeno task\u001b[39m\n\nEvaluate a task from string:\n  \u001b[38;5;245mdeno task --eval \"echo $(pwd)\"\u001b[39m",
       "args": [
         {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
-        {
           "name": "unstable-bundle",
           "short": null,
           "long": "unstable-bundle",
@@ -7172,15 +8373,6 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
-        },
-        {
-          "name": "unstable-node-globals",
-          "short": null,
-          "long": "unstable-node-globals",
-          "required": false,
-          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -7327,6 +8519,24 @@
           "usage": "--no-prefix"
         },
         {
+          "name": "jobs",
+          "short": "j",
+          "long": "jobs",
+          "required": false,
+          "help": "Maximum number of tasks to run concurrently.\nOverrides the DENO_JOBS environment variable; defaults to the number of\navailable CPUs. Use 1 to force sequential execution. Only affects runs\nwhere multiple tasks can run concurrently (workspace runs, or a task with\nparallelizable dependencies)",
+          "help_heading": null,
+          "usage": "--jobs <NUMBER>"
+        },
+        {
+          "name": "if-present",
+          "short": null,
+          "long": "if-present",
+          "required": false,
+          "help": "Exit with code 0 instead of an error when the task is not found",
+          "help_heading": null,
+          "usage": "--if-present"
+        },
+        {
           "name": "env-file",
           "short": null,
           "long": "env-file",
@@ -7340,7 +8550,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -7379,15 +8589,6 @@
       "name": "test",
       "about": "Run tests using Deno's built-in test runner.\n\nEvaluate the given modules, run all tests declared with \u001b[1mDeno.\u001b[33m\u001b[22mtest()\u001b[39m and report results to standard output:\n  \u001b[38;5;245mdeno test src/fetch_test.ts src/signal_test.ts\u001b[39m\n\nDirectory arguments are expanded to all contained files matching the glob \u001b[36m{*_,*.,}test.{js,mjs,ts,mts,jsx,tsx}\u001b[39m\nor \u001b[36m**/__tests__/**\u001b[39m:\n \u001b[38;5;245mdeno test src/\u001b[39m\n\n\u001b[33mRead more:\u001b[39m \u001b[36mhttps://docs.deno.com/go/test\u001b[39m",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
@@ -7459,15 +8660,6 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
-        },
-        {
-          "name": "unstable-node-globals",
-          "short": null,
-          "long": "unstable-node-globals",
-          "required": false,
-          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -7573,7 +8765,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -7627,7 +8819,7 @@
           "short": "r",
           "long": "reload",
           "required": false,
-          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
           "help_heading": "Dependency management options",
           "usage": "--reload[=<CACHE_BLOCKLIST>...]"
         },
@@ -7771,7 +8963,7 @@
           "short": null,
           "long": "check",
           "required": false,
-          "help": "Set type-checking behavior. This subcommand type-checks local modules by default, so adding --check is redundant\n  \u001b[38;5;245mIf the value of \"all\" is supplied, remote modules will be included.\n  Alternatively, the 'deno check' subcommand can be used\u001b[39m",
+          "help": "Set type-checking behavior. This subcommand type-checks local modules by default, so passing \u001b[38;5;245m--check\u001b[39m is redundant; pass \u001b[38;5;245m--check=all\u001b[39m to also type-check remote modules. Alternatively, use the \u001b[38;5;245m'deno check'\u001b[39m subcommand.",
           "help_heading": "Type checking options",
           "usage": "--check[=<CHECK_TYPE>]"
         },
@@ -7866,6 +9058,33 @@
           "usage": "--shuffle[=<NUMBER>]"
         },
         {
+          "name": "retry",
+          "short": null,
+          "long": "retry",
+          "required": false,
+          "help": "Re-run failing tests up to NUMBER times. A test passes if any attempt passes. Tests that set their own `retry` option take precedence",
+          "help_heading": "Testing options",
+          "usage": "--retry <NUMBER>"
+        },
+        {
+          "name": "repeats",
+          "short": null,
+          "long": "repeats",
+          "required": false,
+          "help": "Run each test NUMBER additional times. Every repetition must pass. Tests that set their own `repeats` option take precedence",
+          "help_heading": "Testing options",
+          "usage": "--repeats <NUMBER>"
+        },
+        {
+          "name": "shard",
+          "short": null,
+          "long": "shard",
+          "required": false,
+          "help": "Run only the test files for shard INDEX of COUNT, e.g. --shard=2/3.\n  \u001b[38;5;245mThe discovered test files are sorted and split into COUNT consecutive groups; INDEX is 1-based. Useful for splitting a run across machines.\u001b[39m",
+          "help_heading": "Testing options",
+          "usage": "--shard=<INDEX/COUNT>"
+        },
+        {
           "name": "coverage",
           "short": null,
           "long": "coverage",
@@ -7882,6 +9101,15 @@
           "help": "Only collect raw coverage data, without generating a report",
           "help_heading": "Testing options",
           "usage": "--coverage-raw-data-only"
+        },
+        {
+          "name": "coverage-threshold",
+          "short": null,
+          "long": "coverage-threshold",
+          "required": false,
+          "help": "Fail if coverage is below this percentage (0-100). Requires --coverage",
+          "help_heading": "Testing options",
+          "usage": "--coverage-threshold=<PERCENT>"
         },
         {
           "name": "clean",
@@ -7909,6 +9137,24 @@
           "help": "List of file names to run",
           "help_heading": null,
           "usage": "[files]..."
+        },
+        {
+          "name": "changed",
+          "short": null,
+          "long": "changed",
+          "required": false,
+          "help": "Run only test modules affected by files changed in git.\n  \u001b[38;5;245mWith no value, uses uncommitted changes (staged, unstaged and untracked).\n  Pass a git ref to compare against, e.g. --changed=main or --changed=HEAD~1.\u001b[39m",
+          "help_heading": "Testing options",
+          "usage": "--changed[=<REF>]"
+        },
+        {
+          "name": "related",
+          "short": null,
+          "long": "related",
+          "required": false,
+          "help": "Run only test modules that depend on the given source files",
+          "help_heading": "Testing options",
+          "usage": "--related=<related>"
         },
         {
           "name": "watch",
@@ -7974,6 +9220,15 @@
           "usage": "--hide-stacktraces"
         },
         {
+          "name": "update-snapshots",
+          "short": "u",
+          "long": "update-snapshots",
+          "required": false,
+          "help": "Update snapshots created with `t.assertSnapshot()` instead of failing when they do not match",
+          "help_heading": "Testing options",
+          "usage": "--update-snapshots"
+        },
+        {
           "name": "env-file",
           "short": null,
           "long": "env-file",
@@ -8008,15 +9263,6 @@
       "name": "transpile",
       "about": "Transpile TypeScript/JSX/TSX files to JavaScript.\n\n  \u001b[38;5;245mdeno transpile main.ts\u001b[39m\n\nOutput to a specific file:\n  \u001b[38;5;245mdeno transpile main.ts -o main.js\u001b[39m\n\nOutput to a directory:\n  \u001b[38;5;245mdeno transpile src/*.ts --outdir dist\u001b[39m\n\nWith source maps:\n  \u001b[38;5;245mdeno transpile main.ts --source-map separate\u001b[39m\n\nGenerate declaration files:\n  \u001b[38;5;245mdeno transpile main.ts -o out.js --declaration\u001b[39m\n\nNote: --declaration always writes .d.ts files to disk (next to the source or in --outdir).",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-detect-cjs",
           "short": null,
@@ -8103,7 +9349,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -8157,7 +9403,7 @@
           "short": "r",
           "long": "reload",
           "required": false,
-          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
           "help_heading": "Dependency management options",
           "usage": "--reload[=<CACHE_BLOCKLIST>...]"
         },
@@ -8273,7 +9519,7 @@
     },
     {
       "name": "update",
-      "about": "Update outdated dependencies.\n\nUpdate dependencies to the latest semver compatible versions:\n  \u001b[38;5;245mdeno update\u001b[39m\nUpdate dependencies to the latest versions, ignoring semver requirements:\n  \u001b[38;5;245mdeno update --latest\u001b[39m\n\n\u001b[3mThis command is an alias of \u001b[38;5;245mdeno outdated --update\u001b[39m\u001b[23m\n\nFilters can be used to select which packages to act on. Filters can include wildcards (*) to match multiple packages.\n  \u001b[38;5;245mdeno update --latest \"@std/*\"\u001b[39m\n  \u001b[38;5;245mdeno update --latest \"react*\"\u001b[39m\nNote that filters act on their aliases configured in deno.json / package.json, not the actual package names:\n  Given \"foobar\": \"npm:react@17.0.0\" in deno.json or package.json, the filter \"foobar\" would update npm:react to\n  the latest version.\n  \u001b[38;5;245mdeno update --latest foobar\u001b[39m\nFilters can be combined, and negative filters can be used to exclude results:\n  \u001b[38;5;245mdeno update --latest \"@std/*\" \"!@std/fmt*\"\u001b[39m\n\nSpecific version requirements to update to can be specified:\n  \u001b[38;5;245mdeno update @std/fmt@^1.0.2\u001b[39m\n",
+      "about": "Update outdated dependencies.\n\nUpdate dependencies to the latest semver compatible versions:\n  \u001b[38;5;245mdeno update\u001b[39m\nUpdate dependencies to the latest versions, ignoring semver requirements:\n  \u001b[38;5;245mdeno update --latest\u001b[39m\nUpdate dependencies within their existing version ranges, without editing deno.json / package.json (like \u001b[38;5;245mnpm update\u001b[39m):\n  \u001b[38;5;245mdeno update --lockfile-only\u001b[39m\n\n\u001b[3mThis command is an alias of \u001b[38;5;245mdeno outdated --update\u001b[39m\u001b[23m\n\nFilters can be used to select which packages to act on. Filters can include wildcards (*) to match multiple packages.\n  \u001b[38;5;245mdeno update --latest \"@std/*\"\u001b[39m\n  \u001b[38;5;245mdeno update --latest \"react*\"\u001b[39m\nNote that filters act on their aliases configured in deno.json / package.json, not the actual package names:\n  Given \"foobar\": \"npm:react@17.0.0\" in deno.json or package.json, the filter \"foobar\" would update npm:react to\n  the latest version.\n  \u001b[38;5;245mdeno update --latest foobar\u001b[39m\nFilters can be combined, and negative filters can be used to exclude results:\n  \u001b[38;5;245mdeno update --latest \"@std/*\" \"!@std/fmt*\"\u001b[39m\n\nSpecific version requirements to update to can be specified:\n  \u001b[38;5;245mdeno update @std/fmt@^1.0.2\u001b[39m\n",
       "args": [
         {
           "name": "filters",
@@ -8364,6 +9610,15 @@
           "help": "Error out if lockfile is out of date",
           "help_heading": "Dependency management options",
           "usage": "--frozen[=<BOOLEAN>]"
+        },
+        {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
         }
       ],
       "subcommands": [],
@@ -8515,6 +9770,15 @@
           "help": "[conventional-commits mode] Path to the release notes file to prepend. Default: Releases.md",
           "help_heading": null,
           "usage": "--release-notes <PATH>"
+        },
+        {
+          "name": "config",
+          "short": "c",
+          "long": "config",
+          "required": false,
+          "help": "Explicit path to the manifest file to bump.\n  \u001b[38;5;245mMay point to a `deno.json`/`deno.jsonc` or a `package.json`. When\n  set, single-file mode is forced (workspace auto-detection is bypassed).\n  Useful when both `deno.json` and `package.json` exist in the same\n  directory.\u001b[39m",
+          "help_heading": null,
+          "usage": "--config <FILE>"
         }
       ],
       "subcommands": [],
@@ -8524,15 +9788,6 @@
       "name": "vendor",
       "about": "`deno vendor` was removed in Deno 2.\n\nSee the Deno 1.x to 2.x Migration Guide for migration instructions: https://docs.deno.com/runtime/manual/advanced/migrate_deprecations",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-detect-cjs",
           "short": null,
@@ -8632,6 +9887,15 @@
           "usage": "--frozen[=<BOOLEAN>]"
         },
         {
+          "name": "env-file",
+          "short": null,
+          "long": "env-file",
+          "required": false,
+          "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
+          "help_heading": null,
+          "usage": "--env-file[=<FILE>]"
+        },
+        {
           "name": "package",
           "short": null,
           "long": null,
@@ -8648,15 +9912,6 @@
       "name": "x",
       "about": "Execute a binary from npm or jsr, like npx",
       "args": [
-        {
-          "name": "unstable-bare-node-builtins",
-          "short": null,
-          "long": "unstable-bare-node-builtins",
-          "required": false,
-          "help": "Enable unstable bare node builtins feature",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-bare-node-builtins"
-        },
         {
           "name": "unstable-bundle",
           "short": null,
@@ -8728,15 +9983,6 @@
           "help": "Enable abort signal in Deno.serve without legacy behavior. This will not abort the server when the request is handled successfully.",
           "help_heading": "Unstable options",
           "usage": "--unstable-no-legacy-abort"
-        },
-        {
-          "name": "unstable-node-globals",
-          "short": null,
-          "long": "unstable-node-globals",
-          "required": false,
-          "help": "Prefer Node.js globals over Deno globals - currently this refers to `setTimeout` and `setInterval` APIs.",
-          "help_heading": "Unstable options",
-          "usage": "--unstable-node-globals"
         },
         {
           "name": "unstable-npm-lazy-caching",
@@ -8842,7 +10088,7 @@
           "short": null,
           "long": "node-modules-dir",
           "required": false,
-          "help": "Sets the node modules management mode for npm packages",
+          "help": "Selects the node_modules directory mode for npm packages (not a path). One of: \u001b[38;5;245mauto\u001b[39m (create a local node_modules directory and install npm packages into it), \u001b[38;5;245mmanual\u001b[39m (use the existing local node_modules directory, do not modify it), \u001b[38;5;245mnone\u001b[39m (do not use a local node_modules directory; resolve npm packages from the global cache). Defaults to \u001b[38;5;245mauto\u001b[39m when the flag is passed without a value.",
           "help_heading": "Dependency management options",
           "usage": "--node-modules-dir[=<MODE>]"
         },
@@ -8896,7 +10142,7 @@
           "short": "r",
           "long": "reload",
           "required": false,
-          "help": "Reload source code cache (recompile TypeScript)\n  \u001b[38;5;245mno value                                                 Reload everything\n  jsr:@std/http/file-server,jsr:@std/assert/assert-equals  Reloads specific modules\n  npm:                                                     Reload all npm modules\n  npm:chalk                                                Reload specific npm module\u001b[39m",
+          "help": "Reload source code cache (recompile TypeScript). With no value, reloads everything. Pass a comma-separated list of specifiers to reload only those modules; \u001b[38;5;245mnpm:\u001b[39m reloads all npm modules; \u001b[38;5;245mnpm:chalk\u001b[39m reloads a single npm module; \u001b[38;5;245mjsr:@std/http/file-server,jsr:@std/assert/assert-equals\u001b[39m reloads specific modules.",
           "help_heading": "Dependency management options",
           "usage": "--reload[=<CACHE_BLOCKLIST>...]"
         },
@@ -9054,6 +10300,15 @@
           "usage": "--yes"
         },
         {
+          "name": "ignore-scripts",
+          "short": null,
+          "long": "ignore-scripts",
+          "required": false,
+          "help": "Do not run npm lifecycle scripts for the given packages",
+          "help_heading": null,
+          "usage": "--ignore-scripts[=<PACKAGE>...]"
+        },
+        {
           "name": "package",
           "short": "p",
           "long": "package",
@@ -9067,7 +10322,7 @@
           "short": null,
           "long": "check",
           "required": false,
-          "help": "Enable type-checking. This subcommand does not type-check by default\n  \u001b[38;5;245mIf the value of \"all\" is supplied, remote modules will be included.\n  Alternatively, the 'deno check' subcommand can be used\u001b[39m",
+          "help": "Enable type-checking. This subcommand does not type-check by default; pass \u001b[38;5;245m--check=all\u001b[39m to also type-check remote modules. Alternatively, use the \u001b[38;5;245m'deno check'\u001b[39m subcommand.",
           "help_heading": "Type checking options",
           "usage": "--check[=<CHECK_TYPE>]"
         },
@@ -9113,6 +10368,13 @@
           "args": [],
           "subcommands": [],
           "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help run\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+        },
+        {
+          "name": "watch",
+          "about": null,
+          "args": [],
+          "subcommands": [],
+          "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help watch\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
         },
         {
           "name": "serve",
@@ -9192,6 +10454,13 @@
           "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help create\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
         },
         {
+          "name": "desktop",
+          "about": null,
+          "args": [],
+          "subcommands": [],
+          "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help desktop\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+        },
+        {
           "name": "completions",
           "about": null,
           "args": [],
@@ -9255,6 +10524,13 @@
           "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help info\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
         },
         {
+          "name": "list",
+          "about": null,
+          "args": [],
+          "subcommands": [],
+          "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help list\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+        },
+        {
           "name": "install",
           "about": null,
           "args": [],
@@ -9302,6 +10578,20 @@
           "args": [],
           "subcommands": [],
           "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help outdated\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+        },
+        {
+          "name": "link",
+          "about": null,
+          "args": [],
+          "subcommands": [],
+          "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help link\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
+        },
+        {
+          "name": "unlink",
+          "about": null,
+          "args": [],
+          "subcommands": [],
+          "usage": "\u001b[37mUsage:\u001b[0m \u001b[32mdeno help unlink\u001b[0m \u001b[32m[OPTIONS]\u001b[0m"
         },
         {
           "name": "lsp",
@@ -9435,6 +10725,11 @@
       "example": null
     },
     {
+      "name": "DENO_CONDITIONS",
+      "description": "Comma-separated list of custom conditions to resolve npm package\nexports and imports with. Equivalent to using the --conditions flag.",
+      "example": null
+    },
+    {
       "name": "DENO_COVERAGE_DIR",
       "description": "Set the directory for collecting code coverage profiles.\nEquivalent to using the --coverage flag.",
       "example": null
@@ -9448,6 +10743,11 @@
       "name": "DENO_INSTALL_ROOT",
       "description": "Set deno install's output directory",
       "example": "(defaults to $HOME/.deno/bin)"
+    },
+    {
+      "name": "DENO_JOBS",
+      "description": "Number of parallel workers used for the --parallel flag with the test\nsubcommand. Defaults to the number of available CPUs.",
+      "example": null
     },
     {
       "name": "DENO_KV_DB_MODE",
@@ -9475,6 +10775,11 @@
       "example": null
     },
     {
+      "name": "DENO_NO_PROMPT",
+      "description": "Set to disable permission prompts on access\n(alternative to passing --no-prompt on invocation).",
+      "example": null
+    },
+    {
       "name": "DENO_NO_UPDATE_CHECK",
       "description": "Set to disable checking if a newer Deno version is available",
       "example": null
@@ -9488,6 +10793,11 @@
       "name": "DENO_SERVE_ADDRESS",
       "description": "Override address for Deno.serve",
       "example": "(\"tcp:0.0.0.0:8080\", \"unix:/tmp/deno.sock\", or \"vsock:1234:5678\")"
+    },
+    {
+      "name": "DENO_SERVE_AUTOMATIC_COMPRESSION",
+      "description": "Set to 1 or true to enable automatic response body compression in Deno.serve by default.",
+      "example": null
     },
     {
       "name": "DENO_AUTO_SERVE",
@@ -9507,6 +10817,11 @@
     {
       "name": "DENO_USE_CGROUPS",
       "description": "Use cgroups to determine V8 memory limit.",
+      "example": null
+    },
+    {
+      "name": "DENO_V8_FLAGS",
+      "description": "Set V8 command line options. Equivalent to using the --v8-flags flag;\nflags passed via --v8-flags are appended after these.",
       "example": null
     },
     {

@@ -1,15 +1,13 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-06-25
 title: "Bindings"
 description: "Call Deno-side functions from webview JavaScript via win.bind(): type-safe RPC over in-process channels, encoded at the boundary with no cross-process round-trip."
 ---
 
-:::info Coming in Deno 2.9
+:::info Available in Deno 2.9
 
-`deno desktop` ships in Deno v2.9.0 and is not in a stable release yet. To try
-it now, run `deno upgrade canary` to install the
-[`canary`](/runtime/reference/cli/upgrade/) build. The command, configuration
-keys, and TypeScript APIs may still change before the feature is stable.
+`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 :::
 

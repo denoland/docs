@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-06-24
 title: "deno bundle"
 oldUrl: /runtime/manual/cli/bundler/
 command: bundle
@@ -50,6 +50,15 @@ Keep a dependency out of the bundle with `--external`:
 deno bundle --external npm:sharp -o output.js main.ts
 ```
 
+Generate TypeScript declarations alongside the JS output with `--declaration`.
+Deno rolls up the types for each entry point into a single self-contained
+`.d.ts` file:
+
+```sh
+deno bundle main.ts --outdir dist --declaration
+# Produces dist/main.js and dist/main.d.ts
+```
+
 ## Type checking
 
 `deno bundle` does not type-check your code by default. Enable type-checking
@@ -65,6 +74,29 @@ deno bundle --check=all -o output.js main.ts
 
 You can also skip type-checking explicitly with `--no-check`, and
 `--no-check=remote` ignores diagnostics from remote modules only.
+
+## The `browser` field
+
+When bundling with `--platform=browser`, Deno honors the npm `browser` field in
+a dependency's `package.json`, including its object form. The object maps
+modules to browser-specific replacements:
+
+```json
+{
+  "browser": {
+    "./server.js": "./client.js",
+    "crypto": false,
+    "foo": "./shims/foo.js"
+  }
+}
+```
+
+- A relative-path key remaps a resolved file to a browser-specific one
+  (`./server.js` becomes `./client.js`).
+- A bare-specifier key remaps an import (`foo` becomes `./shims/foo.js`). A
+  leading `node:` prefix is stripped before lookup, so `import "node:crypto"`
+  matches the `"crypto"` key.
+- A value of `false` excludes the module: the bundler substitutes an empty stub.
 
 For more on bundling strategies with Deno, see the
 [Bundling](/runtime/reference/bundling/) guide.

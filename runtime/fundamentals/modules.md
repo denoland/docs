@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-19
+last_modified: 2026-06-30
 title: "Modules"
 description: "Learn how Deno's ECMAScript module system works: importing local and third-party modules, import attributes, import maps, and supported import types such as Wasm and data URLs."
 oldUrl:
@@ -168,6 +168,69 @@ Still experimental. Enable with the `--unstable-raw-imports` CLI flag or the
 
 :::
 
+A stylesheet can be imported with `with { type: "css" }`. The import evaluates
+to a
+[`CSSStyleSheet`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet),
+matching what browsers ship. This is mainly useful for running unmodified
+browser module graphs in Deno, such as server-side rendering or testing web
+components, where a CSS import would otherwise stop the module graph from
+loading:
+
+```ts
+import sheet from "./styles.css" with { type: "css" };
+
+console.log(sheet instanceof CSSStyleSheet);
+// true
+```
+
+Dynamic imports work the same way:
+
+```ts
+const { default: sheet } = await import("./styles.css", {
+  with: { type: "css" },
+});
+```
+
+Static imports and dynamic imports with a statically analyzable specifier are
+loaded as part of the module graph and need no permission. Only a dynamic import
+whose specifier can't be analyzed, such as `import(base + "styles.css")`, reads
+the file at runtime and therefore requires read permission (`--allow-read`).
+
+Deno implements the small slice of the `CSSStyleSheet` interface that browser
+module graphs rely on:
+
+- `cssRules` returns the sheet's top-level rules. Unlike the browser, this is a
+  **frozen array** of `CSSRule` (not a live `CSSRuleList`), and a fresh array is
+  created on each access.
+- `CSSRule.cssText` is the verbatim text of one top-level rule.
+- `replace(text)` and `replaceSync(text)` swap the sheet's contents. As with
+  constructed stylesheets in the browser, top-level `@import` rules are dropped.
+- The `new CSSStyleSheet()` constructor is available, but its `options` argument
+  (`media`, `disabled`, `baseURL`) is not supported.
+
+```ts
+import sheet from "./styles.css" with { type: "css" };
+
+for (const rule of sheet.cssRules) {
+  console.log(rule.cssText);
+}
+
+sheet.replaceSync("body { color: red; }");
+```
+
+Because Deno has no DOM, a sheet can't be adopted anywhere; the implementation
+is backed by the raw CSS text rather than a full CSS object model. `cssRules`
+uses a naive top-level rule split, so the live mutation methods `insertRule` and
+`deleteRule` are not implemented.
+
+:::info `css` imports
+
+Still experimental. Enable with the `--unstable-raw-imports` CLI flag or the
+`unstable.raw-import` option in
+[`deno.json`](/runtime/fundamentals/configuration/).
+
+:::
+
 ## Deferred module evaluation
 
 Starting in Deno 2.8, the
@@ -201,6 +264,11 @@ import { add } from "./add.wasm";
 
 console.log(add(1, 2));
 ```
+
+The named exports mirror the Wasm module's exports: functions, memories, and
+tables come through as their JavaScript objects, and a `global` export resolves
+to the value it holds rather than the `WebAssembly.Global` wrapper, matching the
+WebAssembly ES module integration.
 
 To learn more, visit
 [WebAssembly section](/runtime/reference/wasm/#wasm-modules)

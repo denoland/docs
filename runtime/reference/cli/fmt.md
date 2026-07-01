@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-12
+last_modified: 2026-06-25
 title: "deno fmt"
 oldUrl:
   - /runtime/tools/formatter/
@@ -82,6 +82,21 @@ Customize formatting options in your `deno.json`:
 See the [Configuration](/runtime/reference/deno_json/#formatting) page for all
 available options.
 
+## Inheriting settings from .editorconfig
+
+`deno fmt` also reads [`.editorconfig`](https://editorconfig.org/) files and
+uses them to fill in any formatting option you have not set elsewhere. The
+precedence, from highest to lowest, is:
+
+1. CLI flags (`--indent-width`, `--use-tabs`, and so on)
+2. The `fmt` block in `deno.json`
+3. `.editorconfig`
+4. Built-in defaults
+
+So `.editorconfig` only supplies values you have not already configured through
+a flag or `deno.json`. Properties such as `indent_style`, `indent_size`, and
+`max_line_length` map onto the corresponding `deno fmt` options.
+
 ## Including and excluding files
 
 Specify which files to format in `deno.json`:
@@ -121,7 +136,6 @@ deno fmt --ignore=dist/,build/
 | [Nunjucks][Nunjucks] | `.njk`                                                 |                                                                                        |
 | [Vento][Vento]       | `.vto`                                                 |                                                                                        |
 | YAML                 | `.yml`, `.yaml`                                        |                                                                                        |
-| Sass                 | `.sass`                                                |                                                                                        |
 | SCSS                 | `.scss`                                                |                                                                                        |
 | LESS                 | `.less`                                                |                                                                                        |
 | Jupyter Notebook     | `.ipynb`                                               |                                                                                        |
@@ -139,6 +153,13 @@ deno fmt --ignore=dist/,build/
 enclosed in triple backticks and have a language attribute.
 
 :::
+
+The markup formatters (HTML, XML, SVG, and the `--unstable-component` formats)
+and the style formatters (CSS, SCSS, and Less) were rebuilt to only adjust
+whitespace. They never reorder or rewrite tokens, and they pass unknown syntax
+(vendor extensions, future at-rules, template expressions, even broken markup)
+through unchanged instead of erroring, so formatting is more robust on
+real-world files.
 
 ## Ignoring code
 

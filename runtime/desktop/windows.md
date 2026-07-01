@@ -1,15 +1,13 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-25
 title: "Windows"
 description: "Create and manage native windows with Deno.BrowserWindow: lifecycle, multiple windows, sizing, navigation, keyboard / mouse / focus events, and native window handles."
 ---
 
-:::info Coming in Deno 2.9
+:::info Available in Deno 2.9
 
-`deno desktop` ships in Deno v2.9.0 and is not in a stable release yet. To try
-it now, run `deno upgrade canary` to install the
-[`canary`](/runtime/reference/cli/upgrade/) build. The command, configuration
-keys, and TypeScript APIs may still change before the feature is stable.
+`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 :::
 
@@ -103,6 +101,45 @@ win.setAlwaysOnTop(true);
 ```
 
 Sizes are in logical pixels. The OS handles HiDPI scaling.
+
+### Persisting size and position
+
+Deno does not remember a window's size or position between runs, and you should
+not rely on the OS to restore them — some window managers do, but many don't (on
+Linux/KDE, for example, each launch opens at the constructor's defaults). If you
+want a window to reopen where the user left it, save its geometry to app-owned
+configuration and restore it on the next startup.
+
+Seed the constructor from the saved values, then write the geometry back
+whenever it changes:
+
+```ts
+const file = `${Deno.env.get("HOME")}/.myapp-window.json`;
+
+let saved: { width?: number; height?: number; x?: number; y?: number } = {};
+try {
+  saved = JSON.parse(await Deno.readTextFile(file));
+} catch {
+  // First run, or no saved state yet — fall back to defaults.
+}
+
+const win = new Deno.BrowserWindow({
+  title: "My App",
+  width: saved.width ?? 800,
+  height: saved.height ?? 600,
+  x: saved.x,
+  y: saved.y,
+});
+
+async function save() {
+  const [width, height] = win.getSize();
+  const [x, y] = win.getPosition();
+  await Deno.writeTextFile(file, JSON.stringify({ width, height, x, y }));
+}
+
+win.addEventListener("resize", save);
+win.addEventListener("move", save);
+```
 
 ## Title
 

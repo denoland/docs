@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-10-02
+last_modified: 2026-06-16
 title: "Build a Next.js App"
 description: "Walkthrough guide to building a Next.js application with Deno. Learn how to set up a project, create API routes, implement server-side rendering, and build a full-stack TypeScript application."
 url: /examples/next_tutorial/
@@ -49,7 +49,6 @@ compatibility, update your `deno.json` file with the following configuration:
 ```json deno.json
 {
   "unstable": [
-    "bare-node-builtins",
     "detect-cjs",
     "node-globals",
     "unsafe-proto",

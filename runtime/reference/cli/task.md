@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-06-25
 title: "deno task"
 oldUrl:
   - /runtime/tools/task_runner/
@@ -34,6 +34,21 @@ For example:
   }
 }
 ```
+
+## Running a task only if it exists
+
+`deno task <name>` exits with a non-zero code when the named task is not
+defined. To make a task optional, pass `--if-present`. Deno then exits with code
+0 and prints nothing when the task is missing, which is useful for shared CI
+scripts that call a task only some packages define:
+
+```sh
+deno task --if-present build
+```
+
+The flag only suppresses the not-found case for the named task. Listing tasks
+with a bare `deno task`, running a task that does exist, and real errors such as
+a missing task dependency are unaffected.
 
 ## Specifying the current working directory
 
@@ -109,6 +124,35 @@ surprising errors.
 
 :::
 
+Exclude tasks from a wildcard match by adding an exclusion group `(!a|b|c)` to
+the end of the pattern. Each listed value is matched against what the `*`
+captured. For example, given `test:unit`, `test:integration`, `test:e2e`, and
+`test:interactive` tasks:
+
+```sh
+deno task "test:*(!e2e|interactive)"
+```
+
+runs `test:unit` and `test:integration` but skips `test:e2e` and
+`test:interactive`. A pattern that has an exclusion group but no `*` is
+rejected, since there is nothing to exclude from.
+
+## Loading environment variables from a file
+
+Pass `--env-file` to load variables from a dotenv file into the task's shell
+environment, so every command in the task body inherits them:
+
+```sh
+# Load .env
+deno task --env-file start
+
+# Load a specific file
+deno task --env-file=.env.production start
+```
+
+The flag can be given more than once to load multiple files, with later files
+taking precedence. With no value it defaults to `.env`.
+
 ## Task dependencies
 
 You can specify dependencies for a task:
@@ -143,8 +187,15 @@ Listening on http://localhost:8000/
 ```
 
 Dependency tasks are executed in parallel, with the default parallel limit being
-equal to number of cores on your machine. To change this limit, use the
-`DENO_JOBS` environmental variable.
+equal to number of cores on your machine. To change this limit for a single
+invocation, pass `--jobs` (short `-j`, also spelled `--concurrency`); to set it
+for the environment, use the `DENO_JOBS` environment variable. The flag takes
+precedence:
+
+```sh
+# Run workspace tasks fully sequentially
+deno task --recursive --jobs 1 build
+```
 
 :::info Deno 2.8
 
@@ -233,6 +284,37 @@ useful to logically group several tasks together:
 ```
 
 Running `deno task dev` will run both `dev:client` and `dev:server` in parallel.
+
+## Caching task results
+
+A task can skip work when none of its inputs have changed. Add a `files` field
+listing the input globs the task reads, and Deno fingerprints the command, its
+appended arguments, the contents of the matching files, and the values of any
+listed env vars, then skips the task on the next run when none of them changed.
+Caching is opt-in: a task with no `files` field always runs.
+
+```jsonc title="deno.json"
+{
+  "tasks": {
+    "build": {
+      "command": "deno run -RW build.ts",
+      "files": ["src/**/*.ts", "deno.json"],
+      "output": ["dist/"],
+      "env": ["NODE_ENV"]
+    }
+  }
+}
+```
+
+- `files` lists the input globs that make up the cache key. Declaring them is
+  what turns on caching for the task.
+- `output` lists the globs the task produces. On a cache hit they are restored
+  from the cache, so deleting `dist/` and re-running regenerates it.
+- `env` lists environment variable names whose values are part of the cache key,
+  so the task re-runs when one of them changes.
+
+A task's [dependency](#task-dependencies) fingerprints are folded into its own
+cache key, so a task re-runs whenever an upstream one did.
 
 ## Node and npx binary support
 
@@ -700,6 +782,15 @@ file if it is discovered. Note that Deno does not respect or support any npm
 life cycle events like `preinstall` or `postinstall`—you must explicitly run the
 script entries you want to run (ex.
 `deno install --entrypoint main.ts && deno task postinstall`).
+
+When `deno task` runs a `package.json` script, it sets the `npm_*` environment
+variables that npm exposes, so scripts that read them keep working. These
+include `npm_package_name`, `npm_package_version`, `npm_lifecycle_event` (the
+script name), `npm_lifecycle_script` (its command string), and
+`npm_config_user_agent`, along with `npm_execpath` and `npm_node_execpath` (both
+set to the path of the running `deno` executable) and `npm_command` (set to
+`run-script`). These variables are set only for `package.json` scripts. Tasks
+defined in `deno.json` do not receive them.
 
 ## Command Resolution
 

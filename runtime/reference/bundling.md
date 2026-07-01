@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-09-11
+last_modified: 2026-06-25
 title: "Bundling"
 description: "An overview of `deno bundle` subcommand that can be used to produce a single file application created from multiple source files for optimized execution."
 ---
@@ -84,6 +84,24 @@ To produce a standalone binary rather than a JavaScript file, use
 minify its input with the `--bundle` and `--minify` flags.
 
 :::
+
+---
+
+## Type declarations
+
+Pass `--declaration` to emit TypeScript declaration files next to the bundled
+JavaScript. Deno rolls the types for each entry point up into a single
+self-contained `.d.ts`, so consumers of the bundle get full type information
+without the original source:
+
+```sh
+deno bundle main.ts --outdir dist --declaration
+# Produces dist/main.js and dist/main.d.ts
+```
+
+This matters when you ship a bundle as a library: the `.d.ts` lets downstream
+TypeScript projects type-check against your bundle's public API. Each entry
+point produces its own declaration file alongside its JavaScript output.
 
 ---
 

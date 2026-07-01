@@ -1,15 +1,13 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-30
 title: "Tray and dock"
 description: "Add icons to the OS status area and the macOS dock: tooltips, dark-mode variants, click events, and right-click context menus."
 ---
 
-:::info Coming in Deno 2.9
+:::info Available in Deno 2.9
 
-`deno desktop` ships in Deno v2.9.0 and is not in a stable release yet. To try
-it now, run `deno upgrade canary` to install the
-[`canary`](/runtime/reference/cli/upgrade/) build. The command, configuration
-keys, and TypeScript APIs may still change before the feature is stable.
+`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 :::
 
@@ -20,7 +18,7 @@ keys, and TypeScript APIs may still change before the feature is stable.
 
 Menus on both use the [`Deno.MenuItem`](/runtime/desktop/menus/) type.
 
-## [`Deno.Tray`](/api/deno/~/Deno.Tray)
+## `Deno.Tray`
 
 ```ts
 const icon = await Deno.readFile("./icons/tray.png");
@@ -212,7 +210,7 @@ If the backend cannot create a tray icon, the constructor's underlying `trayId`
 is `0` and subsequent calls are no-ops (silently). Check `tray.trayId !== 0` if
 you need to fall back gracefully.
 
-## [`Deno.dock`](/api/deno/~/Deno.dock)
+## `Deno.dock`
 
 [`Deno.dock`](/api/deno/~/Deno.dock) is a singleton exposing the app's dock /
 taskbar controls. The methods are cross-platform but their effect varies:

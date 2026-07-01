@@ -1,15 +1,13 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-06-25
 title: "Frameworks"
-description: "Run Next.js, Astro, Fresh, Remix, Nuxt, SvelteKit, SolidStart, TanStack Start, and Vite SSR projects as desktop apps with no code changes."
+description: "Run Next.js, Astro, Fresh, Remix, Nuxt, SvelteKit, SolidStart, TanStack Start, and Vite projects as desktop apps with no code changes."
 ---
 
-:::info Coming in Deno 2.9
+:::info Available in Deno 2.9
 
-`deno desktop` ships in Deno v2.9.0 and is not in a stable release yet. To try
-it now, run `deno upgrade canary` to install the
-[`canary`](/runtime/reference/cli/upgrade/) build. The command, configuration
-keys, and TypeScript APIs may still change before the feature is stable.
+`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 :::
 
@@ -31,17 +29,17 @@ ships as a desktop app.
 Detection is based on config files and `package.json` dependencies. The first
 match wins.
 
-| Framework       | Detected by                                              |
-| --------------- | -------------------------------------------------------- |
-| Next.js         | `next.config.{js,mjs,ts}`                                |
-| Astro           | `astro.config.{mjs,ts,js}`                               |
-| Fresh           | `fresh.gen.ts` or `_fresh/` directory                    |
-| Remix           | `@remix-run/react` or `@remix-run/dev` in `package.json` |
-| Nuxt            | `nuxt.config.{ts,js,mjs}`                                |
-| SvelteKit       | `svelte.config.{js,ts}`                                  |
-| SolidStart      | `@solidjs/start` in `package.json`                       |
-| TanStack Start  | `@tanstack/{react,solid}-start` in `package.json`        |
-| Vite (SSR mode) | `vite.config.*` plus a `server.{js,ts,mjs}` entry        |
+| Framework      | Detected by                                              |
+| -------------- | -------------------------------------------------------- |
+| Next.js        | `next.config.{js,mjs,ts}`                                |
+| Astro          | `astro.config.{mjs,ts,js}`                               |
+| Fresh          | `fresh.gen.ts` or `_fresh/` directory                    |
+| Remix          | `@remix-run/react` or `@remix-run/dev` in `package.json` |
+| Nuxt           | `nuxt.config.{ts,js,mjs}`                                |
+| SvelteKit      | `svelte.config.{js,ts}`                                  |
+| SolidStart     | `@solidjs/start` in `package.json`                       |
+| TanStack Start | `@tanstack/{react,solid}-start` in `package.json`        |
+| Vite           | `vite.config.*` or a `vite` dependency in `package.json` |
 
 If none match, `deno desktop` falls back to treating the path as a script, the
 same as `deno desktop main.ts`. You write a
@@ -145,12 +143,19 @@ Both use the Nitro framework underneath; detection handles them via the
 `.output/server/index.*` entry. Build first (`npm run build`) before running
 `deno desktop`.
 
-### Vite SSR
+### Vite
 
-Plain Vite projects with a custom SSR entry (`server.ts`, `server.js`,
-`server.mjs`) work with `deno desktop` if there is also a `vite.config.*`.
-Production runs the SSR entry directly; dev (under `--hmr`) runs the Vite dev
-server in middleware mode.
+Vite projects are detected by a `vite.config.*` file or a `vite` dependency.
+This sits at the lowest bundler priority, so the meta-frameworks built on Vite
+(Astro, SvelteKit, Nuxt, Remix, SolidStart, TanStack Start) are matched by their
+own config or dependency first.
+
+- **SSR** (a `server.{ts,js,mjs}` entry alongside `vite.config.*`): the SSR
+  entry runs directly in production, and dev (under `--hmr`) runs the Vite dev
+  server in middleware mode.
+- **SPA or MPA** (no server entry): Deno serves the static `vite build` output
+  in `dist/` over HTTP, with an `index.html` fallback so client-side routers
+  survive a hard refresh. Run `vite build` first.
 
 ## Forcing a framework or opting out
 

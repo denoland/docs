@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-06-17
 title: OpenTelemetry
 description: "Learn how to implement observability in Deno applications using OpenTelemetry. Covers tracing, metrics collection, and integration with monitoring systems."
 ---
@@ -107,6 +107,8 @@ Deno automatically creates spans for various operations, such as:
 
 - Incoming HTTP requests served with [`Deno.serve`](/api/deno/~/Deno.serve).
 - Outgoing HTTP requests made with [`fetch`](/api/web/~/fetch).
+- HTTP/2 traffic over `node:http2`, both client requests and incoming server
+  requests, with trace context propagated across services (added in Deno 2.9).
 - [`Deno.cron()`](/api/deno/~/Deno.cron) job invocations (added in Deno 2.7).
 
 #### [`Deno.serve`](/api/deno/~/Deno.serve)
@@ -726,6 +728,23 @@ specified by separating them with commas. Currently supported propagators are:
 - `tracecontext`: W3C Trace Context propagation format
 - `baggage`: W3C Baggage propagation format
 
+Trace sampling can be configured with the `OTEL_TRACES_SAMPLER` environment
+variable. The supported values are:
+
+- `always_on` (the default): sample every trace.
+- `always_off`: sample no traces.
+- `traceidratio`: sample a fraction of traces based on the trace ID.
+- `parentbased_always_on`, `parentbased_always_off`, `parentbased_traceidratio`:
+  respect the parent span's sampling decision when there is one, and fall back
+  to the matching root sampler otherwise.
+
+For the ratio-based samplers, `OTEL_TRACES_SAMPLER_ARG` sets the sampling
+probability as a number between `0` and `1`. It defaults to `1.0`:
+
+```sh
+OTEL_DENO=true OTEL_TRACES_SAMPLER=traceidratio OTEL_TRACES_SAMPLER_ARG=0.1 deno run -A main.ts
+```
+
 Metric collection frequency can be configured using the
 `OTEL_METRIC_EXPORT_INTERVAL` environment variable. The default value is `60000`
 milliseconds (60 seconds).
@@ -795,7 +814,6 @@ async function tracedFetch(url: string) {
 While the OpenTelemetry integration for Deno is in development, there are some
 limitations to be aware of:
 
-- Traces are always sampled (i.e. `OTEL_TRACE_SAMPLER=parentbased_always_on`).
 - Traces only support links with no attributes.
 - Metric exemplars are not supported.
 - Custom log streams (e.g. logs other than `console.log` and `console.error`)
@@ -806,10 +824,11 @@ limitations to be aware of:
   exit/crash, so the last value of metrics may not be exported. Synchronous
   metrics are exported on process exit/crash.
 - The limits specified in the `OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT`,
-  `OTEL_ATTRIBUTE_COUNT_LIMIT`, `OTEL_SPAN_EVENT_COUNT_LIMIT`,
   `OTEL_SPAN_LINK_COUNT_LIMIT`, `OTEL_EVENT_ATTRIBUTE_COUNT_LIMIT`, and
   `OTEL_LINK_ATTRIBUTE_COUNT_LIMIT` environment variable are not respected for
-  trace spans.
+  trace spans. The per-span attribute limit (`OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT`,
+  falling back to `OTEL_ATTRIBUTE_COUNT_LIMIT`) and the per-span event limit
+  (`OTEL_SPAN_EVENT_COUNT_LIMIT`) are respected, each defaulting to 128.
 - The `OTEL_METRIC_EXPORT_TIMEOUT` environment variable is not respected.
 - HTTP methods are that are not known are not normalized to `_OTHER` in the
   `http.request.method` span attribute as per the OpenTelemetry semantic

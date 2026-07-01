@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-06-25
 title: "deno test"
 oldUrl: /runtime/manual/tools/test/
 command: test
@@ -60,6 +60,36 @@ To control which test files are collected in the first place, set `test.include`
 and `test.exclude` in your config file. See
 [include and exclude](/runtime/reference/deno_json/#include-and-exclude).
 
+## Running affected tests
+
+When iterating on a change, you can run only the tests touched by it instead of
+the whole suite. These are one-shot runs, not watch mode.
+
+`--changed` runs the test modules affected by files changed in git. With no
+value it uses the working tree (staged, unstaged, and untracked files); pass a
+ref to also include commits since the merge-base with that ref:
+
+```sh
+# Tests affected by uncommitted changes
+deno test --changed
+
+# Tests affected since branching off main
+deno test --changed=origin/main
+```
+
+`--related` runs the test modules that depend on specific source files, without
+consulting git:
+
+```sh
+# Tests that import src/util.ts
+deno test --related=src/util.ts
+```
+
+Both flags filter the collected test files down to those that reach the changed
+or named files through the module graph. See
+[Running affected tests](/runtime/test/#running-affected-tests) in the testing
+guide for the workflow and how selection works.
+
 ## Permissions
 
 Tests run with the same [permission model](/runtime/fundamentals/security/) as
@@ -114,6 +144,25 @@ You can also output an `lcov` report for use with external tools:
 deno coverage --lcov coverage/ > coverage.lcov
 ```
 
+To fail the run when coverage drops below a target, set a threshold (for example
+`deno coverage --threshold=90`). See
+[coverage thresholds](/runtime/reference/cli/coverage/#coverage-thresholds) for
+per-metric configuration.
+
+## Parameterized tests
+
+Run the same test body over a table of cases with
+[`Deno.test.each`](/api/deno/~/Deno.test.each), which registers one
+independently reported test per case. See
+[Parameterized tests](/runtime/test/#parameterized-tests) for the name templates
+and case forms.
+
+## Snapshot testing
+
+Capture a value and compare it against a stored reference on every run with the
+built-in `t.assertSnapshot`, updating with `--update-snapshots` (`-u`). See
+[Snapshot testing](/runtime/test/snapshots/).
+
 ## Reporters
 
 Choose an output format with `--reporter`. Four reporters are built in:
@@ -142,6 +191,41 @@ Shuffle the order tests run in to catch hidden dependencies between tests:
 ```sh
 deno test --shuffle
 ```
+
+## Sharding
+
+Split a test suite across several machines with `--shard=<index>/<count>`, where
+`index` is 1-based. The discovered test files are sorted for a stable order and
+divided into `<count>` balanced groups; the run executes only the files in group
+`<index>`:
+
+```sh
+# On machine 1 of 3
+deno test --shard=1/3
+
+# On machine 2 of 3
+deno test --shard=2/3
+```
+
+Sharding is applied before `--shuffle`, so a given shard runs the same files on
+every machine regardless of the shuffle seed.
+
+## Retrying and repeating
+
+Set a run-wide default for retries and repetitions with `--retry` and
+`--repeats`:
+
+```sh
+# Re-run each failing test up to twice before reporting failure
+deno test --retry=2
+
+# Run every test three times and fail if any run fails
+deno test --repeats=3
+```
+
+A test that sets its own `retry` or `repeats` option overrides the flag. See
+[retrying and repeating tests](/runtime/test/#retrying-and-repeating-tests) for
+the per-test options.
 
 ## Leak detection
 

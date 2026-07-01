@@ -1,15 +1,13 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-06-25
 title: "Comparison with other tools"
 description: "How deno desktop compares to Electron, Electrobun, Tauri, and Dioxus across language, engine, process model, app size, ecosystem, and what's built-in."
 ---
 
-:::info Coming in Deno 2.9
+:::info Available in Deno 2.9
 
-`deno desktop` ships in Deno v2.9.0 and is not in a stable release yet. To try
-it now, run `deno upgrade canary` to install the
-[`canary`](/runtime/reference/cli/upgrade/) build. The command, configuration
-keys, and TypeScript APIs may still change before the feature is stable.
+`deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
+version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 :::
 
@@ -18,22 +16,22 @@ technologies. Here is how it compares to the alternatives.
 
 ## At a glance
 
-|                             | Electron               | Electrobun      | Tauri                | Dioxus           | `deno desktop`                               |
-| --------------------------- | ---------------------- | --------------- | -------------------- | ---------------- | -------------------------------------------- |
-| **Language**                | JS/TS (Node.js)        | JS/TS (Bun)     | Rust + web frontend  | Rust             | JS/TS (Deno)                                 |
-| **Web engine**              | Bundled Chromium       | System WebView  | System WebView       | System WebView   | Bundled CEF or WebView                       |
-| **Consistent rendering**    | Yes                    | No              | No                   | No               | Yes (CEF)                                    |
-| **Process model**           | Multi-process          | Multi-process   | Multi-process        | Single process   | Multi-thread (CEF) / process group (WebView) |
-| **Backend ↔ UI**            | IPC                    | IPC             | IPC                  | Native Rust      | In-process channels                          |
-| **App size**                | ~100 MB+               | ~14 MB          | ~2–10 MB             | ~5 MB            | ~40 MB / ~150 MB (CEF)                       |
-| **npm / Node compat**       | Yes                    | Yes             | No                   | No               | Yes                                          |
-| **Framework auto-detect**   | No                     | No              | No                   | No               | Yes                                          |
-| **HMR**                     | No                     | Yes             | Yes (Vite-based)     | Yes (`dx serve`) | Yes                                          |
-| **Built-in auto-update**    | Full binary            | bsdiff          | Plugin               | None             | bsdiff                                       |
-| **Built-in installers**     | Yes                    | No              | Yes                  | No               | Partial (DMG, AppImage)                      |
-| **Cross-compile**           | Yes (electron-builder) | No (macOS only) | No (needs target OS) | No               | Yes (`--target`)                             |
-| **macOS / Windows / Linux** | All three              | macOS only      | All three            | All three        | All three                                    |
-| **iOS / Android**           | No                     | No              | Yes                  | Yes              | Not yet                                      |
+|                             | Electron               | Electrobun           | Tauri                | Dioxus           | `deno desktop`                               |
+| --------------------------- | ---------------------- | -------------------- | -------------------- | ---------------- | -------------------------------------------- |
+| **Language**                | JS/TS (Node.js)        | JS/TS (Bun)          | Rust + web frontend  | Rust             | JS/TS (Deno)                                 |
+| **Web engine**              | Bundled Chromium       | System WebView       | System WebView       | System WebView   | Bundled CEF or WebView                       |
+| **Consistent rendering**    | Yes                    | No                   | No                   | No               | Yes (CEF)                                    |
+| **Process model**           | Multi-process          | Multi-process        | Multi-process        | Single process   | Multi-thread (CEF) / process group (WebView) |
+| **Backend ↔ UI**            | IPC                    | IPC                  | IPC                  | Native Rust      | In-process channels                          |
+| **App size**                | ~100 MB+               | ~61 MB               | ~2–10 MB             | ~5 MB            | ~40 MB / ~150 MB (CEF)                       |
+| **npm / Node compat**       | Yes                    | Yes                  | No                   | No               | Yes                                          |
+| **Framework auto-detect**   | No                     | No                   | No                   | No               | Yes                                          |
+| **HMR**                     | No                     | Yes                  | Yes (Vite-based)     | Yes (`dx serve`) | Yes                                          |
+| **Built-in auto-update**    | Full binary            | bsdiff               | Plugin               | None             | bsdiff                                       |
+| **Built-in installers**     | Yes                    | No                   | Yes                  | No               | Partial (DMG, AppImage)                      |
+| **Cross-compile**           | Yes (electron-builder) | No (needs target OS) | No (needs target OS) | No               | Yes (`--target`)                             |
+| **macOS / Windows / Linux** | All three              | All three            | All three            | All three        | All three                                    |
+| **iOS / Android**           | No                     | No                   | Yes                  | Yes              | Not yet                                      |
 
 ## What `deno desktop` is good at
 
@@ -44,9 +42,10 @@ auto-detect frameworks at this level.
 
 **Cross-compile from one machine.** Same as `deno compile --target`. Tauri and
 Dioxus need the target platform locally to build (their toolchain includes Rust,
-which has to compile for the target). Electrobun only ships on macOS. Electron
-supports cross-platform builds via electron-builder, but needs Node and
-platform-specific signing tools per target.
+which has to compile for the target). Electrobun runs on macOS, Windows, and
+Linux, but builds each app on its own target platform. Electron supports
+cross-platform builds via electron-builder, but needs Node and platform-specific
+signing tools per target.
 
 **Full Node compatibility, with a choice of backend.** Electron bundles both
 Chromium and Node, but is massive. Tauri and Dioxus are small but have no JS
@@ -78,9 +77,9 @@ Every major editor and chat app uses it. If you need mature plugin ecosystems
 magnitude smaller than `deno desktop` (or Electron) and Tauri 2 supports iOS and
 Android. If size or mobile is the priority, Tauri wins.
 
-**Electrobun: fast iteration on macOS.** Electrobun has good start-up speed and
-HMR on macOS. If you only ship Mac apps and work in the Bun ecosystem, it is
-worth a look.
+**Electrobun: fast iteration in the Bun ecosystem.** Electrobun has good
+start-up speed and HMR, and officially supports macOS, Windows, and Linux
+(Ubuntu). If you work in the Bun ecosystem, it is worth a look.
 
 **Dioxus: Rust-only.** No JS runtime at all. If you are writing everything in
 Rust and want a unified codebase, Dioxus is a good pick.
@@ -129,4 +128,4 @@ one place:
 - **Electron** if your team's existing tooling, signing, and CI already target
   Electron.
 - **Dioxus** if you are writing Rust top to bottom.
-- **Electrobun** if you only ship macOS and want to live on the Bun side.
+- **Electrobun** if you want to live on the Bun side.

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-24
+last_modified: 2026-06-25
 title: "Connect a Database to your local dev"
 description: "Connect a Postgres database to your local development server with Deno Deploy and Deno's tunnel feature"
 url: /examples/tunnel_database_tutorial/
@@ -148,7 +148,7 @@ Then, update the HTML to display the notes:
 
 ```svelte title="src/routes/+page.svelte"
 <script>
-  let { data } = $props();
+let { data } = $props();
 </script>
 <h1>Welcome to SvelteKit</h1>
 <ul>
