@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-01
 title: "deno install"
 oldUrl:
   - /runtime/manual/tools/script_installer/
@@ -280,7 +280,7 @@ imports) will be installed.
 
 ## Native Node.js addons
 
-A lot of popular packages npm packages like
+A lot of popular npm packages like
 [`npm:sqlite3`](https://www.npmjs.com/package/sqlite3) or
 [`npm:duckdb`](https://www.npmjs.com/package/duckdb) depend on
 ["lifecycle scripts"](https://docs.npmjs.com/cli/v10/using-npm/scripts#life-cycle-scripts),
