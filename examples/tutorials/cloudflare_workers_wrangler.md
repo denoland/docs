@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-04-18
+last_modified: 2026-07-01
 title: "Deploying Deno to Cloudflare Workers with Wrangler"
 description: "Learn how to build and deploy a Deno application to Cloudflare Workers using Wrangler"
 url: /examples/cloudflare_workers_wrangler_tutorial/
