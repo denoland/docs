@@ -1,9 +1,11 @@
 ---
+last_modified: 2026-07-02
 title: "Deno.serve request abort behavior"
 description: "Understand the legacy request.signal abort behavior in Deno.serve, why it is changing, and how to detect request completion with the --unstable-no-legacy-abort flag."
 ---
 
-`Deno.serve` historically fired the `abort` event on a request's
+[`Deno.serve`](/api/deno/~/Deno.serve) historically fired the `abort` event on a
+request's
 [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal)
 (`request.signal`) whenever the request finished, **including when your handler
 returned a successful response**. The signal was meant to indicate that the
