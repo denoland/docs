@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-07-02
 title: "Configuring Deno behavior"
 ---
 

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-01
+last_modified: 2026-07-02
 title: "deno install"
 oldUrl:
   - /runtime/manual/tools/script_installer/
@@ -175,9 +175,8 @@ The installation root is determined, in order of precedence:
 - `$HOME/.deno`
 
 Executables are placed in the `bin` subdirectory of the installation root,
-unless the root path already ends with `bin`, in which case it is used
-directly. The resulting directory must be added to the path manually if
-required.
+unless the root path already ends with `bin`, in which case it is used directly.
+The resulting directory must be added to the path manually if required.
 
 ```sh
 echo 'export PATH="$HOME/.deno/bin:$PATH"' >> ~/.bashrc
