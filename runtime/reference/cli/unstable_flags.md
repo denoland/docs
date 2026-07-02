@@ -227,8 +227,13 @@ rather than installing every npm package listed in `package.json` on startup.
 ## `--unstable-no-legacy-abort`
 
 Use the abort signal in [`Deno.serve`](/api/deno/~/Deno.serve) without the
-legacy behavior. With this flag the server is not aborted when a request is
-handled successfully.
+legacy behavior. With this flag `request.signal` aborts only when the client
+actually disconnects, rather than on every successful response.
+
+See
+[Deno.serve request abort behavior](/runtime/reference/deno_serve_legacy_abort/)
+for why this is changing and how to detect when a request has been fully
+delivered.
 
 ## `--unstable`
 
