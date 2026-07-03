@@ -6,15 +6,12 @@
  * @resource {/examples/http_server_cookies} Example: HTTP server: Cookies
  * @group Network
  *
- * Securely sign and verify browser cookies using native cryptographic utilities
- * to prevent client-side tampering. While clients can see the values of signed
+ * Securely sign and verify browser cookies using native cryptographic utilities 
+ * to prevent client-side tampering. While clients can see the values of signed 
  * cookies, they cannot manipulate them without invalidating the cryptographic signature.
  */
 
-import {
-  getSignedCookie,
-  setSignedCookie,
-} from "jsr:@std/http/unstable-signed-cookie";
+import { parseSignedCookie, signCookie } from "jsr:@std/http/unstable-signed-cookie";
 
 // Cryptographic keys must be generated using web standard Web Crypto APIs.
 const cryptoKey = await crypto.subtle.generateKey(
@@ -28,40 +25,45 @@ Deno.serve(async (req) => {
 
   // ROUTE 1: Setting a secure, signed session cookie.
   if (pathname === "/set") {
-    const res = new Response(
-      "A cryptographically signed cookie has been successfully set!\n",
-    );
+    const rawValue = "user_abc123";
+    
+    // signCookie securely appends a cryptographic hash signature to the string value.
+    const signedValue = await signCookie(rawValue, cryptoKey);
 
-    // Pass parameters: headers, cookie name, value, secret key, and option flags.
-    await setSignedCookie(res.headers, "session_id", "user_abc123", cryptoKey, {
-      path: "/",
-      httpOnly: true,
+    return new Response("A cryptographically signed cookie has been successfully set!\n", {
+      headers: {
+        "set-cookie": `session_id=${signedValue}; Path=/; HttpOnly; SameSite=Lax`,
+      },
     });
-
-    return res;
   }
 
   // ROUTE 2: Fetching and verifying the incoming signed cookie.
   if (pathname === "/get") {
-    const cookieValue = await getSignedCookie(
-      req.headers,
-      "session_id",
-      cryptoKey,
-    );
-
-    if (cookieValue === undefined) {
-      return new Response(
-        "Unauthorized: Cookie is missing or signature verification failed!\n",
-        {
-          status: 401,
-        },
-      );
+    const cookieHeader = req.headers.get("cookie") ?? "";
+    const match = cookieHeader.match(/(?:^|;\s*)session_id=([^;]+)/);
+    
+    if (!match) {
+      return new Response("Unauthorized: Cookie is missing!\n", { status: 401 });
     }
 
-    return new Response(
-      `Access Granted. Verified Session Data: ${cookieValue}\n`,
-    );
+    try {
+      // parseSignedCookie extracts and validates the data against our key.
+      // If verification fails, it throws an error.
+      const verifiedValue = parseSignedCookie(match[1]);
+      return new Response(`Access Granted. Verified Session Data: ${verifiedValue}\n`);
+    } catch {
+      return new Response("Unauthorized: Signature verification failed!\n", { status: 401 });
+    }
   }
 
   return new Response("not found\n", { status: 404 });
 });
+
+// The full flow with curl, using a cookie jar (-c saves cookies, -b sends
+// them back):
+//
+//   curl -s -c /tmp/jar http://localhost:8000/set
+//   A cryptographically signed cookie has been successfully set!
+//
+//   curl -s -b /tmp/jar http://localhost:8000/get
+//   Access Granted. Verified Session Data: user_abc123
