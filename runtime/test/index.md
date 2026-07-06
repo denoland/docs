@@ -204,8 +204,8 @@ deno test --retry=2
 
 ## Parameterized tests
 
-[`Deno.test.each`](/api/deno/~/Deno.test.each) runs the same test body over a
-table of cases. It registers one real test per case, so each case reports
+[`Deno.test.each`](/api/deno/~/Deno.DenoTest.each) runs the same test body over
+a table of cases. It registers one real test per case, so each case reports
 independently and can be filtered or run on its own.
 
 Array cases are spread as positional arguments. The name template interpolates
@@ -235,7 +235,7 @@ Deno.test.each([
 });
 ```
 
-[`Deno.test.each`](/api/deno/~/Deno.test.each) accepts the usual per-test
+[`Deno.test.each`](/api/deno/~/Deno.DenoTest.each) accepts the usual per-test
 options object, and the `only` and `ignore` shorthands compose with it as
 `.only.each` and `.ignore.each`.
 

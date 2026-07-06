@@ -152,7 +152,7 @@ per-metric configuration.
 ## Parameterized tests
 
 Run the same test body over a table of cases with
-[`Deno.test.each`](/api/deno/~/Deno.test.each), which registers one
+[`Deno.test.each`](/api/deno/~/Deno.DenoTest.each), which registers one
 independently reported test per case. See
 [Parameterized tests](/runtime/test/#parameterized-tests) for the name templates
 and case forms.
