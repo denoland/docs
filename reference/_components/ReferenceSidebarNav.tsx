@@ -178,7 +178,7 @@ function SidebarItem(props: {
     "block m-0 py-1 px-3 border-l hover:bg-header-highlight hover:border-foreground-secondary hover:text-gray-800 transition-colors duration-150";
   const activeClasses = props.isActive
     ? "bg-header-highlight border-foreground-secondary text-gray-800"
-    : "border-foreground-tertiary";
+    : "border-sidebar-line";
 
   const combinedClasses = `${defaultClasses} ${activeClasses}`;
 

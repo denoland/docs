@@ -9,11 +9,11 @@ export default function CopyPage({ file }: { file: string | undefined }) {
   }`;
 
   return (
-    <div class="copy-page-split inline-flex shrink-0 rounded-full border-2 border-foreground-primary dark:border-background-tertiary">
+    <div class="copy-page-split inline-flex shrink-0 rounded-full border border-foreground-primary dark:border-background-tertiary">
       {/* Primary: directly copies the URL */}
       <button
         type="button"
-        class="copy-page-main-btn flex items-center gap-2 px-4 py-2 text-sm font-semibold text-foreground-primary bg-transparent hover:bg-header-highlight dark:hover:text-background-primary rounded-l-full transition-colors cursor-pointer select-none"
+        class="copy-page-main-btn flex items-center gap-2 px-4 py-1.5 text-sm font-semibold text-foreground-primary bg-transparent hover:bg-header-highlight dark:hover:text-background-primary rounded-l-full transition-colors cursor-pointer select-none"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +31,7 @@ export default function CopyPage({ file }: { file: string | undefined }) {
 
       {/* Visual divider between the two halves */}
       <span
-        class="self-stretch w-0.5 bg-foreground-primary dark:bg-background-tertiary shrink-0"
+        class="self-stretch w-px bg-foreground-primary dark:bg-background-tertiary shrink-0"
         aria-hidden="true"
       >
       </span>

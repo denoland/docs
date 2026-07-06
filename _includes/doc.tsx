@@ -1,6 +1,6 @@
-import renderCommand from "./renderCommand.tsx";
 import { getSectionData } from "../_components/Navigation.tsx";
 import type { Sidebar, SidebarItem } from "../types.ts";
+import renderCommand from "./renderCommand.tsx";
 
 export const layout = "layout.tsx";
 
@@ -108,11 +108,12 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
               data-color-mode="auto"
               data-light-theme="light"
               data-dark-theme="dark"
-              class="markdown-body mt-6 sm:mt-6"
+              class="markdown-body mt-6 sm:mt-7"
             >
               {!(isReference && !isApiLandingPage) && (
-                <header class="flex flex-col md:flex-row items-start justify-between gap-4">
+                <header class="flex flex-col md:flex-row items-center justify-between gap-4">
                   <h1
+                    class="leading-none"
                     dangerouslySetInnerHTML={{
                       __html: helpers.md(data.title!, true),
                     }}

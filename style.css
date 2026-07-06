@@ -72,6 +72,7 @@
 
   --color-primary: var(--color-deploy-500);
   --color-header-highlight: var(--color-runtime);
+  --color-sidebar-line: var(--color-background-secondary);
 
   --breakpoint-xs: 30rem;
   --breakpoint-xlplus: 82rem;
@@ -449,9 +450,8 @@
       }
     }
     table {
-      width: max-content;
+      width: 100%;
       max-width: 100%;
-      display: block;
       overflow-x: auto;
       border: 1px solid var(--color-background-tertiary);
       border-radius: 0.5rem;
@@ -476,7 +476,11 @@
         white-space: nowrap;
       }
       tbody tr:nth-child(2n) {
-        background-color: var(--color-background-secondary);
+        background-color: var(--color-background-primary);
+
+        .dark & {
+          background-color: var(--color-background-secondary);
+        }
       }
       tbody tr:last-child td {
         border-bottom: none;
@@ -658,11 +662,6 @@
     }
     ul {
       list-style: disc;
-    }
-    table {
-      width: -webkit-fit-content;
-      width: -moz-fit-content;
-      width: fit-content;
     }
     .highlight .token.keyword,
     .gfm-highlight .token.keyword {
@@ -854,7 +853,7 @@
   :host {
     --header-height: 6rem;
     --subnav-height: 2.5rem;
-    --layout-max-width: 96rem;
+    --layout-max-width: 82rem;
     /* Advertise support to the UA and extensions; enables form controls/scrollbar theming */
     color-scheme: light dark;
 
@@ -878,6 +877,7 @@
       --color-caution: 45.4deg, 93.39%, 67.11%;
       --color-primary: var(--color-runtime);
       --color-header-highlight: var(--color-runtime);
+      --color-sidebar-line: var(--color-background-tertiary);
 
       color: var(--color-foreground-primary);
       background-color: var(--color-background-primary);
@@ -904,6 +904,7 @@
       --color-caution: 45.4deg, 93.39%, 67.11%;
       --color-primary: var(--color-runtime);
       --color-header-highlight: var(--color-runtime);
+      --color-sidebar-line: var(--color-background-tertiary);
 
       color: var(--color-foreground-primary);
       background-color: var(--color-background-primary);
@@ -1493,7 +1494,7 @@
 @layer components {
   .sub-nav-toggle {
     li:has(&) {
-      border-left: 1px solid var(--color-foreground-tertiary);
+      border-left: 1px solid var(--color-sidebar-line);
     }
 
     li:has(&:hover) {
@@ -1524,7 +1525,6 @@
     li:has(> &).expanded {
       grid-template-rows: max-content 1fr;
       padding-bottom: 1rem;
-      border-left-color: var(--color-header-highlight);
     }
 
     /* Keep the open parent toggle highlighted */
@@ -1581,19 +1581,19 @@
     }
 
     .sidebar-disclosure-list {
-      margin-left: 1rem !important;
-      border-left: 2px solid var(--color-runtime);
+      /* The list's own border continues the sidebar's guide line unbroken:
+         same x-position and color as the sibling items' border-l. Children
+         indent via padding rather than offsetting the whole list, and carry
+         an indented guide line of their own. The !importants beat the
+         p-0 utility on the markup, which otherwise wins the cascade
+         (utilities layer comes after components). */
+      border-left: 1px solid var(--color-sidebar-line);
+      padding-bottom: 0.5rem !important;
+      padding-left: 0.75rem !important;
 
-      /* The shared nested-item style is denser (py-1) than disclosure groups
-         want; give these items the same breathing room as top-level entries
-         without touching the legacy accordions. */
       a {
-        padding-block: 0.5rem;
+        border-left: 1px solid var(--color-sidebar-line);
       }
-    }
-
-    &[data-open="true"] {
-      padding-bottom: 0.5rem;
     }
 
     &[data-open="true"] > .sidebar-disclosure-row > a {

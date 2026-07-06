@@ -24,7 +24,7 @@ export default function TableOfContents({ data, toc, hasSubNav }: {
     <div
       className={`hidden sticky ${topClasses} ${maxHeightClass} border-l border-l-foreground-tertiary lg:flex lg:flex-col lg:w-full`}
     >
-      <p className="px-4 pt-4 pb-2 uppercase text-smaller font-bold tracking-wide text-foreground-secondary">
+      <p className="px-4 pt-4 pb-2 md:pt-7 uppercase text-smaller font-bold tracking-wide text-foreground-secondary">
         This page
       </p>
       <ul

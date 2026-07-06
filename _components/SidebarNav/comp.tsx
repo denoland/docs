@@ -34,7 +34,7 @@ export default function (data: Lume.Data) {
                         <button
                           type="button"
                           data-accordion-toggle={item.title.replaceAll(" ", "")}
-                          className="sub-nav-toggle block relative py-2 px-3 after:right-4 [font:inherit] after:translate-y-1/2 after:transition-transform after:duration-100 after:ease-in after:[background:url(./img/chevron.svg)_no-repeat_center] after:-top-0.5 after:block after:w-4 after:h-4 after:absolute w-full text-left"
+                          className="sub-nav-toggle block relative py-1.5 px-3 after:right-4 [font:inherit] after:translate-y-1/2 after:transition-transform after:duration-100 after:ease-in after:[background:url(./img/chevron.svg)_no-repeat_center] after:-top-0.5 after:block after:w-4 after:h-4 after:absolute w-full text-left"
                         >
                           {item.title}
                         </button>
@@ -118,10 +118,10 @@ function SidebarDisclosure(
       <div class="sidebar-disclosure-row flex items-stretch">
         <a
           href={item.href}
-          className={`grow block m-0 py-2 px-3 border-l hover:bg-header-highlight hover:border-foreground-secondary hover:text-gray-800 transition-colors duration-150 ${
+          className={`grow block m-0 py-1.5 px-3 border-l hover:bg-header-highlight hover:border-foreground-secondary hover:text-gray-800 transition-colors duration-150 ${
             selfActive
               ? "bg-header-highlight text-gray-800 border-foreground-secondary"
-              : "border-foreground-tertiary"
+              : "border-sidebar-line"
           }`}
           data-active={selfActive}
         >
@@ -180,14 +180,14 @@ function SidebarItem(props: {
   // parent group's single guide line instead of carrying their own left border.
   const defaultClasses = props.nested
     ? "block m-0 py-1 px-3 hover:bg-header-highlight hover:text-gray-800 transition-colors duration-150"
-    : "block m-0 py-2 px-3 border-l hover:bg-header-highlight hover:border-foreground-secondary hover:text-gray-800 transition-colors duration-150";
+    : "block m-0 py-1.5 px-3 border-l hover:bg-header-highlight hover:border-foreground-secondary hover:text-gray-800 transition-colors duration-150";
   const activeClasses = props.isActive
     ? `bg-header-highlight text-gray-800${
       props.nested ? "" : " border-foreground-secondary"
     }`
     : props.nested
     ? ""
-    : "border-foreground-tertiary";
+    : "border-sidebar-line";
 
   const combinedClasses = `${defaultClasses} ${activeClasses}`;
 
