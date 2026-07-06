@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-11-04
+last_modified: 2026-07-06
 title: "Stability and releases"
 description: "Guide to Deno's stability guarantees and release process. Covering release channels, long-term support (LTS), unstable features, versioning policy, and how Deno maintains backward compatibility."
 oldUrl:
@@ -21,28 +21,32 @@ released.
 
 ### Release channels
 
-Deno offers 4 release channels
+Deno offers 3 release channels
 
 - `stable` - a semver minor/patch release, as described above. This is **the
   default** distribution channel that is recommended for most users.
-- `lts` - long term support for a particular stable release, recommended for
-  enterprise users who prefer not to upgrade so often. See below for details.
 - `rc` - a release candidate for the upcoming semver minor release.
 - `canary` - an unstable release that changes multiple times per day, allows to
   try out latest bug fixes and new features that might end up in the `stable`
   channel.
 
-### Long Term Support (LTS)
+An `lts` (long term support) channel was previously offered, but it has been
+discontinued. See below for details.
+
+### Long Term Support (LTS) - discontinued
 
 :::warning
 
-LTS support will be discontinued after April 30, 2026; there will be no LTS
-releases or maintenance beyond that date.
+LTS support was discontinued on April 30, 2026. There are no LTS releases or
+maintenance beyond that date. If you are still using an LTS release, upgrade to
+the latest `stable` release.
 
 :::
 
-Deno offers an LTS (long-term support) channel. This is a minor semver version
-that we maintain with only backwards-compatible bug fixes.
+From February 2025 to April 2026, Deno offered an LTS (long-term support)
+channel: a minor semver version maintained with only backwards-compatible bug
+fixes. The final LTS release was v2.5, which reached end of life on April 30,
+2026.
 
 | LTS release version | LTS maintenance start | LTS maintenance end |
 | ------------------- | --------------------- | ------------------- |
@@ -50,13 +54,13 @@ that we maintain with only backwards-compatible bug fixes.
 | v2.2                | May 1st, 2025         | Oct 31st, 2025      |
 | v2.5                | Nov 1st, 2025         | Apr 30th, 2026      |
 
-LTS backports include:
+LTS backports included:
 
 - Security patches
 - Critical bug fixes (e.g., crashes, incorrect computations)
-- **Critical** performance improvements _may_ be backported based on severity.
+- **Critical** performance improvements, backported based on severity
 
-**API changes and major new features will not be backported.**
+API changes and major new features were not backported.
 
 ## Unstable APIs
 
