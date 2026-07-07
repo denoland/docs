@@ -24,7 +24,7 @@ export default function codeblockTitlePlugin(md: any) {
 
     if (maybeTitle) {
       const titleHtml = maybeTitle === ">_"
-        ? `<span aria-label="Terminal" role="img">&gt;_</span>`
+        ? `<span aria-label="Terminal" role="img">terminal</span>`
         : maybeTitle;
       return `<div><div class="markdownBlockTitle">${titleHtml}</div>${render}</div>`;
     }

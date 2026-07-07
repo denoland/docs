@@ -110,9 +110,13 @@ winget install DenoLand.Deno
 </deno-tab>
 </deno-tabs>
 
-> <small>The startup time of the Deno command gets affected if it's installed
-> via npm. We recommend the official install script (shell or PowerShell) for
-> better performance.</small>
+:::note
+
+The startup time of the Deno command gets affected if it's installed via npm. We
+recommend the official install script (shell or PowerShell) for better
+performance.
+
+:::
 
 Deno does not publish an official apt repository, and the versions packaged by
 Linux distributions (such as Debian, Ubuntu, Arch, or the Snap Store) are
