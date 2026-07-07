@@ -461,7 +461,7 @@
          past the column and scroll; narrow ones still fill it via min-width. */
       width: max-content;
       min-width: 100%;
-      border: 1px solid var(--color-background-tertiary);
+      border: 1px solid var(--color-background-secondary);
       border-radius: 0.5rem;
       border-spacing: 0;
       font-size: 0.9em;
@@ -473,7 +473,7 @@
            whole table off-screen (e.g. the deploy comparison table). */
         max-width: 22rem;
         padding: 0.5rem 0.85rem;
-        border-bottom: 1px solid var(--color-background-tertiary);
+        border-bottom: 1px solid var(--color-background-secondary);
         text-align: left;
         vertical-align: top;
       }
@@ -485,10 +485,6 @@
       }
       tbody tr:nth-child(2n) {
         background-color: var(--color-background-primary);
-
-        .dark & {
-          background-color: var(--color-background-secondary);
-        }
       }
       tbody tr:last-child td {
         border-bottom: none;
@@ -1084,7 +1080,7 @@
   }
 
   .ddoc .markdown-body tr:nth-child(2n) {
-    @apply bg-background-secondary!;
+    @apply bg-background-primary!;
   }
 
   .markdownBlockTitle {
