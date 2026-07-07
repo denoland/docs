@@ -28,26 +28,25 @@ jobs:
       - run: deno fmt --check
       - run: deno task test
 
-      # Cache reference types + generated docs (types: 86s, docs: 162s)
-      - name: Restore reference cache
-        uses: actions/cache@v4
-        id: ref-cache
-        with:
-          path: |
-            reference_gen/types
-            reference_gen/gen
-          key: reference-${{ hashFiles('reference_gen/**') }}
-          restore-keys: reference-
-
+      # The types come from `deno types`, so they depend on the Deno binary,
+      # not on any repo file. Regenerate them every run (types: 86s) and cache
+      # only the doc generation (docs: 162s), keyed on the generated types'
+      # content. A repo-only cache key kept serving reference docs generated
+      # with an older Deno, missing newly added APIs (#3389).
       - name: "Reference: install"
-        if: steps.ref-cache.outputs.cache-hit != 'true'
         working-directory: "reference_gen"
         run: deno install
 
       - name: "Reference: generate types"
-        if: steps.ref-cache.outputs.cache-hit != 'true'
         working-directory: "reference_gen"
         run: deno task types
+
+      - name: Restore reference docs cache
+        uses: actions/cache@v4
+        id: ref-cache
+        with:
+          path: reference_gen/gen
+          key: reference-${{ hashFiles('reference_gen/types/**', 'reference_gen/*.ts', 'reference_gen/*.json', 'reference_gen/*.jsonc', 'reference_gen/deno.lock', 'reference_gen/node_descriptions/**') }}
 
       - name: "Reference: generate docs"
         if: steps.ref-cache.outputs.cache-hit != 'true'

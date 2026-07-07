@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-06-30
 title: "Debugging"
 description: "Debug Deno programs with the V8 inspector: Chrome DevTools, VS Code and JetBrains setup, network inspection, worker debugging, and the --inspect flag family."
 oldUrl:
@@ -92,6 +92,57 @@ this flag by default.
 ```sh
 deno run --inspect-brk your_script.ts
 ```
+
+## Activating the inspector at runtime
+
+The `--inspect` flags start the inspector server when the process launches. If
+you instead want to open it on demand from inside a running program, use the
+[`node:inspector`](https://nodejs.org/api/inspector.html) module. This is handy
+for long-running processes such as servers, where you only want a debugger
+listening after some condition is met rather than for the whole lifetime of the
+process.
+
+`inspector.open([port][, host][, wait])` starts the inspector server. The port
+defaults to `9229` and the host to `127.0.0.1`. Because it binds a network
+socket, the program needs the `--allow-net` permission (or run with `-A`).
+
+```ts title="server.ts"
+import inspector from "node:inspector";
+
+Deno.serve((req) => {
+  if (new URL(req.url).pathname === "/debug" && !inspector.url()) {
+    inspector.open(9229, "127.0.0.1");
+    console.log("Inspector listening on", inspector.url());
+  }
+  return new Response("hello");
+});
+```
+
+```sh
+deno run --allow-net server.ts
+```
+
+Send a request to `/debug` and the inspector server starts; open
+`chrome://inspect` in a Chromium derived browser to connect. The module exposes
+a few related functions:
+
+- `inspector.open(port, host, true)` — passing `true` as the third argument
+  blocks until a client connects, the same as `inspector.waitForDebugger()`.
+- `inspector.url()` — returns the inspector WebSocket URL, or `undefined` when
+  the inspector is not active.
+- `inspector.close()` — stops the inspector server.
+
+A `Session` is also available for issuing
+[Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/)
+commands programmatically without an external client.
+
+:::caution
+
+Binding the inspector to a public IP with an open port is insecure: it lets any
+host that can reach the port connect to the inspector and execute arbitrary
+code. Keep the host at `127.0.0.1` unless you fully control the network.
+
+:::
 
 ## Example with Chrome DevTools
 

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-07-02
 title: "Configuring Deno behavior"
 ---
 
@@ -50,8 +50,10 @@ defaults to the operating system's default cache location and then under the
 
 ### DENO_INSTALL_ROOT
 
-When using `deno install` where the installed scripts are stored. This defaults
-to `$HOME/.deno/bin`.
+The root directory used by `deno install` when installing executables.
+Executables are placed in the `bin` subdirectory of this root, unless the path
+already ends with `bin`, in which case it is used directly. This defaults to
+`$HOME/.deno`, so executables are installed to `$HOME/.deno/bin` by default.
 
 ### DENO_NO_PACKAGE_JSON
 

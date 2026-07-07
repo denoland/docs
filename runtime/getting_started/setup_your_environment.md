@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-28
+last_modified: 2026-07-02
 title: "Set up your environment"
 description: "A guide to setting up your development environment for Deno. Learn how to configure popular editors like VS Code, set up language server support, and enable shell completions for better productivity."
 oldUrl: /runtime/manual/getting_started/setup_your_environment/
@@ -63,29 +63,36 @@ to learn more about how to get started with Deno in Jetbrains IDEs.
 
 ### Vim/Neovim
 
-The recommended setup for Neovim 0.6+ is the built-in language server client
+The recommended setup for Neovim 0.11+ is the built-in language server client
 with [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/), which ships a
 [ready-made Deno configuration](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols).
 
-If you also have `ts_ls` configured, both servers can attach to the same buffer.
-To avoid this, give each a distinct `root_dir` (or `root_markers`) and set
-`single_file_support = false` on `ts_ls`:
+If you also have `ts_ls` (the TypeScript language server) configured, both
+servers can attach to the same buffer. Recent versions of nvim-lspconfig prevent
+this out of the box: their `ts_ls` configuration skips projects that contain a
+`deno.json`, `deno.jsonc`, or `deno.lock`. If you are on an older version of the
+plugin, or you configure the servers yourself, give each server distinct
+`root_markers` and set `workspace_required = true` on `ts_ls` so that it only
+attaches when it finds a `package.json`:
 
 ```lua
 vim.lsp.config('denols', {
-    on_attach = on_attach,
-    root_markers = {"deno.json", "deno.jsonc"},
+    root_markers = { "deno.json", "deno.jsonc" },
 })
 
 vim.lsp.config('ts_ls', {
-    on_attach = on_attach,
-    root_markers = {"package.json"},
-    single_file_support = false,
+    root_markers = { "package.json" },
+    workspace_required = true,
 })
+
+vim.lsp.enable({ 'denols', 'ts_ls' })
 ```
 
 This assumes a `deno.json` or `deno.jsonc` lives at the root of your Deno
-project.
+project. Note that `workspace_required` needs Neovim 0.11.1 or later. The older
+`single_file_support` option has no effect here: it is only read by the
+deprecated `require('lspconfig').setup()` API and is silently ignored by
+`vim.lsp.config()`.
 
 **Kickstart.nvim and Mason LSP.** If you use
 [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim), add the equivalent
@@ -95,13 +102,12 @@ configuration to the `servers` table in your `init.lua`:
 local servers = {
         -- ... some configuration
         ts_ls = {
-            root_dir = require("lspconfig").util.root_pattern({ "package.json", "tsconfig.json" }),
-            single_file_support = false,
+            root_markers = { "package.json" },
+            workspace_required = true,
             settings = {},
         },
         denols = {
-            root_dir = require("lspconfig").util.root_pattern({"deno.json", "deno.jsonc"}),
-            single_file_support = false,
+            root_markers = { "deno.json", "deno.jsonc" },
             settings = {},
         },
     }

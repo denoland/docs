@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-06-29
 title: "Permissions"
 description: "Reference for Deno's permission system: how the runtime sandbox works and how to grant or deny file system, network, environment, system, subprocess, FFI, and import access with the --allow and --deny flags."
 oldUrl:
@@ -495,7 +495,7 @@ and call functions from them.
 
 By default, executing code can not use the
 [`Deno.dlopen`](/api/deno/~/Deno.dlopen) API, as this would constitute a
-violation of the principle that code can not escalate it's privileges without
+violation of the principle that code can not escalate its privileges without
 user consent.
 
 In addition to [`Deno.dlopen`](/api/deno/~/Deno.dlopen), FFI can also be used

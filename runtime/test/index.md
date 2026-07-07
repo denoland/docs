@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-06
 title: "Testing"
 description: "Write and run tests with Deno's built-in test runner: assertions, test steps, hooks, filtering, and reporters, with dedicated guides for mocking, snapshots, and coverage."
 oldUrl:
@@ -99,7 +99,9 @@ subcommand.
 
 If run without a file name or directory name, this subcommand will automatically
 find and execute all tests in the current directory (recursively) that match the
-glob `{*_,*.,}test.{ts, tsx, mts, js, mjs, jsx}`.
+glob `{*_,*.,}test.{ts, tsx, mts, js, mjs, jsx}`. Additionally, any script file
+inside a directory named `__tests__` is treated as a test file, regardless of
+its file name.
 
 ```sh
 # Run all tests in the current directory and all sub-directories
@@ -202,8 +204,8 @@ deno test --retry=2
 
 ## Parameterized tests
 
-[`Deno.test.each`](/api/deno/~/Deno.test.each) runs the same test body over a
-table of cases. It registers one real test per case, so each case reports
+[`Deno.test.each`](/api/deno/~/Deno.DenoTest.each) runs the same test body over
+a table of cases. It registers one real test per case, so each case reports
 independently and can be filtered or run on its own.
 
 Array cases are spread as positional arguments. The name template interpolates
@@ -233,7 +235,7 @@ Deno.test.each([
 });
 ```
 
-[`Deno.test.each`](/api/deno/~/Deno.test.each) accepts the usual per-test
+[`Deno.test.each`](/api/deno/~/Deno.DenoTest.each) accepts the usual per-test
 options object, and the `only` and `ignore` shorthands compose with it as
 `.only.each` and `.ignore.each`.
 
