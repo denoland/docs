@@ -313,6 +313,13 @@
       --color-danger-fg: #f85149;
     }
   }
+  /* Added by a site.process() step in _config.ts around every table, so wide
+     tables scroll horizontally instead of overflowing or crushing their
+     content. Un-scoped because tables appear outside .markdown-body too. */
+  .table-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+  }
   .markdown-body {
     color: inherit;
     word-wrap: break-word;
@@ -450,9 +457,10 @@
       }
     }
     table {
-      width: 100%;
-      max-width: 100%;
-      overflow-x: auto;
+      /* Natural width inside the scrolling .table-wrapper: wide tables grow
+         past the column and scroll; narrow ones still fill it via min-width. */
+      width: max-content;
+      min-width: 100%;
       border: 1px solid var(--color-background-tertiary);
       border-radius: 0.5rem;
       border-spacing: 0;
