@@ -182,7 +182,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
                     )}
                   </header>
                   <h1
-                    className="leading-none"
+                    className="leading-none md:text-4xl"
                     dangerouslySetInnerHTML={{
                       __html: helpers.md(data.title!, true),
                     }}

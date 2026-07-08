@@ -272,9 +272,6 @@
     }
     h1 {
       font-size: 2em;
-      &:first-child {
-        @apply md:text-4xl;
-      }
     }
     h2 {
       margin-top: 2.5rem;
@@ -896,7 +893,7 @@
   @media (min-width: 48rem) {
     .content {
       padding-inline: 0;
-      max-width: 56rem;
+      max-width: 48rem;
       margin-inline: auto;
     }
   }
@@ -1342,7 +1339,7 @@
       .content {
         @media (min-width: 64rem) {
           grid-column: 2 / 4;
-          max-width: 56rem;
+          max-width: 48rem;
           margin-inline: auto;
         }
       }
