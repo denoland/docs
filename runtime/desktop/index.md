@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-08
 title: "Desktop apps"
 description: "Build self-contained desktop applications from a Deno project, with framework auto-detection, hot reload, native windowing, auto-update, and cross-platform distribution."
 ---
@@ -86,6 +86,8 @@ webview navigates to, so you do not need to pass a port or hostname. See
 - [Windows](/runtime/desktop/windows/):
   [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) lifecycle, multiple
   windows, events.
+- [WebGPU rendering](/runtime/desktop/webgpu/): draw to a native window with
+  WebGPU on the raw backend.
 - [Bindings](/runtime/desktop/bindings/): calling Deno code from the webview via
   `bindings.<name>()`.
 - [Menus](/runtime/desktop/menus/): application and context menus.
