@@ -99,7 +99,8 @@ The `--inspect` flags start the inspector server when the process launches. If
 you instead want to open it on demand in an already running program, you can do
 so from inside the program with the
 [`node:inspector`](https://nodejs.org/api/inspector.html) module, or from
-outside it by sending the process a [`SIGUSR1` signal](#sending-sigusr1). This
+outside it by sending the process a
+[`SIGUSR1` signal](#starting-inspector-with-a-signal). This
 is handy for long-running processes such as servers, where you only want a
 debugger listening after some condition is met rather than for the whole
 lifetime of the process.
@@ -146,7 +147,7 @@ code. Keep the host at `127.0.0.1` unless you fully control the network.
 
 :::
 
-### Sending SIGUSR1
+### Starting inspector with a signal
 
 Starting with Deno 2.9.2, on Linux and macOS you can also activate the inspector
 from outside the process by sending it the `SIGUSR1` signal, the same way it
