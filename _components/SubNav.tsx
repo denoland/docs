@@ -44,19 +44,17 @@ export default function (
   const activeHref = getActiveHref();
 
   return (
-    <nav className="flex items-center pl-4 z-10 h-(--subnav-height) overflow-x-auto xlplus:pl-0 border-t border-foreground-tertiary -margin-t-px">
-      <ul className="flex w-full h-full max-w-(--layout-max-width) mx-auto items-stretch gap-6">
+    <nav className="flex items-center z-10 h-(--subnav-height) overflow-x-auto border-t border-foreground-tertiary -margin-t-px">
+      <ul className="flex w-full h-full mx-auto items-stretch">
         {navData.map((nav: SidebarNavItem) => (
           <li
             key={nav.href}
-            className={`h-full flex items-center justify-center ${
-              nav.href === activeHref
-                ? "bg-header-highlight text-gray-800 px-4"
-                : ""
+            className={`h-full flex items-center px-4 justify-center ${
+              nav.href === activeHref ? "bg-header-highlight text-gray-800" : ""
             }`}
           >
             <a
-              className={`whitespace-nowrap text-sm md:text-base p-0 block relative ${
+              className={`whitespace-nowrap text-sm p-0 block relative ${
                 nav.href === activeHref ? "font-bold" : ""
               }`}
               data-active={nav.href === activeHref}

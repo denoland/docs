@@ -105,7 +105,7 @@ export default function LandingPage(
               <a
                 key={item.href}
                 href={item.href}
-                className="group relative flex flex-col gap-1 p-4 pr-12 rounded-lg border border-foreground-tertiary bg-background-raw no-underline! hover:border-primary transition-colors duration-150"
+                className="group relative flex flex-col gap-1 p-4 pr-12 rounded-lg border border-foreground-tertiary bg-background-raw dark:bg-background-primary no-underline! hover:border-primary transition-colors duration-150"
               >
                 <span
                   className="absolute top-4 right-4"

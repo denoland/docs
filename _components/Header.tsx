@@ -18,9 +18,9 @@ export default function (
 
   return (
     <header
-      class={`w-full h-auto sticky top-0 z-100 bg-background-raw border-b border-b-foreground-tertiary`}
+      className={`w-full h-auto sticky top-0 z-100 bg-background-raw border-b border-b-foreground-tertiary`}
     >
-      <div class="grid grid-cols-[auto_1fr] md:grid-cols-[auto_auto_1fr] h-[var(--header-height)] gap-x-4 items-center justify-between px-4 w-full max-w-[var(--layout-max-width)] mx-auto xlplus:px-0">
+      <div className="grid grid-cols-[auto_1fr] md:grid-cols-[auto_auto_1fr] h-(--header-height) gap-x-4 items-center justify-between px-4 w-full mx-auto">
         <a
           href="https://deno.com"
           title="Deno main website"
@@ -30,7 +30,7 @@ export default function (
         </a>
         <nav
           id="main-nav"
-          class="flex h-full items-center row-start-2 col-span-2 md:row-auto md:col-auto -mx-4 md:mx-0 overflow-x-auto md:overflow-clip"
+          className="flex h-full items-center row-start-2 col-span-2 md:row-auto md:col-auto -mx-4 md:mx-0 overflow-x-auto md:overflow-clip"
         >
           {data.navigation.map((nav: NavData) => (
             <a
@@ -47,7 +47,7 @@ export default function (
               {hrefIsInCurrentSection(nav.href, currentSection) && (
                 <div
                   id="current-nav-item"
-                  class="absolute inset-0 bg-header-highlight -z-10 transition-transform duration-200 easing-[cubic-bezier(0.5,0,0.5,1)] origin-left"
+                  className="absolute inset-0 bg-header-highlight -z-10 transition-transform duration-200 easing-[cubic-bezier(0.5,0,0.5,1)] origin-left"
                   style="--left: 0px; --scaleX: 1; transform: translateX(var(--left)) scaleX(var(--scaleX));"
                 />
               )}

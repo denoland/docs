@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme static {
-  --color-gray-50: #f5f5f5;
+  --color-white: #fdfeff;
+  --color-gray-50: #f6f8fb;
   --color-gray-100: #e5eaea;
   --color-gray-200: #d4d6d8;
   --color-gray-300: #c2c4c7;
@@ -72,7 +73,7 @@
 
   --color-primary: var(--color-deploy-500);
   --color-header-highlight: var(--color-runtime);
-  --color-sidebar-line: var(--color-background-secondary);
+  --color-sidebar-line: var(--color-background-tertiary);
 
   --breakpoint-xs: 30rem;
   --breakpoint-xlplus: 82rem;
@@ -111,17 +112,24 @@
     border-color: var(--color-gray-200, currentcolor);
   }
 
-  :root,
-  :root::selection,
-  [data-color-mode="light"][data-light-theme="light"],
-  [data-color-mode="dark"][data-dark-theme="light"],
-  [data-color-mode="light"][data-light-theme="light"]::selection,
-  [data-color-mode="dark"][data-dark-theme="light"]::selection,
-  [data-color-mode="light"][data-light-theme="light"] ::-webkit-backdrop,
-  [data-color-mode="light"][data-light-theme="light"] ::backdrop,
-  [data-color-mode="dark"][data-dark-theme="light"] ::-webkit-backdrop,
-  [data-color-mode="dark"][data-dark-theme="light"] ::backdrop {
-    --color-canvas-default-transparent: rgba(255, 255, 255, 0);
+  /* Theme variables for the vendored github-markdown-css styles, collapsed
+     from six generated light/dark permutation blocks. Our markup only ever
+     renders data-light-theme="light" + data-dark-theme="dark", and the theme
+     toggle drives the .dark/.light classes on <html>, so the
+     [data-color-mode] selector permutations (and their ::selection/::backdrop
+     arms, which only re-declared these same variables) were dead. Gray-ish
+     roles follow the site palette and flip with it automatically; only the
+     accent and syntax-highlight colors need explicit dark values. */
+  :root {
+    --color-fg-default: var(--color-foreground-primary);
+    --color-fg-muted: var(--color-foreground-secondary);
+    --color-canvas-default: var(--color-background-raw);
+    --color-canvas-subtle: var(--color-background-primary);
+    --color-border-default: var(--color-background-tertiary);
+    --color-border-muted: var(--color-background-secondary);
+    --color-neutral-muted: rgba(175, 184, 193, 0.2);
+    --color-accent-fg: #0969da;
+    --color-danger-fg: #d1242f;
     --color-prettylights-syntax-comment: #57606a;
     --color-prettylights-syntax-constant: #0550ae;
     --color-prettylights-syntax-entity: #6639ba;
@@ -130,100 +138,16 @@
     --color-prettylights-syntax-keyword: #cf222e;
     --color-prettylights-syntax-string: #0a3069;
     --color-prettylights-syntax-variable: #953800;
-    --color-prettylights-syntax-string-regexp: #116329;
     --color-prettylights-syntax-markup-deleted-text: #82071e;
     --color-prettylights-syntax-markup-deleted-bg: #ffebe9;
     --color-prettylights-syntax-markup-inserted-text: #116329;
     --color-prettylights-syntax-markup-inserted-bg: #dafbe1;
-    --color-prettylights-syntax-constant-other-reference-link: #0a3069;
-    --color-fg-default: #1f2328;
-    --color-fg-muted: #656d76;
-    --color-canvas-default: #fff;
-    --color-canvas-subtle: #f6f8fa;
-    --color-border-default: #d0d7de;
-    --color-border-muted: #d8dee4;
-    --color-neutral-muted: rgba(175, 184, 193, 0.2);
-    --color-accent-fg: #0969da;
-    --color-accent-emphasis: #0969da;
-    --color-danger-fg: #d1242f;
   }
 
-  @media (prefers-color-scheme: light) {
-    [data-color-mode="auto"][data-light-theme="light"],
-    [data-color-mode="auto"][data-light-theme="light"]::selection,
-    [data-color-mode="auto"][data-light-theme="light"] ::-webkit-backdrop,
-    [data-color-mode="auto"][data-light-theme="light"] ::backdrop {
-      --color-canvas-default-transparent: rgba(255, 255, 255, 0);
-      --color-prettylights-syntax-comment: #57606a;
-      --color-prettylights-syntax-constant: #0550ae;
-      --color-prettylights-syntax-entity: #6639ba;
-      --color-prettylights-syntax-storage-modifier-import: #24292f;
-      --color-prettylights-syntax-entity-tag: #116329;
-      --color-prettylights-syntax-keyword: #cf222e;
-      --color-prettylights-syntax-string: #0a3069;
-      --color-prettylights-syntax-variable: #953800;
-      --color-prettylights-syntax-string-regexp: #116329;
-      --color-prettylights-syntax-markup-deleted-text: #82071e;
-      --color-prettylights-syntax-markup-deleted-bg: #ffebe9;
-      --color-prettylights-syntax-markup-inserted-text: #116329;
-      --color-prettylights-syntax-markup-inserted-bg: #dafbe1;
-      --color-prettylights-syntax-constant-other-reference-link: #0a3069;
-      --color-fg-default: #1f2328;
-      --color-fg-muted: #656d76;
-      --color-canvas-default: #fff;
-      --color-canvas-subtle: #f6f8fa;
-      --color-border-default: #d0d7de;
-      --color-border-muted: #d8dee4;
-      --color-neutral-muted: rgba(175, 184, 193, 0.2);
-      --color-accent-fg: #0969da;
-      --color-accent-emphasis: #0969da;
-      --color-danger-fg: #d1242f;
-    }
-  }
-  @media (prefers-color-scheme: dark) {
-    [data-color-mode="auto"][data-dark-theme="light"],
-    [data-color-mode="auto"][data-dark-theme="light"]::selection,
-    [data-color-mode="auto"][data-light-theme="light"] ::-webkit-backdrop,
-    [data-color-mode="auto"][data-light-theme="light"] ::backdrop {
-      --color-canvas-default-transparent: rgba(255, 255, 255, 0);
-      --color-prettylights-syntax-comment: #57606a;
-      --color-prettylights-syntax-constant: #0550ae;
-      --color-prettylights-syntax-entity: #6639ba;
-      --color-prettylights-syntax-storage-modifier-import: #24292f;
-      --color-prettylights-syntax-entity-tag: #116329;
-      --color-prettylights-syntax-keyword: #cf222e;
-      --color-prettylights-syntax-string: #0a3069;
-      --color-prettylights-syntax-variable: #953800;
-      --color-prettylights-syntax-string-regexp: #116329;
-      --color-prettylights-syntax-markup-deleted-text: #82071e;
-      --color-prettylights-syntax-markup-deleted-bg: #ffebe9;
-      --color-prettylights-syntax-markup-inserted-text: #116329;
-      --color-prettylights-syntax-markup-inserted-bg: #dafbe1;
-      --color-prettylights-syntax-constant-other-reference-link: #0a3069;
-      --color-fg-default: #1f2328;
-      --color-fg-muted: #656d76;
-      --color-canvas-default: #fff;
-      --color-canvas-subtle: #f6f8fa;
-      --color-border-default: #d0d7de;
-      --color-border-muted: #d8dee4;
-      --color-neutral-muted: rgba(175, 184, 193, 0.2);
-      --color-accent-fg: #0969da;
-      --color-accent-emphasis: #0969da;
-      --color-danger-fg: #d1242f;
-    }
-  }
-  .dark,
-  [data-color-mode="light"][data-light-theme="dark"],
-  [data-color-mode="dark"][data-dark-theme="dark"],
-  [data-color-mode="light"][data-light-theme="dark"]::selection,
-  [data-color-mode="dark"][data-dark-theme="dark"]::selection,
-  ::-webkit-backdrop,
-  ::backdrop,
-  [data-color-mode="light"][data-light-theme="dark"] ::-webkit-backdrop,
-  [data-color-mode="light"][data-light-theme="dark"] ::backdrop,
-  [data-color-mode="dark"][data-dark-theme="dark"] ::-webkit-backdrop,
-  [data-color-mode="dark"][data-dark-theme="dark"] ::backdrop {
-    --color-canvas-default-transparent: rgba(13, 17, 23, 0);
+  .dark {
+    --color-neutral-muted: rgba(110, 118, 129, 0.4);
+    --color-accent-fg: #2f81f7;
+    --color-danger-fg: #f85149;
     --color-prettylights-syntax-comment: #8b949e;
     --color-prettylights-syntax-constant: #79c0ff;
     --color-prettylights-syntax-entity: #d2a8ff;
@@ -232,61 +156,19 @@
     --color-prettylights-syntax-keyword: #ff7b72;
     --color-prettylights-syntax-string: #a5d6ff;
     --color-prettylights-syntax-variable: #ffa657;
-    --color-prettylights-syntax-string-regexp: #7ee787;
     --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
     --color-prettylights-syntax-markup-deleted-bg: #67060c;
     --color-prettylights-syntax-markup-inserted-text: #aff5b4;
     --color-prettylights-syntax-markup-inserted-bg: #033a16;
-    --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
-    --color-fg-default: #e6edf3;
-    --color-fg-muted: #848d97;
-    --color-canvas-default: #0d1117;
-    --color-canvas-subtle: #161b22;
-    --color-border-default: #30363d;
-    --color-border-muted: #21262d;
-    --color-neutral-muted: rgba(110, 118, 129, 0.4);
-    --color-accent-fg: #2f81f7;
-    --color-accent-emphasis: #1f6feb;
-    --color-danger-fg: #f85149;
   }
-  @media (prefers-color-scheme: light) {
-    [data-color-mode="auto"][data-light-theme="dark"],
-    [data-color-mode="auto"][data-light-theme="dark"]::selection,
-    [data-color-mode="auto"][data-light-theme="dark"] ::-webkit-backdrop,
-    [data-color-mode="auto"][data-light-theme="dark"] ::backdrop {
-      --color-canvas-default-transparent: rgba(13, 17, 23, 0);
-      --color-prettylights-syntax-comment: #8b949e;
-      --color-prettylights-syntax-constant: #79c0ff;
-      --color-prettylights-syntax-entity: #d2a8ff;
-      --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
-      --color-prettylights-syntax-entity-tag: #7ee787;
-      --color-prettylights-syntax-keyword: #ff7b72;
-      --color-prettylights-syntax-string: #a5d6ff;
-      --color-prettylights-syntax-variable: #ffa657;
-      --color-prettylights-syntax-string-regexp: #7ee787;
-      --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
-      --color-prettylights-syntax-markup-deleted-bg: #67060c;
-      --color-prettylights-syntax-markup-inserted-text: #aff5b4;
-      --color-prettylights-syntax-markup-inserted-bg: #033a16;
-      --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
-      --color-fg-default: #e6edf3;
-      --color-fg-muted: #848d97;
-      --color-canvas-default: #0d1117;
-      --color-canvas-subtle: #161b22;
-      --color-border-default: #30363d;
-      --color-border-muted: #21262d;
-      --color-neutral-muted: rgba(110, 118, 129, 0.4);
-      --color-accent-fg: #2f81f7;
-      --color-accent-emphasis: #1f6feb;
-      --color-danger-fg: #f85149;
-    }
-  }
+
+  /* No-JS fallback: respect the system dark preference when no explicit
+     theme class is set, matching the site palette's fallback block below. */
   @media (prefers-color-scheme: dark) {
-    [data-color-mode="auto"][data-dark-theme="dark"],
-    [data-color-mode="auto"][data-dark-theme="dark"]::selection,
-    [data-color-mode="auto"][data-light-theme="dark"] ::-webkit-backdrop,
-    [data-color-mode="auto"][data-light-theme="dark"] ::backdrop {
-      --color-canvas-default-transparent: rgba(13, 17, 23, 0);
+    :root:not(.light):not(.dark) {
+      --color-neutral-muted: rgba(110, 118, 129, 0.4);
+      --color-accent-fg: #2f81f7;
+      --color-danger-fg: #f85149;
       --color-prettylights-syntax-comment: #8b949e;
       --color-prettylights-syntax-constant: #79c0ff;
       --color-prettylights-syntax-entity: #d2a8ff;
@@ -295,22 +177,10 @@
       --color-prettylights-syntax-keyword: #ff7b72;
       --color-prettylights-syntax-string: #a5d6ff;
       --color-prettylights-syntax-variable: #ffa657;
-      --color-prettylights-syntax-string-regexp: #7ee787;
       --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
       --color-prettylights-syntax-markup-deleted-bg: #67060c;
       --color-prettylights-syntax-markup-inserted-text: #aff5b4;
       --color-prettylights-syntax-markup-inserted-bg: #033a16;
-      --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
-      --color-fg-default: #e6edf3;
-      --color-fg-muted: #848d97;
-      --color-canvas-default: #0d1117;
-      --color-canvas-subtle: #161b22;
-      --color-border-default: #30363d;
-      --color-border-muted: #21262d;
-      --color-neutral-muted: rgba(110, 118, 129, 0.4);
-      --color-accent-fg: #2f81f7;
-      --color-accent-emphasis: #1f6feb;
-      --color-danger-fg: #f85149;
     }
   }
   /* Added by a site.process() step in _config.ts around every table, so wide
@@ -862,7 +732,7 @@
     color-scheme: light dark;
 
     @media (min-width: 48rem) {
-      --header-height: 4rem;
+      --header-height: 4.5rem;
     }
 
     @variant dark {
@@ -881,7 +751,7 @@
       --color-caution: 45.4deg, 93.39%, 67.11%;
       --color-primary: var(--color-runtime);
       --color-header-highlight: var(--color-runtime);
-      --color-sidebar-line: var(--color-background-tertiary);
+      --color-sidebar-line: var(--color-background-secondary);
 
       color: var(--color-foreground-primary);
       background-color: var(--color-background-primary);
@@ -908,7 +778,7 @@
       --color-caution: 45.4deg, 93.39%, 67.11%;
       --color-primary: var(--color-runtime);
       --color-header-highlight: var(--color-runtime);
-      --color-sidebar-line: var(--color-background-tertiary);
+      --color-sidebar-line: var(--color-background-secondary);
 
       color: var(--color-foreground-primary);
       background-color: var(--color-background-primary);
@@ -1026,6 +896,8 @@
   @media (min-width: 48rem) {
     .content {
       padding-inline: 0;
+      max-width: 56rem;
+      margin-inline: auto;
     }
   }
 
@@ -1436,10 +1308,9 @@
   @media (min-width: 48rem) {
     .layout {
       display: grid;
-      align-items: start;
+      align-items: stretch;
       width: 100%;
       margin-inline: auto;
-      max-width: var(--layout-max-width);
       column-gap: 1rem;
       padding-inline: 1rem;
     }
@@ -1449,6 +1320,10 @@
 
       @media (min-width: 64rem) {
         grid-template-columns: minmax(13rem, 14rem) minmax(0, 1fr) 16rem;
+      }
+
+      @media (min-width: 82rem) {
+        grid-template-columns: 16rem minmax(0, 1fr) 16rem;
       }
 
       .content {
@@ -1467,6 +1342,8 @@
       .content {
         @media (min-width: 64rem) {
           grid-column: 2 / 4;
+          max-width: 56rem;
+          margin-inline: auto;
         }
       }
     }
@@ -1492,7 +1369,6 @@
 
   @media (min-width: 82rem) {
     .layout {
-      padding-inline: 0;
       column-gap: 3rem;
     }
   }
@@ -1865,19 +1741,9 @@
   }
 
   .active {
-    color: var(--color-foreground-primary);
+    color: var(--color-gray-800);
     position: relative;
-
-    &::before {
-      content: "";
-      width: 0.3rem;
-      height: 0.3rem;
-      border-radius: 100%;
-      background: var(--color-header-highlight);
-      position: absolute;
-      left: -0.6rem;
-      top: 0.3em;
-    }
+    background-color: var(--color-header-highlight);
   }
 
   .documentNavigation {
