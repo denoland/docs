@@ -329,10 +329,11 @@ Next.js's build-time lint/type-check pass. A temporary workaround is to add
 
 If a client component uses browser-only hooks or APIs, Next.js may still try to
 render it on the server during prerendering or SSR. Defer that code until after
-the component mounts, such as in `useEffect`, or load the component with
-`next/dynamic` and `{ ssr: false }`. Marking the route dynamic alone is not
-enough because dynamic routes still render on the server, where browser globals
-are undefined.
+the component mounts, such as in `useEffect`. If you need to disable SSR with
+`next/dynamic` and `{ ssr: false }`, put the dynamic import in a Client
+Component wrapper; Server Components cannot use `{ ssr: false }` directly.
+Marking the route dynamic alone is not enough because dynamic routes still
+render on the server, where browser globals are undefined.
 
 :::
 
