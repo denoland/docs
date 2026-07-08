@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-09-29
+last_modified: 2026-07-08
 title: "Security and responsible disclosure"
 description: "How to report security vulnerabilities in Deno Deploy."
 oldUrl: /deploy/classic/security/
