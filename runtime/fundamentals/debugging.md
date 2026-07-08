@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-03
+last_modified: 2026-07-08
 title: "Debugging"
 description: "Debug Deno programs with the V8 inspector: Chrome DevTools, VS Code and JetBrains setup, network inspection, worker debugging, and the --inspect flag family."
 oldUrl:
@@ -148,7 +148,7 @@ code. Keep the host at `127.0.0.1` unless you fully control the network.
 
 ### Sending SIGUSR1
 
-Starting with Deno 2.10, on Linux and macOS you can also activate the inspector
+Starting with Deno 2.9.2, on Linux and macOS you can also activate the inspector
 from outside the process by sending it the `SIGUSR1` signal, the same way it
 works in Node.js. The inspector server starts on the default `127.0.0.1:9229`
 without pausing execution and prints the usual banner to stderr:
