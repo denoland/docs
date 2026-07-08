@@ -3447,6 +3447,15 @@
           "usage": "--check-js"
         },
         {
+          "name": "desktop",
+          "short": null,
+          "long": "desktop",
+          "required": false,
+          "help": "Type-check using the type definitions for `deno desktop`",
+          "help_heading": "Desktop options",
+          "usage": "--desktop"
+        },
+        {
           "name": "file",
           "short": null,
           "long": null,
