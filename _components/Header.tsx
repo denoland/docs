@@ -18,9 +18,7 @@ export default function (
 
   return (
     <header
-      class={`w-full h-auto sticky top-0 z-[100] bg-background-raw ${
-        hasSubNav ? "" : "border-b border-b-foreground-tertiary"
-      }`}
+      class={`w-full h-auto sticky top-0 z-100 bg-background-raw border-b border-b-foreground-tertiary`}
     >
       <div class="grid grid-cols-[auto_1fr] md:grid-cols-[auto_auto_1fr] h-[var(--header-height)] gap-x-4 items-center justify-between px-4 w-full max-w-[var(--layout-max-width)] mx-auto xlplus:px-0">
         <a

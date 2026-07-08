@@ -28,7 +28,7 @@ export default function TableOfContents({ data, toc, hasSubNav }: {
         This page
       </p>
       <ul
-        className="toc-list overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden flex flex-col flex-1 min-h-0 px-4 pr-2 pb-4"
+        className="toc-list overflow-y-auto scrollbar-none [&::-webkit-scrollbar]:hidden flex flex-col flex-1 min-h-0 px-4 pr-2 pb-4"
         id="toc"
       >
         {toc.map((item: TableOfContentsItem_) => (

@@ -44,15 +44,20 @@ export default function (
   const activeHref = getActiveHref();
 
   return (
-    <nav class="flex items-center pl-4 bg-header-highlight z-10 h-[var(--subnav-height)] overflow-x-auto xlplus:pl-0">
-      <ul class="flex w-full max-w-[var(--layout-max-width)] mx-auto items-center gap-6">
+    <nav className="flex items-center pl-4 z-10 h-(--subnav-height) overflow-x-auto xlplus:pl-0 border-t border-foreground-tertiary -margin-t-px">
+      <ul className="flex w-full h-full max-w-(--layout-max-width) mx-auto items-stretch gap-6">
         {navData.map((nav: SidebarNavItem) => (
-          <li key={nav.href}>
+          <li
+            key={nav.href}
+            className={`h-full flex items-center justify-center ${
+              nav.href === activeHref
+                ? "bg-header-highlight text-gray-800 px-4"
+                : ""
+            }`}
+          >
             <a
-              className={`whitespace-nowrap text-sm md:text-base p-0 text-gray-800 block relative after:absolute after:bottom-0 after:left-0 after:origin-right after:transition-transform after:scale-x-0 after:block after:w-full after:h-px after:bg-gray-800 hover:after:scale-x-100 hover:after:origin-left ${
-                nav.href === activeHref
-                  ? "font-bold after:scale-x-100! after:origin-left"
-                  : ""
+              className={`whitespace-nowrap text-sm md:text-base p-0 block relative ${
+                nav.href === activeHref ? "font-bold" : ""
               }`}
               data-active={nav.href === activeHref}
               {...(currentUrl === nav.href
