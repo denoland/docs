@@ -111,6 +111,5 @@
       "ffi": true,
       "sys": true
     }
-  },
-  "lock": false
+  }
 }
