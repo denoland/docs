@@ -100,10 +100,9 @@ you instead want to open it on demand in an already running program, you can do
 so from inside the program with the
 [`node:inspector`](https://nodejs.org/api/inspector.html) module, or from
 outside it by sending the process a
-[`SIGUSR1` signal](#starting-inspector-with-a-signal). This
-is handy for long-running processes such as servers, where you only want a
-debugger listening after some condition is met rather than for the whole
-lifetime of the process.
+[`SIGUSR1` signal](#starting-inspector-with-a-signal). This is handy for
+long-running processes such as servers, where you only want a debugger listening
+after some condition is met rather than for the whole lifetime of the process.
 
 `inspector.open([port][, host][, wait])` starts the inspector server. The port
 defaults to `9229` and the host to `127.0.0.1`. Because it binds a network
