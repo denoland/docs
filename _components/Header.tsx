@@ -24,7 +24,7 @@ export default function (
         <a
           href="https://deno.com"
           title="Deno main website"
-          className="block h-8 w-8 xs:w-auto md:h-10 md:mr-auto overflow-hidden"
+          className="block h-8 w-8 xs:w-auto md:h-10 md:mr-auto md:w-10 lg:w-auto overflow-hidden"
         >
           <data.comp.DenoLogo />
         </a>
@@ -35,7 +35,7 @@ export default function (
           {data.navigation.map((nav: NavData) => (
             <a
               href={nav.href}
-              className={`font-[clamp(0.8rem,1.5vw,1rem)] whitespace-nowrap relative py-0 px-4 h-full flex justify-center items-center text-foreground-primary hover:text-gray-800 transition-colors duration-200 ${
+              className={`text-sm md:text-base whitespace-nowrap relative py-0 px-4 md:px-3 lg:px-4 h-full flex justify-center items-center text-foreground-primary hover:text-gray-800 transition-colors duration-200 ${
                 hrefIsInCurrentSection(nav.href, currentSection)
                   ? "font-bold text-gray-800 bg-header-highlight"
                   : ""

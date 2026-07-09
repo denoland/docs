@@ -209,7 +209,7 @@ function SidebarCategoryHeading(props: {
 }) {
   if (props.href) {
     return (
-      <h2 className="block leading-0 uppercase pb-3 pt-1.5 pr-4 border-0!">
+      <h2 className="block leading-none uppercase pb-3 pt-1.5 pr-4 border-0!">
         <a
           href={props.href}
           className={`text-foreground-secondary font-bold leading-none tracking-wide hover:text-primary transition-colors ${
@@ -223,7 +223,7 @@ function SidebarCategoryHeading(props: {
   }
 
   return (
-    <h2 className="block leading-0 uppercase pb-3 pt-1.5 pr-4 text-foreground-secondary font-bold text-balance tracking-wide border-0!">
+    <h2 className="block leading-none uppercase pb-3 pt-1.5 pr-4 text-foreground-secondary font-bold text-balance tracking-wide border-0!">
       {props.title}
     </h2>
   );

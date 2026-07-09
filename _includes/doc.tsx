@@ -146,7 +146,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
             >
               {!(isReference && !isApiLandingPage) && (
                 <div className="block mb-2 space-y-2">
-                  <header class="flex flex-col md:flex-row items-center justify-between gap-4">
+                  <header class="flex flex-wrap items-center justify-between gap-2">
                     {breadcrumbs.length > 0
                       ? (
                         <nav
@@ -210,58 +210,61 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
               {data.children}
               {renderedCommand}
             </div>
-            {(prevPage || nextPage) && (
-              <nav
-                aria-label="Previous and next page"
-                class="flex justify-between gap-4 mt-12 pt-4 border-t border-foreground-tertiary"
-              >
-                {prevPage
-                  ? (
-                    <a
-                      href={prevPage.href}
-                      rel="prev"
-                      class="no-underline hover:underline"
-                    >
-                      <span class="block text-xs text-foreground-secondary mb-1">
-                        Previous
-                      </span>
-                      <span class="text-sm font-medium">
-                        ← {prevPage.title}
-                      </span>
-                    </a>
-                  )
-                  : <span />}
-                {nextPage
-                  ? (
-                    <a
-                      href={nextPage.href}
-                      rel="next"
-                      class="no-underline hover:underline text-right"
-                    >
-                      <span class="block text-xs text-foreground-secondary mb-1">
-                        Next
-                      </span>
-                      <span class="text-sm font-medium">
-                        {nextPage.title} →
-                      </span>
-                    </a>
-                  )
-                  : <span />}
-              </nav>
-            )}
+            <div className="mt-24">
+              {data.lastModified && !isReference && !isLintRule && (
+                <p class="text-sm text-foreground-secondary mb-2 leading-none">
+                  Last updated on{" "}
+                  <time dateTime={data.lastModified.toISOString()}>
+                    {data.lastModified.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                </p>
+              )}
+              {(prevPage || nextPage) && (
+                <nav
+                  aria-label="Previous and next page"
+                  class="flex justify-between gap-4 pt-4 border-t border-foreground-tertiary"
+                >
+                  {prevPage
+                    ? (
+                      <a
+                        href={prevPage.href}
+                        rel="prev"
+                        class="no-underline hover:underline"
+                      >
+                        <span class="block text-xs text-foreground-secondary mb-1">
+                          Previous
+                        </span>
+                        <span class="text-sm font-medium">
+                          ← {prevPage.title}
+                        </span>
+                      </a>
+                    )
+                    : <span />}
+                  {nextPage
+                    ? (
+                      <a
+                        href={nextPage.href}
+                        rel="next"
+                        class="no-underline hover:underline text-right"
+                      >
+                        <span class="block text-xs text-foreground-secondary mb-1">
+                          Next
+                        </span>
+                        <span class="text-sm font-medium">
+                          {nextPage.title} →
+                        </span>
+                      </a>
+                    )
+                    : <span />}
+                </nav>
+              )}
+            </div>
           </article>
-          {data.lastModified && !isReference && !isLintRule && (
-            <p class="text-sm text-foreground-secondary mt-8">
-              Last updated on{" "}
-              <time dateTime={data.lastModified.toISOString()}>
-                {data.lastModified.toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
-            </p>
-          )}
+
           <data.comp.Feedback file={file} />
         </div>
       </main>

@@ -53,31 +53,37 @@ export default function ApiLanding(
               View all symbols <span aria-hidden="true">-&gt;</span>
             </a>
           </header>
-          <p className="mt-2 max-w-prose text-foreground-secondary">
+          <p className="mt-2 text-sm max-w-prose text-foreground-secondary">
             {section.description}
           </p>
-          <div
-            className={`grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 ${
+          <ul
+            className={`grid grid-cols-1 sm:grid-cols-2 gap-1 mt-4 list-none pl-0 ${
               section.dense ? "lg:grid-cols-4" : "lg:grid-cols-3"
             }`}
           >
             {section.tiles.map((tile) => (
-              <a
-                key={tile.href}
-                href={tile.href}
-                className="group flex flex-col gap-1 p-4 rounded-lg border border-foreground-tertiary !no-underline hover:border-primary transition-colors duration-150"
-              >
-                <span className="font-semibold !text-foreground-primary group-hover:underline underline-offset-4 decoration-primary">
-                  {tile.title}
-                </span>
-                {tile.description && (
-                  <span className="text-sm text-foreground-secondary">
-                    {tile.description}
-                  </span>
-                )}
-              </a>
+              <li className="h-full m-0!">
+                <a
+                  key={tile.href}
+                  href={tile.href}
+                  className="group mb-1 h-full flex flex-col gap-2 p-4 rounded-lg border border-background-secondary no-underline! hover:border-primary transition-colors duration-150"
+                >
+                  <div
+                    className={`font-semibold text-foreground-primary leading-none ${
+                      section.dense ? "text-sm" : "text-base"
+                    }`}
+                  >
+                    {tile.title}
+                  </div>
+                  {tile.description && (
+                    <div className="text-xs text-foreground-secondary">
+                      {tile.description}
+                    </div>
+                  )}
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
       ))}
     </div>
