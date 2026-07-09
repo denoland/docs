@@ -105,7 +105,7 @@ export default function LandingPage(
               <a
                 key={item.href}
                 href={item.href}
-                className="group relative flex flex-col gap-1 p-4 pr-12 rounded-lg border border-foreground-tertiary bg-background-raw dark:bg-background-primary no-underline! hover:border-primary transition-colors duration-150"
+                className="group relative flex flex-col gap-2 p-4 pr-12 rounded-lg border border-background-tertiary bg-background-raw dark:bg-background-primary no-underline! hover:border-primary transition-colors duration-150"
               >
                 <span
                   className="absolute top-4 right-4"
@@ -114,10 +114,10 @@ export default function LandingPage(
                 >
                   <TypeIcon type={item.type} />
                 </span>
-                <span className="font-semibold !text-foreground-primary group-hover:underline underline-offset-4 decoration-primary">
+                <span className="leading-none font-semibold !text-foreground-primary group-hover:underline underline-offset-4 decoration-primary">
                   <FeaturedStar /> {item.title}
                 </span>
-                <span className="text-sm text-foreground-secondary">
+                <span className="text-xs text-foreground-secondary">
                   {item.description}
                 </span>
               </a>
@@ -125,7 +125,7 @@ export default function LandingPage(
           </div>
         </section>
 
-        <section className="flex flex-col gap-4 w-full mb-8 p-4 border border-blue-100 dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary rounded md:flex-wrap md:justify-start md:items-center md:flex-row">
+        <section className="flex flex-col gap-4 w-full mb-4 mt-16 p-4 border border-blue-100 dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary rounded md:flex-wrap md:justify-start md:items-center md:flex-row">
           <h2 className="font-semibold">
             Filter by type:
           </h2>
@@ -159,35 +159,36 @@ export default function LandingPage(
             </span>
           </label>
 
-          <label for="video" className="flex gap-2 items-center mr-4">
-            <VideoIcon size="1.5rem" />
-            <span>Videos ({counts.video})</span>
-            <span className="switch">
-              <input
-                type="checkbox"
-                id="video"
-                value="Videos"
-                className="filter mr-2"
-                checked
-              />
-              <span className="slider"></span>
-            </span>
-          </label>
-
+          {counts.video > 0 && (
+            <label for="video" className="flex gap-2 items-center mr-4">
+              <VideoIcon size="1.5rem" />
+              <span>Videos ({counts.video})</span>
+              <span className="switch">
+                <input
+                  type="checkbox"
+                  id="video"
+                  value="Videos"
+                  className="filter mr-2"
+                  checked
+                />
+                <span className="slider"></span>
+              </span>
+            </label>
+          )}
           <span className="md:ml-auto text-sm text-foreground-secondary">
             {total} items total
           </span>
         </section>
 
         <nav
-          className="flex flex-wrap gap-2 mb-10"
+          className="flex flex-wrap gap-1 mb-10"
           aria-label="Example categories"
         >
           {sidebar.map((category: { title: string }) => (
             <a
               key={category.title}
               href={`#${category.title.toLowerCase().replace(/\s+/g, "-")}`}
-              className="px-3 py-1 rounded-full border border-foreground-tertiary text-sm !no-underline text-foreground-secondary hover:border-primary hover:text-primary transition-colors duration-150"
+              className="px-2 py-1 rounded-full border border-foreground-tertiary text-xs !no-underline text-foreground-secondary hover:border-primary hover:text-primary transition-colors duration-150"
             >
               {category.title}
             </a>

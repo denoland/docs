@@ -24,7 +24,10 @@ export function LearningList(
   const anchor = props.title.toLowerCase().replace(/\s+/g, "-");
   return (
     <section className="mb-10">
-      <h2 id={anchor} className="text-lg md:text-xl font-semibold mb-4 mt-0">
+      <h2
+        id={anchor}
+        className="text-lg md:text-xl lg:text-2xl font-semibold mb-4 mt-0"
+      >
         {props.title}&nbsp;
         <a class="header-anchor" href={`#${anchor}`}>
           <span class="sr-only">Jump to heading</span>
@@ -37,7 +40,7 @@ export function LearningList(
           return (
             <li className="!mt-0" data-category={item.type}>
               <a
-                className="group relative flex h-full flex-col gap-1 p-4 pr-12 rounded-lg border border-foreground-tertiary bg-background-raw dark:bg-background-primary no-underline! font-normal hover:border-primary transition-colors duration-150"
+                className="group relative flex h-full flex-col gap-3 p-4 pr-12 rounded-lg border border-background-tertiary bg-background-raw dark:bg-background-primary no-underline! font-normal hover:border-primary transition-colors duration-150"
                 href={item.href}
               >
                 <span
@@ -47,11 +50,11 @@ export function LearningList(
                 >
                   <TypeIcon type={item.type} />
                 </span>
-                <span className="font-semibold !text-foreground-primary group-hover:underline underline-offset-4 decoration-primary">
+                <span className="leading-none font-semibold !text-foreground-primary group-hover:underline underline-offset-4 decoration-primary">
                   {item.title}
                 </span>
                 {description && (
-                  <span className="text-sm text-foreground-secondary line-clamp-2">
+                  <span className="text-xs text-foreground-secondary line-clamp-2">
                     {description}
                   </span>
                 )}
