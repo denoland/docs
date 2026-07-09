@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-09-29
+last_modified: 2026-07-08
 title: "Security and responsible disclosure"
 description: "How to report security vulnerabilities in Deno Deploy."
 oldUrl: /deploy/classic/security/
@@ -16,7 +16,7 @@ research community to address our system security.
 
 ## Reporting a vulnerability
 
-Please email you findings to security@deno.com. We strive to resolve all
+Please email your findings to security@deno.com. We strive to resolve all
 problems as quickly as possible, and are more than happy to play an active role
 in publication of writeups after the problem is resolved.
 

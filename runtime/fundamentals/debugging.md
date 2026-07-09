@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-30
+last_modified: 2026-07-08
 title: "Debugging"
 description: "Debug Deno programs with the V8 inspector: Chrome DevTools, VS Code and JetBrains setup, network inspection, worker debugging, and the --inspect flag family."
 oldUrl:
@@ -96,11 +96,13 @@ deno run --inspect-brk your_script.ts
 ## Activating the inspector at runtime
 
 The `--inspect` flags start the inspector server when the process launches. If
-you instead want to open it on demand from inside a running program, use the
-[`node:inspector`](https://nodejs.org/api/inspector.html) module. This is handy
-for long-running processes such as servers, where you only want a debugger
-listening after some condition is met rather than for the whole lifetime of the
-process.
+you instead want to open it on demand in an already running program, you can do
+so from inside the program with the
+[`node:inspector`](https://nodejs.org/api/inspector.html) module, or from
+outside it by sending the process a
+[`SIGUSR1` signal](#starting-inspector-with-a-signal). This is handy for
+long-running processes such as servers, where you only want a debugger listening
+after some condition is met rather than for the whole lifetime of the process.
 
 `inspector.open([port][, host][, wait])` starts the inspector server. The port
 defaults to `9229` and the host to `127.0.0.1`. Because it binds a network
@@ -143,6 +145,35 @@ host that can reach the port connect to the inspector and execute arbitrary
 code. Keep the host at `127.0.0.1` unless you fully control the network.
 
 :::
+
+### Starting inspector with a signal
+
+Starting with Deno 2.9.2, on Linux and macOS you can also activate the inspector
+from outside the process by sending it the `SIGUSR1` signal, the same way it
+works in Node.js. The inspector server starts on the default `127.0.0.1:9229`
+without pausing execution and prints the usual banner to stderr:
+
+```sh
+$ deno run server.ts &
+$ kill -USR1 <pid>
+Debugger listening on ws://127.0.0.1:9229/ws/...
+Visit chrome://inspect to connect to the debugger.
+```
+
+This is useful for debugging a long-running process, such as a server, that was
+started without an `--inspect` flag and cannot easily be restarted. Unlike
+`inspector.open()`, it requires no permissions and no cooperation from the
+program's code.
+
+A few details to be aware of:
+
+- If the inspector server is already running (an `--inspect*` flag,
+  `inspector.open()`, or a previous `SIGUSR1`), the signal has no effect.
+- The signal handler is installed shortly after startup, so this is intended for
+  programs that run for longer than about half a second.
+- Signal listeners added with `Deno.addSignalListener("SIGUSR1")` keep working
+  alongside this handler.
+- `SIGUSR1` does not exist on Windows, so this is not available there.
 
 ## Example with Chrome DevTools
 

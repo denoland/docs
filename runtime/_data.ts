@@ -157,6 +157,10 @@ export const sidebar = [
             href: "/runtime/desktop/windows/",
           },
           {
+            title: "WebGPU rendering",
+            href: "/runtime/desktop/webgpu/",
+          },
+          {
             title: "Bindings",
             href: "/runtime/desktop/bindings/",
           },

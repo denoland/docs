@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-16
+last_modified: 2026-07-07
 title: "Build a Next.js App"
 description: "Walkthrough guide to building a Next.js application with Deno. Learn how to set up a project, create API routes, implement server-side rendering, and build a full-stack TypeScript application."
 url: /examples/next_tutorial/
@@ -56,6 +56,23 @@ compatibility, update your `deno.json` file with the following configuration:
   ]
 }
 ```
+
+Next.js reads `next.config.*` during local and Deploy builds. With Deno, prefer
+an ESM config file named `next.config.mjs`. Current Next.js releases also
+support `next.config.ts` with the same `export default` shape:
+
+```js title="next.config.mjs"
+/** @type {import('next').NextConfig} */
+const nextConfig = {};
+
+export default nextConfig;
+```
+
+If you started from a scaffold that generated `next.config.js` with
+`module.exports`, Deno's `detect-cjs` option usually lets that CommonJS config
+work. If you still see `module is not defined`, or if a tool loads the config as
+an ES module, rename it to `next.config.mjs` and use `export default` as shown
+above.
 
 Now install the dependencies found in the package.json:
 
@@ -178,9 +195,9 @@ export type Dino = { name: string; description: string };
 We'll update the `page.tsx` file in the `app` directory to fetch the dinosaur
 data from our API and display it as a list of links.
 
-To execute client-side code in Next.js we need to use the `use Client` directive
-at the top of the file. Then we'll import the modules that we'll need in this
-page and export the default function that will render the page:
+To execute client-side code in Next.js we need to use the `"use client"`
+directive at the top of the file. Then we'll import the modules that we'll need
+in this page and export the default function that will render the page:
 
 ```tsx title="page.tsx"
 "use client";
@@ -301,6 +318,24 @@ details!
 
 Now that you have your working Next.js app, you can deploy it to the web with
 Deno Deploy.
+
+:::tip Build troubleshooting
+
+If `next build` fails on Deno with
+`Cannot read properties of undefined (reading 'bold')`, the failure is in
+Next.js's build-time lint/type-check pass. A temporary workaround is to add
+`typescript.ignoreBuildErrors` and `eslint.ignoreDuringBuilds` to
+`next.config.mjs`, then run type checking and linting separately in CI.
+
+If a client component uses browser-only hooks or APIs, Next.js may still try to
+render it on the server during prerendering or SSR. Defer that code until after
+the component mounts, such as in `useEffect`. If you need to disable SSR with
+`next/dynamic` and `{ ssr: false }`, put the dynamic import in a Client
+Component wrapper; Server Components cannot use `{ ssr: false }` directly.
+Marking the route dynamic alone is not enough because dynamic routes still
+render on the server, where browser globals are undefined.
+
+:::
 
 For the best experience, you can deploy your app directly from GitHub, which
 will set up automated deployments. Create a GitHub repository and push your app

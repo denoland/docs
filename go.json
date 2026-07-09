@@ -28,6 +28,7 @@
   "lint-ignore": "/runtime/reference/cli/lint/#ignore-directives",
   "lint": "/runtime/reference/cli/lint/",
   "lsp": "/runtime/reference/cli/lsp/",
+  "minimum-dependency-age": "/runtime/packages/supply_chain/#minimum-dependency-age",
   "peer-deps": "/runtime/packages/peer_dependencies/",
   "permission-broker": "/runtime/fundamentals/security/#permission-broker",
   "permission-sets": "/runtime/fundamentals/configuration/#permissions",

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-08
 title: "Backends"
 description: "Pick a rendering engine for your desktop app: bundled Chromium, the OS webview, or raw windowing. Tradeoffs and how to switch."
 ---
@@ -69,7 +69,8 @@ auto-binding, and no `bindings.<name>()` proxy.
 Useful for apps that draw their own UI (WebGPU, Skia, custom rendering) or as a
 foundation for non-web desktop programs. The `raw` backend is selected through
 the `desktop.backend` field in `deno.json`; the `--backend` flag accepts only
-`cef` and `webview`.
+`cef` and `webview`. See [WebGPU rendering](/runtime/desktop/webgpu/) for a
+complete example of drawing to a window on this backend.
 
 ## Picking a backend
 

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-08
 title: "Windows"
 description: "Create and manage native windows with Deno.BrowserWindow: lifecycle, multiple windows, sizing, navigation, keyboard / mouse / focus events, and native window handles."
 ---
@@ -246,6 +246,9 @@ const context = surface.getContext("webgpu");
 
 Once a surface has been taken, `close()` is downgraded to `hide()` so the native
 handles backing the surface are not destroyed out from under WebGPU.
+
+For a full walkthrough — configuring the context, drawing geometry, and running
+a render loop — see [WebGPU rendering](/runtime/desktop/webgpu/).
 
 ## DevTools
 
