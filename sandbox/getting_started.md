@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-01-28
+last_modified: 2026-07-09
 title: "Getting started"
 description: "Step-by-step walkthrough for enabling Deno Sandbox, creating your first microVM, running commands, exposing services, and managing secrets."
 ---
