@@ -967,13 +967,14 @@
 
   .markdownBlockTitle {
     background: var(--bgColor-muted, var(--color-canvas-subtle));
+    min-width: min(4rem, 25%);
     @apply px-2 py-1 leading-none rounded-full border text-xs font-semibold z-10
-      relative w-max -mb-4! text-foreground-secondary sm:left-2 top-3.5
+      relative w-max -mb-4! text-foreground-secondary sm:left-2 top-3
       border-foreground-tertiary;
   }
 
   .deno-tabs .markdownBlockTitle {
-    @apply -top-1 left-2;
+    display: none!important;
   }
 
   div.deno-tabs {
@@ -1033,7 +1034,7 @@
 
   .deno-tabs > div.deno-tabs-content > div {
     background-color: var(--bgColor-muted, var(--color-canvas-subtle));
-    @apply hidden p-2 sm:rounded-md sm:p-3 sm:pt-2 sm:rounded-tl-none
+    @apply hidden p-2 sm:rounded-md sm:p-2 sm:rounded-tl-none
       border border-foreground-tertiary bg-background-primary;
   }
 
@@ -1329,11 +1330,12 @@
       grid-template-columns: auto minmax(0, 1fr) auto;
 
       @media (min-width: 64rem) {
-        grid-template-columns: minmax(13rem, 14rem) minmax(0, 1fr) 16rem;
+        grid-template-columns: minmax(13rem, 14rem) minmax(0, 1fr) 14rem;
+        padding-right: 0;
       }
 
       @media (min-width: 82rem) {
-        grid-template-columns: 16rem minmax(0, 1fr) 16rem;
+        grid-template-columns: 16rem minmax(0, 1fr) 17rem;
       }
 
       .content {
@@ -1369,7 +1371,7 @@
       }
 
       .content.examples-content {
-        max-width: calc(var(--content-max-width) * 1.25);
+        max-width: calc(var(--content-max-width) * 1.5);
       }
     }
 

@@ -22,7 +22,7 @@ export default function TableOfContents({ data, toc, hasSubNav }: {
 
   return (
     <div
-      className={`hidden sticky ${topClasses} ${maxHeightClass} border-l border-l-foreground-tertiary lg:flex lg:flex-col lg:w-full`}
+      className={`hidden sticky ${topClasses} ${maxHeightClass} border-l border-l-foreground-tertiary pt-1.5 lg:flex lg:flex-col lg:w-full`}
     >
       <h2
         id="on-this-page"
@@ -31,7 +31,7 @@ export default function TableOfContents({ data, toc, hasSubNav }: {
         This page
       </h2>
       <ul
-        className="toc-list overflow-y-auto scrollbar-none [&::-webkit-scrollbar]:hidden flex flex-col flex-1 min-h-0 pr-2 pb-4 pl-0"
+        className="toc-list overflow-y-auto scrollbar-none [&::-webkit-scrollbar]:hidden flex flex-col flex-1 min-h-0 pb-4 pl-0"
         id="toc"
         aria-labelledby="on-this-page"
       >

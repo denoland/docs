@@ -182,11 +182,9 @@ function SidebarItem(props: {
     ? "block m-0 py-1 px-3 hover:bg-header-highlight hover:text-gray-800 transition-colors duration-150"
     : "block m-0 py-1.5 px-3 border-l hover:bg-header-highlight hover:border-foreground-secondary hover:text-gray-800 transition-colors duration-150";
   const activeClasses = props.isActive
-    ? `bg-header-highlight text-gray-800${
-      props.nested ? "" : " border-foreground-secondary"
-    }`
+    ? `bg-header-highlight text-gray-800 border-foreground-secondary`
     : props.nested
-    ? ""
+    ? "border-sidebar-line"
     : "border-sidebar-line";
 
   const combinedClasses = `${defaultClasses} ${activeClasses}`;
@@ -209,7 +207,7 @@ function SidebarCategoryHeading(props: {
 }) {
   if (props.href) {
     return (
-      <h2 className="block leading-none uppercase pb-3 pt-1.5 pr-4 border-0!">
+      <h2 className="block leading-none uppercase pb-2 pt-1.5 pr-4 border-0!">
         <a
           href={props.href}
           className={`text-foreground-secondary font-bold leading-none tracking-wide hover:text-primary transition-colors ${
@@ -223,7 +221,7 @@ function SidebarCategoryHeading(props: {
   }
 
   return (
-    <h2 className="block leading-none uppercase pb-3 pt-1.5 pr-4 text-foreground-secondary font-bold text-balance tracking-wide border-0!">
+    <h2 className="block leading-none uppercase pb-2 pt-1.5 pr-4 text-foreground-secondary font-bold text-balance tracking-wide border-0!">
       {props.title}
     </h2>
   );
