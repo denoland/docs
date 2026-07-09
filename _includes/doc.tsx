@@ -131,6 +131,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
     <>
       <main
         id="content"
+        tabIndex={-1}
         class={`content ${isExampleScript ? "examples-content" : ""}`}
       >
         <div class="w-full">

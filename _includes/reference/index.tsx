@@ -8,12 +8,10 @@ export default function Index(
 ) {
   return (
     <comp.Base data={data} comp={comp}>
-      <main id="content">
-        <comp.UsageLarge usages={data.usage} />
-        {data.module_doc && <comp.ModuleDoc moduleDoc={data.module_doc} />}
-        {data.overview &&
-          <comp.SymbolContent symbolContent={data.overview} />}
-      </main>
+      <comp.UsageLarge usages={data.usage} />
+      {data.module_doc && <comp.ModuleDoc moduleDoc={data.module_doc} />}
+      {data.overview &&
+        <comp.SymbolContent symbolContent={data.overview} />}
     </comp.Base>
   );
 }

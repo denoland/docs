@@ -1248,7 +1248,7 @@
   }
 
   .fully-filtered {
-    @apply flex flex-col gap-2 items-center mb-4;
+    @apply flex flex-col gap-2 items-center mb-4 max-w-[75ch];
   }
 
   .filter:checked + .slider {
@@ -1778,10 +1778,6 @@
 }
 
 @layer overrides {
-  #content > main > section + div {
-    @apply max-w-[75ch];
-  }
-
   .ddoc {
     &.markdown-body {
       gap: 0;

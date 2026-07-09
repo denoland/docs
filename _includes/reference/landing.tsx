@@ -29,8 +29,7 @@ export default function ApiLanding(
   _helpers: Lume.Helpers,
 ) {
   return (
-    <main
-      id="content"
+    <div
       className="ddoc markdown-body"
       data-color-mode="auto"
       data-light-theme="light"
@@ -81,6 +80,6 @@ export default function ApiLanding(
           </div>
         </section>
       ))}
-    </main>
+    </div>
   );
 }

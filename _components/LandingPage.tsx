@@ -45,7 +45,7 @@ export default function LandingPage(
 
   return (
     <>
-      <main id="content">
+      <div>
         <div className="flex flex-col md:flex-row w-full mb-8 max-w-screen-xl justify-between">
           <div className="max-w-prose mb-8">
             <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl mb-3">
@@ -209,7 +209,7 @@ export default function LandingPage(
             alt="sad Deno with a grad cap"
           />
         </div>
-      </main>
+      </div>
     </>
   );
 }
