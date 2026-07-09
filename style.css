@@ -1444,7 +1444,6 @@
 
     /* Keep the open parent toggle highlighted */
     li.expanded > & {
-      color: var(--color-foreground-primary);
       font-weight: 600;
     }
 
