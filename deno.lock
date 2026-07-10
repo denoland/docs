@@ -2397,6 +2397,7 @@
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/deps/toml.ts": "151769d4382d8a4245e6d2e0ed5341a18216cdfc2b98c43fccaf5af957b47534",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/deps/vento.ts": "40838402d72e8d2353ae75673cc76830b3593506d6cf2cce2edd209fe35c6896",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/deps/yaml.ts": "ee79a110ac7f97ac7821792246ff29a9a4831d35ecc96f3dd543dc7a4ffd70c9",
+    "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/lint.ts": "41c1bb62434eb9d8e39a255c0dd9cd10734451dd208e3263b5e1c9835732556e",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/middlewares/expires.ts": "998d3a1b6791fe0da589a8193be00f4aaa6988ca19407bd12731e5a32fbf9705",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/middlewares/not_found.ts": "0f92cd91239444247a1c3dce1bed4e978445687ca76f544a0ccd483a352f761a",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/mod.ts": "349b3b7fe199bc6703b1e1fb77f3ab92699fce966da2261d3419a951b1ef2c5d",
