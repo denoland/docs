@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-07-09
 title: "Loader hooks"
 description: "Customize module resolution and loading in Deno using the Node.js-compatible module.registerHooks() API. Create virtual modules, transpile custom formats, and intercept imports."
 oldUrl: /runtime/reference/module_hooks/
@@ -203,6 +203,40 @@ const hooks = registerHooks({
 
 hooks.deregister(); // Clean up after tests
 ```
+
+## External dependencies in hook-generated source
+
+:::info
+
+<strong>`jsr:`, `npm:`, and `https:` specifiers are not resolved automatically
+when they appear only in source produced by a hook.</strong> This applies to any
+`load` hook that returns source Deno did not read from disk itself — custom
+transpilation, virtual modules, mocks, and so on.
+
+Deno discovers and installs external dependencies by statically analyzing your
+module graph <em>before</em> execution. Source returned from a `load` hook is
+generated at load time, after that analysis has completed, so any bare `jsr:`,
+`npm:`, or `https:` import that only appears in the emitted source is invisible
+to dependency resolution. You will see errors such as
+`Could not find constraint 'lodash-es@latest' in the list of packages.`
+
+To use an external dependency from hook-generated code, declare it up front so
+it is part of the resolved package set. For example, add it to the `imports` map
+in your `deno.json`:
+
+```json title="deno.json"
+{
+  "imports": {
+    "lodash-es": "npm:lodash-es@latest"
+  }
+}
+```
+
+and import it by its mapped name from the generated source. This is working as
+designed: dependency resolution is deterministic and lockfile-driven, which
+requires the dependency set to be known ahead of execution.
+
+:::
 
 ## The `resolve` hook
 
