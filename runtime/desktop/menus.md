@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-10
 title: "Menus"
 description: "Build native application menu bars and right-click context menus, with submenus, accelerators, separators, checkboxes, and click events."
 ---

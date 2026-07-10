@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-10
 title: "Auto-update"
 description: "Ship binary-diff updates to deno desktop apps with Deno.desktop.autoUpdate(): bsdiff patches, manifest polling, automatic rollback on failed launch."
 ---

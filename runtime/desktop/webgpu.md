@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-08
+last_modified: 2026-07-10
 title: "WebGPU rendering"
 description: "Draw to a native window with WebGPU on the raw backend: request an adapter, wrap the window as an UnsafeWindowSurface, configure a canvas context, and run a render loop."
 ---

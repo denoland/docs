@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-09
+last_modified: 2026-07-10
 title: "Desktop apps"
 description: "Build self-contained desktop applications from a Deno project, with framework auto-detection, hot reload, native windowing, auto-update, and cross-platform distribution."
 ---

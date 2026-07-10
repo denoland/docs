@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-30
+last_modified: 2026-07-10
 title: "Tray and dock"
 description: "Add icons to the OS status area and the macOS dock: tooltips, dark-mode variants, click events, and right-click context menus."
 ---

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-10
 title: "Error reporting"
 description: "Capture uncaught errors, unhandled rejections, and Rust panics, showing a native alert and POSTing a JSON report to your server."
 ---

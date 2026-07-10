@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-27
+last_modified: 2026-07-10
 title: "deno desktop"
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno desktop"

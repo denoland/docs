@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-10
 title: "Bindings"
 description: "Call Deno-side functions from webview JavaScript via win.bind(): type-safe RPC over in-process channels, encoded at the boundary with no cross-process round-trip."
 ---
