@@ -470,6 +470,22 @@ site.preprocess([".md", ".mdx"], (filteredPages) => {
   }
 });
 
+// Wrap tables in a scrolling container so wide tables scroll horizontally
+// instead of overflowing the page (or getting crushed) on narrow screens.
+site.process([".html"], function wrapTables(pages) {
+  for (const page of pages) {
+    const document = page.document;
+    if (!document) continue;
+    for (const table of document.querySelectorAll("table")) {
+      if (table.parentElement?.classList.contains("table-wrapper")) continue;
+      const wrapper = document.createElement("div");
+      wrapper.className = "table-wrapper";
+      table.replaceWith(wrapper);
+      wrapper.append(table);
+    }
+  }
+});
+
 // Load API categories data globally
 import denoCategories from "./reference_gen/deno-categories.json" with {
   type: "json",

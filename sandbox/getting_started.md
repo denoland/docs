@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-01-28
+last_modified: 2026-07-09
 title: "Getting started"
 description: "Step-by-step walkthrough for enabling Deno Sandbox, creating your first microVM, running commands, exposing services, and managing secrets."
 ---
@@ -80,7 +80,8 @@ pip install deno-sandbox
 <deno-tabs group-id="sandbox-sdk">
 <deno-tab value="js" label="JavaScript" default>
 
-```tsx title="main.ts"
+```tsx
+// main.ts
 import { Sandbox } from "@deno/sandbox";
 await using sandbox = await Sandbox.create();
 await sandbox.sh`ls -lh /`;
@@ -89,7 +90,8 @@ await sandbox.sh`ls -lh /`;
 </deno-tab>
 <deno-tab value="python" label="Python">
 
-```py title="main.py"
+```py
+# main.py
 from deno_sandbox import DenoDeploy
 
 def main():
@@ -106,7 +108,8 @@ if __name__ == '__main__':
 </deno-tab>
 <deno-tab value="python-async" label="Python (Async)">
 
-```py title="main.py"
+```py
+# main.py
 import asyncio
 from deno_sandbox import DenoDeploy
 

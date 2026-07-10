@@ -1,13 +1,13 @@
 export default function Footer_new() {
   return (
-    <footer className="text-smaller bg-gray-50 dark:bg-gray-950 p-4 pt-12 sm:px-8 border-t border-t-foreground-tertiary">
-      <nav className="flex flex-col gap-x-4 gap-y-12 max-w-[var(--layout-max-width)] md:flex-row md:flex-wrap md:justify-between md:w-full md:gap-y-8 md:mx-auto">
+    <footer className="text-smaller bg-gray-50 dark:bg-gray-950 p-4 pt-12 border-t border-t-foreground-tertiary">
+      <nav className="flex flex-col gap-x-4 gap-y-12 w-max max-w-full md:flex-row md:flex-wrap md:justify-between md:gap-16 lg:gap-24">
         {data.map((category) => (
           <section className="flex-auto">
             <h3 className="mb-2 uppercase font-bold text-foreground-primary whitespace-pre">
               {category.title}
             </h3>
-            <ul className="m-0 p-0 pl-3 border-l border-l-background-tertiary list-none">
+            <ul className="m-0 p-0 pl-3 border-l border-l-sidebar-line list-none">
               {category.items.map((item) => (
                 <li>
                   <a
@@ -21,7 +21,7 @@ export default function Footer_new() {
           </section>
         ))}
       </nav>
-      <p className="m-0 mt-16 mx-auto text-center text-xs text-foreground-secondary">
+      <p className="m-0 mt-16 mx-auto text-xs text-foreground-secondary">
         Copyright © {new Date().getFullYear()} the Deno authors.
       </p>
     </footer>

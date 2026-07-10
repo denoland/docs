@@ -9,11 +9,11 @@ export default function CopyPage({ file }: { file: string | undefined }) {
   }`;
 
   return (
-    <div class="copy-page-split inline-flex shrink-0 rounded-full border-2 border-foreground-primary dark:border-background-tertiary">
+    <div className="copy-page-split inline-flex shrink-0 rounded-full border border-foreground-primary dark:border-background-tertiary">
       {/* Primary: directly copies the URL */}
       <button
         type="button"
-        class="copy-page-main-btn flex items-center gap-2 px-4 py-2 text-sm font-semibold text-foreground-primary bg-transparent hover:bg-header-highlight dark:hover:text-background-primary rounded-l-full transition-colors cursor-pointer select-none"
+        className="copy-page-main-btn flex items-center gap-2 pl-3 pr-2 py-1 text-xs font-semibold text-foreground-primary bg-transparent hover:bg-header-highlight dark:hover:text-background-primary rounded-l-full transition-colors cursor-pointer select-none"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -26,12 +26,12 @@ export default function CopyPage({ file }: { file: string | undefined }) {
           <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z" />
           <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z" />
         </svg>
-        <span class="copy-page-main-label">Copy page</span>
+        <span className="copy-page-main-label">Copy page</span>
       </button>
 
       {/* Visual divider between the two halves */}
       <span
-        class="self-stretch w-0.5 bg-foreground-primary dark:bg-background-tertiary shrink-0"
+        className="self-stretch w-px bg-foreground-primary dark:bg-background-tertiary shrink-0"
         aria-hidden="true"
       >
       </span>
@@ -39,13 +39,13 @@ export default function CopyPage({ file }: { file: string | undefined }) {
       {/* Chevron: opens the popover panel */}
       <button
         type="button"
-        class="copy-page-toggle-btn flex items-center px-3 py-2 text-foreground-primary bg-transparent hover:bg-header-highlight dark:hover:text-background-primary rounded-r-full transition-colors cursor-pointer select-none"
+        className="copy-page-toggle-btn flex items-center pl-1.5 pr-2  text-foreground-primary bg-transparent hover:bg-header-highlight dark:hover:text-background-primary rounded-r-full transition-colors cursor-pointer select-none"
         popovertarget="copy-page-menu"
         aria-label="More copy options"
         aria-haspopup="menu"
       >
         <svg
-          class="copy-page-chevron transition-transform duration-200"
+          className="copy-page-chevron transition-transform duration-200"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
           fill="currentColor"
@@ -58,11 +58,11 @@ export default function CopyPage({ file }: { file: string | undefined }) {
       </button>
 
       {/* Popover panel — positioned via CSS anchor positioning, JS fallback */}
-      <div id="copy-page-menu" popover="auto" class="copy-page-panel">
+      <div id="copy-page-menu" popover="auto" className="copy-page-panel">
         <a
           href={file}
           target="_blank"
-          class="no-underline flex items-start gap-3 px-4 py-3 hover:bg-background-secondary dark:hover:bg-gray-800 transition-colors"
+          className="no-underline flex items-start gap-3 px-4 py-3 hover:bg-background-secondary dark:hover:bg-gray-800 transition-colors"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -71,13 +71,15 @@ export default function CopyPage({ file }: { file: string | undefined }) {
             width="16"
             height="16"
             viewBox="0 0 16 16"
-            class="mt-0.5 shrink-0"
+            className="mt-0.5 shrink-0"
           >
             <path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z" />
           </svg>
           <span>
-            <span class="block text-sm font-medium">View Page as Markdown</span>
-            <span class="block text-xs text-foreground-secondary mt-0.5">
+            <span className="block text-sm font-medium">
+              View Page as Markdown
+            </span>
+            <span className="block text-xs text-foreground-secondary mt-0.5">
               Open the Markdown file in a new tab
             </span>
           </span>
@@ -85,7 +87,7 @@ export default function CopyPage({ file }: { file: string | undefined }) {
         <a
           href={claudeUrl}
           target="_blank"
-          class="no-underline flex items-start gap-3 px-4 py-3 border-t border-foreground-tertiary hover:bg-background-secondary dark:hover:bg-gray-800 transition-colors"
+          className="no-underline flex items-start gap-3 px-4 py-3 border-t border-foreground-tertiary hover:bg-background-secondary dark:hover:bg-gray-800 transition-colors"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -94,13 +96,13 @@ export default function CopyPage({ file }: { file: string | undefined }) {
             width="16"
             height="16"
             viewBox="0 0 24 24"
-            class="mt-0.5 shrink-0"
+            className="mt-0.5 shrink-0"
           >
             <path d="M12 0C12 0 10.5 10.5 0 12C10.5 12 12 24 12 24C12 24 13.5 13.5 24 12C13.5 12 12 0 12 0Z" />
           </svg>
           <span>
-            <span class="block text-sm font-medium">Open in Claude</span>
-            <span class="block text-xs text-foreground-secondary mt-0.5">
+            <span className="block text-sm font-medium">Open in Claude</span>
+            <span className="block text-xs text-foreground-secondary mt-0.5">
               Ask Claude about this page
             </span>
           </span>
@@ -108,7 +110,7 @@ export default function CopyPage({ file }: { file: string | undefined }) {
         <a
           href="/llms.txt"
           target="_blank"
-          class="no-underline flex items-start gap-3 px-4 py-3 border-t border-foreground-tertiary hover:bg-background-secondary dark:hover:bg-gray-800 transition-colors"
+          className="no-underline flex items-start gap-3 px-4 py-3 border-t border-foreground-tertiary hover:bg-background-secondary dark:hover:bg-gray-800 transition-colors"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -117,13 +119,13 @@ export default function CopyPage({ file }: { file: string | undefined }) {
             width="16"
             height="16"
             viewBox="0 0 16 16"
-            class="mt-0.5 shrink-0"
+            className="mt-0.5 shrink-0"
           >
             <path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 9 4.25V1.5Zm6.75.062V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z" />
           </svg>
           <span>
-            <span class="block text-sm font-medium">llms.txt</span>
-            <span class="block text-xs text-foreground-secondary mt-0.5">
+            <span className="block text-sm font-medium">llms.txt</span>
+            <span className="block text-xs text-foreground-secondary mt-0.5">
               Machine-readable index of these docs for AI tools
             </span>
           </span>

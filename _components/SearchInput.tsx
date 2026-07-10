@@ -8,7 +8,7 @@ export default function SearchInput() {
           placeholder="Search"
           id="orama-search-input"
           className="w-full min-w-24 rounded-lg placeholder:text-sm text-base leading-normal p-1 pl-8 border transition-all duration-150
-          text-foreground-primary border-foreground-secondary hover:bg-background-secondary focus:bg-background-secondary focus:outline-offset-1"
+          text-foreground-primary border-foreground-tertiary hover:bg-background-secondary focus:bg-background-secondary focus:outline-offset-1"
           style="background: url(/img/search.svg) no-repeat 0.5em 50%; background-size: 1.25em; background-color: var(--color-background-raw);"
         />
         <kbd

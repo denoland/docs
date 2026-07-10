@@ -42,6 +42,7 @@
     "prod": "deno run --allow-read --allow-env --allow-net server.ts",
     "test": "deno test -A",
     "check:freshness": "deno run --allow-read --allow-run=git --allow-env scripts/check_freshness.ts",
+    "fmt:css": "deno run --allow-read --allow-write scripts/reflow_apply.ts && deno fmt style.css",
     "check:links": "deno run --no-lock --allow-net --allow-env .github/workflows/better_link_checker.ts",
     "lint:update": "deno run -A update_lint_rules.ts",
     "generate:search": "deno run -A orama/generate_orama_index_full.ts",

@@ -19,7 +19,7 @@ export default function ApiIndex(
   _helpers: Lume.Helpers,
 ) {
   return (
-    <main id="content" className="ddoc markdown-body" tabIndex={-1}>
+    <div className="ddoc markdown-body">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <h1 className="!mb-0">{data.title}</h1>
         <p className="!my-0 text-sm whitespace-nowrap">
@@ -68,6 +68,6 @@ export default function ApiIndex(
           </ul>
         </section>
       ))}
-    </main>
+    </div>
   );
 }

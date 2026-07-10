@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-28
+last_modified: 2026-07-09
 title: "Get started with Deno"
 description: "Install Deno and build your first project: why Deno, install, create, run, test, add a dependency, and use the built-in toolchain. No build step, no config."
 pagination_next: /runtime/getting_started/installation/
@@ -52,7 +52,8 @@ curl -fsSL https://deno.land/install.sh | sh
 </deno-tab>
 <deno-tab value="windows" label="Windows">
 
-```shell title="pwsh"
+```shell
+# pwsh
 irm https://deno.land/install.ps1 | iex
 ```
 
