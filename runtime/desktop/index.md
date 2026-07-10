@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-08
+last_modified: 2026-07-09
 title: "Desktop apps"
 description: "Build self-contained desktop applications from a Deno project, with framework auto-detection, hot reload, native windowing, auto-update, and cross-platform distribution."
 ---
@@ -32,10 +32,10 @@ integration.
   the bundled Chromium (CEF) backend when you need identical rendering across
   macOS, Windows, and Linux.
 - **Framework auto-detection.** Point `deno desktop` at a Next.js, Astro, Fresh,
-  Remix, Nuxt, SvelteKit, SolidStart, TanStack Start, or Vite SSR project and it
-  runs: the production server in release mode, the dev server with hot reload
-  under `--hmr`. No code changes are required to take an existing web project to
-  the desktop.
+  Remix, React Router, Nuxt, SvelteKit, SolidStart, TanStack Start, or Vite SSR
+  project and it runs: the production server in release mode, the dev server
+  with hot reload under `--hmr`. Most frameworks need no special adapter; see
+  [Frameworks](/runtime/desktop/frameworks/) for per-framework requirements.
 - **In-process bindings instead of IPC.** Backend and UI communication goes
   through in-process channels, not socket-based IPC. Values are still encoded as
   they cross the call boundary, but there is no cross-process round-trip between

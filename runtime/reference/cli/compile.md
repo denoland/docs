@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-06-27
 title: "deno compile"
 oldUrl:
   - /runtime/manual/tools/compile/
@@ -43,6 +43,7 @@ Supported frameworks:
 - Astro
 - Fresh (1.x and 2.x)
 - Remix
+- React Router
 - SvelteKit
 - Nuxt
 - SolidStart
@@ -50,7 +51,7 @@ Supported frameworks:
 - Vite (SSR, plus SPA/MPA projects served as static output)
 
 ```sh
-# In a Next.js / Astro / Fresh / etc. project
+# In a Next.js / Astro / Fresh / React Router / etc. project
 deno compile .
 
 # Or pointing at a specific app directory
@@ -60,6 +61,12 @@ deno compile ./apps/web
 Generated entrypoints use `import.meta.dirname` so framework asset paths resolve
 correctly against the [virtual filesystem](#including-data-files-or-directories)
 inside the compiled binary.
+
+React Router projects must build successfully under Deno before they can be
+compiled. Because React Router's default server entry targets Node.js, add a Web
+Streams-compatible `app/entry.server.tsx` when building with Deno. See the
+[React Router desktop framework notes](/runtime/desktop/frameworks/#react-router)
+for an example.
 
 If the project doesn't match any supported framework, `deno compile` will error
 out.
