@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-07-10
 title: "Build an app with Tanstack and Deno"
 description: "Complete guide to building applications with Tanstack and Deno. Learn how to implement Query for data fetching, Router for navigation, manage server state, and create type-safe full-stack applications."
 url: /examples/tanstack_tutorial/
@@ -232,7 +232,7 @@ export function DinosaurList() {
 ```
 
 This uses
-[`useQuery`](https://tanstack.com/query/v4/docs/framework/react/guides/queries)
+[`useQuery`](https://tanstack.com/query/latest/docs/framework/react/guides/queries)
 from **Tanstack Query** to fetch and cache the dinosaur data automatically, with
 built-in loading and error states. Then it uses
 [`Link`](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent)
@@ -294,6 +294,8 @@ Let's create another file in the `./src/components/` folder called `Layout.tsx`:
 
 ```ts
 // ./src/components/Layout.tsx
+
+import { Link, Outlet } from "@tanstack/react-router";
 
 export function Layout() {
   return (
@@ -362,22 +364,22 @@ structure using Tanstack Router's type-safe route definitions:
 ```ts
 // ./src/routeTree.tsx
 
-import { RootRoute, Route } from "@tanstack/react-router";
+import { createRootRoute, createRoute } from "@tanstack/react-router";
 import { DinosaurList } from "./components/DinosaurList";
 import { DinosaurDetail } from "./components/DinosaurDetail";
 import { Layout } from "./components/Layout";
 
-const rootRoute = new RootRoute({
+const rootRoute = createRootRoute({
   component: Layout,
 });
 
-const indexRoute = new Route({
+const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
   component: DinosaurList,
 });
 
-const dinosaurRoute = new Route({
+const dinosaurRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "dinosaur/$name",
   component: DinosaurDetail,
@@ -386,10 +388,11 @@ const dinosaurRoute = new Route({
 export const routeTree = rootRoute.addChildren([indexRoute, dinosaurRoute]);
 ```
 
-In `./src/routeTree.tsx`, we create a hierarchy of routes with `Layout` as the
-root component. Then we set two child routes, their paths and components — one
-for the dinosaur list, `DinosaurList`, and the other for the individual dinosaur
-details with a dynamic parameter, `DinosaurDetail`.
+In `./src/routeTree.tsx`, we use `createRootRoute` to create a route hierarchy
+with `Layout` as the root component. Then `createRoute` sets two child routes,
+their paths and components: one for the dinosaur list, `DinosaurList`, and the
+other for the individual dinosaur details with a dynamic parameter,
+`DinosaurDetail`.
 
 With all that complete, we can run this project:
 
