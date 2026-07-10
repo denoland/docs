@@ -66,7 +66,7 @@ original source if the bundler emits maps.
 
 If you only want to debug one side, use the per-target endpoints in the DevTools
 target list, or use
-[`Deno.BrowserWindow.openDevtools()`](/api/deno/~/Deno.BrowserWindow.openDevtools)
+[`Deno.desktop.BrowserWindow.openDevtools()`](/api/deno/~/Deno.desktop.BrowserWindow.openDevtools)
 from your own code:
 
 ```ts

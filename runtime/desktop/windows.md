@@ -1,7 +1,7 @@
 ---
 last_modified: 2026-07-08
 title: "Windows"
-description: "Create and manage native windows with Deno.BrowserWindow: lifecycle, multiple windows, sizing, navigation, keyboard / mouse / focus events, and native window handles."
+description: "Create and manage native windows with Deno.desktop.BrowserWindow: lifecycle, multiple windows, sizing, navigation, keyboard / mouse / focus events, and native window handles."
 ---
 
 :::info Available in Deno 2.9
@@ -11,25 +11,25 @@ version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 :::
 
-The [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) class controls native
-windows. A window opens automatically when your binary starts and is navigated
-to your local [HTTP server](/runtime/desktop/serving/). The **first**
-`new Deno.BrowserWindow()` you construct adopts that initial window; every
-construction after that opens a new one. All windows share the same Deno
-runtime: there is one async runtime per process, regardless of how many windows
-are open.
+The [`Deno.desktop.BrowserWindow`](/api/deno/~/Deno.desktop.BrowserWindow) class
+controls native windows. A window opens automatically when your binary starts
+and is navigated to your local [HTTP server](/runtime/desktop/serving/). The
+**first** `new Deno.desktop.BrowserWindow()` you construct adopts that initial
+window; every construction after that opens a new one. All windows share the
+same Deno runtime: there is one async runtime per process, regardless of how
+many windows are open.
 
 ## Creating windows
 
 ```ts
 // The first construction adopts the implicit startup window.
-const win = new Deno.BrowserWindow({ title: "My App" });
+const win = new Deno.desktop.BrowserWindow({ title: "My App" });
 
 // Subsequent constructions open additional windows.
 const base = Deno.env.get("DENO_SERVE_ADDRESS")!; // "tcp:127.0.0.1:<port>"
 const port = base.split(":").pop();
 
-const settings = new Deno.BrowserWindow({
+const settings = new Deno.desktop.BrowserWindow({
   title: "Settings",
   width: 420,
   height: 320,
@@ -51,8 +51,8 @@ The constructor accepts a `BrowserWindowOptions` object:
 | `noActivate`          | `boolean` | `false` | Floating, non-activating panel that doesn't steal focus. Creation-only. |
 | `transparentTitlebar` | `boolean` | `false` | Blend the title bar into the content. Creation-only.                    |
 
-`new Deno.BrowserWindow()` opens (or adopts) a window immediately. The window is
-alive until `close()` is called or the user closes it from the OS.
+`new Deno.desktop.BrowserWindow()` opens (or adopts) a window immediately. The
+window is alive until `close()` is called or the user closes it from the OS.
 
 `frameless`, `noActivate`, and `transparentTitlebar` can only be set at creation
 time. `frameless` + `noActivate` together are the building blocks for tray /
@@ -123,7 +123,7 @@ try {
   // First run, or no saved state yet — fall back to defaults.
 }
 
-const win = new Deno.BrowserWindow({
+const win = new Deno.desktop.BrowserWindow({
   title: "My App",
   width: saved.width ?? 800,
   height: saved.height ?? 600,
@@ -166,8 +166,9 @@ windows. For modal dialogs, prefer creating a child window over navigating away.
 
 ## Events
 
-[`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) is an `EventTarget`.
-Listen with `addEventListener` or assign to the matching `on<event>` property.
+[`Deno.desktop.BrowserWindow`](/api/deno/~/Deno.desktop.BrowserWindow) is an
+`EventTarget`. Listen with `addEventListener` or assign to the matching
+`on<event>` property.
 
 ```ts
 win.addEventListener("resize", (e) => {

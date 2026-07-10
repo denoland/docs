@@ -227,8 +227,8 @@ patch flow.
 ```
 
 This is the **only** server URL the runtime polls automatically.
-[`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) defaults to this URL, but can
-override it per call.
+[`Deno.desktop.autoUpdate()`](/api/deno/~/Deno.desktop.autoUpdate) defaults to
+this URL, but can override it per call.
 
 ## `errorReporting`
 

@@ -11,19 +11,20 @@ version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 
 :::
 
-[`Deno.Tray`](/api/deno/~/Deno.Tray) puts an icon in the system status area
-(macOS menu bar extras, Windows system tray, Linux AppIndicator).
-[`Deno.dock`](/api/deno/~/Deno.dock) is a singleton that controls the app's dock
-/ taskbar presence: badge, bounce, visibility, and a custom menu.
+[`Deno.desktop.Tray`](/api/deno/~/Deno.desktop.Tray) puts an icon in the system
+status area (macOS menu bar extras, Windows system tray, Linux AppIndicator).
+[`Deno.desktop.dock`](/api/deno/~/Deno.desktop.dock) is a singleton that
+controls the app's dock / taskbar presence: badge, bounce, visibility, and a
+custom menu.
 
-Menus on both use the [`Deno.MenuItem`](/runtime/desktop/menus/) type.
+Menus on both use the [`Deno.desktop.MenuItem`](/runtime/desktop/menus/) type.
 
-## `Deno.Tray`
+## `Deno.desktop.Tray`
 
 ```ts
 const icon = await Deno.readFile("./icons/tray.png");
 
-const tray = new Deno.Tray();
+const tray = new Deno.desktop.Tray();
 tray.setIcon(icon);
 tray.setTooltip("My App");
 
@@ -52,7 +53,7 @@ tray.destroy();
 
 ```ts
 {
-  using tray = new Deno.Tray();
+  using tray = new Deno.desktop.Tray();
   // ...
 } // automatically destroyed at scope exit
 ```
@@ -90,8 +91,8 @@ tray.setTooltip(null); // remove tooltip
 ### Context menu
 
 Right-click on the tray icon opens the menu set by `setMenu`. The items are the
-same [`Deno.MenuItem`](/runtime/desktop/menus/) shape used by application and
-context menus:
+same [`Deno.desktop.MenuItem`](/runtime/desktop/menus/) shape used by
+application and context menus:
 
 ```ts
 tray.setMenu([
@@ -152,7 +153,7 @@ For the classic menu-bar-app pattern, click the tray icon to toggle a small
 floating window anchored under it, then use `attachPanel()`:
 
 ```ts
-const tray = new Deno.Tray();
+const tray = new Deno.desktop.Tray();
 tray.setIcon(await Deno.readFile("./icons/tray.png"));
 
 const panel = tray.attachPanel({
@@ -164,11 +165,11 @@ const panel = tray.attachPanel({
 panel.window.bind("doThing", async () => {/* … */});
 ```
 
-The returned [`Deno.TrayPanel`](/api/deno/~/Deno.TrayPanel) toggles on tray
-click, is positioned under the icon, and hides when it loses focus. Pass a
-string as shorthand for `{ url }`. `TrayPanelOptions` also accepts `hideOnBlur`
-(default `true`) and a `position` callback to override placement (e.g. for a
-bottom-edge taskbar).
+The returned [`Deno.desktop.TrayPanel`](/api/deno/~/Deno.desktop.TrayPanel)
+toggles on tray click, is positioned under the icon, and hides when it loses
+focus. Pass a string as shorthand for `{ url }`. `TrayPanelOptions` also accepts
+`hideOnBlur` (default `true`) and a `position` callback to override placement
+(e.g. for a bottom-edge taskbar).
 
 ```ts
 panel.show();
@@ -210,18 +211,18 @@ If the backend cannot create a tray icon, the constructor's underlying `trayId`
 is `0` and subsequent calls are no-ops (silently). Check `tray.trayId !== 0` if
 you need to fall back gracefully.
 
-## `Deno.dock`
+## `Deno.desktop.dock`
 
-[`Deno.dock`](/api/deno/~/Deno.dock) is a singleton exposing the app's dock /
-taskbar controls. The methods are cross-platform but their effect varies:
-macOS-only operations are no-ops on Windows and Linux (they fail gracefully
-rather than throwing).
+[`Deno.desktop.dock`](/api/deno/~/Deno.desktop.dock) is a singleton exposing the
+app's dock / taskbar controls. The methods are cross-platform but their effect
+varies: macOS-only operations are no-ops on Windows and Linux (they fail
+gracefully rather than throwing).
 
 ### Badge
 
 ```ts
-Deno.dock.setBadge("3"); // short text on the dock / taskbar icon
-Deno.dock.setBadge(null); // clear (null or empty string)
+Deno.desktop.dock.setBadge("3"); // short text on the dock / taskbar icon
+Deno.desktop.dock.setBadge(null); // clear (null or empty string)
 ```
 
 Sets a text badge on the dock icon (macOS) or taskbar icon (Windows); on Linux
@@ -231,8 +232,8 @@ OS truncates long strings.
 ### Bounce
 
 ```ts
-Deno.dock.bounce(); // single bounce / flash
-Deno.dock.bounce(true); // bounce continuously until the app is focused
+Deno.desktop.dock.bounce(); // single bounce / flash
+Deno.desktop.dock.bounce(true); // bounce continuously until the app is focused
 ```
 
 Bounces the dock icon (macOS), flashes the taskbar button (Windows), or sets the
@@ -242,8 +243,8 @@ urgency hint on the focused window (Linux). The optional `critical` argument
 ### Visibility
 
 ```ts
-Deno.dock.setVisible(false); // remove the app from the dock
-Deno.dock.setVisible(true); // restore it
+Deno.desktop.dock.setVisible(false); // remove the app from the dock
+Deno.desktop.dock.setVisible(true); // restore it
 ```
 
 macOS only; controls the app's activation policy. A hidden app does not appear
@@ -254,19 +255,19 @@ via Spotlight or the tray icon. No-op on Windows and Linux.
 ### Menu
 
 ```ts
-Deno.dock.setMenu([
+Deno.desktop.dock.setMenu([
   { item: { label: "New Window", id: "new", enabled: true } },
   { item: { label: "Quit", id: "quit", enabled: true } },
 ]);
-Deno.dock.setMenu(null); // remove the menu
+Deno.desktop.dock.setMenu(null); // remove the menu
 
-Deno.dock.addEventListener("menuclick", (e) => {
+Deno.desktop.dock.addEventListener("menuclick", (e) => {
   if (e.detail.id === "quit") Deno.exit(0);
 });
 ```
 
 macOS only; a custom right-click menu on the dock icon. Clicks are delivered as
-`menuclick` events on [`Deno.dock`](/api/deno/~/Deno.dock).
+`menuclick` events on [`Deno.desktop.dock`](/api/deno/~/Deno.desktop.dock).
 
 ### Reopen event
 
@@ -275,7 +276,7 @@ On macOS, clicking the dock icon while the app has no visible windows fires a
 so you decide what to do:
 
 ```ts
-Deno.dock.addEventListener("reopen", (e) => {
+Deno.desktop.dock.addEventListener("reopen", (e) => {
   if (!e.detail.hasVisibleWindows) win.show();
 });
 ```
@@ -285,10 +286,10 @@ Deno.dock.addEventListener("reopen", (e) => {
 To run as a status-bar-only background process (no dock, no main window):
 
 ```ts
-Deno.dock.setVisible(false); // macOS: hide the app from the dock
+Deno.desktop.dock.setVisible(false); // macOS: hide the app from the dock
 win.hide(); // hide the implicit startup window
 
-const tray = new Deno.Tray();
+const tray = new Deno.desktop.Tray();
 tray.setIcon(await Deno.readFile("./icons/tray.png"));
 tray.setTooltip("My App");
 tray.setMenu([

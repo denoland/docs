@@ -30,8 +30,9 @@ current directory and builds the appropriate desktop entrypoint. See
 per-framework requirements.
 
 This page covers the command-line flags. For the full guide (backends,
-[`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow), bindings, auto-update,
-DevTools, and distribution) see the [Desktop apps section](/runtime/desktop/).
+[`Deno.desktop.BrowserWindow`](/api/deno/~/Deno.desktop.BrowserWindow),
+bindings, auto-update, DevTools, and distribution) see the
+[Desktop apps section](/runtime/desktop/).
 
 ## Runtime flags
 

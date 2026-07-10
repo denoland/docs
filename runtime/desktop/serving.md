@@ -123,6 +123,6 @@ differentiate:
 
 ```ts
 const port = Deno.env.get("DENO_SERVE_ADDRESS")!.split(":").pop();
-const settings = new Deno.BrowserWindow();
+const settings = new Deno.desktop.BrowserWindow();
 settings.navigate(`http://127.0.0.1:${port}/settings`);
 ```

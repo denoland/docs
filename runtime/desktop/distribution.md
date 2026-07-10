@@ -261,5 +261,5 @@ in the output directory) externally for now, e.g.
 ## Distributing updates after release
 
 Once your binary is in users' hands, ship updates via
-[`Deno.autoUpdate()`](/runtime/desktop/auto_update/): `bsdiff` patches shipped
-from your own server, no app store required.
+[`Deno.desktop.autoUpdate()`](/runtime/desktop/auto_update/): `bsdiff` patches
+shipped from your own server, no app store required.

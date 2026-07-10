@@ -18,7 +18,7 @@ visualizations, emulators, and any app that renders its own pixels rather than a
 document.
 
 The bridge between a window and WebGPU is
-[`Deno.BrowserWindow.getNativeWindow()`](/api/deno/~/Deno.BrowserWindow.prototype.getNativeWindow),
+[`Deno.desktop.BrowserWindow.getNativeWindow()`](/api/deno/~/Deno.desktop.BrowserWindow.prototype.getNativeWindow),
 which hands back a
 [`Deno.UnsafeWindowSurface`](/api/deno/~/Deno.UnsafeWindowSurface). That surface
 exposes a WebGPU canvas context, so the same `context.configure()` /
@@ -56,7 +56,7 @@ const adapter = await navigator.gpu.requestAdapter();
 if (!adapter) throw new Error("no WebGPU adapter available");
 const device = await adapter.requestDevice();
 
-const win = new Deno.BrowserWindow({
+const win = new Deno.desktop.BrowserWindow({
   title: "WebGPU",
   width: 640,
   height: 480,
@@ -111,7 +111,7 @@ const adapter = await navigator.gpu.requestAdapter();
 if (!adapter) throw new Error("no WebGPU adapter available");
 const device = await adapter.requestDevice();
 
-const win = new Deno.BrowserWindow({
+const win = new Deno.desktop.BrowserWindow({
   title: "Triangle",
   width: 640,
   height: 480,
@@ -195,7 +195,11 @@ const adapter = await navigator.gpu.requestAdapter();
 if (!adapter) throw new Error("no WebGPU adapter available");
 const device = await adapter.requestDevice();
 
-const win = new Deno.BrowserWindow({ title: "Spin", width: 640, height: 480 });
+const win = new Deno.desktop.BrowserWindow({
+  title: "Spin",
+  width: 640,
+  height: 480,
+});
 
 const surface = win.getNativeWindow();
 const format = navigator.gpu.getPreferredCanvasFormat();
@@ -304,7 +308,7 @@ alive with nothing on screen.
 ## Key details
 
 - **Request the adapter before wrapping the window.**
-  [`getNativeWindow()`](/api/deno/~/Deno.BrowserWindow.prototype.getNativeWindow)
+  [`getNativeWindow()`](/api/deno/~/Deno.desktop.BrowserWindow.prototype.getNativeWindow)
   needs an active WebGPU context and throws if you call it before
   [`navigator.gpu.requestAdapter()`](/api/web/~/GPU.prototype.requestAdapter).
 
@@ -333,7 +337,7 @@ alive with nothing on screen.
 - [Backends](/runtime/desktop/backends/) — when to choose `raw` over `cef` /
   `webview`.
 - [Windows](/runtime/desktop/windows/) —
-  [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) lifecycle, sizing, and
-  events.
+  [`Deno.desktop.BrowserWindow`](/api/deno/~/Deno.desktop.BrowserWindow)
+  lifecycle, sizing, and events.
 - [WebGPU API](/api/web/~/GPUDevice) and the
   [WGSL specification](https://www.w3.org/TR/WGSL/).
