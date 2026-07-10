@@ -46,16 +46,16 @@ Two pieces of configuration are required:
    ```
 
 Both are baked into the compiled binary. The version is exposed at runtime as
-[`Deno.desktop.desktopVersion`](/api/deno/~/Deno.desktop.desktopVersion):
+[`Deno.desktop.appVersion`](/api/deno/~/Deno.desktop.appVersion):
 
 ```ts
-console.log(Deno.desktop.desktopVersion); // "1.4.0", or null if no version was set
+console.log(Deno.desktop.appVersion); // "1.4.0", or null if no version was set
 ```
 
-If [`Deno.desktop.desktopVersion`](/api/deno/~/Deno.desktop.desktopVersion) is
-`null`, [`Deno.desktop.autoUpdate()`](/api/deno/~/Deno.desktop.autoUpdate) is a
-no-op: the runtime warns once and returns. This is also what happens under
-`deno run`, since a non-compiled program has no baked-in version.
+If [`Deno.desktop.appVersion`](/api/deno/~/Deno.desktop.appVersion) is `null`,
+[`Deno.desktop.autoUpdate()`](/api/deno/~/Deno.desktop.autoUpdate) is a no-op:
+the runtime warns once and returns. This is also what happens under `deno run`,
+since a non-compiled program has no baked-in version.
 [`Deno.desktop.autoUpdate()`](/api/deno/~/Deno.desktop.autoUpdate) does not
 throw there, so you can leave the call in your code and run the same entry point
 with `deno run` during development.
@@ -107,7 +107,7 @@ is an object carrying the patch filename and its **SHA-256 hash**:
 
 | Field     | Meaning                                                                                                                                                          |
 | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `version` | The latest available version. Compared with [`Deno.desktop.desktopVersion`](/api/deno/~/Deno.desktop.desktopVersion).                                            |
+| `version` | The latest available version. Compared with [`Deno.desktop.appVersion`](/api/deno/~/Deno.desktop.appVersion).                                                    |
 | `patches` | Map of from-version → `{ name, sha256 }`. `name` is the patch filename relative to the manifest's URL; `sha256` is the lowercase hex SHA-256 of the patch bytes. |
 
 The `sha256` is **required**: the runtime refuses to apply a patch whose bytes
@@ -151,9 +151,9 @@ Deno.desktop.autoUpdate({
 
 1. **Fetch manifest.** `GET <url>/latest.json`. On a non-2xx response, the check
    silently returns and waits for the next interval.
-2. **Compare versions.** If `manifest.version === Deno.desktop.desktopVersion`,
+2. **Compare versions.** If `manifest.version === Deno.desktop.appVersion`,
    nothing to do.
-3. **Look up a patch.** `manifest.patches[Deno.desktop.desktopVersion]` →
+3. **Look up a patch.** `manifest.patches[Deno.desktop.appVersion]` →
    `{ name, sha256 }`.
 4. **Download the patch.** `GET <url>/<name>`. The whole patch is buffered into
    memory; for typical bsdiff outputs (a few MB) this is fine.
