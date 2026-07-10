@@ -155,6 +155,6 @@ deno task    # run scripts defined in deno.json
 - **[Run code](/runtime/run/).** Servers, tasks, web APIs, and debugging.
 - **[Manage packages](/runtime/packages/).** Dependencies, workspaces,
   publishing.
-- **[Migrate from Node.js](/runtime/migrate/).** Bring an existing project
+- **[Migrate from Node.js](/runtime/migrate/migrate_from_node/).** Bring an existing project
   across.
 - **[Examples and tutorials](/examples/).** Ideas for what to build next.

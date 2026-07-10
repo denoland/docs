@@ -112,4 +112,4 @@ replaces several dev dependencies with zero configuration:
 | `tsc --noEmit`     | deno check   |
 
 For module resolution details, the full command cheatsheet, and tsconfig
-migration, see the [Migrate from Node.js guide](/runtime/migrate/).
+migration, see the [Migrate from Node.js guide](/runtime/migrate/migrate_from_node/).

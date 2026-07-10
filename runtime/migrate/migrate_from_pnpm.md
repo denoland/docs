@@ -166,7 +166,7 @@ counterpart. Plan around them rather than translating them:
 
 - **[Migrate from npm](/runtime/migrate/migrate_from_npm/).** The npm and pnpm
   CLI workflows map to the same Deno commands.
-- **[Migrate from Node.js](/runtime/migrate/).** If you are also moving the
+- **[Migrate from Node.js](/runtime/migrate/migrate_from_node/).** If you are also moving the
   runtime, this covers CommonJS and ES module resolution and the Node built-ins
   Deno supports.
 - **[Workspaces](/runtime/fundamentals/workspaces/).** How Deno resolves
