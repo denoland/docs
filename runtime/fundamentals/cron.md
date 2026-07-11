@@ -44,7 +44,8 @@ Deno.cron("hourly-task", { hour: { every: 1 } }, () => {
 
 :::note
 
-All times are UTC — this avoids ambiguity around daylight saving transitions.
+All times are **UTC** — this avoids ambiguity around daylight saving
+transitions.
 
 :::
 
@@ -80,18 +81,15 @@ Each field accepts an exact value, `*` (every value), a range (`1-5`), a list
 
 :::note
 
-Unlike traditional UNIX cron engines (which use `0-6` where `0` is Sunday), Deno
-maps numeric days of the week from **1** to **7** (1 = Sunday, 7 = Saturday).
+Unlike traditional UNIX cron engines (which use `0–6`, where `0` is Sunday),
+Deno maps numeric days of the week as **`1–7`** (where `1` is Sunday and `7` is
+Saturday).
 
 :::
 
 ### Advanced Features
 
 Deno's parser introduces powerful features for advanced scheduling:
-
-- **Wraparound Ranges:** Inverted ranges that cross time boundaries are
-  supported. Useful for night-time windows or end-of-month + start-of-next-month
-  logic.
 
 - **Last Day of Month:** Specifying `L` in the _Day of Month_ field triggers the
   task on the exact last day of the current month (28, 29, 30, or 31).\
@@ -103,25 +101,31 @@ Deno's parser introduces powerful features for advanced scheduling:
   `LW` or `L-<offset>W` works relative to the end of the month.
 
 - **Last Day of Week:** Specifying `<day>L` triggers on the last specific day of
-  the week in that month. Standalone `L` is equivalent to `7L`.
+  the week in that month. However, a standalone `L` is simply equivalent to `7`
+  (every Saturday).
 
 - **N-th Day of Week:** `<day>#<nth>` triggers on the n-th specific day of the
   week in a month. The `<nth>` value can be from `1` to `5`.
 
+- **Wraparound Ranges:** Inverted ranges that cross time boundaries are
+  supported. Useful for night-time windows or end-of-month + start-of-next-month
+  logic. Note: plain wraparound ranges are processed by including one value
+  prior to the start bound (e.g., `31-1` is `30,31,1`).
+
 ### Examples
 
-| Expression              | Description                                               |
-| ----------------------- | --------------------------------------------------------- |
-| `0 9 * * 2-6`           | Every weekday at 09:00                                    |
-| `5/10 8-18 * * *`       | Every 10 minutes starting at :05, between 8 AM and 6 PM   |
-| `59-0 23-0 31-1 12-1 *` | From end of December to beginning of January (wraparound) |
-| `0 0 L * *`             | Last day of every month at midnight                       |
-| `0 0 LW * *`            | Last weekday of every month at midnight                   |
-| `0 0 L-30W * *`         | Nearest weekday to (end of month - 30 days) at midnight   |
-| `0 0 1W * *`            | Nearest weekday to the 1st of the month at midnight       |
-| `0 0 * * 7L`            | Last Saturday of every month at midnight                  |
-| `0 0 * * MON#2`         | Second Monday of every month at midnight                  |
-| `*/10 20-4 * * *`       | Every 10 minutes during night hours (wraparound)          |
+| Expression              | Description                                                                                                                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `0 9 * * 2-6`           | Every weekday at 09:00                                                                                                                                                        |
+| `5/10 8-18 * * *`       | Every 10 minutes starting at :05, between 8 AM and 6 PM                                                                                                                       |
+| `0 0 L * *`             | Last day of every month at midnight                                                                                                                                           |
+| `0 0 LW * *`            | Last weekday of every month at midnight                                                                                                                                       |
+| `0 0 L-30W * *`         | Nearest weekday to (end of month - 30 days) at midnight                                                                                                                       |
+| `0 0 1W * *`            | Nearest weekday to the 1st of the month at midnight                                                                                                                           |
+| `0 0 * * 7L`            | Last Saturday of every month at midnight                                                                                                                                      |
+| `0 0 * * MON#2`         | Second Monday of every month at midnight                                                                                                                                      |
+| `50-10/10 * * * *`      | Every 10 minutes in range (00:50, 01:00, 01:10)                                                                                                                               |
+| `59-0 23-0 31-1 12-1 *` | Tricky example. It is **not** _"from the end of December to the beginning of January"_. Invocations will occur at specific times, such as Nov 30 at 22:58 and Dec 1 at 00:00. |
 
 ## Retries and backoff
 
