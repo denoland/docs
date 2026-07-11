@@ -251,6 +251,10 @@ if (PROFILE) {
 // ignore some folders that have their own build tasks
 // site.ignore("styleguide");
 
+// Agent skills are instructions for humans and coding agents working on the
+// repo, not published pages.
+site.ignore("skills");
+
 site.copy("static", ".");
 site.copy("timeUtils.ts");
 site.copy("subhosting/api/images");
