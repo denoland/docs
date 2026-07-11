@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-08
+last_modified: 2026-07-14
 title: "Windows"
 description: "Create and manage native windows with Deno.BrowserWindow: lifecycle, multiple windows, sizing, navigation, keyboard / mouse / focus events, and native window handles."
 ---
@@ -39,17 +39,18 @@ settings.navigate(`http://127.0.0.1:${port}/settings`);
 
 The constructor accepts a `BrowserWindowOptions` object:
 
-| Option                | Type      | Default | Notes                                                                   |
-| --------------------- | --------- | ------- | ----------------------------------------------------------------------- |
-| `title`               | `string`  | none    | Window title.                                                           |
-| `width`               | `number`  | `800`   | Initial width in logical pixels.                                        |
-| `height`              | `number`  | `600`   | Initial height in logical pixels.                                       |
-| `x`, `y`              | `number`  | none    | Initial position; centered if omitted.                                  |
-| `resizable`           | `boolean` | `true`  | Whether the user can resize the window.                                 |
-| `alwaysOnTop`         | `boolean` | `false` | Keep the window above others.                                           |
-| `frameless`           | `boolean` | `false` | Remove the title bar and window chrome. Creation-only.                  |
-| `noActivate`          | `boolean` | `false` | Floating, non-activating panel that doesn't steal focus. Creation-only. |
-| `transparentTitlebar` | `boolean` | `false` | Blend the title bar into the content. Creation-only.                    |
+| Option                | Type      | Default | Notes                                                                        |
+| --------------------- | --------- | ------- | ---------------------------------------------------------------------------- |
+| `title`               | `string`  | none    | Window title.                                                                |
+| `width`               | `number`  | `800`   | Initial width in logical pixels.                                             |
+| `height`              | `number`  | `600`   | Initial height in logical pixels.                                            |
+| `x`, `y`              | `number`  | none    | Initial position; centered if omitted.                                       |
+| `resizable`           | `boolean` | `true`  | Whether the user can resize the window.                                      |
+| `alwaysOnTop`         | `boolean` | `false` | Keep the window above others.                                                |
+| `frameless`           | `boolean` | `false` | Remove the title bar and window chrome. Creation-only.                       |
+| `noActivate`          | `boolean` | `false` | Floating, non-activating panel that doesn't steal focus. Creation-only.      |
+| `transparentTitlebar` | `boolean` | `false` | Blend the title bar into the content. Creation-only.                         |
+| `visible`             | `boolean` | `true`  | Whether the window is shown when created. Set `false` for a headless window. |
 
 `new Deno.BrowserWindow()` opens (or adopts) a window immediately. The window is
 alive until `close()` is called or the user closes it from the OS.
@@ -57,6 +58,12 @@ alive until `close()` is called or the user closes it from the OS.
 `frameless`, `noActivate`, and `transparentTitlebar` can only be set at creation
 time. `frameless` + `noActivate` together are the building blocks for tray /
 menu-bar popovers; see [`Tray.attachPanel`](/runtime/desktop/tray_and_dock/).
+
+Set `visible: false` to create a window that is never shown. It runs a full
+webview off-screen (load a page, run scripts, or
+[render it to a PDF](#printing-to-pdf)) and you can reveal it later with
+`show()`, or never at all. Unlike the creation-only flags above, visibility is
+not fixed: toggle it any time with `show()` and `hide()`.
 
 Multiple windows are independent: each has its own size, position, focus state,
 and webview. They can navigate to different paths or different origins, set
@@ -224,6 +231,44 @@ the script throws, the returned promise rejects with the thrown value.
 
 For richer Deno ↔ webview communication, use
 [bindings](/runtime/desktop/bindings/) instead.
+
+## Printing to PDF
+
+```ts
+const bytes = await win.printToPdf();
+await Deno.writeFile("page.pdf", bytes);
+```
+
+`printToPdf()` renders the window's current page and resolves with the PDF as a
+`Uint8Array`. Pass a `path` to also write the file in one step; the promise
+still resolves with the same bytes:
+
+```ts
+const bytes = await win.printToPdf({ path: "page.pdf" });
+```
+
+The promise rejects if the active [backend](/runtime/desktop/backends/) cannot
+produce a PDF.
+
+Because the bytes come back directly, no window needs to be on screen. Pair
+`visible: false` with `printToPdf()` to render a document headlessly: the window
+loads, prints, and closes without ever appearing:
+
+```ts
+const port = Deno.env.get("DENO_SERVE_ADDRESS")!.split(":").pop();
+
+const win = new Deno.BrowserWindow({ visible: false });
+win.navigate(`http://127.0.0.1:${port}/invoice/42`);
+
+// The page loads asynchronously, so wait until it is done before printing.
+while ((await win.executeJs("document.readyState")) !== "complete") {
+  await new Promise((r) => setTimeout(r, 50));
+}
+
+const bytes = await win.printToPdf();
+await Deno.writeFile("invoice-42.pdf", bytes);
+win.close();
+```
 
 ## Native window handle
 
