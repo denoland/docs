@@ -77,6 +77,7 @@
 
   --breakpoint-xs: 30rem;
   --breakpoint-xlplus: 82rem;
+  --breakpoint-3xl: 112rem;
 
   --text-smaller: 0.8125rem;
   --content-max-width: 48rem;
@@ -111,6 +112,12 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
+  }
+
+  html {
+    @variant 3xl {
+      font-size: 112.5%; /* 18px equivalent */
+    }
   }
 
   /* Theme variables for the vendored github-markdown-css styles, collapsed
