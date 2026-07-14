@@ -1486,10 +1486,26 @@
       flex-shrink: 0;
       cursor: pointer;
       color: var(--color-foreground-secondary);
+      position: relative;
 
-      &:hover {
+      &:not(:focus)::before {
+        content: "";
+        position: absolute;
+        border: 1px solid var(--color-foreground-tertiary);
+        inset: 7px;
+        border-radius: 2px;
+        pointer-events: none;
+      }
+
+      &:hover,
+      &:focus,
+      a[data-active] + & {
         background-color: var(--color-header-highlight);
         color: var(--color-gray-800);
+
+        &::before {
+          border-color: var(--color-foreground-secondary);
+        }
       }
     }
 
