@@ -2410,9 +2410,9 @@
           "short": null,
           "long": "watch",
           "required": false,
-          "help": "Watch for file changes and restart process automatically.\n  \u001b[38;5;245mOnly local files from entry point module graph are watched.\u001b[39m",
+          "help": "Watch for file changes and restart process automatically.\n  \u001b[38;5;245mLocal files from entry point module graph are watched by default.\n  Additional paths might be watched by passing them as arguments to this flag.\u001b[39m",
           "help_heading": "File watching options",
-          "usage": "--watch"
+          "usage": "--watch[=<FILES>...]"
         },
         {
           "name": "watch-exclude",
@@ -4595,6 +4595,15 @@
           "usage": "--exclude <exclude>"
         },
         {
+          "name": "exclude-unused-npm",
+          "short": null,
+          "long": "exclude-unused-npm",
+          "required": false,
+          "help": "Embed only the npm packages reachable from the module graph (managed npm; no \u001b[36mnode_modules\u001b[39m directory).\n  \u001b[38;5;245mWithout this flag the full managed npm snapshot from the lockfile / package.json is embedded.\n  Reduces binary size when the lockfile contains packages the entrypoint does not import.\n  Skips packages that are only reached through non-statically-analyzable dynamic imports;\n  pass those with \u001b[36m--include npm:<pkg>\u001b[38;5;245m if needed.\u001b[39m",
+          "help_heading": "Desktop options",
+          "usage": "--exclude-unused-npm"
+        },
+        {
           "name": "output",
           "short": "o",
           "long": "output",
@@ -5690,9 +5699,9 @@
           "short": null,
           "long": "watch",
           "required": false,
-          "help": "Watch for file changes and restart process automatically.\n  \u001b[38;5;245mOnly local files from entry point module graph are watched.\u001b[39m",
+          "help": "Watch for file changes and restart process automatically.\n  \u001b[38;5;245mLocal files from entry point module graph are watched by default.\n  Additional paths might be watched by passing them as arguments to this flag.\u001b[39m",
           "help_heading": "File watching options",
-          "usage": "--watch"
+          "usage": "--watch[=<FILES>...]"
         },
         {
           "name": "watch-exclude",
@@ -7014,7 +7023,7 @@
     },
     {
       "name": "uninstall",
-      "about": "Uninstalls a dependency or an executable script in the installation root's bin directory.\n  \u001b[38;5;245mdeno uninstall @std/dotenv chalk\u001b[39m\n  \u001b[38;5;245mdeno uninstall --global file_server\u001b[39m\n\nTo change the installation root, use \u001b[36m--root\u001b[39m flag:\n  \u001b[38;5;245mdeno uninstall --global --root /usr/local serve\u001b[39m\n\nThe installation root is determined, in order of precedence:\n  - \u001b[38;5;245m--root\u001b[39m option\n  - \u001b[38;5;245mDENO_INSTALL_ROOT\u001b[39m environment variable\n  - \u001b[38;5;245m$HOME/.deno\u001b[39m",
+      "about": "Uninstalls dependencies or an executable script in the installation root's bin directory.\n  \u001b[38;5;245mdeno uninstall @std/dotenv chalk\u001b[39m\n  \u001b[38;5;245mdeno uninstall --global file_server\u001b[39m\n\nTo change the installation root, use \u001b[36m--root\u001b[39m flag:\n  \u001b[38;5;245mdeno uninstall --global --root /usr/local cowsay serve\u001b[39m\n\nThe installation root is determined, in order of precedence:\n  - \u001b[38;5;245m--root\u001b[39m option\n  - \u001b[38;5;245mDENO_INSTALL_ROOT\u001b[39m environment variable\n  - \u001b[38;5;245m$HOME/.deno\u001b[39m",
       "args": [
         {
           "name": "name-or-package",
@@ -7039,7 +7048,7 @@
           "short": "g",
           "long": "global",
           "required": false,
-          "help": "Remove globally installed package or module",
+          "help": "Remove globally installed packages or modules",
           "help_heading": null,
           "usage": "--global"
         },
@@ -7510,9 +7519,9 @@
           "short": null,
           "long": "watch",
           "required": false,
-          "help": "Watch for file changes and restart process automatically.\n  \u001b[38;5;245mOnly local files from entry point module graph are watched.\u001b[39m",
+          "help": "Watch for file changes and restart process automatically.\n  \u001b[38;5;245mLocal files from entry point module graph are watched by default.\n  Additional paths might be watched by passing them as arguments to this flag.\u001b[39m",
           "help_heading": "File watching options",
-          "usage": "--watch"
+          "usage": "--watch[=<FILES>...]"
         },
         {
           "name": "watch-exclude",
@@ -10771,6 +10780,11 @@
     {
       "name": "DENO_KV_PATH_PREFIX",
       "description": "Set a prefix to be added to all Deno.openKv() paths.",
+      "example": null
+    },
+    {
+      "name": "DENO_KV_REQUIRES_DISTRIBUTED_DATABASE",
+      "description": "Require Deno.openKv() to resolve to a distributed (remote) database.\nWhen set to \"error\", Deno.openKv() is always exposed and rejects with a\nclear message unless the resolved path is remote. When set to \"warn\", a\nlocal/in-memory fallback is allowed but logs a warning. Used by Deno\nDeploy to surface a clear error when no KV database is attached.",
       "example": null
     },
     {
