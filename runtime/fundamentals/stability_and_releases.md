@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-15
+last_modified: 2026-07-16
 title: "Stability and releases"
 description: "Guide to Deno's stability guarantees and release process. Covering release channels, long-term support (LTS), unstable features, versioning policy, and how Deno maintains backward compatibility."
 oldUrl:
@@ -85,15 +85,15 @@ we maintain with only backwards-compatible bug fixes. It is aimed at enterprise
 users who prefer to stay on one release line without absorbing new features or
 breaking changes. Install or update it with `deno upgrade lts`.
 
-The LTS channel is active on the Deno 2.9 line, starting with **v2.9.3**. The
-maintenance window for the 2.9 LTS line is still being finalized.
+The LTS channel is active on the Deno 2.9 line, starting with **v2.9.3**, and is
+maintained until January 31st, 2027.
 
 | LTS release version | LTS maintenance start | LTS maintenance end |
 | ------------------- | --------------------- | ------------------- |
 | v2.1                | Feb 1st, 2025         | Apr 30th, 2025      |
 | v2.2                | May 1st, 2025         | Oct 31st, 2025      |
 | v2.5                | Nov 1st, 2025         | Apr 30th, 2026      |
-| v2.9                | TBD                   | TBD                 |
+| v2.9                | Jul 1st, 2026         | Jan 31st, 2027      |
 
 LTS backports include:
 
