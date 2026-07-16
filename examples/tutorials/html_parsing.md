@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-17
+last_modified: 2026-07-16
 title: "Parse HTML with DOMParser"
 description: "Learn why DOMParser is not a Deno global and how to parse and query HTML with LinkeDOM or Deno DOM."
 url: /examples/html_parsing_tutorial/
