@@ -555,6 +555,13 @@ export const items = [
     category: "Web standard APIs",
   },
 
+  {
+    title: "Parse HTML with DOMParser",
+    href: "/examples/html_parsing_tutorial/",
+    type: "tutorial",
+    category: "Web standard APIs",
+  },
+
   // Standard library
   {
     title: "User Data Processing with Deno Collections",
