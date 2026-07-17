@@ -19,6 +19,9 @@ construction after that opens a new one. All windows share the same Deno
 runtime: there is one async runtime per process, regardless of how many windows
 are open.
 
+For a complete app that manages a window, application menus, and packaging, see
+the [denidian example](https://github.com/bartlomieju/denidian).
+
 ## Creating windows
 
 ```ts
