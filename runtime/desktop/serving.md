@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-10
 title: "HTTP serving"
 description: "How Deno.serve() works inside a desktop app: automatic port binding, the DENO_SERVE_ADDRESS env var, and serving local UI to the embedded webview."
 ---
@@ -123,6 +123,6 @@ differentiate:
 
 ```ts
 const port = Deno.env.get("DENO_SERVE_ADDRESS")!.split(":").pop();
-const settings = new Deno.BrowserWindow();
+const settings = new Deno.desktop.BrowserWindow();
 settings.navigate(`http://127.0.0.1:${port}/settings`);
 ```

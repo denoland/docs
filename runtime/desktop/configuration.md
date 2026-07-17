@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-30
+last_modified: 2026-07-10
 title: "Configuration"
 description: "Configure deno desktop in deno.json: app metadata, icons, deep-link URL schemes, backend selection, output paths, error reporting, and the auto-update server."
 ---
@@ -227,8 +227,8 @@ patch flow.
 ```
 
 This is the **only** server URL the runtime polls automatically.
-[`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) defaults to this URL, but can
-override it per call.
+[`Deno.desktop.autoUpdate()`](/api/deno/~/Deno.desktop.autoUpdate) defaults to
+this URL, but can override it per call.
 
 ## `errorReporting`
 

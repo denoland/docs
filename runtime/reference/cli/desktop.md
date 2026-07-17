@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-27
+last_modified: 2026-07-10
 title: "deno desktop"
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno desktop"
@@ -30,8 +30,9 @@ current directory and builds the appropriate desktop entrypoint. See
 per-framework requirements.
 
 This page covers the command-line flags. For the full guide (backends,
-[`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow), bindings, auto-update,
-DevTools, and distribution) see the [Desktop apps section](/runtime/desktop/).
+[`Deno.desktop.BrowserWindow`](/api/deno/~/Deno.desktop.BrowserWindow),
+bindings, auto-update, DevTools, and distribution) see the
+[Desktop apps section](/runtime/desktop/).
 
 ## Runtime flags
 

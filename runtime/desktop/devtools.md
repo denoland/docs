@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-10
 title: "DevTools"
 description: "Attach Chrome DevTools to a deno desktop app: a single session shows both the Deno runtime V8 and the renderer V8 as inspectable targets."
 ---
@@ -66,7 +66,7 @@ original source if the bundler emits maps.
 
 If you only want to debug one side, use the per-target endpoints in the DevTools
 target list, or use
-[`Deno.BrowserWindow.openDevtools()`](/api/deno/~/Deno.BrowserWindow.openDevtools)
+[`Deno.desktop.BrowserWindow.openDevtools()`](/api/deno/~/Deno.desktop.BrowserWindow.openDevtools)
 from your own code:
 
 ```ts
