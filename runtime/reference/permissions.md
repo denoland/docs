@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-29
+last_modified: 2026-07-09
 title: "Permissions"
 description: "Reference for Deno's permission system: how the runtime sandbox works and how to grant or deny file system, network, environment, system, subprocess, FFI, and import access with the --allow and --deny flags."
 oldUrl:
@@ -385,7 +385,7 @@ deno run --deny-sys script.ts
 The interface names accepted by `--allow-sys` correspond to the functions in the
 `Deno` namespace that expose host information, such as `hostname`, `osRelease`,
 `osUptime`, `loadavg`, `networkInterfaces`, `systemMemoryInfo`, `uid`, `gid`,
-`username`, `cpus`, and `homedir`. See
+`username`, `cpus`, `homedir`, and `inspector`. See
 [Deno.SysPermissionDescriptor](/api/deno/~/Deno.SysPermissionDescriptor) for the
 full set of recognized names.
 
@@ -397,6 +397,24 @@ system information, such as `os.hostname()`, `os.cpus()`,
 the same interface names. For example, calling `os.cpus()` needs
 `--allow-sys=cpus`, and `os.networkInterfaces()` needs
 `--allow-sys=networkInterfaces`.
+
+:::caution `--allow-sys` is not purely read-only
+
+Unlike the other names, `inspector` does not read host information. It gates
+connecting to [`node:inspector`](/api/node/inspector/), which opens a Chrome
+DevTools Protocol (CDP) session against the current isolate. CDP is a powerful
+capability: it can evaluate expressions and set breakpoints in scopes that are
+otherwise inaccessible to user code, which can be abused to reach Deno's
+internal functions and bypass the permission model. Treat
+`--allow-sys=inspector` as a high-privilege grant, not as read-only access to
+system information.
+
+Because a bare `--allow-sys` (or `-S`) enables every interface, it includes
+`inspector`. When running untrusted code, prefer granting only the specific
+interfaces you need (for example `--allow-sys=hostname,osRelease`) and avoid
+granting `inspector` unless the program genuinely needs the debugger.
+
+:::
 
 ## Subprocesses
 
