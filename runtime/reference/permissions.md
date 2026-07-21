@@ -180,6 +180,14 @@ explicit permissions, and sometimes is allowed by default:
   `deno info <entrypoint>`.
 - Files that are dynamically imported in a way that can not be statically
   analyzed require runtime read permissions.
+- A Web Worker's script is loaded as if it were a dynamic import, so a worker
+  whose script is a local file, such as
+  `new Worker(new URL("./worker.ts", import.meta.url).href, { type: "module" })`,
+  requires `--allow-read`. This applies to the worker's entry script and its
+  entire static import graph, and the read access is checked against the
+  permissions of the thread that created the worker. A worker loaded from an
+  `https:` URL instead requires [`--allow-import`](#importing-from-the-web);
+  `data:` and `blob:` URLs need no permission.
 - Files inside of a `node_modules/` directory are allowed to be read by default.
 
 When fetching modules from the network, or when transpiling code from TypeScript
@@ -536,10 +544,10 @@ Allow importing code from the Web. By default Deno limits hosts you can import
 code from. This is true for both static and dynamic imports.
 
 If you want to dynamically import code, either using the `import()` or the
-`new Worker()` APIs, additional permissions need to be granted. Importing from
-the local file system [requires `--allow-read`](#file-system-access), but Deno
-also allows to import from `http:` and `https:` URLs. In such case you will need
-to specify an explicit `--allow-import` flag:
+`new Worker()` APIs, additional permissions need to be granted. Loading such
+code from the local file system [requires `--allow-read`](#file-system-access).
+Deno also allows importing from `http:` and `https:` URLs, but in that case you
+will need to specify an explicit `--allow-import` flag:
 
 ```sh
 # allow importing code from `https://example.com`
