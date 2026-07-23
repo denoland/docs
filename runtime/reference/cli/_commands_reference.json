@@ -1707,6 +1707,24 @@
           "usage": "--dev"
         },
         {
+          "name": "save-optional",
+          "short": "O",
+          "long": "save-optional",
+          "required": false,
+          "help": "Add the package as an optional dependency (under `optionalDependencies`). Note: this only applies when adding to a `package.json` file.",
+          "help_heading": null,
+          "usage": "--save-optional"
+        },
+        {
+          "name": "no-save",
+          "short": null,
+          "long": "no-save",
+          "required": false,
+          "help": "Install the package(s) without adding them to the configuration file.",
+          "help_heading": null,
+          "usage": "--no-save"
+        },
+        {
           "name": "allow-scripts",
           "short": null,
           "long": "allow-scripts",
@@ -6652,6 +6670,24 @@
           "help": "Add the package as a dev dependency (under `devDependencies`). Note: this only applies when adding to a `package.json` file.",
           "help_heading": null,
           "usage": "--dev"
+        },
+        {
+          "name": "save-optional",
+          "short": "O",
+          "long": "save-optional",
+          "required": false,
+          "help": "Add the package as an optional dependency (under `optionalDependencies`). Note: this only applies when adding to a `package.json` file.",
+          "help_heading": null,
+          "usage": "--save-optional"
+        },
+        {
+          "name": "no-save",
+          "short": null,
+          "long": "no-save",
+          "required": false,
+          "help": "Install the package(s) without adding them to the configuration file.",
+          "help_heading": null,
+          "usage": "--no-save"
         },
         {
           "name": "npm",
