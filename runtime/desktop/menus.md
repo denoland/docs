@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-10
 title: "Menus"
 description: "Build native application menu bars and right-click context menus, with submenus, accelerators, separators, checkboxes, and click events."
 ---
@@ -15,7 +15,8 @@ version, [update Deno](/runtime/reference/cli/upgrade/) to use it.
 (macOS menu bar, Windows / Linux window menu) and **context menus** (right-click
 popups).
 
-Both use the same [`Deno.MenuItem`](/api/deno/~/Deno.MenuItem) type.
+Both use the same [`Deno.desktop.MenuItem`](/api/deno/~/Deno.desktop.MenuItem)
+type.
 
 ## `MenuItem` shape
 
@@ -154,9 +155,9 @@ commands so they behave natively (and so macOS wires up the standard Edit-menu
 keyboard shortcuts):
 
 ```ts
-const quit: Deno.MenuItem = { role: { role: "quit" } };
-const copy: Deno.MenuItem = { role: { role: "copy" } };
-const paste: Deno.MenuItem = { role: { role: "paste" } };
+const quit: Deno.desktop.MenuItem = { role: { role: "quit" } };
+const copy: Deno.desktop.MenuItem = { role: { role: "copy" } };
+const paste: Deno.desktop.MenuItem = { role: { role: "paste" } };
 ```
 
 Common roles include `quit`, `undo`, `redo`, `cut`, `copy`, `paste`,
@@ -178,7 +179,7 @@ natively when you include them as `role` items.
 Show a context menu at a screen position with `showContextMenu(x, y, menu)`:
 
 ```ts
-const contextMenu: Deno.MenuItem[] = [
+const contextMenu: Deno.desktop.MenuItem[] = [
   { item: { label: "Copy", id: "copy", enabled: true } },
   { item: { label: "Paste", id: "paste", enabled: true } },
   "separator",
@@ -239,7 +240,7 @@ calling on every change.
 Set `enabled: false` to gray out an item:
 
 ```ts
-const save: Deno.MenuItem = {
+const save: Deno.desktop.MenuItem = {
   item: { label: "Save", id: "save", enabled: false },
 };
 ```

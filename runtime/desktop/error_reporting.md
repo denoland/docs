@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-10
 title: "Error reporting"
 description: "Capture uncaught errors, unhandled rejections, and Rust panics, showing a native alert and POSTing a JSON report to your server."
 ---
@@ -56,15 +56,15 @@ sent.
 }
 ```
 
-| Field        | Type                               | Notes                                                                              |
-| ------------ | ---------------------------------- | ---------------------------------------------------------------------------------- |
-| `version`    | `1`                                | Schema version. Check this on the server side.                                     |
-| `message`    | `string`                           | The error's `message`.                                                             |
-| `stack`      | `string`                           | The error's `stack`. Source-mapped where possible.                                 |
-| `appVersion` | `string \| null`                   | [`Deno.desktopVersion`](/api/deno/~/Deno.desktopVersion) at the time of the error. |
-| `timestamp`  | ISO 8601 string                    | UTC timestamp of when the error was caught.                                        |
-| `platform`   | `"darwin" \| "windows" \| "linux"` | [`Deno.build.os`](/api/deno/~/Deno.build.os).                                      |
-| `arch`       | string                             | [`Deno.build.arch`](/api/deno/~/Deno.build.arch).                                  |
+| Field        | Type                               | Notes                                                                                      |
+| ------------ | ---------------------------------- | ------------------------------------------------------------------------------------------ |
+| `version`    | `1`                                | Schema version. Check this on the server side.                                             |
+| `message`    | `string`                           | The error's `message`.                                                                     |
+| `stack`      | `string`                           | The error's `stack`. Source-mapped where possible.                                         |
+| `appVersion` | `string \| null`                   | [`Deno.desktop.appVersion`](/api/deno/~/Deno.desktop.appVersion) at the time of the error. |
+| `timestamp`  | ISO 8601 string                    | UTC timestamp of when the error was caught.                                                |
+| `platform`   | `"darwin" \| "windows" \| "linux"` | [`Deno.build.os`](/api/deno/~/Deno.build.os).                                              |
+| `arch`       | string                             | [`Deno.build.arch`](/api/deno/~/Deno.build.arch).                                          |
 
 The `Content-Type` header is `application/json`. Reports are sent as a single
 POST with no retry. If your server is down, the report is lost. For

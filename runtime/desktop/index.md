@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-09
+last_modified: 2026-07-10
 title: "Desktop apps"
 description: "Build self-contained desktop applications from a Deno project, with framework auto-detection, hot reload, native windowing, auto-update, and cross-platform distribution."
 ---
@@ -84,8 +84,8 @@ webview navigates to, so you do not need to pass a port or hostname. See
 - [Frameworks](/runtime/desktop/frameworks/): Next.js, Astro, Fresh, Remix,
   Nuxt, SvelteKit, and others.
 - [Windows](/runtime/desktop/windows/):
-  [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) lifecycle, multiple
-  windows, events.
+  [`Deno.desktop.BrowserWindow`](/api/deno/~/Deno.desktop.BrowserWindow)
+  lifecycle, multiple windows, events.
 - [WebGPU rendering](/runtime/desktop/webgpu/): draw to a native window with
   WebGPU on the raw backend.
 - [Bindings](/runtime/desktop/bindings/): calling Deno code from the webview via
@@ -102,8 +102,8 @@ webview navigates to, so you do not need to pass a port or hostname. See
 - [DevTools](/runtime/desktop/devtools/): unified DevTools attached to both the
   Deno runtime and the webview.
 - [Auto-update](/runtime/desktop/auto_update/):
-  [`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate), manifests, bsdiff,
-  rollback.
+  [`Deno.desktop.autoUpdate()`](/api/deno/~/Deno.desktop.autoUpdate), manifests,
+  bsdiff, rollback.
 - [Error reporting](/runtime/desktop/error_reporting/): capturing uncaught
   exceptions and panics.
 - [Distribution](/runtime/desktop/distribution/): cross-compilation, output

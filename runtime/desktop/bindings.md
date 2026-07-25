@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-10
 title: "Bindings"
 description: "Call Deno-side functions from webview JavaScript via win.bind(): type-safe RPC over in-process channels, encoded at the boundary with no cross-process round-trip."
 ---
@@ -145,15 +145,15 @@ Bindings are per-window. A binding registered on `winA` is not callable from
 `winB`'s webview. To share, register on each window:
 
 ```ts
-function bindShared(win: Deno.BrowserWindow) {
+function bindShared(win: Deno.desktop.BrowserWindow) {
   win.bind("now", () => Date.now());
   win.bind("readSettings", readSettings);
 }
 
-const main = new Deno.BrowserWindow(); // adopts the startup window
+const main = new Deno.desktop.BrowserWindow(); // adopts the startup window
 bindShared(main);
 
-const settings = new Deno.BrowserWindow();
+const settings = new Deno.desktop.BrowserWindow();
 bindShared(settings);
 ```
 
