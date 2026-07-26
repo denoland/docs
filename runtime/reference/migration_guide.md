@@ -11,7 +11,7 @@ oldUrl:
 
 This guide covers the one-time migration from Deno 1.x to Deno 2.x and is no
 longer actively updated. If you're coming to Deno from Node.js, see
-[Migrate from Node.js](/runtime/migrate/) instead.
+[Migrate from Node.js](/runtime/migrate/migrate_from_node/) instead.
 
 :::
 

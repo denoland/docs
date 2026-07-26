@@ -216,7 +216,7 @@ A few Bun features have no Deno counterpart, so plan around them:
 
 ## Keep going
 
-- **[Migrate from Node.js](/runtime/migrate/).** Much of it applies to Bun
+- **[Migrate from Node.js](/runtime/migrate/migrate_from_node/).** Much of it applies to Bun
   projects too, including how CommonJS and ES modules are resolved.
 - **[Security and permissions](/runtime/fundamentals/security/).** How the
   sandbox works and which flags to grant.

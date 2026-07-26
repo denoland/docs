@@ -100,7 +100,7 @@ in the configuration reference says what to do with each one. For most, the
 answer is "delete it".
 
 If you are moving a whole project over, the
-[Migrating from Node.js](/runtime/migrate/) guide covers the rest (dependencies,
+[Migrating from Node.js](/runtime/migrate/migrate_from_node/) guide covers the rest (dependencies,
 `package.json`, npm scripts).
 
 ## Type checking
@@ -454,4 +454,4 @@ publishing to [JSR](https://jsr.io).
 - Type-check the examples in your docs with
   [documentation tests](/runtime/test/doc_tests/).
 - Moving an existing project? Start with
-  [Migrating from Node.js](/runtime/migrate/).
+  [Migrating from Node.js](/runtime/migrate/migrate_from_node/).

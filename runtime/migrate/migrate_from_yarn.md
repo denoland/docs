@@ -126,7 +126,7 @@ you move to Deno:
 
 ## Keep going
 
-- **[Migrate from Node.js](/runtime/migrate/).** If you are also moving the
+- **[Migrate from Node.js](/runtime/migrate/migrate_from_node/).** If you are also moving the
   runtime, this covers CommonJS and ES module resolution and the Node built-ins
   Deno supports.
 - **[Migrate from npm](/runtime/migrate/migrate_from_npm/)** and

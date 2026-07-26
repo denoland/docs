@@ -105,10 +105,14 @@ export const sidebar = [
         href: "/runtime/lint_and_format/",
       },
       {
-        title: "Migrating from Node",
+        title: "Adopting Deno",
         href: "/runtime/migrate/",
         disclosure: true,
         items: [
+          {
+            title: "Migrate from Node.js",
+            href: "/runtime/migrate/migrate_from_node/",
+          },
           {
             title: "Migrate from npm",
             href: "/runtime/migrate/migrate_from_npm/",

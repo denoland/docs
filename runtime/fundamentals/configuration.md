@@ -37,7 +37,7 @@ configuration from `deno.json`.
 This is what lets you adopt Deno incrementally: keep running an app on Node
 while using Deno as a faster drop-in package manager, run your existing scripts
 with `deno task`, and add a `deno.json` for Deno's toolchain when you are ready.
-The [Migrate from Node.js](/runtime/migrate/) guide walks through each step, and
+The [Migrate from Node.js](/runtime/migrate/migrate_from_node/) guide walks through each step, and
 [Node compatibility in Deno](/runtime/fundamentals/node/) covers how the runtime
 maps Node's APIs and module resolution.
 

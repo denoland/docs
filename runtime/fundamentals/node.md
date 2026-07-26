@@ -287,7 +287,7 @@ install step) and try again.
 
 For a full checklist, optional toolchain improvements, and a Node-to-Deno
 command cheatsheet, see the
-[Migrating from Node.js to Deno guide](/runtime/migrate/).
+[Migrating from Node.js to Deno guide](/runtime/migrate/migrate_from_node/).
 
 ### Tools that spawn `node`
 
