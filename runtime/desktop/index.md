@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-09
+last_modified: 2026-07-27
 title: "Desktop apps"
 description: "Build self-contained desktop applications from a Deno project, with framework auto-detection, hot reload, native windowing, auto-update, and cross-platform distribution."
 ---
@@ -73,6 +73,16 @@ The compiled binary opens a window pointed at a local HTTP server bound to your
 [`Deno.serve()`](/api/deno/~/Deno.serve) automatically binds to the address the
 webview navigates to, so you do not need to pass a port or hostname. See
 [HTTP serving](/runtime/desktop/serving/) for details.
+
+## A complete example
+
+For a complete, real-world app built with `deno desktop`, see
+[denidian](https://github.com/bartlomieju/denidian): an Obsidian-style
+note-taking app with Markdown notes, `[[wikilink]]` crosslinking, and a
+force-directed graph view. It is deliberately small — a single Deno HTTP server
+plus a vanilla HTML/CSS/JS frontend — and covers window management via
+[`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow), application menus,
+`--hmr` development, and packaging for distribution.
 
 ## What's in this section
 
