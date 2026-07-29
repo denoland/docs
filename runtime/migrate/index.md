@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-29
 title: "Migrate from Node.js"
 description: "How to move a Node.js project to Deno: use Deno as a drop-in package manager, run your existing project and package.json scripts, understand how CommonJS and ES modules are resolved, and map your Node commands to Deno."
 oldUrl:
@@ -18,6 +18,14 @@ You can also adopt Deno incrementally: use it purely as a faster, drop-in
 package manager for an app you still run with Node, run your existing
 `package.json` scripts with `deno task`, or switch to Deno as the runtime and
 pick up its built-in toolchain. This guide walks through each step.
+
+:::tip Using an AI coding agent?
+
+Point it at [deno.com/agents.md](https://deno.com/agents.md). It orients the
+agent and installs Deno's `migrate-to-deno` skill, which covers each step below,
+the errors you are likely to hit, and per-tool command equivalents.
+
+:::
 
 ## Use Deno as your package manager
 
