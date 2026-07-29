@@ -48,6 +48,8 @@
     "generate:search": "deno run -A orama/generate_orama_index_full.ts",
     "generate:search:docs-only": "deno run -A orama/generate.ts",
     "generate:llms": "deno run -A generate_llms_files.ts",
+    "generate:llms-txt": "deno run --allow-read --allow-write generate_llms_txt.ts",
+    "check:llms-txt": "deno run --allow-read generate_llms_txt.ts --check",
     "generate:llms:site": "deno run -A generate_llms_files.ts _site",
     "generate:reference": "cd reference_gen && deno task types && deno task doc",
     "generate:std-docs": "deno run -A scripts/generate_std_docs.ts",
