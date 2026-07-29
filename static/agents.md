@@ -71,8 +71,12 @@ If the user agrees, install them. This touches no project source and adds no
 dependency:
 
 ```sh
-npx skills add denoland/skills --skill deno
+dx skills add denoland/skills --skill deno
 ```
+
+`dx` is Deno's `npx` equivalent and ships with the binary you installed above,
+so this needs no Node. If you would rather use Node, `npx skills add ...` is
+identical.
 
 Add `--skill migrate-to-deno` as well if the project is coming from Node, npm,
 Yarn, pnpm, or Bun. In Claude Code you can instead install the whole set as a

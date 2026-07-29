@@ -40,8 +40,15 @@ few minutes.
 
 ## Using an AI coding agent?
 
-Hand it [deno.com/agents.md](https://deno.com/agents.md). It is a single page
-written for coding agents: what Deno is, the assumptions to unlearn if it knows
+Paste this into Claude Code, Codex, Gemini CLI, OpenCode, Cursor, Pi, or
+whichever agent you use:
+
+```plaintext
+Read deno.com/agents.md and set up Deno in this project
+```
+
+[deno.com/agents.md](https://deno.com/agents.md) is a single page written for
+coding agents: what Deno is, the assumptions to unlearn if it already knows
 Node, and how to install
 [Deno's agent skills](https://github.com/denoland/skills) so it keeps that
 context in every session. If you are asking an agent to bring an existing Node
