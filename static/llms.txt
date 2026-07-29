@@ -1,59 +1,94 @@
 # Deno
 
-> Deno is a secure JavaScript/TypeScript runtime built on V8 and Rust,
-> distributed as a single binary. TypeScript, formatting, linting, testing, and
-> a standard library work with zero configuration. Programs are sandboxed by
+> Deno is a secure JavaScript and TypeScript runtime built on V8 and Rust,
+> distributed as a single binary. TypeScript, formatting, linting, testing and a
+> standard library work with zero configuration. Programs are sandboxed by
 > default; capabilities (network, filesystem, etc.) are granted explicitly via
-> --allow-* flags. Deno natively supports npm packages and Node.js built-in
-> modules.
+> --allow-* flags. Deno runs npm packages and Node.js built-in modules natively,
+> and reads an existing package.json.
 
-- [llms-full-guide.txt](https://docs.deno.com/llms-full-guide.txt): Complete agent-oriented guide with CLI reference, code examples, and usage patterns (publish alongside this file)
-- [llms-summary.txt](https://docs.deno.com/llms-summary.txt): Compact index of all documentation sections
+This file indexes the Deno runtime documentation. Deno Deploy, Deno Sandbox and
+Subhosting are separate products and are linked at the end.
+
+- [agents.md](https://deno.com/agents.md): Start here if you are a coding agent working in a user's project — orientation, the Node assumptions to unlearn, and how to install Deno's agent skills
+- [llms-full-guide.txt](https://docs.deno.com/llms-full-guide.txt): Self-contained quick reference: CLI commands, permissions, configuration and code examples
+- [llms-summary.txt](https://docs.deno.com/llms-summary.txt): Compact index of every documentation section, including the products below
 - [llms-full.txt](https://docs.deno.com/llms-full.txt): Full documentation content dump (large)
 
-## Runtime
+## Get started
 
-- [Getting Started](https://docs.deno.com/runtime/getting_started/first_project): Scaffold a project, run code, and execute tests
-- [CLI Reference](https://docs.deno.com/runtime/reference/cli/): All deno subcommands and flags (run, test, fmt, lint, task, compile, install)
-- [Configuration (deno.json)](https://docs.deno.com/runtime/fundamentals/configuration): Project config, tasks, import maps, TypeScript settings
-- [Modules and Imports](https://docs.deno.com/runtime/fundamentals/modules): jsr:, npm:, and node: specifiers; import maps; dependency management
-- [Security and Permissions](https://docs.deno.com/runtime/fundamentals/security): Sandbox model and --allow-* permission flags
-- [Node.js Compatibility](https://docs.deno.com/runtime/fundamentals/node): Running Node projects, npm packages, and node: built-ins in Deno
-- [Testing](https://docs.deno.com/runtime/fundamentals/testing): Built-in test runner, assertions, mocking, coverage
-- [TypeScript Support](https://docs.deno.com/runtime/fundamentals/typescript): TypeScript configuration and type checking
-- [HTTP Server](https://docs.deno.com/runtime/fundamentals/http_server): Deno.serve API, request handling, WebSockets
-- [Standard Library (@std)](https://docs.deno.com/runtime/reference/std/): Deno's standard library modules on JSR
-- [Linting and Formatting](https://docs.deno.com/runtime/fundamentals/linting_and_formatting): deno lint and deno fmt configuration and usage
-- [Workspaces](https://docs.deno.com/runtime/fundamentals/workspaces): Monorepo and multi-package project configuration
-- [Web Development](https://docs.deno.com/runtime/fundamentals/web_dev): Frameworks (Fresh, Next.js, Astro, SvelteKit) with Deno
+- [Welcome to Deno](https://docs.deno.com/runtime/): Install Deno and build your first project: why Deno, install, create, run, test, add a dependency, and use the built-in toolchain
+- [Installation](https://docs.deno.com/runtime/getting_started/installation/): A Guide to installing Deno on different operating systems
+- [Setup your environment](https://docs.deno.com/runtime/getting_started/setup_your_environment/): A guide to setting up your development environment for Deno
 
-## Deploy
+## Guides
 
-- [Deno Deploy Overview](https://docs.deno.com/deploy/): Managed edge platform for JavaScript/TypeScript apps
-- [Getting Started](https://docs.deno.com/deploy/getting_started): Create and configure your first Deploy application
-- [Deno KV](https://docs.deno.com/deploy/kv/): Built-in key-value database available in CLI and on Deploy
+- [Running code](https://docs.deno.com/runtime/run/): Run JavaScript and TypeScript with Deno: the secure-by-default permission model, running files, URLs and stdin, script arguments, watch mode, and project tasks
+- [Dependency management](https://docs.deno.com/runtime/packages/): Use Deno as your package manager for npm and JSR: install, add, update, audit, and inspect dependencies, manage lockfiles and lifecycle scripts, and override packages
+- [Web development](https://docs.deno.com/runtime/fundamentals/web_dev/): A guide to web development with Deno. Learn about supported frameworks like Fresh, Next.js, and Astro, along with built-in features for building modern web applications
+- [JSX and React](https://docs.deno.com/runtime/reference/jsx/): Configure JSX in Deno for React, Preact, or Hono: the automatic runtime, server-side rendering and its permission caveat, the precompile transform, and per-file pragmas
+- [HTTP Server](https://docs.deno.com/runtime/fundamentals/http_server/): A guide to creating HTTP servers in Deno
+- [Testing](https://docs.deno.com/runtime/test/): Write and run tests with Deno's built-in test runner: assertions, test steps, hooks, filtering, and reporters, with dedicated guides for mocking, snapshots, and coverage
+- [Linting and formatting](https://docs.deno.com/runtime/lint_and_format/): A guide to Deno's built-in code quality tools
+- [Migrating from Node](https://docs.deno.com/runtime/migrate/): How to move a Node.js project to Deno: use Deno as a drop-in package manager, run your existing project and package.json scripts, understand how CommonJS and ES...
+- [Building CLI apps](https://docs.deno.com/runtime/cli_apps/): Build command-line tools with Deno: read arguments and stdin, prompt the user, set exit codes, compile to a single self-contained executable, and distribute your tool
+- [Desktop apps](https://docs.deno.com/runtime/desktop/): Build self-contained desktop applications from a Deno project, with framework auto-detection, hot reload, native windowing, auto-update, and cross-platform distribution
+- [Deploying your app](https://docs.deno.com/runtime/deploy/): Ways to run a Deno app in production: the managed Deno Deploy platform, containers and Docker, cloud and serverless providers, and self-hosting a standalone binary
 
-## Sandbox
+## Concepts
 
-- [Deno Sandbox Overview](https://docs.deno.com/sandbox/): Ephemeral Linux microVMs for running untrusted code safely
-- [Getting Started](https://docs.deno.com/sandbox/getting_started/): Enable sandboxes, create a microVM, run commands, manage secrets
-- [Create a Sandbox](https://docs.deno.com/sandbox/create/): Sandbox.create() API reference and configuration options
-- [Sandbox Timeouts](https://docs.deno.com/sandbox/timeouts/): Ephemeral vs. persistent sandbox lifecycle management
-- [Deploy App Management](https://docs.deno.com/sandbox/apps/): Programmatically create and manage Deploy apps via the SDK
+- [TypeScript](https://docs.deno.com/runtime/fundamentals/typescript/): TypeScript is a first-class language in Deno
+- [Node](https://docs.deno.com/runtime/fundamentals/node/): Guide to using Node.js modules and npm packages in Deno
+- [Security](https://docs.deno.com/runtime/fundamentals/security/): A guide to Deno's security model: secure-by-default execution, the permission sandbox, evaluating and executing untrusted code, and the permission broker
+- [Modules](https://docs.deno.com/runtime/fundamentals/modules/): Learn how Deno's ECMAScript module system works: importing local and third-party modules, import attributes, import maps, and supported import types such as Wasm and...
+- [Config files](https://docs.deno.com/runtime/fundamentals/configuration/): How Deno projects are configured: first-class package.json support, the deno.json file for Deno's own tooling, .jsonc support and discovery, and an overview of what...
+- [Workspaces](https://docs.deno.com/runtime/fundamentals/workspaces/): A guide to managing workspaces and monorepos in Deno
+- [Stability and releases](https://docs.deno.com/runtime/fundamentals/stability_and_releases/): Guide to Deno's stability guarantees and release process
+
+## Diagnostics
+
+- [Debugging](https://docs.deno.com/runtime/fundamentals/debugging/): Debug Deno programs with the V8 inspector: Chrome DevTools, VS Code and JetBrains setup, network inspection, worker debugging, and the --inspect flag family
+- [CPU profiling](https://docs.deno.com/runtime/fundamentals/cpu_profiling/): Profile Deno programs with the built-in CPU profiler: collecting profiles, Markdown and flamegraph reports, Chrome DevTools analysis, and profiling tips
+- [OpenTelemetry](https://docs.deno.com/runtime/fundamentals/open_telemetry/): Learn how to implement observability in Deno applications using OpenTelemetry
+
+## Advanced
+
+- [FFI](https://docs.deno.com/runtime/fundamentals/ffi/): Learn how to use Deno's Foreign Function Interface (FFI) to call native libraries directly from JavaScript or TypeScript
+- [WebAssembly](https://docs.deno.com/runtime/reference/wasm/): A guide to using WebAssembly (Wasm) in Deno
+- [Cron](https://docs.deno.com/runtime/fundamentals/cron/): Schedule recurring tasks in Deno with the Deno.cron() runtime API, an unstable feature enabled via --unstable-cron
+- [Loader hooks](https://docs.deno.com/runtime/reference/loader_hooks/): Customize module resolution and loading in Deno using the Node.js-compatible module.registerHooks() API
+- [Lint plugins](https://docs.deno.com/runtime/reference/lint_plugins/): Guide to creating and using custom lint plugins in Deno
+- [Bundling](https://docs.deno.com/runtime/reference/bundling/): An overview of `deno bundle` subcommand that can be used to produce a single file application created from multiple source files for optimized execution
+- [Docker](https://docs.deno.com/runtime/reference/docker/): Complete guide to using Deno with Docker containers
+- [Continuous integration](https://docs.deno.com/runtime/reference/continuous_integration/): Guide to setting up continuous integration (CI) pipelines for Deno projects
+- [Deno & VS Code](https://docs.deno.com/runtime/reference/vscode/): Complete guide to using Deno with Visual Studio Code
+
+## Reference
+
+- [Overview](https://docs.deno.com/runtime/reference/): Look it up: the full deno CLI, configuration, the standard library, and runtime APIs
+- [CLI](https://docs.deno.com/runtime/reference/cli/): Every deno subcommand and its flags: run, test, fmt, lint, task, install, add, compile, publish and the rest
+- [Standard library](https://docs.deno.com/runtime/reference/std/): The Deno standard library (@std on JSR): audited, dependency-free modules for common tasks
+- [deno.json](https://docs.deno.com/runtime/reference/deno_json/): Reference for every deno.json field: dependencies and import maps, tasks, lint and fmt, lockfile, node_modules directory, TypeScript compiler options, unstable flags,...
+- [TypeScript](https://docs.deno.com/runtime/reference/ts_config_migration/): A guide to TypeScript configuration in Deno
+- [Environment variables](https://docs.deno.com/runtime/reference/env_variables/): A guide to working with environment variables in Deno
+- [Permissions](https://docs.deno.com/runtime/reference/permissions/): Reference for Deno's permission system: how the runtime sandbox works and how to grant or deny file system, network, environment, system, subprocess, FFI, and import...
+- [LSP integration](https://docs.deno.com/runtime/reference/lsp_integration/): Technical guide to integrating Deno's Language Server Protocol (LSP)
+- [Lint rules](https://docs.deno.com/lint/): Every deno lint rule, what it catches, and how to configure or suppress it
 
 ## Examples
 
-- [Build a Fresh App](https://docs.deno.com/examples/fresh_tutorial/): Full-stack app with Fresh framework and islands architecture
-- [Deploy with deno deploy CLI](https://docs.deno.com/examples/deploy_command_tutorial/): Deploy a local project to Deno Deploy
-- [Chat App with WebSockets](https://docs.deno.com/examples/chat_app_tutorial/): Real-time WebSocket server with Oak
-- [LLM Chat App](https://docs.deno.com/examples/llm_tutorial/): Integrate OpenAI/Anthropic APIs with Deno
-- [Connecting to Databases](https://docs.deno.com/examples/connecting_to_databases_tutorial/): MySQL, PostgreSQL, MongoDB, SQLite, and ORMs
-- [Sandbox Volumes](https://docs.deno.com/examples/volumes_tutorial/): Persistent storage for sandbox microVMs
-- [Sandbox Snapshots](https://docs.deno.com/examples/snapshots_tutorial/): Reproducible sandbox environments with snapshots
+- [Examples and tutorials](https://docs.deno.com/examples/): Runnable examples and step-by-step tutorials, indexed by topic
+
+## Other Deno products
+
+- [Deno Deploy](https://docs.deno.com/deploy/): Managed platform for deploying JavaScript and TypeScript apps
+- [Deno Sandbox](https://docs.deno.com/sandbox/): Ephemeral Linux microVMs for running untrusted code
+- [Subhosting](https://docs.deno.com/subhosting/manual/): Run your customers' code securely, for SaaS platforms
+- [Agent skills](https://github.com/denoland/skills): Deno skills for coding agents
 
 ## Optional
 
-- [Contributing](https://docs.deno.com/runtime/contributing/): How to contribute to the Deno project
-- [Style Guide](https://docs.deno.com/runtime/contributing/style_guide): Coding conventions for Deno internals
-- [Subhosting](https://docs.deno.com/subhosting/): Platform for SaaS providers to run customer code securely
-- [AI Skills for Coding Assistants](https://github.com/denoland/skills): Deno-specific skills and playbooks for LLMs
+- [Overview](https://docs.deno.com/runtime/contributing/): Guide to contributing to the Deno project and ecosystem
+- [Architecture](https://docs.deno.com/runtime/contributing/architecture/): Deep dive into Deno's internal architecture, explaining core components like the runtime, compiler, and security sandbox
+- [Style guide](https://docs.deno.com/runtime/contributing/style_guide/): Comprehensive style guide for contributing to Deno's internal runtime code and standard library
+- [Help](https://docs.deno.com/runtime/help/): Guide to getting help with Deno. Find community resources, support channels, discussion forums, and how to engage with the Deno community for troubleshooting and...
