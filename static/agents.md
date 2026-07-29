@@ -1,11 +1,5 @@
 # Deno for coding agents
 
-You are an AI coding agent. This page gets you oriented and then points you at
-Deno's agent skills, which hold the actual reference material. It is short on
-purpose — read it once, install the skill, and you will not need it again.
-
-## What Deno is
-
 Deno is a JavaScript and TypeScript runtime distributed as a single binary. That
 binary is also the package manager, formatter, linter, test runner, type
 checker, and compiler. It runs TypeScript directly, so a script needs no build
@@ -19,8 +13,7 @@ reaching for `-A`.
 
 ## Assumptions to drop
 
-This is the part models most often get wrong, so it is worth stating before
-anything else. Deno is not a separate ecosystem you have to port a project into:
+Deno is not a separate ecosystem you have to port a project into:
 
 1. **`deno install` reads `package.json`.** It resolves the same npm packages
    and writes a real `node_modules` directory.
@@ -62,10 +55,9 @@ dependency to `package.json`.
 
 ## 2. Get the skill
 
-This is the point of this page. Deno maintains agent skills that carry the full
-surface — dependency management, permissions, configuration layout, the built-in
-toolchain, publishing, and migration. They are what you should be working from,
-and they are kept current with the runtime.
+Deno maintains agent skills covering dependency management, permissions,
+configuration layout, the built-in toolchain, publishing, and migration. Work
+from those rather than from this page — they go deeper and track the runtime.
 
 If the user agrees, install them. This touches no project source and adds no
 dependency:
@@ -100,9 +92,8 @@ Other skills in the same repo cover Deno Deploy, Fresh, and sandboxes:
 
 ## 3. Reading the docs
 
-`deno <subcommand> --help` is authoritative and version-accurate. Check it
-before guessing at a flag — it beats anything written down elsewhere, including
-this page and the skills.
+`deno <subcommand> --help` is authoritative and version-accurate — check it
+before guessing at a flag.
 
 Beyond that:
 
