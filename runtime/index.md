@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-09
+last_modified: 2026-07-29
 title: "Get started with Deno"
 description: "Install Deno and build your first project: why Deno, install, create, run, test, add a dependency, and use the built-in toolchain. No build step, no config."
 pagination_next: /runtime/getting_started/installation/
@@ -37,6 +37,15 @@ few minutes.
   [formatter](/runtime/lint_and_format/), [linter](/runtime/lint_and_format/),
   [test runner](/runtime/test/), benchmarking, and
   [a lot more](/runtime/reference/cli/). No `devDependencies` to wire up.
+
+## Using an AI coding agent?
+
+Hand it [deno.com/agents.md](https://deno.com/agents.md). It is a single page
+written for coding agents: what Deno is, the assumptions to unlearn if it knows
+Node, and how to install
+[Deno's agent skills](https://github.com/denoland/skills) so it keeps that
+context in every session. If you are asking an agent to bring an existing Node
+project across, it covers that too.
 
 ## Install Deno
 

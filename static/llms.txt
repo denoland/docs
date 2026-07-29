@@ -7,6 +7,7 @@
 > --allow-* flags. Deno natively supports npm packages and Node.js built-in
 > modules.
 
+- [agents.md](https://deno.com/agents.md): Entrypoint for coding agents working in a user's project — orientation, the Node assumptions to unlearn, and how to install Deno's agent skills (https://github.com/denoland/skills), which carry the full reference material
 - [llms-full-guide.txt](https://docs.deno.com/llms-full-guide.txt): Complete agent-oriented guide with CLI reference, code examples, and usage patterns (publish alongside this file)
 - [llms-summary.txt](https://docs.deno.com/llms-summary.txt): Compact index of all documentation sections
 - [llms-full.txt](https://docs.deno.com/llms-full.txt): Full documentation content dump (large)
