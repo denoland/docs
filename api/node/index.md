@@ -136,8 +136,8 @@ Node compatibility is an ongoing project. Most core Node.js APIs are supported
 with high fidelity. For detailed compatibility information:
 
 - View our [Node.js compatibility guide](/runtime/reference/node_apis/)
-- Check [Node.js test results](https://node-test-viewer.deno.dev/) for specific
-  test coverage
+- Check [Node.js test results](https://node-test-viewer.deno.deno.net/) for
+  specific test coverage
 - [Report compatibility issues](https://github.com/denoland/deno/issues) on
   GitHub
 

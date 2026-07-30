@@ -146,10 +146,6 @@ const data = [
         href: "https://deno.com/blog",
       },
       {
-        label: "Merch",
-        href: "https://merch.deno.com/",
-      },
-      {
         label: "Privacy Policy",
         href: "/deploy/privacy_policy",
       },
