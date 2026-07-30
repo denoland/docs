@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-30
 title: "Node and npm Compatibility"
 description: "Guide to using Node.js modules and npm packages in Deno. Learn about compatibility features, importing npm packages, and differences between Node.js and Deno environments."
 oldUrl:
