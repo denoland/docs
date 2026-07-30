@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-07-30
 title: "Node and npm Compatibility"
 description: "Guide to using Node.js modules and npm packages in Deno. Learn about compatibility features, importing npm packages, and differences between Node.js and Deno environments."
 oldUrl:
@@ -58,8 +58,8 @@ need a local `node_modules` directory, and a few tools assume npm's exact
 on-disk layout. The sections below cover each of those cases.
 
 You can track the current state at
-[node-test-viewer.deno.dev](https://node-test-viewer.deno.dev/) and browse the
-[list of supported Node.js APIs](/runtime/reference/node_apis/).
+[node-test-viewer.deno.deno.net](https://node-test-viewer.deno.deno.net/) and
+browse the [list of supported Node.js APIs](/runtime/reference/node_apis/).
 
 ## Using npm packages
 
