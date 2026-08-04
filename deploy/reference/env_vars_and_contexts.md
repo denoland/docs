@@ -163,4 +163,4 @@ Deno Deploy provides these predefined environment variables in all contexts:
   [pre-deploy command](/deploy/reference/builds/), which runs once per timeline
   and receives the timeline it is preparing.
 
-During builds, the environment variable `CI=1` is additionally set.
+During builds, the environment variable `CI=true` is additionally set.
