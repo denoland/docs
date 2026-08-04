@@ -143,7 +143,7 @@ Deno Deploy provides these predefined environment variables in all contexts:
 
 - `DENO_DEPLOY`: `true` - Indicates that the code is running in Deno Deploy.
 - `DENO_DEPLOY_ORG_ID`: The ID of the organization that owns the application.
-- This is a UUID.
+  This is a UUID.
 - `DENO_DEPLOY_ORG_SLUG`: The slug of the organization that owns the
   application. This is the human-readable identifier used in URLs that was set
   when creating the organization.
@@ -151,11 +151,11 @@ Deno Deploy provides these predefined environment variables in all contexts:
 - `DENO_DEPLOY_APP_SLUG`: The slug of the application. This is the
   human-readable identifier used in URLs that was set when creating the
   application, or changed later in the application settings.
-- `DENO_DEPLOY_BUILD_ID`: The ID of the currently running build.
+- `DENO_DEPLOY_BUILD_ID`: The ID of the revision that is currently running.
+  During builds, this is the ID of the revision being built.
 - `DENO_DEPLOYMENT_ID`: A unique identifier representing the entire
   configuration set (application ID, build ID, context, environment variables,
   cloud connections, database). Changes if any of these components change.
-- `DENO_DEPLOY_BUILD_ID`: The ID of the currently running revision.
 - `DENO_TIMELINE`: The timeline the application is currently running in.
   Possible values are `production`, `git-branch/<branch-name>`, and
   `preview/<revision-id>`. This is not set during builds, as builds are not
