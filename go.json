@@ -18,6 +18,7 @@
   "config": "/runtime/fundamentals/configuration/",
   "coverage": "/runtime/reference/cli/coverage/",
   "deploy": "/runtime/reference/cli/deploy",
+  "desktop": "/runtime/desktop/",
   "doc": "/runtime/reference/cli/doc/",
   "env-vars": "/runtime/reference/env_variables",
   "eval": "/runtime/reference/cli/eval/",
