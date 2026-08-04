@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-08-04
 title: Builds
 description: "Detailed explanation of the build process in Deno Deploy, covering build triggers, stages, configuration options, caching, and the build environment."
 ---
@@ -37,7 +37,10 @@ A revision goes through these stages before becoming available:
    1. **Create database**: If the application has an attached database, ensure
       one exists for this timeline (creating it if necessary).
    2. **Pre-deploy command**: Any pre-deploy command configured for the
-      application executes, typically for tasks like database migrations.
+      application executes, typically for tasks like database migrations. The
+      command receives the timeline it is preparing in the
+      [`DENO_TIMELINE` environment variable](/deploy/reference/env_vars_and_contexts/),
+      so migrations can target the correct environment.
    3. **Warmup**: Only in the "Preview" timeline, the application is started to
       ensure it boots correctly.
    4. **Routing**: Roll out the new revision to the URLs associated with this
@@ -262,13 +265,13 @@ builds:
 
 - `CI`: `true`
 - `DENO_DEPLOY`: `true` - Indicates that the code is running in Deno Deploy.
-- `DENO_DEPLOY_ORGANIZATION_ID`: The ID of the organization that owns the
-  application. This is a UUID.
-- `DENO_DEPLOY_ORGANIZATION_SLUG`: The slug of the organization that owns the
+- `DENO_DEPLOY_ORG_ID`: The ID of the organization that owns the application.
+  This is a UUID.
+- `DENO_DEPLOY_ORG_SLUG`: The slug of the organization that owns the
   application. This is the human-readable identifier used in URLs that was set
   when creating the organization.
-- `DENO_DEPLOY_APPLICATION_ID`: The ID of the application. This is a UUID.
-- `DENO_DEPLOY_APPLICATION_SLUG`: The slug of the application. This is the
+- `DENO_DEPLOY_APP_ID`: The ID of the application. This is a UUID.
+- `DENO_DEPLOY_APP_SLUG`: The slug of the application. This is the
   human-readable identifier used in URLs that was set when creating the
   application, or changed later in the application settings.
 - `DENO_DEPLOY_BUILD_ID`: The ID of the currently running build.
