@@ -37,7 +37,10 @@ A revision goes through these stages before becoming available:
    1. **Create database**: If the application has an attached database, ensure
       one exists for this timeline (creating it if necessary).
    2. **Pre-deploy command**: Any pre-deploy command configured for the
-      application executes, typically for tasks like database migrations.
+      application executes, typically for tasks like database migrations. The
+      command receives the timeline it is preparing in the
+      [`DENO_TIMELINE` environment variable](/deploy/reference/env_vars_and_contexts/),
+      so migrations can target the correct environment.
    3. **Warmup**: Only in the "Preview" timeline, the application is started to
       ensure it boots correctly.
    4. **Routing**: Roll out the new revision to the URLs associated with this
