@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-08-04
 title: Builds
 description: "Detailed explanation of the build process in Deno Deploy, covering build triggers, stages, configuration options, caching, and the build environment."
 ---

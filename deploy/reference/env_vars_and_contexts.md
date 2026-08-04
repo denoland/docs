@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-02-25
+last_modified: 2026-08-04
 title: Environment Variables and Contexts
 description: "Guide to managing environment variables and contexts in Deno Deploy, including variable types, creation, editing, and accessing them in your code."
 oldUrl: /deploy/reference/env-vars-and-contexts/
