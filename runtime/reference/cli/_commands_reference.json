@@ -1831,6 +1831,15 @@
           "help": "Load environment variables from local file\n  \u001b[38;5;245mOnly the first environment variable with a given key is used.\n  Existing process environment variables are not overwritten, so if variables with the same names already exist in the environment, their values will be preserved.\n  Where multiple declarations for the same environment variable exist in your .env file, the first one encountered is applied. This is determined by the order of the files you pass as arguments.\u001b[39m",
           "help_heading": null,
           "usage": "--env-file[=<FILE>]"
+        },
+        {
+          "name": "minimum-dependency-age",
+          "short": null,
+          "long": "minimum-dependency-age",
+          "required": false,
+          "help": "(Unstable) The age in minutes, ISO-8601 duration or RFC3339 absolute timestamp (e.g. '120' for two hours, 'P2D' for two days, '2025-09-16' for cutoff date, '2025-09-16T12:00:00+00:00' for cutoff time, '0' to disable)",
+          "help_heading": null,
+          "usage": "--minimum-dependency-age <minimum-dependency-age>"
         }
       ],
       "subcommands": [],
@@ -2009,6 +2018,15 @@
           "help": "Force using package.json for dependency management instead of deno.json",
           "help_heading": null,
           "usage": "--package-json"
+        },
+        {
+          "name": "minimum-dependency-age",
+          "short": null,
+          "long": "minimum-dependency-age",
+          "required": false,
+          "help": "(Unstable) The age in minutes, ISO-8601 duration or RFC3339 absolute timestamp (e.g. '120' for two hours, 'P2D' for two days, '2025-09-16' for cutoff date, '2025-09-16T12:00:00+00:00' for cutoff time, '0' to disable)",
+          "help_heading": null,
+          "usage": "--minimum-dependency-age <minimum-dependency-age>"
         }
       ],
       "subcommands": [],
