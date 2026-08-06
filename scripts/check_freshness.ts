@@ -84,12 +84,14 @@ async function main() {
   const today = new Date().toISOString().slice(0, 10);
   const violations: string[] = [];
 
+  // Diff the merge-base against the working tree (not HEAD), so local runs
+  // see uncommitted edits and date bumps; in CI the tree matches HEAD anyway.
   // -M detects renames; status is e.g. "M", "A", "D", "R095".
   const nameStatus = await git(
     "diff",
     "--name-status",
     "-M",
-    `${mergeBase}..HEAD`,
+    mergeBase,
   );
 
   for (const line of nameStatus.split("\n")) {
@@ -103,7 +105,7 @@ async function main() {
     const newPath = isRename ? parts[2] : parts[1];
     if (!isDoc(newPath)) continue;
 
-    const headContent = await showFile("HEAD", newPath);
+    const headContent = await Deno.readTextFile(newPath).catch(() => null);
     const baseContent = status === "A"
       ? null
       : await showFile(mergeBase, oldPath);

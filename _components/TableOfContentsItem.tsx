@@ -9,10 +9,10 @@ export default function TableOfContentsItem(
 ) {
   const depth = props.depth ?? 1;
   return (
-    <li class="my-1.5 ml-2 mr-0 leading-tight text-balance">
+    <li className="leading-tight text-balance">
       <a
         href={`#${props.item.slug}`}
-        className="text-smaller lg:text-foreground-secondary hover:text-primary transition-colors duration-200 ease-in-out select-none"
+        className="block py-2 px-4 leading-none text-smaller lg:text-foreground-secondary hover:text-primary transition-colors duration-200 ease-in-out select-none"
       >
         {props.item.text.replaceAll(/ \([0-9/]+?\)/g, "")}
       </a>

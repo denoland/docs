@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-28
+last_modified: 2026-07-29
 title: "Get started with Deno"
 description: "Install Deno and build your first project: why Deno, install, create, run, test, add a dependency, and use the built-in toolchain. No build step, no config."
 pagination_next: /runtime/getting_started/installation/
@@ -38,6 +38,22 @@ few minutes.
   [test runner](/runtime/test/), benchmarking, and
   [a lot more](/runtime/reference/cli/). No `devDependencies` to wire up.
 
+## Using an AI coding agent?
+
+Paste this into Claude Code, Codex, Gemini CLI, OpenCode, Cursor, Pi, or
+whichever agent you use:
+
+```plaintext
+Read deno.com/agents.md and set up Deno in this project
+```
+
+[deno.com/agents.md](https://deno.com/agents.md) is a single page written for
+coding agents: what Deno is, the assumptions to unlearn if it already knows
+Node, and how to install
+[Deno's agent skills](https://github.com/denoland/skills) so it keeps that
+context in every session. If you are asking an agent to bring an existing Node
+project across, it covers that too.
+
 ## Install Deno
 
 Install the runtime with one command:
@@ -52,7 +68,8 @@ curl -fsSL https://deno.land/install.sh | sh
 </deno-tab>
 <deno-tab value="windows" label="Windows">
 
-```shell title="pwsh"
+```shell
+# pwsh
 irm https://deno.land/install.ps1 | iex
 ```
 

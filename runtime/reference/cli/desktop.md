@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-06-27
 title: "deno desktop"
 openGraphLayout: "/open_graph/cli-commands.jsx"
 openGraphTitle: "deno desktop"
@@ -24,9 +24,10 @@ deno desktop --output MyApp.app main.ts
 ```
 
 The entrypoint is optional. A bare `deno desktop` (or `deno desktop .`) detects
-a supported framework (Next.js, Astro, Fresh, and others) in the current
-directory and builds it without any code changes. See
-[Frameworks](/runtime/desktop/frameworks/).
+a supported framework (Next.js, Astro, Fresh, React Router, and others) in the
+current directory and builds the appropriate desktop entrypoint. See
+[Frameworks](/runtime/desktop/frameworks/) for supported frameworks and
+per-framework requirements.
 
 This page covers the command-line flags. For the full guide (backends,
 [`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow), bindings, auto-update,

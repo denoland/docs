@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-07-30
 title: Node APIs
 description: "A guide to Node.js compatibility in Deno. Learn about supported Node.js built-in modules, global objects, and how to use Node.js packages in Deno projects."
 templateEngine: [vto, md]
@@ -181,4 +181,4 @@ db.setAuthorizer((_action, _table) => {
 
 If you're interested in a more detailed view of compatibility on a per-test-case
 basis, you can find a list of both passing and failing Node.js test cases on
-[this page](https://node-test-viewer.deno.dev/).
+[this page](https://node-test-viewer.deno.deno.net/).

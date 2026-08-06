@@ -212,10 +212,17 @@ if (desktopToc) {
   if (headings.length > 0) {
     const updateActive = () => {
       const header = document.querySelector("header");
-      const line = (header ? header.getBoundingClientRect().height : 64) + 24;
+      const headerBottom = header ? header.getBoundingClientRect().bottom : 64;
+      // Place the activation line a quarter of the way into the space below
+      // the sticky header, not right at it: the previous section shouldn't
+      // stay highlighted when almost none of it is still on screen. The slack
+      // also covers click-navigation, where scroll-margin-top lands headings
+      // ~1rem below the header + subnav (which sits outside <header>, so it
+      // isn't part of headerBottom).
+      const line = headerBottom + (window.innerHeight - headerBottom) * 0.25;
 
-      // The active section is the last heading whose top has scrolled past the
-      // line just below the sticky header.
+      // The active section is the last heading whose top has scrolled past
+      // the line.
       let current = headings[0];
       for (const h of headings) {
         if (h.getBoundingClientRect().top - line <= 0) {

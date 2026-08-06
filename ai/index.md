@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-02-19
+last_modified: 2026-07-29
 title: "AI entrypoint"
 description: "Overview and key resources for LLMs and AI agents using the Deno docs"
 url: /ai/
@@ -7,6 +7,11 @@ url: /ai/
 
 This page is a short entrypoint for LLMs and AI agents consuming the Deno
 documentation.
+
+If you are a coding agent working in a user's project, read
+[deno.com/agents.md](https://deno.com/agents.md) instead. It orients you and
+points you at [Deno's agent skills](https://github.com/denoland/skills), which
+carry the full reference material and are kept current with the runtime.
 
 ## Deno overview
 
@@ -150,6 +155,8 @@ deno init --serve
 
 ## Key resources
 
+- [agents.md](https://deno.com/agents.md): entrypoint for coding agents working
+  in a project — orientation, then how to install Deno's agent skills
 - [llms.txt](/llms.txt): curated section index with key documentation links
 - [llms-full-guide.txt](/llms-full-guide.txt): agent-oriented quick reference
   with CLI commands, code examples, and usage patterns

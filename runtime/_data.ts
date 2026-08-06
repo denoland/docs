@@ -313,6 +313,7 @@ export const sidebar = [
       {
         title: "CLI",
         href: "/runtime/reference/cli/",
+        disclosure: true,
         items: [
           {
             title: "deno add",
@@ -502,8 +503,9 @@ export const sidebar = [
       },
       {
         title: "Standard library",
+        href: "/runtime/reference/std/",
+        disclosure: true,
         items: [
-          { title: "Overview", href: "/runtime/reference/std/" },
           ...[
             "assert",
             "async",

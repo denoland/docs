@@ -7,7 +7,7 @@ export default function Feedback({ file }: { file: string | undefined }) {
     return (
       <section
         id="feedback-section"
-        class="mt-10 pt-6 border-t border-t-foreground-tertiary"
+        class="mt-16 pt-6 border-t border-t-foreground-tertiary"
       >
         <form aria-live="polite" id="feedback-form">
           <div

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-08
+last_modified: 2026-07-27
 title: "Windows"
 description: "Create and manage native windows with Deno.BrowserWindow: lifecycle, multiple windows, sizing, navigation, keyboard / mouse / focus events, and native window handles."
 ---
@@ -18,6 +18,9 @@ to your local [HTTP server](/runtime/desktop/serving/). The **first**
 construction after that opens a new one. All windows share the same Deno
 runtime: there is one async runtime per process, regardless of how many windows
 are open.
+
+For a complete app that manages a window, application menus, and packaging, see
+the [denidian example](https://github.com/bartlomieju/denidian).
 
 ## Creating windows
 

@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-07-15
 title: "deno upgrade"
 oldUrl: /runtime/manual/tools/upgrade/
 command: upgrade
@@ -50,6 +50,44 @@ Checking for latest version
 Version has been found
 Would upgrade to version 1.38.5
 ```
+
+## Channels
+
+`deno upgrade` works one channel at a time. With no argument it upgrades to the
+latest **stable** release. Pass a channel name to move to that channel's latest
+build instead:
+
+```sh
+# Latest stable release (the default)
+deno upgrade
+
+# Latest long term support (LTS) release
+deno upgrade lts
+
+# Latest release candidate
+deno upgrade rc
+
+# Latest canary build
+deno upgrade canary
+```
+
+A bare version number is always a **stable** coordinate. `deno upgrade 2.9.3`
+installs the stable build of 2.9.3, even when the same version number also ships
+on another channel:
+
+```sh
+deno upgrade 2.9.3
+```
+
+Because of this, if you are on the LTS channel and run `deno upgrade 2.9.3`, you
+download the stable build and move off LTS onto stable. To stay on LTS, upgrade
+with `deno upgrade lts`.
+
+Note that `deno upgrade lts` always installs the latest LTS release. There is no
+version-number form that selects a specific LTS build, since a version number
+always resolves to the stable channel. For the full mental model of channels and
+how the same version number can be two different builds, see
+[Stability and releases](/runtime/fundamentals/stability_and_releases/#choosing-a-channel).
 
 ## --quiet flag
 

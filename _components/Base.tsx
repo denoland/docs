@@ -11,9 +11,7 @@ export default function Base(
           parts={data.breadcrumbs_ctx.parts}
           hasSubNav={false}
         />
-        <main id="content" tabindex={-1}>
-          {children}
-        </main>
+        {children}
       </div>
     </>
   );

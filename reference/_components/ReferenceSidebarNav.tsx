@@ -83,7 +83,7 @@ function ApiSection({ section, currentUrl, apiCategories }: {
   });
 
   return (
-    <nav>
+    <nav className="mb-4">
       <SidebarCategoryHeading
         title={section.title}
         href={`${section.basePath}/`}
@@ -178,7 +178,7 @@ function SidebarItem(props: {
     "block m-0 py-1 px-3 border-l hover:bg-header-highlight hover:border-foreground-secondary hover:text-gray-800 transition-colors duration-150";
   const activeClasses = props.isActive
     ? "bg-header-highlight border-foreground-secondary text-gray-800"
-    : "border-foreground-tertiary";
+    : "border-sidebar-line";
 
   const combinedClasses = `${defaultClasses} ${activeClasses}`;
 
@@ -200,7 +200,7 @@ function SidebarCategoryHeading(props: {
 }) {
   if (props.href) {
     return (
-      <h2 class="block uppercase py-2 pr-4 mt-4 !border-0">
+      <h2 className="block uppercase py-2 pr-4 border-0!">
         <a
           href={props.href}
           className={`text-foreground-secondary font-bold leading-none tracking-wide hover:text-primary transition-colors ${
@@ -214,7 +214,7 @@ function SidebarCategoryHeading(props: {
   }
 
   return (
-    <h2 class="block uppercase py-2 pr-4 mt-4 text-foreground-secondary font-bold leading-[1.2] text-balance tracking-wide !border-0">
+    <h2 className="block uppercase py-2 pr-4 text-foreground-secondary font-bold leading-[1.2] text-balance tracking-wide !border-0">
       {props.title}
     </h2>
   );
