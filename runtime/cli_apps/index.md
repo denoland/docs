@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-12
+last_modified: 2026-08-06
 title: "Build CLI apps"
 description: "Build command-line tools with Deno: read arguments and stdin, prompt the user, set exit codes, compile to a single self-contained executable, and distribute your tool."
 ---
@@ -168,6 +168,11 @@ with the usual `--allow-*` flags so it runs without prompting:
 ```sh
 deno compile --output greet greet.ts
 ```
+
+If binary size matters more than raw execution speed, you can build against the
+experimental QuickJS engine instead of V8 with `--engine quickjs`. See
+[choosing a JavaScript engine](/runtime/reference/cli/compile/#choosing-a-javascript-engine)
+for the trade-offs.
 
 ## Embed assets in the binary
 

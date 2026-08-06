@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-08-06
 title: "Distribution"
 description: "Cross-compile a deno desktop app for macOS, Windows, and Linux from one machine, and produce per-platform output formats: .app, .dmg, .exe directory, AppImage."
 ---
@@ -184,6 +184,13 @@ Cross-compiling from one OS to another requires:
   your Deno version.
 
 Both downloads are SHA-256 verified and cached under `<deno_dir>/`.
+
+`deno desktop` also accepts `--engine v8|quickjs`, which selects the JavaScript
+engine inside the downloaded runtime library. V8 is the default; the
+experimental QuickJS build is smaller but does not receive the same security
+updates. See
+[choosing a JavaScript engine](/runtime/reference/cli/compile/#choosing-a-javascript-engine)
+for the full trade-offs.
 
 There is **no Rust toolchain involved** in cross-compiling a desktop app. You
 are not compiling Rust on the host; you are downloading prebuilt artifacts for

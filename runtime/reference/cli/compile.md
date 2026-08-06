@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-27
+last_modified: 2026-08-06
 title: "deno compile"
 oldUrl:
   - /runtime/manual/tools/compile/
@@ -106,10 +106,13 @@ Deno supports cross compiling to all targets regardless of the host platform.
 | OS      | Architecture | Target                      |
 | ------- | ------------ | --------------------------- |
 | Windows | x86_64       | `x86_64-pc-windows-msvc`    |
+| Windows | ARM64        | `aarch64-pc-windows-msvc`   |
 | macOS   | x86_64       | `x86_64-apple-darwin`       |
 | macOS   | ARM64        | `aarch64-apple-darwin`      |
 | Linux   | x86_64       | `x86_64-unknown-linux-gnu`  |
 | Linux   | ARM64        | `aarch64-unknown-linux-gnu` |
+
+`aarch64-pc-windows-msvc` (Windows on ARM) is supported starting in Deno 2.9.3.
 
 ## The denort binary
 
@@ -127,6 +130,48 @@ and work offline.
 To use a custom or locally built runtime as the base, set the `DENORT_BIN`
 environment variable to its path. Deno also picks up a `denort` binary placed
 next to the `deno` executable.
+
+## Choosing a JavaScript engine
+
+:::caution
+
+`--engine quickjs` is experimental and subject to change. It landed after Deno
+2.9.4, so it is available in
+[canary builds](/runtime/reference/cli/upgrade/#canary-build) and in later
+releases.
+
+:::
+
+Compiled binaries run on V8 by default. The `--engine` flag lets you build
+against QuickJS instead, which produces a smaller executable:
+
+```sh
+# Default, same as omitting the flag
+deno compile --engine v8 main.ts
+
+# Build a binary that runs on QuickJS
+deno compile --engine quickjs main.ts
+```
+
+The same flag is available on [`deno desktop`](/runtime/desktop/distribution/),
+where it selects the engine embedded in the app's runtime library.
+
+Trade-offs to weigh before shipping a QuickJS binary:
+
+- **Security updates.** The QuickJS backend does not receive the same security
+  updates as V8. Don't use it for programs that run untrusted input.
+- **Performance.** QuickJS is an interpreter with no JIT, so compute-heavy code
+  runs slower than on V8. Startup and memory use are lower.
+- **Maturity.** The backend is experimental; behavior differences from V8 are
+  possible, so test your program with the engine you intend to ship.
+
+Each engine has its own prebuilt runtime: with `--engine quickjs`, Deno
+downloads `denort-quickjs-<target>.zip` (or `libdenort-quickjs-<target>.zip` for
+`deno desktop`) instead of the default `denort-<target>.zip`. Both variants are
+published for every [supported target](#supported-targets), so cross-compilation
+works the same way. If you override the base runtime with `DENORT_BIN` (or a
+`denort` binary next to `deno`), that binary is used as-is: `--engine` is then
+ignored and Deno prints a warning.
 
 ## Icons
 
