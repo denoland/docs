@@ -1,7 +1,7 @@
 ---
 title: "Migrate from pnpm"
 description: "How to move a pnpm project to Deno: install dependencies from your existing package.json, keep your pinned versions, map pnpm CLI commands to Deno, and let Deno migrate pnpm-workspace.yaml workspaces and catalogs automatically."
-last_modified: 2026-06-25
+last_modified: 2026-08-01
 ---
 
 pnpm is a package manager, not a runtime, so most of what you are "migrating" is
@@ -113,15 +113,16 @@ packages:
 }
 ```
 
-A couple of differences are worth knowing when you read the migrated globs:
+A couple of notes are worth knowing when you read the migrated globs:
 
-- **Depth is explicit in Deno.** `packages/*` matches one level
-  (`packages/foo`), and `packages/*/*` matches two levels. There is no `**`
-  recursive glob; add a `/*` segment per level instead. See
+- **Depth follows the same rules.** `packages/*` matches one level
+  (`packages/foo`), `packages/*/*` matches two levels, and `packages/**` matches
+  every depth below `packages`. See
   [Workspace path patterns](/runtime/fundamentals/workspaces/#workspace-path-patterns).
-- **Exclusions are not supported.** pnpm's `!packages/excluded` negation has no
-  equivalent in the `workspace` field, so list the members you want explicitly
-  rather than excluding a few from a wildcard.
+- **Exclusions carry over.** pnpm's `!packages/excluded` negation means the same
+  thing in the `workspace` field: a `!` pattern drops directories that another
+  pattern would otherwise include. See
+  [Excluding members](/runtime/fundamentals/workspaces/#excluding-members).
 
 ### Catalogs
 
