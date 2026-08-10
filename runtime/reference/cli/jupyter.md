@@ -11,10 +11,12 @@ Deno ships with a built-in Jupyter kernel that allows you to write JavaScript
 and TypeScript; use Web and Deno APIs and import `npm` packages straight in your
 interactive notebooks.
 
-:::caution `deno jupyter` always runs with `--allow-all`
+:::info `deno jupyter` runs with `--allow-all` by default
 
-Currently all code executed in the Jupyter kernel runs with `--allow-all` flag.
-This is a temporary limitation and will be addressed in the future.
+By default, code executed in the Jupyter kernel runs with all permissions
+granted. You can restrict what a notebook is allowed to do with a
+`permissions.jupyter` set in your `deno.json` — see
+[Configuring the kernel](#configuring-the-kernel).
 
 :::
 
@@ -48,6 +50,59 @@ notebooks.
 ### JetBrains IDEs
 
 Jupyter Notebooks are available right out of the box.
+
+## Configuring the kernel
+
+The Deno kernel resolves a `deno.json` (or `deno.jsonc`) the same way the rest
+of the Deno CLI does: it starts from the kernel's working directory — which
+notebook frontends set to the notebook's directory — and walks up looking for a
+config file. Placing a `deno.json` next to your `.ipynb` therefore lets a
+notebook carry its own configuration, including an
+[import map](/runtime/fundamentals/modules/), unstable features, and
+permissions.
+
+### Unstable features
+
+Enable unstable APIs (such as `Deno.openKv()`) for a notebook by listing them in
+the `unstable` array:
+
+```json title="deno.json"
+{
+  "unstable": ["kv"]
+}
+```
+
+With this file next to the notebook, `await Deno.openKv()` works in a cell
+without any additional flags.
+
+### Permissions
+
+By default the kernel runs cells with all permissions granted. To scope what a
+notebook is allowed to do, define a `permissions.jupyter` set in `deno.json`:
+
+```json title="deno.json"
+{
+  "permissions": {
+    "jupyter": {
+      "env": ["OPENAI_API_KEY"],
+      "net": ["api.openai.com"],
+      "read": ["./data"]
+    }
+  }
+}
+```
+
+Cells then run with only those permissions, and accessing anything outside the
+set throws a `NotCapable` error. When no `jupyter` set is defined the kernel
+falls back to the `default` set, and when neither is defined it keeps granting
+all permissions, so existing notebooks are unaffected.
+
+:::info
+
+Specifying permissions in the config file is an experimental feature and may
+change in the future.
+
+:::
 
 ## Rich content output
 
