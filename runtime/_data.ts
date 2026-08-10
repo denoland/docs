@@ -70,6 +70,10 @@ export const sidebar = [
         href: "/runtime/fundamentals/http_server/",
       },
       {
+        title: "Databases",
+        href: "/runtime/databases/",
+      },
+      {
         title: "Testing",
         href: "/runtime/test/",
         disclosure: true,
