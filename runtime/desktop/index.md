@@ -12,7 +12,9 @@ rendering engine into one bundle per platform.
 :::info Available in Deno 2.9
 
 `deno desktop` is available starting in Deno v2.9.0. If you're on an earlier
-version, [update Deno](/runtime/reference/cli/upgrade/) to use it. You'll also need to add `deno.desktop` to `compilerOptions.lib` in the `deno.json` configuration file.
+version, [update Deno](/runtime/reference/cli/upgrade/) to use it. You'll also
+need to add `deno.desktop` to `compilerOptions.lib` in the `deno.json`
+configuration file.
 
 :::
 
