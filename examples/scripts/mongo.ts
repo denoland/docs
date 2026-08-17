@@ -3,14 +3,14 @@
  * @difficulty intermediate
  * @tags cli, deploy
  * @run -N -S -R <url>
- * @resource {https://deno.land/x/mongo} Deno MongoDB on deno.land/x
+ * @resource {https://www.npmjs.com/package/mongodb} MongoDB driver on npm
  * @group Databases
  *
  * Using the Deno MongoDB client, you can connect to a Mongo database
  * running anywhere.
  */
 
-import { MongoClient } from "npm:mongodb@6.1.0";
+import { MongoClient } from "npm:mongodb@^7";
 
 // Create a new instance of the MongoDB client running locally on port 27017
 const client = new MongoClient("mongodb://127.0.0.1:27017");

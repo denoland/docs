@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli, deploy
  * @run <url>
- * @resource {https://docs.deno.com/runtime/manual/node/npm_specifiers} npm: specifiers
+ * @resource {https://docs.deno.com/runtime/fundamentals/node/} Node.js / npm support in Deno
  * @resource {https://www.npmjs.com/package/jose} jose library on npm
  * @group Authentication
  *
@@ -15,7 +15,7 @@
  */
 
 // Import necessary functions and types from the `jose` library.
-import { JWTPayload, jwtVerify, SignJWT } from "npm:jose@5.9.6";
+import { JWTPayload, jwtVerify, SignJWT } from "npm:jose@^6";
 
 // Define a secret key used for signing and verifying JWTs. Ensure that this secret is kept secure in a real-world application.
 const secret = new TextEncoder().encode("secret-that-no-one-knows");

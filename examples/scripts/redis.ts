@@ -12,7 +12,7 @@
  */
 
 // Import `createClient` from the npm:redis module
-import { createClient } from "npm:redis@^4.5";
+import { createClient } from "npm:redis@^6";
 
 // Create a client, pointing it at your Redis server. The host and port below
 // default to a local instance; change them to connect to a remote server.

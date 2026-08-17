@@ -3,15 +3,15 @@
  * @difficulty intermediate
  * @tags cli, web
  * @run -N -E <url>
- * @resource {https://deno.land/x/openai} OpenAI module on deno.land/x
+ * @resource {https://www.npmjs.com/package/openai} OpenAI SDK on npm
  * @group Basics
  *
  * This example demonstrates how to interact with OpenAI's chat completions API
  * using Deno, where we send a user prompt and receive a response from the GPT-4 model.
  */
 
-// Import the OpenAI module from the Deno third-party library
-import { OpenAI } from "https://deno.land/x/openai@v4.68.1/mod.ts";
+// Import the OpenAI module from npm
+import OpenAI from "npm:openai@^7";
 
 // Create an OpenAI client by providing the API key stored in an environment variable. (Make sure your API key is set as an environment variable)
 const openai = new OpenAI({

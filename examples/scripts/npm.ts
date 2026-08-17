@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @run -N -R -E <url>
- * @resource {https://docs.deno.com/runtime/manual/node} Node.js / npm support in Deno
+ * @resource {https://docs.deno.com/runtime/fundamentals/node/} Node.js / npm support in Deno
  * @resource {https://docs.deno.com/runtime/manual/node/npm_specifiers} npm: specifiers
  * @resource {https://www.npmjs.com/package/express} express module on npm
  * @group Basics
@@ -16,7 +16,7 @@
 // version number. Dependencies from npm can be configured in an import map
 // also.
 // @ts-types="npm:@types/express@4"
-import express, { type Request, type Response } from "npm:express@4.18.2";
+import express, { type Request, type Response } from "npm:express@4.22.2";
 
 // Create an express server
 const app = express();
