@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-07-14
+last_modified: 2026-08-17
 title: "How to use Express with Deno"
 description: "Step-by-step guide to using Express.js with Deno. Learn how to set up an Express server, configure routes, handle middleware, and build REST APIs using Deno's Node.js compatibility features."
 url: /examples/express_tutorial/
