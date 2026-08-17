@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-08-17
 title: "Building a SvelteKit app with sv and Deno"
 url: /examples/sveltekit_tutorial/
 ---
