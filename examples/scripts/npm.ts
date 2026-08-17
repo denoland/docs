@@ -9,13 +9,13 @@
  * @group Basics
  *
  * Use JavaScript modules from npm in your Deno programs with the "npm:"
- * specifier in your imports.
+ * specifier in your imports. As of Deno 2.2.1, TypeScript types for npm
+ * packages are resolved automatically.
  */
 
 // Import the express module from npm using an npm: prefix, and appending a
 // version number. Dependencies from npm can be configured in an import map
 // also.
-// @ts-types="npm:@types/express@4"
 import express, { type Request, type Response } from "npm:express@4.18.2";
 
 // Create an express server
