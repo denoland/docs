@@ -6,7 +6,7 @@
  * @resource {https://www.npmjs.com/package/mongodb} MongoDB driver on npm
  * @group Databases
  *
- * Using the Deno MongoDB client, you can connect to a Mongo database
+ * Using the official MongoDB driver, you can connect to a MongoDB database
  * running anywhere.
  */
 
