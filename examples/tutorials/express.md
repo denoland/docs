@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-07-14
+last_modified: 2026-08-17
 title: "How to use Express with Deno"
 description: "Step-by-step guide to using Express.js with Deno. Learn how to set up an Express server, configure routes, handle middleware, and build REST APIs using Deno's Node.js compatibility features."
 url: /examples/express_tutorial/
@@ -59,8 +59,11 @@ console.log(`Server is running on http://localhost:8000`);
 
 You may notice that your editor is complaining about the `req` and `res`
 parameters. This is because Deno does not have types for the `express` module.
-To fix this, you can import the Express types file directly from npm. Add the
-following comment to the top of your `main.ts` file:
+**If you're using Deno 2.2.1 or later**, Deno automatically resolves the types
+from `@types/express`—you don't need to add anything.
+
+**For earlier versions of Deno (pre-2.2.1)**, you needed to manually add a
+`@ts-types` comment:
 
 ```ts
 // @ts-types="npm:@types/express@4.17.15"
