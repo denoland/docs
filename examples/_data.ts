@@ -377,6 +377,12 @@ export const items = [
     category: "File system",
   },
   {
+    title: "Checking for directory existence",
+    href: "/examples/checking_directory_existence/",
+    type: "example",
+    category: "File system",
+  },
+  {
     title: "Moving/Renaming files",
     href: "/examples/moving_renaming_files/",
     type: "example",
@@ -739,6 +745,12 @@ export const items = [
   {
     title: "AES Encryption and Decryption",
     href: "/examples/aes_encryption/",
+    type: "example",
+    category: "Cryptography",
+  },
+  {
+    title: "Shamir's Secret Sharing",
+    href: "/examples/sss/",
     type: "example",
     category: "Cryptography",
   },
