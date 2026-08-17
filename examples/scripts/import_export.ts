@@ -2,8 +2,7 @@
  * @title Importing & exporting
  * @difficulty beginner
  * @tags cli, deploy
- * @resource {https://docs.deno.com/runtime/fundamentals/modules/} Example: Dependency Management
- * @resource {https://docs.deno.com/runtime/fundamentals/modules/} Manual: Modules
+ * @resource {https://docs.deno.com/runtime/fundamentals/modules/} Doc: Modules and dependencies
  * @group Basics
  *
  * To build composable programs, it is necessary to be able to import and export
