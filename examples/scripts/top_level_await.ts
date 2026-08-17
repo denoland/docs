@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @resource {https://docs.deno.com/api/deno/~/Deno.readTextFile} Doc: Deno.readTextFile
- * @run <url>
+ * @run -R <url>
  * @group Basics
  *
  * Example of how top-level await can be used by default in Deno. This example would assist in migrating from NodeJS (CommonJS) to Deno.

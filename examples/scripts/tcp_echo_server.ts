@@ -2,7 +2,7 @@
  * @title TCP Echo Server
  * @difficulty beginner
  * @tags cli
- * @run -N echo_server.ts
+ * @run -N <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.listen} Deno listen API docs
  * @resource {https://docs.deno.com/api/deno/~/Deno.Conn#property_readable} Readable connection API docs
  * @resource {https://docs.deno.com/api/deno/~/Deno.Conn#property_writable} Writable connection docs

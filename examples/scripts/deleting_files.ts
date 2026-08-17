@@ -3,6 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @resource {https://docs.deno.com/api/deno/~/Deno.remove} Doc: Deno.remove
+ * @run -W <url>
  * @group File System
  *
  * Removing files and directories is a common task. Deno has a number of
@@ -15,7 +16,8 @@
 await Deno.remove("example.txt");
 
 // There is also a sync version of the api available
-Deno.removeSync("example.txt");
+await Deno.writeTextFile("toBeRemoved.txt", "noop");
+Deno.removeSync("toBeRemoved.txt");
 
 // If we want to remove a directory, we could do exactly
 // what we did above. If the directory has contents, the
