@@ -100,7 +100,7 @@
     "npm:sharp@0.34.5": "0.34.5",
     "npm:tailwindcss@4.1.13": "4.1.13",
     "npm:tailwindcss@4.1.17": "4.1.17",
-    "npm:tailwindcss@^4.1.11": "4.1.17",
+    "npm:tailwindcss@^4.1.11": "4.1.13",
     "npm:zod-to-json-schema@3.24.5": "3.24.5_zod@3.24.3",
     "npm:zod@3.24.3": "3.24.3"
   },
