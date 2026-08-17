@@ -3,7 +3,7 @@
  * @difficulty intermediate
  * @tags cli
  * @run -N -R <url>
- * @resource {https://docs.deno.com/api/deno/~/Deno.ServeTlsOptions} Doc: Deno.ServeTlsOptions
+ * @resource {https://docs.deno.com/api/deno/~/Deno.serve} Doc: Deno.serve
  * @resource {/examples/http_server} Example: HTTP Server: Hello world
  * @group Network
  *

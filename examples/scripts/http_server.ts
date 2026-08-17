@@ -8,7 +8,7 @@
  * @playground https://dash.deno.com/playground/example-helloworld
  * @group Network
  *
- * An example of a HTTP server that serves a "Hello World" message.
+ * An example of an HTTP server that serves a "Hello World" message.
  */
 
 // HTTP servers need a handler function. This function is called for every

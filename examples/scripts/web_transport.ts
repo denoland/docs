@@ -7,7 +7,7 @@
  * @resource {https://docs.deno.com/api/deno/~/Deno.upgradeWebTransport} Doc: Deno.upgradeWebTransport
  * @group Network
  *
- * <strong>Warning: This is an unstable API that is subject to change or removal at anytime.</strong><br>WebTransport is the web platform's API for low-latency, multiplexed
+ * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br>WebTransport is the web platform's API for low-latency, multiplexed
  * communication over HTTP/3. Browsers can use it where raw QUIC and TCP
  * sockets are unavailable, and unlike WebSockets it offers many independent
  * streams plus unreliable datagrams. Deno provides both the client API and,

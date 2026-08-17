@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli, deploy, web
  * @run -R <url>
- * @resource {/examples/import_export} Example: Importing & Exporting
+ * @resource {https://jsr.io/@std/csv} std/csv
  * @resource {https://datatracker.ietf.org/doc/html/rfc4180} Spec: CSV
  * @group Encoding
  *

@@ -7,7 +7,7 @@
  * @resource {https://docs.deno.com/examples/websocket/} Example: Outbound WebSockets
  * @group Network
  *
- * <strong>Warning: This is an unstable API that is subject to change or removal at anytime.</strong><br>WebSocketStream is a promise-based alternative to the event-based
+ * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br>WebSocketStream is a promise-based alternative to the event-based
  * WebSocket API. It exposes the connection as a pair of web streams, which
  * brings backpressure and async iteration to WebSocket code and composes
  * with everything else that speaks ReadableStream and WritableStream.

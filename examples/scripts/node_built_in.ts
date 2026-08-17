@@ -4,7 +4,7 @@
  * @tags cli, deploy
  * @run -E <url>
  * @resource {https://docs.deno.com/runtime/fundamentals/node} Node.js / npm support in Deno
- * @resource {https://docs.deno.com/runtime/fundamentals/node/#node_specifiers} node: specifiers
+ * @resource {https://docs.deno.com/runtime/fundamentals/node/#use-a-node-built-in-module} node: specifiers
  * @group Basics
  *
  * Deno supports most built-in Node.js modules natively - you can include them

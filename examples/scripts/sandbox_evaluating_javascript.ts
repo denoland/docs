@@ -9,8 +9,8 @@
  * You can evaluate JavaScript code in a sandbox using the `eval` function.
  *
  * Calling `sandbox.deno.eval()` lets you run arbitrary JavaScript snippets
- * directly inside the sandbox’s Deno runtime without writing files or shelling * out. This is useful when you want to prototype logic, run small
- * computations, or  inspect the sandbox environment itself quickly. Use it for
+ * directly inside the sandbox’s Deno runtime without writing files or shelling out. This is useful when you want to prototype logic, run small
+ * computations, or inspect the sandbox environment itself quickly. Use it for
  * dynamic scripts or exploratory debugging where creating a full module would
  * be overkill.
  */

@@ -2,8 +2,8 @@
  * @title Importing & exporting
  * @difficulty beginner
  * @tags cli, deploy
- * @resource {/examples/dependency-management} Example: Dependency Management
- * @resource {https://docs.deno.com/runtime/manual/basics/modules} Manual: Modules
+ * @resource {https://docs.deno.com/runtime/fundamentals/modules/} Example: Dependency Management
+ * @resource {https://docs.deno.com/runtime/fundamentals/modules/} Manual: Modules
  * @group Basics
  *
  * To build composable programs, it is necessary to be able to import and export
@@ -26,7 +26,7 @@ export const baz = "baz";
 
 // File: ./main.ts
 
-// To import things from files other files can use the import keyword.
+// To import things from other files, you can use the import keyword.
 import { sayHello } from "./util.ts";
 sayHello("World");
 

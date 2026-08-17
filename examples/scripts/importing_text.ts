@@ -9,7 +9,7 @@
  * Text files can be imported in JS and TS files using the `import` keyword.
  * This makes including static data in a library much easier.
  *
- * Stable as of Deno 2.8 — no flag required. (Binary `bytes` imports are still
+ * Stable as of Deno 2.8: no flag required. (Binary `bytes` imports are still
  * experimental and require `--unstable-raw-imports`.)
  */
 
@@ -32,5 +32,5 @@ console.log(text2);
 2025-07-01 08:15:12 - Program started
 2025-07-01 08:16:45 - Uploading file: summary.xls
 2025-07-01 08:17:33 - Error: Invalid file format (xls)
-2025-07-01 08:18:01 - Uploadinf file failed: summary.xls
+2025-07-01 08:18:01 - Uploading file failed: summary.xls
 */

@@ -8,7 +8,7 @@
  * @playground https://dash.deno.com/playground/example-routing
  * @group Network
  *
- * An example of a HTTP server that handles requests with different responses
+ * An example of an HTTP server that handles requests with different responses
  * based on the incoming URL.
  */
 

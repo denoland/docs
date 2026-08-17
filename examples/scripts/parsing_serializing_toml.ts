@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli, deploy, web
  * @run <url>
- * @resource {/examples/import_export} Example: Importing & Exporting
+ * @resource {https://jsr.io/@std/toml} std/toml
  * @resource {https://toml.io} Spec: TOML
  * @group Encoding
  *
@@ -11,7 +11,7 @@
  */
 import { parse, stringify } from "jsr:@std/toml";
 
-// To parse a TOML string, you can use the the standard library's TOML
+// To parse a TOML string, you can use the standard library's TOML
 // parse function. The value is returned as a JavaScript object.
 const text = `
 int = 1_000_000

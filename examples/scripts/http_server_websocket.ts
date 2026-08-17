@@ -7,7 +7,7 @@
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/WebSocket} MDN: WebSocket
  * @group Network
  *
- * An example of a HTTP server that handles websocket requests.
+ * An example of an HTTP server that handles websocket requests.
  */
 
 // To start the server on the default port, call `Deno.serve` with the handler.
