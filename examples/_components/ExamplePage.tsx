@@ -9,12 +9,8 @@ export default function ExamplePage({ example }: Props) {
     file.snippets.map((snippet) => snippet.code).join("\n")
   ).join("\n");
   const url =
-    `https://github.com/denoland/docs/blob/main/examples/scripts/${example.name}${
-      example.parsed.files.length > 1 ? "/main" : ""
-    }`;
-  const rawUrl = `https://docs.deno.com/examples/scripts/${example.name}${
-    example.parsed.files.length > 1 ? "/main" : ""
-  }`;
+    `https://github.com/denoland/docs/blob/main/examples/scripts/${example.name}`;
+  const rawUrl = `https://docs.deno.com/examples/scripts/${example.name}`;
 
   return (
     <div data-content="example">
