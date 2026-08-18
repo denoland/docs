@@ -2,12 +2,12 @@
  * @title Deno KV watch
  * @difficulty intermediate
  * @tags cli, deploy
- * @run --unstable-kv <url>
- * @resource {https://docs.deno.com/deploy/kv/manual} Deno KV user guide
+ * @run --unstable-kv -N <url>
+ * @resource {https://docs.deno.com/deploy/kv/} Deno KV user guide
  * @resource {https://docs.deno.com/api/deno/~/Deno.Kv} Deno KV Runtime API docs
  * @group Unstable APIs
  *
- * <strong>Warning: This is an unstable API that is subject to change or removal at anytime.</strong><br>Deno KV watch allows you to detect changes to your KV database, making
+ * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br>Deno KV watch allows you to detect changes to your KV database, making
  * it easier to build real-time applications, newsfeeds, chat, and more.
  */
 
@@ -20,21 +20,8 @@ setInterval(() => {
   kv.atomic().sum(["counter"], 1n).commit();
 }, 1000);
 
-// Listen for changes to "counter" and log value.
-for await (const [entry] of kv.watch([["counter"]])) {
-  console.log(`Counter: ${entry.value}`);
-}
-
-// You can also create a stream reader from kv.watch, which returns
-// a ReadableStream.
-const stream = kv.watch([["counter"]]).getReader();
-while (true) {
-  const counter = await stream.read();
-  if (counter.done) {
-    break;
-  }
-  console.log(`Counter: ${counter.value[0].value}`);
-}
+// kv.watch([["counter"]]) also returns a ReadableStream you can consume
+// yourself; here the server below streams each change to clients.
 
 // To use server-sent events, let's create a server that
 // responds with a stream. Each time a change to "counter"

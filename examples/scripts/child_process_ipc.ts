@@ -2,7 +2,7 @@
  * @title Communicate with a child process over IPC
  * @difficulty intermediate
  * @tags cli
- * @run -A <url>
+ * @run -E --allow-run <url>
  * @resource {https://docs.deno.com/api/node/child_process/} Doc: node:child_process
  * @resource {https://docs.deno.com/examples/subprocess_tutorial/} Example: Subprocess spawning
  * @group System
@@ -28,7 +28,7 @@ if (process.send) {
   // In the parent, fork starts the child with an IPC channel attached.
   // Forking this same file keeps the example self-contained; normally the
   // child is its own module.
-  const child = fork(new URL(import.meta.url).pathname);
+  const child = fork(import.meta.url);
 
   // Messages from the child arrive on the message event. They are
   // structured values, not bytes, so no parsing is needed.

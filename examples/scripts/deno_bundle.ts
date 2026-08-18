@@ -2,7 +2,7 @@
  * @title Bundle code with Deno.bundle
  * @difficulty intermediate
  * @tags cli
- * @run --unstable-bundle --allow-read --allow-write --allow-env --allow-net <url>
+ * @run --unstable-bundle -R -W --allow-run <url>
  * @resource {https://docs.deno.com/api/deno/~/Deno.bundle} Doc: Deno.bundle
  * @resource {https://docs.deno.com/runtime/reference/bundling/} Bundling in the Deno manual
  * @group CLI

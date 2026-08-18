@@ -3,13 +3,15 @@
  * @difficulty intermediate
  * @tags cli, web
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers} MDN: Web Workers
- * @resource {https://deno.land/manual@v1.30.0/runtime/workers} Manual: Workers
+ * @resource {https://docs.deno.com/api/web/~/Worker/} API: Worker
  * @group Advanced
  *
  * Workers are the only way of running javascript off of the main thread.
  * This can be useful for a wide variety of programs, especially those where
  * there is a lot of computation that needs to be done without blocking a
- * thread.
+ * thread. This example is not runnable on its own; the worker expects
+ * separate `worker.ts` and log files, so it is meant to be read rather than
+ * executed directly.
  */
 
 // File: ./worker.ts
