@@ -1,5 +1,5 @@
 /**
- * @title Shamir's Secret Sharing Implementation
+ * @title Shamir's Secret Sharing
  * @difficulty intermediate
  * @tags cli
  * @run <url>
