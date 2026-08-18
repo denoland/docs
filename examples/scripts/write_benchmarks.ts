@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli
  * @run deno bench <url>
- * @resource {https://docs.deno.com/runtime/fundamentals/testing/#benchmarking} Doc: Benchmarking
+ * @resource {https://docs.deno.com/runtime/reference/cli/bench/} Doc: Benchmarking
  * @resource {https://docs.deno.com/api/deno/~/Deno.bench} Doc: Deno.bench
  * @group CLI
  *

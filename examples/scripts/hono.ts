@@ -7,7 +7,7 @@
  * @resource {https://hono.dev/docs} Hono documentation
  * @group Network
  *
- * An example of a HTTP server that uses the Hono framework.
+ * An example of an HTTP server that uses the Hono framework.
  */
 
 // Import the Hono framework

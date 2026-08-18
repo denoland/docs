@@ -3,7 +3,7 @@
  * @difficulty beginner
  * @tags cli, deploy, web
  * @run <url>
- * @resource {/examples/import_export} Example: Importing & Exporting
+ * @resource {https://jsr.io/@std/yaml} std/yaml
  * @resource {https://yaml.org} Spec: YAML
  * @group Encoding
  *
@@ -11,7 +11,7 @@
  */
 import { parse, stringify } from "jsr:@std/yaml";
 
-// To parse a YAML string, you can use the the standard library's YAML
+// To parse a YAML string, you can use the standard library's YAML
 // parse function. The value is returned as a JavaScript object.
 const text = `
 foo: bar
@@ -31,7 +31,7 @@ const obj = {
 };
 const yaml = stringify(obj);
 console.log(yaml);
-//- hello: word
+//- hello: world
 //- numbers:
 //-   - 1
 //-   - 2

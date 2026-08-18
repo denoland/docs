@@ -3,9 +3,9 @@
  * @difficulty intermediate
  * @tags cli, deploy
  * @run -N <url>
- * @resource {https://fresh.deno.dev/docs/concepts/forms#-handling-file-uploads} Handling File Uploads in Fresh
- * @resource {/examples/writing-files} Writing files
- * @resource {/examples/http-server-routing} Example: HTTP server: Server routing
+ * @resource {https://usefresh.dev/docs/advanced/forms#handling-file-uploads} Handling File Uploads in Fresh
+ * @resource {/examples/writing_files} Writing files
+ * @resource {/examples/http_server_routing} Example: HTTP server: Server routing
  * @group Network
  *
  * An example HTTP server that provides sending and receiving of a file upload.<br><br>

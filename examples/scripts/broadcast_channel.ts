@@ -4,7 +4,7 @@
  * @tags cli, deploy, web
  * @run <url>
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel} MDN: BroadcastChannel
- * @resource {https://docs.deno.com/deploy/api/runtime-broadcast-channel/} Deno Deploy: BroadcastChannel
+ * @resource {https://docs.deno.com/deploy/classic/api/runtime-broadcast-channel/} Deno Deploy: BroadcastChannel
  * @group Web Standard APIs
  *
  * BroadcastChannel is a named bus. Every channel opened with the same name

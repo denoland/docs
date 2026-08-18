@@ -4,7 +4,7 @@
  * @tags cli
  * @run <url>
  * @resource {https://jsr.io/@std/path/doc/~/fromFileUrl} Doc: @std/path fromFileUrl
- * @resource {https://docs.deno.com/examples/module_metadata/} Example: Module Metadata
+ * @resource {https://docs.deno.com/examples/module_metadata_tutorial/} Example: Module Metadata
  * @group File System
  *
  * Modules are identified by URLs in Deno, while file system APIs take

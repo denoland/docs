@@ -4,7 +4,7 @@
  * @tags cli, deploy
  * @run <url>
  * @resource {https://jsr.io/@std/crypto/doc/timing-safe-equal} Doc: timingSafeEqual
- * @resource {https://codahale.com/a-lesson-in-timing-attacks/} A lesson in timing attacks
+ * @resource {https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html} OWASP: Authentication Cheat Sheet (timing attacks)
  * @group Cryptography
  *
  * An ordinary comparison like a === b returns as soon as the first byte

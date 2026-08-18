@@ -7,7 +7,7 @@
  * @resource {https://docs.deno.com/api/deno/~/Deno.connectQuic} Doc: Deno.connectQuic
  * @group Network
  *
- * <strong>Warning: This is an unstable API that is subject to change or removal at anytime.</strong><br>QUIC is the transport protocol underneath HTTP/3. It runs over UDP,
+ * <strong>Warning: This is an unstable API that is subject to change or removal at any time.</strong><br>QUIC is the transport protocol underneath HTTP/3. It runs over UDP,
  * always encrypts with TLS, connects faster than TCP plus TLS, and one
  * connection carries many independent streams with no head-of-line
  * blocking. This example starts a QUIC server and client in one process

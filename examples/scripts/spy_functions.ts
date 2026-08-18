@@ -7,7 +7,7 @@
  * @resource {https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-2.html} Typescript docs for `using` keyword
  * @group Testing
  *
- * A function spy allow us to assert that a function was called with the correct arguments and a specific number of times.
+ * A function spy allows us to assert that a function was called with the correct arguments and a specific number of times.
  * This snippet demonstrates how to spy on a function using a mock function.
  */
 

@@ -7,7 +7,7 @@
  * @resource {https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream} MDN: ReadableStream
  * @group Network
  *
- * This example demonstrates how to make a HTTP request to a server.
+ * This example demonstrates how to make an HTTP request to a server.
  */
 
 // To make a request to a server, you use the `fetch` API.

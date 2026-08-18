@@ -8,7 +8,7 @@
  * @resource {/examples/http_server} Example: HTTP Server: Hello World
  * @group Network
  *
- * An example of a HTTP server that serves files.
+ * An example of an HTTP server that serves files.
  */
 
 // Import utility methods for serving files with mime types.
