@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-30
+last_modified: 2026-08-18
 title: "Configuration"
 description: "Configure deno desktop in deno.json: app metadata, icons, deep-link URL schemes, backend selection, output paths, error reporting, and the auto-update server."
 ---
@@ -272,3 +272,18 @@ Configuration is validated at the start of `deno desktop`:
 - `app.deepLinks` entries must be valid, non-reserved URL schemes.
 
 Errors are reported with the offending `deno.json` location.
+
+## Type checking
+
+By default, Deno type-checks code against the runtime's global scope (the
+`deno.window` library), which does not include desktop-only types such as
+[`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow). To get editor
+completions from the language server, set `compilerOptions.lib` in `deno.json`:
+
+```json title="deno.json"
+{
+  "compilerOptions": {
+    "lib": ["deno.desktop", "deno.unstable", "node"]
+  }
+}
+```
