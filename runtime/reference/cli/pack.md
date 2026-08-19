@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-08-19
 title: "deno pack"
 command: pack
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -50,15 +50,24 @@ becomes `-`, matching `npm pack`'s naming convention).
 | Transpiled `.js` files (with inline source maps by default; pass `--no-source-maps` to omit).                                                                                                      |
 | Generated `.d.ts` declaration files (produced via the same fast-check pipeline as [`deno publish`](/runtime/reference/cli/publish/)).                                                              |
 | `README` and `LICENSE` files from the project root, if present.                                                                                                                                    |
+| Non-source files matched by `publish.include` / `publish.exclude` (Deno 2.9+).                                                                                                                     |
 
-Only files reachable through the module graph from `exports` are included.
-Non-JS assets such as data files or WASM are only included if they're imported
-from JS/TS. If you need to ship arbitrary files, list them as positional
-arguments:
+JavaScript and TypeScript still come from the module graph starting at
+`exports`. Those files are transpiled; they are not packed as raw `.ts`.
+
+(Deno 2.9+) `deno pack` also copies non-source files that match the same
+`publish.include` / `publish.exclude` globs as
+[`deno publish`](/runtime/reference/cli/publish/). SVG, WASM, and other assets
+listed there go into the tarball as-is. See
+[`publish` in deno.json](/runtime/reference/deno_json/).
+
+You can still pass extra files as positional arguments:
 
 ```sh
 deno pack assets/icon.svg locales/*.json
 ```
+
+`--ignore` on the command line applies to these assets as well.
 
 ## Specifier rewriting
 
