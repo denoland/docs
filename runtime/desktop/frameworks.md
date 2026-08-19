@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-27
+last_modified: 2026-08-19
 title: "Frameworks"
 description: "Run Next.js, Astro, Fresh, Remix, React Router, Nuxt, SvelteKit, SolidStart, TanStack Start, and Vite projects as desktop apps."
 ---
@@ -25,6 +25,57 @@ Most supported frameworks need no special adapter. Some frameworks have
 runtime-specific entry files; check the per-framework notes below before
 building.
 
+## package.json vs deno.json
+
+When you scaffold a framework project with `deno init --npm <framework>` or manually add npm
+dependencies, both `package.json` and `deno.json` may exist. Each plays a distinct role:
+
+| File | Purpose |
+| ---- | ------- |
+| `package.json` | Declares npm dependencies (e.g., `vite`, `react`, etc.). |
+| `deno.json` | Configures Deno-specific settings, including the `desktop` manifest that Deno Desktop reads. |
+
+> ⚠️ **Important:** Deno Desktop **ignores** the `desktop` key in `package.json`. Only place desktop
+> configuration in `deno.json`.
+
+### Example
+
+Here's a recommended project structure showing both files:
+
+```json title="package.json"
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "vite": "^5.0.0"
+  }
+}
+```
+
+```json title="deno.json"
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "importMap": "./import_map.json",
+  "desktop": {
+    "window": {
+      "width": 1280,
+      "height": 800,
+      "title": "My Desktop App"
+    },
+    "permissions": ["allow-net", "allow-read"]
+  }
+}
+```
+
+### FAQ
+
+**Do I need both `package.json` and `deno.json`?**
+
+Yes, for framework-based desktop apps scaffolded with npm. Use `package.json` for managing
+dependencies and `deno.json` for configuring Deno Desktop features like windows, permissions,
+and import maps.
 ## Detection
 
 Detection is based on config files and `package.json` dependencies. The first
