@@ -55,13 +55,11 @@ becomes `-`, matching `npm pack`'s naming convention).
 JavaScript and TypeScript still come from the module graph starting at
 `exports`. Those files are transpiled; they are not packed as raw `.ts`.
 
-:::info Deno 2.9
-`deno pack` also copies non-source files that match the same
+(Deno 2.9+) `deno pack` also copies non-source files that match the same
 `publish.include` / `publish.exclude` globs as
 [`deno publish`](/runtime/reference/cli/publish/). SVG, WASM, and other assets
 listed there go into the tarball as-is. See
 [`publish` in deno.json](/runtime/reference/deno_json/).
-:::
 
 You can still pass extra files as positional arguments:
 
