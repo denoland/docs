@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-29
+last_modified: 2026-08-21
 title: "Get started with Deno"
 description: "Install Deno and build your first project: why Deno, install, create, run, test, add a dependency, and use the built-in toolchain. No build step, no config."
 pagination_next: /runtime/getting_started/installation/
@@ -84,6 +84,20 @@ deno --version
 
 See [Installation](/runtime/getting_started/installation/) for package managers,
 Docker, and other options.
+
+:::tip Keep Deno up to date
+
+Deno is constantly improving with new features and fixes. You can upgrade to the
+latest version at any time with:
+
+```sh
+deno upgrade
+```
+
+See [`deno upgrade`](/runtime/reference/cli/upgrade/) for channels (stable, LTS,
+canary), version pinning, and more.
+
+:::
 
 ## Create a project
 
