@@ -85,6 +85,20 @@ deno --version
 See [Installation](/runtime/getting_started/installation/) for package managers,
 Docker, and other options.
 
+:::tip Keep Deno up to date
+
+Deno is constantly improving with new features and fixes. You can upgrade to the
+latest version at any time with:
+
+```sh
+deno upgrade
+```
+
+See [`deno upgrade`](/runtime/reference/cli/upgrade/) for channels (stable, LTS,
+canary), version pinning, and more.
+
+:::
+
 ## Create a project
 
 Scaffold a new project with [`deno init`](/runtime/reference/cli/init/):
