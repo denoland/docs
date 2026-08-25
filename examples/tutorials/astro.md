@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-09-29
+last_modified: 2026-08-25
 title: "Build Astro with Deno"
 description: "Step-by-step tutorial on building web applications with Astro and Deno. Learn how to scaffold projects, create dynamic pages, implement SSR, and deploy your Astro sites using Deno's Node.js compatibility."
 url: /examples/astro_tutorial/
@@ -42,7 +42,7 @@ this will set us up with a basic Astro project structure, including a
 ## Start the Astro server
 
 We can start the local Astro server with the `dev` task. In your terminal,
-change directory into your new project and run run
+change directory into your new project and run
 
 ```sh
 deno task dev

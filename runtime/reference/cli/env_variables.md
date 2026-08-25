@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-02
+last_modified: 2026-08-25
 title: "Configuring Deno behavior"
 ---
 
@@ -113,8 +113,8 @@ The npm registry to use when loading modules via
 
 Deno is able to handle network requests through a proxy server, useful for
 various reasons such as security, caching, or accessing resources behind a
-firewall. The runtime supports supports proxies for module downloads and the Web
-standard `fetch` API.
+firewall. The runtime supports proxies for module downloads and the Web standard
+`fetch` API.
 
 Deno reads proxy configuration from environment variables: `HTTP_PROXY`,
 `HTTPS_PROXY` and `NO_PROXY`.
