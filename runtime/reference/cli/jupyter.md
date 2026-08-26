@@ -57,7 +57,7 @@ for displaying rich content in your notebooks
 
 ---
 
-The easiest way to provide a rich output is to return an object that that has a
+The easiest way to provide a rich output is to return an object that has a
 `[Symbol.for("Jupyter.display")]` method.
 
 This method should return a dictionary mapping a MIME type to a value that
@@ -86,7 +86,7 @@ You can also use `Deno.jupyter.$display` instead of typing
 
 :::
 
-This is a regular function, so you you can use any library you want to format
+This is a regular function, so you can use any library you want to format
 the output - eg. use [`@std/fmt/colors`](/runtime/reference/std/fmt/) to provide
 a colorful output:
 
