@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-11-05
+last_modified: 2026-08-26
 title: "Jupyter Kernel for Deno"
 oldUrl: /runtime/manual/tools/jupyter/
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -86,9 +86,9 @@ You can also use `Deno.jupyter.$display` instead of typing
 
 :::
 
-This is a regular function, so you can use any library you want to format
-the output - eg. use [`@std/fmt/colors`](/runtime/reference/std/fmt/) to provide
-a colorful output:
+This is a regular function, so you can use any library you want to format the
+output - eg. use [`@std/fmt/colors`](/runtime/reference/std/fmt/) to provide a
+colorful output:
 
 ```ts
 import * as colors from "jsr:@std/fmt/colors";
