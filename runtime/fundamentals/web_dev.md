@@ -1,119 +1,150 @@
 ---
-last_modified: 2025-10-10
+last_modified: 2026-06-15
 title: "Web development"
-description: "A guide to web development with Deno. Learn about supported frameworks like Fresh, Next.js, and Astro, along with built-in features for building modern web applications."
+description: "Build for the web with Deno: start with the built-in HTTP server, choose a Deno-native or npm framework, and run each one with verified commands and Deno-specific notes."
 oldUrl:
   - /runtime/manual/getting_started/web_frameworks/
   - /runtime/fundamentals/web_frameworks/
 ---
 
-Deno offers a secure and developer-friendly environment for building web
-applications, making your web dev a delightful experience.
+There are three ways to build for the web with Deno, and this page covers all of
+them: start from the built-in HTTP server with no dependencies, reach for a
+Deno-native framework, or run an established npm framework through Deno's
+Node.js compatibility. Pick the row that matches what you're building:
 
-1. Deno has [secure defaults](/runtime/fundamentals/security/), meaning it
-   requires explicit permission for file, network, and environment access,
-   reducing the risk of security vulnerabilities.
-2. Deno has [built-in TypeScript support](/runtime/fundamentals/typescript/),
-   allowing you to write TypeScript code without additional configuration or
-   tooling.
-3. Deno comes with a [standard library](/runtime/reference/std/) that includes
-   modules for common tasks like HTTP servers, file system operations, and more.
+| Approach                    | Reach for it when                                                   | Covered below                                           |
+| --------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------- |
+| **No framework**            | APIs, webhooks, small sites; you want minimal dependencies          | [Start without a framework](#start-without-a-framework) |
+| **A Deno-native framework** | You want the smoothest Deno experience, no Node compatibility layer | [Deno-native frameworks](#deno-native-frameworks)       |
+| **An npm framework**        | You want an established React, Vue, or Svelte ecosystem framework   | [Run an npm framework](#run-an-npm-framework)           |
 
-For your vanilla TypeScript, or JavaScript, web applications, you can use the
-built-in Deno [HTTP server](/runtime/fundamentals/http_server/). This is a great
-way to get started with Deno and build simple web applications without any
-additional dependencies.
+## Start without a framework
 
-Most likely, if you're building a more complex application, you'll be
-interacting with Deno through a web framework.
+Deno ships an HTTP server in the runtime, so for APIs, webhooks, and small sites
+you may not need a framework at all. [`Deno.serve`](/api/deno/~/Deno.serve)
+takes a handler that receives a standard
+[`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) and
+returns a
+[`Response`](https://developer.mozilla.org/en-US/docs/Web/API/Response), the
+same objects you already know from the browser. Here is a server that returns an
+HTML page, a JSON API route, and a static file:
 
-## React/Next
+```ts title="server.ts"
+import { serveDir } from "jsr:@std/http/file-server";
 
-[React](https://reactjs.org/) is a popular JavaScript library for building user
-interfaces. To use React with Deno, you can use the popular web framework
-[Next.js](https://nextjs.org/).
+Deno.serve((req) => {
+  const { pathname } = new URL(req.url);
 
-To get started with Next.js in Deno, you can create a new next app and run it
-immediately with Deno:
+  // A JSON API route
+  if (pathname === "/api/hello") {
+    return Response.json({ message: "Hello from Deno" });
+  }
 
-```sh
-deno run -A npm:create-next-app@latest my-next-app
-cd my-next-app
-deno task dev
+  // Static assets from ./public, served under /static/
+  if (pathname.startsWith("/static/")) {
+    return serveDir(req, { fsRoot: "public", urlRoot: "static" });
+  }
+
+  // Everything else: an HTML page
+  return new Response(
+    `<!doctype html>
+<link rel="stylesheet" href="/static/style.css">
+<h1>Hello from Deno</h1>
+<p>Try <a href="/api/hello">/api/hello</a></p>`,
+    { headers: { "content-type": "text/html; charset=utf-8" } },
+  );
+});
 ```
 
-This will create a new Next.js app with TypeScript and run it with Deno. You can
-then open your browser to `http://localhost:3000` to see your new app, and start
-editing `page.tsx` to see your changes live.
-
-To better understand how JSX and Deno interface under the hood, read on
-[here](/runtime/reference/jsx/).
-
-## Fresh
-
-[Fresh](https://usefresh.dev/) is the most popular web framework for Deno. It
-uses a model where you send no JavaScript to clients by default.
-
-To get started with a Fresh app, you can use the following command and follow
-the cli prompts to create your app:
+This is where Deno's [permission model](/runtime/fundamentals/security/) pays
+off: a server you write yourself asks for exactly what it touches. This one
+needs network access to listen and read access to serve files from `public/`,
+and nothing more:
 
 ```sh
-deno run -Ar jsr:@fresh/init
+deno run --allow-net --allow-read server.ts
+```
+
+The [HTTP server guide](/runtime/fundamentals/http_server/) takes this further:
+routing, streaming responses, graceful shutdown, HTTPS, HTTP/2, and WebSockets,
+all with zero dependencies.
+
+### Lightweight routers
+
+When you outgrow hand-rolled routing but don't want a full framework, two small
+libraries work well with Deno.
+
+[Hono](https://hono.dev/) is a small, fast router in the tradition of Express,
+with first-class Deno support:
+
+```sh
+deno init --npm hono --template=deno my-hono-app
+cd my-hono-app
+deno task start
+```
+
+[Oak](https://jsr.io/@oak/oak) is a middleware framework in the tradition of
+Koa, published on JSR. Add it with `deno add jsr:@oak/oak`, then create
+`server.ts`:
+
+```ts title="server.ts"
+import { Application, Router } from "@oak/oak";
+
+const router = new Router();
+router.get("/", (ctx) => {
+  ctx.response.body = "Hello Oak!";
+});
+
+const app = new Application();
+app.use(router.routes());
+app.use(router.allowedMethods());
+await app.listen({ port: 8000 });
+```
+
+Run it the same way, granting only network access:
+
+```sh
+deno run --allow-net server.ts
+```
+
+## Deno-native frameworks
+
+These frameworks target Deno directly. There is no `package.json` to translate
+and no Node.js compatibility layer in the way: configuration lives in
+`deno.json`, dependencies come from [JSR](https://jsr.io) and npm through the
+`imports` map, and a `deno.lock` file pins them.
+
+### Fresh
+
+[Fresh](https://fresh.deno.dev/) is the web framework built for Deno. It renders
+pages on the server and ships no JavaScript to the client by default.
+Interactive components are opt-in
+[islands](https://jasonformat.com/islands-architecture/), so you only pay for
+client-side rendering where you ask for it.
+
+Create a project and start the dev server:
+
+```sh
+deno run -Ar jsr:@fresh/init my-fresh-app
 cd my-fresh-app
 deno task dev
 ```
 
-This will create a new Fresh app and run it with Deno. You can then open your
-browser to `http://localhost:8000` to see your new app. Edit `/routes/index.tsx`
-to see your changes live.
+The `-r` flag forces Deno to re-download the initializer so you always get the
+latest version. The dev server prints its URL when it starts (Fresh 2 uses Vite
+for development, which defaults to `http://localhost:5173`). Edit
+`routes/index.tsx` to see changes live.
 
-Fresh does the majority of its rendering on the server, and the client is only
-responsible for re-rendering small
-[islands of interactivity](https://jasonformat.com/islands-architecture/). This
-means the developer explicitly opts in to client side rendering for specific
-components.
+What's different under Deno: nothing to translate, because Fresh targets Deno
+directly. The generated project sets `"nodeModulesDir": "manual"` and the
+initializer creates a `node_modules` directory, because the Vite-based dev
+server expects one. The generated tasks already carry the permissions they need;
+for example the production `start` task runs `deno serve -A _fresh/server.js`.
 
-## Astro
+### Lume
 
-[Astro](https://astro.build/) is a static site generator that allows developers
-to create fast and lightweight websites.
-
-To get started with Astro, you can use the following command to create a new
-Astro site:
-
-```sh
-deno run -A npm:create-astro my-astro-site
-cd my-astro-site
-deno task dev
-```
-
-This will create a new Astro site and run it with Deno. You can then open your
-browser to `http://localhost:4321` to see your new site. Edit
-`/src/pages/index.astro` to see your changes live.
-
-## Vite
-
-[Vite](https://vitejs.dev/) is a web dev build tool that serves your code via
-native ES modules, which can be run directly in the browser. Vite is a great
-choice for building modern web applications with Deno.
-
-To get started with Vite, you can use the following command to create a new Vite
-app:
-
-```sh
-deno run -A npm:create-vite@latest
-cd my-vite-app
-deno install
-deno task dev
-```
-
-## Lume
-
-[Lume](https://lume.land/) is a static site generator for Deno that is inspired
-by other static site generators such Jekyll or Eleventy.
-
-To get started with Lume, you can use the following command to create a new Lume
-site:
+[Lume](https://lume.land/) is a static site generator built for Deno, inspired
+by Jekyll and Eleventy.
 
 ```sh
 mkdir my-lume-site
@@ -122,81 +153,72 @@ deno run -A https://lume.land/init.ts
 deno task serve
 ```
 
-## Docusaurus
+The `serve` task builds the site, starts a local server at
+`http://localhost:3000`, and rebuilds on changes.
 
-[Docusaurus](https://docusaurus.io/) is a static site generator that is
-optimized for technical documentation websites.
+What's different under Deno: like Fresh, Lume is Deno-native. There is no
+`package.json` and no `node_modules`. The site is configured in `_config.ts`,
+tasks live in `deno.json`, and plugins are imported as modules.
 
-To get started with Docusaurus, you can use the following command to create a
-new Docusaurus site:
+## Run an npm framework
 
-```sh
-deno run -A npm:create-docusaurus@latest my-website classic
-cd my-website
-deno task start
-```
+Established npm frameworks run under Deno through
+[Node.js compatibility](/runtime/fundamentals/node/), and the pattern is the
+same for all of them:
 
-## Hono
+1. **Scaffold** with the framework's own generator, run through Deno. Generators
+   need `-A` (allow all) because they write files, read environment variables,
+   and download and execute packages.
+2. **Install** with `deno install`. The scaffold is a standard npm project with
+   a `package.json`, and Deno expects a local `node_modules` directory when one
+   is present. This step creates it and records resolved versions in
+   `deno.lock`.
+3. **Run** the dev server with `deno task`, which executes the scripts from
+   `package.json` exactly as `npm run` would.
 
-[Hono](https://hono.dev) is a light-weight web app framework in the tradition of
-Express and Sinatra.
-
-To get started with Hono, you can use the following command to create a new Hono
-app:
-
-```sh
-deno run -A npm:create-hono@latest
-cd my-hono-app
-deno task start
-```
-
-This will create a new Hono app and run it with Deno. You can then open your
-browser to `http://localhost:8000` to see your new app.
-
-## Oak
-
-[Oak](https://jsr.io/@oak/oak) is a middleware framework for handling HTTP with
-Deno. Oak is the glue between your frontend application and a potential database
-or other data sources (e.g. REST APIs, GraphQL APIs).
-
-Oak offers additional functionality over the native Deno HTTP server, including
-a basic router, JSON parser, middlewares, plugins, etc.
-
-To get started with Oak, make a file called `server.ts` and add the following:
-
-```ts
-import { Application } from "jsr:@oak/oak/application";
-import { Router } from "jsr:@oak/oak/router";
-
-const router = new Router();
-router.get("/", (ctx) => {
-  ctx.response.body = `<!DOCTYPE html>
-    <html>
-      <head><title>Hello oak!</title><head>
-      <body>
-        <h1>Hello oak!</h1>
-      </body>
-    </html>
-  `;
-});
-
-const app = new Application();
-const port = 8080;
-
-app.use(router.routes());
-app.use(router.allowedMethods());
-console.log(`Server running on http://localhost:${port}`);
-
-app.listen({ port: port });
-```
-
-Run the server with the following command:
+So a full setup looks like:
 
 ```sh
-deno run --allow-net server.ts
+deno run -A npm:create-next-app@latest my-app
+cd my-app
+deno install
+deno task dev
 ```
 
-## Node projects
+The scaffold command and dev server differ per framework. These are all verified
+to run under Deno:
 
-Deno will run your Node.js projects out the box. Check out our guide on
-[migrating your Node.js project to Deno](/runtime/migrate/).
+| Framework                            | Scaffold command                                          | Start dev server            |
+| ------------------------------------ | --------------------------------------------------------- | --------------------------- |
+| [Next.js](https://nextjs.org/)       | `deno run -A npm:create-next-app@latest my-app`           | `deno task dev` → `:3000`   |
+| [Astro](https://astro.build/)        | `deno run -A npm:create-astro@latest my-app`              | `deno task dev` → `:4321`   |
+| [Vite](https://vite.dev/)            | `deno init --npm vite my-app`                             | `deno task dev` → `:5173`   |
+| [SvelteKit](https://svelte.dev/)     | `deno run -A npm:sv create my-app`                        | `deno task dev` → `:5173`   |
+| [Nuxt](https://nuxt.com/)            | `deno run -A npm:create-nuxt@latest my-app`               | `deno task dev` → `:3000`   |
+| [Docusaurus](https://docusaurus.io/) | `deno run -A npm:create-docusaurus@latest my-app classic` | `deno task start` → `:3000` |
+
+A few per-framework notes:
+
+- **Vite** can take a template directly, for example
+  `deno init --npm vite my-app --template react-ts`. `deno init --npm vite` runs
+  the `create-vite` generator for you.
+- **SvelteKit** and **Nuxt** generators are interactive: they prompt for a
+  template and options, and both already list Deno as a package manager.
+- **Astro**'s setup wizard may offer to install dependencies for you; skip that
+  and let `deno install` handle it.
+- **Docusaurus** also accepts `--skip-install` to stop the generator from
+  invoking npm, leaving the install to `deno install`.
+
+To understand how Deno handles JSX in any of these, see the
+[JSX reference](/runtime/reference/jsx/).
+
+## Keep going
+
+- Build a server from scratch in the
+  [HTTP server guide](/runtime/fundamentals/http_server/).
+- See which browser-standard APIs (`fetch`, Web Streams, Web Crypto, and more)
+  are available in the
+  [web platform APIs reference](/runtime/reference/web_platform_apis/).
+- Follow step-by-step framework tutorials, including React, Vue, SolidJS, and
+  more, in the [examples and tutorials section](/examples/).
+- When your app is ready for production, deploy it with [Deno Deploy](/deploy/).
