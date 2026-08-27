@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-02
+last_modified: 2026-07-08
 title: Cron
 description: "Scheduling and managing cron jobs in Deno Deploy, including defining cron jobs in code, execution lifecycle, retries, and observability."
 ---
@@ -8,9 +8,9 @@ Cron jobs are scheduled tasks that run automatically on a defined schedule. You
 define cron jobs in your code using the `Deno.cron()` API, deploy your
 application, and the platform discovers and runs them on schedule.
 
-[`Deno.cron()`](/runtime/fundamentals/cron/) is a Deno runtime API — it ships
-with Deno itself. Deno Deploy builds on top of that runtime API: it discovers
-your `Deno.cron()` definitions at deployment time, schedules and invokes them,
+[`Deno.cron()`](/api/deno/~/Deno.cron) is a Deno runtime API — it ships with
+Deno itself. Deno Deploy builds on top of that runtime API: it discovers your
+`Deno.cron()` definitions at deployment time, schedules and invokes them,
 handles retries, and surfaces runs in the dashboard and logs, so you don't need
 to keep a long-running process up yourself.
 
@@ -19,11 +19,9 @@ to keep a long-running process up yourself.
 `Deno.cron()` takes a human-readable name, a schedule, and a handler function.
 The name identifies the cron job in the dashboard and logs, the schedule
 determines when it fires, and the handler contains the code to run on each
-invocation. The schedule can be either a standard
-[5-field cron expression](https://en.wikipedia.org/wiki/Cron#UNIX-like) or a
-structured object. All times are UTC — this avoids ambiguity around daylight
-saving transitions. See the
-[full API reference](https://docs.deno.com/api/deno/~/Deno.cron) for details.
+invocation.
+
+The schedule can be either a 5-field cron expression or a structured object.
 
 ```typescript
 Deno.cron("cleanup-old-data", "0 * * * *", () => {
@@ -32,7 +30,7 @@ Deno.cron("cleanup-old-data", "0 * * * *", () => {
 
 Deno.cron(
   "sync-data",
-  "*/15 * * * *",
+  { minute: { every: 15 } },
   {
     backoffSchedule: [1000, 5000, 10000],
   },
@@ -41,6 +39,12 @@ Deno.cron(
   },
 );
 ```
+
+:::info
+
+See the Deno.cron [runtime docs](/runtime/fundamentals/cron/) for more details.
+
+:::
 
 ### Common schedule expressions
 
