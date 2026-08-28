@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-02
+last_modified: 2026-08-28
 title: Cron
 description: "Scheduling and managing cron jobs in Deno Deploy, including defining cron jobs in code, execution lifecycle, retries, and observability."
 ---
@@ -182,11 +182,20 @@ On the traces page, you can use these cron-related filters:
 
 ## Timelines
 
-Cron jobs run on production and git branch
+Cron jobs are registered on production and git branch
 [timelines](/deploy/reference/timelines/). The platform extracts `Deno.cron()`
 definitions at deployment time and schedules them for execution, so each
-timeline runs the set of cron jobs defined in its active revision's code. To
-add, remove, or modify cron jobs, update your code and deploy a new revision.
+**enabled** timeline runs the set of cron jobs defined in its active revision's
+code.
+
+Production timeline cron registrations are enabled by default. Git branch
+timeline cron registrations are disabled by default, so a correctly registered
+preview cron can look broken until you turn it on. To enable a branch
+registration, open the app's **Cron** tab, select **View Details**, open the
+**Enable/Disable** dropdown, and choose `Enable for Git Branch/<branch>`. Once
+enabled, the job runs against that timeline's active revision.
+
+To add, remove, or modify cron jobs, update your code and deploy a new revision.
 Rolling back to a previous deployment re-registers the cron jobs from that
 deployment. You can see which cron jobs are currently registered in a given
 timeline from its page in the dashboard.
