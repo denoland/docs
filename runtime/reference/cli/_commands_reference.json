@@ -1815,6 +1815,15 @@
           "usage": "--save-exact"
         },
         {
+          "name": "unscoped",
+          "short": null,
+          "long": "unscoped",
+          "required": false,
+          "help": "Use the package name without its scope as the alias (ex. `jsr:@david/jsonc-morph` is added as `jsonc-morph`). Packages given an explicit alias are unaffected.",
+          "help_heading": null,
+          "usage": "--unscoped"
+        },
+        {
           "name": "package-json",
           "short": null,
           "long": "package-json",
@@ -4030,6 +4039,15 @@
           "usage": "--target <target>"
         },
         {
+          "name": "engine",
+          "short": null,
+          "long": "engine",
+          "required": false,
+          "help": "JS engine the compiled binary runs on \u001b[38;5;245m(quickjs is smaller and experimental, and does not receive the same security updates as v8)\u001b[39m",
+          "help_heading": "Compile options",
+          "usage": "--engine <engine>"
+        },
+        {
           "name": "no-code-cache",
           "short": null,
           "long": "no-code-cache",
@@ -4692,6 +4710,15 @@
           "help": "Backend to use for the desktop app",
           "help_heading": "Desktop options",
           "usage": "--backend <backend>"
+        },
+        {
+          "name": "engine",
+          "short": null,
+          "long": "engine",
+          "required": false,
+          "help": "JS engine the desktop binary runs on (quickjs is smaller and experimental, and does not receive the same security updates as v8)",
+          "help_heading": "Desktop options",
+          "usage": "--engine <engine>"
         },
         {
           "name": "all-targets",
@@ -6735,6 +6762,15 @@
           "usage": "--save-exact"
         },
         {
+          "name": "unscoped",
+          "short": null,
+          "long": "unscoped",
+          "required": false,
+          "help": "Use the package name without its scope as the alias (ex. `jsr:@david/jsonc-morph` is added as `jsonc-morph`). Packages given an explicit alias are unaffected.",
+          "help_heading": null,
+          "usage": "--unscoped"
+        },
+        {
           "name": "lockfile-only",
           "short": null,
           "long": "lockfile-only",
@@ -8562,6 +8598,15 @@
           "help": "Run the task in all projects in the workspace",
           "help_heading": null,
           "usage": "--recursive"
+        },
+        {
+          "name": "members",
+          "short": null,
+          "long": "members",
+          "required": false,
+          "help": "Run the task in all workspace members, but not in the workspace root",
+          "help_heading": null,
+          "usage": "--members"
         },
         {
           "name": "filter",
