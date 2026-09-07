@@ -1,7 +1,7 @@
 ---
-last_modified: 2026-06-30
+last_modified: 2026-09-07
 title: "Configuration"
-description: "Configure deno desktop in deno.json: app metadata, icons, deep-link URL schemes, backend selection, output paths, error reporting, and the auto-update server."
+description: "Configure deno desktop in deno.json: app metadata, initial window options, icons, deep-link URL schemes, backend selection, output paths, error reporting, and the auto-update server."
 ---
 
 :::info Available in Deno 2.9
@@ -208,6 +208,35 @@ has a stable code identity (required for notification permission), but the
 result is not distributable without further signing. Set a real Developer ID
 identity to produce a notarizable bundle. See
 [Distribution](/runtime/desktop/distribution/#code-signing).
+
+## `initialWindow`
+
+Configure the implicit first window created before your application code runs.
+This is useful when its creation-time properties must differ from the defaults;
+the first `new Deno.BrowserWindow()` adopts this window rather than creating a
+new one.
+
+```jsonc title="deno.json"
+{
+  "desktop": {
+    "initialWindow": {
+      "width": 320,
+      "height": 220,
+      "frameless": true,
+      "noActivate": true,
+      "transparent": true,
+      "showOnFirstLoad": false
+    }
+  }
+}
+```
+
+All fields are optional. The defaults preserve the standard 800×600, decorated,
+activating, opaque window that appears after its first page load. `frameless`,
+`noActivate`, `transparentTitlebar`, and `transparent` are applied when macOS,
+Windows, or Linux creates the native window, so they cannot be set later by
+adopting it in JavaScript. Set `showOnFirstLoad` to `false` when your app will
+reveal the adopted window itself.
 
 ## `release`
 
