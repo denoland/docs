@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-09-16
 title: "Snapshot testing"
 description: "Capture program output as reference snapshots with Deno's built-in test runner, compare against them on every run, and update them with deno test --update-snapshots."
 oldUrl:
