@@ -151,8 +151,8 @@ The most useful options:
 - `dir` and `path`: control where the snapshot file is written, resolved
   relative to the test file. A custom location requires read and write
   permission.
-- `mode`: force `"assert"` or `"update"` behavior for a single call, regardless
-  of the `--update-snapshots` flag.
+- `msg`: Failure message to use when the assertion fails, instead of the
+  generated diff message.
 
 Classes can customize their own serialization by implementing
 `Symbol.for("Deno.customInspect")`, since the default serializer is built on
