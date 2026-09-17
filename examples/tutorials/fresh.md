@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-09-29
+last_modified: 2026-09-02
 title: "Build a Fresh App"
 description: "Complete guide to building Full-stack applications with Fresh and Deno. Learn how to set up a project, implement server-side rendering with islands architecture, add API routes, and deploy your TypeScript application."
 url: /examples/fresh_tutorial/
@@ -326,8 +326,7 @@ For a walkthrough of deploying your app, check out the
 🦕 Now you have a starter Fresh app! Here are some ideas to extend your dinosaur
 catalog:
 
-- Add a database (try [Deno KV](https://docs.deno.com/runtime/fundamentals/kv/)
-  or connect to
+- Add a database (try [Deno KV](https://docs.deno.com/deploy/kv/) or connect to
   [PostgreSQL](https://docs.deno.com/runtime/tutorials/connecting_to_databases/))
 - Implement user authentication with
 - Add more interactive features like favorites or ratings
