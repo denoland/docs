@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-15
+last_modified: 2026-08-25
 title: "How to export telemetry data to Honeycomb"
 description: "Complete guide to exporting telemetry data with OpenTelemetry and Honeycomb.io. Learn how to configure collectors, visualize traces, and monitor application performance."
 url: /examples/honeycomb_tutorial/
@@ -82,7 +82,7 @@ the container. The file is renamed to `/otel-config.yml` inside the container.
 run when the container starts. It tells the OpenTelemetry Collector to use the
 configuration file we copied in the previous step.
 
-Next, add the following to your `otel-collector.yml` file to define how how
+Next, add the following to your `otel-collector.yml` file to define how
 telemetry data should be collected and exported to Honeycomb:
 
 ```yml title="otel-collector.yml"

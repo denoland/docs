@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-15
+last_modified: 2026-08-25
 title: "How to export telemetry data to Grafana"
 description: "Complete guide to exporting telemetry data with OpenTelemetry and Grafana. Learn how to configure collectors, visualize traces, and monitor application performance."
 url: /examples/grafana_tutorial/
@@ -105,7 +105,7 @@ and **Password / API Token** (you will have to generate one).
 
 ![Configuring OTel in Grafana Cloud](./images/how-to/grafana/grafana-3.png)
 
-Next, add the following to your `otel-collector.yml` file to define how how
+Next, add the following to your `otel-collector.yml` file to define how
 telemetry data should be collected and exported to Grafana Cloud:
 
 ```yml title="otel-collector.yml"
