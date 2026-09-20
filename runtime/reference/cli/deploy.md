@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-02-12
+last_modified: 2026-06-01
 title: "deno deploy"
 command: deploy
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -14,23 +14,52 @@ platform for hosting JavaScript, TypeScript, and WebAssembly applications.
 When called without any subcommands, `deno deploy` will deploy your local
 directory to the specified application.
 
+If you are scripting `deno deploy` from CI or driving it from an AI agent rather
+than running it interactively, jump to [Agent / CI usage](#agent--ci-usage) for
+non-interactive auth, structured output, and exit-code conventions.
+
 ## Authentication
 
-The deploy command uses secure token-based authentication stored in your
-system's keyring:
+The deploy command supports three ways to authenticate, checked in this order:
 
-- **Automatic Authentication**: The CLI will prompt for authentication when
-  needed
-- **Token Storage**: Deploy tokens are securely stored using the system keyring
-- **Token Management**: The CLI provides operations to get, set, and delete
-  authentication tokens.
+1. **`--token <token>` flag** - Useful for one-off scripted calls.
+2. **`DENO_DEPLOY_TOKEN` environment variable** - The recommended way to
+   authenticate from CI / agent contexts; no browser is opened.
+3. **OS keychain** - Tokens are securely stored in the system keyring after the
+   first interactive sign-in. The CLI will prompt for sign-in when no token is
+   found via (1) or (2).
 
-## Global options
+Use `deno deploy whoami` to verify the active token without side effects.
+Generate or revoke tokens at
+[console.deno.com/account/tokens](https://console.deno.com/account/tokens).
 
-- `-h, --help` - Show help information
+## Root command options
+
+These options apply to the top-level `deno deploy [root-path]` invocation that
+deploys the current directory:
+
 - `--org <name>` - Specify the organization name
 - `--app <name>` - Specify the application name
 - `--prod` - Deploy directly to production
+- `--allow-node-modules` - Include `node_modules` when uploading
+- `--no-wait` - Skip waiting for the build to complete
+
+## Global options
+
+These options are honored by every subcommand (including `deno sandbox`):
+
+- `-h, --help` - Show help information
+- `-j, --json` - Emit JSON on stdout instead of human-readable output
+- `-y, --non-interactive` - Fail fast instead of prompting; required input must
+  be supplied via flags or env vars
+- `-q, --quiet` - Suppress non-essential output
+- `--debug` - Print stack traces and verbose diagnostics on stderr
+- `--token <token>` - Override the token from env / keychain
+- `--endpoint <url>` - Override the API endpoint (also reads
+  `DENO_DEPLOY_ENDPOINT`)
+- `--config <path>` - Path to the config file (defaults to `deno.json` /
+  `deno.jsonc`)
+- `--ignore <path>` - Ignore particular source files (repeatable)
 
 ## Subcommands
 
@@ -561,6 +590,358 @@ deno deploy setup-gcp --org <name> --app <name>
 ```sh
 deno deploy setup-gcp --org my-org --app my-app
 ```
+
+## Agent / CI usage
+
+`deno deploy` is designed to be invokable from CI pipelines and AI agents
+without a human at the terminal. This section documents the conventions that
+make non-interactive use reliable: token-based auth (covered above), fail-fast
+prompting, structured output, exit codes, and per-command JSON shapes.
+
+For the global flags themselves, see [Global options](#global-options).
+`--non-interactive` and `--json` are independent. The recommended agent
+invocation combines both:
+`deno deploy <subcommand> --json --non-interactive
+<...>`.
+
+### Exit codes
+
+| Code | Name        | Meaning                                                                            |
+| ---- | ----------- | ---------------------------------------------------------------------------------- |
+| `0`  | `OK`        | Success.                                                                           |
+| `1`  | `GENERIC`   | Unclassified failure.                                                              |
+| `2`  | `USAGE`     | Bad flag, missing required value, or `--non-interactive` short-circuit.            |
+| `3`  | `AUTH`      | Token missing, invalid, expired, or rejected by the backend.                       |
+| `4`  | `NOT_FOUND` | The targeted org / app / database / revision doesn't exist or isn't reachable.     |
+| `5`  | `CONFLICT`  | A resource with the supplied name already exists (idempotent re-runs return this). |
+| `6`  | `NETWORK`   | Backend 5xx, transport failure, or unreachable endpoint.                           |
+
+Agents should pattern-match on the exit code first, then parse stderr if
+non-zero.
+
+### Structured error envelope
+
+In `--json` mode, every error is written to **stderr** as a single JSON object:
+
+```json
+{
+  "error": {
+    "code": "AUTH_INVALID_TOKEN",
+    "message": "The token specified via 'DENO_DEPLOY_TOKEN' or the '--token' flag is invalid or expired.",
+    "hint": "Generate a new token at https://console.deno.com/account/tokens and re-export DENO_DEPLOY_TOKEN.",
+    "traceId": "abc123"
+  }
+}
+```
+
+Fields:
+
+- `code` - Stable string identifier. Examples: `AUTH_INVALID_TOKEN`,
+  `NON_INTERACTIVE_REQUIRED`, `MISSING_FLAG`, `SLUG_ALREADY_IN_USE`,
+  `POSTGRES_ERROR`. Agents should treat unknown codes as opaque.
+- `message` - Human-readable description.
+- `hint` - Optional. Suggests a concrete next step.
+- `traceId` - Optional. Server-side trace identifier from the `x-deno-trace-id`
+  response header. Useful for bug reports.
+
+Human-mode errors go to stderr too but without the JSON envelope.
+
+### Stdio discipline
+
+- **stdout** carries the result of the command. In `--json` mode this is a
+  single object or array (NDJSON for streaming commands like `logs`). In human
+  mode it is the formatted table / URL / etc.
+- **stderr** carries human progress, prompts, and the structured error envelope.
+  `--quiet` suppresses progress but keeps the final result on stdout.
+
+This lets you pipe cleanly:
+
+```sh
+deno deploy publish --json | jq -r '.url'
+deno deploy logs --json --app my-app | jq -c 'select(.severityNumber >= 17)'
+deno deploy env list --json | jq '.[] | select(.isSecret == false)'
+```
+
+### Required flags under `--non-interactive`
+
+When a required flag is missing in `--non-interactive` mode, the CLI exits `2`
+(`USAGE`) with an error envelope naming the missing flag.
+
+| Subcommand                     | Required flags                                                                                                                            |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `deno deploy --prod`           | `--org`, `--app` (or pre-existing `deno.json` config)                                                                                     |
+| `deno deploy create`           | `--org`, `--app`, `--source`, `--region`, plus per-source / per-mode flags                                                                |
+| `deno deploy env list`         | `--org`, `--app`                                                                                                                          |
+| `deno deploy env load`         | `--replace` or `--skip-existing` when existing keys overlap                                                                               |
+| `deno deploy database *`       | `--org`, plus per-action flags                                                                                                            |
+| `deno deploy setup-aws`        | `--org`, `--app`, `--policies <arn>` (repeatable), optional `--role-name`                                                                 |
+| `deno deploy setup-gcp`        | `--org`, `--app`, `--roles <role>` (repeatable), optional `--service-account-name`, `--enable-apis` to bypass the API-enable confirmation |
+| `deno deploy whoami`           | (none; reads token only)                                                                                                                  |
+| `deno deploy apps list`        | `--org`                                                                                                                                   |
+| `deno deploy orgs list`        | (none)                                                                                                                                    |
+| `deno deploy deployments list` | `--org`, `--app`                                                                                                                          |
+
+### JSON output schemas
+
+These shapes are stable; new fields may be added but existing fields will not be
+removed without a version bump.
+
+#### `deno deploy whoami --json`
+
+```json
+{
+  "authenticated": true,
+  "user": {
+    "id": "...",
+    "name": "Ada Lovelace",
+    "email": "[email protected]",
+    "avatarUrl": "https://...",
+    "githubLogin": "ada"
+  },
+  "tokenType": "user",
+  "orgs": [
+    { "id": "...", "slug": "myorg", "name": "My Org", "plan": "pro" }
+  ]
+}
+```
+
+For user-backed tokens (web sessions, `dop_` device tokens) `user` is populated
+with `id`, `name`, `email`, `avatarUrl`, `githubLogin`. For organization-scoped
+(`ddo_`) tokens, `user` is `null` and `tokenType` identifies the token kind so
+the caller can fall back to `orgs[]`. Any of the inner string fields may be
+`null` if the backend has no value.
+
+#### `deno deploy orgs list --json`
+
+```json
+[
+  { "id": "...", "slug": "myorg", "name": "My Org", "plan": "pro" }
+]
+```
+
+#### `deno deploy apps list --json`
+
+```json
+{
+  "items": [
+    {
+      "id": "...",
+      "slug": "my-app",
+      "createdAt": "2026-05-12T14:40:00.000Z",
+      "updatedAt": "2026-05-12T14:40:00.000Z",
+      "layers": ["base"]
+    }
+  ],
+  "nextCursor": null,
+  "org": "myorg"
+}
+```
+
+#### `deno deploy deployments list --json`
+
+```json
+{
+  "items": [
+    {
+      "id": "rev_...",
+      "status": "routed",
+      "prod": true,
+      "createdAt": "...",
+      "updatedAt": "...",
+      "lastStep": "deployed"
+    }
+  ],
+  "nextCursor": null,
+  "org": "myorg",
+  "app": "my-app"
+}
+```
+
+#### `deno deploy env list --json`
+
+```json
+[
+  {
+    "id": "...",
+    "key": "DATABASE_URL",
+    "value": "postgres://...",
+    "isSecret": false,
+    "contexts": ["production"]
+  },
+  {
+    "id": "...",
+    "key": "API_KEY",
+    "value": null,
+    "isSecret": true,
+    "contexts": null
+  }
+]
+```
+
+`value` is `null` for secrets; `contexts: null` means "all contexts".
+
+#### `deno deploy database list --json`
+
+```json
+[
+  {
+    "name": "my-db",
+    "engine": "postgresql",
+    "createdAt": "...",
+    "assignments": ["my-app"],
+    "connection": {
+      "hostname": "db.example.com",
+      "port": 5432,
+      "username": "deploy",
+      "customCertificate": false
+    },
+    "databases": [{ "name": "main", "status": "ready", "createdAt": "..." }]
+  }
+]
+```
+
+#### `deno deploy database query --json`
+
+```json
+{ "rows": [{ "column1": "value1", "column2": 42 }] }
+```
+
+On query failure the structured error envelope appears on stderr with
+`error.code: "POSTGRES_ERROR"` or `"QUERY_ERROR"`.
+
+#### `deno deploy publish --json`
+
+```json
+{
+  "org": "myorg",
+  "app": "my-app",
+  "revisionId": "rev_...",
+  "url": "https://console.deno.com/myorg/my-app/builds/rev_...",
+  "status": "ready",
+  "timelines": [
+    { "partition": "production", "domains": ["https://my-app.deno.dev"] }
+  ]
+}
+```
+
+#### `deno deploy create --json --dry-run`
+
+```json
+{
+  "dryRun": true,
+  "org": "myorg",
+  "app": "my-app",
+  "repo": null,
+  "buildDirectory": ".",
+  "buildConfig": {
+    "frameworkPreset": "astro",
+    "mode": "static",
+    "staticDir": "dist",
+    "singlePageApp": false
+  },
+  "buildTimeout": 5,
+  "buildMemoryLimit": 1024,
+  "region": "us"
+}
+```
+
+#### `deno deploy create --json` (GitHub source)
+
+```json
+{
+  "org": "myorg",
+  "app": "my-app",
+  "url": "https://console.deno.com/myorg/my-app",
+  "revisionId": "rev_...",
+  "source": "github"
+}
+```
+
+For local source, the command delegates to `publish --json` and emits its
+envelope instead.
+
+#### `deno deploy logs --json`
+
+NDJSON, one record per line on stdout (shown here line-wrapped for readability):
+
+```text
+{"timestamp":"...","traceId":"...","spanId":"...","severity":"INFO","severityNumber":9,"body":"hello","scope":"app","revision":"rev_...","attributes":{}}
+```
+
+### Examples
+
+#### Verify auth
+
+```sh
+export DENO_DEPLOY_TOKEN=ddo_...
+deno deploy whoami --json
+# {"authenticated":true,"user":null,"orgs":[{"id":"...","slug":"myorg",...}]}
+```
+
+#### Create + deploy a local app
+
+```sh
+deno deploy create --json --non-interactive \
+  --org myorg --app my-app \
+  --source local --app-directory . \
+  --runtime-mode static --static-dir dist \
+  --region us
+```
+
+#### Deploy to an existing app
+
+```sh
+deno deploy --json --non-interactive --org myorg --app my-app --prod .
+```
+
+#### Load secrets from .env, idempotently
+
+```sh
+deno deploy env load --org myorg --app my-app \
+  --non-interactive --replace .env.production
+```
+
+#### List failed deployments
+
+```sh
+deno deploy deployments list --json --org myorg --app my-app \
+  --status failed | jq '.items[] | .id'
+```
+
+#### Page through all apps
+
+```sh
+cursor=""
+while :; do
+  out=$(deno deploy apps list --json --org myorg ${cursor:+--cursor "$cursor"})
+  echo "$out" | jq '.items[] | .slug'
+  cursor=$(echo "$out" | jq -r '.nextCursor // empty')
+  [ -z "$cursor" ] && break
+done
+```
+
+#### Cloud setup (AWS) idempotently
+
+```sh
+deno deploy setup-aws --json --non-interactive \
+  --org myorg --app my-app \
+  --policies arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess \
+  --policies arn:aws:iam::aws:policy/AmazonDynamoDBReadOnlyAccess \
+  --role-name DenoDeploy-myorg-my-app
+```
+
+The fixed `--role-name` makes the operation idempotent: re-running with the same
+name surfaces `SLUG_ALREADY_IN_USE` (exit `5`, `CONFLICT`) rather than silently
+creating a second resource with a random suffix.
+
+### Compatibility
+
+- JSON shapes are additive: new fields may be added but existing fields will not
+  be removed without a version bump. Agents should ignore unknown fields.
+- Exit-code values and `error.code` strings are stable; new values may be
+  introduced.
+- The flag set is stable; new flags may be added but existing ones will not be
+  renamed or repurposed.
 
 ## Usage examples
 
