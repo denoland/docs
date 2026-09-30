@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-10-07
+last_modified: 2026-09-30
 title: Cloud Connections
 description: Learn how to connect Deno Deploy to cloud providers like AWS and Google Cloud Platform without needing to manage credentials.
 oldUrl: /deploy/reference/cloud-connections
@@ -29,6 +29,21 @@ To enable AWS or GCP to exchange OIDC tokens for credentials, the cloud provider
 needs to be configured to trust Deno Deploy as an OIDC identity provider, and an
 AWS IAM role or GCP service account needs to be created that allows the exchange
 of tokens for credentials, for a specific Deno Deploy application.
+
+### Environment variables set by a connection
+
+When a cloud connection applies to the context your application is running in,
+Deno Deploy sets the environment variables the cloud SDKs look for, so your code
+does not have to configure credentials itself:
+
+- AWS: `AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE`
+- GCP: `GOOGLE_APPLICATION_CREDENTIALS`, `GCP_WORKLOAD_PROVIDER_ID`,
+  `GCP_SERVICE_ACCOUNT_EMAIL`, and `GCP_PROJECT_ID`
+
+Deno Deploy sets these, and they take precedence over an environment variable
+you have defined with the same name, in every scope. In contexts where no
+connection applies, these names are ordinary environment variables that you are
+free to use for your own purposes.
 
 ## Setting up AWS
 
