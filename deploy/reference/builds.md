@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-08-04
+last_modified: 2026-09-30
 title: Builds
 description: "Detailed explanation of the build process in Deno Deploy, covering build triggers, stages, configuration options, caching, and the build environment."
 ---
@@ -158,12 +158,14 @@ the entire configuration will be sourced from the file instead of the dashboard
 - `deploy.predeploy` (optional): Shell command to run after the build is
   complete but before deployment, typically for tasks like database migrations.
 - `deploy.build_timeout` (optional): Maximum time allowed for the build process,
-  as a whole number of minutes. Defaults to 5 minutes. A value above your plan's
-  maximum (5 minutes on the Free plan, 30 minutes on the Pro plan) is capped to
-  that maximum. Because the dashboard setting is ignored for apps configured
-  from `deno.json`, this is the only way to change their build timeout. On its
-  own, this option does not move the app configuration into `deno.json`: it only
-  takes effect together with at least one of the other options in this list.
+  as a positive whole number of minutes. Defaults to 5 minutes. Any other value
+  (such as `0` or `7.5`) causes the whole `deploy` section to be ignored. A
+  value above your plan's maximum (5 minutes on the Free plan, 30 minutes on the
+  Pro plan) is capped to that maximum. Because the dashboard setting is ignored
+  for apps configured from `deno.json`, this is the only way to change their
+  build timeout. On its own, this option does not move the app configuration
+  into `deno.json`: it only takes effect together with at least one of the other
+  options in this list.
 - `deploy.runtime` (required unless `deploy.framework` is set): Configuration
   for how the app serves traffic. The app can either be static or dynamic, as
   defined below:
