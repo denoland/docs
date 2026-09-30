@@ -143,9 +143,10 @@ repository if you're using a recognized framework or common build setup.
 
 To configure your application from source code, add a `deno.json` or
 `deno.jsonc` file to the root of your application directory with a `deploy` key.
-If any of the following app configuration options are specified under this key,
-the entire configuration will be sourced from the file instead of the dashboard
-(any configuration specified in the dashboard will be ignored).
+If any of the following app configuration options other than
+`deploy.buildTimeout` are specified under this key, the entire configuration
+will be sourced from the file instead of the dashboard (any configuration
+specified in the dashboard will be ignored).
 
 #### `deno.json` options
 
