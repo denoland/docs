@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-08-04
+last_modified: 2026-09-30
 title: Environment Variables and Contexts
 description: "Guide to managing environment variables and contexts in Deno Deploy, including variable types, creation, editing, and accessing them in your code."
 oldUrl: /deploy/reference/env-vars-and-contexts/
@@ -120,22 +120,22 @@ certificates. -->
 Environment variables have the following limits:
 
 - Environment variable keys can be at most 128 bytes long.
+- Environment variable keys can not contain `=`, null bytes, or leading or
+  trailing whitespace.
 - Environment variable keys can not start with:
   - `DENO_`, except for `DENO_AUTH_TOKENS`, `DENO_COMPAT`, `DENO_CONDITIONS`,
     `DENO_DEPLOY_ENDPOINT`, or `DENO_DEPLOY_TOKEN`
   - `LD_`
   - `OTEL_`
-- Environment variable values can be at most 16 KB (16,384 bytes) long.
-- Environment variable keys can not be any of these keys. Instead, use
-  [Cloud Connections](/deploy/reference/cloud_connections)
-  - `AWS_ROLE_ARN`
-  - `AWS_WEB_IDENTITY_TOKEN_FILE`
-  - `GCP_WORKLOAD_PROVIDER_ID`
-  - `GCP_SERVICE_ACCOUNT_EMAIL`
-  - `GCP_PROJECT_ID`
-  - `AZURE_CLIENT_ID`
-  - `AZURE_TENANT_ID`
-  - `AZURE_FEDERATED_TOKEN_FILE`
+- Environment variable values can be at most 128 kB (128,000 bytes) long.
+- Environment variables can total at most 256 KiB (262,144 bytes) of keys and
+  values within one scope. Organization, application and layer scopes are
+  budgeted separately.
+
+No individual key name is reserved. If you use
+[Cloud Connections](/deploy/reference/cloud_connections), the credentials they
+provide are set by Deno Deploy in the contexts the connection applies to, and
+take precedence over an environment variable you define with the same name.
 
 ## Predefined environment variables
 
