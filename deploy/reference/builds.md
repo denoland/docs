@@ -133,7 +133,8 @@ repository if you're using a recognized framework or common build setup.
       GB on the Pro plan.
 
 - **Build timeout**: Maximum time allowed for the build process. Defaults to 5
-  minutes, can be increased to 15 minutes on the Pro plan.
+  minutes, can be increased to 30 minutes on the Pro plan. For apps configured
+  from `deno.json`, set it with `deploy.build_timeout` instead.
 
 - **Build memory**: Amount of memory allocated to the build process. Defaults to
   3 GB, can be increased to 4 GB on the Pro plan.
@@ -156,6 +157,13 @@ the entire configuration will be sourced from the file instead of the dashboard
 - `deploy.build` (optional): Shell command to build the project.
 - `deploy.predeploy` (optional): Shell command to run after the build is
   complete but before deployment, typically for tasks like database migrations.
+- `deploy.build_timeout` (optional): Maximum time allowed for the build process,
+  as a whole number of minutes. Defaults to 5 minutes. A value above your plan's
+  maximum (5 minutes on the Free plan, 30 minutes on the Pro plan) is capped to
+  that maximum. Because the dashboard setting is ignored for apps configured
+  from `deno.json`, this is the only way to change their build timeout. On its
+  own, this option does not move the app configuration into `deno.json`: it only
+  takes effect together with at least one of the other options in this list.
 - `deploy.runtime` (required unless `deploy.framework` is set): Configuration
   for how the app serves traffic. The app can either be static or dynamic, as
   defined below:
@@ -226,7 +234,8 @@ the entire configuration will be sourced from the file instead of the dashboard
   "deploy": {
     "framework": "nextjs",
     "install": "npm install",
-    "build": "npm run build"
+    "build": "npm run build",
+    "build_timeout": 15
   }
 }
 ```
