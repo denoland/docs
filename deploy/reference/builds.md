@@ -158,14 +158,16 @@ specified in the dashboard will be ignored).
 - `deploy.build` (optional): Shell command to build the project.
 - `deploy.predeploy` (optional): Shell command to run after the build is
   complete but before deployment, typically for tasks like database migrations.
-- `deploy.buildTimeout` (optional): Maximum time allowed for the build process,
-  as a positive whole number of minutes. Defaults to 5 minutes. Any other value
-  (such as `0` or `7.5`) causes the whole `deploy` section to be ignored. A
-  value above your plan's maximum (5 minutes on the Free plan, 30 minutes on the
-  Pro plan) is capped to that maximum. Because the dashboard setting is ignored
-  for apps configured from `deno.json`, this is the only way to change their
-  build timeout. On its own, this option does not move the app configuration
-  into `deno.json`: it only takes effect together with at least one of the other
+- `deploy.buildTimeout` (optional): Maximum time allowed for the build process.
+  Either a whole number of seconds (`600`), or a whole number with an `s`, `m`
+  or `h` suffix (`"90s"`, `"10m"`, `"1h"`). Defaults to 5 minutes. Any other
+  value (such as `0`, `"10"` or `"1.5m"`) causes the whole `deploy` section to
+  be ignored. A value above your plan's maximum (5 minutes on the Free plan, 30
+  minutes on the Pro plan) is capped to that maximum, and a value below 1 minute
+  is raised to 1 minute. Because the dashboard setting is ignored for apps
+  configured from `deno.json`, this is the only way to change their build
+  timeout. On its own, this option does not move the app configuration into
+  `deno.json`: it only takes effect together with at least one of the other
   options in this list.
 - `deploy.runtime` (required unless `deploy.framework` is set): Configuration
   for how the app serves traffic. The app can either be static or dynamic, as
@@ -240,7 +242,7 @@ specified in the dashboard will be ignored).
     "framework": "nextjs",
     "install": "npm install",
     "build": "npm run build",
-    "buildTimeout": 15
+    "buildTimeout": "15m"
   }
 }
 ```
