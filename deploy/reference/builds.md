@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-08-04
+last_modified: 2026-09-30
 title: Builds
 description: "Detailed explanation of the build process in Deno Deploy, covering build triggers, stages, configuration options, caching, and the build environment."
 ---
@@ -133,7 +133,8 @@ repository if you're using a recognized framework or common build setup.
       GB on the Pro plan.
 
 - **Build timeout**: Maximum time allowed for the build process. Defaults to 5
-  minutes, can be increased to 15 minutes on the Pro plan.
+  minutes, can be increased to 30 minutes on the Pro plan. For apps configured
+  from `deno.json`, set it with `deploy.buildTimeout` instead.
 
 - **Build memory**: Amount of memory allocated to the build process. Defaults to
   3 GB, can be increased to 4 GB on the Pro plan.
@@ -142,9 +143,10 @@ repository if you're using a recognized framework or common build setup.
 
 To configure your application from source code, add a `deno.json` or
 `deno.jsonc` file to the root of your application directory with a `deploy` key.
-If any of the following app configuration options are specified under this key,
-the entire configuration will be sourced from the file instead of the dashboard
-(any configuration specified in the dashboard will be ignored).
+If any of the following app configuration options other than
+`deploy.buildTimeout` are specified under this key, the entire configuration
+will be sourced from the file instead of the dashboard (any configuration
+specified in the dashboard will be ignored).
 
 #### `deno.json` options
 
@@ -156,6 +158,15 @@ the entire configuration will be sourced from the file instead of the dashboard
 - `deploy.build` (optional): Shell command to build the project.
 - `deploy.predeploy` (optional): Shell command to run after the build is
   complete but before deployment, typically for tasks like database migrations.
+- `deploy.buildTimeout` (optional): Maximum time allowed for the build process,
+  as a positive whole number of minutes. Defaults to 5 minutes. Any other value
+  (such as `0` or `7.5`) causes the whole `deploy` section to be ignored. A
+  value above your plan's maximum (5 minutes on the Free plan, 30 minutes on the
+  Pro plan) is capped to that maximum. Because the dashboard setting is ignored
+  for apps configured from `deno.json`, this is the only way to change their
+  build timeout. On its own, this option does not move the app configuration
+  into `deno.json`: it only takes effect together with at least one of the other
+  options in this list.
 - `deploy.runtime` (required unless `deploy.framework` is set): Configuration
   for how the app serves traffic. The app can either be static or dynamic, as
   defined below:
@@ -226,7 +237,8 @@ the entire configuration will be sourced from the file instead of the dashboard
   "deploy": {
     "framework": "nextjs",
     "install": "npm install",
-    "build": "npm run build"
+    "build": "npm run build",
+    "buildTimeout": 15
   }
 }
 ```
