@@ -68,8 +68,9 @@ These flags control where the app code comes from:
 
 #### Build configuration options
 
-If the app directory's `deno.json` or `deno.jsonc` has a `deploy` section, it
-takes precedence over these options on every deploy. See
+If the app directory's `deno.json` or `deno.jsonc` sets build configuration in
+its `deploy` section, that takes precedence over the corresponding options on
+every deploy. See
 [editing app configuration from source code](/deploy/reference/builds/#editing-app-configuration-from-source-code).
 
 - `--app-directory <path>` - Path to the app directory within the project
@@ -123,8 +124,8 @@ you through each configuration step:
 6. **Build configuration** - Auto-detects framework settings. You can accept the
    detected config or configure manually (framework preset, install/build
    commands, runtime mode, etc.)
-7. **Build timeout** - How long the build can run (skipped when the detected
-   `deno.json` or `deno.jsonc` `deploy` section decides it)
+7. **Build timeout** - How long the build can run (skipped when you accept a
+   build configuration detected from `deno.json` or `deno.jsonc`)
 8. **Build memory limit** - How much memory the build gets
 9. **Region** - Where to deploy (`us`, `eu`, or `global`)
 10. **Confirm** - Review and confirm before creating
