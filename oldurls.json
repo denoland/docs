@@ -168,6 +168,8 @@
   "runtime/reference/node_apis/": "/api/node/",
   "/deploy/tutorials/vite/": "/examples/react_tutorial/",
   "/deploy/manual/*": "/deploy/classic/*",
+  "/deploy/privacy-policy/": "/deploy/privacy_policy/",
+  "/deploy/terms-and-conditions/": "/deploy/terms_and_conditions/",
   "/deploy/early-access": "/deploy/",
   "/deploy/early-access/*": "/deploy/*",
   "/deploy/tutorials/": "/examples/",
