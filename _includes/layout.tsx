@@ -124,12 +124,6 @@ export default function Layout(data: Lume.Data) {
         <script type="module" defer src="/js/feedback.js"></script>
         <script type="module" defer src="/js/copy-page.js"></script>
         <script type="module" defer src="/js/search.js"></script>
-        <script
-          async
-          src="https://www.googletagmanager.com/gtm.js?id=GTM-5B5TH8ZJ"
-        >
-        </script>
-        <link rel="preconnect" href="https://www.googletagmanager.com"></link>
       </head>
       <body
         data-services-page={Boolean(isServicesPage)}
