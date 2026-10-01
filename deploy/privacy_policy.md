@@ -1,11 +1,11 @@
 ---
-last_modified: 2025-10-07
+last_modified: 2026-09-30
 title: "Privacy Policy"
 description: "Deno's Privacy Policy"
 oldUrl: /deploy/classic/privacy-policy
 ---
 
-**DENO PRIVACY POLICY** 09 September 2024
+**DENO PRIVACY POLICY** Effective September 30, 2026
 
 Deno Land Inc. (“Deno,” “we,” “us,” or “our”) collects and uses personal
 information in order to provide its products and services to you. This Privacy
@@ -15,20 +15,21 @@ choices with respect to such information. For purposes of this Privacy Policy,
 “personal information” means any information that relates to you as an
 individual and could reasonably be used to identify you. This Privacy Policy
 applies to our collection and use of personal information through (i) our
-website at [https://deno.com](https://deno.com) (the “Site”); (ii) any websites,
-applications or other digital properties that link to this Privacy Policy; and
-(iii) the products and services (the “Deno Offerings”) we offer to you on our
-proprietary platform (the “Platform”) via the following websites:
+website at [https://deno.com](https://deno.com) (the “Site” or “Sites”); (ii)
+any websites, applications or other digital properties that link to this Privacy
+Policy; and (iii) the products and services (the “Deno Offerings”) we offer to
+you on our proprietary platform (the “Platform”) via the following websites:
 
-- Deno Deploy ([https://deno.com/deploy](https://deno.com/deploy))
-- Deno Deploy Classic
-  ([https://deno.com/deploy/classic](https://deno.com/deploy/classic))
-- Deno Subhosting ([https://deno.com/subhosting](https://deno.com/subhosting))
+- Deno Deploy ([https://console.deno.com](https://console.deno.com))
+- Deno Deploy Classic ([https://dash.deno.com](https://dash.deno.com))
+- Deno Subhosting ([https://api.deno.com](https://api.deno.com))
+- JSR ([https://jsr.io](https://jsr.io))
+- Dactyl ([https://dactyl.dev](https://dactyl.dev))
 
 By accessing or using the Site or any other digital property that links to this
 Privacy Policy, you may learn about Deno and our technology platform, and
 registered customers may also access the Deno Offerings (collectively, the
-“Services”). To the extent permitted by applicable law, your use of Deno’
+“Services”). To the extent permitted by applicable law, your use of Deno’s
 products and services constitutes your acknowledgment and/or consent to the
 practices described in this Policy.
 
@@ -60,8 +61,9 @@ identifies you or can be used to identify or contact you.
 
 _Account Credentials_. When you register to create an account with us, we will
 collect certain additional personal information, including your name, email
-address, and potentially other information such as your GitHub user name and
-public GitHub profile.
+address, and potentially other information such as your user name and public
+profile from the identity provider you sign in with (for example GitHub, Apple,
+or Google).
 
 In addition to Contact Information and Account Credentials, we may collect other
 kinds of information, such as:
@@ -119,8 +121,8 @@ following:
   operating system and settings, browser type, mobile device carrier, country,
   IP address, and unique identifiers.
 
-- _Internet and other or electronic activity data_. This includes information
-  about your interaction with our Sites, emails, and other online content.
+- _Internet and other electronic activity data_. This includes information about
+  your interaction with our Sites, emails, and other online content.
 
 - _Tracking Data_. We may collect tracking data using first and third-party
   cookies, pixels, web server logs, web beacons, and similar data collection and
@@ -142,10 +144,11 @@ hosting events, and informing you about our organization, products, services,
 events, and other areas of interest.
 
 _Analytics Services_. We may use third-party web analytics services, such as
-Google Analytics, to help us understand and analyze how Site visitors use our
-services. For more information on how Google Analytics uses data collected
-through our Sites, visit
-[www.google.com/policies/privacy/partners](http://www.google.com/policies/privacy/partners).
+PostHog, to help us understand and analyze how visitors use our Sites and
+services. These services may use cookies and similar technologies and may record
+how you interact with pages within our Sites. For more information on how these
+providers use data collected through our Sites, please review their respective
+privacy policies.
 
 _Aggregated Data_. We may analyze your personal information in aggregate form
 which does not identify you personally (“**Aggregated Data**”). The Aggregated
@@ -160,9 +163,16 @@ to certain types of third party companies but only to the extent needed to
 enable them to provide such services, for example web hosting, disaster
 recovery, client survey and marketing, and data storage.
 
-_Reorganization_. If, in the future, Deno undergoes a corporate, partnership, or
-business reorganization, we may transfer the Information, including personal
-information, to the new or surviving entity. 
+_Business Transfers_. We may disclose or transfer your Information, including
+personal information, to an actual or prospective acquirer, successor, assignee,
+merger partner, investor, or other third party, and to their respective
+advisors, in connection with the evaluation, negotiation, financing, or
+consummation of any merger, acquisition, corporate reorganization, financing,
+sale or transfer of all or a portion of our business or assets, or similar
+transaction, or in the event of bankruptcy, receivership, or insolvency. Any
+successor or acquirer of Deno or its business will be entitled to use your
+Information in accordance with this Privacy Policy, as it may be amended in
+accordance with Section XI.
 
 _Protection of Rights and Compliance_. We may use your Information to protect
 the rights, privacy or safety of you, us or others; to ensure our compliance
@@ -236,9 +246,10 @@ Choices website to opt out of targeted advertising for participating vendors.
 The Network Advertising Initiative similarly assists with opt outs through their
 Opt Out of Interest-Based Advertising webpage.
 
-_Google Analytics Opt-Out._ To opt out of Google Analytics cookies, visit
-Google’s [My Ad Center](https://myadcenter.google.com/personalizationoff) and/or
-download the Google Analytics Opt-Out Browser Add-On.
+_Analytics Opt-Out._ To opt out of analytics cookies, you may use the cookie
+consent controls available on our Sites where offered or adjust your browser
+settings as described above. To opt out of PostHog analytics, please contact us
+at [support@deno.com](mailto:support@deno.com).
 
 **VI. Children**
 
@@ -290,9 +301,8 @@ the past, personal information with third parties for direct marketing purposes.
 If you are a resident of Nevada, you have the right to opt-out of the sale of
 personal information to third parties. You can exercise this right by contacting
 us at [support@deno.com](mailto:support@deno.com) with the subject line “Nevada
-Do Not Sell Request” and providing us with your name and the email address.
-Please note, however, that we do not sell any personal information to third
-parties.
+Do Not Sell Request” and providing us with your name and email address. Please
+note, however, that we do not sell any personal information to third parties.
 
 **XI. Changes To This Privacy Policy**
 
@@ -317,4 +327,4 @@ PMB 702973\
 San Diego CA, 92101\
 USA
 
-**© 2024 Deno Land Inc. All rights reserved.**
+**© 2026 Deno Land Inc. All rights reserved.**
