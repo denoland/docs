@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-02-12
+last_modified: 2026-10-01
 title: "deno deploy"
 command: deploy
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -68,6 +68,11 @@ These flags control where the app code comes from:
 
 #### Build configuration options
 
+If the app directory's `deno.json` or `deno.jsonc` sets build configuration in
+its `deploy` section, that takes precedence over the corresponding options on
+every deploy. See
+[editing app configuration from source code](/deploy/reference/builds/#editing-app-configuration-from-source-code).
+
 - `--app-directory <path>` - Path to the app directory within the project
 - `--framework-preset <preset>` - Use a framework preset for build defaults.
   Supported values: `astro`, `nextjs`, `nuxt`, `remix`, `solidstart`,
@@ -99,8 +104,8 @@ These flags control where the app code comes from:
 
 #### Build resource options
 
-- `--build-timeout <minutes>` - Build timeout. Allowed values: `5`, `10`, `15`,
-  `20`, `25`, `30`
+- `--build-timeout <duration>` - Build timeout, in minutes or with a unit suffix
+  (e.g. `10`, `10m` or `600s`). Allowed values: 5, 10, 15, 20, 25 or 30 minutes
 - `--build-memory-limit <megabytes>` - Build memory limit in MB. Allowed values:
   `1024`, `2048`, `3072`, `4096`
 - `--region <region>` - Deployment region. Allowed values: `us`, `eu`, `global`
@@ -119,7 +124,8 @@ you through each configuration step:
 6. **Build configuration** - Auto-detects framework settings. You can accept the
    detected config or configure manually (framework preset, install/build
    commands, runtime mode, etc.)
-7. **Build timeout** - How long the build can run
+7. **Build timeout** - How long the build can run (skipped when you accept a
+   build configuration detected from `deno.json` or `deno.jsonc`)
 8. **Build memory limit** - How much memory the build gets
 9. **Region** - Where to deploy (`us`, `eu`, or `global`)
 10. **Confirm** - Review and confirm before creating
