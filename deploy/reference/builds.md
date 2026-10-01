@@ -180,9 +180,10 @@ specified in the dashboard will be ignored).
       [runtime reference](/deploy/reference/runtime/).
     - `deploy.runtime.cwd` (optional): The working directory for the application
       at runtime.
-    - `deploy.runtime.memory_limit` (optional): The maximum amount of memory the
-      application can use at runtime. Defaults to 768 MB, can be increased to 4
-      GB on the Pro plan.
+    - `deploy.runtime.memoryLimit` (optional): The maximum amount of memory the
+      application can use at runtime, in MB. Defaults to 768 MB, can be
+      increased to 4 GB on the Pro plan. The earlier spelling `memory_limit` is
+      still accepted but deprecated.
   - For static apps:
     - `deploy.runtime.type`: Must be set to `"static"`.
     - `deploy.runtime.cwd`: Folder containing static assets (e.g., `dist`,
@@ -190,9 +191,10 @@ specified in the dashboard will be ignored).
     - `deploy.runtime.spa` (optional): If `true`, serves `index.html` for paths
       that don't match static files instead of returning 404 errors.
   - For apps using a framework preset:
-    - `deploy.runtime.memory_limit` (optional): The maximum amount of memory the
-      application can use at runtime. Defaults to 768 MB, can be increased to 4
-      GB on the Pro plan.
+    - `deploy.runtime.memoryLimit` (optional): The maximum amount of memory the
+      application can use at runtime, in MB. Defaults to 768 MB, can be
+      increased to 4 GB on the Pro plan. The earlier spelling `memory_limit` is
+      still accepted but deprecated.
 
 #### Examples
 
