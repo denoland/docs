@@ -14,7 +14,9 @@ function unstableFlags(run: string | undefined): string[] {
 
 async function typecheck(args: string[]): Promise<Deno.CommandOutput> {
   return await new Deno.Command(Deno.execPath(), {
-    args: ["check", ...args],
+    // Typecheck without evaluating the examples. This follows the runtime
+    // type-checking path, which supports Deno-specific module types.
+    args: ["test", "--no-run", ...args],
   }).output();
 }
 
