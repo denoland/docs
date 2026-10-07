@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-02
+last_modified: 2026-08-01
 title: "Unstable feature flags"
 oldUrl:
   - /runtime/tools/unstable_flags/
@@ -111,8 +111,10 @@ Sloppy imports will allow (but print warnings for) the following:
 - Import a directory path, and automatically use `index.js` or `index.ts` as the
   import for that directory
 
-[`deno compile`](/runtime/reference/cli/compile/) does not support sloppy
-imports.
+[`deno compile`](/runtime/reference/cli/compile/) supports sloppy imports too.
+Enable the flag the same way you would for `deno run`, either on the command
+line or in the config file, and the resolved modules are embedded in the output
+binary.
 
 ## `--unstable-unsafe-proto`
 
