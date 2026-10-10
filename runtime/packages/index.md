@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-10
 title: "Dependency management"
 description: "Use Deno as your package manager for npm and JSR: install, add, update, audit, and inspect dependencies, manage lockfiles and lifecycle scripts, and override packages."
 oldUrl:
@@ -383,7 +383,7 @@ When using a `package.json` file, dev dependencies can be added to the separate
 If you work primarily in `package.json`, set `"preferPackageJson": true` in
 `deno.json` so that `deno add`, `deno install`, and `deno remove` write there by
 default instead of `deno.json`, without passing `--package-json` each time. See
-[preferPackageJson](/runtime/reference/deno_json/#prefer-package-json-for-dependencies).
+[preferPackageJson](/runtime/reference/deno_json/#prefer-package.json-for-dependencies).
 
 ### JSR packages in package.json
 

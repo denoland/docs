@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-15
+last_modified: 2026-10-10
 title: "Peer dependencies"
 description: "Peer dependencies are an npm and package.json feature. deno.json has no peerDependencies field or equivalent. How Deno resolves peer dependencies when you consume npm packages, the node_modules layout caveat, optional peers, and fixing unmet-peer errors."
 ---
@@ -64,7 +64,8 @@ in `dependencies`, exactly as you would in Node.
 ## node_modules layout and peer dependencies
 
 How peer dependencies resolve depends on the
-[node_modules layout](/runtime/fundamentals/node/#node_modules) Deno uses.
+[node_modules layout](/runtime/fundamentals/node/#control-node_modules) Deno
+uses.
 
 In the default **isolated** layout, each package only sees the dependencies it
 declares, so a peer dependency must be provided by your project (as shown above)
@@ -117,7 +118,7 @@ deno install
 
 If the package instead expects to find the peer dependency as a hoisted sibling
 in `node_modules`, see
-[node_modules layout](/runtime/fundamentals/node/#node_modules) and switch to
-the hoisted linker as shown above. For more on how Deno works with npm packages
-and `node_modules`, see
+[node_modules layout](/runtime/fundamentals/node/#control-node_modules) and
+switch to the hoisted linker as shown above. For more on how Deno works with npm
+packages and `node_modules`, see
 [Node compatibility](/runtime/fundamentals/node/#using-npm-packages).

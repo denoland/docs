@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-11
+last_modified: 2026-10-10
 title: "Run npm lifecycle scripts"
 description: "Allow npm postinstall and other lifecycle scripts in Deno with deno approve-scripts, and persist approvals with the allowScripts field in deno.json."
 url: /examples/npm_lifecycle_scripts_tutorial/
@@ -76,5 +76,5 @@ security policy is consistent across all packages.
 For more detail, see the
 [`deno approve-scripts` reference](/runtime/reference/cli/approve_scripts/) and
 the
-[native Node.js addons section](/runtime/reference/cli/install/#native-nodejs-addons)
+[native Node.js addons section](/runtime/reference/cli/install/#native-node.js-addons)
 of the `deno install` docs.

@@ -1,7 +1,7 @@
 ---
 title: "Migrate from Yarn"
 description: "How to move a Yarn project to Deno: install dependencies from your existing package.json, keep your pinned versions, map Yarn CLI commands to Deno, run workspaces unchanged, and what to do about Plug'n'Play."
-last_modified: 2026-06-25
+last_modified: 2026-10-10
 ---
 
 Yarn is a package manager, not a runtime, so most of what you are "migrating" is
@@ -94,7 +94,7 @@ that field directly. A monorepo like this runs as-is:
 ```
 
 Members reference each other through the
-[`workspace:` protocol](/runtime/fundamentals/workspaces/#using-workspace-protocol-in-package-json)
+[`workspace:` protocol](/runtime/fundamentals/workspaces/#using-workspace-protocol-in-package.json)
 in their `package.json` dependencies, exactly as they do under Yarn. There is
 nothing to convert. See [Workspaces](/runtime/fundamentals/workspaces/) for how
 resolution works.
