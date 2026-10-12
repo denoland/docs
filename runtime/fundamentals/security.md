@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-10-12
 title: "Security and permissions"
 description: "A guide to Deno's security model: secure-by-default execution, the permission sandbox, evaluating and executing untrusted code, and the permission broker. See the Permissions reference for the flags."
 ---
@@ -151,10 +151,11 @@ code you are running.
 
 A program can inspect and tighten its own permissions through the
 [`Deno.permissions`](/api/deno/#permissions) API.
-[`Deno.permissions.query`](/api/deno/#query-permissions) reports whether a
-permission is granted,
-[`Deno.permissions.request`](/api/deno/#request-permissions) prompts for one on
-demand, and [`Deno.permissions.revoke`](/api/deno/#revoke-permissions)
+[`Deno.permissions.query`](/api/deno/~/Deno.Permissions.prototype.query) reports
+whether a permission is granted,
+[`Deno.permissions.request`](/api/deno/~/Deno.Permissions.prototype.request)
+prompts for one on demand, and
+[`Deno.permissions.revoke`](/api/deno/~/Deno.Permissions.prototype.revoke)
 downgrades a granted permission back to the prompt state:
 
 ```ts
