@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-30
+last_modified: 2026-10-10
 title: "Modules"
 description: "Learn how Deno's ECMAScript module system works: importing local and third-party modules, import attributes, import maps, and supported import types such as Wasm and data URLs."
 oldUrl:
@@ -326,7 +326,7 @@ party modules. There, you'll find plenty of well documented ES modules for your
 projects, including the [Deno Standard Library](/runtime/reference/std/).
 
 You can
-[read more about Deno's support for npm packages here](/runtime/fundamentals/node/#using-npm-modules).
+[read more about Deno's support for npm packages here](/runtime/fundamentals/node/#using-npm-packages).
 
 ## Managing third party modules and libraries
 
