@@ -187,7 +187,7 @@ reference documentation when the Deno documentation site is next updated.
 In order to preview changes to the API reference, take the following steps:
 
 1. Make changes to the JSDoc comments in the Deno source code
-1. [Build the Deno CLI locally](https://docs.deno.com/runtime/contributing/building_from_source/),
+1. [Build the Deno CLI locally](https://github.com/denoland/deno/blob/main/.github/CONTRIBUTING.md#building-from-source),
    including your JSDoc changes
 1. For convenience, create an alias of `d_deno` to point to your local build of
    the Deno CLI (typically in the `target/debug/deno` directory of your CLI

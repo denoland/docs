@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-10
+last_modified: 2026-09-02
 title: "Build an app with Tanstack and Deno"
 description: "Complete guide to building applications with Tanstack and Deno. Learn how to implement Query for data fetching, Router for navigation, manage server state, and create type-safe full-stack applications."
 url: /examples/tanstack_tutorial/
@@ -357,7 +357,7 @@ management. We also import `RouterProvider`, which connects our defined routes
 to React's rendering system.
 
 Finally, we'll need to define a
-[`routeTree.tsx`](https://tanstack.com/router/v1/docs/framework/react/guide/route-trees)
+[`routeTree.tsx`](https://tanstack.com/router/latest/docs/routing/route-trees)
 file in our `./src/` directory. This file defines our application's routing
 structure using Tanstack Router's type-safe route definitions:
 
