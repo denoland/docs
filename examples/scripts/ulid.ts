@@ -33,8 +33,9 @@ const myULID = ulid();
 console.log(decodeTime(myULID));
 
 // Optionally, if you're not on a distributed system and want monotonic ULIDs,
-// you can use the monotonic ULID generator instead.
+// you can use the monotonic ULID generator instead. The first 10 characters
+// encode the seed time, and the rest is random, then incremented on each call.
 import { monotonicUlid } from "jsr:@std/ulid@1";
-console.log(monotonicUlid(150000)); // 000XAL6S41ACTAV9WEVGEMMVR8
-console.log(monotonicUlid(150000)); // 000XAL6S41ACTAV9WEVGEMMVR9
-console.log(monotonicUlid(150000)); // 000XAL6S41ACTAV9WEVGEMMVRA
+console.log(monotonicUlid(150000)); // 0000004JFGMK13WPJ1GCNNY774
+console.log(monotonicUlid(150000)); // 0000004JFGMK13WPJ1GCNNY775
+console.log(monotonicUlid(150000)); // 0000004JFGMK13WPJ1GCNNY776

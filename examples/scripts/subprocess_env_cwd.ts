@@ -28,18 +28,20 @@ console.log((await withEnv.stdout.text()).trim()); // hello from parent
 await withEnv.status;
 
 // With clearEnv set to true the child does not inherit anything, it only
-// gets the variables listed in env. Even PATH is gone, so this is best
-// combined with an absolute path to the executable. Note that the operating
-// system may still inject a few variables of its own.
+// gets the variables listed in env. Even PATH is not passed on, so this is
+// best combined with an absolute path to the executable. Note that the
+// operating system or the child itself may still add a few variables of its
+// own. A Deno child, for example, puts its node shim directory on PATH, so
+// this checks HOME instead.
 const cleared = Deno.spawn(Deno.execPath(), [
   "eval",
-  "console.log('has PATH:', Deno.env.has('PATH'))",
+  "console.log('has HOME:', Deno.env.has('HOME'))",
 ], {
   env: { GREETING: "hello again" },
   clearEnv: true,
   stdout: "piped",
 });
-console.log((await cleared.stdout.text()).trim()); // has PATH: false
+console.log((await cleared.stdout.text()).trim()); // has HOME: false
 await cleared.status;
 
 // The cwd option sets the working directory the child starts in. The child
