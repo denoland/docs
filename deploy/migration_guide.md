@@ -1,8 +1,17 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-10-27
 title: "Migrating from Deploy Classic to Deno Deploy"
 description: "Guide to migrating your applications from Deno Deploy Classic (dash.deno.com) to the new Deno Deploy (console.deno.com), including subhosting API migration."
 ---
+
+:::warning Deno Deploy is shutting down
+
+On October 9, 2026, [Deno announced](https://deno.com/blog/cloudflare) that Deno
+Deploy will operate for six months before shutting down. Paying customers will
+receive migration support to Cloudflare Workers. The Classic migration steps
+below are retained for reference.
+
+:::
 
 Deno Deploy Classic (dash.deno.com) and the subhosting v1 API (apidocs.deno.com)
 will be shut down on **July 20, 2026**. This guide covers migrating your

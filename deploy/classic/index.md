@@ -1,10 +1,19 @@
 ---
-last_modified: 2026-03-19
+last_modified: 2026-10-27
 title: "Deploy Classic"
 oldUrl:
   - /deploy/docs/
   - /deploy/manual/hello-world/
 ---
+
+:::warning The newer Deno Deploy service is also shutting down
+
+On October 9, 2026, [Deno announced](https://deno.com/blog/cloudflare) that Deno
+Deploy's newer service will operate for six months before shutting down. Paying
+customers will receive migration support to Cloudflare Workers. The historical
+Classic shutdown notice is retained below.
+
+:::
 
 :::warning Sunsetting on July 20, 2026
 

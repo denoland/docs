@@ -1,8 +1,16 @@
 ---
-last_modified: 2026-07-09
+last_modified: 2026-10-27
 title: "About Deno Deploy"
 description: "Guide to Deno Deploy features, comparison with Deploy Classic, and getting started instructions for deployment."
 ---
+
+:::warning Deno Deploy is shutting down
+
+On October 9, 2026, [Deno announced](https://deno.com/blog/cloudflare) that Deno
+Deploy will operate for six months before shutting down. Paying customers will
+receive migration support to Cloudflare Workers.
+
+:::
 
 <div class="sm:flex sm:flex-row md:flex-col lg:flex-row xl:fle sm:gap-6 md:gap-0 lg:gap-8">
    <img src="/deno-deploy.svg" alt="Deno Deploy logo" class="max-w-20 md:max-w-24 bg-transparent" />
