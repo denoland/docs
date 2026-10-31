@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-31
 title: "HTTP serving"
 description: "How Deno.serve() works inside a desktop app: automatic port binding, the DENO_SERVE_ADDRESS env var, and serving local UI to the embedded webview."
 ---
@@ -91,8 +91,8 @@ through in-process channels.
 
 The bound address is **always** `127.0.0.1` (or `[::1]`). The compiled binary
 never binds to a public interface, even if you pass `0.0.0.0` to
-[`Deno.serve()`](/api/deno/~/Deno.serve). Other apps and other users on the same
-machine cannot reach your server.
+[`Deno.serve()`](/api/deno/~/Deno.serve). This prevents inbound access from
+external machines and devices on the local network.
 
 If you need to serve users on other machines (a self-hosted local server), do
 not use `deno desktop` for that part of your stack. Use `deno run` with an
