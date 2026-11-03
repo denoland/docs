@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-10-01
+last_modified: 2026-11-03
 title: "How to create a RESTful API with Prisma and Oak"
 description: "Guide to building a RESTful API using Prisma and Oak with Deno. Learn how to set up database schemas, generate clients, implement CRUD operations, and deploy your API with proper type safety."
 url: /examples/prisma_tutorial/
@@ -35,22 +35,27 @@ cd rest-api-with-prisma-oak
 Then, let's run `prisma init` with Deno:
 
 ```shell
-npx prisma@latest init --generator-provider prisma-client --output ./generated
+deno run -A npm:prisma@7 init --generator-provider prisma-client --output ./generated
 ```
 
 Let's understand the key parameters:
 
-- `--generator-provider prisma-client`: Define the provides as
-  "prisma-client-js" instead of the default "prisma-client-js". The
-  "prisma-client" provider is optimized for Deno and generates TypeScript code
-  compatible with the Deno runtime.
+- `npm:prisma@7`: This tutorial uses Prisma ORM 7. The `latest` tag of the
+  `prisma` package points to a Prisma ORM 8 pre-release, which has a different
+  CLI, so pin the major version.
+
+- `--generator-provider prisma-client`: Use the `prisma-client` generator
+  instead of the default `prisma-client-js`. The `prisma-client` generator
+  outputs plain TypeScript and supports a Deno runtime target.
 
 - `--output`: Defines the directory where Prisma will save the generated client
   files, including type definitions and database access utilities.
 
 This will generate
-[`prisma/schema.prisma`](https://www.prisma.io/docs/orm/prisma-schema). Let's
-update it with the following:
+[`prisma/schema.prisma`](https://www.prisma.io/docs/orm/v7/prisma-schema/overview?utm_source=deno&utm_medium=docs&utm_campaign=deno_prisma_tutorial&utm_content=setup_schema),
+a `prisma7.config.ts` file that reads the database connection URL from the
+`DATABASE_URL` environment variable, and a `.env` file. Let's update the schema
+with the following:
 
 :::tip
 
@@ -63,12 +68,11 @@ schema.prisma file. This is required for Prisma to work correctly with Deno.
 generator client {
   provider = "prisma-client"
   output   = "./generated"
-  runtime = "deno"
+  runtime  = "deno"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Dinosaur {
@@ -78,38 +82,44 @@ model Dinosaur {
 }
 ```
 
-Prisma also generates a `.env` file with a `DATABASE_URL` environment variable.
-Let's assign `DATABASE_URL` to a PostgreSQL connection string. In this example,
-we'll use a free
-[PostgreSQL database from Supabase](https://supabase.com/database).
+The `.env` file that `prisma init` created contains a placeholder `DATABASE_URL`
+for a local database. Replace it with the connection string of a PostgreSQL
+database. If you don't have one, the following command creates a free
+[Prisma Postgres](https://www.prisma.io/postgres?utm_source=deno&utm_medium=docs&utm_campaign=deno_prisma_tutorial&utm_content=setup_database)
+database and prints its connection string:
+
+```shell
+deno run -A npm:create-db@latest
+```
+
+The database is deleted after 24 hours unless you claim it with the link the
+command prints. Copy the `postgres://` connection string into `.env`:
+
+```text
+DATABASE_URL="postgres://<username>:<password>@db.prisma.io:5432/postgres?sslmode=require"
+```
 
 Next, let's create the database schema:
 
 ```shell
-deno run -A npm:prisma@latest db push
+deno run -A npm:prisma@7 db push
 ```
 
 After that's complete, we'll need to generate a Prisma Client:
 
 ```shell
-deno run -A npm:prisma@latest generate
+deno run -A npm:prisma@7 generate
 ```
 
-## Setup Accelerate in the Prisma Data Platform
+Prisma Client connects to the database through a driver adapter. Let's add the
+PostgreSQL adapter and the client package, along with Oak, which we'll use for
+the API routes. Deno stores them in `node_modules` so the generated client can
+resolve them:
 
-> Note: This is an optional step. Prisma Accelerate is not required for the
-> basic functionality.
-
-To get started with the Prisma Data Platform:
-
-1. Sign up for a free [Prisma Data Platform account](https://console.prisma.io).
-2. Create a project.
-3. Navigate to the project you created.
-4. Enable Accelerate by providing your database's connection string.
-5. Generate an Accelerate connection string and copy it to your clipboard.
-
-Assign the Accelerate connection string, that begins with `prisma://`, to
-`DATABASE_URL` in your `.env` file replacing your existing connection string.
+```shell
+echo '{ "nodeModulesDir": "auto" }' > deno.json
+deno add npm:@prisma/client@7 npm:@prisma/adapter-pg@7 jsr:@oak/oak
+```
 
 Next, let's create a seed script to seed the database.
 
@@ -124,11 +134,11 @@ touch prisma/seed.ts
 And in `./prisma/seed.ts`:
 
 ```ts
+import { PrismaPg } from "@prisma/adapter-pg";
 import { Prisma, PrismaClient } from "./generated/client.ts";
 
-const prisma = new PrismaClient({
-  datasourceUrl: process.env.DATABASE_URL,
-});
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
 
 const dinosaurData: Prisma.DinosaurCreateInput[] = [
   {
@@ -177,7 +187,7 @@ After doing so, you should be able to see your data on Prisma Studio by running
 the following command:
 
 ```bash
-deno run -A npm:prisma studio
+deno run -A npm:prisma@7 studio
 ```
 
 You should see something similar to the following screenshot:
@@ -186,8 +196,8 @@ You should see something similar to the following screenshot:
 
 ## Create your API routes
 
-We'll use [`oak`](https://jsr.io/@oak/oak) to create the API routes. Let's keep
-them simple for now.
+We'll use [`oak`](https://jsr.io/@oak/oak), which we added above, to create the
+API routes. Let's keep them simple for now.
 
 Let's create a `main.ts` file:
 
@@ -198,20 +208,16 @@ touch main.ts
 Then, in your `main.ts` file:
 
 ```ts
+import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "./prisma/generated/client.ts";
-import { Application, Router } from "jsr:@oak/oak";
+import { Application, Router } from "@oak/oak";
 
 /**
  * Initialize.
  */
 
-const prisma = new PrismaClient({
-  datasources: {
-    db: {
-      url: process.env.DATABASE_URL,
-    },
-  },
-});
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
 const app = new Application();
 const router = new Router();
 
@@ -280,7 +286,7 @@ Now, let's run it:
 deno run -A --env main.ts
 ```
 
-Let's visit `localhost:8000/dinosaurs`:
+Let's visit `localhost:8000/dinosaur`:
 
 ![List of all dinosaurs from REST API](./images/how-to/prisma/2-dinosaurs-from-api.png)
 
@@ -303,4 +309,4 @@ since both technologies deliver an intuitive developer experience with data
 modeling, type-safety, and robust IDE support.
 
 If you're interested in connecting Prisma to Deno Deploy,
-[check out this awesome guide](https://www.prisma.io/docs/guides/deployment/deployment-guides/deploying-to-deno-deploy).
+[check out this guide](https://www.prisma.io/docs/guides/integrations/deno?utm_source=deno&utm_medium=docs&utm_campaign=deno_prisma_tutorial&utm_content=next_steps_deno_deploy).
