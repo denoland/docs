@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-10-10
 title: "TypeScript support"
 description: "TypeScript is a first-class language in Deno. Run .ts files directly with no build step, type-check with deno check, reuse your tsconfig.json, and skip the toolchain you needed under Node.js."
 oldUrl:
@@ -65,14 +65,14 @@ running Node or a bundler), reach for a separate tool:
 If you write TypeScript for Node.js today, most of your toolchain has a built-in
 replacement:
 
-| In your Node.js project                         | In Deno                                                                                                         |
-| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `tsx`, `ts-node`, or `node` with type stripping | `deno run main.ts`                                                                                              |
-| `tsc --noEmit`                                  | `deno check`                                                                                                    |
-| `tsconfig.json`                                 | Optional. Auto-detected if present; Deno-first projects use `compilerOptions` in `deno.json`                    |
-| `typescript` as a devDependency                 | Nothing to install; the checker ships inside the `deno` binary                                                  |
-| `@types/node`                                   | Built in and [version-overridable](/runtime/fundamentals/node/#including-node-types); `node:` imports are typed |
-| ESLint + Prettier with TypeScript plugins       | [`deno lint`](/runtime/reference/cli/lint/) and [`deno fmt`](/runtime/reference/cli/fmt/) handle `.ts` natively |
+| In your Node.js project                         | In Deno                                                                                                                      |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `tsx`, `ts-node`, or `node` with type stripping | `deno run main.ts`                                                                                                           |
+| `tsc --noEmit`                                  | `deno check`                                                                                                                 |
+| `tsconfig.json`                                 | Optional. Auto-detected if present; Deno-first projects use `compilerOptions` in `deno.json`                                 |
+| `typescript` as a devDependency                 | Nothing to install; the checker ships inside the `deno` binary                                                               |
+| `@types/node`                                   | Built in and [version-overridable](/runtime/fundamentals/node/#get-node-and-npm-type-definitions); `node:` imports are typed |
+| ESLint + Prettier with TypeScript plugins       | [`deno lint`](/runtime/reference/cli/lint/) and [`deno fmt`](/runtime/reference/cli/fmt/) handle `.ts` natively              |
 
 Three differences trip up Node.js developers most often:
 
@@ -95,7 +95,7 @@ Node 24. Deno runs all of them with no flag.
 Options like `target`, `module`, `outDir`, `esModuleInterop`, and `sourceMap`
 shape emitted JavaScript, which Deno keeps in its internal cache rather than
 writing to disk. Deno warns about these ignored options, and the
-[migration table](/runtime/reference/ts_config_migration/#migrating-compileroptions-from-nodejs)
+[migration table](/runtime/reference/ts_config_migration/#migrating-compileroptions-from-node.js)
 in the configuration reference says what to do with each one. For most, the
 answer is "delete it".
 
@@ -410,7 +410,7 @@ This adds browser globals like `document` while keeping the `Deno` namespace
 available through `deno.ns`. Use `lib: ["deno.worker"]` (or a
 `/// <reference lib="deno.worker" />` directive) for code that runs in a
 `new Worker`. The
-[lib property reference](/runtime/reference/ts_config_migration/#using-the-lib-property)
+[lib property reference](/runtime/reference/ts_config_migration/#using-the-%22lib%22-property)
 describes the available libraries, conflicts to expect, and worker-specific
 setup.
 

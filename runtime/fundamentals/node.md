@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-30
+last_modified: 2026-10-10
 title: "Node and npm Compatibility"
 description: "Guide to using Node.js modules and npm packages in Deno. Learn about compatibility features, importing npm packages, and differences between Node.js and Deno environments."
 oldUrl:
@@ -820,8 +820,8 @@ resolution, you can:
    tooling for packages to support both ESM and CJS, since default exports
    require different syntaxes. See also
    [microsoft/TypeScript#54593](https://github.com/microsoft/TypeScript/issues/54593))
-2. Use a [CDN](/runtime/fundamentals/modules/#url_imports), that rebuilds the
-   packages for Deno support, instead of an `npm:` identifier.
+2. Use a [CDN](/runtime/packages/#https-imports), that rebuilds the packages for
+   Deno support, instead of an `npm:` identifier.
 3. Ignore the type errors you get in your code base with `// @ts-expect-error`
    or `// @ts-ignore`.
 
