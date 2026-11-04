@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-08-17
 title: "Supply chain management"
 description: "Keep Deno dependencies deterministic and safe: lockfile discipline, minimum dependency age, publishing-trust policy, deno audit, intentional updates, and a recommended CI baseline."
 ---
@@ -88,6 +88,52 @@ field also supports an object form that exempts specific packages; see the
 for the full shape, and
 [`.npmrc` configuration](/runtime/fundamentals/node/#.npmrc-configuration) for
 the other npm-registry options Deno reads.
+
+### Troubleshooting: "Blocked by minimum dependency age"
+
+When Deno blocks a freshly published package, you'll see an error like:
+
+```
+error: Could not find version of '@scope/pkg' that matches specified version constraint '^0.1.1'
+A newer matching version was found, but it was not used because it was newer than the
+specified minimum dependency date of 2026-07-07 20:38:44 UTC
+hint: This version is blocked by the minimum dependency age policy, which avoids
+installing recently published versions to reduce supply chain risk (the default is
+24 hours). To use this version now, set "minimumDependencyAge" in your deno.json
+(for example 0 to disable it, or a shorter duration like "1 hour"), or wait until
+the version is old enough.
+```
+
+#### How to fix it
+
+**Option 1: Disable it temporarily** (for testing or urgent fixes)
+
+```sh
+deno add --min-dep-age=0 npm:your-package
+```
+
+Or with `deno install`:
+
+```sh
+deno install --minimum-dependency-age=0 npm:your-package
+```
+
+**Option 2: Set a shorter window** in `deno.json`:
+
+```json
+{
+  "minimumDependencyAge": "PT1H" // 1 hour
+}
+```
+
+**Option 3: Wait** — the package will become available after 24 hours (or your configured window).
+
+#### Important notes
+
+- The `--min-dep-age` alias is available in Deno 2.10+ (shorthand for `--minimum-dependency-age`).
+- The `--minimum-dependency-age` flag works with `deno add`, `deno install`, `deno run`, `deno cache`, and `deno check`.
+- In a workspace, `minimumDependencyAge` must be set at the root `deno.json`.
+- Setting `minimumDependencyAge` makes Deno request full npm packuments, which can increase memory usage for frequently-published packages.
 
 ## Publishing-trust policy
 
