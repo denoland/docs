@@ -8,9 +8,13 @@
 
 const SECTION_PREFIXES = ["/deploy/", "/sandbox/", "/examples/sandbox_"];
 
-// Pages inside the sections above that document Deploy Classic and carry
-// their own July 20, 2026 warning.
-const EXCLUDED_PREFIXES = ["/deploy/classic/", "/deploy/kv/node/"];
+// Pages inside the sections above that document Deploy Classic, or address
+// users migrating off it, and carry their own July 20, 2026 warning.
+const EXCLUDED_PREFIXES = [
+  "/deploy/classic/",
+  "/deploy/kv/node/",
+  "/deploy/migration_guide/",
+];
 
 // Deploy-only pages that live outside the sections above.
 const EXTRA_PAGES = new Set([
@@ -19,7 +23,7 @@ const EXTRA_PAGES = new Set([
   "/examples/deno_deploy_tutorial/",
   "/examples/deploy_command_tutorial/",
   "/examples/deploy_otel_tutorial/",
-  "/examples/migrate_custom_domain_tutorial/",
+  "/examples/simple_api_tutorial/",
   "/examples/tunnel_tutorial/",
   "/examples/tunnel_telemetry_tutorial/",
   "/examples/tunnel_database_tutorial/",

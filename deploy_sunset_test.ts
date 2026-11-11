@@ -8,7 +8,6 @@ Deno.test("deploy sunset callout renders on Deploy and Sandbox pages", () => {
     const url of [
       "/deploy/",
       "/deploy/getting_started/",
-      "/deploy/migration_guide/",
       "/deploy/reference/tunnel/",
       "/deploy/kv/",
       "/deploy/kv/backup/",
@@ -17,6 +16,7 @@ Deno.test("deploy sunset callout renders on Deploy and Sandbox pages", () => {
       "/examples/sandbox_web_framework/",
       "/examples/sandbox_ssh_access/",
       "/examples/deno_deploy_tutorial/",
+      "/examples/simple_api_tutorial/",
       "/examples/tunnel_tutorial/",
       "/examples/volumes_tutorial/",
       "/runtime/reference/cli/deploy/",
@@ -27,8 +27,9 @@ Deno.test("deploy sunset callout renders on Deploy and Sandbox pages", () => {
   }
 });
 
-// Deploy Classic and Subhosting pages carry their own, earlier (July 20,
-// 2026) shutdown warning; the April 2027 callout must not contradict it.
+// Deploy Classic and Subhosting pages, and the guides for migrating off
+// Classic, carry their own, earlier (July 20, 2026) shutdown warning; the
+// April 2027 callout must not contradict it.
 Deno.test("deploy sunset callout stays off Classic and Subhosting pages", () => {
   for (
     const url of [
@@ -36,6 +37,8 @@ Deno.test("deploy sunset callout stays off Classic and Subhosting pages", () => 
       "/deploy/classic/deployctl/",
       "/deploy/classic/api/runtime-fetch/",
       "/deploy/kv/node/",
+      "/deploy/migration_guide/",
+      "/examples/migrate_custom_domain_tutorial/",
       "/subhosting/",
       "/subhosting/manual/",
       "/subhosting/api/authentication/",
