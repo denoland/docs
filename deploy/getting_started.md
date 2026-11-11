@@ -1,14 +1,10 @@
 ---
-last_modified: 2026-03-26
+last_modified: 2026-11-11
 title: "Getting started"
 description: "Step-by-step guide to creating and configuring your first Deno Deploy application, including organization setup, build configuration, environment variables, and deployment monitoring."
 ---
 
 ## Create an organization
-
-Deno Deploy Classic will be shut down on July 20, 2026. If you are migrating
-from Deploy Classic, see the [migration guide](/deploy/migration_guide/) for
-details on what has changed.
 
 To get started with Deno Deploy:
 

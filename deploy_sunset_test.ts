@@ -13,6 +13,8 @@ Deno.test("deploy sunset callout renders on Deploy and Sandbox pages", () => {
       "/deploy/kv/backup/",
       "/sandbox/",
       "/sandbox/volumes/",
+      "/subhosting/manual/",
+      "/subhosting/api/authentication/",
       "/examples/sandbox_web_framework/",
       "/examples/sandbox_ssh_access/",
       "/examples/deno_deploy_tutorial/",
@@ -27,21 +29,16 @@ Deno.test("deploy sunset callout renders on Deploy and Sandbox pages", () => {
   }
 });
 
-// Deploy Classic and Subhosting pages, and the guides for migrating off
-// Classic, carry their own, earlier (July 20, 2026) shutdown warning; the
-// April 2027 callout must not contradict it.
-Deno.test("deploy sunset callout stays off Classic and Subhosting pages", () => {
+// Deploy Classic was shut down on July 20, 2026; its pages are reference-only
+// and carry their own notice, so the April 2027 callout stays off them.
+Deno.test("deploy sunset callout stays off Deploy Classic pages", () => {
   for (
     const url of [
       "/deploy/classic/",
       "/deploy/classic/deployctl/",
       "/deploy/classic/api/runtime-fetch/",
       "/deploy/kv/node/",
-      "/deploy/migration_guide/",
       "/examples/migrate_custom_domain_tutorial/",
-      "/subhosting/",
-      "/subhosting/manual/",
-      "/subhosting/api/authentication/",
     ]
   ) {
     assertFalse(isDeployPage(url), `expected no callout on ${url}`);

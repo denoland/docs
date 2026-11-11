@@ -45,10 +45,6 @@ export const sidebar = [
         title: "v2 API Reference",
         href: "https://api.deno.com/v2/docs",
       },
-      {
-        title: "Migration guide (v1 to v2)",
-        href: "/subhosting/manual/api_migration_guide/",
-      },
     ],
   },
 ] satisfies Sidebar;

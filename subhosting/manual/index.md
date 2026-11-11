@@ -1,17 +1,16 @@
 ---
-last_modified: 2026-03-19
+last_modified: 2026-11-11
 title: About Subhosting
 oldUrl:
   - /subhosting/
   - /deploy/manual/subhosting/
 ---
 
-:::warning Sunsetting on July 20, 2026
+:::warning Subhosting v1 API has been shut down
 
-The subhosting v1 API will be shut down on July 20, 2026. Migrate to the
-<a href="https://api.deno.com/v2/docs">v2 API</a>. See the
-<a href="/subhosting/manual/api_migration_guide/">API migration guide</a> for
-details.
+The subhosting v1 API was shut down on July 20, 2026. The
+<a href="https://api.deno.com/v2/docs">v2 API</a> (<code>api.deno.com/v2</code>)
+is the only subhosting API.
 
 :::
 
@@ -79,14 +78,10 @@ execute that code on a Deno-provisioned URL or a
 
 ## REST API reference
 
-The subhosting v1 API is being replaced by the v2 API. See the
-[API migration guide](/subhosting/manual/api_migration_guide/) for detailed
-endpoint mappings and migration instructions.
+The subhosting v1 API was shut down on July 20, 2026; the v2 API is the only
+subhosting API.
 
-- **v2 API reference** (recommended):
-  [api.deno.com/v2/docs](https://api.deno.com/v2/docs)
-- **v1 API reference** (legacy, sunsetting July 20, 2026):
-  [apidocs.deno.com](https://apidocs.deno.com)
+- **v2 API reference**: [api.deno.com/v2/docs](https://api.deno.com/v2/docs)
 
 ### SDKs
 

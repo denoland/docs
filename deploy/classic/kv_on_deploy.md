@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-03-19
+last_modified: 2026-11-11
 title: "KV on Deno Deploy"
 oldUrl:
   - /deploy/manual/kv/
@@ -7,11 +7,10 @@ oldUrl:
   - /deploy/kv/manual/on_deploy/
 ---
 
-:::warning Sunsetting on July 20, 2026
+:::warning Deploy Classic has been shut down
 
-Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
-to the new <a href="/deploy/">Deno Deploy</a> platform. See the
-<a href="/deploy/migration_guide/">migration guide</a> for details.
+Deno Deploy Classic (dash.deno.com) was shut down on July 20, 2026. These pages
+are kept for reference only.
 
 :::
 

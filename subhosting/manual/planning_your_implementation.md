@@ -1,14 +1,13 @@
 ---
-last_modified: 2026-03-19
+last_modified: 2026-11-11
 title: Planning your implementation
 ---
 
-:::warning Sunsetting on July 20, 2026
+:::warning Subhosting v1 API has been shut down
 
-The subhosting v1 API will be shut down on July 20, 2026. Migrate to the
-<a href="https://api.deno.com/v2/docs">v2 API</a>. See the
-<a href="/subhosting/manual/api_migration_guide/">API migration guide</a> for
-details.
+The subhosting v1 API was shut down on July 20, 2026. The
+<a href="https://api.deno.com/v2/docs">v2 API</a> (<code>api.deno.com/v2</code>)
+is the only subhosting API.
 
 :::
 
