@@ -37,6 +37,7 @@
   "/deploy/migration_guide/": "/deploy/",
   "/subhosting/manual/api_migration_guide/": "/subhosting/",
   "/deploy/api_migration_guide/": "/subhosting/",
+  "/examples/migrate_custom_domain_tutorial/": "/deploy/reference/domains/",
   "/runtime/reference/tcp_udp_connections/": "/examples/",
   "/runtime/getting_started/": "/runtime/",
   "/api/deno/~/Deno.TlsConn.rid/": "/runtime/reference/migration_guide/#rid",

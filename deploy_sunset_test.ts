@@ -37,7 +37,6 @@ Deno.test("deploy sunset callout stays off Classic and Subhosting pages", () => 
       "/deploy/classic/deployctl/",
       "/deploy/classic/api/runtime-fetch/",
       "/deploy/kv/node/",
-      "/examples/migrate_custom_domain_tutorial/",
       "/subhosting/",
       "/subhosting/manual/",
       "/subhosting/manual/quick_start/",

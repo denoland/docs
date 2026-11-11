@@ -1133,12 +1133,6 @@ export const items = [
     category: "Deploying Deno projects",
   },
   {
-    title: "Migrating a custom domain to Deno Deploy",
-    href: "/examples/migrate_custom_domain_tutorial/",
-    type: "tutorial",
-    category: "Deploying Deno projects",
-  },
-  {
     title: "Connecting to a database both locally and on Deno Deploy",
     href: "/examples/tunnel_database_tutorial/",
     type: "tutorial",

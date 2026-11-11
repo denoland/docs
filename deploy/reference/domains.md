@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-11-11
 title: Domains
 description: "Complete guide to domain management in Deno Deploy, including organization domains, custom domains, DNS configuration, TLS certificates, and domain assignments."
 ---
@@ -211,9 +211,8 @@ organization for use with other applications.
 This removes the custom domain from your organization and deletes all domain
 assignments across all applications.
 
-## Migrating a custom domain from Deploy Classic to Deno Deploy
+## Domains previously used on Deploy Classic
 
-If you have previously set up a custom domain on Deploy Classic and want to
-migrate it to Deno Deploy, we've created a
-[step-by-step tutorial](/examples/migrate_custom_domain_tutorial/) to guide you
-through the process.
+Deploy Classic was shut down on July 20, 2026. A custom domain that still points
+at it is added to Deno Deploy like any other domain: follow the steps above and
+update its DNS records to the ones shown in the dashboard.
