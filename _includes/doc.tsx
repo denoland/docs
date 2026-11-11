@@ -144,6 +144,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
               data-dark-theme="dark"
               class="markdown-body mt-4"
             >
+              <data.comp.DeploySunset url={data.url} />
               {!(isReference && !isApiLandingPage) && (
                 <div className="block mb-2 space-y-2">
                   <header class="flex flex-wrap items-center justify-between gap-2">
