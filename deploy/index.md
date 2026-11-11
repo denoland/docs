@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-09
+last_modified: 2026-11-11
 title: "About Deno Deploy"
 description: "Guide to Deno Deploy features, comparison with Deploy Classic, and getting started instructions for deployment."
 ---
@@ -54,11 +54,10 @@ Deploy Classic. The below table compares the two versions of Deno Deploy.
 | Regions                         | 2                              | 6                                                                                                                                       |
 | Self hostable regions           | ✅ Supported                   | ❌ Not supported                                                                                                                        |
 
-:::warning Deploy Classic sunsetting July 20, 2026
+:::warning Deploy Classic has been shut down
 
-Deno Deploy Classic (dash.deno.com) and the subhosting v1 API will be shut down
-on July 20, 2026. See the
-<a href="/deploy/migration_guide/">migration guide</a> for details.
+Deno Deploy Classic (dash.deno.com) and the subhosting v1 API were shut down on
+July 20, 2026.
 
 :::
 

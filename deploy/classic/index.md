@@ -1,26 +1,22 @@
 ---
-last_modified: 2026-03-19
+last_modified: 2026-11-11
 title: "Deploy Classic"
 oldUrl:
   - /deploy/docs/
   - /deploy/manual/hello-world/
 ---
 
-:::warning Sunsetting on July 20, 2026
+:::warning Deploy Classic has been shut down
 
-Deno Deploy Classic will be shut down on July 20, 2026. We recommend migrating
-to the new <a href="/deploy/">Deno Deploy</a> platform. See the
-<a href="/deploy/migration_guide/">migration guide</a> for details.
+Deno Deploy Classic (dash.deno.com) was shut down on July 20, 2026. These pages
+are kept for reference only.
 
 :::
 
-This section documents the legacy Deno Deploy Classic platform (dash.deno.com).
-We are no longer onboarding new users or organizations to Deploy Classic.
-
-If you already have existing Deploy Classic projects, you must migrate them to
-the new Deno Deploy platform at [console.deno.com](https://console.deno.com)
-before the shutdown date. See the [migration guide](/deploy/migration_guide/)
-for step-by-step instructions.
+This section documents the legacy Deno Deploy Classic platform (dash.deno.com),
+which was shut down on July 20, 2026. Deploy Classic projects can no longer be
+migrated; these pages are kept for reference only. The current platform is
+[Deno Deploy](/deploy/).
 
 ## What is Deno Deploy Classic?
 

@@ -2,19 +2,15 @@
 // documents them carries this callout, mounted once from the doc layout so
 // no page content needs to change.
 //
-// Deploy Classic and the Subhosting v1 API shut down earlier, on July 20,
-// 2026, and their pages already carry that warning, so this callout stays
-// off them: a second, later deadline on the same page would be misleading.
+// Deploy Classic and the subhosting v1 API were shut down earlier, on July
+// 20, 2026, and their pages are kept for reference only with their own
+// notice, so this callout stays off them: a second, later deadline on the
+// same page would be misleading.
 
 const SECTION_PREFIXES = ["/deploy/", "/sandbox/", "/examples/sandbox_"];
 
-// Pages inside the sections above that document Deploy Classic, or address
-// users migrating off it, and carry their own July 20, 2026 warning.
-const EXCLUDED_PREFIXES = [
-  "/deploy/classic/",
-  "/deploy/kv/node/",
-  "/deploy/migration_guide/",
-];
+// Pages inside the sections above that document Deploy Classic.
+const EXCLUDED_PREFIXES = ["/deploy/classic/", "/deploy/kv/node/"];
 
 // Deploy-only pages that live outside the sections above.
 const EXTRA_PAGES = new Set([

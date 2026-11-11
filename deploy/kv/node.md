@@ -1,17 +1,16 @@
 ---
-last_modified: 2026-05-13
+last_modified: 2026-11-11
 title: "Using KV in Node.js"
 oldUrl:
   - /kv/manual/node/
 ---
 
-:::warning Sunsetting on July 20, 2026
+:::warning Deploy Classic has been shut down
 
 This page covers connecting to a Deno KV database hosted on
 <strong>Deno Deploy Classic</strong>
-(<a href="https://dash.deno.com">dash.deno.com</a>). Deploy Classic will be shut
-down on July 20, 2026 — see the
-<a href="/deploy/migration_guide/">migration guide</a> for details.
+(<a href="https://dash.deno.com">dash.deno.com</a>), which was shut down on July
+20, 2026. It is kept for reference only.
 
 On the new <a href="/deploy/">Deno Deploy</a> platform, KV databases are
 provisioned per app through the

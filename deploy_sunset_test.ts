@@ -27,9 +27,9 @@ Deno.test("deploy sunset callout renders on Deploy and Sandbox pages", () => {
   }
 });
 
-// Deploy Classic and Subhosting pages, and the guides for migrating off
-// Classic, carry their own, earlier (July 20, 2026) shutdown warning; the
-// April 2027 callout must not contradict it.
+// Deploy Classic and the subhosting v1 API were shut down on July 20, 2026;
+// their pages are reference-only and carry their own notice, so the April
+// 2027 callout stays off them.
 Deno.test("deploy sunset callout stays off Classic and Subhosting pages", () => {
   for (
     const url of [
@@ -37,10 +37,9 @@ Deno.test("deploy sunset callout stays off Classic and Subhosting pages", () => 
       "/deploy/classic/deployctl/",
       "/deploy/classic/api/runtime-fetch/",
       "/deploy/kv/node/",
-      "/deploy/migration_guide/",
-      "/examples/migrate_custom_domain_tutorial/",
       "/subhosting/",
       "/subhosting/manual/",
+      "/subhosting/manual/quick_start/",
       "/subhosting/api/authentication/",
     ]
   ) {
