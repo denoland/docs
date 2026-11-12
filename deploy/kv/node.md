@@ -70,8 +70,11 @@ import { openKv } from "@deno/kv";
 const kv = await openKv("<KV Connect URL>", { accessToken: myToken });
 ```
 
-Once your Deno KV client is initialized, the same API available in Deno may be
-used in Node as well.
+Once the client is initialized, the Deno KV API is available in Node, with one
+exception: queue operations (`enqueue` / `listenQueue`) are not part of the KV
+Connect protocol, so they are unavailable over a remote connection. The
+[package README](https://www.npmjs.com/package/@deno/kv) has the full support
+matrix and the supported Node.js versions.
 
 ## KV Connect URLs
 
@@ -82,16 +85,11 @@ database hosted on Deno Deploy it has this format:
 https://api.deno.com/v2/databases/<Database ID>/connect
 ```
 
-Replace `<Database ID>` with the ID of the database you want to connect to. Each
-database's ID is shown in the Databases table on the database instance page in
-the [Deno Deploy console](https://console.deno.com).
-
-Authenticate the connection with either a personal or an organization access
-token, set as the `DENO_KV_ACCESS_TOKEN` environment variable or passed as
-`accessToken`. Organization access tokens can be created from your
-organization's settings page in the Deno Deploy console. The same URL and token
-work from the Deno CLI with `Deno.openKv(url)`; see
-[Connect from outside Deno Deploy](/deploy/reference/deno_kv/#connect-from-outside-deno-deploy).
+Where to find the database ID and how to create the access token that
+authenticates the connection (`DENO_KV_ACCESS_TOKEN`, or `accessToken` above) is
+described in
+[Connect from outside Deno Deploy](/deploy/reference/deno_kv/#connect-from-outside-deno-deploy);
+the same URL and token work from the Deno CLI.
 
 For a self-hosted `denokv` server, use the URL the server is listening on (for
 example `http://localhost:4512`) and the access token it was started with.
