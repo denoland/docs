@@ -1,16 +1,13 @@
-// Deno Deploy and Deno Sandbox shut down in April 2027. Every page that
+// Deno Deploy, Deno Subhosting and Deno Sandbox shut down in April 2027. Every page that
 // documents them carries this callout, mounted once from the doc layout so
 // no page content needs to change.
-//
-// Deploy Classic and the subhosting v1 API were shut down earlier, on July
-// 20, 2026, and their pages are kept for reference only with their own
-// notice, so this callout stays off them: a second, later deadline on the
-// same page would be misleading.
 
-const SECTION_PREFIXES = ["/deploy/", "/sandbox/", "/examples/sandbox_"];
-
-// Pages inside the sections above that document Deploy Classic.
-const EXCLUDED_PREFIXES = ["/deploy/classic/", "/deploy/kv/node/"];
+const SECTION_PREFIXES = [
+  "/deploy/",
+  "/sandbox/",
+  "/subhosting/",
+  "/examples/sandbox_",
+];
 
 // Deploy-only pages that live outside the sections above.
 const EXTRA_PAGES = new Set([
@@ -29,9 +26,6 @@ const EXTRA_PAGES = new Set([
 ]);
 
 export function isDeployPage(url: string): boolean {
-  if (EXCLUDED_PREFIXES.some((prefix) => url.startsWith(prefix))) {
-    return false;
-  }
   return SECTION_PREFIXES.some((prefix) => url.startsWith(prefix)) ||
     EXTRA_PAGES.has(url);
 }

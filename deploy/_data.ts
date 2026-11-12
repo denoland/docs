@@ -111,7 +111,6 @@ export const sidebar = [
         href: "/deploy/kv/secondary_indexes/",
       },
       { title: "Transactions", href: "/deploy/kv/transactions/" },
-      { title: "Node", href: "/deploy/kv/node/" },
       {
         title: "Data modeling",
         href: "/deploy/kv/data_modeling_typescript/",
@@ -166,11 +165,7 @@ export const SidebarNav = [
     href: "/sandbox/",
   },
   {
-    title: "Deploy Classic",
-    href: "/deploy/classic/",
-  },
-  {
     title: "Subhosting",
-    href: "/subhosting/manual/",
+    href: "/subhosting/",
   },
 ] satisfies SidebarNavItem[];

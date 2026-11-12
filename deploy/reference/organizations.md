@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-01-27
+last_modified: 2026-11-12
 title: Organizations
 description: "Guide to creating and managing organizations in Deno Deploy, including members, permissions, and organization administration."
 ---
@@ -12,9 +12,8 @@ All users must belong to an organization to use Deno Deploy, as all resources
 are owned at the organization level.
 
 Organizations have both a name and a slug. The name is visible only to
-organization members and appears in the organization dropdown in both Deno
-Deploy and Deploy Classic. The slug forms part of the default domain for all
-applications in the organization.
+organization members and appears in the organization dropdown. The slug forms
+part of the default domain for all applications in the organization.
 
 Every organization has a default domain used for production, git branch, and
 preview URLs for projects in that organization. For example, an organization
@@ -36,8 +35,7 @@ sign-up process.
 
 :::info
 
-Organization slugs must be unique across all Deno Deploy organizations and
-cannot match any existing project name in Deno Deploy Classic.
+Organization slugs must be unique across all Deno Deploy organizations.
 
 :::
 

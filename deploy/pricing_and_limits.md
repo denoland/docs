@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-10-07
+last_modified: 2026-11-12
 title: "Pricing and limitations"
 description: "Important limitations, service level expectations, and terms of use for Deno Deploy."
 oldUrl: /deploy/classic/pricing-and-limits/
@@ -41,5 +41,4 @@ connection to port 443, please use
 
 This restriction is in place because connecting to port 443 without terminating
 TLS is frequently used in TLS-over-TLS proxies, which are prohibited on Deno
-Deploy Classic as per
-[our acceptable use policy](/deploy/acceptable_use_policy).
+Deploy as per [our acceptable use policy](/deploy/acceptable_use_policy).

@@ -2,55 +2,26 @@ import type { Sidebar, SidebarNavItem } from "../types.ts";
 
 export const sidebar = [
   {
-    title: "Getting started",
+    title: "Subhosting",
     items: [
       {
         title: "About Subhosting",
-        href: "/subhosting/manual/",
+        href: "/subhosting/",
       },
       {
-        title: "Quick start",
-        href: "/subhosting/manual/quick_start/",
-      },
-      {
-        title: "Planning your implementation",
-        href: "/subhosting/manual/planning_your_implementation/",
-      },
-      {
-        title: "Pricing and Limits",
-        href: "/subhosting/manual/pricing_and_limits/",
-      },
-    ],
-  },
-  {
-    title: "REST API",
-    items: [
-      {
-        title: "Resources",
-        href: "/subhosting/api/",
-      },
-      {
-        title: "Authentication",
-        href: "/subhosting/api/authentication/",
-      },
-      {
-        title: "Events",
-        href: "/subhosting/manual/events/",
-      },
-      {
-        title: "v1 API Reference (legacy)",
-        href: "https://apidocs.deno.com",
-      },
-      {
-        title: "v2 API Reference",
+        title: "API reference",
         href: "https://api.deno.com/v2/docs",
+      },
+      {
+        title: "Deno Deploy docs",
+        href: "/deploy/",
       },
     ],
   },
 ] satisfies Sidebar;
 
 export const sectionTitle = "Subhosting";
-export const sectionHref = "/subhosting/manual/";
+export const sectionHref = "/subhosting/";
 export const SidebarNav = [
   {
     title: "Deno Deploy",
@@ -61,11 +32,7 @@ export const SidebarNav = [
     href: "/sandbox/",
   },
   {
-    title: "Deploy Classic",
-    href: "/deploy/classic/",
-  },
-  {
     title: "Subhosting",
-    href: "/subhosting/manual/",
+    href: "/subhosting/",
   },
 ] satisfies SidebarNavItem[];
