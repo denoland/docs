@@ -44,7 +44,6 @@ export interface Example {
   tags: (keyof typeof TAGS)[];
   additionalResources: [string, string][];
   run?: string;
-  playground?: string;
   files: ExampleFile[];
   group: string;
   sortOrder: any;
