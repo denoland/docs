@@ -154,7 +154,6 @@ export function parseExample(id: string, file: string): Example {
     tags,
     additionalResources,
     run: kvs.run,
-    playground: kvs.playground,
     files,
     group: kvs.group || "Misc",
     sortOrder: kvs.sortOrder || 999999,
