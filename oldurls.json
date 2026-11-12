@@ -233,8 +233,6 @@
   "/subhosting/manual/planning_your_implementation/": "/subhosting/",
   "/subhosting/manual/pricing_and_limits/": "/subhosting/",
   "/subhosting/manual/quick_start/": "/subhosting/",
-  "/deploy/kv/node/": "/deploy/kv/",
-  "/kv/manual/node/": "/deploy/kv/",
   "/deploy/api/compression/": "/deploy/",
   "/deploy/docs/compression/": "/deploy/",
   "/deploy/api/dynamic-import/": "/deploy/",

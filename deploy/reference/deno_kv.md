@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-05
+last_modified: 2026-11-12
 title: Deno KV
 description: Use Deno KV in your applications with a dedicated database per timeline
 oldUrl: /deploy/reference/deno-kv/
@@ -82,6 +82,9 @@ export DENO_KV_ACCESS_TOKEN=ddo_...
 
 Organization access tokens can be created from your organization's settings page
 in the Deno Deploy console.
+
+The same URL and token work from Node.js with the `@deno/kv` client; see
+[Using KV from Node.js](/deploy/kv/node/).
 
 ## Un-assigning a KV database
 

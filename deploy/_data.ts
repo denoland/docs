@@ -116,6 +116,7 @@ export const sidebar = [
         href: "/deploy/kv/data_modeling_typescript/",
       },
       { title: "Backup", href: "/deploy/kv/backup/" },
+      { title: "Node", href: "/deploy/kv/node/" },
     ],
   },
   {
