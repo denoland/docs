@@ -44,7 +44,7 @@ who writes the code and how it gets there.
 
 1. Create an [organization](/deploy/reference/organizations/) in the
    [Deno Deploy console](https://console.deno.com) and create an access token
-   for it.
+   for it from the organization's settings page.
 2. Use the API to create an [app](/deploy/reference/apps/) per customer project
    and upload its code as a deployment. Each deployment runs on a
    Deno-provisioned URL or on a [custom domain](/deploy/reference/domains/) you
