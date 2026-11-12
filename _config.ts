@@ -253,10 +253,8 @@ if (PROFILE) {
 
 site.copy("static", ".");
 site.copy("timeUtils.ts");
-site.copy("subhosting/api/images");
 site.copy("deploy/docs-images");
 site.copy("deploy/images");
-site.copy("deploy/classic/images");
 site.copy("deploy/kv/images");
 site.copy("deploy/tutorials/images");
 site.copy("sandbox/images");
@@ -454,7 +452,6 @@ site.ignore(
   (path) => path.includes("/lint/rules/"),
   // "deploy",
   // "runtime",
-  // "subhosting",
   // "404",
 );
 

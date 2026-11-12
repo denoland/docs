@@ -1,7 +1,7 @@
 import { assert, assertFalse } from "@std/assert";
 import { isDeployPage } from "./_components/DeploySunset.tsx";
 
-// Pages about Deno Deploy and Deno Sandbox carry the April 2027 sunset
+// Pages about Deno Deploy, Subhosting and Deno Sandbox carry the April 2027
 // callout.
 Deno.test("deploy sunset callout renders on Deploy and Sandbox pages", () => {
   for (
@@ -13,6 +13,7 @@ Deno.test("deploy sunset callout renders on Deploy and Sandbox pages", () => {
       "/deploy/kv/backup/",
       "/sandbox/",
       "/sandbox/volumes/",
+      "/subhosting/",
       "/examples/sandbox_web_framework/",
       "/examples/sandbox_ssh_access/",
       "/examples/deno_deploy_tutorial/",
@@ -24,26 +25,6 @@ Deno.test("deploy sunset callout renders on Deploy and Sandbox pages", () => {
     ]
   ) {
     assert(isDeployPage(url), `expected callout on ${url}`);
-  }
-});
-
-// Deploy Classic and the subhosting v1 API were shut down on July 20, 2026;
-// their pages are reference-only and carry their own notice, so the April
-// 2027 callout stays off them.
-Deno.test("deploy sunset callout stays off Classic and Subhosting pages", () => {
-  for (
-    const url of [
-      "/deploy/classic/",
-      "/deploy/classic/deployctl/",
-      "/deploy/classic/api/runtime-fetch/",
-      "/deploy/kv/node/",
-      "/subhosting/",
-      "/subhosting/manual/",
-      "/subhosting/manual/quick_start/",
-      "/subhosting/api/authentication/",
-    ]
-  ) {
-    assertFalse(isDeployPage(url), `expected no callout on ${url}`);
   }
 });
 

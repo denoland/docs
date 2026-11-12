@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-11-11
+last_modified: 2026-11-12
 title: "Getting started"
 description: "Step-by-step guide to creating and configuring your first Deno Deploy application, including organization setup, build configuration, environment variables, and deployment monitoring."
 ---
@@ -13,9 +13,7 @@ To get started with Deno Deploy:
 
 ![The Deno Deploy organization creation screen.](./images/create_org.png)
 
-Note that you cannot create an organization with the same slug as any existing
-project in Deploy Classic. Organization names and slugs cannot be changed after
-creation.
+Organization names and slugs cannot be changed after creation.
 
 ## Create an app
 

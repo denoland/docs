@@ -71,12 +71,8 @@ const data = [
         to: "/deploy/",
       },
       {
-        label: "Deno Deploy Classic",
-        to: "/deploy/classic/",
-      },
-      {
         label: "Deno Subhosting",
-        to: "/subhosting/manual/",
+        to: "/subhosting/",
       },
     ],
   },

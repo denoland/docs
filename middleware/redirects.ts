@@ -8,7 +8,7 @@ let redirectsSingleton: Record<string, string> | null = null;
 
 interface WildcardRule {
   fromPrefix: string; // e.g. '/deploy/manual/'
-  toPattern: string; // e.g. '/deploy/classic/*' or '/deploy/classic/'
+  toPattern: string; // e.g. '/deploy/tutorials/*' or '/examples/'
   rawFrom: string; // original key including '*'
   rawTo: string; // original value
 }
