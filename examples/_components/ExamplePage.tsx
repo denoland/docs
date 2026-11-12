@@ -90,20 +90,6 @@ export default function ExamplePage({ example }: Props) {
             </div>
           </div>
         )}
-        {example.parsed.playground && (
-          <div class="col-span-3 mt-8">
-            <p class="text-foreground-secondary">
-              Try this example in a{" "}
-              <a
-                href={example.parsed.playground}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Deno Deploy playground
-              </a>
-            </p>
-          </div>
-        )}
         {example.parsed.additionalResources.length > 0 && (
           <div class="col-span-3 pt-6 mt-8 border-t-1 border-gray-200">
             <h2 class="mt-0">Additional resources</h2>
