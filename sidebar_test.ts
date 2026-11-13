@@ -1,7 +1,6 @@
 import { assert } from "@std/assert";
 import { sidebar as runtimeSidebar } from "./runtime/_data.ts";
 import { sidebar as deploySidebar } from "./deploy/_data.ts";
-import { sidebar as classicSidebar } from "./deploy/classic/_data.ts";
 import { sidebar as subhostingSidebar } from "./subhosting/_data.ts";
 import { sidebar as sandboxSidebar } from "./sandbox/_data.ts";
 import type { TitleContent } from "./types.ts";
@@ -13,8 +12,7 @@ import type { TitleContent } from "./types.ts";
 const SIDEBARS = [
   { name: "runtime", sidebar: runtimeSidebar, maxLabelLength: 22 },
   { name: "deploy", sidebar: deploySidebar, maxLabelLength: 29 },
-  { name: "deploy classic", sidebar: classicSidebar, maxLabelLength: 25 },
-  { name: "subhosting", sidebar: subhostingSidebar, maxLabelLength: 28 },
+  { name: "subhosting", sidebar: subhostingSidebar, maxLabelLength: 16 },
   { name: "sandbox", sidebar: sandboxSidebar, maxLabelLength: 23 },
 ];
 

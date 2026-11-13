@@ -87,11 +87,7 @@ export const SidebarNav = [
     href: "/sandbox/",
   },
   {
-    title: "Deploy Classic",
-    href: "/deploy/classic/",
-  },
-  {
     title: "Subhosting",
-    href: "/subhosting/manual/",
+    href: "/subhosting/",
   },
 ] satisfies SidebarNavItem[];

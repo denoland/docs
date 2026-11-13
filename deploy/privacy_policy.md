@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-09-30
+last_modified: 2026-11-12
 title: "Privacy Policy"
 description: "Deno's Privacy Policy"
 oldUrl: /deploy/classic/privacy-policy
@@ -21,7 +21,6 @@ Policy; and (iii) the products and services (the “Deno Offerings”) we offer 
 you on our proprietary platform (the “Platform”) via the following websites:
 
 - Deno Deploy ([https://console.deno.com](https://console.deno.com))
-- Deno Deploy Classic ([https://dash.deno.com](https://dash.deno.com))
 - Deno Subhosting ([https://api.deno.com](https://api.deno.com))
 - JSR ([https://jsr.io](https://jsr.io))
 - Dactyl ([https://dactyl.dev](https://dactyl.dev))

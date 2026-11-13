@@ -44,7 +44,6 @@ export default function ExamplePage({ example }: Props) {
           >
             {file.snippets.map((snippet, i) => (
               <SnippetComponent
-                key={i}
                 onlyOneSnippet={file.snippets.length === 1}
                 firstOfFile={i === 0 || !file.snippets[i - 1].code}
                 lastOfFile={i === file.snippets.length - 1 ||
@@ -88,20 +87,6 @@ export default function ExamplePage({ example }: Props) {
                 </code>
               </pre>
             </div>
-          </div>
-        )}
-        {example.parsed.playground && (
-          <div class="col-span-3 mt-8">
-            <p class="text-foreground-secondary">
-              Try this example in a{" "}
-              <a
-                href={example.parsed.playground}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Deno Deploy playground
-              </a>
-            </p>
           </div>
         )}
         {example.parsed.additionalResources.length > 0 && (

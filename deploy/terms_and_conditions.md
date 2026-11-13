@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-09-30
+last_modified: 2026-11-12
 title: "Terms and Conditions"
 description: "Deno Terms and Conditions"
 oldUrl: /deploy/classic/terms-and-conditions
@@ -16,7 +16,6 @@ products and services (the “Deno Offerings”) we offer to you on our propriet
 platform (the “Platform”) via the following websites:
 
 - Deno Deploy ([https://console.deno.com](https://console.deno.com))
-- Deno Deploy Classic ([https://dash.deno.com](https://dash.deno.com))
 - Deno Subhosting ([https://api.deno.com](https://api.deno.com))
 - JSR ([https://jsr.io](https://jsr.io))
 - Dactyl ([https://dactyl.dev](https://dactyl.dev))

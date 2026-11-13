@@ -1,37 +1,17 @@
 ---
-last_modified: 2026-05-13
-title: "Using KV in Node.js"
+last_modified: 2026-11-12
+title: "Using KV from Node.js"
+description: "Connect to a Deno KV database on Deno Deploy, or to a self-hosted denokv server, from Node.js with the @deno/kv client and a KV Connect URL."
 oldUrl:
   - /kv/manual/node/
 ---
 
-:::warning Sunsetting on July 20, 2026
-
-This page covers connecting to a Deno KV database hosted on
-<strong>Deno Deploy Classic</strong>
-(<a href="https://dash.deno.com">dash.deno.com</a>). Deploy Classic will be shut
-down on July 20, 2026 — see the
-<a href="/deploy/migration_guide/">migration guide</a> for details.
-
-On the new <a href="/deploy/">Deno Deploy</a> platform, KV databases are
-provisioned per app through the
-<a href="/deploy/reference/databases/">Databases</a> feature and accessed from
-your app code via
-<a href="/api/deno/~/Deno.openKv"><code>Deno.openKv()</code></a> without a
-connection URL — see
-<a href="/deploy/reference/deno_kv/">Deno KV on Deno Deploy</a>. External KV
-Connect access to new‑Deploy KV databases is not currently exposed.
-
-:::
-
-Connecting from Node.js to a Deno KV database hosted on Deno Deploy Classic is
-supported via our
-[official client library on npm](https://www.npmjs.com/package/@deno/kv). You
-can find usage instructions for this option below. The same library can also
-connect to any other endpoint implementing the open
+A Deno KV database hosted on Deno Deploy can be used from Node.js through the
+[official client library on npm](https://www.npmjs.com/package/@deno/kv). The
+library speaks the open
 [KV Connect](https://github.com/denoland/denokv/blob/main/proto/kv-connect.md)
-protocol, such as a self‑hosted [`denokv`](https://github.com/denoland/denokv)
-instance.
+protocol, so the same client also connects to a self-hosted
+[`denokv`](https://github.com/denoland/denokv) server.
 
 ## Installation and usage
 
@@ -68,8 +48,10 @@ function (supports both ESM `import` and CJS `require`-based usage):
 ```js
 import { openKv } from "@deno/kv";
 
-// Connect to a KV instance
-const kv = await openKv("<KV Connect URL>");
+// Connect to a KV database on Deno Deploy
+const kv = await openKv(
+  "https://api.deno.com/v2/databases/<Database ID>/connect",
+);
 
 // Write some data
 await kv.set(["users", "alice"], { name: "Alice" });
@@ -88,21 +70,29 @@ import { openKv } from "@deno/kv";
 const kv = await openKv("<KV Connect URL>", { accessToken: myToken });
 ```
 
-Once your Deno KV client is initialized, the same API available in Deno may be
-used in Node as well.
+Once the client is initialized, the Deno KV API is available in Node, with one
+exception: queue operations (`enqueue` / `listenQueue`) are not part of the KV
+Connect protocol, so they are unavailable over a remote connection. The
+[package README](https://www.npmjs.com/package/@deno/kv) has the full support
+matrix and the supported Node.js versions.
 
 ## KV Connect URLs
 
-Connecting to a KV database outside of Deno requires a
-[KV Connect](https://github.com/denoland/denokv/blob/main/proto/kv-connect.md)
-URL. A KV Connect URL for a database hosted on Deno Deploy Classic will be in
-this format: `https://api.deno.com/databases/<database-id>/connect`.
+Connecting to a KV database outside of Deno requires a KV Connect URL. For a
+database hosted on Deno Deploy it has this format:
 
-The `database-id` for your project can be found in the
-[Deno Deploy Classic dashboard](https://dash.deno.com), under your project's
-"KV" tab.
+```
+https://api.deno.com/v2/databases/<Database ID>/connect
+```
 
-![Connection string locations in Deploy](./images/kv-connect.png)
+Where to find the database ID and how to create the access token that
+authenticates the connection (`DENO_KV_ACCESS_TOKEN`, or `accessToken` above) is
+described in
+[Connect from outside Deno Deploy](/deploy/reference/deno_kv/#connect-from-outside-deno-deploy);
+the same URL and token work from the Deno CLI.
+
+For a self-hosted `denokv` server, use the URL the server is listening on (for
+example `http://localhost:4512`) and the access token it was started with.
 
 ## More information
 

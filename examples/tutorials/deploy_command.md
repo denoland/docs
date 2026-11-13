@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-11-12
 title: "Deploy an app with the deno deploy command"
 description: "Step-by-step tutorial for using the deno deploy CLI command to create and deploy your first application to Deno Deploy."
 url: /examples/deploy_command_tutorial/
@@ -177,8 +177,7 @@ deno deploy
 Select the appropriate options in the terminal when prompted.
 
 By default the CLI prompts you for an application name. You can set it yourself
-with the `--app` flag instead (this is the equivalent of the project name in
-Deno Deploy Classic):
+with the `--app` flag instead:
 
 ```bash
 deno deploy --app my-app-name
