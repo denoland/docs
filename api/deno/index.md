@@ -553,7 +553,7 @@ const result = dylib.symbols.add(35, 34); // 69
 console.log(`Result from external addition of 35 and 34: ${result}`);
 ```
 
-Run with `--allow-ffi` and `--unstable` flag:
+Run with the `--allow-ffi` flag:
 
 ```sh
 deno run --allow-ffi ffi.ts
