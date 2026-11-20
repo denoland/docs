@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-10-10
 title: "deno add"
 command: add
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -9,7 +9,7 @@ description: "Add and manage project dependencies with Deno"
 
 The `deno add` command adds dependencies to your project's configuration file.
 It is an alias for
-[`deno install [PACKAGES]`](/runtime/reference/cli/install/#deno-install-packages).
+[`deno install [PACKAGES]`](/runtime/reference/cli/install/#deno-install-%5Bpackages%5D).
 For more on how Deno handles dependencies, see
 [Modules and dependencies](/runtime/fundamentals/modules/).
 
@@ -61,5 +61,5 @@ form (`npm:@jsr/...`). The same flag works on
 [`deno uninstall`](/runtime/reference/cli/uninstall/).
 
 To make this the default without passing the flag each time, set
-[`"preferPackageJson": true`](/runtime/reference/deno_json/#prefer-package-json-for-dependencies)
+[`"preferPackageJson": true`](/runtime/reference/deno_json/#prefer-package.json-for-dependencies)
 in `deno.json`.

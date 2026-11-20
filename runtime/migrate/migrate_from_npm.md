@@ -1,7 +1,7 @@
 ---
 title: "Migrate from npm"
 description: "How to move an npm project to Deno: install dependencies from your existing package.json, keep your pinned versions, map npm CLI commands to Deno, run workspaces unchanged, and handle lifecycle scripts."
-last_modified: 2026-06-25
+last_modified: 2026-10-10
 oldUrl:
   - /runtime/migrate/switch_package_manager/
 ---
@@ -100,7 +100,7 @@ that field directly. A monorepo like this runs as-is:
 ```
 
 Members reference each other through the
-[`workspace:` protocol](/runtime/fundamentals/workspaces/#using-workspace-protocol-in-package-json)
+[`workspace:` protocol](/runtime/fundamentals/workspaces/#using-workspace-protocol-in-package.json)
 in their `package.json` dependencies, exactly as they do under npm. There is
 nothing to convert. See [Workspaces](/runtime/fundamentals/workspaces/) for how
 resolution works.

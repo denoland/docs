@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-02
+last_modified: 2026-10-10
 title: "Unstable feature flags"
 oldUrl:
   - /runtime/tools/unstable_flags/
@@ -294,5 +294,5 @@ deno check --unstable-tsgo main.ts
 It can also be enabled with the `DENO_UNSTABLE_TSGO=1` environment variable or
 `"unstable": ["tsgo"]` in `deno.json`. This is a preview feature and is not yet
 feature-complete. See
-[TypeScript](/runtime/fundamentals/typescript/#faster-type-checking-with-the-native-compiler-tsgo)
+[TypeScript](/runtime/fundamentals/typescript/#faster-type-checking-with-the-native-compiler-(tsgo))
 for details.
