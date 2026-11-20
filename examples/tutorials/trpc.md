@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-03-10
+last_modified: 2026-09-02
 title: "Build a Typesafe API with tRPC and Deno"
 description: "A guide to building type-safe APIs with tRPC and Deno. Learn how to set up endpoints, implement RPC procedures, handle data validation, and create efficient client-server applications."
 url: /examples/trpc_tutorial/
@@ -137,8 +137,8 @@ but this will work well for our demo.
 > ⚠️️ In this tutorial, we hard code data and use a file-based database. However,
 > you can
 > [connect to a variety of databases](https://docs.deno.com/runtime/tutorials/connecting_to_databases/)
-> and use ORMs like [Drizzle](https://docs.deno.com/examples/drizzle) or
-> [Prisma](https://docs.deno.com/runtime/tutorials/how_to_with_npm/prisma/).
+> and use ORMs like [Drizzle](https://docs.deno.com/examples/drizzle_tutorial/)
+> or [Prisma](https://docs.deno.com/runtime/tutorials/how_to_with_npm/prisma/).
 
 Finally, we'll need to provide the actual data. Let's create a `./data.json`
 file with some sample dinosaur data:
@@ -415,7 +415,8 @@ Now that you have a basic understanding of how to use tRPC with Deno, you could:
    complex data structures
 5. Integrate with a proper database like
    [PostgreSQL](https://docs.deno.com/runtime/tutorials/connecting_to_databases/#postgres)
-   or use an ORM like [Drizzle](https://docs.deno.com/examples/drizzle) or
+   or use an ORM like
+   [Drizzle](https://docs.deno.com/examples/drizzle_tutorial/) or
    [Prisma](https://docs.deno.com/runtime/tutorials/how_to_with_npm/prisma/)
 6. Deploy your application to [Deno Deploy](https://deno.com/deploy) or
    [any public cloud via Docker](https://docs.deno.com/runtime/tutorials/#deploying-deno-projects)

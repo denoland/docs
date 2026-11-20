@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-25
+last_modified: 2026-09-02
 title: "deno task"
 oldUrl:
   - /runtime/tools/task_runner/
@@ -761,7 +761,7 @@ box on Windows, Mac, and Linux.
   environment variables.
 - [`xargs`](https://man7.org/linux/man-pages/man1/xargs.1p.html) - Builds
   arguments from stdin and executes a command.
-- [`:`](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/colon.html) -
+- [`:`](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/colon.html) -
   The POSIX null command. Does nothing and always exits with status `0` (Deno
   2.8+). Handy as a no-op placeholder in conditionals or for parameter-expansion
   side effects.
