@@ -36,4 +36,4 @@ console.log(url.searchParams.get("s")); // Deno.readFile
 url.host = "deno.com";
 url.protocol = "http:";
 
-console.log(url.href); // http://deno.com/api?s=Deno.readFile
+console.log(url.href); // http://deno.com/api/deno?s=Deno.readFile

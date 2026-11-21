@@ -16,14 +16,14 @@ import { extname } from "node:path";
 
 // Look up the MIME type for a file name by its extension.
 console.log(contentType(extname("photo.png"))); // image/png
-console.log(contentType(extname("data.json"))); // application/json
+console.log(contentType(extname("data.json"))); // application/json; charset=UTF-8
 
 // Text types include their charset, ready to use in a header.
 console.log(contentType(extname("index.html"))); // text/html; charset=UTF-8
 
 // Unknown extensions return undefined, so provide a fallback. The standard
 // fallback for arbitrary binary data is application/octet-stream.
-const type = contentType(extname("archive.xyz")) ??
+const type = contentType(extname("archive.unknown")) ??
   "application/octet-stream";
 console.log(type); // application/octet-stream
 
@@ -35,7 +35,7 @@ const response = new Response(body, {
     "content-type": contentType(extname(path)) ?? "application/octet-stream",
   },
 });
-console.log(response.headers.get("content-type")); // application/json
+console.log(response.headers.get("content-type")); // application/json; charset=UTF-8
 
 // Note that the lookup trusts the file name. To identify a file by its
 // actual contents, inspect its magic bytes instead.

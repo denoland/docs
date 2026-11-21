@@ -1,5 +1,5 @@
 ---
-last_modified: 2025-04-03
+last_modified: 2026-10-25
 title: "Better debugging with the console API"
 description: "An in-depth guide to advanced console debugging in Deno. Learn about console.table, timers, counters, tracers, and how to leverage the full console API beyond basic logging for better debugging workflows."
 url: /examples/debugging_with_console_tutorial/
@@ -26,14 +26,14 @@ You can output multiple items by separated by commas like so:
 
 ```jsx
 const person = { "name": "Jane", "city": "New York" };
-console.log("Hello, ", person.name, "from ", person.city); // "Hello, Jane from New York"
+console.log("Hello,", person.name, "from", person.city); // "Hello, Jane from New York"
 ```
 
 Or you can use string literals:
 
 ```jsx
 const person = { "name": "Jane", "city": "New York" };
-console.log(`Hello ${person.name} from ${person.city}`); // "Hello, Jane from New York"
+console.log(`Hello, ${person.name} from ${person.city}`); // "Hello, Jane from New York"
 ```
 
 You can also [apply some styling using CSS](/examples/color_logging/) using the
@@ -68,8 +68,8 @@ console.table(people);
 ┌───────┬─────┬───────────────┐
 │ (idx) │ age │ city          │
 ├───────┼─────┼───────────────┤
-│ john  │ 30  │ "New York"    │
-│ jane  │ 25  │ "Los Angeles" │
+│ john  │  30 │ "New York"    │
+│ jane  │  25 │ "Los Angeles" │
 └───────┴─────┴───────────────┘
 */
 ```
