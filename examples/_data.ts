@@ -139,6 +139,12 @@ export const items = [
     category: "Modules and package management",
   },
   {
+    title: "Full-stack monorepo with a Node frontend and Deno backend",
+    href: "/examples/fullstack_monorepo_tutorial/",
+    type: "tutorial",
+    category: "Modules and package management",
+  },
+  {
     title: "Run Deno in GitHub Actions",
     href: "/examples/deno_github_actions_tutorial/",
     type: "tutorial",
