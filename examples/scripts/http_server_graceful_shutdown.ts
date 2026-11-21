@@ -50,12 +50,9 @@ const onSigint = () => shutdown("SIGINT");
 const onSigterm = () => shutdown("SIGTERM");
 
 // SIGINT is what Ctrl+C sends, SIGTERM is what process managers, docker
-// stop, and Kubernetes send first. Note that SIGTERM listeners are not
-// supported on Windows.
+// stop, and Kubernetes send first.
 Deno.addSignalListener("SIGINT", onSigint);
-if (Deno.build.os !== "windows") {
-  Deno.addSignalListener("SIGTERM", onSigterm);
-}
+Deno.addSignalListener("SIGTERM", onSigterm);
 
 // Start a slow request, then send SIGTERM while it is still running:
 //
