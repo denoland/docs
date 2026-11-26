@@ -63,41 +63,6 @@ export default function LandingPage(
             src="/examples.png"
           />
         </div>
-        <details
-          id="guide-request-box"
-          className="mb-8 p-4 border border-blue-100 dark:border-background-tertiary bg-blue-50 dark:bg-background-secondary rounded"
-        >
-          <summary className="cursor-pointer">
-            <span className="font-semibold">
-              Can't find what you're looking for?
-            </span>{" "}
-            <span className="text-primary underline underline-offset-4">
-              Request a new guide
-            </span>
-          </summary>
-          <form id="guide-request-form" className="mt-4 max-w-prose space-y-3">
-            <textarea
-              className="block w-full p-2 border border-foreground-tertiary bg-white dark:bg-background-primary rounded"
-              name="guide-request-comment"
-              required
-              minLength={3}
-              placeholder="What would you like a guide or example for?"
-            >
-            </textarea>
-            <input
-              type="text"
-              className="block w-full p-2 border border-foreground-tertiary bg-white dark:bg-background-primary rounded"
-              name="guide-request-contact"
-              placeholder="GitHub username (optional, you'll be @mentioned)"
-            />
-            <p className="text-xs text-gray-600 dark:text-gray-400 italic">
-              Your request will be posted as an issue in the denoland/docs
-              GitHub repo.
-            </p>
-            <button type="submit" className="btn">Request guide</button>
-          </form>
-        </details>
-
         <section className="mb-10">
           <h2 className="text-lg md:text-xl font-semibold mb-4">Featured</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
