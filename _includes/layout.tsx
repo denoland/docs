@@ -121,7 +121,6 @@ export default function Layout(data: Lume.Data) {
         <script type="module" defer src="/js/lint_rules.js"></script>
         <script type="module" defer src="/js/copy.js"></script>
         <script type="module" defer src="/js/tabs.js"></script>
-        <script type="module" defer src="/js/feedback.js"></script>
         <script type="module" defer src="/js/copy-page.js"></script>
         <script type="module" defer src="/js/search.js"></script>
       </head>

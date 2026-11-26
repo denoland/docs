@@ -68,7 +68,7 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
   );
   const isLintRule = data.url.startsWith("/lint/rules/");
 
-  // Compute file path used by Feedback component
+  // Compute file path used by the CopyPage and EditThisPage components
   const file = isLintRule
     ? `/lint/rules/${encodeURIComponent(data.title ?? "")}.md`
     : data.page.sourcePath;
@@ -266,7 +266,11 @@ export default function Doc(data: Lume.Data, helpers: Lume.Helpers) {
             </div>
           </article>
 
-          <data.comp.Feedback file={file} />
+          {file && !file.includes("[") && (
+            <section class="mt-16 pt-6 border-t border-t-foreground-tertiary">
+              <data.comp.EditThisPage file={file} />
+            </section>
+          )}
         </div>
       </main>
       {isReference && tocCtx && (
