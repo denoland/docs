@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-18
+last_modified: 2026-11-26
 title: "WebAssembly"
 description: "A guide to using WebAssembly (Wasm) in Deno. Learn about module imports, type checking, streaming APIs, optimization techniques, and how to work with various programming languages that compile to Wasm."
 oldUrl:
@@ -278,8 +278,9 @@ it into a binary and calling it from a JavaScript program can be found on
 [MDN](https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm).
 
 If you plan to do a lot of work with Web APIs in Rust+WebAssembly, you may find
-the [web_sys](https://rustwasm.github.io/wasm-bindgen/web-sys/index.html) and
-[js_sys](https://rustwasm.github.io/wasm-bindgen/contributing/js-sys/index.html)
+the [web_sys](https://wasm-bindgen.github.io/wasm-bindgen/web-sys/index.html)
+and
+[js_sys](https://wasm-bindgen.github.io/wasm-bindgen/contributing/js-sys/index.html)
 Rust crates useful. `web_sys` contains bindings to most of the Web APIs that are
 available in Deno, while `js_sys` provides bindings to JavaScript's standard,
 built-in objects.
