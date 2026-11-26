@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-17
+last_modified: 2026-06-29
 title: "deno serve"
 oldUrl: /runtime/manual/tools/serve/
 command: serve
@@ -137,6 +137,15 @@ specific interface:
 
 ```sh
 deno serve --host=127.0.0.1 server.ts
+```
+
+## HTTPS support
+
+HTTPS can be enabled by providing the server TLS certificate and private key
+pair as PEM-encoded files:
+
+```sh
+deno serve --tls-cert cert.pem --tls-key key.pem
 ```
 
 ## Horizontal scaling
