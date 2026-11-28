@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-06-15
+last_modified: 2026-11-28
 title: "deno init"
 oldUrl: /runtime/manual/tools/init/
 command: init
