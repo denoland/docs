@@ -37,7 +37,7 @@ ok | 1 passed | 0 failed (29ms)
 
 The `init` subcommand will create two files (`main.ts` and `main_test.ts`).
 These files provide a basic example of how to write a Deno program and how to
-write tests for it. The `main.ts` file exports a `add` function that adds two
+write tests for it. The `main.ts` file exports an `add` function that adds two
 numbers together and the `main_test.ts` file contains a test for this function.
 
 You can also specify an argument to `deno init` to initialize a project in a
@@ -187,7 +187,7 @@ Hello world!
 ## Generate a library project
 
 You can append a `--lib` flag to add extra parameters to your `deno.json`, such
-as "name", "version" and an "exports" fields.
+as "name", "version" and an "exports" field.
 
 ```sh
 deno init my_deno_project --lib
