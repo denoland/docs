@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-07-27
+last_modified: 2026-11-28
 title: "Desktop apps"
 description: "Build self-contained desktop applications from a Deno project, with framework auto-detection, hot reload, native windowing, auto-update, and cross-platform distribution."
 ---
@@ -73,6 +73,26 @@ The compiled binary opens a window pointed at a local HTTP server bound to your
 [`Deno.serve()`](/api/deno/~/Deno.serve) automatically binds to the address the
 webview navigates to, so you do not need to pass a port or hostname. See
 [HTTP serving](/runtime/desktop/serving/) for details.
+
+### TypeScript setup
+
+To enable type checking for desktop APIs such as
+[`Deno.BrowserWindow`](/api/deno/~/Deno.BrowserWindow) and
+[`Deno.autoUpdate()`](/api/deno/~/Deno.autoUpdate) in `deno check` and your
+editor, add `"deno.desktop"` to `compilerOptions.lib` in `deno.json`
+(`deno.desktop` already includes `deno.window`):
+
+```jsonc title="deno.json"
+{
+  "compilerOptions": {
+    "lib": ["deno.desktop"]
+  }
+}
+```
+
+See the
+[lib property reference](/runtime/reference/ts_config_migration/#using-the-lib-property)
+for details on Deno's built-in libraries.
 
 ## A complete example
 
