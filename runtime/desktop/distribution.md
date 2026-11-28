@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-08-06
+last_modified: 2026-11-28
 title: "Distribution"
 description: "Cross-compile a deno desktop app for macOS, Windows, and Linux from one machine, and produce per-platform output formats: .app, .dmg, .exe directory, AppImage."
 ---
@@ -138,13 +138,18 @@ shrinks the distributed artifact substantially, a webview hello-world drops from
 about 66 MB to 19 MB, in exchange for a one-time decompression on first launch.
 
 ```sh
-# Self-extracting, compressed bundle
-deno desktop --compress main.ts
+# Self-extracting, compressed bundle (uses xz by default when building `.`)
+deno desktop --compress
 
-# Choose the codec explicitly
+# Pass the codec with `=` when specifying an entrypoint
 deno desktop --compress=xz main.ts
 deno desktop --compress=zstd main.ts
 ```
+
+Because `--compress` takes an optional codec (`xz`, `lzma`, or `zstd`), passing
+`deno desktop --compress main.ts` causes `main.ts` to be parsed as the codec
+value; use `--compress=<codec>` (or `--compress -- main.ts`) when specifying an
+entrypoint.
 
 `xz` produces the smaller artifact; `zstd` trades some size for faster
 first-launch decompression.
