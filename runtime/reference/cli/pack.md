@@ -1,5 +1,5 @@
 ---
-last_modified: 2026-05-20
+last_modified: 2026-11-28
 title: "deno pack"
 command: pack
 openGraphLayout: "/open_graph/cli-commands.jsx"
@@ -77,17 +77,6 @@ published tarball needs the JSR npm registry configured. The simplest way is to
 run [`npx jsr add`](https://jsr.io/docs/npm-compatibility) once in the consumer
 project; that sets up the `.npmrc` entries for the `@jsr` scope.
 
-## Deno API shimming
-
-If your code uses the `Deno.*` global, `deno pack` adds
-[`@deno/shim-deno`](https://www.npmjs.com/package/@deno/shim-deno) as a runtime
-dependency and injects the shim so the package can run under Node.js. The shim
-covers the subset of `Deno.*` that maps cleanly onto Node APIs — review the
-shim's docs to see what's polyfilled.
-
-Pass `--no-deno-shim` to opt out, e.g. if you've already provided your own
-abstraction or only intend the package to run under Deno-on-npm.
-
 ## Publishing to npm
 
 ```sh
@@ -164,12 +153,6 @@ declaration files.
 deno pack --allow-slow-types
 ```
 
-### Skip the Deno shim
-
-```sh
-deno pack --no-deno-shim
-```
-
 ### Pack despite a dirty working tree
 
 ```sh
@@ -203,6 +186,8 @@ upstream.
 - **No `bin` entries.** `deno pack` does not synthesize the `package.json` `bin`
   field. Library publishing is supported; CLI tools that need a `node`-shebanged
   executable still need a hand-rolled npm package.
+- **No `Deno` API shim.** Code that uses the `Deno.*` global is packed as is, so
+  it only works in runtimes that provide `Deno`.
 - **No native addons.** Packages that link against native code or ship a
   `node-gyp` build step are out of scope.
 - **No `.npmignore`.** Use `--ignore` for excludes; `.gitignore` is honored for
